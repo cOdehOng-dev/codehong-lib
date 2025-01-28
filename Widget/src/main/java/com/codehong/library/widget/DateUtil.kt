@@ -5,13 +5,16 @@ import java.util.Calendar
 import java.util.Locale
 
 object DateUtil {
-    fun formatDateTime(
-        input: String?
+    fun formatTodayDateTime(
+        input: String?,
+        inputPattern: String,
+        todayPattern: String,
+        otherDayPattern: String
     ): String {
         if (input.isNullOrEmpty()) return ""
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val outputTodayFormat = SimpleDateFormat("'오늘' HH:mm", Locale.getDefault())
-        val outputOtherDayFormat = SimpleDateFormat("M.d(E) HH:mm", Locale.getDefault())
+        val inputFormat = SimpleDateFormat(inputPattern, Locale.getDefault())
+        val outputTodayFormat = SimpleDateFormat(todayPattern, Locale.getDefault())
+        val outputOtherDayFormat = SimpleDateFormat(otherDayPattern, Locale.getDefault())
 
         try {
             // 입력된 시간 파싱
