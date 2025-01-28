@@ -58,13 +58,13 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 from(components["release"])
                 groupId = "com.codehong.library"
-                artifactId = "library"
+                artifactId = "widget"
                 version = "0.0.1"
             }
             create<MavenPublication>("debug") {
                 from(components["debug"])
                 groupId = "com.codehong.library"
-                artifactId = "library"
+                artifactId = "widget"
                 version = "0.0.1"
             }
         }
