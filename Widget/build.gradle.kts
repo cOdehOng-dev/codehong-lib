@@ -1,6 +1,5 @@
 plugins {
     id("com.android.library")
-//    id("org.jetbrains.kotlin.android")
     kotlin("android")
     kotlin("kapt")
     id("maven-publish")
@@ -31,7 +30,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }
 
@@ -45,11 +44,13 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 }
 
-task("assembleToPublish") {
-    dependsOn("assembleRelease")
-    group = "github"
-    finalizedBy("publish")
-}
+//group = "com.github.cOdehOng-dev"
+
+//task("assembleToPublish") {
+//    dependsOn("assembleRelease")
+//    group = "github"
+//    finalizedBy("publish")
+//}
 
 
 afterEvaluate {
@@ -57,13 +58,13 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
-                groupId = "com.codehong.library"
+                groupId = "com.github.cOdehOng-dev"
                 artifactId = "widget"
                 version = "0.0.1"
             }
             create<MavenPublication>("debug") {
                 from(components["debug"])
-                groupId = "com.codehong.library"
+                groupId = "com.github.cOdehOng-dev"
                 artifactId = "widget"
                 version = "0.0.1"
             }
