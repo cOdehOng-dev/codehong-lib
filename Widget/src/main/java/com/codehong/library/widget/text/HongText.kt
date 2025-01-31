@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -19,6 +20,7 @@ fun HongText(
     modifier: Modifier = Modifier,
     text: String?,
     size: Int? = null,
+    fontFamily: FontFamily? = pretendardFontFamily,
     fontWeight: HongFontWeight = HongFontWeight.W_500,
     @ColorRes color: Int? = null,
     lineHeight: Float? = null,
@@ -34,7 +36,7 @@ fun HongText(
     Text(
         modifier = modifier,
         text = text ?: "",
-        fontFamily = pretendardFontFamily,
+        fontFamily = fontFamily,
         fontWeight = when (fontWeight) {
             HongFontWeight.W_700 -> FontWeight.ExtraBold
             HongFontWeight.W_600 -> FontWeight.Bold
