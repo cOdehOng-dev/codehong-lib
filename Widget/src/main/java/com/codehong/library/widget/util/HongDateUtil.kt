@@ -1,10 +1,10 @@
-package com.codehong.library.widget
+package com.codehong.library.widget.util
 
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-object DateUtil {
+object HongDateUtil {
     fun formatTodayDateTime(
         input: String?,
         inputPattern: String,
