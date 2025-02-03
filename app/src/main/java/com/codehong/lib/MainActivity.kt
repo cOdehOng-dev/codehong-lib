@@ -15,10 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.ui.theme.CodehonglibTheme
-import com.codehong.library.widget.HongFontWeight
+import com.codehong.library.widget.R
 import com.codehong.library.widget.text.HongText
 
 class MainActivity : ComponentActivity() {
@@ -39,14 +40,16 @@ fun SampleTheme() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
-                    .background(colorResource(id = R.color.purple_200)),
+                    .background(
+                        colorResource(id = R.color.honglib_purple_200)
+                    ),
                 contentAlignment = Alignment.Center
             ) {
                 HongText(
                     text = "코드홍의 라이브러리 월드",
-                    fontWeight = HongFontWeight.W_700,
-                    size = 30,
-                    color = R.color.color_000000
+                    fontWeight = FontWeight.W700,
+                    textSize = 30,
+                    textColor = R.color.honglib_color_000000
                 )
             }
         },
@@ -55,7 +58,9 @@ fun SampleTheme() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
-                    .background(colorResource(id = R.color.purple_200))
+                    .background(
+                        colorResource(id = R.color.honglib_purple_200)
+                    )
             ) {
             }
         }

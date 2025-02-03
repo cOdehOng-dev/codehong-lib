@@ -51,14 +51,15 @@ android {
 
 dependencies {
 
+    implementation(project(":Widget"))
+
     hongImpl(
         implLibs = arrayOf(
             Libs.MULTIDEX,
             Libs.FRAGMENT,
             Libs.CORE,
             Libs.APPCOMPAT,
-            Libs.LIFECYCLE_RUNTIME,
-            project(":Widget")
+            Libs.LIFECYCLE_RUNTIME
         )
     )
 

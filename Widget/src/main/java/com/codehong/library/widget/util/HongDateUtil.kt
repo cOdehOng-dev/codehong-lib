@@ -43,4 +43,24 @@ object HongDateUtil {
         }
         return input
     }
+
+    /**
+     * 30분 단위로 버린 현재 시간 가져오기
+     */
+    fun getDateTimeStandard30Min(
+        datePattern: String
+    ): String {
+        val calendar = Calendar.getInstance()
+
+        // 현재 분 계산 (30분 단위로 버림)
+        val minutes = calendar.get(Calendar.MINUTE)
+        val roundedMinutes = if (minutes < 30) 0 else 30
+
+        // 반올림된 시간 설정
+        calendar.set(Calendar.MINUTE, roundedMinutes)
+        calendar.set(Calendar.SECOND, 0) // 초는 항상 0으로 설정
+
+        val dateFormat = SimpleDateFormat(datePattern, Locale.KOREAN)
+        return dateFormat.format(calendar.time)
+    }
 }
