@@ -19,6 +19,8 @@ fun dpToPx(dp: Dp) = with(LocalDensity.current) { dp.toPx() }
 
 @Composable
 fun dpToPx(dp: Float) = with(LocalDensity.current) { dp.dp.toPx() }
+@Composable
+fun dpToPx(dp: Int) = with(LocalDensity.current) { dp.dp.toPx() }
 
 @Composable
 fun pxToDp(px: Float): Dp {
