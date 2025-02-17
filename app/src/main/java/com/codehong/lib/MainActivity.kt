@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,8 +23,9 @@ import com.codehong.lib.sample.button.SampleTextButtonActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
 import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.R
+import com.codehong.library.widget.button.HongTextButton
+import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.text.HongText
-import com.codehong.library.widget.text.HongTypoText
 import com.codehong.library.widget.typo.TypoType
 
 class MainActivity : ComponentActivity() {
@@ -49,7 +49,7 @@ fun SampleTheme(
                     .fillMaxWidth()
                     .height(50.dp)
                     .background(
-                        colorResource(id = R.color.honglib_purple_200)
+                        colorResource(id = ColorType.PRIMARY_MINT.colorResId)
                     ),
                 contentAlignment = Alignment.Center
             ) {
@@ -57,7 +57,7 @@ fun SampleTheme(
                     text = "코드홍의 라이브러리 월드",
                     fontWeight = FontWeight.W700,
                     textSize = 30,
-                    textColorResId = R.color.honglib_color_000000
+                    textColorResId = R.color.honglib_color_ffffff
                 )
             }
         },
@@ -67,7 +67,7 @@ fun SampleTheme(
                     .fillMaxWidth()
                     .height(50.dp)
                     .background(
-                        colorResource(id = R.color.honglib_purple_200)
+                        colorResource(id = ColorType.PRIMARY_MINT.colorResId)
                     )
             ) {
             }
@@ -89,34 +89,36 @@ fun SampleTheme(
                         )
                     }
                 }
-            ) {
-                Button(
+            ) { item ->
+                HongTextButton(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 20.dp),
-                    onClick = {
-                        when (it.compose) {
-                            ComposeItem.TEXT_FILED -> {
-                                Intent(activity, SampleTextFieldActivity::class.java).apply {
-                                    activity.startActivity(this)
-                                }
-                            }
-                            ComposeItem.TEXT_BUTTON -> {
-                                Intent(activity, SampleTextButtonActivity::class.java).apply {
-                                    activity.startActivity(this)
-                                }
-                            }
-
-                            else -> {}
-                        }
-                    },
-                    contentPadding = PaddingValues(vertical = 16.dp)
-                ) {
-                    HongTypoText(
-                        text = it.title,
-                        typo = TypoType.BODY_14_B,
+                        .padding(vertical = 15.dp),
+                    buttonText = item.title,
+                    buttonTextTypoType = TypoType.BODY_14_B,
+                    allRadius = 20,
+                    buttonTextColor = HongComposeColor(
                         colorType = ColorType.WHITE_100
-                    )
+                    ),
+                    buttonBackgroundColor = HongComposeColor(
+                        colorType = ColorType.PRIMARY_MINT
+                    ),
+                    verticalPadding = 20
+                ) {
+                    when (item.compose) {
+                        ComposeItem.TEXT_FILED -> {
+                            Intent(activity, SampleTextFieldActivity::class.java).apply {
+                                activity.startActivity(this)
+                            }
+                        }
+                        ComposeItem.TEXT_BUTTON -> {
+                            Intent(activity, SampleTextButtonActivity::class.java).apply {
+                                activity.startActivity(this)
+                            }
+                        }
+
+                        else -> {}
+                    }
                 }
             }
         }
@@ -130,5 +132,5 @@ enum class ComposeItem(val title: String) {
     HEADER("헤더"),
     TEXT_FILED("TextField"),
     SEARCH_BAR("검색바"),
-    TEXT_BUTTON("텍스트 버튼"),
+    TEXT_BUTTON("텍스트 버튼")
 }
