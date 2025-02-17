@@ -1,6 +1,5 @@
 package com.codehong.lib.sample.layout.fadeanimheader
 
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -61,7 +60,7 @@ fun FadeAnimHeaderLayoutHeader(
             text = "헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더",
             textSize = 16,
             fontWeight = FontWeight.W700,
-            textColor = com.codehong.library.widget.R.color.honglib_color_29292d,
+            textColorResId = com.codehong.library.widget.R.color.honglib_color_29292d,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             isEmptyOrNullHideView = false

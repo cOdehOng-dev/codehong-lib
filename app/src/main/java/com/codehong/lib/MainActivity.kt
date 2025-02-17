@@ -1,39 +1,46 @@
 package com.codehong.lib
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.codehong.lib.ui.theme.CodehonglibTheme
+import com.codehong.lib.sample.textfield.SampleTextFieldActivity
+import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.R
 import com.codehong.library.widget.text.HongText
+import com.codehong.library.widget.text.HongTypoText
+import com.codehong.library.widget.typo.TypoType
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SampleTheme()
+            SampleTheme(this)
         }
     }
 }
 
 @Composable
-fun SampleTheme() {
+fun SampleTheme(
+    activity: ComponentActivity
+) {
     Scaffold(
         topBar = {
             Box(
@@ -49,7 +56,7 @@ fun SampleTheme() {
                     text = "코드홍의 라이브러리 월드",
                     fontWeight = FontWeight.W700,
                     textSize = 30,
-                    textColor = R.color.honglib_color_000000
+                    textColorResId = R.color.honglib_color_000000
                 )
             }
         },
@@ -65,26 +72,56 @@ fun SampleTheme() {
             }
         }
     ) {
-        Column(
+        LazyColumn(
             modifier = Modifier
-                .padding(it)
+                .padding(it),
+            contentPadding = PaddingValues(horizontal = 20.dp)
         ) {
+            items(
+                mutableListOf<SampleTestItem>().apply {
+                    ComposeItem.values().forEach { item ->
+                        add(
+                            SampleTestItem(
+                                title = item.title,
+                                compose = item
+                            )
+                        )
+                    }
+                }
+            ) {
+                Button(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 20.dp),
+                    onClick = {
+                        when (it.compose) {
+                            ComposeItem.TEXT_FILED -> {
+                                Intent(activity, SampleTextFieldActivity::class.java).apply {
+                                    activity.startActivity(this)
+                                }
+                            }
+
+                            else -> {}
+                        }
+                    },
+                    contentPadding = PaddingValues(vertical = 16.dp)
+                ) {
+                    HongTypoText(
+                        text = it.title,
+                        typo = TypoType.BODY_14_B,
+                        colorType = ColorType.WHITE_100
+                    )
+                }
+            }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CodehonglibTheme {
-        Greeting("Android")
-    }
+enum class ComposeItem(val title: String) {
+    TEXT_TYPO("텍스트 Typo"),
+    TEXT("Text"),
+    CALENDAR("달력"),
+    HEADER("헤더"),
+    TEXT_FILED("TextField"),
+    SEARCH_BAR("검색바")
 }

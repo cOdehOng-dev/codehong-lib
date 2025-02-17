@@ -27,6 +27,7 @@
         <activity
             android:name=".sample.layout.fadeanimheader.FadeAnimHeaderLayoutActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".sample.textfield.SampleTextFieldActivity"/>
     </application>
 
 </manifest>
