@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.codehong.lib.sample.button.SampleTextButtonActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
 import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.R
@@ -100,6 +101,11 @@ fun SampleTheme(
                                     activity.startActivity(this)
                                 }
                             }
+                            ComposeItem.TEXT_BUTTON -> {
+                                Intent(activity, SampleTextButtonActivity::class.java).apply {
+                                    activity.startActivity(this)
+                                }
+                            }
 
                             else -> {}
                         }
@@ -123,5 +129,6 @@ enum class ComposeItem(val title: String) {
     CALENDAR("달력"),
     HEADER("헤더"),
     TEXT_FILED("TextField"),
-    SEARCH_BAR("검색바")
+    SEARCH_BAR("검색바"),
+    TEXT_BUTTON("텍스트 버튼"),
 }

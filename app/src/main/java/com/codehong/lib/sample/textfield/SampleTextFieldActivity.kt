@@ -10,7 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.codehong.lib.ui.TestMenuView
+import com.codehong.lib.ui.SampleHeader
+import com.codehong.lib.ui.SampleMenu
 import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.MarginTopOrBottom
 import com.codehong.library.widget.model.HongComposeColor
@@ -25,7 +26,9 @@ class SampleTextFieldActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Scaffold(
-                topBar = {}
+                topBar = {
+                    SampleHeader(title = "입력창")
+                }
             ) {
                 Column(
                     modifier = Modifier
@@ -34,7 +37,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                         .padding(horizontal = 20.dp)
                 ) {
                     MarginTopOrBottom(30)
-                    TestMenuView(title = "HongTextField") {
+                    SampleMenu(title = "HongTextField") {
                         HongTextField(
                             modifier = Modifier
                                 .fillMaxWidth(),
@@ -43,7 +46,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                         }
                     }
 
-                    TestMenuView(title = "키보드 Done") {
+                    SampleMenu(title = "키보드 Done") {
                         HongTextField(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -61,7 +64,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                         }
                     }
 
-                    TestMenuView(title = "키보드 Go") {
+                    SampleMenu(title = "키보드 Go") {
                         HongTextField(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -79,7 +82,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                         }
                     }
 
-                    TestMenuView(title = "키보드 Search") {
+                    SampleMenu(title = "키보드 Search") {
                         HongTextField(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -97,7 +100,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                         }
                     }
 
-                    TestMenuView(title = "키보드 Send") {
+                    SampleMenu(title = "키보드 Send") {
                         HongTextField(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -115,7 +118,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                         }
                     }
 
-                    TestMenuView(title = "지우기 버튼이 있는 textField") {
+                    SampleMenu(title = "지우기 버튼이 있는 textField") {
                         HongTextFieldRemoveButton(
                             modifier = Modifier
                                 .fillMaxWidth()
