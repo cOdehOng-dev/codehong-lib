@@ -20,6 +20,11 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.button.SampleTextButtonActivity
+import com.codehong.lib.sample.calendar.SampleCalendarActivity1
+import com.codehong.lib.sample.header.SampleHeaderActivity
+import com.codehong.lib.sample.layout.slide.SampleSlideLayoutActivity
+import com.codehong.lib.sample.pager.SampleHorizontalPagerActivity
+import com.codehong.lib.sample.text.SampleTextActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
 import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.R
@@ -56,8 +61,10 @@ fun SampleTheme(
                 HongText(
                     text = "코드홍의 라이브러리 월드",
                     fontWeight = FontWeight.W700,
-                    textSize = 30,
-                    textColorResId = R.color.honglib_color_ffffff
+                    size = 30,
+                    color = HongComposeColor(
+                        resId = R.color.honglib_color_ffffff
+                    )
                 )
             }
         },
@@ -98,21 +105,52 @@ fun SampleTheme(
                     buttonTextTypoType = TypoType.BODY_14_B,
                     allRadius = 20,
                     buttonTextColor = HongComposeColor(
-                        colorType = ColorType.WHITE_100
+                        type = ColorType.WHITE_100
                     ),
                     buttonBackgroundColor = HongComposeColor(
-                        colorType = ColorType.PRIMARY_MINT
+                        type = ColorType.PRIMARY_MINT
                     ),
                     verticalPadding = 20
                 ) {
                     when (item.compose) {
+                        ComposeItem.TEXT -> {
+                            Intent(activity, SampleTextActivity::class.java).apply {
+                                activity.startActivity(this)
+                            }
+                        }
+
                         ComposeItem.TEXT_FILED -> {
                             Intent(activity, SampleTextFieldActivity::class.java).apply {
                                 activity.startActivity(this)
                             }
                         }
+
                         ComposeItem.TEXT_BUTTON -> {
                             Intent(activity, SampleTextButtonActivity::class.java).apply {
+                                activity.startActivity(this)
+                            }
+                        }
+
+                        ComposeItem.SLIDE_LAYOUT -> {
+                            Intent(activity, SampleSlideLayoutActivity::class.java).apply {
+                                activity.startActivity(this)
+                            }
+                        }
+
+                        ComposeItem.HEADER -> {
+                            Intent(activity, SampleHeaderActivity::class.java).apply {
+                                activity.startActivity(this)
+                            }
+                        }
+
+                        ComposeItem.CALENDAR_1 -> {
+                            Intent(activity, SampleCalendarActivity1::class.java).apply {
+                                activity.startActivity(this)
+                            }
+                        }
+
+                        ComposeItem.HORIZONTAL_PAGER -> {
+                            Intent(activity, SampleHorizontalPagerActivity::class.java).apply {
                                 activity.startActivity(this)
                             }
                         }
@@ -128,9 +166,11 @@ fun SampleTheme(
 enum class ComposeItem(val title: String) {
     TEXT_TYPO("텍스트 Typo"),
     TEXT("Text"),
-    CALENDAR("달력"),
     HEADER("헤더"),
     TEXT_FILED("TextField"),
     SEARCH_BAR("검색바"),
-    TEXT_BUTTON("텍스트 버튼")
+    TEXT_BUTTON("텍스트 버튼"),
+    SLIDE_LAYOUT("SlideLayout"),
+    CALENDAR_1("달력(초기 X)"),
+    HORIZONTAL_PAGER("HorizontalViewPager")
 }

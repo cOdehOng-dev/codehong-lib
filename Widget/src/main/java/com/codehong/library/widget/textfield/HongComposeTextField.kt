@@ -1,11 +1,11 @@
 package com.codehong.library.widget.textfield
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -30,73 +30,36 @@ import com.codehong.library.widget.model.text.HongComposeTextStyle
 import com.codehong.library.widget.pretendardFontFamily
 import com.codehong.library.widget.text.HongText
 import com.codehong.library.widget.typo.TypoType
-import com.codehong.library.widget.typo.fontWeight
-import com.codehong.library.widget.typo.size
 import com.codehong.library.widget.util.dpToSp
 import com.codehong.library.widget.util.getColor
+import kotlinx.coroutines.delay
 
 @Composable
 fun HongTextField(
     modifier: Modifier = Modifier,
+    inputText: String,
     placeholder: String = "",
-    placeholderColor: HongComposeColor = HongComposeColor(
-        colorType = ColorType.BLACK_60
+    placeholderStyle: HongComposeTextStyle = HongComposeTextStyle(
+        fontWeight = FontWeight.W400,
+        color = HongComposeColor(
+            resId = ColorType.BLACK_60.colorResId,
+            type = ColorType.BLACK_60
+        ),
+        size = 16,
+        typo = TypoType.BODY_16
     ),
-    placeholderTypo: TypoType = TypoType.BODY_16,
-    inputTextTypo: TypoType = TypoType.BODY_16_B,
-    inputTextColor: HongComposeColor = HongComposeColor(
-        colorType = ColorType.BLACK_100
+    inputStyle: HongComposeTextStyle = HongComposeTextStyle(
+        fontWeight = FontWeight.W700,
+        color = HongComposeColor(
+            resId = ColorType.BLACK_100.colorResId,
+            type = ColorType.BLACK_100
+        ),
+        size = 16,
+        typo = TypoType.BODY_16_B
     ),
     cursorColor: HongComposeColor = HongComposeColor(
-        colorType = ColorType.BLACK_100
-    ),
-    useHideKeyboard: Boolean = true,
-    singleLine: Boolean = true,
-    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
-    minLines: Int = 1,
-    keyboardType: KeyboardType = KeyboardType.DONE,
-    onTextChanged: (String) -> Unit
-) {
-    HongTextField(
-        modifier = modifier,
-        placeholder = placeholder,
-        placeholderColor = placeholderColor,
-        placeholderSize = placeholderTypo.size(),
-        placeholderFontWeight = placeholderTypo.fontWeight(),
-        inputTextSize = inputTextTypo.size(),
-        inputTextFontWeight = inputTextTypo.fontWeight(),
-        inputTextColor = inputTextColor,
-        cursorColor = cursorColor,
-        useHideKeyboard = useHideKeyboard,
-        singleLine = singleLine,
-        maxLines = maxLines,
-        minLines = minLines,
-        keyboardType = keyboardType,
-        onTextChanged = onTextChanged
-    )
-}
-
-@Composable
-fun HongTextField(
-    modifier: Modifier = Modifier,
-    placeholder: String = "",
-    placeholderColor: HongComposeColor = HongComposeColor(
-        colorRes = R.color.honglib_color_9929292d,
-        colorType = ColorType.BLACK_60
-    ),
-    placeholderSize: Int = 16,
-    placeholderFontWeight: FontWeight = FontWeight.W400,
-
-    inputTextSize: Int = 16,
-    inputTextFontWeight: FontWeight = FontWeight.W700,
-
-    inputTextColor: HongComposeColor = HongComposeColor(
-        colorRes = R.color.honglib_color_29292d,
-        colorType = ColorType.BLACK_100
-    ),
-    cursorColor: HongComposeColor = HongComposeColor(
-        colorRes = R.color.honglib_color_29292d,
-        colorType = ColorType.BLACK_100
+        resId = ColorType.PRIMARY_MINT.colorResId,
+        type = ColorType.PRIMARY_MINT
     ),
     useHideKeyboard: Boolean = true,
     singleLine: Boolean = true,
@@ -106,7 +69,6 @@ fun HongTextField(
     onTextChanged: (String) -> Unit
 ) {
     val focusManager = LocalFocusManager.current
-    var inputText by rememberSaveable { mutableStateOf("") }
 
     Box(
         modifier = modifier,
@@ -115,12 +77,7 @@ fun HongTextField(
         if (inputText.isEmpty()) {
             HongText(
                 text = placeholder,
-                style = HongComposeTextStyle(
-                    textSize = placeholderSize,
-                    fontWeight = placeholderFontWeight,
-                    textColorType = placeholderColor.colorType,
-                    textColorResId = placeholderColor.colorRes
-                )
+                style = placeholderStyle
             )
         }
 
@@ -128,13 +85,12 @@ fun HongTextField(
             modifier = Modifier.fillMaxWidth(),
             value = inputText,
             onValueChange = {
-                inputText = it
                 onTextChanged(it)
             },
             textStyle = TextStyle(
-                color = inputTextColor.getColor(),
-                fontWeight = inputTextFontWeight,
-                fontSize = dpToSp(dp = inputTextSize),
+                color = inputStyle.color.getColor(),
+                fontWeight = inputStyle.fontWeight,
+                fontSize = dpToSp(dp = inputStyle.size),
                 fontFamily = pretendardFontFamily,
                 platformStyle = PlatformTextStyle(includeFontPadding = false)
             ),
@@ -153,80 +109,110 @@ fun HongTextField(
 }
 
 @Composable
-fun HongTextFieldRemoveButton(
+fun HongTextField(
     modifier: Modifier = Modifier,
     placeholder: String = "",
-    placeholderColor: HongComposeColor = HongComposeColor(
-        colorType = ColorType.BLACK_60
+    placeholderStyle: HongComposeTextStyle = HongComposeTextStyle(
+        fontWeight = FontWeight.W400,
+        color = HongComposeColor(
+            resId = ColorType.BLACK_60.colorResId,
+            type = ColorType.BLACK_60
+        ),
+        size = 16,
+        typo = TypoType.BODY_16
     ),
-    placeholderTypo: TypoType = TypoType.BODY_16,
-    inputTextTypo: TypoType = TypoType.BODY_16_B,
-    inputTextColor: HongComposeColor = HongComposeColor(
-        colorType = ColorType.BLACK_100
+    inputStyle: HongComposeTextStyle = HongComposeTextStyle(
+        fontWeight = FontWeight.W700,
+        color = HongComposeColor(
+            resId = ColorType.BLACK_100.colorResId,
+            type = ColorType.BLACK_100
+        ),
+        size = 16,
+        typo = TypoType.BODY_16_B
     ),
     cursorColor: HongComposeColor = HongComposeColor(
-        colorType = ColorType.BLACK_100
+        resId = ColorType.PRIMARY_MINT.colorResId,
+        type = ColorType.PRIMARY_MINT
     ),
-    @DrawableRes removeIconResId: Int = R.drawable.honglib_ic_20_close,
     useHideKeyboard: Boolean = true,
     singleLine: Boolean = true,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     minLines: Int = 1,
+    debounceTime: Long = 0L,
     keyboardType: KeyboardType = KeyboardType.DONE,
     onTextChanged: (String) -> Unit
 ) {
-    HongTextFieldRemoveButton(
+    var inputText by rememberSaveable { mutableStateOf("") }
+    var debouncedInput by rememberSaveable { mutableStateOf("") }
+    if (debounceTime > 0L) {
+        LaunchedEffect(inputText) {
+            delay(debounceTime) // 마지막 입력 후 500ms 기다림
+            if (inputText == debouncedInput) return@LaunchedEffect
+            debouncedInput = inputText
+            onTextChanged(inputText)
+        }
+    }
+
+    HongTextField(
         modifier = modifier,
         placeholder = placeholder,
-        placeholderColor = placeholderColor,
-        placeholderSize = placeholderTypo.size(),
-        placeholderFontWeight = placeholderTypo.fontWeight(),
-        inputTextSize = inputTextTypo.size(),
-        inputTextFontWeight = inputTextTypo.fontWeight(),
-        inputTextColor = inputTextColor,
+        inputText = inputText,
+
+        placeholderStyle = placeholderStyle,
+
+        inputStyle = inputStyle,
+
         cursorColor = cursorColor,
-        removeIconResId = removeIconResId,
         useHideKeyboard = useHideKeyboard,
         singleLine = singleLine,
         maxLines = maxLines,
         minLines = minLines,
         keyboardType = keyboardType,
-        onTextChanged = onTextChanged
+        onTextChanged = {
+            inputText = it
+            if (debounceTime == 0L) {
+                onTextChanged(it)
+            }
+        }
     )
 }
 
 @Composable
 fun HongTextFieldRemoveButton(
     modifier: Modifier = Modifier,
+    inputText: String,
     placeholder: String = "",
-    placeholderColor: HongComposeColor = HongComposeColor(
-        colorRes = R.color.honglib_color_9929292d,
-        colorType = ColorType.BLACK_60
+    placeholderStyle: HongComposeTextStyle = HongComposeTextStyle(
+        fontWeight = FontWeight.W400,
+        color = HongComposeColor(
+            resId = ColorType.BLACK_60.colorResId,
+            type = ColorType.BLACK_60
+        ),
+        size = 16,
+        typo = TypoType.BODY_16
     ),
-    placeholderSize: Int = 16,
-    placeholderFontWeight: FontWeight = FontWeight.W400,
-
-    inputTextSize: Int = 16,
-    inputTextFontWeight: FontWeight = FontWeight.W700,
-
-    inputTextColor: HongComposeColor = HongComposeColor(
-        colorRes = R.color.honglib_color_29292d,
-        colorType = ColorType.BLACK_100
+    inputStyle: HongComposeTextStyle = HongComposeTextStyle(
+        fontWeight = FontWeight.W700,
+        color = HongComposeColor(
+            resId = ColorType.BLACK_100.colorResId,
+            type = ColorType.BLACK_100
+        ),
+        size = 16,
+        typo = TypoType.BODY_16_B
     ),
     cursorColor: HongComposeColor = HongComposeColor(
-        colorRes = R.color.honglib_color_29292d,
-        colorType = ColorType.BLACK_100
+        resId = ColorType.PRIMARY_MINT.colorResId,
+        type = ColorType.PRIMARY_MINT
     ),
-    @DrawableRes removeIconResId: Int = R.drawable.honglib_ic_20_close,
     useHideKeyboard: Boolean = true,
     singleLine: Boolean = true,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     minLines: Int = 1,
     keyboardType: KeyboardType = KeyboardType.DONE,
-    onTextChanged: (String) -> Unit
+    onTextChanged: (String) -> Unit,
+    removeClick: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
-    var inputText by rememberSaveable { mutableStateOf("") }
 
     Row(
         modifier = modifier,
@@ -239,12 +225,7 @@ fun HongTextFieldRemoveButton(
             if (inputText.isEmpty()) {
                 HongText(
                     text = placeholder,
-                    style = HongComposeTextStyle(
-                        textSize = placeholderSize,
-                        fontWeight = placeholderFontWeight,
-                        textColorType = placeholderColor.colorType,
-                        textColorResId = placeholderColor.colorRes
-                    )
+                    style = placeholderStyle
                 )
             }
 
@@ -252,13 +233,12 @@ fun HongTextFieldRemoveButton(
                 modifier = Modifier.fillMaxWidth(),
                 value = inputText,
                 onValueChange = {
-                    inputText = it
                     onTextChanged(it)
                 },
                 textStyle = TextStyle(
-                    color = inputTextColor.getColor(),
-                    fontWeight = inputTextFontWeight,
-                    fontSize = dpToSp(dp = inputTextSize),
+                    color = inputStyle.color.getColor(),
+                    fontWeight = inputStyle.fontWeight,
+                    fontSize = dpToSp(dp = inputStyle.size),
                     fontFamily = pretendardFontFamily,
                     platformStyle = PlatformTextStyle(includeFontPadding = false)
                 ),
@@ -280,14 +260,83 @@ fun HongTextFieldRemoveButton(
             HongImage(
                 modifier = Modifier
                     .disableRippleClickable {
-                        inputText = ""
-                        focusManager.clearFocus()
+                        removeClick.invoke()
                     },
-                drawableResId = removeIconResId
+                drawableResId = R.drawable.honglib_ic_20_close
             )
         }
     }
 }
 
+@Composable
+fun HongTextFieldRemoveButton(
+    modifier: Modifier = Modifier,
+    placeholder: String = "",
+    placeholderStyle: HongComposeTextStyle = HongComposeTextStyle(
+        fontWeight = FontWeight.W400,
+        color = HongComposeColor(
+            resId = ColorType.BLACK_60.colorResId,
+            type = ColorType.BLACK_60
+        ),
+        size = 16,
+        typo = TypoType.BODY_16
+    ),
+    inputStyle: HongComposeTextStyle = HongComposeTextStyle(
+        fontWeight = FontWeight.W700,
+        color = HongComposeColor(
+            resId = ColorType.BLACK_100.colorResId,
+            type = ColorType.BLACK_100
+        ),
+        size = 16,
+        typo = TypoType.BODY_16_B
+    ),
+    cursorColor: HongComposeColor = HongComposeColor(
+        resId = ColorType.PRIMARY_MINT.colorResId,
+        type = ColorType.PRIMARY_MINT
+    ),
+    useHideKeyboard: Boolean = true,
+    singleLine: Boolean = true,
+    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
+    minLines: Int = 1,
+    debounceTime: Long = 0L,
+    keyboardType: KeyboardType = KeyboardType.DONE,
+    onTextChanged: (String) -> Unit
+) {
+    var inputText by rememberSaveable { mutableStateOf("") }
+    var debouncedInput by rememberSaveable { mutableStateOf("") }
 
+    if (debounceTime > 0L) {
+        LaunchedEffect(inputText) {
+            delay(debounceTime)
+            if (inputText == debouncedInput) return@LaunchedEffect
+            debouncedInput = inputText
+            onTextChanged(inputText)
+        }
+    }
 
+    HongTextFieldRemoveButton(
+        modifier = modifier,
+
+        placeholder = placeholder,
+        placeholderStyle = placeholderStyle,
+
+        inputText = inputText,
+        inputStyle = inputStyle,
+
+        cursorColor = cursorColor,
+        useHideKeyboard = useHideKeyboard,
+        singleLine = singleLine,
+        maxLines = maxLines,
+        minLines = minLines,
+        keyboardType = keyboardType,
+        onTextChanged = {
+            inputText = it
+            if (debounceTime == 0L) {
+                onTextChanged(it)
+            }
+        },
+        removeClick = {
+            inputText = ""
+        }
+    )
+}

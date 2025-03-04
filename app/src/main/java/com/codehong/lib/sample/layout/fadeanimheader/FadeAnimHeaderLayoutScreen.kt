@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.codehong.lib.R
+import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.text.HongText
 
 @Composable
@@ -58,9 +59,11 @@ fun FadeAnimHeaderLayoutHeader(
                 }
                 .alpha(if (isTransparent) 0f else 1f),
             text = "헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더",
-            textSize = 16,
+            size = 16,
             fontWeight = FontWeight.W700,
-            textColorResId = com.codehong.library.widget.R.color.honglib_color_29292d,
+            color = HongComposeColor(
+                resId = com.codehong.library.widget.R.color.honglib_color_29292d
+            ),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             isEmptyOrNullHideView = false

@@ -27,10 +27,10 @@ fun HongTextButton(
     buttonText: String,
     modifier: Modifier = Modifier,
     buttonBackgroundColor: HongComposeColor = HongComposeColor(
-        colorRes = R.color.honglib_color_ffffff
+        resId = R.color.honglib_color_ffffff
     ),
     buttonTextColor: HongComposeColor = HongComposeColor(
-        colorRes = R.color.honglib_color_ffffff
+        resId = R.color.honglib_color_ffffff
     ),
     buttonTextTypoType: TypoType,
     horizontalPadding: Int = 0,
@@ -50,9 +50,8 @@ fun HongTextButton(
         buttonBackgroundColor = buttonBackgroundColor,
         buttonTextStyle = HongComposeTextStyle(
             fontWeight = buttonTextTypoType.fontWeight(),
-            textSize = buttonTextTypoType.size(),
-            textColorResId = buttonTextColor.colorRes,
-            textColorType = buttonTextColor.colorType
+            size = buttonTextTypoType.size(),
+            color = buttonTextColor
         ),
         horizontalPadding = horizontalPadding,
         verticalPadding = verticalPadding,
@@ -72,12 +71,14 @@ fun HongTextButton(
     buttonText: String,
     modifier: Modifier = Modifier,
     buttonBackgroundColor: HongComposeColor = HongComposeColor(
-        colorRes = R.color.honglib_color_ffffff
+        resId = R.color.honglib_color_ffffff
     ),
     buttonTextStyle: HongComposeTextStyle = HongComposeTextStyle(
         fontWeight = FontWeight.W700,
-        textSize = 16,
-        textColorResId = R.color.honglib_color_ffffff
+        size = 16,
+        color = HongComposeColor(
+            resId = R.color.honglib_color_ffffff
+        )
     ),
     horizontalPadding: Int = 0,
     verticalPadding: Int = 0,

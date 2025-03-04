@@ -3,6 +3,8 @@ package com.codehong.library.widget.util
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import java.util.TimeZone
+import org.threeten.bp.LocalDate
 
 object HongDateUtil {
     fun formatTodayDateTime(
@@ -62,5 +64,27 @@ object HongDateUtil {
 
         val dateFormat = SimpleDateFormat(datePattern, Locale.KOREAN)
         return dateFormat.format(calendar.time)
+    }
+
+    fun convertDateStringToLocalDate(
+        dateTime: String,
+        datePattern: String
+    ): LocalDate {
+        try {
+            val inputFormat = SimpleDateFormat(datePattern, Locale.KOREA).apply {
+                timeZone = TimeZone.getTimeZone("Asia/Seoul")
+            }
+            val dateParse = inputFormat.parse(dateTime)
+
+            val cal = Calendar.getInstance()
+            cal.time = dateParse
+
+            val year = cal.get(Calendar.YEAR)
+            val month = cal.get(Calendar.MONTH) + 1
+            val date = cal.get(Calendar.DATE)
+            return LocalDate.of(year, month, date)
+        } catch (e: Exception) {
+            return LocalDate.of(2025, 1, 1)
+        }
     }
 }

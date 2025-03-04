@@ -12,7 +12,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.MarginTopOrBottom
-import com.codehong.library.widget.text.HongTypoText
+import com.codehong.library.widget.text.HongText
 import com.codehong.library.widget.typo.TypoType
 
 
@@ -27,7 +27,7 @@ fun SampleHeader(
             .background(colorResource(id = ColorType.PRIMARY_MINT.colorResId)),
         contentAlignment = Alignment.Center
     ) {
-        HongTypoText(
+        HongText(
             text = title,
             typo = TypoType.BODY_18_B,
             colorType = ColorType.WHITE_100
@@ -41,7 +41,7 @@ fun SampleMenu(
     title: String,
     testCompose: @Composable () -> Unit
 ) {
-    HongTypoText(
+    HongText(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp),

@@ -6,6 +6,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -23,6 +25,21 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.util.getColor
+
+fun Modifier.widthHeight(
+    width: Int? = null,
+    height: Int? = null
+): Modifier {
+    return when {
+        width != null && height != null ->
+            this.width(width.dp)
+                .height(height.dp)
+
+        width != null -> this.width(width.dp)
+        height != null -> this.height(height.dp)
+        else -> this
+    }
+}
 
 /**
  * 클릭 ripple 이벤트 삭제
@@ -77,6 +94,8 @@ fun Modifier.inpkBorder(
 
 fun Modifier.roundBackground(
     color: HongComposeColor,
+    width: Int? = null,
+    height: Int? = null,
     allRadius: Int = 0,
     topRadius: Int = 0,
     bottomRadius: Int = 0,
@@ -85,24 +104,99 @@ fun Modifier.roundBackground(
     bottomStartRadius: Int = 0,
     bottomEndRadius: Int = 0
 ): Modifier = composed {
-    this.background(
-        color = color.getColor(),
-        shape = RoundedCornerShape(
-            topStart = getRadius(allRadius, topRadius, topStartRadius).dp,
-            topEnd = getRadius(allRadius, topRadius, topEndRadius).dp,
-            bottomStart = getRadius(allRadius, bottomRadius, bottomStartRadius).dp,
-            bottomEnd = getRadius(allRadius, bottomRadius, bottomEndRadius).dp
-        )
-    )
+    return@composed when {
+        width != null && height != null -> {
+            this.width(width.dp)
+                .height(height.dp)
+                .background(
+                    color = color.getColor(),
+                    shape = RoundedCornerShape(
+                        topStart = getRadius(allRadius, topRadius, topStartRadius).dp,
+                        topEnd = getRadius(allRadius, topRadius, topEndRadius).dp,
+                        bottomStart = getRadius(allRadius, bottomRadius, bottomStartRadius).dp,
+                        bottomEnd = getRadius(allRadius, bottomRadius, bottomEndRadius).dp
+                    )
+                )
+        }
+
+        width != null -> {
+            this.width(width.dp)
+                .background(
+                    color = color.getColor(),
+                    shape = RoundedCornerShape(
+                        topStart = getRadius(allRadius, topRadius, topStartRadius).dp,
+                        topEnd = getRadius(allRadius, topRadius, topEndRadius).dp,
+                        bottomStart = getRadius(allRadius, bottomRadius, bottomStartRadius).dp,
+                        bottomEnd = getRadius(allRadius, bottomRadius, bottomEndRadius).dp
+                    )
+                )
+        }
+
+        height != null -> {
+            this.height(height.dp)
+                .background(
+                    color = color.getColor(),
+                    shape = RoundedCornerShape(
+                        topStart = getRadius(allRadius, topRadius, topStartRadius).dp,
+                        topEnd = getRadius(allRadius, topRadius, topEndRadius).dp,
+                        bottomStart = getRadius(allRadius, bottomRadius, bottomStartRadius).dp,
+                        bottomEnd = getRadius(allRadius, bottomRadius, bottomEndRadius).dp
+                    )
+                )
+        }
+
+        else -> {
+            this.background(
+                color = color.getColor(),
+                shape = RoundedCornerShape(
+                    topStart = getRadius(allRadius, topRadius, topStartRadius).dp,
+                    topEnd = getRadius(allRadius, topRadius, topEndRadius).dp,
+                    bottomStart = getRadius(allRadius, bottomRadius, bottomStartRadius).dp,
+                    bottomEnd = getRadius(allRadius, bottomRadius, bottomEndRadius).dp
+                )
+            )
+        }
+    }
 }
 
 fun Modifier.circleBackground(
-    color: HongComposeColor
+    color: HongComposeColor,
+    width: Int? = null,
+    height: Int? = null,
 ): Modifier = composed {
-    this.background(
-        color = color.getColor(),
-        shape = CircleShape
-    )
+    return@composed when {
+        width != null && height != null -> {
+            this.width(width.dp)
+                .height(height.dp)
+                .background(
+                    color = color.getColor(),
+                    shape = CircleShape
+                )
+        }
+
+        width != null -> {
+            this.width(width.dp)
+                .background(
+                    color = color.getColor(),
+                    shape = CircleShape
+                )
+        }
+
+        height != null -> {
+            this.height(height.dp)
+                .background(
+                    color = color.getColor(),
+                    shape = CircleShape
+                )
+        }
+
+        else -> {
+            this.background(
+                color = color.getColor(),
+                shape = CircleShape
+            )
+        }
+    }
 }
 
 // region shadow
@@ -180,7 +274,7 @@ fun Modifier.inpkBorderShadow(
     borderColor: HongComposeColor,
     borderWidth: Int,
     backgroundColor: HongComposeColor = HongComposeColor(
-        colorRes = R.color.honglib_color_transparent
+        resId = R.color.honglib_color_transparent
     ),
     allRadius: Int = 0,
     topRadius: Int = 0,

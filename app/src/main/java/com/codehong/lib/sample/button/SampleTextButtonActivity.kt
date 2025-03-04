@@ -3,15 +3,16 @@ package com.codehong.lib.sample.button
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.codehong.lib.R
 import com.codehong.lib.ui.SampleHeader
 import com.codehong.lib.ui.SampleMenu
 import com.codehong.library.widget.ColorType
@@ -34,6 +35,7 @@ class SampleTextButtonActivity : ComponentActivity() {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .background(colorResource(id = ColorType.WHITE_100.colorResId))
                         .padding(it)
                         .padding(horizontal = 20.dp)
                 ) {
@@ -46,12 +48,14 @@ class SampleTextButtonActivity : ComponentActivity() {
                                 .padding(horizontal = 20.dp),
                             buttonText = "최저가 검색",
                             buttonBackgroundColor = HongComposeColor(
-                                colorType = ColorType.PRIMARY_MINT
+                                type = ColorType.PRIMARY_MINT
                             ),
                             allRadius = 12,
                             buttonTextStyle = HongComposeTextStyle(
-                                textColorResId = R.color.color_ffffff,
-                                textSize = 15,
+                                color = HongComposeColor(
+                                    resId = com.codehong.library.widget.R.color.honglib_color_ffffff
+                                ),
+                                size = 15,
                                 fontWeight = FontWeight.W700
                             ),
                             verticalPadding = 15,
@@ -63,6 +67,5 @@ class SampleTextButtonActivity : ComponentActivity() {
                 }
             }
         }
-
     }
 }

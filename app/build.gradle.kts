@@ -82,9 +82,9 @@ dependencies {
             Libs.ACCOMPANIST_PAGER,
             Libs.ACCOMPANIST_PAGER_INDICATORS,
             Libs.COMPOSE_COIL,
-            Libs.COMPOSE_UI_GRAPHICS
-
-            )
+            Libs.COMPOSE_UI_GRAPHICS,
+            Libs.THREETENAPB
+        )
     )
 
     debugHongImpl(
