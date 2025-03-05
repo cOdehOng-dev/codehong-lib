@@ -24,6 +24,7 @@ import com.codehong.lib.sample.calendar.SampleCalendarActivity1
 import com.codehong.lib.sample.header.SampleHeaderActivity
 import com.codehong.lib.sample.layout.slide.SampleSlideLayoutActivity
 import com.codehong.lib.sample.pager.SampleHorizontalPagerActivity
+import com.codehong.lib.sample.text.SampleBadgeTextActivity
 import com.codehong.lib.sample.text.SampleTextActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
 import com.codehong.library.widget.ColorType
@@ -155,6 +156,12 @@ fun SampleTheme(
                             }
                         }
 
+                        ComposeItem.BADGE_TEXT -> {
+                            Intent(activity, SampleBadgeTextActivity::class.java).apply {
+                                activity.startActivity(this)
+                            }
+                        }
+
                         else -> {}
                     }
                 }
@@ -172,5 +179,6 @@ enum class ComposeItem(val title: String) {
     TEXT_BUTTON("텍스트 버튼"),
     SLIDE_LAYOUT("SlideLayout"),
     CALENDAR_1("달력(초기 X)"),
-    HORIZONTAL_PAGER("HorizontalViewPager")
+    HORIZONTAL_PAGER("HorizontalViewPager"),
+    BADGE_TEXT("BadgeText"),
 }

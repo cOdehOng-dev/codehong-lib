@@ -46,7 +46,9 @@ class SampleHorizontalPagerActivity : ComponentActivity() {
                             modifier = Modifier
                                 .fillMaxWidth(),
                             pageList = testImageUrlList,
-                            nextPageVisibleWidth = 15f
+                            nextPageVisibleWidth = 15f,
+                            currentIndex = {
+                            }
                         ) { item ->
                             (item as? String)
                                 ?.toString()
@@ -71,7 +73,9 @@ class SampleHorizontalPagerActivity : ComponentActivity() {
                             pageList = testImageUrlList,
                             autoScrollMillSecond = 3000,
                             nextPageVisibleWidth = 15f,
-                            isInfiniteScroll = true
+                            isInfiniteScroll = true,
+                            currentIndex = {
+                            }
                         ) { item ->
                             (item as? String)
                                 ?.toString()
@@ -95,7 +99,9 @@ class SampleHorizontalPagerActivity : ComponentActivity() {
                                 .fillMaxWidth(),
                             pageList = testImageUrlList,
                             nextPageVisibleWidth = 15f,
-                            isInfiniteScroll = true
+                            isInfiniteScroll = true,
+                            currentIndex = {
+                            }
                         ) { item ->
                             (item as? String)
                                 ?.toString()
@@ -120,7 +126,9 @@ class SampleHorizontalPagerActivity : ComponentActivity() {
                             pageList = testImageUrlList,
                             nextPageVisibleWidth = 15f,
                             isInfiniteScrollWithBackToFirstItem = true,
-                            autoScrollMillSecond = 3000
+                            autoScrollMillSecond = 3000,
+                            currentIndex = {
+                            }
                         ) { item ->
                             (item as? String)
                                 ?.toString()

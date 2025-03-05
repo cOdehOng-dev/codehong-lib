@@ -35,6 +35,7 @@ fun HongHorizontalPager(
     initialLoadPageSize: Int? = null,
     isInfiniteScroll: Boolean = false,
     isInfiniteScrollWithBackToFirstItem: Boolean = false,
+    currentIndex: (Int) -> Unit,
     content: @Composable (Any) -> Unit
 ) {
     if (pageList.isNullOrEmpty()) {
@@ -62,6 +63,7 @@ fun HongHorizontalPager(
         snapshotFlow { pagerState.currentPage }
             .collect { page ->
                 currentPage = page
+                currentIndex.invoke(currentPage % pageList.size)
             }
     }
 

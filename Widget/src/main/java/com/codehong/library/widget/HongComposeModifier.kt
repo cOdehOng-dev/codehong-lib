@@ -41,21 +41,7 @@ fun Modifier.widthHeight(
     }
 }
 
-/**
- * 클릭 ripple 이벤트 삭제
- */
-inline fun Modifier.disableRippleClickable(
-    crossinline onClick: () -> Unit
-): Modifier = composed {
-    clickable(
-        indication = null,
-        interactionSource = remember { MutableInteractionSource() }
-    ) {
-        onClick()
-    }
-}
-
-fun Modifier.inpkBorder(
+fun Modifier.hongBorder(
     borderWidth: Int,
     borderColor: HongComposeColor,
     backgroundColor: HongComposeColor = HongComposeColor(),
@@ -162,7 +148,7 @@ fun Modifier.roundBackground(
 fun Modifier.circleBackground(
     color: HongComposeColor,
     width: Int? = null,
-    height: Int? = null,
+    height: Int? = null
 ): Modifier = composed {
     return@composed when {
         width != null && height != null -> {
@@ -270,7 +256,7 @@ fun Modifier.dropShadow(
 }
 
 @Composable
-fun Modifier.inpkBorderShadow(
+fun Modifier.hongBorderShadow(
     borderColor: HongComposeColor,
     borderWidth: Int,
     backgroundColor: HongComposeColor = HongComposeColor(
@@ -328,3 +314,17 @@ fun Modifier.inpkBorderShadow(
         )
 }
 // endregion shadow
+
+/**
+ * 클릭 ripple 이벤트 삭제
+ */
+inline fun Modifier.disableRippleClickable(
+    crossinline onClick: () -> Unit
+): Modifier = composed {
+    clickable(
+        indication = null,
+        interactionSource = remember { MutableInteractionSource() }
+    ) {
+        onClick()
+    }
+}

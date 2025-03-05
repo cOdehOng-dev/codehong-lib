@@ -39,6 +39,7 @@
         <activity android:name=".sample.calendar.SampleCalendarActivity1"/>
         <activity android:name=".sample.header.SampleHeaderActivity"/>
         <activity android:name=".sample.pager.SampleHorizontalPagerActivity"/>
+        <activity android:name=".sample.text.SampleBadgeTextActivity"/>
     </application>
 
 </manifest>
