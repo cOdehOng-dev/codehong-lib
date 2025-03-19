@@ -1,5 +1,8 @@
 package com.codehong.library.widget.util
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
@@ -41,6 +44,9 @@ fun ColorType?.getComposeColor(defColor: Int): Color {
 
     return colorResource(id = this.colorResId)
 }
+
+@Composable
+fun getStatusHeight(): Dp = WindowInsets.systemBars.asPaddingValues().calculateTopPadding()
 
 @Composable
 fun HongComposeColor?.getColor(): Color {
@@ -167,4 +173,3 @@ fun getAlphaColor(colorHexCode: String, alpha: Int): String {
 
     return "#$prefix${colorHexCode.removePrefix("#")}"
 }
-

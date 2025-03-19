@@ -72,7 +72,8 @@ dependencies {
             Libs.ACCOMPANIST_PAGER_INDICATORS,
             Libs.COMPOSE_COIL,
             Libs.COMPOSE_UI_GRAPHICS,
-            Libs.THREETENAPB
+            Libs.THREETENAPB,
+            Libs.ACCOMPANIST_DRAWABLEPAINTER
 
         )
     )

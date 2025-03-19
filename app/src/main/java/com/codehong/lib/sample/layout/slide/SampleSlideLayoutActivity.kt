@@ -1,6 +1,7 @@
 package com.codehong.lib.sample.layout.slide
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -22,14 +23,14 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.codehong.lib.R
-import com.codehong.lib.ui.SampleHeader
-import com.codehong.lib.ui.SampleMenu
+import com.codehong.lib.sample.R
+import com.codehong.lib.sample.SampleHeader
+import com.codehong.lib.sample.SampleMenu
 import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.MarginTopOrBottom
 import com.codehong.library.widget.button.HongTextButton
 import com.codehong.library.widget.disableRippleClickable
-import com.codehong.library.widget.layout.SlideVisibleLayout
+import com.codehong.library.widget.layout.HongSlideVisibleLayout
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.model.text.HongComposeTextStyle
 import com.codehong.library.widget.text.HongText
@@ -61,7 +62,7 @@ class SampleSlideLayoutActivity : ComponentActivity() {
                                 .padding(horizontal = 20.dp),
                             buttonText = "뷰 슬라이드",
                             buttonBackgroundColor = HongComposeColor(
-                                type = ColorType.PRIMARY_MINT
+                                type = ColorType.MAIN_PURPLE
                             ),
                             allRadius = 12,
                             buttonTextStyle = HongComposeTextStyle(
@@ -91,8 +92,11 @@ class SampleSlideLayoutActivity : ComponentActivity() {
         isVisible: Boolean,
         closeClick: () -> Unit
     ) {
-        SlideVisibleLayout(
-            isVisible = isVisible
+        HongSlideVisibleLayout(
+            isVisible = isVisible,
+            onAnimationEnd = {
+                Log.d("TAG", "애니메이션 종료")
+            }
         ) {
             Scaffold(
                 topBar = {
@@ -100,7 +104,7 @@ class SampleSlideLayoutActivity : ComponentActivity() {
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(52.dp)
-                            .background(colorResource(id = ColorType.PRIMARY_MINT.colorResId)),
+                            .background(colorResource(id = ColorType.MAIN_PURPLE.colorResId)),
                         contentAlignment = Alignment.Center
                     ) {
                         HongText(

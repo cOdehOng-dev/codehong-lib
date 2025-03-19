@@ -1,4 +1,4 @@
-package com.codehong.lib
+package com.codehong.lib.sample
 
 data class SampleTestItem(
     val title: String,

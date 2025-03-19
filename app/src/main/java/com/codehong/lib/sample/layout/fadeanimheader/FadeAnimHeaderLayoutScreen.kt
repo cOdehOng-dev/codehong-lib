@@ -1,5 +1,6 @@
 package com.codehong.lib.sample.layout.fadeanimheader
 
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +15,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.codehong.lib.R
+import com.codehong.library.widget.R
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.text.HongText
 
@@ -27,7 +28,7 @@ fun FadeAnimHeaderLayoutHeader(
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp)
-            .background(colorResource(id = R.color.color_ffffff).copy(alpha = headerAlpha))
+            .background(colorResource(id = R.color.honglib_color_ffffff).copy(alpha = headerAlpha))
     ) {
         val startGuideline = createGuidelineFromStart(4.dp)
         val endGuideline = createGuidelineFromEnd(4.dp)
@@ -45,7 +46,7 @@ fun FadeAnimHeaderLayoutHeader(
                 }
                 .width(40.dp)
                 .height(40.dp)
-                .background(colorResource(id = if (isTransparent) R.color.white else R.color.black))
+                .background(colorResource(id = if (isTransparent) R.color.honglib_color_ffffff else R.color.honglib_color_000000))
         )
 
         HongText(
@@ -62,7 +63,7 @@ fun FadeAnimHeaderLayoutHeader(
             size = 16,
             fontWeight = FontWeight.W700,
             color = HongComposeColor(
-                resId = com.codehong.library.widget.R.color.honglib_color_29292d
+                resId = R.color.honglib_color_29292d
             ),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
@@ -78,7 +79,7 @@ fun FadeAnimHeaderLayoutHeader(
                 }
                 .width(40.dp)
                 .height(40.dp)
-                .background(colorResource(id = if (isTransparent) R.color.white else R.color.black))
+                .background(colorResource(id = if (isTransparent) R.color.honglib_color_ffffff else R.color.honglib_color_000000))
         )
     }
 }

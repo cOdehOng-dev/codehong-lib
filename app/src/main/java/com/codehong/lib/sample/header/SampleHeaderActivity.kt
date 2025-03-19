@@ -15,8 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import com.codehong.lib.ui.SampleHeader
-import com.codehong.lib.ui.SampleMenu
+import com.codehong.lib.sample.SampleHeader
+import com.codehong.lib.sample.SampleMenu
 import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.MarginTopOrBottom
 import com.codehong.library.widget.header.HongComposeCloseHeader
@@ -51,7 +51,7 @@ class SampleHeaderActivity : ComponentActivity() {
                                     .width(100.dp)
                                     .height(50.dp)
                                     .background(
-                                        colorResource(id = ColorType.PRIMARY_MINT.colorResId)
+                                        colorResource(id = ColorType.MAIN_PURPLE.colorResId)
                                     )
                             )
                         }
@@ -69,7 +69,7 @@ class SampleHeaderActivity : ComponentActivity() {
                                     .width(100.dp)
                                     .height(50.dp)
                                     .background(
-                                        colorResource(id = ColorType.PRIMARY_MINT.colorResId)
+                                        colorResource(id = ColorType.MAIN_PURPLE.colorResId)
                                     )
                             )
                         }
@@ -87,7 +87,7 @@ class SampleHeaderActivity : ComponentActivity() {
                                     .width(100.dp)
                                     .height(50.dp)
                                     .background(
-                                        colorResource(id = ColorType.PRIMARY_MINT.colorResId)
+                                        colorResource(id = ColorType.MAIN_PURPLE.colorResId)
                                     )
                             )
                         }

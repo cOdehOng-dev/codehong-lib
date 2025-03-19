@@ -1,4 +1,4 @@
-package com.codehong.lib
+package com.codehong.lib.sample
 
 import android.content.Intent
 import android.os.Bundle
@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.button.SampleTextButtonActivity
 import com.codehong.lib.sample.calendar.SampleCalendarActivity1
 import com.codehong.lib.sample.header.SampleHeaderActivity
+import com.codehong.lib.sample.image.SampleImageActivity
 import com.codehong.lib.sample.layout.slide.SampleSlideLayoutActivity
 import com.codehong.lib.sample.pager.SampleHorizontalPagerActivity
 import com.codehong.lib.sample.text.SampleBadgeTextActivity
@@ -55,7 +56,7 @@ fun SampleTheme(
                     .fillMaxWidth()
                     .height(50.dp)
                     .background(
-                        colorResource(id = ColorType.PRIMARY_MINT.colorResId)
+                        colorResource(id = ColorType.MAIN_PURPLE.colorResId)
                     ),
                 contentAlignment = Alignment.Center
             ) {
@@ -75,7 +76,7 @@ fun SampleTheme(
                     .fillMaxWidth()
                     .height(50.dp)
                     .background(
-                        colorResource(id = ColorType.PRIMARY_MINT.colorResId)
+                        colorResource(id = ColorType.MAIN_PURPLE.colorResId)
                     )
             ) {
             }
@@ -109,13 +110,18 @@ fun SampleTheme(
                         type = ColorType.WHITE_100
                     ),
                     buttonBackgroundColor = HongComposeColor(
-                        type = ColorType.PRIMARY_MINT
+                        type = ColorType.MAIN_PURPLE
                     ),
                     verticalPadding = 20
                 ) {
                     when (item.compose) {
                         ComposeItem.TEXT -> {
                             Intent(activity, SampleTextActivity::class.java).apply {
+                                activity.startActivity(this)
+                            }
+                        }
+                        ComposeItem.IMAGE -> {
+                            Intent(activity, SampleImageActivity::class.java).apply {
                                 activity.startActivity(this)
                             }
                         }
@@ -162,6 +168,12 @@ fun SampleTheme(
                             }
                         }
 
+
+                        ComposeItem.SCROLL_TAB -> {
+                            Intent(activity, SampleBadgeTextActivity::class.java).apply {
+                                activity.startActivity(this)
+                            }
+                        }
                         else -> {}
                     }
                 }
@@ -173,6 +185,7 @@ fun SampleTheme(
 enum class ComposeItem(val title: String) {
     TEXT_TYPO("텍스트 Typo"),
     TEXT("Text"),
+    IMAGE("Image"),
     HEADER("헤더"),
     TEXT_FILED("TextField"),
     SEARCH_BAR("검색바"),
@@ -181,4 +194,5 @@ enum class ComposeItem(val title: String) {
     CALENDAR_1("달력(초기 X)"),
     HORIZONTAL_PAGER("HorizontalViewPager"),
     BADGE_TEXT("BadgeText"),
+    SCROLL_TAB("ScrollTab")
 }

@@ -58,8 +58,8 @@ fun HongTextField(
         typo = TypoType.BODY_16_B
     ),
     cursorColor: HongComposeColor = HongComposeColor(
-        resId = ColorType.PRIMARY_MINT.colorResId,
-        type = ColorType.PRIMARY_MINT
+        resId = ColorType.MAIN_PURPLE.colorResId,
+        type = ColorType.MAIN_PURPLE
     ),
     useHideKeyboard: Boolean = true,
     singleLine: Boolean = true,
@@ -131,8 +131,8 @@ fun HongTextField(
         typo = TypoType.BODY_16_B
     ),
     cursorColor: HongComposeColor = HongComposeColor(
-        resId = ColorType.PRIMARY_MINT.colorResId,
-        type = ColorType.PRIMARY_MINT
+        resId = ColorType.MAIN_PURPLE.colorResId,
+        type = ColorType.MAIN_PURPLE
     ),
     useHideKeyboard: Boolean = true,
     singleLine: Boolean = true,
@@ -201,8 +201,8 @@ fun HongTextFieldRemoveButton(
         typo = TypoType.BODY_16_B
     ),
     cursorColor: HongComposeColor = HongComposeColor(
-        resId = ColorType.PRIMARY_MINT.colorResId,
-        type = ColorType.PRIMARY_MINT
+        resId = ColorType.MAIN_PURPLE.colorResId,
+        type = ColorType.MAIN_PURPLE
     ),
     useHideKeyboard: Boolean = true,
     singleLine: Boolean = true,
@@ -291,8 +291,8 @@ fun HongTextFieldRemoveButton(
         typo = TypoType.BODY_16_B
     ),
     cursorColor: HongComposeColor = HongComposeColor(
-        resId = ColorType.PRIMARY_MINT.colorResId,
-        type = ColorType.PRIMARY_MINT
+        resId = ColorType.MAIN_PURPLE.colorResId,
+        type = ColorType.MAIN_PURPLE
     ),
     useHideKeyboard: Boolean = true,
     singleLine: Boolean = true,

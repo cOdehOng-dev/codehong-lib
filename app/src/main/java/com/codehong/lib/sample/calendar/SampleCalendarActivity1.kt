@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.codehong.lib.ui.SampleHeader
+import com.codehong.lib.sample.SampleHeader
 import com.codehong.library.widget.R
 import com.codehong.library.widget.calendar.HongComposeCalendar
 import com.codehong.library.widget.model.HongComposeColor

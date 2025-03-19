@@ -13,10 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.codehong.lib.ui.SampleHeader
-import com.codehong.lib.ui.SampleMenu
+import com.codehong.lib.sample.SampleHeader
+import com.codehong.lib.sample.SampleMenu
 import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.MarginTopOrBottom
+import com.codehong.library.widget.R
 import com.codehong.library.widget.button.HongTextButton
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.model.text.HongComposeTextStyle
@@ -48,12 +49,12 @@ class SampleTextButtonActivity : ComponentActivity() {
                                 .padding(horizontal = 20.dp),
                             buttonText = "최저가 검색",
                             buttonBackgroundColor = HongComposeColor(
-                                type = ColorType.PRIMARY_MINT
+                                type = ColorType.MAIN_PURPLE
                             ),
                             allRadius = 12,
                             buttonTextStyle = HongComposeTextStyle(
                                 color = HongComposeColor(
-                                    resId = com.codehong.library.widget.R.color.honglib_color_ffffff
+                                    resId = R.color.honglib_color_ffffff
                                 ),
                                 size = 15,
                                 fontWeight = FontWeight.W700

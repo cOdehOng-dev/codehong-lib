@@ -14,7 +14,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.codehong.lib.ui.SampleMenu
+import com.codehong.lib.sample.SampleMenu
 import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.MarginTopOrBottom
 import com.codehong.library.widget.model.HongComposeColor

@@ -13,20 +13,24 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter
 import com.codehong.library.widget.getRadius
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.util.getColor
 import com.codehong.library.widget.widthHeight
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 @Composable
 fun HongImage(
     modifier: Modifier = Modifier,
+    @DrawableRes drawableResId: Int,
     width: Int? = null,
     height: Int? = null,
-    @DrawableRes drawableResId: Int,
     allRadius: Int = 0,
     topRadius: Int = 0,
     bottomRadius: Int = 0,
@@ -90,6 +94,8 @@ fun HongImage(
     imageUrl: String?,
     width: Int? = null,
     height: Int? = null,
+    @DrawableRes placeholder: Int? = null,
+    @DrawableRes error: Int? = null,
     allRadius: Int = 0,
     topRadius: Int = 0,
     bottomRadius: Int = 0,
@@ -104,8 +110,12 @@ fun HongImage(
     contentScale: ContentScale = ContentScale.Fit,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
-    useShapeCircle: Boolean = false
+    useShapeCircle: Boolean = false,
+    onLoading: ((AsyncImagePainter.State.Loading) -> Unit)? = null,
+    onSuccess: ((AsyncImagePainter.State.Success) -> Unit)? = null,
+    onError: ((AsyncImagePainter.State.Error) -> Unit)? = null
 ) {
+    val context = LocalContext.current
     AsyncImage(
         modifier = Modifier
             .then(modifier)
@@ -143,6 +153,29 @@ fun HongImage(
         contentDescription = contentDescription,
         alignment = alignment,
         contentScale = contentScale,
-        colorFilter = colorFilter
+        colorFilter = colorFilter,
+        placeholder = if (placeholder != null) {
+            rememberDrawablePainter(
+                ContextCompat.getDrawable(
+                    context,
+                    placeholder
+                )
+            )
+        } else {
+            null
+        },
+        error = if (error != null) {
+            rememberDrawablePainter(
+                ContextCompat.getDrawable(
+                    context,
+                    error
+                )
+            )
+        } else {
+            null
+        },
+        onLoading = onLoading,
+        onSuccess = onSuccess,
+        onError = onError
     )
 }

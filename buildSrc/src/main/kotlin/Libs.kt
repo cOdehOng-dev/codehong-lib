@@ -49,4 +49,5 @@ object Libs {
 
     const val COMPOSE_COIL = "io.coil-kt:coil-compose:2.4.0"
     const val THREETENAPB = "com.jakewharton.threetenabp:threetenabp:1.3.0"
+    const val ACCOMPANIST_DRAWABLEPAINTER = "com.google.accompanist:accompanist-drawablepainter:0.31.1-alpha"
 }

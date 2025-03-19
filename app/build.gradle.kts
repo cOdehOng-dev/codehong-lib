@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.codehong.lib"
+    namespace = "com.codehong.lib.sample"
     compileSdk = 34
 
     defaultConfig {

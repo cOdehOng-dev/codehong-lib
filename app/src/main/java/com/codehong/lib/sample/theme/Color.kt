@@ -1,8 +1,6 @@
-package com.codehong.lib.ui.theme
+package com.codehong.lib.sample.theme
 
-import androidx.annotation.ColorRes
 import androidx.compose.ui.graphics.Color
-import com.codehong.lib.R
 
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)

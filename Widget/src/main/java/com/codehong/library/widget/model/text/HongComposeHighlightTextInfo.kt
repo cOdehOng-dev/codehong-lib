@@ -9,7 +9,7 @@ data class HongComposeHighlightTextInfo(
     val style: HongComposeTextStyle = HongComposeTextStyle(
         typo = TypoType.BODY_16_B,
         color = HongComposeColor(
-            type = ColorType.PRIMARY_MINT
+            type = ColorType.MAIN_PURPLE
         )
     )
 )

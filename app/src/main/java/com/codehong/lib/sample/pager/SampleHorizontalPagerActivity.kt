@@ -11,8 +11,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import com.codehong.lib.ui.SampleHeader
-import com.codehong.lib.ui.SampleMenu
+import com.codehong.lib.sample.SampleHeader
+import com.codehong.lib.sample.SampleMenu
 import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.MarginTopOrBottom
 import com.codehong.library.widget.image.HongImage

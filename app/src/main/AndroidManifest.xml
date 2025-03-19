@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.codehong.lib.sample">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <application
-        android:name=".sample.SampleApplication"
+        android:name=".SampleApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -30,16 +31,18 @@
         </activity>
 
         <activity
-            android:name=".sample.layout.fadeanimheader.FadeAnimHeaderLayoutActivity"
+            android:name=".layout.fadeanimheader.FadeAnimHeaderLayoutActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".sample.textfield.SampleTextFieldActivity"/>
-        <activity android:name=".sample.button.SampleTextButtonActivity"/>
-        <activity android:name=".sample.text.SampleTextActivity"/>
-        <activity android:name=".sample.layout.slide.SampleSlideLayoutActivity"/>
-        <activity android:name=".sample.calendar.SampleCalendarActivity1"/>
-        <activity android:name=".sample.header.SampleHeaderActivity"/>
-        <activity android:name=".sample.pager.SampleHorizontalPagerActivity"/>
-        <activity android:name=".sample.text.SampleBadgeTextActivity"/>
+        <activity android:name=".textfield.SampleTextFieldActivity"/>
+        <activity android:name=".button.SampleTextButtonActivity"/>
+        <activity android:name=".text.SampleTextActivity"/>
+        <activity android:name=".image.SampleImageActivity"/>
+        <activity android:name=".layout.slide.SampleSlideLayoutActivity"/>
+        <activity android:name=".calendar.SampleCalendarActivity1"/>
+        <activity android:name=".header.SampleHeaderActivity"/>
+        <activity android:name=".pager.SampleHorizontalPagerActivity"/>
+        <activity android:name=".text.SampleBadgeTextActivity"/>
+        <activity android:name=".tab.SampleScrollTabActivity"/>
     </application>
 
 </manifest>

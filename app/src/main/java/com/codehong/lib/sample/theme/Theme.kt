@@ -1,4 +1,4 @@
-package com.codehong.lib.ui.theme
+package com.codehong.lib.sample.theme
 
 import android.app.Activity
 import android.os.Build

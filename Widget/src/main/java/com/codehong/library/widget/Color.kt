@@ -30,5 +30,6 @@ enum class ColorType(val colorName: String, @ColorRes val colorResId: Int, val c
     HONG_BG2("hong_bg2", R.color.honglib_color_f7f7f8, 41),
     HONG_ALERT("alert", R.color.honglib_color_be0017, 42),
 
-    PRIMARY_MINT("primary_mint", R.color.honglib_color_3eb489, 50),
+    MAIN_PURPLE("primary_mint", R.color.honglib_color_8b00ff, 50)
+//    MAIN_COLOR("main_color", R.color.honglib_color_8b00ff, 51),
 }

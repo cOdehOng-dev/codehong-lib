@@ -1,4 +1,4 @@
-package com.codehong.lib.ui.theme
+package com.codehong.lib.sample.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
