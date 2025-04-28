@@ -4,6 +4,9 @@ object Libs {
     const val FRAGMENT = "androidx.fragment:fragment-ktx:1.5.2"
     const val CORE = "androidx.core:core-ktx:1.9.0"
     const val APPCOMPAT = "androidx.appcompat:appcompat:1.2.0"
+    const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:2.1.0"
+    const val ACTIVITY_KTX = "androidx.activity:activity-ktx:1.9.1"
+    const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:1.5.2"
 
     const val LIFECYCLE_RUNTIME = "androidx.lifecycle:lifecycle-runtime-ktx:2.8.7"
 

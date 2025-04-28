@@ -2,9 +2,12 @@ package com.codehong.lib.sample
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,15 +28,20 @@ import com.codehong.lib.sample.header.SampleHeaderActivity
 import com.codehong.lib.sample.image.SampleImageActivity
 import com.codehong.lib.sample.layout.slide.SampleSlideLayoutActivity
 import com.codehong.lib.sample.pager.SampleHorizontalPagerActivity
+import com.codehong.lib.sample.picker.OptionPickerActivity
+import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.text.SampleBadgeTextActivity
-import com.codehong.lib.sample.text.SampleTextActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
-import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.R
 import com.codehong.library.widget.button.HongTextButton
+import com.codehong.library.widget.hongBorder
 import com.codehong.library.widget.model.HongComposeColor
+import com.codehong.library.widget.model.text.HongComposeTextStyle
+import com.codehong.library.widget.rule.HongWidgetType
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongText
-import com.codehong.library.widget.typo.TypoType
+import com.codehong.library.widget.util.picker.OptionPickerDialog
 
 class MainActivity : ComponentActivity() {
 
@@ -56,12 +64,12 @@ fun SampleTheme(
                     .fillMaxWidth()
                     .height(50.dp)
                     .background(
-                        colorResource(id = ColorType.MAIN_PURPLE.colorResId)
+                        colorResource(id = HongColor.MAIN_PURPLE.colorResId)
                     ),
                 contentAlignment = Alignment.Center
             ) {
                 HongText(
-                    text = "코드홍의 라이브러리 월드",
+                    text = "라이브러리",
                     fontWeight = FontWeight.W700,
                     size = 30,
                     color = HongComposeColor(
@@ -71,14 +79,52 @@ fun SampleTheme(
             }
         },
         bottomBar = {
+            val widgetList = HongWidgetType.values().map { it.value }.toMutableList()
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
-                    .background(
-                        colorResource(id = ColorType.MAIN_PURPLE.colorResId)
+                    .hongBorder(
+                        borderWidth = 1,
+                        borderColor = HongComposeColor(
+                            type = HongColor.MAIN_PURPLE
+                        ),
+                        backgroundColor = HongComposeColor(
+                            type = HongColor.WHITE_100
+                        )
                     )
+                    .clickable {
+                        OptionPickerDialog(
+                            activity,
+                            "위젯 선택",
+                            widgetList,
+                            0
+                        ) { selectComponent, _ ->
+                            if (selectComponent == HongWidgetType.NO_VALUE.value) {
+                                return@OptionPickerDialog
+                            }
+
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                Intent(activity, PlaygroundActivity::class.java).apply {
+                                    putExtra("componentType", selectComponent)
+                                    activity.startActivity(this)
+                                }
+                            }, 200)
+                        }.show()
+                    },
+                contentAlignment = Alignment.Center
             ) {
+                HongText(
+                    text = "Playground",
+                    style = HongComposeTextStyle(
+                        size = 16,
+                        color = HongComposeColor(
+                            resId = R.color.honglib_default
+                        ),
+                        fontWeight = FontWeight.W500
+                    )
+                )
             }
         }
     ) {
@@ -104,22 +150,27 @@ fun SampleTheme(
                         .fillMaxWidth()
                         .padding(vertical = 15.dp),
                     buttonText = item.title,
-                    buttonTextTypoType = TypoType.BODY_14_B,
+                    buttonTextTypoType = HongTypo.BODY_14_B,
                     allRadius = 20,
                     buttonTextColor = HongComposeColor(
-                        type = ColorType.WHITE_100
+                        type = HongColor.WHITE_100
                     ),
                     buttonBackgroundColor = HongComposeColor(
-                        type = ColorType.MAIN_PURPLE
+                        type = HongColor.MAIN_PURPLE
                     ),
                     verticalPadding = 20
                 ) {
                     when (item.compose) {
                         ComposeItem.TEXT -> {
-                            Intent(activity, SampleTextActivity::class.java).apply {
+//                            Intent(activity, SampleTextActivity::class.java).apply {
+//                                activity.startActivity(this)
+//                            }
+                            Intent(activity, SampleActivity::class.java).apply {
+                                putExtra("componentType", HongWidgetType.TEXT.value)
                                 activity.startActivity(this)
                             }
                         }
+
                         ComposeItem.IMAGE -> {
                             Intent(activity, SampleImageActivity::class.java).apply {
                                 activity.startActivity(this)
@@ -168,13 +219,17 @@ fun SampleTheme(
                             }
                         }
 
-
                         ComposeItem.SCROLL_TAB -> {
                             Intent(activity, SampleBadgeTextActivity::class.java).apply {
                                 activity.startActivity(this)
                             }
                         }
-                        else -> {}
+
+                        else -> {
+                            Intent(activity, OptionPickerActivity::class.java).apply {
+                                activity.startActivity(this)
+                            }
+                        }
                     }
                 }
             }
@@ -194,5 +249,7 @@ enum class ComposeItem(val title: String) {
     CALENDAR_1("달력(초기 X)"),
     HORIZONTAL_PAGER("HorizontalViewPager"),
     BADGE_TEXT("BadgeText"),
-    SCROLL_TAB("ScrollTab")
+    SCROLL_TAB("ScrollTab"),
+
+    OPTION_PICKER("옵션 선택 picker")
 }

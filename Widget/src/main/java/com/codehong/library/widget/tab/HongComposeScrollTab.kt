@@ -14,13 +14,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.ColorType
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.disableRippleClickable
 import com.codehong.library.widget.hongBorder
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.model.text.HongComposeTextStyle
 import com.codehong.library.widget.text.HongText
-import com.codehong.library.widget.typo.TypoType
+import com.codehong.library.widget.rule.typo.HongTypo
 import kotlinx.coroutines.delay
 
 @Composable
@@ -30,27 +30,27 @@ fun HongScrollTab(
     tabTitleList: List<String>,
     borderWidth: Int = 1,
     selectBorderColor: HongComposeColor = HongComposeColor(
-        type = ColorType.WHITE_100
+        type = HongColor.WHITE_100
     ),
     unselectBorderColor: HongComposeColor = HongComposeColor(
-        type = ColorType.GRAY_10
+        type = HongColor.GRAY_10
     ),
     selectBackgroundColor: HongComposeColor = HongComposeColor(
-        type = ColorType.MAIN_PURPLE
+        type = HongColor.MAIN_PURPLE
     ),
     unselectBackgroundColor: HongComposeColor = HongComposeColor(
-        type = ColorType.WHITE_100
+        type = HongColor.WHITE_100
     ),
     selectTextStyle: HongComposeTextStyle = HongComposeTextStyle(
-        typo = TypoType.BODY_14_B,
+        typo = HongTypo.BODY_14_B,
         color = HongComposeColor(
-            type = ColorType.WHITE_100
+            type = HongColor.WHITE_100
         )
     ),
     unselectTextStyle: HongComposeTextStyle = HongComposeTextStyle(
-        typo = TypoType.BODY_14,
+        typo = HongTypo.BODY_14,
         color = HongComposeColor(
-            type = ColorType.BLACK_100
+            type = HongColor.BLACK_100
         )
     ),
     tabLayoutStartPadding: Int = 0,

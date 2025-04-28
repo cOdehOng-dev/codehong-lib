@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import com.codehong.lib.sample.SampleHeader
 import com.codehong.lib.sample.SampleMenu
-import com.codehong.library.widget.ColorType
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.MarginTopOrBottom
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.tab.HongScrollTab
@@ -30,7 +30,7 @@ class SampleScrollTabActivity : ComponentActivity() {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(colorResource(ColorType.WHITE_100.colorResId))
+                        .background(colorResource(HongColor.WHITE_100.colorResId))
                         .padding(it)
                 ) {
                     MarginTopOrBottom(30)
@@ -50,7 +50,7 @@ class SampleScrollTabActivity : ComponentActivity() {
                             ),
                             allRadius = 100,
                             selectBackgroundColor = HongComposeColor(
-                                type = ColorType.BLACK_100
+                                type = HongColor.BLACK_100
                             ),
                             tabTextHorizontalPadding = 12,
                             tabLayoutStartPadding = 16,
@@ -87,7 +87,7 @@ class SampleScrollTabActivity : ComponentActivity() {
                             ),
                             allRadius = 100,
                             selectBackgroundColor = HongComposeColor(
-                                type = ColorType.MAIN_PURPLE
+                                type = HongColor.MAIN_PURPLE
                             ),
                             tabTextHorizontalPadding = 12,
                             tabLayoutStartPadding = 16,

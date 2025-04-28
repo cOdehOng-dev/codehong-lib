@@ -17,7 +17,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.MarginStartOrEnd
 import com.codehong.library.widget.R
 import com.codehong.library.widget.disableRippleClickable
@@ -28,8 +27,9 @@ import com.codehong.library.widget.model.keyboard.KeyboardTypeUtil.getAction
 import com.codehong.library.widget.model.keyboard.KeyboardTypeUtil.getOption
 import com.codehong.library.widget.model.text.HongComposeTextStyle
 import com.codehong.library.widget.pretendardFontFamily
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongText
-import com.codehong.library.widget.typo.TypoType
 import com.codehong.library.widget.util.dpToSp
 import com.codehong.library.widget.util.getColor
 import kotlinx.coroutines.delay
@@ -42,24 +42,24 @@ fun HongTextField(
     placeholderStyle: HongComposeTextStyle = HongComposeTextStyle(
         fontWeight = FontWeight.W400,
         color = HongComposeColor(
-            resId = ColorType.BLACK_60.colorResId,
-            type = ColorType.BLACK_60
+            resId = HongColor.BLACK_60.colorResId,
+            type = HongColor.BLACK_60
         ),
         size = 16,
-        typo = TypoType.BODY_16
+        typo = HongTypo.BODY_16
     ),
     inputStyle: HongComposeTextStyle = HongComposeTextStyle(
         fontWeight = FontWeight.W700,
         color = HongComposeColor(
-            resId = ColorType.BLACK_100.colorResId,
-            type = ColorType.BLACK_100
+            resId = HongColor.BLACK_100.colorResId,
+            type = HongColor.BLACK_100
         ),
         size = 16,
-        typo = TypoType.BODY_16_B
+        typo = HongTypo.BODY_16_B
     ),
     cursorColor: HongComposeColor = HongComposeColor(
-        resId = ColorType.MAIN_PURPLE.colorResId,
-        type = ColorType.MAIN_PURPLE
+        resId = HongColor.MAIN_PURPLE.colorResId,
+        type = HongColor.MAIN_PURPLE
     ),
     useHideKeyboard: Boolean = true,
     singleLine: Boolean = true,
@@ -115,24 +115,24 @@ fun HongTextField(
     placeholderStyle: HongComposeTextStyle = HongComposeTextStyle(
         fontWeight = FontWeight.W400,
         color = HongComposeColor(
-            resId = ColorType.BLACK_60.colorResId,
-            type = ColorType.BLACK_60
+            resId = HongColor.BLACK_60.colorResId,
+            type = HongColor.BLACK_60
         ),
         size = 16,
-        typo = TypoType.BODY_16
+        typo = HongTypo.BODY_16
     ),
     inputStyle: HongComposeTextStyle = HongComposeTextStyle(
         fontWeight = FontWeight.W700,
         color = HongComposeColor(
-            resId = ColorType.BLACK_100.colorResId,
-            type = ColorType.BLACK_100
+            resId = HongColor.BLACK_100.colorResId,
+            type = HongColor.BLACK_100
         ),
         size = 16,
-        typo = TypoType.BODY_16_B
+        typo = HongTypo.BODY_16_B
     ),
     cursorColor: HongComposeColor = HongComposeColor(
-        resId = ColorType.MAIN_PURPLE.colorResId,
-        type = ColorType.MAIN_PURPLE
+        resId = HongColor.MAIN_PURPLE.colorResId,
+        type = HongColor.MAIN_PURPLE
     ),
     useHideKeyboard: Boolean = true,
     singleLine: Boolean = true,
@@ -185,24 +185,24 @@ fun HongTextFieldRemoveButton(
     placeholderStyle: HongComposeTextStyle = HongComposeTextStyle(
         fontWeight = FontWeight.W400,
         color = HongComposeColor(
-            resId = ColorType.BLACK_60.colorResId,
-            type = ColorType.BLACK_60
+            resId = HongColor.BLACK_60.colorResId,
+            type = HongColor.BLACK_60
         ),
         size = 16,
-        typo = TypoType.BODY_16
+        typo = HongTypo.BODY_16
     ),
     inputStyle: HongComposeTextStyle = HongComposeTextStyle(
         fontWeight = FontWeight.W700,
         color = HongComposeColor(
-            resId = ColorType.BLACK_100.colorResId,
-            type = ColorType.BLACK_100
+            resId = HongColor.BLACK_100.colorResId,
+            type = HongColor.BLACK_100
         ),
         size = 16,
-        typo = TypoType.BODY_16_B
+        typo = HongTypo.BODY_16_B
     ),
     cursorColor: HongComposeColor = HongComposeColor(
-        resId = ColorType.MAIN_PURPLE.colorResId,
-        type = ColorType.MAIN_PURPLE
+        resId = HongColor.MAIN_PURPLE.colorResId,
+        type = HongColor.MAIN_PURPLE
     ),
     useHideKeyboard: Boolean = true,
     singleLine: Boolean = true,
@@ -275,24 +275,24 @@ fun HongTextFieldRemoveButton(
     placeholderStyle: HongComposeTextStyle = HongComposeTextStyle(
         fontWeight = FontWeight.W400,
         color = HongComposeColor(
-            resId = ColorType.BLACK_60.colorResId,
-            type = ColorType.BLACK_60
+            resId = HongColor.BLACK_60.colorResId,
+            type = HongColor.BLACK_60
         ),
         size = 16,
-        typo = TypoType.BODY_16
+        typo = HongTypo.BODY_16
     ),
     inputStyle: HongComposeTextStyle = HongComposeTextStyle(
         fontWeight = FontWeight.W700,
         color = HongComposeColor(
-            resId = ColorType.BLACK_100.colorResId,
-            type = ColorType.BLACK_100
+            resId = HongColor.BLACK_100.colorResId,
+            type = HongColor.BLACK_100
         ),
         size = 16,
-        typo = TypoType.BODY_16_B
+        typo = HongTypo.BODY_16_B
     ),
     cursorColor: HongComposeColor = HongComposeColor(
-        resId = ColorType.MAIN_PURPLE.colorResId,
-        type = ColorType.MAIN_PURPLE
+        resId = HongColor.MAIN_PURPLE.colorResId,
+        type = HongColor.MAIN_PURPLE
     ),
     useHideKeyboard: Boolean = true,
     singleLine: Boolean = true,

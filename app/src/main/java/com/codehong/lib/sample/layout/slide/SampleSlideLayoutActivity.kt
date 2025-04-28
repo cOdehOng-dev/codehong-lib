@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.R
 import com.codehong.lib.sample.SampleHeader
 import com.codehong.lib.sample.SampleMenu
-import com.codehong.library.widget.ColorType
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.MarginTopOrBottom
 import com.codehong.library.widget.button.HongTextButton
 import com.codehong.library.widget.disableRippleClickable
@@ -34,7 +34,7 @@ import com.codehong.library.widget.layout.HongSlideVisibleLayout
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.model.text.HongComposeTextStyle
 import com.codehong.library.widget.text.HongText
-import com.codehong.library.widget.typo.TypoType
+import com.codehong.library.widget.rule.typo.HongTypo
 
 class SampleSlideLayoutActivity : ComponentActivity() {
 
@@ -62,7 +62,7 @@ class SampleSlideLayoutActivity : ComponentActivity() {
                                 .padding(horizontal = 20.dp),
                             buttonText = "뷰 슬라이드",
                             buttonBackgroundColor = HongComposeColor(
-                                type = ColorType.MAIN_PURPLE
+                                type = HongColor.MAIN_PURPLE
                             ),
                             allRadius = 12,
                             buttonTextStyle = HongComposeTextStyle(
@@ -104,7 +104,7 @@ class SampleSlideLayoutActivity : ComponentActivity() {
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(52.dp)
-                            .background(colorResource(id = ColorType.MAIN_PURPLE.colorResId)),
+                            .background(colorResource(id = HongColor.MAIN_PURPLE.colorResId)),
                         contentAlignment = Alignment.Center
                     ) {
                         HongText(
@@ -113,8 +113,8 @@ class SampleSlideLayoutActivity : ComponentActivity() {
                                 .padding(horizontal = 20.dp)
                                 .disableRippleClickable { closeClick.invoke() },
                             text = "닫기",
-                            typo = TypoType.BODY_18_B,
-                            colorType = ColorType.WHITE_100,
+                            typo = HongTypo.BODY_18_B,
+                            colorType = HongColor.WHITE_100,
                             textAlign = TextAlign.End
                         )
                     }
@@ -124,7 +124,7 @@ class SampleSlideLayoutActivity : ComponentActivity() {
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(it)
-                        .background(colorResource(id = ColorType.BLACK_15.colorResId))
+                        .background(colorResource(id = HongColor.BLACK_15.colorResId))
                 )
             }
         }

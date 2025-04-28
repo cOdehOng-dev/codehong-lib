@@ -25,13 +25,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.HongDivider
 import com.codehong.library.widget.MarginTopOrBottom
 import com.codehong.library.widget.R
 import com.codehong.library.widget.calendar.model.InitialCalendarInfo
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.model.text.HongComposeTextStyle
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.text.HongText
 import com.codehong.library.widget.util.getColor
 import com.codehong.library.widget.util.getComposeColor
@@ -374,7 +374,7 @@ fun HongComposeCalendar(
 private fun SelectBackground(
     selectedType: SelectedType,
     @ColorRes colorResId: Int = R.color.honglib_color_e9f0fe,
-    colorType: ColorType? = null
+    colorType: HongColor? = null
 ) {
     when (selectedType) {
         SelectedType.START -> {

@@ -13,7 +13,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import com.codehong.lib.sample.SampleHeader
 import com.codehong.lib.sample.SampleMenu
-import com.codehong.library.widget.ColorType
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.MarginTopOrBottom
 import com.codehong.library.widget.image.HongImage
 import com.codehong.library.widget.pager.HongHorizontalPager
@@ -37,7 +37,7 @@ class SampleHorizontalPagerActivity : ComponentActivity() {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(colorResource(ColorType.WHITE_100.colorResId))
+                        .background(colorResource(HongColor.WHITE_100.colorResId))
                         .padding(paddingValues)
                 ) {
                     MarginTopOrBottom(30)

@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -37,6 +38,8 @@ android {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
     buildFeatures {
+        viewBinding = true
+        dataBinding = true
         compose = true
     }
     composeOptions {
@@ -59,7 +62,10 @@ dependencies {
             Libs.FRAGMENT,
             Libs.CORE,
             Libs.APPCOMPAT,
-            Libs.LIFECYCLE_RUNTIME
+            Libs.LIFECYCLE_RUNTIME,
+            Libs.CONSTRAINT_LAYOUT,
+            Libs.ACTIVITY_KTX,
+            Libs.FRAGMENT_KTX
         )
     )
 

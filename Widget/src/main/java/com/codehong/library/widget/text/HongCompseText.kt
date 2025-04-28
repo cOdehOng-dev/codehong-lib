@@ -16,16 +16,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.R
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.model.text.HongComposeHighlightTextInfo
 import com.codehong.library.widget.model.text.HongComposeTextStyle
 import com.codehong.library.widget.pretendardFontFamily
-import com.codehong.library.widget.typo.TypoType
-import com.codehong.library.widget.typo.isBold
-import com.codehong.library.widget.typo.lineHeight
-import com.codehong.library.widget.typo.size
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.typo.HongTypo
+import com.codehong.library.widget.rule.typo.isBold
+import com.codehong.library.widget.rule.typo.lineHeight
+import com.codehong.library.widget.rule.typo.size
 import com.codehong.library.widget.util.dpToSp
 import com.codehong.library.widget.util.getColor
 
@@ -145,8 +145,8 @@ fun HongText(
 fun HongText(
     modifier: Modifier = Modifier,
     text: String?,
-    typo: TypoType,
-    colorType: ColorType = ColorType.BLACK_100,
+    typo: HongTypo,
+    colorType: HongColor = HongColor.BLACK_100,
     textAlign: TextAlign? = null,
     maxLines: Int = Int.MAX_VALUE,
     letterSpacing: Int? = null,
