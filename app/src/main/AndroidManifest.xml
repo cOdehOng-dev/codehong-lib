@@ -60,6 +60,7 @@
         <activity android:name=".playground.PlaygroundActivity"/>
         <activity android:name=".SampleActivity"/>
         <activity android:name=".captureshare.SampleCaptureShareActivity" />
+        <activity android:name=".dynamicisland.SampleDynamicIslandActivity"/>
     </application>
 
 </manifest>

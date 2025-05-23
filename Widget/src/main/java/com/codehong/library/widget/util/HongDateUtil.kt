@@ -87,4 +87,14 @@ object HongDateUtil {
             return LocalDate.of(2025, 1, 1)
         }
     }
+
+    fun parseDateTimeString(
+        dateTimeStr: String?,
+        pattern: String
+    ): Long {
+        if (dateTimeStr.isNullOrEmpty()) return 0L
+        val sdf = SimpleDateFormat(pattern, Locale.KOREA)
+        sdf.timeZone = TimeZone.getTimeZone("Asia/Seoul") // 서울 시간 기준
+        return sdf.parse(dateTimeStr)?.time ?: 0L
+    }
 }

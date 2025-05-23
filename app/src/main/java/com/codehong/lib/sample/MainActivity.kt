@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.button.SampleTextButtonActivity
 import com.codehong.lib.sample.calendar.SampleCalendarActivity1
 import com.codehong.lib.sample.captureshare.SampleCaptureShareActivity
+import com.codehong.lib.sample.dynamicisland.SampleDynamicIslandActivity
 import com.codehong.lib.sample.header.SampleHeaderActivity
 import com.codehong.lib.sample.image.SampleImageActivity
 import com.codehong.lib.sample.layout.slide.SampleSlideLayoutActivity
@@ -35,6 +36,8 @@ import com.codehong.lib.sample.text.SampleBadgeTextActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
 import com.codehong.library.widget.R
 import com.codehong.library.widget.button.HongTextButton
+import com.codehong.library.widget.dynamicisland.DynamicIslandInfo
+import com.codehong.library.widget.dynamicisland.DynamicIslandManager
 import com.codehong.library.widget.hongBorder
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.model.text.HongComposeTextStyle
@@ -43,6 +46,10 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongText
 import com.codehong.library.widget.util.picker.OptionPickerDialog
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 class MainActivity : ComponentActivity() {
 
@@ -50,6 +57,34 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SampleTheme(this)
+        }
+        checkDynamicIsland()
+    }
+
+    private fun checkDynamicIsland() {
+        if (DynamicIslandManager.isGranted(this)) {
+            startDynamicIsland()
+        }
+    }
+
+    private fun startDynamicIsland() {
+        val dateFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.KOREA)
+        dateFormat.timeZone = TimeZone.getTimeZone("Asia/Seoul")
+        val startFutureTime = Date(System.currentTimeMillis() + 1000 * 60 * 60) // 1시간 후
+        val start = dateFormat.format(startFutureTime)
+        val endFutureTime = Date(System.currentTimeMillis() + 1000 * 60 * 120) // 2시간 후
+        val end = dateFormat.format(endFutureTime)
+        val ticketInfo = DynamicIslandInfo(
+            thumbnailUrl = "https://images.unsplash.com/photo-1644645233471-d2cbe70e3871?q=80&w=2187&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            fromCity = "FROM   TOKYO",
+            toCity = "TO       SEOUL/INCHEON",
+            startDate = start,
+            endDate = end
+        )
+        if (DynamicIslandManager.isRunning()) {
+            DynamicIslandManager.reset(ticketInfo)
+        } else {
+            DynamicIslandManager.schedule(this, ticketInfo)
         }
     }
 }
@@ -222,9 +257,13 @@ fun SampleTheme(
                                 activity.startActivity(this)
                             }
                         }
-
                         ComposeItem.CAPTURE_SHARE -> {
                             Intent(activity, SampleCaptureShareActivity::class.java).apply {
+                                activity.startActivity(this)
+                            }
+                        }
+                        ComposeItem.DYNAMIC_ISLAND -> {
+                            Intent(activity, SampleDynamicIslandActivity::class.java).apply {
                                 activity.startActivity(this)
                             }
                         }
@@ -254,6 +293,7 @@ enum class ComposeItem(val title: String) {
     BADGE_TEXT("BadgeText"),
     SCROLL_TAB("ScrollTab"),
     CAPTURE_SHARE("CaptureShare"),
+    DYNAMIC_ISLAND("DynamicIsland"),
 
     OPTION_PICKER("옵션 선택 picker")
 }

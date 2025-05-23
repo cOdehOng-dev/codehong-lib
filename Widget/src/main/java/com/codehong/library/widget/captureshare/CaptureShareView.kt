@@ -58,7 +58,7 @@ class CaptureShareView @JvmOverloads constructor(
 
         this.shareLink = shareLink
 
-        binding.clScreenShotShare.visibility = GONE
+        binding.clCaptureShare.visibility = GONE
         val gestureDetector = GestureDetector(
             context,
             object : GestureDetector.SimpleOnGestureListener() {
@@ -80,7 +80,7 @@ class CaptureShareView @JvmOverloads constructor(
             }
         )
 
-        binding.clScreenShotShare.setOnTouchListener { _, event ->
+        binding.clCaptureShare.setOnTouchListener { _, event ->
             gestureDetector.onTouchEvent(event)
             true
         }
@@ -130,9 +130,9 @@ class CaptureShareView @JvmOverloads constructor(
                         Glide.with(context)
                             .asBitmap()
                             .load(shareCaptureUri)
-                            .into(binding.ivScreenShot)
+                            .into(binding.ivCapture)
 
-                        binding.clScreenShotShare.post {
+                        binding.clCaptureShare.post {
                             slideDown()
                         }
                     }
@@ -175,9 +175,9 @@ class CaptureShareView @JvmOverloads constructor(
     }
 
     private fun slideDown() {
-        binding.clScreenShotShare.visibility = View.VISIBLE
-        binding.clScreenShotShare.translationY = -100f
-        binding.clScreenShotShare.animate()
+        binding.clCaptureShare.visibility = View.VISIBLE
+        binding.clCaptureShare.translationY = -100f
+        binding.clCaptureShare.animate()
             .translationY(0f)
             .setDuration(300)
             .setInterpolator(DecelerateInterpolator())
@@ -190,11 +190,11 @@ class CaptureShareView @JvmOverloads constructor(
 
     private fun hideScreenShotView() {
         autoDismissHandler.removeCallbacks(autoDismissRunnable)
-        binding.clScreenShotShare.animate()
-            .translationY(-binding.clScreenShotShare.height.toFloat())
+        binding.clCaptureShare.animate()
+            .translationY(-binding.clCaptureShare.height.toFloat())
             .setDuration(300)
             .withEndAction {
-                binding.clScreenShotShare.visibility = GONE
+                binding.clCaptureShare.visibility = GONE
             }
             .start()
     }

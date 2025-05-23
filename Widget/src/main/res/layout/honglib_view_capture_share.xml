@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cl_screen_shot_share"
+    android:id="@+id/cl_capture_share"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_constraintTop_toTopOf="parent"
@@ -13,7 +13,7 @@
     tools:visibility="visible">
 
     <ImageView
-        android:id="@+id/iv_screen_shot"
+        android:id="@+id/iv_capture"
         android:layout_width="40dp"
         android:layout_height="50dp"
         android:scaleType="center"
@@ -34,7 +34,7 @@
         android:textColor="@color/honglib_color_ffffff"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/iv_screen_shot"
+        app:layout_constraintStart_toEndOf="@id/iv_capture"
         app:layout_constraintEnd_toStartOf="@id/tv_share"
         android:layout_marginStart="10dp"/>
 
