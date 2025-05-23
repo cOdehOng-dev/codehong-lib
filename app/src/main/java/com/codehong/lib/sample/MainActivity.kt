@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.button.SampleTextButtonActivity
 import com.codehong.lib.sample.calendar.SampleCalendarActivity1
+import com.codehong.lib.sample.captureshare.SampleCaptureShareActivity
 import com.codehong.lib.sample.header.SampleHeaderActivity
 import com.codehong.lib.sample.image.SampleImageActivity
 import com.codehong.lib.sample.layout.slide.SampleSlideLayoutActivity
@@ -222,6 +223,11 @@ fun SampleTheme(
                             }
                         }
 
+                        ComposeItem.CAPTURE_SHARE -> {
+                            Intent(activity, SampleCaptureShareActivity::class.java).apply {
+                                activity.startActivity(this)
+                            }
+                        }
                         else -> {
                             Intent(activity, OptionPickerActivity::class.java).apply {
                                 activity.startActivity(this)
@@ -247,6 +253,7 @@ enum class ComposeItem(val title: String) {
     HORIZONTAL_PAGER("HorizontalViewPager"),
     BADGE_TEXT("BadgeText"),
     SCROLL_TAB("ScrollTab"),
+    CAPTURE_SHARE("CaptureShare"),
 
     OPTION_PICKER("옵션 선택 picker")
 }

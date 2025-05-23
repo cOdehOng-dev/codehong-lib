@@ -10,6 +10,11 @@ object Libs {
 
     const val LIFECYCLE_RUNTIME = "androidx.lifecycle:lifecycle-runtime-ktx:2.8.7"
 
+    private const val GLIDE_VERSION = "4.16.0"
+    const val GLIDE = "com.github.bumptech.glide:glide:$GLIDE_VERSION"
+    const val GLIDE_COMPILER = "com.github.bumptech.glide:compiler:$GLIDE_VERSION"
+    const val GLIDE_TRANSFORMATION = "jp.wasabeef:glide-transformations:4.3.0"
+
     // test
     const val JUNIT = "junit:junit:4.13.2"
     const val EXT_JUNIT = "androidx.test.ext:junit:1.1.4"

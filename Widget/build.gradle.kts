@@ -10,7 +10,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 28
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -53,7 +53,12 @@ dependencies {
             Libs.LIFECYCLE_RUNTIME,
             Libs.CONSTRAINT_LAYOUT,
             Libs.ACTIVITY_KTX,
-            Libs.FRAGMENT_KTX
+            Libs.FRAGMENT_KTX,
+            Libs.GLIDE,
+            Libs.GLIDE_TRANSFORMATION,
+        ),
+        kaptLibs = arrayOf(
+            Libs.GLIDE_COMPILER
         )
     )
 

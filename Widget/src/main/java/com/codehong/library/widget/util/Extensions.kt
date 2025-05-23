@@ -1,6 +1,7 @@
 package com.codehong.library.widget.util
 
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.Context
 import android.os.Build
 import android.text.ParcelableSpan
@@ -16,6 +17,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.DimenRes
 import androidx.compose.ui.graphics.Color
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -278,10 +280,10 @@ fun Activity?.applyActivityOpenAnim(openAnim: Int) {
         overrideActivityTransition(
             Activity.OVERRIDE_TRANSITION_OPEN,
             openAnim,
-            R.anim.none
+            R.anim.honglib_none
         )
     } else {
-        overridePendingTransition(openAnim, R.anim.none)
+        overridePendingTransition(openAnim, R.anim.honglib_none)
     }
 }
 
@@ -304,11 +306,11 @@ fun Activity?.applyActivityCloseAnim(closeAnim: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
         overrideActivityTransition(
             Activity.OVERRIDE_TRANSITION_CLOSE,
-            R.anim.none,
+            R.anim.honglib_none,
             closeAnim
         )
     } else {
-        overridePendingTransition(R.anim.none, closeAnim)
+        overridePendingTransition(R.anim.honglib_none, closeAnim)
     }
 }
 
@@ -323,4 +325,27 @@ fun Activity?.applyActivityCloseAnim(enterAnim: Int, exitAnim: Int) {
     } else {
         overridePendingTransition(enterAnim, exitAnim)
     }
+}
+
+fun <I> ActivityResultLauncher<I>.safeLaunch(
+    activity: Activity?,
+    input: I
+) {
+    try {
+        if (activity != null && !activity.isFinishing) {
+            launch(input)
+        }
+    } catch (e: IllegalStateException) {
+        e.printStackTrace()
+    }
+}
+
+fun Context?.isAppForeground(): Boolean {
+    if (this == null) return false
+    val appProcesses = (getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager)?.runningAppProcesses
+    val packageName = packageName
+    return appProcesses?.any {
+        it.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND &&
+                it.processName == packageName
+    } ?: false
 }
