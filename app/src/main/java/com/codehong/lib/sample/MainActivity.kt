@@ -162,9 +162,6 @@ fun SampleTheme(
                 ) {
                     when (item.compose) {
                         ComposeItem.TEXT -> {
-//                            Intent(activity, SampleTextActivity::class.java).apply {
-//                                activity.startActivity(this)
-//                            }
                             Intent(activity, SampleActivity::class.java).apply {
                                 putExtra("componentType", HongWidgetType.TEXT.value)
                                 activity.startActivity(this)
@@ -238,7 +235,7 @@ fun SampleTheme(
 }
 
 enum class ComposeItem(val title: String) {
-    TEXT_TYPO("텍스트 Typo"),
+//    TEXT_TYPO("텍스트 Typo"),
     TEXT("Text"),
     IMAGE("Image"),
     HEADER("헤더"),
