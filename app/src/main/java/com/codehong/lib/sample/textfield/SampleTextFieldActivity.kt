@@ -15,11 +15,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.SampleMenu
-import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.MarginTopOrBottom
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.model.keyboard.KeyboardType
 import com.codehong.library.widget.roundBackground
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.textfield.HongTextField
 import com.codehong.library.widget.textfield.HongTextFieldRemoveButton
 
@@ -47,7 +47,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                                     .height(44.dp)
                                     .roundBackground(
                                         color = HongComposeColor(
-                                            type = ColorType.BLACK_10
+                                            type = HongColor.BLACK_10
                                         ),
                                         allRadius = 50
                                     )
@@ -68,7 +68,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                                     .height(44.dp)
                                     .roundBackground(
                                         color = HongComposeColor(
-                                            type = ColorType.BLACK_10
+                                            type = HongColor.BLACK_10
                                         ),
                                         allRadius = 50
                                     )
@@ -88,7 +88,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                                     .height(44.dp)
                                     .roundBackground(
                                         color = HongComposeColor(
-                                            type = ColorType.BLACK_10
+                                            type = HongColor.BLACK_10
                                         ),
                                         allRadius = 50
                                     )
@@ -109,7 +109,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                                     .height(44.dp)
                                     .roundBackground(
                                         color = HongComposeColor(
-                                            type = ColorType.BLACK_10
+                                            type = HongColor.BLACK_10
                                         ),
                                         allRadius = 50
                                     )
@@ -130,7 +130,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                                     .height(44.dp)
                                     .roundBackground(
                                         color = HongComposeColor(
-                                            type = ColorType.BLACK_10
+                                            type = HongColor.BLACK_10
                                         ),
                                         allRadius = 50
                                     )
@@ -151,7 +151,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                                     .height(44.dp)
                                     .roundBackground(
                                         color = HongComposeColor(
-                                            type = ColorType.BLACK_10
+                                            type = HongColor.BLACK_10
                                         ),
                                         allRadius = 50
                                     )
@@ -173,7 +173,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                                     .height(44.dp)
                                     .roundBackground(
                                         color = HongComposeColor(
-                                            type = ColorType.BLACK_10
+                                            type = HongColor.BLACK_10
                                         ),
                                         allRadius = 50
                                     )
@@ -199,7 +199,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                                     .height(44.dp)
                                     .roundBackground(
                                         color = HongComposeColor(
-                                            type = ColorType.BLACK_10
+                                            type = HongColor.BLACK_10
                                         ),
                                         allRadius = 50
                                     )
@@ -220,7 +220,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                                     .height(44.dp)
                                     .roundBackground(
                                         color = HongComposeColor(
-                                            type = ColorType.BLACK_10
+                                            type = HongColor.BLACK_10
                                         ),
                                         allRadius = 50
                                     )
@@ -241,7 +241,7 @@ class SampleTextFieldActivity : ComponentActivity() {
                                     .height(44.dp)
                                     .roundBackground(
                                         color = HongComposeColor(
-                                            type = ColorType.BLACK_10
+                                            type = HongColor.BLACK_10
                                         ),
                                         allRadius = 50
                                     )

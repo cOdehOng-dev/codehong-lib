@@ -3,9 +3,9 @@ package com.codehong.library.widget.model.text
 import androidx.compose.ui.text.font.FontWeight
 import com.codehong.library.widget.R
 import com.codehong.library.widget.model.HongComposeColor
-import com.codehong.library.widget.typo.TypoType
-import com.codehong.library.widget.typo.fontWeight
-import com.codehong.library.widget.typo.size
+import com.codehong.library.widget.rule.typo.HongTypo
+import com.codehong.library.widget.rule.typo.fontWeight
+import com.codehong.library.widget.rule.typo.size
 
 data class HongComposeTextStyle(
     val fontWeight: FontWeight = FontWeight.W400,
@@ -13,7 +13,7 @@ data class HongComposeTextStyle(
     val color: HongComposeColor = HongComposeColor(
         resId = R.color.honglib_color_29292d
     ),
-    val typo: TypoType? = null
+    val typo: HongTypo? = null
 ) {
     fun convertFontWeight(): FontWeight {
         if (typo == null) {

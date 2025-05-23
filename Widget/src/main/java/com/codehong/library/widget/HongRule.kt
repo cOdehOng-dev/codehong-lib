@@ -8,8 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.UiComposable
 import androidx.compose.ui.unit.dp
 
-
-
 @Composable
 @UiComposable
 fun MarginTopOrBottom(value: Int) {
@@ -32,4 +30,9 @@ fun getRadius(
     } else {
         hvRadius.takeIf { it > 0 } ?: run { cornerRadius }
     }
+}
+
+enum class WidthHeightRange(val id: Int) {
+    FILL(-1),
+    WRAP(-2)
 }

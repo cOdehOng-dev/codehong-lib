@@ -6,6 +6,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
@@ -31,9 +34,23 @@ fun Modifier.widthHeight(
     height: Int? = null
 ): Modifier {
     return when {
-        width != null && height != null ->
-            this.width(width.dp)
-                .height(height.dp)
+        width != null && height != null -> {
+            if (width == WidthHeightRange.FILL.id
+                && height == WidthHeightRange.FILL.id
+            ) {
+                this.fillMaxSize()
+            } else if (width == WidthHeightRange.FILL.id) {
+                this
+                    .fillMaxWidth()
+                    .height(height.dp)
+            } else if (height == WidthHeightRange.FILL.id) {
+                this.width(width.dp)
+                    .fillMaxHeight()
+            } else {
+                this.width(width.dp)
+                    .height(height.dp)
+            }
+        }
 
         width != null -> this.width(width.dp)
         height != null -> this.height(height.dp)
@@ -45,6 +62,7 @@ fun Modifier.hongBorder(
     borderWidth: Int,
     borderColor: HongComposeColor,
     backgroundColor: HongComposeColor = HongComposeColor(),
+    useShapeCircle: Boolean = false,
     allRadius: Int = 0,
     topRadius: Int = 0,
     bottomRadius: Int = 0,
@@ -59,12 +77,16 @@ fun Modifier.hongBorder(
                 borderWidth.dp,
                 borderColor.getColor()
             ),
-            shape = RoundedCornerShape(
-                topStart = getRadius(allRadius, topRadius, topStartRadius).dp,
-                topEnd = getRadius(allRadius, topRadius, topEndRadius).dp,
-                bottomStart = getRadius(allRadius, bottomRadius, bottomStartRadius).dp,
-                bottomEnd = getRadius(allRadius, bottomRadius, bottomEndRadius).dp
-            )
+            shape = if (useShapeCircle) {
+                CircleShape
+            } else {
+                RoundedCornerShape(
+                    topStart = getRadius(allRadius, topRadius, topStartRadius).dp,
+                    topEnd = getRadius(allRadius, topRadius, topEndRadius).dp,
+                    bottomStart = getRadius(allRadius, bottomRadius, bottomStartRadius).dp,
+                    bottomEnd = getRadius(allRadius, bottomRadius, bottomEndRadius).dp
+                )
+            }
         )
         .roundBackground(
             color = backgroundColor,

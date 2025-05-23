@@ -14,12 +14,13 @@ import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.R
 import com.codehong.library.widget.disableRippleClickable
 import com.codehong.library.widget.getRadius
+import com.codehong.library.widget.hongBorder
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.model.text.HongComposeTextStyle
+import com.codehong.library.widget.rule.typo.HongTypo
+import com.codehong.library.widget.rule.typo.fontWeight
+import com.codehong.library.widget.rule.typo.size
 import com.codehong.library.widget.text.HongText
-import com.codehong.library.widget.typo.TypoType
-import com.codehong.library.widget.typo.fontWeight
-import com.codehong.library.widget.typo.size
 import com.codehong.library.widget.util.getColor
 
 @Composable
@@ -32,7 +33,10 @@ fun HongTextButton(
     buttonTextColor: HongComposeColor = HongComposeColor(
         resId = R.color.honglib_color_ffffff
     ),
-    buttonTextTypoType: TypoType,
+    borderWidth: Int = 0,
+    borderColor: HongComposeColor = HongComposeColor(),
+    useShapeCircle: Boolean = false,
+    buttonTextTypoType: HongTypo,
     horizontalPadding: Int = 0,
     verticalPadding: Int = 0,
     allRadius: Int = 0,
@@ -53,6 +57,9 @@ fun HongTextButton(
             size = buttonTextTypoType.size(),
             color = buttonTextColor
         ),
+        borderWidth = borderWidth,
+        borderColor = borderColor,
+        useShapeCircle = useShapeCircle,
         horizontalPadding = horizontalPadding,
         verticalPadding = verticalPadding,
         allRadius = allRadius,
@@ -80,6 +87,9 @@ fun HongTextButton(
             resId = R.color.honglib_color_ffffff
         )
     ),
+    borderWidth: Int = 0,
+    borderColor: HongComposeColor = HongComposeColor(),
+    useShapeCircle: Boolean = false,
     horizontalPadding: Int = 0,
     verticalPadding: Int = 0,
     allRadius: Int = 0,
@@ -94,6 +104,19 @@ fun HongTextButton(
     Box(
         modifier = Modifier
             .then(modifier)
+            .hongBorder(
+                borderWidth = borderWidth,
+                borderColor = borderColor,
+                backgroundColor = buttonBackgroundColor,
+                useShapeCircle = useShapeCircle,
+                allRadius = allRadius,
+                topRadius = topRadius,
+                bottomRadius = bottomRadius,
+                topStartRadius = topStartRadius,
+                topEndRadius = topEndRadius,
+                bottomStartRadius = bottomStartRadius,
+                bottomEndRadius = bottomEndRadius
+            )
             .background(
                 color = buttonBackgroundColor.getColor(),
                 shape = RoundedCornerShape(

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="honglib_purple_200">#FFBB86FC</color>
-    <color name="honglib_purple_500">#FF6200EE</color>
-    <color name="honglib_purple_700">#FF3700B3</color>
+    <color name="honglib_default">#6200ee</color>
+    <color name="honglib_purple_200">#BB86FC</color>
+    <color name="honglib_purple_700">#3700B3</color>
     <color name="honglib_teal_200">#FF03DAC5</color>
     <color name="honglib_teal_700">#FF018786</color>
     <color name="honglib_black">#FF000000</color>
@@ -128,4 +128,10 @@
     <color name="honglib_color_3eb489">#3eb489</color>
     <color name="honglib_color_8b00ff">#8b00ff</color>
     <color name="honglib_color_75ff322e">#75ff322e</color>
+    <color name="dimNormal">#4D252729</color>
+    <color name="bgNormal">#ffffff</color>
+
+    <color name="honglib_color_b3ffffff">#b3ffffff</color>
+
+    <color name="honglib_color_f2f2f2">#f2f2f2</color>
 </resources>

@@ -12,10 +12,9 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.codehong.library.widget.ColorType
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.R
 import com.codehong.library.widget.disableRippleClickable
-import com.codehong.library.widget.image.HongImage
 
 @Composable
 fun HongComposeCloseHeader(
@@ -28,7 +27,7 @@ fun HongComposeCloseHeader(
         modifier = Modifier
             .then(modifier)
             .fillMaxWidth()
-            .background(colorResource(id = ColorType.WHITE_100.colorResId))
+            .background(colorResource(id = HongColor.WHITE_100.colorResId))
             .height(52.dp)
     ) {
         val (cContent, ivClose) = createRefs()
@@ -59,7 +58,7 @@ fun HongComposeCloseHeader(
                 .disableRippleClickable { closeClick.invoke() },
             contentAlignment = Alignment.Center
         ) {
-            HongImage(drawableResId = R.drawable.ic_24_close)
+//            HongImage(drawableResId = R.drawable.ic_24_close)
         }
     }
 }

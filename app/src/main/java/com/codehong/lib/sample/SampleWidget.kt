@@ -16,10 +16,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.MarginTopOrBottom
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongText
-import com.codehong.library.widget.typo.TypoType
 
 @Composable
 fun SampleScaffold(
@@ -30,7 +30,7 @@ fun SampleScaffold(
     val scrollState = rememberScrollState()
     Scaffold(
         modifier = Modifier
-            .background(colorResource(id = ColorType.WHITE_100.colorResId)),
+            .background(colorResource(id = HongColor.WHITE_100.colorResId)),
         topBar = {
             SampleHeader(title = title)
         }
@@ -40,7 +40,7 @@ fun SampleScaffold(
                 .fillMaxSize()
                 .padding(it)
                 .padding(start = horizontalPadding.dp, end = horizontalPadding.dp)
-                .background(colorResource(ColorType.WHITE_100.colorResId))
+                .background(colorResource(HongColor.WHITE_100.colorResId))
                 .verticalScroll(scrollState)
         ) {
             MarginTopOrBottom(value = 30)
@@ -57,13 +57,13 @@ fun SampleHeader(
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp)
-            .background(colorResource(id = ColorType.MAIN_PURPLE.colorResId)),
+            .background(colorResource(id = HongColor.MAIN_PURPLE.colorResId)),
         contentAlignment = Alignment.Center
     ) {
         HongText(
             text = title,
-            typo = TypoType.BODY_18_B,
-            colorType = ColorType.WHITE_100
+            typo = HongTypo.BODY_18_B,
+            colorType = HongColor.WHITE_100
         )
     }
 }
@@ -78,10 +78,10 @@ fun SampleMenu(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp)
-            .background(colorResource(id = ColorType.WHITE_100.colorResId)),
+            .background(colorResource(id = HongColor.WHITE_100.colorResId)),
         text = title,
-        typo = TypoType.BODY_18_B,
-        colorType = ColorType.BLACK_100
+        typo = HongTypo.BODY_18_B,
+        colorType = HongColor.BLACK_100
     )
     MarginTopOrBottom(10)
     Box(

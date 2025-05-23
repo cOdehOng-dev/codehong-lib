@@ -14,7 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.ColorType
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.util.getColor
 import kotlinx.coroutines.delay
@@ -26,7 +26,7 @@ import kotlinx.coroutines.delay
 fun HongHorizontalPager(
     modifier: Modifier = Modifier,
     pagerBackgroundColor: HongComposeColor = HongComposeColor(
-        type = ColorType.WHITE_100
+        type = HongColor.WHITE_100
     ),
     pageList: List<Any>?,
     prevPageVisibleWidth: Float = 25f,

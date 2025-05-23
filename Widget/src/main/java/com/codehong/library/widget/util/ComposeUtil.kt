@@ -9,9 +9,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.ColorType
 import com.codehong.library.widget.R
 import com.codehong.library.widget.model.HongComposeColor
+import com.codehong.library.widget.rule.color.HongColor
 
 @Composable
 fun dpToSp(dp: Dp) = with(LocalDensity.current) { dp.toSp() }
@@ -37,7 +37,7 @@ fun pxToDp(px: Float): Dp {
 }
 
 @Composable
-fun ColorType?.getComposeColor(defColor: Int): Color {
+fun HongColor?.getComposeColor(defColor: Int): Color {
     if (this == null) {
         return colorResource(id = defColor)
     }

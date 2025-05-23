@@ -17,7 +17,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.SampleHeader
 import com.codehong.lib.sample.SampleMenu
-import com.codehong.library.widget.ColorType
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.MarginTopOrBottom
 import com.codehong.library.widget.header.HongComposeCloseHeader
 
@@ -34,7 +34,7 @@ class SampleHeaderActivity : ComponentActivity() {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(colorResource(id = ColorType.WHITE_100.colorResId))
+                        .background(colorResource(id = HongColor.WHITE_100.colorResId))
                         .padding(it)
                         .padding(horizontal = 20.dp)
                 ) {
@@ -51,7 +51,7 @@ class SampleHeaderActivity : ComponentActivity() {
                                     .width(100.dp)
                                     .height(50.dp)
                                     .background(
-                                        colorResource(id = ColorType.MAIN_PURPLE.colorResId)
+                                        colorResource(id = HongColor.MAIN_PURPLE.colorResId)
                                     )
                             )
                         }
@@ -69,7 +69,7 @@ class SampleHeaderActivity : ComponentActivity() {
                                     .width(100.dp)
                                     .height(50.dp)
                                     .background(
-                                        colorResource(id = ColorType.MAIN_PURPLE.colorResId)
+                                        colorResource(id = HongColor.MAIN_PURPLE.colorResId)
                                     )
                             )
                         }
@@ -87,7 +87,7 @@ class SampleHeaderActivity : ComponentActivity() {
                                     .width(100.dp)
                                     .height(50.dp)
                                     .background(
-                                        colorResource(id = ColorType.MAIN_PURPLE.colorResId)
+                                        colorResource(id = HongColor.MAIN_PURPLE.colorResId)
                                     )
                             )
                         }

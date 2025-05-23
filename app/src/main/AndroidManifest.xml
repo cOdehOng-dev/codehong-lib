@@ -35,7 +35,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".textfield.SampleTextFieldActivity"/>
         <activity android:name=".button.SampleTextButtonActivity"/>
-        <activity android:name=".text.SampleTextActivity"/>
         <activity android:name=".image.SampleImageActivity"/>
         <activity android:name=".layout.slide.SampleSlideLayoutActivity"/>
         <activity android:name=".calendar.SampleCalendarActivity1"/>
@@ -43,6 +42,11 @@
         <activity android:name=".pager.SampleHorizontalPagerActivity"/>
         <activity android:name=".text.SampleBadgeTextActivity"/>
         <activity android:name=".tab.SampleScrollTabActivity"/>
+
+        <activity android:name=".picker.OptionPickerActivity"/>
+
+        <activity android:name=".playground.PlaygroundActivity"/>
+        <activity android:name=".SampleActivity"/>
     </application>
 
 </manifest>

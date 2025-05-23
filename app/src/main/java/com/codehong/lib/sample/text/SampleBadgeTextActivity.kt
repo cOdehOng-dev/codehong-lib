@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.SampleHeader
 import com.codehong.lib.sample.SampleMenu
-import com.codehong.library.widget.ColorType
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.MarginTopOrBottom
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.model.text.HongComposeTextStyle
@@ -28,7 +28,7 @@ class SampleBadgeTextActivity : ComponentActivity() {
             Scaffold(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(colorResource(ColorType.WHITE_100.colorResId)),
+                    .background(colorResource(HongColor.WHITE_100.colorResId)),
                 topBar = {
                     SampleHeader(title = "BadgeText")
                 }
@@ -36,7 +36,7 @@ class SampleBadgeTextActivity : ComponentActivity() {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(colorResource(ColorType.WHITE_100.colorResId))
+                        .background(colorResource(HongColor.WHITE_100.colorResId))
                         .padding(paddingValues)
                 ) {
                     MarginTopOrBottom(30)
@@ -75,7 +75,7 @@ class SampleBadgeTextActivity : ComponentActivity() {
                             HongBadgeText(
                                 text = "모두 보라보라해해에에에",
                                 backgroundColor = HongComposeColor(
-                                    type = ColorType.WHITE_100
+                                    type = HongColor.WHITE_100
                                 ),
                                 textStyle = HongComposeTextStyle(
                                     color = HongComposeColor(
