@@ -1,10 +1,11 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    kotlin("android")
+    kotlin("kapt")
 }
 
 android {
-    namespace = "com.codehong.lib"
+    namespace = "com.codehong.lib.sample"
     compileSdk = 34
 
     defaultConfig {
@@ -37,6 +38,8 @@ android {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
     buildFeatures {
+        viewBinding = true
+        dataBinding = true
         compose = true
     }
     composeOptions {
@@ -51,20 +54,64 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
-    implementation("androidx.activity:activity-compose:1.10.0")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation(project(mapOf("path" to ":Widget")))
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation(project(":Widget"))
+
+    hongImpl(
+        implLibs = arrayOf(
+            Libs.MULTIDEX,
+            Libs.FRAGMENT,
+            Libs.CORE,
+            Libs.APPCOMPAT,
+            Libs.LIFECYCLE_RUNTIME,
+            Libs.CONSTRAINT_LAYOUT,
+            Libs.ACTIVITY_KTX,
+            Libs.FRAGMENT_KTX
+        )
+    )
+
+    hongImpl(
+        implLibs = arrayOf(
+            platform(Libs.COMPOSE_BOM),
+            Libs.COMPOSE_CONSTRAINTLAYOUT,
+            Libs.HILT_NAVIGATION_COMPOSE,
+            Libs.COMPOSE_MATERIAL3,
+//            Libs.COMPOSE_MATERIAL,
+            Libs.COMPOSE_FOUNDATION,
+            Libs.COMPOSE_UI,
+            Libs.COMPOSE_RUNTIME,
+            Libs.COMPOSE_TOOLING_PREVIEW,
+            Libs.COMPOSE_LIFECYCLE_VIEWMODEL,
+            Libs.COMPOSE_ACTIVITY,
+            Libs.COMPOSE_LIVEDATA,
+            Libs.COMPOSE_RXJAVA2,
+            Libs.COMPOSE_MATERIAL_ADAPTIVE,
+            Libs.ACCOMPANIST_PAGER,
+            Libs.ACCOMPANIST_PAGER_INDICATORS,
+            Libs.COMPOSE_COIL,
+            Libs.COMPOSE_UI_GRAPHICS,
+            Libs.THREETENAPB
+        )
+    )
+
+    debugHongImpl(
+        implLibs = arrayOf(
+            Libs.COMPOSE_TOOLING,
+            Libs.COMPOSE_UI_TEST_MANIFEST
+        )
+    )
+
+    // -------------------------------------------------
+    // TEST
+    // -------------------------------------------------
+    testImpl(
+        testLibs = arrayOf(
+            Libs.JUNIT
+        ),
+        androidTestLibs = arrayOf(
+            Libs.ESPRESSO_CORE,
+            Libs.COMPOSE_BOM,
+            Libs.COMPOSE_JUNIT4,
+            Libs.EXT_JUNIT
+        )
+    )
 }

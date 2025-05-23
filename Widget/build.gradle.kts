@@ -1,6 +1,5 @@
 plugins {
     id("com.android.library")
-//    id("org.jetbrains.kotlin.android")
     kotlin("android")
     kotlin("kapt")
     id("maven-publish")
@@ -31,19 +30,90 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.3"
     }
 }
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("com.google.android.material:material:1.12.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    hongImpl(
+        implLibs = arrayOf(
+            Libs.MULTIDEX,
+            Libs.FRAGMENT,
+            Libs.CORE,
+            Libs.APPCOMPAT,
+            Libs.LIFECYCLE_RUNTIME,
+            Libs.CONSTRAINT_LAYOUT,
+            Libs.ACTIVITY_KTX,
+            Libs.FRAGMENT_KTX
+        )
+    )
+
+    hongImpl(
+        implLibs = arrayOf(
+            platform(Libs.COMPOSE_BOM),
+            Libs.COMPOSE_CONSTRAINTLAYOUT,
+            Libs.HILT_NAVIGATION_COMPOSE,
+            Libs.COMPOSE_MATERIAL3,
+//            Libs.COMPOSE_MATERIAL,
+            Libs.COMPOSE_FOUNDATION,
+            Libs.COMPOSE_UI,
+            Libs.COMPOSE_RUNTIME,
+            Libs.COMPOSE_TOOLING_PREVIEW,
+            Libs.COMPOSE_LIFECYCLE_VIEWMODEL,
+            Libs.COMPOSE_ACTIVITY,
+            Libs.COMPOSE_LIVEDATA,
+            Libs.COMPOSE_RXJAVA2,
+            Libs.COMPOSE_MATERIAL_ADAPTIVE,
+            Libs.ACCOMPANIST_PAGER,
+            Libs.ACCOMPANIST_PAGER_INDICATORS,
+            Libs.COMPOSE_COIL,
+            Libs.COMPOSE_UI_GRAPHICS,
+            Libs.THREETENAPB,
+            Libs.ACCOMPANIST_DRAWABLEPAINTER
+
+        )
+    )
+
+    debugHongImpl(
+        implLibs = arrayOf(
+            Libs.COMPOSE_TOOLING,
+            Libs.COMPOSE_UI_TEST_MANIFEST
+        )
+    )
+
+    // -------------------------------------------------
+    // TEST
+    // -------------------------------------------------
+    testImpl(
+        testLibs = arrayOf(
+            Libs.JUNIT
+        ),
+        androidTestLibs = arrayOf(
+            Libs.ESPRESSO_CORE,
+            Libs.COMPOSE_BOM,
+            Libs.COMPOSE_JUNIT4,
+            Libs.EXT_JUNIT
+        )
+    )
+
+//    implementation("androidx.core:core-ktx:1.9.0")
+//    implementation("androidx.appcompat:appcompat:1.7.0")
+//    implementation("com.google.android.material:material:1.12.0")
+//    testImplementation("junit:junit:4.13.2")
+//    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+//    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 }
+
+//group = "com.github.cOdehOng-dev"
 
 task("assembleToPublish") {
     dependsOn("assembleRelease")
@@ -57,14 +127,14 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
-                groupId = "com.codehong.library"
-                artifactId = "library"
+                groupId = "com.github.cOdehOng-dev"
+                artifactId = "widget"
                 version = "0.0.1"
             }
             create<MavenPublication>("debug") {
                 from(components["debug"])
-                groupId = "com.codehong.library"
-                artifactId = "library"
+                groupId = "com.github.cOdehOng-dev"
+                artifactId = "widget"
                 version = "0.0.1"
             }
         }

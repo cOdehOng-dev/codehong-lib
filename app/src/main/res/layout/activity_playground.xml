@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_ffffff">
+
+
+    <com.codehong.lib.sample.playground.preview.HeaderView
+        android:id="@+id/v_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_preview"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        app:layout_constraintTop_toBottomOf="@id/v_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/fl_component_preview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ll_change_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:background="@color/color_ebebeb"/>
+
+        <LinearLayout
+            android:id="@+id/ll_change_background"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="end|center_vertical"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="배경 변경"
+                android:fontFamily="@font/pretendard_500"
+                android:includeFontPadding="false"
+                android:textSize="15dp"
+                android:textColor="@color/color_000000"
+                android:layout_marginEnd="10dp"/>
+
+            <FrameLayout
+                android:id="@+id/v_change_white"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/rect_ffffff_border_999999_radius10"
+                android:layout_marginEnd="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_check_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_50_check_black"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/v_change_black"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/rect_000000_border_eeeeee_radius10"
+                android:layout_marginEnd="10dp">
+                <ImageView
+                    android:id="@+id/iv_check_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_50_check_white"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/v_change_gray"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/rect_ebebeb_border_999999_radius10"
+                android:layout_marginEnd="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_check_gray"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_50_check_black"/>
+
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="테두리 생성"
+                android:fontFamily="@font/pretendard_500"
+                android:includeFontPadding="false"
+                android:textSize="15dp"
+                android:textColor="@color/color_000000"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"/>
+
+            <com.codehong.lib.sample.playground.preview.ToggleView
+                android:id="@+id/v_toggle_border_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_ebebeb"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/cl_preview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/ll_property"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="20dp"
+            android:paddingHorizontal="20dp"/>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
