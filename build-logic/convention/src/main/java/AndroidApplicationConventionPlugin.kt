@@ -24,7 +24,10 @@ class AndroidApplicationConventionPlugin: Plugin<Project> {
                     versionName = libs.findVersion("projectVersionName").get().toString()
                 }
 
-                configureAndroid(this)
+                configureAndroid(
+                    this,
+                    false
+                )
 
                 configureBuildTypes(
                     commonExtension = this,

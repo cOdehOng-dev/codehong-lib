@@ -1,5 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
-import com.codehong.convention.configureAndroidCompose
+import com.codehong.convention.configureAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getByType
@@ -10,7 +10,10 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
             pluginManager.apply("codehong.lib.android.application")
 
             val extension = extensions.getByType<ApplicationExtension>()
-            configureAndroidCompose(extension)
+            configureAndroid(
+                commonExtension = extension,
+                isCompose = true
+            )
         }
     }
 }

@@ -16,7 +16,10 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
 
             extensions.configure<LibraryExtension> {
-                configureAndroid(this)
+                configureAndroid(
+                    this,
+                    false
+                )
 
                 configureBuildTypes(
                     commonExtension = this,
