@@ -62,17 +62,15 @@ internal fun Project.configureAndroid(
             ignoreWarnings = true
         }
 
-        tasks.whenTaskAdded {
-            if (name == "lint") {
-                enabled = false
-            }
-        }
-
         tasks.withType<KotlinCompile>().configureEach {
             kotlinOptions {
                 jvmTarget = JavaVersion.VERSION_17.toString()
             }
         }
+    }
+
+    tasks.matching { it.name.contains("lint", ignoreCase = true) }.configureEach {
+        enabled = false
     }
 
     extensions.configure<JavaPluginExtension> {
