@@ -53,5 +53,6 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.junit4)
     androidTestImplementation(libs.ext.junit)
-
 }
+
+group = "com.github.cOdehOng-dev"
