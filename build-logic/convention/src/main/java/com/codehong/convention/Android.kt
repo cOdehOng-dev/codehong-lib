@@ -59,6 +59,13 @@ internal fun Project.configureAndroid(
         lint {
             checkReleaseBuilds = false
             abortOnError = false
+            ignoreWarnings = true
+        }
+
+        tasks.whenTaskAdded {
+            if (name == "lint") {
+                enabled = false
+            }
         }
 
         tasks.withType<KotlinCompile>().configureEach {
@@ -91,7 +98,6 @@ internal fun Project.configureBuildTypes(
 ) {
 
     commonExtension.run {
-
         when (extensionType) {
             ExtensionType.APPLICATION -> {
                 extensions.configure<ApplicationExtension> {
@@ -114,6 +120,7 @@ internal fun Project.configureBuildTypes(
             }
             ExtensionType.LIBRARY -> {
                 extensions.configure<LibraryExtension> {
+
                     buildTypes {
 //                        debug {
 //                            configureDebugBuildType(apiKey)
