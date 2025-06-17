@@ -19,3 +19,13 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.codehong.library.** { *; }
+-keep interface com.codehong.library.** { *; }
+-dontwarn com.codehong.library.**
+
+-keep class com.google.gson.** { *; }
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class retrofit2.** { *; }
+-dontwarn okhttp3.**

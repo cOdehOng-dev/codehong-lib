@@ -25,13 +25,13 @@ class PublishingLibraryConventionPlugin : Plugin<Project> {
                         from(components["release"])
                         groupId = "com.github.cOdehOng-dev"
                         artifactId = "widget"
-                        version = "0.0.3.6"
+                        version = "0.0.3.7"
                     }
                     create<MavenPublication>("debug") {
                         from(components["debug"])
                         groupId = "com.github.cOdehOng-dev"
                         artifactId = "widget"
-                        version = "0.0.3.6"
+                        version = "0.0.3.7"
                     }
                 }
             }
