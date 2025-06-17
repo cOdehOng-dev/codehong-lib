@@ -6,9 +6,7 @@ compileSdk = "34"
 projectApplicationId = "com.codehong.lib"
 projectVersionName = "1.0"
 projectVersionCode = "1"
-projectMinSdkVersion = "28"
 projectTargetSdkVersion = "34"
-projectCompileSdkVersion = "34"
 
 
 

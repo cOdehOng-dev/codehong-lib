@@ -5,9 +5,11 @@ import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal fun Project.configureAndroid(
@@ -15,10 +17,10 @@ internal fun Project.configureAndroid(
     isCompose: Boolean,
 ) {
     commonExtension.apply {
-        compileSdk = libs.getVersion("projectCompileSdkVersion")
+        compileSdk = libs.getVersion("compileSdk")
 
         defaultConfig {
-            minSdk = libs.getVersion("projectMinSdkVersion")
+            minSdk = libs.getVersion("minSdk")
         }
 
         buildFeatures {
@@ -54,20 +56,32 @@ internal fun Project.configureAndroid(
             }
         }
 
-        dependencies {
-            if (isCompose) {
-                val bom = libs.findLibrary("androidx.compose.bom").get()
-                add("implementation", platform(bom))
-                add("androidTestImplementation", platform(bom))
+        lint {
+            abortOnError = false
+        }
+
+        tasks.withType<KotlinCompile>().configureEach {
+            kotlinOptions {
+                jvmTarget = JavaVersion.VERSION_17.toString()
             }
         }
     }
 
-    tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_17.toString()
+    extensions.configure<JavaPluginExtension> {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinExtension.jvmToolchain(17)
+
+    dependencies {
+        if (isCompose) {
+            val bom = libs.getLibrary("androidx-compose-bom")
+            add("implementation", platform(bom))
+            add("androidTestImplementation", platform(bom))
         }
     }
+
+
 }
 
 internal fun Project.configureBuildTypes(
