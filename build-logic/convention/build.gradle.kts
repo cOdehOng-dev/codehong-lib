@@ -33,9 +33,5 @@ gradlePlugin {
             id = "codehong.lib.library.publishing"
             implementationClass = "PublishingLibraryConventionPlugin"
         }
-//        register("publishingLibraryBom") {
-//            id = "codehong.library.bom.publishing"
-//            implementationClass = "PublishingLibraryBomConventionPlugin"
-//        }
     }
 }
