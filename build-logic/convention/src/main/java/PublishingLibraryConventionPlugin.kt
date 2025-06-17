@@ -23,15 +23,15 @@ class PublishingLibraryConventionPlugin : Plugin<Project> {
                 publishing.publications {
                     create<MavenPublication>("release") {
                         from(components["release"])
-                        groupId = "com.github.cOdehOng-dev"
-                        artifactId = "widget"
-                        version = "0.0.3.8"
+                        groupId = project.properties["GROUP_ID"] as String
+                        artifactId = project.properties["ARTIFACT_ID"] as String // "widget"
+                        version =  project.properties["VERSION_NAME"] as String // "0.0.3.8"
                     }
                     create<MavenPublication>("debug") {
                         from(components["debug"])
-                        groupId = "com.github.cOdehOng-dev"
-                        artifactId = "widget"
-                        version = "0.0.3.8"
+                        groupId = project.properties["GROUP_ID"] as String
+                        artifactId = project.properties["ARTIFACT_ID"] as String // "widget"
+                        version =  project.properties["VERSION_NAME"] as String // "0.0.3.8"
                     }
                 }
             }
