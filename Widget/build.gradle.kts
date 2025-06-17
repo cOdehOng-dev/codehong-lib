@@ -1,148 +1,59 @@
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.codehong.lib.android.library)
+    alias(libs.plugins.codehong.lib.android.library.compose)
+    alias(libs.plugins.codehong.lib.android.library.publishing)
     id("kotlin-parcelize")
-    kotlin("android")
-    kotlin("kapt")
-    id("maven-publish")
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "com.codehong.library.widget"
-    compileSdk = 34
-
-    defaultConfig {
-        minSdk = 28
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-    buildFeatures {
-        viewBinding = true
-        dataBinding = true
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
-    }
 }
 
 dependencies {
 
-    hongImpl(
-        implLibs = arrayOf(
-            Libs.MULTIDEX,
-            Libs.FRAGMENT,
-            Libs.CORE,
-            Libs.APPCOMPAT,
-            Libs.LIFECYCLE_RUNTIME,
-            Libs.CONSTRAINT_LAYOUT,
-            Libs.ACTIVITY_KTX,
-            Libs.FRAGMENT_KTX,
-            Libs.GLIDE,
-            Libs.GLIDE_TRANSFORMATION,
-        ),
-        kaptLibs = arrayOf(
-            Libs.GLIDE_COMPILER
-        )
-    )
+    implementation(libs.androidx.multidex)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.glide)
+    implementation(libs.glide.transformation)
+    ksp(libs.glide.ksp)
 
-    hongImpl(
-        implLibs = arrayOf(
-            platform(Libs.COMPOSE_BOM),
-            Libs.COMPOSE_CONSTRAINTLAYOUT,
-            Libs.HILT_NAVIGATION_COMPOSE,
-            Libs.COMPOSE_MATERIAL3,
-//            Libs.COMPOSE_MATERIAL,
-            Libs.COMPOSE_FOUNDATION,
-            Libs.COMPOSE_UI,
-            Libs.COMPOSE_RUNTIME,
-            Libs.COMPOSE_TOOLING_PREVIEW,
-            Libs.COMPOSE_LIFECYCLE_VIEWMODEL,
-            Libs.COMPOSE_ACTIVITY,
-            Libs.COMPOSE_LIVEDATA,
-            Libs.COMPOSE_RXJAVA2,
-            Libs.COMPOSE_MATERIAL_ADAPTIVE,
-            Libs.ACCOMPANIST_PAGER,
-            Libs.ACCOMPANIST_PAGER_INDICATORS,
-            Libs.COMPOSE_COIL,
-            Libs.COMPOSE_UI_GRAPHICS,
-            Libs.THREETENAPB,
-            Libs.ACCOMPANIST_DRAWABLEPAINTER
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.constraintlayout)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.compose.tooling.preview)
+    implementation(libs.androidx.compose.lifecycle.viewmodel)
+    implementation(libs.androidx.compose.activity)
+    implementation(libs.androidx.compose.runtime.livedata)
+    implementation(libs.androidx.compose.rxjava2)
+    implementation(libs.androidx.compose.material3.adaptive)
+    implementation(libs.google.accompanist.pager)
+    implementation(libs.google.accompanist.pager.indicators)
+    implementation(libs.compose.coil)
+    implementation(libs.andoridx.compose.ui.graphics)
+    implementation(libs.threetenapb)
+    implementation(libs.google.accompanist.drawablepainter)
 
-        )
-    )
-
-    debugHongImpl(
-        implLibs = arrayOf(
-            Libs.COMPOSE_TOOLING,
-            Libs.COMPOSE_UI_TEST_MANIFEST
-        )
-    )
+    debugImplementation(libs.androidx.compose.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     // -------------------------------------------------
     // TEST
     // -------------------------------------------------
-    testImpl(
-        testLibs = arrayOf(
-            Libs.JUNIT
-        ),
-        androidTestLibs = arrayOf(
-            Libs.ESPRESSO_CORE,
-            Libs.COMPOSE_BOM,
-            Libs.COMPOSE_JUNIT4,
-            Libs.EXT_JUNIT
-        )
-    )
+    testImplementation(libs.junit)
 
-//    implementation("androidx.core:core-ktx:1.9.0")
-//    implementation("androidx.appcompat:appcompat:1.7.0")
-//    implementation("com.google.android.material:material:1.12.0")
-//    testImplementation("junit:junit:4.13.2")
-//    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-//    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
-}
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.junit4)
+    androidTestImplementation(libs.ext.junit)
 
-//group = "com.github.cOdehOng-dev"
-
-task("assembleToPublish") {
-    dependsOn("assembleRelease")
-    group = "github"
-    finalizedBy("publish")
-}
-
-
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-                groupId = "com.github.cOdehOng-dev"
-                artifactId = "widget"
-                version = "0.0.1"
-            }
-            create<MavenPublication>("debug") {
-                from(components["debug"])
-                groupId = "com.github.cOdehOng-dev"
-                artifactId = "widget"
-                version = "0.0.1"
-            }
-        }
-    }
 }

@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
@@ -13,6 +14,8 @@ dependencyResolutionManagement {
         maven(url = "https://jitpack.io")
     }
 }
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "code-hong-lib"
 include(":app")
