@@ -15,6 +15,9 @@ class AndroidApplicationConventionPlugin: Plugin<Project> {
         target.run {
             apply(plugin = libs.getPluginId("android-application"))
             apply(plugin = libs.getPluginId("kotlin-android"))
+            apply(plugin = libs.getPluginId("kotlin-kapt"))
+            apply(plugin = libs.getPluginId("kotlin-parcelize"))
+            apply(plugin = libs.getPluginId("ksp"))
 
             extensions.configure<ApplicationExtension> {
                 defaultConfig {

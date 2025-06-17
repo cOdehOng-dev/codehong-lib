@@ -2,8 +2,6 @@ plugins {
     alias(libs.plugins.codehong.lib.android.library)
     alias(libs.plugins.codehong.lib.android.library.compose)
     alias(libs.plugins.codehong.lib.android.library.publishing)
-    id("kotlin-parcelize")
-    alias(libs.plugins.ksp)
 }
 
 android {
