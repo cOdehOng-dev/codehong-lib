@@ -1,117 +1,58 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    kotlin("kapt")
+    alias(libs.plugins.codehong.lib.android.application.compose)
 }
 
 android {
-    namespace = "com.codehong.lib.sample"
-    compileSdk = 34
+    namespace = project.properties["APP_ID"].toString()
 
     defaultConfig {
-        applicationId = "com.codehong.lib"
-        minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-    buildFeatures {
-        viewBinding = true
-        dataBinding = true
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
+        applicationId = project.properties["APP_ID"].toString()
+        versionName = project.properties["VERSION_NAME"].toString()
     }
 }
 
 dependencies {
 
-    implementation(project(":Widget"))
+//    debugImplementation(project(":Widget"))
+//    implementation(project(":Widget"))
+    implementation(codehonglibs.widget)
 
-    hongImpl(
-        implLibs = arrayOf(
-            Libs.MULTIDEX,
-            Libs.FRAGMENT,
-            Libs.CORE,
-            Libs.APPCOMPAT,
-            Libs.LIFECYCLE_RUNTIME,
-            Libs.CONSTRAINT_LAYOUT,
-            Libs.ACTIVITY_KTX,
-            Libs.FRAGMENT_KTX
-        )
-    )
+    implementation(libs.androidx.multidex)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.activity.ktx)
 
-    hongImpl(
-        implLibs = arrayOf(
-            platform(Libs.COMPOSE_BOM),
-            Libs.COMPOSE_CONSTRAINTLAYOUT,
-            Libs.HILT_NAVIGATION_COMPOSE,
-            Libs.COMPOSE_MATERIAL3,
-//            Libs.COMPOSE_MATERIAL,
-            Libs.COMPOSE_FOUNDATION,
-            Libs.COMPOSE_UI,
-            Libs.COMPOSE_RUNTIME,
-            Libs.COMPOSE_TOOLING_PREVIEW,
-            Libs.COMPOSE_LIFECYCLE_VIEWMODEL,
-            Libs.COMPOSE_ACTIVITY,
-            Libs.COMPOSE_LIVEDATA,
-            Libs.COMPOSE_RXJAVA2,
-            Libs.COMPOSE_MATERIAL_ADAPTIVE,
-            Libs.ACCOMPANIST_PAGER,
-            Libs.ACCOMPANIST_PAGER_INDICATORS,
-            Libs.COMPOSE_COIL,
-            Libs.COMPOSE_UI_GRAPHICS,
-            Libs.THREETENAPB
-        )
-    )
+    implementation(libs.androidx.compose.constraintlayout)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.compose.tooling.preview)
+    implementation(libs.androidx.compose.lifecycle.viewmodel)
+    implementation(libs.androidx.compose.activity)
+    implementation(libs.androidx.compose.runtime.livedata)
+    implementation(libs.androidx.compose.rxjava2)
+    implementation(libs.androidx.compose.material3.adaptive)
+    implementation(libs.google.accompanist.pager)
+    implementation(libs.google.accompanist.pager.indicators)
+    implementation(libs.compose.coil)
+    implementation(libs.andoridx.compose.ui.graphics)
+    implementation(libs.threetenapb)
 
-    debugHongImpl(
-        implLibs = arrayOf(
-            Libs.COMPOSE_TOOLING,
-            Libs.COMPOSE_UI_TEST_MANIFEST
-        )
-    )
+
+    debugImplementation(libs.androidx.compose.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     // -------------------------------------------------
     // TEST
     // -------------------------------------------------
-    testImpl(
-        testLibs = arrayOf(
-            Libs.JUNIT
-        ),
-        androidTestLibs = arrayOf(
-            Libs.ESPRESSO_CORE,
-            Libs.COMPOSE_BOM,
-            Libs.COMPOSE_JUNIT4,
-            Libs.EXT_JUNIT
-        )
-    )
+    testImplementation(libs.junit)
+
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.androidx.compose.junit4)
+    androidTestImplementation(libs.ext.junit)
 }

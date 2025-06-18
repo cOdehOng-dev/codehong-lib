@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 축소 뷰 (초기 상태) -->
+    <LinearLayout
+        android:id="@+id/ll_small_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/honglib_rect_000000_radius30"
+        android:padding="5dp"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_horizontal"
+        tools:visibility="visible"
+        >
+
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp">
+
+            <ImageView
+                android:id="@+id/island_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/honglib_ic_alarm" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_small_state"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/pretendard_400"
+            android:includeFontPadding="false"
+            android:textSize="11dp"
+            android:textColor="@color/honglib_color_ffffff"
+            android:gravity="end"
+            tools:text="탑승 준비"/>
+
+    </LinearLayout>
+
+    <!-- 확장 뷰 (초기에는 숨김) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_expanded_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:padding="15dp"
+        android:visibility="gone"
+        android:background="@drawable/honglib_rect_000000_radius20"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/ll_app_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_bi_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/honglib_ic_alarm"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:textSize="12dp"
+                android:textColor="@color/honglib_color_ffffff"
+                android:fontFamily="@font/pretendard_700"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_bi_icon"
+                android:gravity="center"
+                tools:text="HONG AIR"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_expand_state"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/honglib_color_ffffff"
+            android:fontFamily="@font/pretendard_700"
+            android:includeFontPadding="false"
+            app:layout_constraintTop_toBottomOf="@id/ll_app_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_thumbnail"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            tools:text="30분 후 탑승 예정"/>
+
+        <TextView
+            android:id="@+id/tv_from"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:fontFamily="@font/pretendard_400"
+            android:includeFontPadding="false"
+            android:textColor="@color/honglib_color_ffffff"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@id/tv_expand_state"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_thumbnail"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            tools:text="FROM   SEOUL/INCHEON"/>
+
+        <TextView
+            android:id="@+id/tv_to"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:fontFamily="@font/pretendard_400"
+            android:includeFontPadding="false"
+            android:textColor="@color/honglib_color_ffffff"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@id/tv_from"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_thumbnail"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            tools:text="TO         TOKYO"/>
+
+        <ImageView
+            android:id="@+id/iv_thumbnail"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

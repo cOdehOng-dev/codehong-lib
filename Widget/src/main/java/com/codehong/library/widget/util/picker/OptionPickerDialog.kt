@@ -86,11 +86,11 @@ class OptionPickerDialog constructor(
                 R.anim.honglib_popup_in
             )
         )
-        binding.dim.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_motion_m))
+        binding.dim.startAnimation(AnimationUtils.loadAnimation(context, R.anim.honglib_fade_in))
     }
 
     override fun dismiss() {
-        binding.dim.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out_motion_m))
+        binding.dim.startAnimation(AnimationUtils.loadAnimation(context, R.anim.honglib_fade_out))
         binding.clOptionPicker.startAnimation(
             AnimationUtils.loadAnimation(
                 context,

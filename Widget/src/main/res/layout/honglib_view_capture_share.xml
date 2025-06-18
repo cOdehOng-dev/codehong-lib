@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_capture_share"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    android:padding="10dp"
+    android:background="@drawable/honglib_rect_333333_radius6"
+    android:visibility="gone"
+    tools:visibility="visible">
+
+    <ImageView
+        android:id="@+id/iv_capture"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:scaleType="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:background="@color/honglib_color_ffffff"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="방금 캡처한 화면을 공유해 보세요!"
+        android:textSize="13dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:fontFamily="@font/pretendard_400"
+        android:includeFontPadding="false"
+        android:textColor="@color/honglib_color_ffffff"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_capture"
+        app:layout_constraintEnd_toStartOf="@id/tv_share"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_share"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="공유하기"
+        android:textSize="14dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:fontFamily="@font/pretendard_600"
+        android:includeFontPadding="false"
+        android:textColor="@color/honglib_teal_200"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

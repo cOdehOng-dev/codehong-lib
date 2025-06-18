@@ -15,18 +15,18 @@ class SampleImageActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SampleScaffold(title = "Image") {
-                SampleMenu(
-                    title = "drawable image",
-                    horizontalPadding = 20
-                ) {
-                    HongImage(
-                        width = 200,
-                        height = 200,
-                        drawableResId = R.drawable.ic_sample_image,
-                        allRadius = 12,
-                        contentScale = ContentScale.Crop
-                    )
-                }
+//                SampleMenu(
+//                    title = "drawable image",
+//                    horizontalPadding = 20
+//                ) {
+//                    HongImage(
+//                        width = 200,
+//                        height = 200,
+//                        drawableResId = R.drawable.ic_sample_image,
+//                        allRadius = 12,
+//                        contentScale = ContentScale.Crop
+//                    )
+//                }
 
                 SampleMenu(
                     title = "url image",
@@ -52,7 +52,7 @@ class SampleImageActivity : ComponentActivity() {
                                 "b=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                         allRadius = 12,
                         contentScale = ContentScale.Crop,
-                        error = R.drawable.bg_image_error
+                        error = R.drawable.honglib_bg_image_error
                     )
                 }
 
@@ -67,7 +67,7 @@ class SampleImageActivity : ComponentActivity() {
                                 "b=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                         allRadius = 12,
                         contentScale = ContentScale.Crop,
-                        error = R.drawable.bg_image_error
+                        error = R.drawable.honglib_bg_image_error
                     )
                 }
 
@@ -82,7 +82,7 @@ class SampleImageActivity : ComponentActivity() {
                                 "b=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                         allRadius = 12,
                         contentScale = ContentScale.Crop,
-                        placeholder = R.drawable.bg_image_placeholder
+                        placeholder = R.drawable.honglib_bg_image_placeholder
                     )
                 }
             }
