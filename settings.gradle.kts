@@ -24,9 +24,17 @@ dependencyResolutionManagement {
                 password = githubProperties.getProperty("token")
             }
         }
-        maven(url = "https://jitpack.io")
+    }
+    versionCatalogs {
+//        create("libs") {
+//            from(files("gradle/libs.versions.toml"))
+//        }
+        create("codehonglibs") {
+            from(files("gradle/codehonglibs.versions.toml"))
+        }
     }
 }
+
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
