@@ -15,18 +15,18 @@ class SampleImageActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SampleScaffold(title = "Image") {
-                SampleMenu(
-                    title = "drawable image",
-                    horizontalPadding = 20
-                ) {
-                    HongImage(
-                        width = 200,
-                        height = 200,
-                        drawableResId = R.drawable.ic_sample_image,
-                        allRadius = 12,
-                        contentScale = ContentScale.Crop
-                    )
-                }
+//                SampleMenu(
+//                    title = "drawable image",
+//                    horizontalPadding = 20
+//                ) {
+//                    HongImage(
+//                        width = 200,
+//                        height = 200,
+//                        drawableResId = R.drawable.ic_sample_image,
+//                        allRadius = 12,
+//                        contentScale = ContentScale.Crop
+//                    )
+//                }
 
                 SampleMenu(
                     title = "url image",
