@@ -1,3 +1,9 @@
+import java.util.Properties
+
+val githubProperties = Properties().apply {
+    load(file("github.properties").inputStream())
+}
+
 pluginManagement {
     includeBuild("build-logic")
     repositories {
@@ -11,6 +17,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri(githubProperties.getProperty("url"))
+            credentials {
+                username = githubProperties.getProperty("username")
+                password = githubProperties.getProperty("token")
+            }
+        }
         maven(url = "https://jitpack.io")
     }
 }

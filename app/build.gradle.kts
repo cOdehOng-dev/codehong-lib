@@ -9,9 +9,8 @@ android {
 
 dependencies {
 
-    implementation(project(":Widget"))
-
-//    implementation("com.github.cOdehOng-dev:Widget:0.0.3.11")
+//    implementation(project(":Widget"))
+    implementation("com.codehong.library:widget:0.0.3.19")
 
     implementation(libs.androidx.multidex)
     implementation(libs.androidx.fragment.ktx)
