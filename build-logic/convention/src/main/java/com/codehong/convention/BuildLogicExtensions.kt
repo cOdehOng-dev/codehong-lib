@@ -21,3 +21,35 @@ fun VersionCatalog.getLibrary(alias: String): Provider<MinimalExternalModuleDepe
 fun VersionCatalog.getPluginId(alias: String): String {
     return this.findPlugin(alias).get().get().pluginId
 }
+
+fun Project.getStringProperty(
+    name: String,
+    default: String
+): String {
+    return try {
+        if (this.properties.containsKey(name)) {
+            this.properties[name].toString()
+        } else {
+            default
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+        default
+    }
+}
+
+fun Project.getIntProperty(
+    name: String,
+    default: Int
+): Int {
+    return try {
+        if (this.properties.containsKey(name)) {
+            this.properties[name].toString().toInt()
+        } else {
+            default
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+        default
+    }
+}

@@ -3,16 +3,11 @@ minSdk = "28"
 targetSdk = "34"
 compileSdk = "34"
 
-projectApplicationId = "com.codehong.lib"
-projectVersionName = "1.0"
-projectVersionCode = "1"
-projectTargetSdkVersion = "34"
-
-
 
 agp = "8.4.0"
-kotlin = "1.9.23"
-ksp = "1.9.22-1.0.17"
+#kotlin = "1.9.23"
+kotlin = "2.1.10"
+ksp = "2.1.10-1.0.31"
 android-maven-plugin = "2.1"
 androidTools = "31.5.0"
 
@@ -49,7 +44,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 

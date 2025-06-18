@@ -3,7 +3,9 @@ import com.android.build.api.dsl.LibraryExtension
 import com.codehong.convention.ExtensionType
 import com.codehong.convention.configureAndroid
 import com.codehong.convention.configureBuildTypes
+import com.codehong.convention.configureFlavors
 import com.codehong.convention.getPluginId
+import com.codehong.convention.getVersion
 import com.codehong.convention.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -20,20 +22,21 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             apply(plugin = libs.getPluginId("ksp"))
 
             extensions.configure<LibraryExtension> {
+                defaultConfig {
+                    targetSdk = libs.getVersion("targetSdk")
+                    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+                    consumerProguardFiles("consumer-rules.pro")
+                }
                 configureAndroid(
-                    this,
-                    false
+                    commonExtension = this,
+                    isCompose = false
                 )
 
                 configureBuildTypes(
                     commonExtension = this,
                     extensionType = ExtensionType.LIBRARY
                 )
-
-                defaultConfig {
-                    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-                    consumerProguardFiles("consumer-rules.pro")
-                }
+                configureFlavors(this, ExtensionType.LIBRARY)
             }
         }
     }

@@ -20,12 +20,15 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.codehong.library.** { *; }
--keep interface com.codehong.library.** { *; }
--dontwarn com.codehong.library.**
+#-keep class com.codehong.library.widget.** { *; }
+#-keep interface com.codehong.library.widget.** { *; }
+#-dontwarn com.codehong.library.widget.**
 
 -keep class com.google.gson.** { *; }
 -keepattributes Signature
 -keepattributes *Annotation*
 -keep class retrofit2.** { *; }
 -dontwarn okhttp3.**
+
+#-keep class java.lang.invoke.StringConcatFactory { *; }
+#-dontwarn java.lang.invoke.**

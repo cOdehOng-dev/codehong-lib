@@ -1,5 +1,4 @@
 plugins {
-    alias(libs.plugins.codehong.lib.android.library)
     alias(libs.plugins.codehong.lib.android.library.compose)
     alias(libs.plugins.codehong.lib.android.library.publishing)
 }
@@ -21,7 +20,7 @@ dependencies {
     implementation(libs.glide.transformation)
     ksp(libs.glide.ksp)
 
-    implementation(platform(libs.androidx.compose.bom))
+//    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.constraintlayout)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.compose.material3)
@@ -50,7 +49,7 @@ dependencies {
     testImplementation(libs.junit)
 
     androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
+//    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.junit4)
     androidTestImplementation(libs.ext.junit)
 }

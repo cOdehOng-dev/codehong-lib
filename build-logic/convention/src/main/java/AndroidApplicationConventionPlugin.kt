@@ -3,7 +3,9 @@ import com.android.build.api.dsl.ApplicationExtension
 import com.codehong.convention.ExtensionType
 import com.codehong.convention.configureAndroid
 import com.codehong.convention.configureBuildTypes
+import com.codehong.convention.configureFlavors
 import com.codehong.convention.getPluginId
+import com.codehong.convention.getVersion
 import com.codehong.convention.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -21,21 +23,19 @@ class AndroidApplicationConventionPlugin: Plugin<Project> {
 
             extensions.configure<ApplicationExtension> {
                 defaultConfig {
-                    applicationId = libs.findVersion("projectApplicationId").get().toString()
-                    targetSdk = libs.findVersion("projectTargetSdkVersion").get().toString().toInt()
-                    versionCode = libs.findVersion("projectVersionCode").get().toString().toInt()
-                    versionName = libs.findVersion("projectVersionName").get().toString()
+                    targetSdk = libs.getVersion("targetSdk")
                 }
 
                 configureAndroid(
-                    this,
-                    false
+                    commonExtension = this,
+                    isCompose = false
                 )
 
                 configureBuildTypes(
                     commonExtension = this,
                     extensionType = ExtensionType.APPLICATION
                 )
+                configureFlavors(this, ExtensionType.APPLICATION)
             }
         }
     }
