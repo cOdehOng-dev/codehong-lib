@@ -10,7 +10,7 @@ android {
 dependencies {
 
 //    implementation(project(":Widget"))
-    implementation("com.codehong.library:widget:0.0.3.19")
+    implementation("com.codehong.library:widget:0.0.3.20")
 
     implementation(libs.androidx.multidex)
     implementation(libs.androidx.fragment.ktx)

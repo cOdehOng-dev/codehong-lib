@@ -11,7 +11,7 @@ projectTargetSdkVersion = "34"
 
 
 agp = "8.4.0"
-kotlin = "1.9.22"
+kotlin = "1.9.23"
 ksp = "1.9.22-1.0.17"
 android-maven-plugin = "2.1"
 androidTools = "31.5.0"
