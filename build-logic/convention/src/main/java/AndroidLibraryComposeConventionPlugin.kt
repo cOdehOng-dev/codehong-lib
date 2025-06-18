@@ -1,7 +1,11 @@
 
 import com.android.build.api.dsl.LibraryExtension
+import com.codehong.convention.ExtensionType
 import com.codehong.convention.configureAndroid
+import com.codehong.convention.configureBuildTypes
+import com.codehong.convention.configureFlavors
 import com.codehong.convention.getPluginId
+import com.codehong.convention.getVersion
 import com.codehong.convention.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -16,16 +20,24 @@ class AndroidLibraryComposeConventionPlugin: Plugin<Project> {
             apply(plugin = libs.getPluginId("kotlin-kapt"))
             apply(plugin = libs.getPluginId("kotlin-parcelize"))
             apply(plugin = libs.getPluginId("ksp"))
-
-            // TODO HONG 찾지를 못 함
-//            apply(plugin = libs.getPluginId("kotlin-compose"))
-//            apply(plugin = "org.jetbrains.kotlin.plugin.compose")
+            apply(plugin = libs.getPluginId("kotlin-compose-compiler"))
 
             extensions.configure<LibraryExtension> {
+                defaultConfig {
+                    targetSdk = libs.getVersion("targetSdk")
+                    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+                    consumerProguardFiles("consumer-rules.pro")
+                }
                 configureAndroid(
                     commonExtension = this,
                     isCompose = true
                 )
+
+                configureBuildTypes(
+                    commonExtension = this,
+                    extensionType = ExtensionType.LIBRARY
+                )
+                configureFlavors(this, ExtensionType.LIBRARY)
             }
         }
     }

@@ -1,17 +1,21 @@
 plugins {
-    alias(libs.plugins.codehong.lib.android.application)
     alias(libs.plugins.codehong.lib.android.application.compose)
 }
 
 android {
-    namespace = "com.codehong.lib.sample"
+    namespace = project.properties["APP_ID"].toString()
+
+    defaultConfig {
+        applicationId = project.properties["APP_ID"].toString()
+        versionName = project.properties["VERSION_NAME"].toString()
+    }
 }
 
 dependencies {
 
-    implementation(project(":Widget"))
 //    debugImplementation(project(":Widget"))
-//    implementation(codehonglibs.widget)
+//    implementation(project(":Widget"))
+    implementation(codehonglibs.widget)
 
     implementation(libs.androidx.multidex)
     implementation(libs.androidx.fragment.ktx)

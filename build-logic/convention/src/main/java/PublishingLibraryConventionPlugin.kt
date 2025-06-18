@@ -65,7 +65,6 @@ class PublishingLibraryConventionPlugin : Plugin<Project> {
                             this.version =  version +
                                     "-${SimpleDateFormat("yyyyMMdd.HHmmss").format(Date())}" +
                                     "-SNAPSHOT"
-
                             afterEvaluate {
                                 artifact(artifact)
                             }
