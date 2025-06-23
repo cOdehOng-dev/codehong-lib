@@ -1,37 +1,29 @@
 package com.codehong.lib.sample.calendar
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.background
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.codehong.lib.sample.SampleHeader
+import androidx.compose.ui.res.colorResource
+import com.codehong.lib.sample.base.BaseSampleComposeActivity
 import com.codehong.library.widget.R
 import com.codehong.library.widget.calendar.HongComposeCalendar
 import com.codehong.library.widget.model.HongComposeColor
+import com.codehong.library.widget.util.HongToastUtil
 import org.threeten.bp.LocalDate
 
-class SampleCalendarActivity1 : ComponentActivity() {
+class SampleCalendarActivity1 : BaseSampleComposeActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            Scaffold(
-                topBar = {
-                    SampleHeader(title = "달력")
-                }
-            ) {
-                HongComposeCalendar(
-                    modifier = Modifier
-                        .padding(it),
-                    lineColor = HongComposeColor(
-                        resId = R.color.honglib_color_eeeeee
-                    ),
-                    holidays = koreanHolidays
-                ) { startDate, endDate ->
-                }
-            }
+    @Composable
+    override fun InitSample() {
+        HongComposeCalendar(
+            modifier = Modifier
+                .background(colorResource(R.color.honglib_color_ffffff)),
+            lineColor = HongComposeColor(
+                resId = R.color.honglib_color_eeeeee
+            ),
+            holidays = koreanHolidays
+        ) { startDate, endDate ->
+            HongToastUtil.showToast(this, "선택된 날짜: ${startDate.toString()} ~ ${endDate.toString()}")
         }
     }
 

@@ -16,7 +16,7 @@ import com.codehong.library.widget.R
 import com.codehong.library.widget.button.HongTextButton
 import com.codehong.library.widget.model.HongComposeColor
 import com.codehong.library.widget.model.text.HongComposeTextStyle
-import com.codehong.library.widget.util.ToastUtil
+import com.codehong.library.widget.util.HongToastUtil
 
 class SampleTextButtonActivity : ComponentActivity() {
 
@@ -44,7 +44,7 @@ class SampleTextButtonActivity : ComponentActivity() {
                         ),
                         verticalPadding = 15,
                         click = {
-                            ToastUtil.showToast(this@SampleTextButtonActivity, "버튼 클릭")
+                            HongToastUtil.showToast(this@SampleTextButtonActivity, "버튼 클릭")
                         }
                     )
 
@@ -68,7 +68,7 @@ class SampleTextButtonActivity : ComponentActivity() {
                             ),
                             verticalPadding = 15,
                             click = {
-                                ToastUtil.showToast(this@SampleTextButtonActivity, "버튼 클릭")
+                                HongToastUtil.showToast(this@SampleTextButtonActivity, "버튼 클릭")
                             }
                         )
                     }
