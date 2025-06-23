@@ -6,7 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.codehong.lib.sample.databinding.ActivityDynamicIslandBinding
 import com.codehong.library.widget.dynamicisland.DynamicIslandInfo
 import com.codehong.library.widget.dynamicisland.DynamicIslandManager
-import com.codehong.library.widget.util.ToastUtil
+import com.codehong.library.widget.rule.HongWidgetType
+import com.codehong.library.widget.util.HongToastUtil
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -21,7 +22,7 @@ class SampleDynamicIslandActivity : AppCompatActivity() {
         binding = ActivityDynamicIslandBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.vHeader.init("다이나믹 아일랜드") {
+        binding.vHeader.init(HongWidgetType.DYNAMIC_ISLAND.value) {
             finish()
         }
 
@@ -73,7 +74,7 @@ class SampleDynamicIslandActivity : AppCompatActivity() {
                 startDynamicIsland()
                 checkDynamicIslandPermission(true)
             } else {
-                ToastUtil.showToast(this, "다이나믹 아일랜드 권한을 거부하였습니다")
+                HongToastUtil.showToast(this, "다이나믹 아일랜드 권한을 거부하였습니다")
                 checkDynamicIslandPermission(false)
             }
         }

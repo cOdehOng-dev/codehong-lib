@@ -14,8 +14,8 @@ android {
 dependencies {
 
 //    debugImplementation(project(":Widget"))
-//    implementation(project(":Widget"))
-    implementation(codehonglibs.widget)
+    implementation(project(":Widget"))
+//    implementation(codehonglibs.widget)
 
     implementation(libs.androidx.multidex)
     implementation(libs.androidx.fragment.ktx)
@@ -24,6 +24,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.activity)
 
     implementation(libs.androidx.compose.constraintlayout)
     implementation(libs.androidx.hilt.navigation.compose)
@@ -37,6 +38,8 @@ dependencies {
     implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.compose.rxjava2)
     implementation(libs.androidx.compose.material3.adaptive)
+
+
     implementation(libs.google.accompanist.pager)
     implementation(libs.google.accompanist.pager.indicators)
     implementation(libs.compose.coil)
