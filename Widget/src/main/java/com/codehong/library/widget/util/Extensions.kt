@@ -3,6 +3,7 @@ package com.codehong.library.widget.util
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.text.ParcelableSpan
 import android.text.SpannableString
@@ -18,10 +19,13 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
+import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.compose.ui.graphics.Color
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.text.set
+import androidx.core.view.WindowCompat
 import com.codehong.library.widget.R
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongTextLineBreak
@@ -348,4 +352,67 @@ fun Context?.isAppForeground(): Boolean {
         it.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND &&
                 it.processName == packageName
     } ?: false
+}
+
+fun View?.applyRatio(ratio: String?) {
+    if (this == null || ratio.isNullOrEmpty()) return
+
+    try {
+        val params = this.layoutParams as ConstraintLayout.LayoutParams
+        params.dimensionRatio = ratio
+        this.layoutParams = params
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+fun String?.aspectRatio(): Float {
+    if (this.isNullOrEmpty()) return 0f
+    val parts = this.split(":")
+    return if (parts.size == 2) {
+        parts[0].toFloat() / parts[1].toFloat()
+    } else {
+        1f / 1f
+    }
+}
+
+fun View?.applyRoundBackground(
+    @ColorRes color: Int,
+    radiusDp: Int,
+    topLeft: Boolean = false,
+    topRight: Boolean = false,
+    bottomLeft: Boolean = false,
+    bottomRight: Boolean = false
+) {
+    if (this == null) return
+
+    val corner = Utils.dpToFloatPx(context, radiusDp)
+    val corners = floatArrayOf(
+        if (topLeft) corner else 0f,
+        if (topLeft) corner else 0f,
+        if (topRight) corner else 0f,
+        if (topRight) corner else 0f,
+        if (bottomRight) corner else 0f,
+        if (bottomRight) corner else 0f,
+        if (bottomLeft) corner else 0f,
+        if (bottomLeft) corner else 0f
+    )
+
+    this.background = GradientDrawable().apply {
+        shape = GradientDrawable.RECTANGLE
+        this.cornerRadii = corners
+        setColor(ContextCompat.getColor(context, color))
+    }
+
+    this.clipToOutline = true
+}
+
+fun Activity?.applyStatusBarColor(color: Int) {
+    if (this == null) return
+
+    WindowCompat.setDecorFitsSystemWindows(window, true)
+    window.statusBarColor = ContextCompat.getColor(
+        this,
+        color
+    )
 }

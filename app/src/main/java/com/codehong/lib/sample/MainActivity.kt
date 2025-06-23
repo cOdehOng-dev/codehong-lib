@@ -7,12 +7,14 @@ import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
@@ -22,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.codehong.lib.sample.SampleType.Companion.toType
 import com.codehong.lib.sample.button.SampleTextButtonActivity
 import com.codehong.lib.sample.calendar.SampleCalendarActivity1
 import com.codehong.lib.sample.captureshare.SampleCaptureShareActivity
@@ -31,16 +34,20 @@ import com.codehong.lib.sample.image.SampleImageActivity
 import com.codehong.lib.sample.layout.slide.SampleSlideLayoutActivity
 import com.codehong.lib.sample.pager.SampleHorizontalPagerActivity
 import com.codehong.lib.sample.picker.OptionPickerActivity
+import com.codehong.lib.sample.player.SampleVideoPlayerActivity
 import com.codehong.lib.sample.playground.PlaygroundActivity
+import com.codehong.lib.sample.tab.SampleScrollTabActivity
 import com.codehong.lib.sample.text.SampleBadgeTextActivity
+import com.codehong.lib.sample.text.SampleTextActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
+import com.codehong.lib.sample.videopopup.SampleVideoPopupActivity
+import com.codehong.lib.sample.videopopup.SampleVideoPopupBuilderActivity
+import com.codehong.lib.sample.videopopup.SampleVideoPopupComposeActivity
 import com.codehong.library.widget.R
 import com.codehong.library.widget.button.HongTextButton
 import com.codehong.library.widget.dynamicisland.DynamicIslandInfo
 import com.codehong.library.widget.dynamicisland.DynamicIslandManager
-import com.codehong.library.widget.hongBorder
 import com.codehong.library.widget.model.HongComposeColor
-import com.codehong.library.widget.model.text.HongComposeTextStyle
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
@@ -115,161 +122,249 @@ fun SampleTheme(
             }
         },
         bottomBar = {
-            val widgetList = HongWidgetType.values().map { it.value }.toMutableList()
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
-                    .hongBorder(
-                        borderWidth = 1,
-                        borderColor = HongComposeColor(
-                            type = HongColor.MAIN_PURPLE
-                        ),
-                        backgroundColor = HongComposeColor(
-                            type = HongColor.WHITE_100
-                        )
-                    )
-                    .clickable {
-                        OptionPickerDialog(
-                            activity,
-                            "위젯 선택",
-                            widgetList,
-                            0
-                        ) { selectComponent, _ ->
-                            if (selectComponent == HongWidgetType.NO_VALUE.value) {
-                                return@OptionPickerDialog
-                            }
-
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                Intent(activity, PlaygroundActivity::class.java).apply {
-                                    putExtra("componentType", selectComponent)
-                                    activity.startActivity(this)
-                                }
-                            }, 200)
-                        }.show()
-                    },
-                contentAlignment = Alignment.Center
-            ) {
-                HongText(
-                    text = "Playground",
-                    style = HongComposeTextStyle(
-                        size = 16,
-                        color = HongComposeColor(
-                            resId = R.color.honglib_default
-                        ),
-                        fontWeight = FontWeight.W500
-                    )
-                )
-            }
+//            val widgetList = HongWidgetType.entries.map { it.value }.toMutableList()
+//
+//            Box(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .height(50.dp)
+//                    .hongBorder(
+//                        borderWidth = 1,
+//                        borderColor = HongComposeColor(
+//                            type = HongColor.MAIN_PURPLE
+//                        ),
+//                        backgroundColor = HongComposeColor(
+//                            type = HongColor.WHITE_100
+//                        )
+//                    )
+//                    .clickable {
+//                        OptionPickerDialog(
+//                            activity,
+//                            "위젯 선택",
+//                            widgetList,
+//                            0
+//                        ) { selectComponent, _ ->
+//                            if (selectComponent == HongWidgetType.NO_VALUE.value) {
+//                                return@OptionPickerDialog
+//                            }
+//
+//                            Handler(Looper.getMainLooper()).postDelayed({
+//                                Intent(activity, PlaygroundActivity::class.java).apply {
+//                                    putExtra("componentType", selectComponent)
+//                                    activity.startActivity(this)
+//                                }
+//                            }, 200)
+//                        }.show()
+//                    },
+//                contentAlignment = Alignment.Center
+//            ) {
+//            }
         }
     ) {
         LazyColumn(
             modifier = Modifier
-                .padding(it),
+                .padding(it)
+                .background(colorResource(R.color.honglib_color_ffffff)),
             contentPadding = PaddingValues(horizontal = 20.dp)
         ) {
             items(
                 mutableListOf<SampleTestItem>().apply {
-                    ComposeItem.values().forEach { item ->
-                        add(
-                            SampleTestItem(
-                                title = item.title,
-                                compose = item
+                    HongWidgetType.entries.forEach { item ->
+                        if (item != HongWidgetType.NO_VALUE) {
+                            add(
+                                SampleTestItem(
+                                    title = item.value,
+                                    compose = item
+                                )
                             )
-                        )
+                        }
                     }
                 }
             ) { item ->
-                HongTextButton(
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 15.dp),
-                    buttonText = item.title,
-                    buttonTextTypoType = HongTypo.BODY_14_B,
-                    allRadius = 20,
-                    buttonTextColor = HongComposeColor(
-                        type = HongColor.WHITE_100
-                    ),
-                    buttonBackgroundColor = HongComposeColor(
-                        type = HongColor.MAIN_PURPLE
-                    ),
-                    verticalPadding = 20
+                        .padding(vertical = 15.dp)
+                        .background(colorResource(R.color.honglib_color_ffffff))
                 ) {
-                    when (item.compose) {
-                        ComposeItem.TEXT -> {
-                            Intent(activity, SampleActivity::class.java).apply {
-                                putExtra("componentType", HongWidgetType.TEXT.value)
-                                activity.startActivity(this)
-                            }
+                    HongText(
+                        modifier = Modifier
+                            .weight(2f)
+                            .align(Alignment.CenterVertically),
+                        text = item.title,
+                        typo = HongTypo.BODY_14_B,
+                        colorType = HongColor.BLACK_100
+                    )
+                    Spacer(
+                        modifier = Modifier
+                            .width(5.dp)
+                            .height(1.dp)
+                    )
+                    if (item.compose.allowPlayground) {
+                        HongTextButton(
+                            modifier = Modifier
+                                .weight(1.5f),
+                            buttonText = "Playground",
+                            buttonTextTypoType = HongTypo.BODY_14_B,
+                            allRadius = 14,
+                            buttonTextColor = HongComposeColor(
+                                type = HongColor.MAIN_PURPLE
+                            ),
+                            buttonBackgroundColor = HongComposeColor(
+                                type = HongColor.WHITE_100
+                            ),
+                            borderColor = HongComposeColor(
+                                type = HongColor.MAIN_PURPLE
+                            ),
+                            borderWidth = 1,
+                            verticalPadding = 15
+                        ) {
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                Intent(activity, PlaygroundActivity::class.java).apply {
+                                    putExtra("componentType", item.compose.value)
+                                    activity.startActivity(this)
+                                }
+                            }, 200)
                         }
+                        Spacer(
+                            modifier = Modifier
+                                .width(5.dp)
+                                .height(1.dp)
+                        )
+                    }
+                    HongTextButton(
+                        modifier = Modifier
+                            .weight(1f),
+                        buttonText = "샘플",
+                        buttonTextTypoType = HongTypo.BODY_14_B,
+                        allRadius = 14,
+                        buttonTextColor = HongComposeColor(
+                            type = HongColor.MAIN_PURPLE
+                        ),
+                        buttonBackgroundColor = HongComposeColor(
+                            type = HongColor.WHITE_100
+                        ),
+                        borderColor = HongComposeColor(
+                            type = HongColor.MAIN_PURPLE
+                        ),
+                        borderWidth = 1,
+                        verticalPadding = 15,
+                    )  {
+                        when (item.compose) {
+                            HongWidgetType.TEXT -> {
+                                Intent(activity, SampleTextActivity::class.java).apply {
+                                    putExtra(SampleConst.WIDGET_TYPE, HongWidgetType.TEXT.value)
+                                    activity.startActivity(this)
+                                }
+                            }
 
-                        ComposeItem.IMAGE -> {
-                            Intent(activity, SampleImageActivity::class.java).apply {
-                                activity.startActivity(this)
+                            HongWidgetType.IMAGE -> {
+                                Intent(activity, SampleImageActivity::class.java).apply {
+                                    activity.startActivity(this)
+                                }
                             }
-                        }
 
-                        ComposeItem.TEXT_FILED -> {
-                            Intent(activity, SampleTextFieldActivity::class.java).apply {
-                                activity.startActivity(this)
+                            HongWidgetType.TEXT_FILED -> {
+                                Intent(activity, SampleTextFieldActivity::class.java).apply {
+                                    activity.startActivity(this)
+                                }
                             }
-                        }
 
-                        ComposeItem.TEXT_BUTTON -> {
-                            Intent(activity, SampleTextButtonActivity::class.java).apply {
-                                activity.startActivity(this)
+                            HongWidgetType.TEXT_BUTTON -> {
+                                Intent(activity, SampleTextButtonActivity::class.java).apply {
+                                    activity.startActivity(this)
+                                }
                             }
-                        }
 
-                        ComposeItem.SLIDE_LAYOUT -> {
-                            Intent(activity, SampleSlideLayoutActivity::class.java).apply {
-                                activity.startActivity(this)
+                            HongWidgetType.SLIDE_LAYOUT -> {
+                                Intent(activity, SampleSlideLayoutActivity::class.java).apply {
+                                    activity.startActivity(this)
+                                }
                             }
-                        }
 
-                        ComposeItem.HEADER -> {
-                            Intent(activity, SampleHeaderActivity::class.java).apply {
-                                activity.startActivity(this)
+                            HongWidgetType.HEADER -> {
+                                Intent(activity, SampleHeaderActivity::class.java).apply {
+                                    activity.startActivity(this)
+                                }
                             }
-                        }
 
-                        ComposeItem.CALENDAR_1 -> {
-                            Intent(activity, SampleCalendarActivity1::class.java).apply {
-                                activity.startActivity(this)
+                            HongWidgetType.CALENDAR_1 -> {
+                                Intent(activity, SampleCalendarActivity1::class.java).apply {
+                                    putExtra(SampleConst.WIDGET_TYPE, HongWidgetType.CALENDAR_1.value)
+                                    activity.startActivity(this)
+                                }
                             }
-                        }
 
-                        ComposeItem.HORIZONTAL_PAGER -> {
-                            Intent(activity, SampleHorizontalPagerActivity::class.java).apply {
-                                activity.startActivity(this)
+                            HongWidgetType.HORIZONTAL_PAGER -> {
+                                Intent(activity, SampleHorizontalPagerActivity::class.java).apply {
+                                    activity.startActivity(this)
+                                }
                             }
-                        }
 
-                        ComposeItem.BADGE_TEXT -> {
-                            Intent(activity, SampleBadgeTextActivity::class.java).apply {
-                                activity.startActivity(this)
+                            HongWidgetType.BADGE_TEXT -> {
+                                Intent(activity, SampleBadgeTextActivity::class.java).apply {
+                                    activity.startActivity(this)
+                                }
                             }
-                        }
 
-                        ComposeItem.SCROLL_TAB -> {
-                            Intent(activity, SampleBadgeTextActivity::class.java).apply {
-                                activity.startActivity(this)
+                            HongWidgetType.SCROLL_TAB -> {
+                                Intent(activity, SampleScrollTabActivity::class.java).apply {
+                                    activity.startActivity(this)
+                                }
                             }
-                        }
-                        ComposeItem.CAPTURE_SHARE -> {
-                            Intent(activity, SampleCaptureShareActivity::class.java).apply {
-                                activity.startActivity(this)
+                            HongWidgetType.CAPTURE_SHARE -> {
+                                Intent(activity, SampleCaptureShareActivity::class.java).apply {
+                                    activity.startActivity(this)
+                                }
                             }
-                        }
-                        ComposeItem.DYNAMIC_ISLAND -> {
-                            Intent(activity, SampleDynamicIslandActivity::class.java).apply {
-                                activity.startActivity(this)
+                            HongWidgetType.DYNAMIC_ISLAND -> {
+                                Intent(activity, SampleDynamicIslandActivity::class.java).apply {
+                                    activity.startActivity(this)
+                                }
                             }
-                        }
-                        else -> {
-                            Intent(activity, OptionPickerActivity::class.java).apply {
-                                activity.startActivity(this)
+                            HongWidgetType.VIDEO_POPUP -> {
+                                OptionPickerDialog(
+                                    activity,
+                                    "샘플 선택",
+                                    sampleTypeList,
+                                    0
+                                ) { selectType, _ ->
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        when (selectType.toType()) {
+                                            SampleType.XML -> {
+                                                Intent(activity, SampleVideoPopupActivity::class.java).apply {
+                                                    putExtra(SampleConst.WIDGET_TYPE, HongWidgetType.VIDEO_POPUP.value)
+                                                    activity.startActivity(this)
+                                                }
+                                            }
+                                            SampleType.OPTION_BUILDER -> {
+                                                Intent(activity, SampleVideoPopupBuilderActivity::class.java).apply {
+                                                    putExtra(SampleConst.WIDGET_TYPE, HongWidgetType.VIDEO_POPUP.value)
+                                                    activity.startActivity(this)
+                                                }
+                                            }
+                                            SampleType.COMPOSE -> {
+                                                Intent(activity, SampleVideoPopupComposeActivity::class.java).apply {
+                                                    putExtra(SampleConst.WIDGET_TYPE, HongWidgetType.VIDEO_POPUP.value)
+                                                    activity.startActivity(this)
+                                                }
+
+                                            }
+                                            else -> {}
+                                        }
+                                    }, 200)
+                                }.show()
+                            }
+                            HongWidgetType.VIDEO_PLAYER -> {
+                                Intent(activity, SampleVideoPlayerActivity::class.java).apply {
+                                    putExtra(SampleConst.WIDGET_TYPE, HongWidgetType.VIDEO_PLAYER.value)
+                                    activity.startActivity(this)
+                                }
+                            }
+                            else -> {
+                                Intent(activity, OptionPickerActivity::class.java).apply {
+                                    activity.startActivity(this)
+                                }
                             }
                         }
                     }
@@ -279,21 +374,26 @@ fun SampleTheme(
     }
 }
 
-enum class ComposeItem(val title: String) {
-//    TEXT_TYPO("텍스트 Typo"),
-    TEXT("Text"),
-    IMAGE("Image"),
-    HEADER("헤더"),
-    TEXT_FILED("TextField"),
-    SEARCH_BAR("검색바"),
-    TEXT_BUTTON("텍스트 버튼"),
-    SLIDE_LAYOUT("SlideLayout"),
-    CALENDAR_1("달력(초기 X)"),
-    HORIZONTAL_PAGER("HorizontalViewPager"),
-    BADGE_TEXT("BadgeText"),
-    SCROLL_TAB("ScrollTab"),
-    CAPTURE_SHARE("CaptureShare"),
-    DYNAMIC_ISLAND("DynamicIsland"),
+private val sampleTypeList = listOf(
+    "xml",
+    "option builder",
+    "compose"
+)
 
-    OPTION_PICKER("옵션 선택 picker")
+enum class SampleType(
+    val value: String
+) {
+    XML("xml"),
+    OPTION_BUILDER("option builder"),
+    COMPOSE("compose");
+
+    companion object {
+        fun String.toType(): SampleType? {
+            return entries.find { it.value == this }
+        }
+    }
 }
+
+
+
+
