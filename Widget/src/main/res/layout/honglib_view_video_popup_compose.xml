@@ -38,7 +38,7 @@
             android:layout_height="64dp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:background="@color/honglib_default"
+            android:background="@color/honglib_color_default"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">

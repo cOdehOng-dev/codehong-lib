@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
 
-    <!-- Dim 배경 -->
     <View
         android:id="@+id/v_dim"
         android:layout_width="match_parent"
@@ -16,7 +15,6 @@
         android:background="@color/honglib_color_9929292d"
         android:alpha="0" />
 
-    <!-- 슬라이딩 뷰 -->
     <LinearLayout
         android:id="@+id/ll_content"
         android:layout_width="match_parent"
@@ -25,7 +23,7 @@
         android:layout_gravity="bottom"
         tools:background="@color/honglib_color_eeeeee">
 
-        <com.codehong.library.widget.player.view.HongVideoPlayerView
+        <com.codehong.library.widget.player.HongVideoPlayerView
             android:id="@+id/v_video_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +36,7 @@
             android:layout_height="64dp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:background="@color/honglib_default"
+            android:background="@color/honglib_color_default"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">

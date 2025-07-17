@@ -25,6 +25,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.activity)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.viewpager2)
 
     implementation(libs.androidx.compose.constraintlayout)
     implementation(libs.androidx.hilt.navigation.compose)
@@ -42,7 +44,8 @@ dependencies {
 
     implementation(libs.google.accompanist.pager)
     implementation(libs.google.accompanist.pager.indicators)
-    implementation(libs.compose.coil)
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
     implementation(libs.andoridx.compose.ui.graphics)
     implementation(libs.threetenapb)
 

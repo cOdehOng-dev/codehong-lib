@@ -3,16 +3,17 @@ package com.codehong.lib.sample.videopopup
 import android.os.Bundle
 import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.lib.sample.databinding.ActivitySampleVideoPopupBinding
+import com.codehong.library.widget.player.HongVideoPlayerBuilder
 import com.codehong.library.widget.rule.HongWidgetType
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.util.HongToastUtil
 import com.codehong.library.widget.util.applyStatusBarColor
+import com.codehong.library.widget.videopopup.HongVideoPopupBuilder
 import com.codehong.library.widget.videopopup.HongVideoPopupManager
-import com.codehong.library.widget.videopopup.view.HongVideoPopupListener
 
 class SampleVideoPopupActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySampleVideoPopupBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,39 +40,50 @@ class SampleVideoPopupActivity : BaseActivity() {
     }
 
     private fun setup() {
+        val option = HongVideoPopupBuilder()
+            .videoPlayerOption(
+                HongVideoPlayerBuilder()
+                    .setVideoUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4")
+                    .ratio("16:9")
+                    .radius(
+                        HongRadiusInfo(
+                            top = 14
+                        )
+                    )
+                    .applyOption()
+            )
+            .landingLink("https://github.com/cOdehOng-dev")
+            .applyOption()
         binding.vVideoPopup.set(
-            radiusDp = 14,
-            blockTouchOutside = true,
-            listener = object : HongVideoPopupListener {
-                override fun onShow() {
-                    applyStatusBarColor(com.codehong.library.widget.R.color.honglib_color_9929292d)
-                }
-
-                override fun onHide(isClickClose: Boolean) {
-                    applyStatusBarColor(com.codehong.library.widget.R.color.honglib_color_ffffff)
-                    if (isClickClose) {
-                        HongVideoPopupManager.saveOneDayLastSeenTimestamp(this@SampleVideoPopupActivity)
-                    }
-                }
+            option = option,
+            onShow = {
+                applyStatusBarColor(com.codehong.library.widget.R.color.honglib_color_9929292d)
+            },
+            onHide = { isClickClose ->
+                hidePopup(isClickClose)
             }
         )
     }
 
     private fun checkShowing() {
-        val url = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
-        val ratio = "16:9"
-        val landingLink = "https://github.com/cOdehOng-dev"
         if (HongVideoPopupManager.isAllowDisplaying(this)) {
             binding.vVideoPopup.show(
-                videoUrl = url,
-                ratio = ratio,
-                landingLink = landingLink,
+                onHide = { isClickClose ->
+                    hidePopup(isClickClose)
+                },
                 landing = {
                     if (!it.isNullOrEmpty()) {
                         HongToastUtil.showToast(this, "링크 이동")
                     }
                 }
             )
+        }
+    }
+
+    private fun hidePopup(isClickClose: Boolean) {
+        applyStatusBarColor(com.codehong.library.widget.R.color.honglib_color_ffffff)
+        if (isClickClose) {
+            HongVideoPopupManager.saveOneDayLastSeenTimestamp(this)
         }
     }
 }

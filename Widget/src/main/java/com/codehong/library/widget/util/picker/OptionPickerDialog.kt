@@ -18,7 +18,7 @@ class OptionPickerDialog constructor(
     private val title: String,
     private val optionList: List<String>,
     private var selectedPosition: Int,
-    private val isDirectCallback: Boolean = false,
+    private val useDirectCallback: Boolean = false,
     private val selectOptionCallback: (String, Int) -> Unit
 ) : Dialog(context, R.style.Dialog_FullScreen) {
 
@@ -39,7 +39,7 @@ class OptionPickerDialog constructor(
         setContentView(binding.root)
         this.selectOption = optionList[selectedPosition]
 
-        if (isDirectCallback) {
+        if (useDirectCallback) {
             binding.tvCancel.visibility = View.GONE
         }
 
@@ -49,7 +49,7 @@ class OptionPickerDialog constructor(
 
         binding.tvConfirm.setOnClickListener {
             dismiss()
-            if (!isDirectCallback) {
+            if (!useDirectCallback) {
                 selectOptionCallback.invoke(selectOption, selectedPosition)
             }
         }
@@ -66,7 +66,7 @@ class OptionPickerDialog constructor(
             ) { selectPicker, index ->
                 this@OptionPickerDialog.selectOption = selectPicker
                 this@OptionPickerDialog.selectedPosition = index
-                if (isDirectCallback) {
+                if (useDirectCallback) {
                     selectOptionCallback.invoke(selectPicker, index)
                 }
             }

@@ -5,14 +5,17 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.view.*
+import android.view.MotionEvent
+import android.view.VelocityTracker
+import android.view.View
+import android.view.ViewConfiguration
+import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.OverScroller
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.codehong.library.widget.R
-import com.codehong.library.widget.util.dpToPx
-import java.util.*
+import com.codehong.library.widget.extensions.dpToPx
 import kotlin.math.abs
 import kotlin.math.min
 

@@ -5,11 +5,13 @@ import androidx.compose.runtime.Composable
 import com.codehong.lib.sample.SampleConst
 import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.lib.sample.databinding.ActivitySampleVideoPlayerBinding
-import com.codehong.library.widget.player.builder.HongVideoPlayerBuilderView
-import com.codehong.library.widget.player.builder.HongVideoPlayerOption
-import com.codehong.library.widget.player.compose.HongComposeVideoPlayerView
+import com.codehong.library.widget.player.HongComposeVideoPlayerView
+import com.codehong.library.widget.player.HongVideoPlayerBuilder
+import com.codehong.library.widget.player.HongVideoPlayerView
+import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.HongWidgetType.Companion.toHongWidgetType
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
 class SampleVideoPlayerActivity : BaseActivity() {
 
@@ -43,27 +45,39 @@ class SampleVideoPlayerActivity : BaseActivity() {
     }
 
     private fun initXml() {
-        with(binding.vVideoPlayer) {
-            set(
-                radiusDp = 14,
-                topLeft = true,
-                topRight = true
+        val option = HongVideoPlayerBuilder()
+            .margin(
+                HongSpacingInfo(
+                    left = 10f,
+                    right = 10f
+                )
             )
-            play(
-                playerUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-                ratio = "16:9",
-            )
-        }
+            .setVideoUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")
+            .ratio("16:9")
+            .applyOption()
+        binding.vVideoPlayer.set(
+            option = option,
+            onReady = {
+            },
+            onError = {
+            },
+            onEnd = {
+            }
+        ).play()
     }
 
     private fun initBuilder() {
-        val option = HongVideoPlayerOption.Builder()
-            .setPlayerUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4")
-            .setRadiusDp(14)
-            .setRatio("16:9")
-            .build()
+        val option = HongVideoPlayerBuilder()
+            .setVideoUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4")
+            .radius(
+                HongRadiusInfo(
+                    all = 14
+                )
+            )
+            .ratio("16:9")
+            .applyOption()
         listOf(
-            HongVideoPlayerBuilderView(this).set(option = option).apply {
+            HongVideoPlayerView(this).set(option = option).apply {
                 play()
             }
         ).forEach {
@@ -74,11 +88,15 @@ class SampleVideoPlayerActivity : BaseActivity() {
 
     @Composable
     fun InitCompose() {
-        val option = HongVideoPlayerOption.Builder()
-            .setPlayerUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4")
-            .setRadiusDp(14)
-            .setRatio("16:9")
-            .build()
+        val option = HongVideoPlayerBuilder()
+            .setVideoUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4")
+            .radius(
+                HongRadiusInfo(
+                    top = 14
+                )
+            )
+            .ratio("16:9")
+            .applyOption()
         HongComposeVideoPlayerView(
             option = option
         )

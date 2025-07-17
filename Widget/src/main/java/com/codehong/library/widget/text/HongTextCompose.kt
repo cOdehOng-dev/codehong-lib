@@ -15,11 +15,11 @@ import com.codehong.library.widget.pretendardFontFamily
 import com.codehong.library.widget.rule.HongTextLineBreak
 import com.codehong.library.widget.rule.typo.lineHeight
 import com.codehong.library.widget.rule.typo.size
-import com.codehong.library.widget.util.adjustHeight
-import com.codehong.library.widget.util.adjustWidth
 import com.codehong.library.widget.util.dpToSp
+import com.codehong.library.widget.extensions.hongHeight
+import com.codehong.library.widget.extensions.hongWidth
+import com.codehong.library.widget.extensions.parseComposeColor
 import com.codehong.library.widget.util.lineBreakSyllable
-import com.codehong.library.widget.util.parseComposeColor
 
 @Composable
 fun HongTextCompose(
@@ -52,17 +52,17 @@ fun HongTextCompose(
     val text = buildAnnotatedString {
         this.append(fullText)
 
-        if (option.spanTextsProperty.isNullOrEmpty()) {
+        if (option.spanTextBuilderList.isNullOrEmpty()) {
             return@buildAnnotatedString
         }
 
-        option.spanTextsProperty?.forEach { spanProperty ->
-            spanProperty.injectOption(option)
+        option.spanTextBuilderList?.forEach { builder ->
+            builder.injectOption(option)
 
             val target = if (isLineBreakSyllable) {
-                spanProperty.text?.lineBreakSyllable()
+                builder.option.text?.lineBreakSyllable()
             } else {
-                spanProperty.text
+                builder.option.text
             }
 
             target?.toRegex()?.findAll(fullText)?.forEach { matchResult ->
@@ -70,12 +70,12 @@ fun HongTextCompose(
                 val endIndex = matchResult.range.last + 1
 
                 var spanTextDecoration: TextDecoration? = null
-                if (spanProperty.isEnableCancelLine || spanProperty.isEnableUnderLine) {
+                if (builder.option.isEnableCancelLine || builder.option.isEnableUnderLine) {
                     val decoList = mutableListOf<TextDecoration>()
-                    if (spanProperty.isEnableCancelLine) {
+                    if (builder.option.isEnableCancelLine) {
                         decoList.add(TextDecoration.LineThrough)
                     }
-                    if (spanProperty.isEnableUnderLine) {
+                    if (builder.option.isEnableUnderLine) {
                         decoList.add(TextDecoration.Underline)
                     }
                     spanTextDecoration = TextDecoration.combine(decoList)
@@ -84,12 +84,12 @@ fun HongTextCompose(
                 this.addStyle(
                     style = SpanStyle(
                         color = (
-                                spanProperty.colorHex
+                                builder.option.colorHex
                                     ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
                                 ).parseComposeColor(),
-                        fontWeight = spanProperty.fontWeight,
+                        fontWeight = builder.option.fontWeight,
                         fontSize = dpToSp(
-                            dp = (spanProperty.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size()).dp
+                            dp = (builder.option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size()).dp
                         ),
                         fontFamily = pretendardFontFamily,
                         textDecoration = spanTextDecoration
@@ -110,8 +110,8 @@ fun HongTextCompose(
                     end = option.margin.right.dp,
                     bottom = option.margin.bottom.dp
                 )
-                .adjustWidth(option.width)
-                .adjustHeight(option.height)
+                .hongWidth(option.width)
+                .hongHeight(option.height)
         ) {
             Text(
                 modifier = Modifier
@@ -121,8 +121,8 @@ fun HongTextCompose(
                         end = option.padding.right.dp,
                         bottom = option.padding.bottom.dp
                     )
-                    .adjustWidth(option.width)
-                    .adjustHeight(option.height),
+                    .hongWidth(option.width)
+                    .hongHeight(option.height),
                 text = text,
                 color = (
                         option.colorHex
@@ -151,8 +151,8 @@ fun HongTextCompose(
                     end = option.padding.right.dp,
                     bottom = option.padding.bottom.dp
                 )
-                .adjustWidth(option.width)
-                .adjustHeight(option.height),
+                .hongWidth(option.width)
+                .hongHeight(option.height),
             text = text,
             color = (
                     option.colorHex

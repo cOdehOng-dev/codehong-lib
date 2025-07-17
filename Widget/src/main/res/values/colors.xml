@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="honglib_default">#6200ee</color>
-    <color name="honglib_purple_200">#BB86FC</color>
-    <color name="honglib_purple_700">#3700B3</color>
-    <color name="honglib_teal_200">#FF03DAC5</color>
-    <color name="honglib_teal_700">#FF018786</color>
-    <color name="honglib_black">#FF000000</color>
-    <color name="honglib_white">#FFFFFFFF</color>
-
-
-    <!-- transparent -->
-    <color name="honglib_transparent">#00000000</color>
-
-    <color name="honglib_color_fdc400">#fdc400</color>
+    <color name="honglib_color_default">#ffff8224</color>
 
     <!-- transparent -->
     <color name="honglib_color_transparent">#00000000</color>
@@ -62,45 +50,16 @@
     <color name="honglib_color_e9f0fe">#e9f0fe</color>
 
 
-
-    <color name="honglib_color_ff666666">#ff666666</color>
-
-
-    <color name="honglib_color_148e43e7">#148e43e7</color> <!--8%-->
-
-    <color name="honglib_color_1769ff">#1769ff</color>
-
-    <color name="honglib_color_ffc2ab">#ffc2ab</color>
-    <color name="honglib_color_ef3f43">#ef3f43</color>
-    <color name="honglib_color_ef3e43">#ef3e43</color>
-    <color name="honglib_color_1aff322e">#1aff322e</color>
-
-    <color name="honglib_color_dc941b">#dc941b</color>
-
-    <color name="honglib_color_4a95ff">#4a95ff</color>
-    <color name="honglib_color_b7cff6">#b7cff6</color>
-
-    <color name="honglib_color_dfb4fc">#dfb4fc</color>
-
-    <color name="honglib_color_efb0b4">#efb0b4</color>
-
-    <color name="honglib_color_shimmer">#ecf0f1</color>
-
-    <!--푸터-->
-    <color name="honglib_color_4d000000">#4d000000</color>
-    <color name="honglib_color_80111111">#80111111</color>
-
-
     <color name="honglib_color_29292d">#29292d</color>
     <color name="honglib_color_cc29292d">#cc29292d</color>
     <color name="honglib_color_9929292d">#9929292d</color>
     <color name="honglib_color_8029292d">#8029292d</color>
     <color name="honglib_color_4d29292d">#4d29292d</color>
+    <color name="honglib_color_4029292d">#4029292d</color>
     <color name="honglib_color_2629292d">#2629292d</color>
     <color name="honglib_color_1a29292d">#1a29292d</color>
     <color name="honglib_color_0d29292d">#0d29292d</color>
 
-    <color name="honglib_color_545457">#545457</color>
     <color name="honglib_color_7e7e81">#7e7e81</color>
     <color name="honglib_color_949496">#949496</color>
     <color name="honglib_color_bfbfc0">#bfbfc0</color>
@@ -109,16 +68,26 @@
     <color name="honglib_color_f4f4f5">#f4f4f5</color>
 
 
-    <color name="honglib_color_ffffff">#ffffff</color>
     <color name="honglib_color_ccffffff">#ccffffff</color>
     <color name="honglib_color_99ffffff">#99ffffff</color>
     <color name="honglib_color_33ffffff">#33ffffff</color>
     <color name="honglib_color_14ffffff">#14ffffff</color>
 
-    <color name="honglib_color_ff322e">#ff322e</color>
-    <color name="honglib_color_ff8224">#ff8224</color>
+    <color name="honglib_color_ffffff">#ffffff</color>
+    <color name="honglib_color_ffffff_90">#E6FFFFFF</color>
+    <color name="honglib_color_ffffff_80">#CCFFFFFF</color>
+    <color name="honglib_color_ffffff_70">#B3FFFFFF</color>
+    <color name="honglib_color_ffffff_60">#99FFFFFF</color>
+    <color name="honglib_color_ffffff_50">#80FFFFFF</color>
+    <color name="honglib_color_ffffff_40">#66FFFFFF</color>
+    <color name="honglib_color_ffffff_30">#4DFFFFFF</color>
+    <color name="honglib_color_ffffff_25">#40FFFFFF</color>
+    <color name="honglib_color_ffffff_20">#33FFFFFF</color>
+    <color name="honglib_color_ffffff_15">#26FFFFFF</color>
+    <color name="honglib_color_ffffff_10">#1AFFFFFF</color>
+    <color name="honglib_color_ffffff_05">#0DFFFFFF</color>
+
     <color name="honglib_color_fdba39">#fdba39</color>
-    <color name="honglib_color_277cff">#277cff</color>
     <color name="honglib_color_8e43e7">#8e43e7</color>
     <color name="honglib_color_324b94">#324b94</color>
 
@@ -126,12 +95,88 @@
     <color name="honglib_color_be0017">#be0017</color>
 
     <color name="honglib_color_3eb489">#3eb489</color>
-    <color name="honglib_color_8b00ff">#8b00ff</color>
     <color name="honglib_color_75ff322e">#75ff322e</color>
     <color name="dimNormal">#4D252729</color>
     <color name="bgNormal">#ffffff</color>
 
-    <color name="honglib_color_b3ffffff">#b3ffffff</color>
-
     <color name="honglib_color_f2f2f2">#f2f2f2</color>
+
+    <!--메인 컬러-->
+    <color name="honglib_color_ff8224">#ff8224</color>
+    <color name="honglib_color_ff8224_90">#E6FF8224</color>
+    <color name="honglib_color_ff8224_80">#CCFF8224</color>
+    <color name="honglib_color_ff8224_70">#B3FF8224</color>
+    <color name="honglib_color_ff8224_60">#99FF8224</color>
+    <color name="honglib_color_ff8224_50">#80FF8224</color>
+    <color name="honglib_color_ff8224_40">#66FF8224</color>
+    <color name="honglib_color_ff8224_30">#4DFF8224</color>
+    <color name="honglib_color_ff8224_25">#40FF8224</color>
+    <color name="honglib_color_ff8224_20">#33FF8224</color>
+    <color name="honglib_color_ff8224_15">#26FF8224</color>
+    <color name="honglib_color_ff8224_10">#1AFF8224</color>
+    <color name="honglib_color_ff8224_05">#0DFF8224</color>
+
+    <!--gray-->
+    <color name="honglib_color_545457">#FF545457</color>
+    <color name="honglib_color_545457_90">#E6545457</color>
+    <color name="honglib_color_545457_80">#CC545457</color>
+    <color name="honglib_color_545457_70">#B3545457</color>
+    <color name="honglib_color_545457_60">#99545457</color>
+    <color name="honglib_color_545457_50">#80545457</color>
+    <color name="honglib_color_545457_40">#66545457</color>
+    <color name="honglib_color_545457_30">#4D545457</color>
+    <color name="honglib_color_545457_25">#40545457</color>
+    <color name="honglib_color_545457_20">#33545457</color>
+    <color name="honglib_color_545457_15">#26545457</color>
+    <color name="honglib_color_545457_10">#1A545457</color>
+    <color name="honglib_color_545457_05">#0D545457</color>
+
+    <!--red-->
+    <color name="honglib_color_ff322e">#FFFF322E</color>
+    <color name="honglib_color_ff322e_90">#E6FF322E</color>
+    <color name="honglib_color_ff322e_80">#CCFF322E</color>
+    <color name="honglib_color_ff322e_70">#B3FF322E</color>
+    <color name="honglib_color_ff322e_60">#99FF322E</color>
+    <color name="honglib_color_ff322e_50">#80FF322E</color>
+    <color name="honglib_color_ff322e_40">#66FF322E</color>
+    <color name="honglib_color_ff322e_30">#4DFF322E</color>
+    <color name="honglib_color_ff322e_25">#40FF322E</color>
+    <color name="honglib_color_ff322e_20">#33FF322E</color>
+    <color name="honglib_color_ff322e_15">#26FF322E</color>
+    <color name="honglib_color_ff322e_10">#1AFF322E</color>
+    <color name="honglib_color_ff322e_05">#0DFF322E</color>
+
+
+    <!--blue-->
+    <color name="honglib_color_0043be">#FF0043BE</color>
+    <color name="honglib_color_0043be_90">#E60043BE</color>
+    <color name="honglib_color_0043be_80">#CC0043BE</color>
+    <color name="honglib_color_0043be_70">#B30043BE</color>
+    <color name="honglib_color_0043be_60">#990043BE</color>
+    <color name="honglib_color_0043be_50">#800043BE</color>
+    <color name="honglib_color_0043be_40">#660043BE</color>
+    <color name="honglib_color_0043be_30">#4D0043BE</color>
+    <color name="honglib_color_0043be_25">#400043BE</color>
+    <color name="honglib_color_0043be_20">#330043BE</color>
+    <color name="honglib_color_0043be_15">#260043BE</color>
+    <color name="honglib_color_0043be_10">#1A0043BE</color>
+    <color name="honglib_color_0043be_05">#0D0043BE</color>
+
+    <!--yellow-->
+    <color name="honglib_color_fdc400">#FFFDC400</color>
+    <color name="honglib_color_fdc400_90">#E6FDC400</color>
+    <color name="honglib_color_fdc400_80">#CCFDC400</color>
+    <color name="honglib_color_fdc400_70">#B3FDC400</color>
+    <color name="honglib_color_fdc400_60">#99FDC400</color>
+    <color name="honglib_color_fdc400_50">#80FDC400</color>
+    <color name="honglib_color_fdc400_40">#66FDC400</color>
+    <color name="honglib_color_fdc400_30">#4DFDC400</color>
+    <color name="honglib_color_fdc400_25">#40FDC400</color>
+    <color name="honglib_color_fdc400_20">#33FDC400</color>
+    <color name="honglib_color_fdc400_15">#26FDC400</color>
+    <color name="honglib_color_fdc400_10">#1AFDC400</color>
+    <color name="honglib_color_fdc400_05">#0DFDC400</color>
+
+
+
 </resources>

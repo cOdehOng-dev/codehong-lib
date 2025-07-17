@@ -1,17 +1,31 @@
 package com.codehong.library.widget.util
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.R
-import com.codehong.library.widget.model.HongComposeColor
-import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.HongWidgetAdvanceOption
+import com.codehong.library.widget.HongWidgetCommonOption
+import com.codehong.library.widget.extensions.disableRippleClickable
+import com.codehong.library.widget.extensions.hongBackground
+import com.codehong.library.widget.extensions.hongHeight
+import com.codehong.library.widget.extensions.hongPadding
+import com.codehong.library.widget.extensions.hongWidth
+import com.codehong.library.widget.extensions.toColor
+import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
+import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType.Companion.toImeAction
+import com.codehong.library.widget.rule.keyboard.HongKeyboardType
+import com.codehong.library.widget.rule.keyboard.HongKeyboardType.Companion.toKeyboardType
 
 @Composable
 fun dpToSp(dp: Dp) = with(LocalDensity.current) { dp.toSp() }
@@ -37,33 +51,7 @@ fun pxToDp(px: Float): Dp {
 }
 
 @Composable
-fun HongColor?.getComposeColor(defColor: Int): Color {
-    if (this == null) {
-        return colorResource(id = defColor)
-    }
-
-    return colorResource(id = this.colorResId)
-}
-
-@Composable
 fun getStatusHeight(): Dp = WindowInsets.systemBars.asPaddingValues().calculateTopPadding()
-
-@Composable
-fun HongComposeColor?.getColor(): Color {
-    if (this == null) {
-        return colorResource(id = R.color.honglib_color_ffffff)
-    }
-
-    return when {
-        type != null -> colorResource(id = type.colorResId)
-
-        !hexCode.isNullOrEmpty() -> alpha?.let { alpha ->
-            Color(android.graphics.Color.parseColor(getAlphaColor(hexCode, alpha)))
-        } ?: Color(android.graphics.Color.parseColor(hexCode))
-
-        else -> colorResource(id = resId)
-    }
-}
 
 fun getAlphaColor(colorHexCode: String, alpha: Int): String {
     val prefix = when (alpha) {
@@ -172,4 +160,73 @@ fun getAlphaColor(colorHexCode: String, alpha: Int): String {
     }
 
     return "#$prefix${colorHexCode.removePrefix("#")}"
+}
+
+
+@Composable
+fun HongWidgetContainer(
+    option: HongWidgetCommonOption,
+    childCompose: @Composable () -> Unit,
+) {
+    Box(
+        modifier = Modifier
+            .hongPadding(option.margin)
+    ) {
+        Box(
+            modifier = Modifier
+                .hongWidth(option.width)
+                .hongHeight(option.height)
+                .hongPadding(option.padding)
+                .background(option.backgroundColorHex.toColor())
+                .disableRippleClickable { option.click?.invoke(option) }
+        ) {
+            childCompose()
+        }
+    }
+}
+
+
+@Composable
+fun HongWidgetContainer(
+    option: HongWidgetAdvanceOption,
+    childCompose: @Composable () -> Unit,
+) {
+    Box(
+        modifier = Modifier
+            .hongPadding(option.margin)
+    ) {
+        Box(
+            modifier = Modifier
+                .hongWidth(option.width)
+                .hongHeight(option.height)
+                .hongBackground(
+                    backgroundColor = option.backgroundColorHex,
+                    border = option.border,
+                    shadow = option.shadow,
+                    radius = option.radius,
+                    useShapeCircle = option.useShapeCircle,
+                )
+                .hongPadding(option.padding)
+                .disableRippleClickable { option.click?.invoke(option) },
+            contentAlignment = Alignment.Center
+        ) {
+            childCompose()
+        }
+    }
+}
+
+fun Pair<HongKeyboardType, HongKeyboardActionType>.toKeyboardOptions(): KeyboardOptions {
+    return KeyboardOptions(
+        keyboardType = this.first.toKeyboardType(),
+        imeAction = this.second.toImeAction()
+    )
+}
+
+fun Pair<HongKeyboardType, HongKeyboardActionType>.checkPasswordType(): VisualTransformation {
+    return when (this.first) {
+        HongKeyboardType.PASSWORD,
+        HongKeyboardType.NUMBER_PASSWORD -> PasswordVisualTransformation()
+
+        else -> VisualTransformation.None
+    }
 }

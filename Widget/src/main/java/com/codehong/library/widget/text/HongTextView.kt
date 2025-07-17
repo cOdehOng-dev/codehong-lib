@@ -14,11 +14,11 @@ import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.rule.typo.fontType
 import com.codehong.library.widget.rule.typo.lineHeight
 import com.codehong.library.widget.rule.typo.size
-import com.codehong.library.widget.util.dpToFloatPx
-import com.codehong.library.widget.util.dpToPx
+import com.codehong.library.widget.extensions.dpToFloatPx
+import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.widget.extensions.parseColor
+import com.codehong.library.widget.extensions.setLayout
 import com.codehong.library.widget.util.lineBreakSyllable
-import com.codehong.library.widget.util.parseColor
-import com.codehong.library.widget.util.setLayout
 import com.codehong.library.widget.util.setTextFont
 import com.codehong.library.widget.util.setTextSize
 import com.codehong.library.widget.util.setTextSpan
@@ -106,7 +106,7 @@ class HongTextView @JvmOverloads constructor(
 
         textView.text = option.text
 
-        option.spanTextsProperty?.let {
+        option.spanTextBuilderList?.let {
             val spannableText = SpannableString(
                 if (lineBreakType == HongTextLineBreak.SYLLABLE) {
                     option.text.lineBreakSyllable()
@@ -115,20 +115,18 @@ class HongTextView @JvmOverloads constructor(
                 }
             )
 
-            it.forEach { spanProperty ->
-                spanProperty.injectOption(option)
+            it.forEach { spanOption ->
+                spanOption.injectOption(option)
                 spannableText.setTextSpan(
                     context,
-                    spanProperty,
+                    spanOption,
                     lineBreakType
                 )
             }
 
             textView.text = spannableText
         }
-
         return this
-
     }
 
     fun setColor(@ColorInt colorInt: Int) {

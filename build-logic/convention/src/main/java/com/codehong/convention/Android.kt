@@ -82,6 +82,7 @@ internal fun Project.configureBuildTypes(
                     buildTypes {
                         debug {
                             isMinifyEnabled = false
+                            isCrunchPngs = false
 //                            proguardFiles(
 //                                commonExtension.getDefaultProguardFile("proguard-android-optimize.txt"),
 //                                "proguard-rules.pro"
@@ -96,6 +97,7 @@ internal fun Project.configureBuildTypes(
                         }
                         release {
                             isMinifyEnabled = true
+                            isCrunchPngs = false
 //                            proguardFiles(
 //                                commonExtension.getDefaultProguardFile("proguard-android-optimize.txt"),
 //                                "proguard-rules.pro"

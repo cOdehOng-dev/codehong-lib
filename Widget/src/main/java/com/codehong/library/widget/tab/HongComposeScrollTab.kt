@@ -14,134 +14,128 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.rule.color.HongColor
-import com.codehong.library.widget.disableRippleClickable
-import com.codehong.library.widget.hongBorder
-import com.codehong.library.widget.model.HongComposeColor
-import com.codehong.library.widget.model.text.HongComposeTextStyle
-import com.codehong.library.widget.text.HongText
-import com.codehong.library.widget.rule.typo.HongTypo
+import com.codehong.library.widget.rule.HongBorderInfo
+import com.codehong.library.widget.text.HongTextCompose
+import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.extensions.disableRippleClickable
+import com.codehong.library.widget.extensions.hongBackground
+import com.codehong.library.widget.extensions.hongHeight
+import com.codehong.library.widget.extensions.hongWidth
 import kotlinx.coroutines.delay
 
 @Composable
 fun HongScrollTab(
-    modifier: Modifier = Modifier,
-    tabList: List<Any>,
-    tabTitleList: List<String>,
-    borderWidth: Int = 1,
-    selectBorderColor: HongComposeColor = HongComposeColor(
-        type = HongColor.WHITE_100
-    ),
-    unselectBorderColor: HongComposeColor = HongComposeColor(
-        type = HongColor.GRAY_10
-    ),
-    selectBackgroundColor: HongComposeColor = HongComposeColor(
-        type = HongColor.MAIN_PURPLE
-    ),
-    unselectBackgroundColor: HongComposeColor = HongComposeColor(
-        type = HongColor.WHITE_100
-    ),
-    selectTextStyle: HongComposeTextStyle = HongComposeTextStyle(
-        typo = HongTypo.BODY_14_B,
-        color = HongComposeColor(
-            type = HongColor.WHITE_100
-        )
-    ),
-    unselectTextStyle: HongComposeTextStyle = HongComposeTextStyle(
-        typo = HongTypo.BODY_14,
-        color = HongComposeColor(
-            type = HongColor.BLACK_100
-        )
-    ),
-    tabLayoutStartPadding: Int = 0,
-    tabLayoutEndPadding: Int = 0,
-    tabBetweenPadding: Int = 0,
-    tabTextHorizontalPadding: Int = 16,
-    tabTextVerticalPadding: Int = 8,
-    allRadius: Int = 0,
-    topRadius: Int = 0,
-    bottomRadius: Int = 0,
-    topStartRadius: Int = 0,
-    topEndRadius: Int = 0,
-    bottomStartRadius: Int = 0,
-    bottomEndRadius: Int = 0,
-    initialSelectIndex: Int = 0,
+    option: HongScrollTabOption,
     onTabClick: (index: Int, item: Any) -> Unit
 ) {
     val scrollState = rememberScrollState()
 
-    var selectedIndex by remember { mutableIntStateOf(initialSelectIndex) }
+    var selectedIndex by remember { mutableIntStateOf(option.initialSelectIndex) }
 
     LaunchedEffect(selectedIndex) {
         delay(200)
-        val centerOffset = (scrollState.maxValue / tabList.size) * selectedIndex
+        val centerOffset = (scrollState.maxValue / option.tabList.size) * selectedIndex
         scrollState.animateScrollTo(centerOffset)
     }
 
-    Row(
+    Box(
         modifier = Modifier
-            .then(modifier)
-            .horizontalScroll(scrollState)
             .padding(
-                start = tabLayoutStartPadding.dp,
-                end = tabLayoutEndPadding.dp
-            ),
-        verticalAlignment = Alignment.CenterVertically
+                start = option.margin.left.dp,
+                top = option.margin.top.dp,
+                end = option.margin.right.dp,
+                bottom = option.margin.bottom.dp
+            )
     ) {
-        tabList.forEachIndexed { i, item ->
-            val isSelected = selectedIndex == i
+        Row(
+            modifier = Modifier
+                .horizontalScroll(scrollState)
+                .hongWidth(option.width)
+                .hongHeight(option.height)
+                .padding(
+                    start = option.padding.left.dp,
+                    end = option.padding.right.dp
+                ),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            option.tabList.forEachIndexed { i, item ->
+                val isSelected = selectedIndex == i
 
-            Row(
-                modifier = Modifier
-                    .padding(
-                        start = if (i == 0) {
-                            0.dp
-                        } else {
-                            (tabBetweenPadding / 2).dp
-                        },
-                        end = if (i == tabList.size - 1) {
-                            0.dp
-                        } else {
-                            (tabBetweenPadding / 2).dp
-                        }
-                    )
-            ) {
-                Box(
+                Row(
                     modifier = Modifier
-                        .hongBorder(
-                            borderWidth = if (isSelected) 0 else borderWidth,
-                            borderColor = if (isSelected) {
-                                selectBorderColor
+                        .padding(
+                            start = if (i == 0) {
+                                0.dp
                             } else {
-                                unselectBorderColor
+                                (option.tabBetweenPadding / 2).dp
                             },
-                            allRadius = allRadius,
-                            topRadius = topRadius,
-                            bottomRadius = bottomRadius,
-                            topStartRadius = topStartRadius,
-                            topEndRadius = topEndRadius,
-                            bottomStartRadius = bottomStartRadius,
-                            bottomEndRadius = bottomEndRadius,
-                            backgroundColor = if (isSelected) {
-                                selectBackgroundColor
+                            end = if (i == option.tabList.size - 1) {
+                                0.dp
                             } else {
-                                unselectBackgroundColor
+                                (option.tabBetweenPadding / 2).dp
                             }
                         )
-                        .padding(
-                            vertical = tabTextVerticalPadding.dp,
-                            horizontal = tabTextHorizontalPadding.dp
-                        )
-                        .disableRippleClickable {
-                            selectedIndex = i
-                            onTabClick(i, item)
-                        },
-                    contentAlignment = Alignment.Center
                 ) {
-                    HongText(
-                        text = tabTitleList[i],
-                        style = if (isSelected) selectTextStyle else unselectTextStyle
-                    )
+                    Box(
+                        modifier = Modifier
+                            .hongWidth(
+                                if (isSelected) {
+                                    option.selectTabTextOption.width
+                                } else {
+                                    option.unselectTabTextOption.width
+                                }
+                            )
+                            .hongHeight(
+                                if (isSelected) {
+                                    option.selectTabTextOption.height
+                                } else {
+                                    option.unselectTabTextOption.height
+                                }
+                            )
+                            .hongBackground(
+                                backgroundColor = if (isSelected) {
+                                    option.selectBackgroundColor
+                                } else {
+                                    option.unselectBackgroundColor
+                                },
+                                border = HongBorderInfo(
+                                    width = if (isSelected) {
+                                        0
+                                    } else {
+                                        option.borderWidth
+                                    },
+                                    color = if (isSelected) {
+                                        option.selectBorderColor
+                                    } else {
+                                        option.unselectBorderColor
+                                    }
+                                ),
+                                radius = option.radius
+                            )
+                            .padding(
+                                vertical = option.tabTextVerticalPadding.dp,
+                                horizontal = option.tabTextHorizontalPadding.dp
+                            )
+                            .disableRippleClickable {
+                                selectedIndex = i
+                                onTabClick(i, item)
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        HongTextCompose(
+                            option = if (isSelected) {
+                                HongTextBuilder()
+                                    .copy(option.selectTabTextOption)
+                                    .text(option.tabTitleList[i])
+                                    .applyOption()
+                            } else {
+                                HongTextBuilder()
+                                    .copy(option.unselectTabTextOption)
+                                    .text(option.tabTitleList[i])
+                                    .applyOption()
+                            }
+                        )
+                    }
                 }
             }
         }

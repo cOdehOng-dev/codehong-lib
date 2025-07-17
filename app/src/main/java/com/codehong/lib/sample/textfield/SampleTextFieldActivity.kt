@@ -1,260 +1,512 @@
 package com.codehong.lib.sample.textfield
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.codehong.lib.sample.SampleMenu
-import com.codehong.library.widget.MarginTopOrBottom
-import com.codehong.library.widget.model.HongComposeColor
-import com.codehong.library.widget.model.keyboard.KeyboardType
-import com.codehong.library.widget.roundBackground
+import android.util.Log
+import android.view.View
+import androidx.compose.runtime.Composable
+import com.codehong.lib.sample.base.BaseSampleMixActivity
+import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
-import com.codehong.library.widget.textfield.HongTextField
-import com.codehong.library.widget.textfield.HongTextFieldRemoveButton
+import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
+import com.codehong.library.widget.rule.keyboard.HongKeyboardType
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.textfield.HongTextFieldBuilder
+import com.codehong.library.widget.textfield.HongTextFieldCompose
+import com.codehong.library.widget.textfield.HongTextFieldOption
+import com.codehong.library.widget.textfield.HongTextFieldView
 
-class SampleTextFieldActivity : ComponentActivity() {
+class SampleTextFieldActivity : BaseSampleMixActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            Scaffold(
-                topBar = {}
-            ) {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(it)
-                        .padding(horizontal = 20.dp)
-                ) {
-                    item {
-                        MarginTopOrBottom(30)
-                        SampleMenu(title = "input 외부 remember") {
-                            var inputText by rememberSaveable { mutableStateOf("") }
-                            HongTextField(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(44.dp)
-                                    .roundBackground(
-                                        color = HongComposeColor(
-                                            type = HongColor.BLACK_10
-                                        ),
-                                        allRadius = 50
-                                    )
-                                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                                placeholder = "값을 입력해주세요.",
-                                inputText = inputText
-                            ) { trackingText ->
-                                inputText = trackingText
-                            }
-                        }
-                    }
+    private val option1 = HongTextFieldBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(44)
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f,
+                top = 12f,
+                bottom = 12f
+            )
+        )
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                right = 20f,
+                bottom = 20f
+            )
+        )
+        .backgroundColor(HongColor.BLACK_5.hex)
+        .radius(
+            HongRadiusInfo(
+                all = 50
+            )
+        )
+        .placeholderTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .text("값을 입력해주세요.")
+                .applyOption()
+        )
+        .inputTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_INPUT)
+                .applyOption()
+        )
+        .cursorColor(HongColor.MAIN_ORANGE_100.hex)
+        .onTextChanged { trackingText ->
+        }
+        .applyOption()
 
-                    item {
-                        SampleMenu(title = "input 내부 remember") {
-                            HongTextField(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(44.dp)
-                                    .roundBackground(
-                                        color = HongComposeColor(
-                                            type = HongColor.BLACK_10
-                                        ),
-                                        allRadius = 50
-                                    )
-                                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                                placeholder = "값을 입력해주세요."
-                            ) { trackingText ->
+    private val option2 = HongTextFieldBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(44)
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f,
+                top = 12f,
+                bottom = 12f
+            )
+        )
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                right = 20f,
+                bottom = 20f
+            )
+        )
+        .backgroundColor(HongColor.BLACK_5.hex)
+        .radius(
+            HongRadiusInfo(
+                all = 50
+            )
+        )
+        .placeholderTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .text("[키보드 done 버튼] 값을 입력해주세요.")
+                .applyOption()
+        )
+        .inputTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_INPUT)
+                .applyOption()
+        )
+        .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
+        .cursorColor(HongColor.MAIN_ORANGE_100.hex)
+        .onTextChanged { trackingText ->
+        }
+        .applyOption()
 
-                            }
-                        }
-                    }
+    private val option3 = HongTextFieldBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(44)
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f,
+                top = 12f,
+                bottom = 12f
+            )
+        )
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                right = 20f,
+                bottom = 20f
+            )
+        )
+        .backgroundColor(HongColor.BLACK_5.hex)
+        .radius(
+            HongRadiusInfo(
+                all = 50
+            )
+        )
+        .placeholderTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .text("[숫자 키패드] 값을 입력해주세요.")
+                .applyOption()
+        )
+        .inputTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_INPUT)
+                .applyOption()
+        )
+        .keyboardOption(Pair(HongKeyboardType.NUMBER, HongKeyboardActionType.DONE))
+        .onTextChanged { trackingText ->
+        }
+        .applyOption()
 
-                    item {
-                        SampleMenu(title = "키보드 Done") {
-                            HongTextField(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(44.dp)
-                                    .roundBackground(
-                                        color = HongComposeColor(
-                                            type = HongColor.BLACK_10
-                                        ),
-                                        allRadius = 50
-                                    )
-                                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                                placeholder = "값을 입력해주세요.",
-                                keyboardType = KeyboardType.DONE
-                            ) {
+    private val option4 = HongTextFieldBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(44)
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f,
+                top = 12f,
+                bottom = 12f
+            )
+        )
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                right = 20f,
+                bottom = 20f
+            )
+        )
+        .backgroundColor(HongColor.BLACK_5.hex)
+        .radius(
+            HongRadiusInfo(
+                all = 50
+            )
+        )
+        .placeholderTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .text("[지우기 버튼] 값을 입력해주세요.")
+                .applyOption()
+        )
+        .inputTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_INPUT)
+                .applyOption()
+        )
+        .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
+        .cursorColor(HongColor.MAIN_ORANGE_100.hex)
+        .onTextChanged { trackingText ->
+        }
+        .clearImageOption(
+            HongTextFieldOption.DEFAULT_CLEAR_IMAGE
+        )
+        .applyOption()
 
-                            }
-                        }
-                    }
+    private val option5 = HongTextFieldBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(44)
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f,
+                top = 12f,
+                bottom = 12f
+            )
+        )
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                right = 20f,
+                bottom = 20f
+            )
+        )
+        .backgroundColor(HongColor.BLACK_5.hex)
+        .radius(
+            HongRadiusInfo(
+                all = 50
+            )
+        )
+        .placeholderTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .text("[password] 값을 입력해주세요.")
+                .applyOption()
+        )
+        .inputTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_INPUT)
+                .applyOption()
+        )
+        .keyboardOption(Pair(HongKeyboardType.PASSWORD, HongKeyboardActionType.DONE))
+        .onTextChanged { trackingText ->
+        }
+        .applyOption()
 
-                    item {
-                        SampleMenu(title = "키보드 Go") {
-                            HongTextField(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(44.dp)
-                                    .roundBackground(
-                                        color = HongComposeColor(
-                                            type = HongColor.BLACK_10
-                                        ),
-                                        allRadius = 50
-                                    )
-                                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                                placeholder = "값을 입력해주세요.",
-                                keyboardType = KeyboardType.GO
-                            ) {
+    private val option6 = HongTextFieldBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(44)
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f,
+                top = 12f,
+                bottom = 12f
+            )
+        )
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                right = 20f,
+                bottom = 20f
+            )
+        )
+        .backgroundColor(HongColor.BLACK_5.hex)
+        .radius(
+            HongRadiusInfo(
+                all = 50
+            )
+        )
+        .placeholderTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .text("[키보드 go] 값을 입력해주세요.")
+                .applyOption()
+        )
+        .inputTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_INPUT)
+                .applyOption()
+        )
+        .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.GO))
+        .cursorColor(HongColor.MAIN_ORANGE_100.hex)
+        .onTextChanged { trackingText ->
+        }
+        .applyOption()
 
-                            }
-                        }
-                    }
+    private val option7 = HongTextFieldBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(44)
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f,
+                top = 12f,
+                bottom = 12f
+            )
+        )
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                right = 20f,
+                bottom = 20f
+            )
+        )
+        .backgroundColor(HongColor.BLACK_5.hex)
+        .radius(
+            HongRadiusInfo(
+                all = 50
+            )
+        )
+        .placeholderTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .text("[키보드 search] 값을 입력해주세요.")
+                .applyOption()
+        )
+        .inputTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_INPUT)
+                .applyOption()
+        )
+        .cursorColor(HongColor.MAIN_ORANGE_100.hex)
+        .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.SEARCH))
+        .onTextChanged { trackingText ->
+        }
+        .applyOption()
 
-                    item {
-                        SampleMenu(title = "키보드 Search") {
-                            HongTextField(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(44.dp)
-                                    .roundBackground(
-                                        color = HongComposeColor(
-                                            type = HongColor.BLACK_10
-                                        ),
-                                        allRadius = 50
-                                    )
-                                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                                placeholder = "값을 입력해주세요.",
-                                keyboardType = KeyboardType.SEARCH
-                            ) {
+    private val option8 = HongTextFieldBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(44)
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f,
+                top = 12f,
+                bottom = 12f
+            )
+        )
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                right = 20f,
+                bottom = 20f
+            )
+        )
+        .backgroundColor(HongColor.BLACK_5.hex)
+        .radius(
+            HongRadiusInfo(
+                all = 50
+            )
+        )
+        .placeholderTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .text("[키보드 send] 값을 입력해주세요.")
+                .applyOption()
+        )
+        .inputTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_INPUT)
+                .applyOption()
+        )
+        .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.SEND))
+        .cursorColor(HongColor.MAIN_ORANGE_100.hex)
+        .onTextChanged { trackingText ->
+        }
+        .applyOption()
 
-                            }
-                        }
-                    }
+    private val option9 = HongTextFieldBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(44)
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f,
+                top = 12f,
+                bottom = 12f
+            )
+        )
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                right = 20f,
+                bottom = 20f
+            )
+        )
+        .backgroundColor(HongColor.BLACK_5.hex)
+        .radius(
+            HongRadiusInfo(
+                all = 50
+            )
+        )
+        .placeholderTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .text("[number password] 값을 입력해주세요.")
+                .applyOption()
+        )
+        .inputTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_INPUT)
+                .applyOption()
+        )
+        .keyboardOption(
+            Pair(
+                HongKeyboardType.NUMBER_PASSWORD,
+                HongKeyboardActionType.DONE
+            )
+        )
+        .cursorColor(HongColor.MAIN_ORANGE_100.hex)
+        .onTextChanged { trackingText ->
+        }
+        .applyOption()
 
-                    item {
-                        SampleMenu(title = "키보드 Send") {
-                            HongTextField(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(44.dp)
-                                    .roundBackground(
-                                        color = HongComposeColor(
-                                            type = HongColor.BLACK_10
-                                        ),
-                                        allRadius = 50
-                                    )
-                                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                                placeholder = "값을 입력해주세요.",
-                                keyboardType = KeyboardType.SEND
-                            ) {
+    private val option10 = HongTextFieldBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(44)
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f,
+                top = 12f,
+                bottom = 12f
+            )
+        )
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                right = 20f,
+                bottom = 20f
+            )
+        )
+        .backgroundColor(HongColor.BLACK_5.hex)
+        .radius(
+            HongRadiusInfo(
+                all = 50
+            )
+        )
+        .placeholderTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .text("[딜레이] 값을 입력해주세요.")
+                .applyOption()
+        )
+        .inputTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_INPUT)
+                .applyOption()
+        )
+        .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
+        .delayInputCallback(500L)
+        .onTextChanged { trackingText ->
+            Log.d("TAG", "TextField 딜레이 입력 = $trackingText")
+        }
+        .applyOption()
 
-                            }
-                        }
-                    }
+    private val option11 = HongTextFieldBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(44)
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f,
+                top = 12f,
+                bottom = 12f
+            )
+        )
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                right = 20f,
+                bottom = 20f
+            )
+        )
+        .backgroundColor(HongColor.BLACK_5.hex)
+        .radius(
+            HongRadiusInfo(
+                all = 50
+            )
+        )
+        .placeholderTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .text("딜레이 삭제 버튼 값을 입력해주세요.")
+                .applyOption()
+        )
+        .inputTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_INPUT)
+                .applyOption()
+        )
+        .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
+        .delayInputCallback(500L)
+        .onTextChanged { trackingText ->
+            Log.d("TAG", "TextField 딜레이 입력[삭제 버튼 포함] = $trackingText")
+        }
+        .clearImageOption(
+            HongTextFieldOption.DEFAULT_CLEAR_IMAGE
+        )
+        .applyOption()
 
-                    item {
-                        SampleMenu(title = "지우기 버튼 존재(외부 input)") {
-                            var inputText by rememberSaveable { mutableStateOf("") }
-                            HongTextFieldRemoveButton(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(44.dp)
-                                    .roundBackground(
-                                        color = HongComposeColor(
-                                            type = HongColor.BLACK_10
-                                        ),
-                                        allRadius = 50
-                                    )
-                                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                                placeholder = "값을 입력해주세요.",
-                                keyboardType = KeyboardType.DONE,
-                                inputText = inputText,
-                                removeClick = {
-                                    inputText = ""
-                                },
-                                onTextChanged = {
-                                    inputText = it
-                                }
-                            )
-                        }
-                    }
+    private val optionList get() = listOf(
+        option1,
+        option2,
+        option3,
+        option4,
+        option5,
+        option6,
+        option7,
+        option8,
+        option9,
+        option10,
+        option11,
+    )
 
-                    item {
-                        SampleMenu(title = "지우기 버튼 존재(내부 input)") {
-                            HongTextFieldRemoveButton(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(44.dp)
-                                    .roundBackground(
-                                        color = HongComposeColor(
-                                            type = HongColor.BLACK_10
-                                        ),
-                                        allRadius = 50
-                                    )
-                                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                                placeholder = "값을 입력해주세요.",
-                                keyboardType = KeyboardType.DONE
-                            ) {
-
-                            }
-                        }
-                    }
-
-                    item {
-                        SampleMenu(title = "Debounce 500ms") {
-                            HongTextField(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(44.dp)
-                                    .roundBackground(
-                                        color = HongComposeColor(
-                                            type = HongColor.BLACK_10
-                                        ),
-                                        allRadius = 50
-                                    )
-                                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                                placeholder = "값을 입력해주세요.",
-                                keyboardType = KeyboardType.DONE,
-                                debounceTime = 500L
-                            ) {
-                            }
-                        }
-                    }
-
-                    item {
-                        SampleMenu(title = "Debounce 500ms with remove button") {
-                            HongTextFieldRemoveButton(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(44.dp)
-                                    .roundBackground(
-                                        color = HongComposeColor(
-                                            type = HongColor.BLACK_10
-                                        ),
-                                        allRadius = 50
-                                    )
-                                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                                placeholder = "값을 입력해주세요.",
-                                keyboardType = KeyboardType.DONE,
-                                debounceTime = 500L
-                            ) {
-                            }
-                        }
-                    }
-                }
+    override fun optionViewList(): List<View> {
+        return mutableListOf<View>().apply {
+            optionList.forEach {
+                add(
+                    HongTextFieldView(this@SampleTextFieldActivity).set(it)
+                )
             }
+        }
+    }
+
+    @Composable
+    override fun InitCompose() {
+        optionList.forEach {
+            HongTextFieldCompose(it)
         }
     }
 }

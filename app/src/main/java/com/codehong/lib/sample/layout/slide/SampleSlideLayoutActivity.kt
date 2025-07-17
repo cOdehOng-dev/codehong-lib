@@ -3,6 +3,7 @@ package com.codehong.lib.sample.layout.slide
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,16 +14,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.codehong.lib.sample.R
 import com.codehong.lib.sample.SampleHeader
-import com.codehong.lib.sample.SampleMenu
+import com.codehong.lib.sample.SampleComposeDespContainer
 import com.codehong.library.widget.MarginTopOrBottom
-import com.codehong.library.widget.button.HongTextButton
-import com.codehong.library.widget.model.HongComposeColor
-import com.codehong.library.widget.model.text.HongComposeTextStyle
+import com.codehong.library.widget.button.HongTextButtonCompose
+import com.codehong.library.widget.button.HongTextButtonBuilder
+import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.rule.typo.HongFont
+import com.codehong.library.widget.text.HongTextBuilder
 
 class SampleSlideLayoutActivity : ComponentActivity() {
 
@@ -42,29 +44,40 @@ class SampleSlideLayoutActivity : ComponentActivity() {
                         .padding(horizontal = 20.dp)
                 ) {
                     MarginTopOrBottom(30)
-                    SampleMenu(title = "슬라이드 레이아웃") {
-                        HongTextButton(
+                    SampleComposeDespContainer(desp = "슬라이드 레이아웃") {
+                        Box(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(48.dp)
-                                .padding(horizontal = 20.dp),
-                            buttonText = "뷰 슬라이드",
-                            buttonBackgroundColor = HongComposeColor(
-                                type = HongColor.MAIN_PURPLE
-                            ),
-                            allRadius = 12,
-                            buttonTextStyle = HongComposeTextStyle(
-                                color = HongComposeColor(
-                                    resId = R.color.color_ffffff
-                                ),
-                                size = 15,
-                                fontWeight = FontWeight.W700
-                            ),
-                            verticalPadding = 15,
-                            click = {
-                                visibleState = true
-                            }
-                        )
+                        ) {
+                            HongTextButtonCompose(
+                                option = HongTextButtonBuilder()
+                                    .padding(
+                                        HongSpacingInfo(
+                                            left = 20f,
+                                            right = 20f
+                                        )
+                                    )
+                                    .textOption(
+                                        HongTextBuilder()
+                                            .text("뷰 슬라이드")
+                                            .size(15)
+                                            .fontType(HongFont.PRETENDARD_700)
+                                            .color(HongColor.WHITE_100.hex)
+                                            .applyOption()
+                                    )
+                                    .backgroundColor(HongColor.MAIN_ORANGE_100.hex)
+                                    .radius(
+                                        HongRadiusInfo(
+                                            all = 12
+                                        )
+                                    )
+                                    .onClick {
+                                        visibleState = true
+                                    }
+                                    .applyOption()
+                            )
+                        }
                     }
                 }
             }

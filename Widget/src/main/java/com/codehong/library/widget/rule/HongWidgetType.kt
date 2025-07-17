@@ -3,16 +3,16 @@ package com.codehong.library.widget.rule
 enum class HongWidgetType(
     val id: Int,
     val value: String,
-    val allowPlayground: Boolean = false
+    val allowPlayground: Boolean = false,
 ) {
-    TEXT(1, "text", true),
+    TEXT(1, "Text", true),
     IMAGE(2, "Image", true),
-    HEADER(3, "Header", true),
+    CLOSE_HEADER(3, "CloseHeader", true),
     TEXT_FILED(4, "TextField", true),
-    SEARCH_BAR(5, "검색바", true),
-    TEXT_BUTTON(6, "텍스트 버튼", true),
-    SLIDE_LAYOUT(7, "SlideLayout", true),
-    CALENDAR_1(8, "달력(초기 X)", true),
+//    SEARCH_BAR(5, "SearchBar", true),
+    TEXT_BUTTON(6, "TextButton", true),
+//    SLIDE_LAYOUT(7, "SlideLayout", true),
+    CALENDAR(8, "Calendar", true),
     HORIZONTAL_PAGER(9, "HorizontalViewPager", true),
     BADGE_TEXT(10, "BadgeText", true),
     SCROLL_TAB(11, "ScrollTab", true),
@@ -20,6 +20,12 @@ enum class HongWidgetType(
     DYNAMIC_ISLAND(13, "DynamicIsland", false),
     VIDEO_POPUP(14, "VideoPopup", false),
     VIDEO_PLAYER(15, "VideoPlayer", false),
+    CHECKBOX(16, "Checkbox", true),
+    SWITCH(17, "Switch", true),
+    LABEL(18, "Label", true),
+    LABEL_INPUT(19, "LabelInput", true),
+    LABEL_SELECT_INPUT(20, "LabelSelectInput", false),
+    LABEL_SWITCH(21, "LabelSwitch", true),
     NO_VALUE(-1, "no_value");
 
     companion object {
