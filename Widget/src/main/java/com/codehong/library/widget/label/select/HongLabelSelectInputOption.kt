@@ -37,6 +37,7 @@ data class HongLabelSelectInputOption(
 
         val DEFAULT_TEXT_BUTTON = HongTextButtonBuilder()
             .width(HongLayoutParam.MATCH_PARENT.value)
+            .height(48)
             .radius(
                 HongRadiusInfo(
                     topLeft = 10,

@@ -2,7 +2,6 @@ package com.codehong.library.widget.label.select
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import com.codehong.library.widget.button.text.HongTextButtonBuilder
@@ -158,7 +157,7 @@ class HongLabelSelectInputView @JvmOverloads constructor(
     }
 
     private fun initSelectPickerView() {
-        val initial = option.textButtonOption.textOption.text.also { Log.d("TAG", "test here 123123 = $it") }
+        val initial = option.textButtonOption.textOption.text
 
         this.textButtonOption = HongTextButtonBuilder()
             .copy(option.textButtonOption)
