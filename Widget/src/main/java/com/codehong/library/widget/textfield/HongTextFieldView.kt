@@ -69,11 +69,6 @@ class HongTextFieldView @JvmOverloads constructor(
         }
 
         with(binding.etInput) {
-            layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT).apply {
-                weight = 1f
-                marginEnd = context.dpToPx(5f)
-            }
-            setBackgroundColor(ContextCompat.getColor(context, R.color.honglib_color_transparent))
             setOnFocusChangeListener { _, hasFocus ->
                 isCursorVisible = hasFocus
             }
