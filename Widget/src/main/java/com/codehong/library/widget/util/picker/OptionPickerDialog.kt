@@ -10,8 +10,24 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
 import com.codehong.library.widget.R
+import com.codehong.library.widget.button.select.HongSelectButtonBuilder
+import com.codehong.library.widget.button.text.HongTextButtonBuilder
 import com.codehong.library.widget.databinding.HonglibOptionPickerDialogBinding
+import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.widget.extensions.hongBackground
+import com.codehong.library.widget.extensions.setLayout
+import com.codehong.library.widget.language.hongSelectButton
+import com.codehong.library.widget.language.hongText
+import com.codehong.library.widget.language.hongTextButton
+import com.codehong.library.widget.language.verticalLinearLayout
+import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.rule.typo.HongTypo
+import com.codehong.library.widget.text.HongTextBuilder
 
 class OptionPickerDialog constructor(
     private val context: Context,
@@ -28,6 +44,8 @@ class OptionPickerDialog constructor(
 
     private var selectOption: String = ""
 
+    private var llOptionPicker: LinearLayout? = null
+
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         setFullDialog(isAttachWindow = true)
@@ -39,48 +57,129 @@ class OptionPickerDialog constructor(
         setContentView(binding.root)
         this.selectOption = optionList[selectedPosition]
 
-        if (useDirectCallback) {
-            binding.tvCancel.visibility = View.GONE
+        binding.llDialog.verticalLinearLayout {
+            llOptionPicker = this
+            setLayout(
+                width = HongLayoutParam.MATCH_PARENT.value,
+                height = HongLayoutParam.WRAP_CONTENT.value
+            )?.apply {
+                minimumHeight = context.dpToPx(50)
+            }
+            setPadding(
+                0,
+                context.dpToPx(20),
+                0,
+                context.dpToPx(20)
+            )
+            hongBackground(
+                backgroundColor = HongColor.WHITE_100.hex,
+                radius = HongRadiusInfo(
+                    topLeft = 16,
+                    topRight = 16
+                )
+            )
+
+            hongText {
+                set(
+                    HongTextBuilder()
+                        .width(HongLayoutParam.MATCH_PARENT.value)
+                        .padding(
+                            HongSpacingInfo(
+                                left = 20f,
+                                right = 20f
+                            )
+                        )
+                        .text(title)
+                        .typography(HongTypo.BODY_20_B)
+                        .color(HongColor.BLACK_100)
+                        .applyOption()
+                )
+            }
+
+            val picker = PickerListView(context).apply {
+                initPicker(
+                    pickerList = optionList,
+                    selectPosition = selectedPosition
+                ) { selectPicker, index ->
+                    this@OptionPickerDialog.selectOption = selectPicker
+                    this@OptionPickerDialog.selectedPosition = index
+                    if (useDirectCallback) {
+                        selectOptionCallback.invoke(selectPicker, index)
+                    }
+                }
+            }
+
+            verticalLinearLayout {
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+                addView(picker)
+            }
+
+            if (!useDirectCallback) {
+                hongSelectButton {
+                    set(
+                        HongSelectButtonBuilder()
+                            .margin(
+                                HongSpacingInfo(
+                                    left = 20f,
+                                    right = 20f,
+                                )
+                            )
+                            .negativeClick {
+                                dismiss()
+                            }
+                            .positiveClick {
+                                dismiss()
+                                selectOptionCallback.invoke(selectOption, selectedPosition)
+                            }
+                            .applyOption()
+                    )
+                }
+            } else {
+                hongTextButton {
+                    set(
+                        HongTextButtonBuilder()
+                            .width(HongLayoutParam.MATCH_PARENT.value)
+                            .height(48)
+                            .onClick {
+                                dismiss()
+                            }
+                            .margin(
+                                HongSpacingInfo(
+                                    left = 20f,
+                                    right = 20f,
+                                    bottom = 10f
+                                )
+                            )
+                            .textOption(
+                                HongTextBuilder()
+                                    .text("확인")
+                                    .typography(HongTypo.BODY_15_B)
+                                    .color(HongColor.WHITE_100)
+                                    .applyOption()
+                            )
+                            .backgroundColor(HongColor.MAIN_ORANGE_100.hex)
+                            .radius(
+                                HongRadiusInfo(
+                                    all = 12
+                                )
+                            )
+                            .applyOption()
+                    )
+                }
+            }
         }
 
         binding.dim.setOnClickListener {
             dismiss()
         }
-
-        binding.tvConfirm.setOnClickListener {
-            dismiss()
-            if (!useDirectCallback) {
-                selectOptionCallback.invoke(selectOption, selectedPosition)
-            }
-        }
-
-        binding.tvCancel.setOnClickListener {
-            dismiss()
-        }
-
-        binding.tvTitle.text = title
-        val picker = PickerListView(context).apply {
-            initPicker(
-                pickerList = optionList,
-                selectPosition = selectedPosition
-            ) { selectPicker, index ->
-                this@OptionPickerDialog.selectOption = selectPicker
-                this@OptionPickerDialog.selectedPosition = index
-                if (useDirectCallback) {
-                    selectOptionCallback.invoke(selectPicker, index)
-                }
-            }
-        }
-
-        if (binding.containerOptionPicker.childCount > 0) {
-            binding.containerOptionPicker.removeAllViews()
-        }
-        binding.containerOptionPicker.addView(picker)
     }
 
     override fun show() {
         super.show()
-        binding.llOptionPicker.startAnimation(
+        llOptionPicker?.startAnimation(
             AnimationUtils.loadAnimation(
                 context,
                 R.anim.honglib_popup_in
@@ -91,7 +190,7 @@ class OptionPickerDialog constructor(
 
     override fun dismiss() {
         binding.dim.startAnimation(AnimationUtils.loadAnimation(context, R.anim.honglib_fade_out))
-        binding.llOptionPicker.startAnimation(
+        llOptionPicker?.startAnimation(
             AnimationUtils.loadAnimation(
                 context,
                 R.anim.honglib_popup_out
