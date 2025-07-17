@@ -57,6 +57,7 @@ import com.codehong.library.widget.dynamicisland.DynamicIslandManager
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.HongState
 import com.codehong.library.widget.rule.HongTextAlign
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
@@ -181,53 +182,49 @@ fun SampleTheme(
                             .width(5.dp)
                             .height(1.dp)
                     )
-                    if (item.widgetType.allowPlayground) {
-                        Box(
-                            modifier = Modifier
-                                .weight(1.5f)
-                        ) {
-                            HongTextButtonCompose(
-                                option = HongTextButtonBuilder()
-                                    .padding(
-                                        HongSpacingInfo(
-                                            top = 15f,
-                                            bottom = 15f,
-                                        )
+                    Box(
+                        modifier = Modifier
+                            .weight(1.5f)
+                    ) {
+                        HongTextButtonCompose(
+                            option = HongTextButtonBuilder()
+                                .height(50)
+                                .state(
+                                    if (item.widgetType.allowPlayground) HongState.ENABLED else HongState.DISABLED
+                                )
+                                .margin(
+                                    HongSpacingInfo(
+                                        right = 5f
                                     )
-                                    .margin(
-                                        HongSpacingInfo(
-                                            right = 5f
-                                        )
+                                )
+                                .textOption(
+                                    HongTextBuilder()
+                                        .text("Playground")
+                                        .typography(HongTypo.BODY_14_B)
+                                        .color(HongColor.MAIN_ORANGE_100)
+                                        .textAlign(HongTextAlign.CENTER)
+                                        .applyOption()
+                                )
+                                .backgroundColor(HongColor.WHITE_100.hex)
+                                .radius(
+                                    HongRadiusInfo(all = 14)
+                                )
+                                .border(
+                                    HongBorderInfo(
+                                        color = HongColor.MAIN_ORANGE_100.hex,
+                                        width = 1
                                     )
-                                    .textOption(
-                                        HongTextBuilder()
-                                            .text("Playground")
-                                            .typography(HongTypo.BODY_14_B)
-                                            .color(HongColor.MAIN_ORANGE_100)
-                                            .textAlign(HongTextAlign.CENTER)
-                                            .applyOption()
-                                    )
-                                    .backgroundColor(HongColor.WHITE_100.hex)
-                                    .radius(
-                                        HongRadiusInfo(all = 14)
-                                    )
-                                    .border(
-                                        HongBorderInfo(
-                                            color = HongColor.MAIN_ORANGE_100.hex,
-                                            width = 1
-                                        )
-                                    )
-                                    .onClick {
-                                        Handler(Looper.getMainLooper()).postDelayed({
-                                            Intent(activity, PlaygroundActivity::class.java).apply {
-                                                putExtra(SampleConst.WIDGET_TYPE, item.widgetType.value)
-                                                activity.startActivity(this)
-                                            }
-                                        }, 200)
-                                    }
-                                    .applyOption(),
-                            )
-                        }
+                                )
+                                .onClick {
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        Intent(activity, PlaygroundActivity::class.java).apply {
+                                            putExtra(SampleConst.WIDGET_TYPE, item.widgetType.value)
+                                            activity.startActivity(this)
+                                        }
+                                    }, 200)
+                                }
+                                .applyOption(),
+                        )
                     }
                     Box(
                         modifier = Modifier
@@ -235,12 +232,7 @@ fun SampleTheme(
                     ) {
                         HongTextButtonCompose(
                             option = HongTextButtonBuilder()
-                                .padding(
-                                    HongSpacingInfo(
-                                        top = 15f,
-                                        bottom = 15f,
-                                    )
-                                )
+                                .height(50)
                                 .textOption(
                                     HongTextBuilder()
                                         .text("샘플")

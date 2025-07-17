@@ -182,6 +182,26 @@ fun HongWidgetContainer(
         }
     }
 }
+@Composable
+fun HongWidgetDisableContainer(
+    option: HongWidgetCommonOption,
+    childCompose: @Composable () -> Unit,
+) {
+    Box(
+        modifier = Modifier
+            .hongPadding(option.margin)
+    ) {
+        Box(
+            modifier = Modifier
+                .hongWidth(option.width)
+                .hongHeight(option.height)
+                .hongPadding(option.padding)
+                .background(option.backgroundColorHex.toColor())
+        ) {
+            childCompose()
+        }
+    }
+}
 
 
 @Composable
@@ -206,6 +226,34 @@ fun HongWidgetContainer(
                 )
                 .hongPadding(option.padding)
                 .disableRippleClickable { option.click?.invoke(option) },
+            contentAlignment = Alignment.Center
+        ) {
+            childCompose()
+        }
+    }
+}
+
+@Composable
+fun HongWidgetDisableContainer(
+    option: HongWidgetAdvanceOption,
+    childCompose: @Composable () -> Unit,
+) {
+    Box(
+        modifier = Modifier
+            .hongPadding(option.margin)
+    ) {
+        Box(
+            modifier = Modifier
+                .hongWidth(option.width)
+                .hongHeight(option.height)
+                .hongBackground(
+                    backgroundColor = option.backgroundColorHex,
+                    border = option.border,
+                    shadow = option.shadow,
+                    radius = option.radius,
+                    useShapeCircle = option.useShapeCircle,
+                )
+                .hongPadding(option.padding),
             contentAlignment = Alignment.Center
         ) {
             childCompose()

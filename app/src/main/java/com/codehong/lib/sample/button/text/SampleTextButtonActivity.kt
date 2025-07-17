@@ -10,6 +10,7 @@ import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.HongState
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
@@ -20,12 +21,6 @@ class SampleTextButtonActivity : BaseSampleMixActivity() {
     private val option1 = HongTextButtonBuilder()
         .width(HongLayoutParam.MATCH_PARENT.value)
         .height(48)
-        .padding(
-            HongSpacingInfo(
-                top = 15f,
-                bottom = 15f
-            )
-        )
         .margin(
             HongSpacingInfo(
                 left = 20f,
@@ -51,12 +46,6 @@ class SampleTextButtonActivity : BaseSampleMixActivity() {
     private val option2 = HongTextButtonBuilder()
         .width(HongLayoutParam.MATCH_PARENT.value)
         .height(48)
-        .padding(
-            HongSpacingInfo(
-                top = 15f,
-                bottom = 15f
-            )
-        )
         .margin(
             HongSpacingInfo(
                 left = 20f,
@@ -91,12 +80,6 @@ class SampleTextButtonActivity : BaseSampleMixActivity() {
     private val option3 = HongTextButtonBuilder()
         .width(HongLayoutParam.MATCH_PARENT.value)
         .height(48)
-        .padding(
-            HongSpacingInfo(
-                top = 8f,
-                bottom = 8f
-            )
-        )
         .margin(
             HongSpacingInfo(
                 left = 20f,
@@ -128,10 +111,46 @@ class SampleTextButtonActivity : BaseSampleMixActivity() {
         .backgroundColor(HongColor.WHITE_100.hex)
         .applyOption()
 
+    private val option4 = HongTextButtonBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(48)
+        .state(HongState.DISABLED)
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                right = 20f,
+                bottom = 10f
+            )
+        )
+        .textOption(
+            HongTextBuilder()
+                .text("이동하기")
+                .typography(HongTypo.BODY_15_B)
+                .color(HongColor.WHITE_100.hex)
+                .applyOption()
+        )
+        .backgroundColor(HongColor.MAIN_ORANGE_100.hex)
+        .radius(
+            HongRadiusInfo(
+                all = 12
+            )
+        )
+        .shadow(
+            HongShadowInfo(
+                color = HongColor.BLACK_25.hex,
+                blur = 24f,
+                offsetY = 0f,
+                offsetX = 2f,
+                spread = 0f,
+            )
+        )
+        .applyOption()
+
     private val optionList get() = listOf(
         option1,
         option2,
-        option3
+        option3,
+        option4
     )
 
     override fun optionViewList(): List<View> {

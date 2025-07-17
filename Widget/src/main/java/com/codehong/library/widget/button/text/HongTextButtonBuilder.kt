@@ -3,6 +3,8 @@ package com.codehong.library.widget.button.text
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongShadowInfo
+import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.HongState
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
@@ -11,6 +13,10 @@ class HongTextButtonBuilder : HongWidgetCommonBuilder<HongTextButtonOption, Hong
 
     override val builder: HongTextButtonBuilder = this
     override val option: HongTextButtonOption = HongTextButtonOption()
+
+    override fun padding(padding: HongSpacingInfo): HongTextButtonBuilder = apply {
+        option.padding = HongSpacingInfo()
+    }
 
     fun radius(radiusInfo: HongRadiusInfo) = apply {
         option.radius = radiusInfo
@@ -32,6 +38,10 @@ class HongTextButtonBuilder : HongWidgetCommonBuilder<HongTextButtonOption, Hong
                 .applyOption()
     }
 
+    fun state(state: HongState) = apply {
+        option.state = state
+    }
+
     fun copy(inject: HongTextButtonOption?): HongTextButtonBuilder {
         if (inject == null) return HongTextButtonBuilder()
         return HongTextButtonBuilder()
@@ -46,5 +56,6 @@ class HongTextButtonBuilder : HongWidgetCommonBuilder<HongTextButtonOption, Hong
             .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
             .border(inject.border)
+            .state(inject.state)
     }
 }

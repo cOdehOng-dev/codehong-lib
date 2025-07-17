@@ -106,6 +106,7 @@ class HongTextButtonPlayground(
         if (includeCommonOption) {
             /** common */
             commonPreviewOption(
+                usePadding = false,
                 selectWidth = { selectWidth ->
                     inject = HongTextButtonBuilder()
                         .copy(inject)
@@ -124,13 +125,6 @@ class HongTextButtonPlayground(
                     inject = HongTextButtonBuilder()
                         .copy(inject)
                         .margin(selectMargin)
-                        .applyOption()
-                    callback.invoke(inject)
-                },
-                selectPadding = { selectPadding ->
-                    inject = HongTextButtonBuilder()
-                        .copy(inject)
-                        .padding(selectPadding)
                         .applyOption()
                     callback.invoke(inject)
                 }

@@ -6,6 +6,7 @@ import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.HongState
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
@@ -30,10 +31,17 @@ data class HongTextButtonOption(
 
         const val DEFAULT_USE_SHAPE_CIRCLE = false
 
-        var DEFAULT_TEXT_OPTION = HongTextBuilder()
+        val DEFAULT_TEXT_OPTION = HongTextBuilder()
             .typography(DEFAULT_TEXT_TYPO)
             .color(DEFAULT_TEXT_COLOR)
             .applyOption()
+
+        val DEFAULT_DISABLE_TEXT_OPTION = HongTextBuilder()
+            .typography(DEFAULT_TEXT_TYPO)
+            .color(HongColor.WHITE_60.hex)
+            .applyOption()
+
+        val DEFAULT_DISABLE_BACKGROUND_COLOR = HongColor.GRAY_70
     }
 
     override var isValidComponent: Boolean = true
@@ -60,6 +68,9 @@ data class HongTextButtonOption(
 
     var textOption = DEFAULT_TEXT_OPTION
 
+    var state: HongState = HongState.ENABLED
+
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -80,6 +91,7 @@ data class HongTextButtonOption(
         if (useShapeCircle != other.useShapeCircle) return false
         if (shadow != other.shadow) return false
         if (textOption != other.textOption) return false
+        if (state != other.state) return false
 
         return true
     }
@@ -99,6 +111,7 @@ data class HongTextButtonOption(
         result = 31 * result + useShapeCircle.hashCode()
         result = 31 * result + shadow.hashCode()
         result = 31 * result + textOption.hashCode()
+        result = 31 * result + state.hashCode()
         return result
     }
 
@@ -117,7 +130,8 @@ data class HongTextButtonOption(
                 "border=$border, " +
                 "useShapeCircle=$useShapeCircle, " +
                 "shadow=$shadow, " +
-                "textOption=$textOption" +
+                "textOption=$textOption, " +
+                "state=$state" +
                 ")"
     }
 }
