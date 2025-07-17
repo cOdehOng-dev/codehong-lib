@@ -152,13 +152,10 @@ class HongBadgeTextPlayground(
         }
 
         // region 버튼 텍스트
-        PlaygroundManager.addOptionTitleView(
-            activity,
-            label = "텍스트 옵션"
-        )
         HongTextPlayground(activity).injectPreview(
             injectOption = previewOption.textOption,
-            includeCommonOption = true
+            includeCommonOption = true,
+            label = "텍스트 옵션"
         ) {
             this.previewOption = HongBadgeTextBuilder()
                 .copy(previewOption)

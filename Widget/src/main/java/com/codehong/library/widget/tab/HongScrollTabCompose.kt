@@ -1,5 +1,6 @@
 package com.codehong.library.widget.tab
 
+import android.util.Log
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -14,27 +15,28 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.rule.HongBorderInfo
-import com.codehong.library.widget.text.HongTextCompose
-import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.extensions.disableRippleClickable
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
+import com.codehong.library.widget.rule.HongBorderInfo
+import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.text.HongTextCompose
 import kotlinx.coroutines.delay
 
 @Composable
-fun HongScrollTab(
+fun HongScrollTabCompose(
     option: HongScrollTabOption,
     onTabClick: (index: Int, item: Any) -> Unit
 ) {
+    Log.w("TAG", "test here option = $option")
     val scrollState = rememberScrollState()
 
     var selectedIndex by remember { mutableIntStateOf(option.initialSelectIndex) }
 
     LaunchedEffect(selectedIndex) {
         delay(200)
-        val centerOffset = (scrollState.maxValue / option.tabList.size) * selectedIndex
+        val centerOffset = (scrollState.maxValue / option.tabList.size.also { Log.d("TAG", "test here size = $it") }) * selectedIndex
         scrollState.animateScrollTo(centerOffset)
     }
 

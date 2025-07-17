@@ -14,7 +14,7 @@ import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.text.HongTextBuilder
 
-class HongTextButtonPlayground constructor(
+class HongTextButtonPlayground(
     playgroundActivity: PlaygroundActivity
 ) : BasePlayground<HongTextButtonOption> {
 
@@ -153,13 +153,10 @@ class HongTextButtonPlayground constructor(
         }
 
         // region 버튼 텍스트
-        PlaygroundManager.addOptionTitleView(
-            activity,
-            label = "텍스트 옵션"
-        )
         HongTextPlayground(activity).injectPreview(
             previewOption.textOption,
-            includeCommonOption = false
+            includeCommonOption = false,
+            label = "텍스트 옵션"
         ) {
             this.previewOption = HongTextButtonBuilder()
                 .copy(previewOption)

@@ -57,6 +57,7 @@ object PlaygroundManager {
     fun addOptionTitleView(
         activity: PlaygroundActivity,
         label: String,
+        description: String = "",
         labelTypo: HongTypo? = null,
         descriptionTypo: HongTypo? = null,
         useTopPadding: Boolean = true
@@ -80,6 +81,7 @@ object PlaygroundManager {
                     .descriptionTextOption(
                         HongTextBuilder()
                             .copy(HongLabelOption.DEFAULT_DESCRIPTION_OPTION)
+                            .text(description)
                             .typography(descriptionTypo ?: HongTypo.CONTENTS_12)
                             .color(HongColor.BLACK_100)
                             .applyOption()
@@ -456,6 +458,7 @@ object PlaygroundManager {
                     )
                     .label("${label}color")
                     .description(description)
+                    .placeholder("hexCode를 입력하세요. (ex: #ff000000)")
                     .buttonText(if (!initialColor?.colorName.isNullOrEmpty()) initialColor?.colorName else Const.DIRECT_INPUT)
                     .inputText(initialColor?.hex ?: (colorHex ?: ""))
                     .selectList(colorOptionList)

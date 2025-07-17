@@ -1,6 +1,7 @@
 package com.codehong.lib.sample.playground
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.compose.foundation.border
@@ -24,6 +25,7 @@ import com.codehong.lib.sample.label.HongLabelPlayground
 import com.codehong.lib.sample.label.input.HongLabelInputPlayground
 import com.codehong.lib.sample.label.toggle.HongLabelSwitchPlayground
 import com.codehong.lib.sample.pager.HongHorizontalPagerPlayground
+import com.codehong.lib.sample.tab.HongScrollTabPlayground
 import com.codehong.lib.sample.text.HongTextPlayground
 import com.codehong.lib.sample.textfield.HongTextFieldPlayground
 import com.codehong.lib.sample.toggleswitch.HongSwitchPlayground
@@ -56,6 +58,8 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.HongWidgetType.Companion.toHongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.tab.HongScrollTabCompose
+import com.codehong.library.widget.tab.HongScrollTabOption
 import com.codehong.library.widget.text.HongTextCompose
 import com.codehong.library.widget.text.HongTextOption
 import com.codehong.library.widget.textfield.HongTextFieldCompose
@@ -178,6 +182,7 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.LABEL -> HongLabelPlayground(this).preview()
             HongWidgetType.LABEL_INPUT -> HongLabelInputPlayground(this).preview()
             HongWidgetType.LABEL_SWITCH -> HongLabelSwitchPlayground(this).preview()
+            HongWidgetType.SCROLL_TAB -> HongScrollTabPlayground(this).preview()
 //            HongWidgetType.LABEL_SELECT_INPUT -> HongLabelSelectInputPlayground(this).preview()
             else -> {}
         }
@@ -187,6 +192,7 @@ class PlaygroundActivity : BaseActivity() {
         previewOption: HongWidgetCommonOption
     ) {
         this.previewOption = previewOption
+        Log.d("TAG", "test here previewOption 22 : $previewOption")
         val isBorderOn = viewModel.isBorderOn.value ?: false
         applyPreviewUI(isBorderOn)
     }
@@ -344,17 +350,14 @@ class PlaygroundActivity : BaseActivity() {
                 }
             }
 
-//            HongWidgetType.LABEL_SELECT_INPUT -> {
-//                binding.vComposePreview.setContent {
-//                    var option by rememberSaveable(previewOption as HongLabelSelectInputOption) {
-//                        mutableStateOf(previewOption as HongLabelSelectInputOption)
-//                    }
-//                    option = previewOption as HongLabelSelectInputOption
-//                    PreviewUI(isBorderOn) {
-//                        HongLabelSelectInputCompose(option)
-//                    }
-//                }
-//            }
+            HongWidgetType.SCROLL_TAB -> {
+                binding.vComposePreview.setContent {
+                    Log.e("TAG", "test here previewOption 11 : $previewOption")
+                    PreviewUI(isBorderOn) {
+                        HongScrollTabCompose(previewOption as HongScrollTabOption) { _, _ -> }
+                    }
+                }
+            }
 
 
             else -> return

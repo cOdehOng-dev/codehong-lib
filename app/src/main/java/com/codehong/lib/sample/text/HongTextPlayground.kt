@@ -48,26 +48,46 @@ class HongTextPlayground(
             executePreview()
         }
     }
-    
+
     fun injectPreview(
         injectOption: HongTextOption,
         includeCommonOption: Boolean = false,
         label: String = "",
+        labelTypo: HongTypo? = null,
+        description: String = "",
+        descriptionTypo: HongTypo? = null,
+        useText: Boolean = true,
+        useAlign: Boolean = true,
+        useCancelLine: Boolean = true,
+        useUnderline: Boolean = true,
         callback: (HongTextOption) -> Unit
     ) {
         var inject = injectOption
 
-        PlaygroundManager.addLabelInputOptionPreview(
-            activity = activity,
-            label = "${label}text",
-            input = inject.text,
-        ) { text ->
-            inject = HongTextBuilder()
-                .copy(inject)
-                .text(text)
-                .applyOption()
-            callback.invoke(inject)
+        if (label.isNotEmpty()) {
+            PlaygroundManager.addOptionTitleView(
+                activity,
+                label = label,
+                labelTypo = labelTypo,
+                description = description,
+                descriptionTypo = descriptionTypo
+            )
         }
+
+        if (useText) {
+            PlaygroundManager.addLabelInputOptionPreview(
+                activity = activity,
+                label = "text",
+                input = inject.text,
+            ) { text ->
+                inject = HongTextBuilder()
+                    .copy(inject)
+                    .text(text)
+                    .applyOption()
+                callback.invoke(inject)
+            }
+        }
+
 
         if (includeCommonOption) {
             commonPreviewOption(
@@ -109,7 +129,7 @@ class HongTextPlayground(
         /** 텍스트 컬러 */
         PlaygroundManager.addColorOptionPreview(
             activity = activity,
-            label = "${label}text",
+            label = "text",
             colorHex = inject.colorHex
         ) { selectColor ->
             inject = HongTextBuilder()
@@ -132,8 +152,9 @@ class HongTextPlayground(
             description = "헤더 제목의 타이포그라피를 설정해요.",
             useDirectCallback = true,
         ) { selectTypography, index ->
-            val typography = PlaygroundManager.typographyList.firstOrNull { it.styleName == selectTypography }
-                ?: HongTypo.BODY_16_B
+            val typography =
+                PlaygroundManager.typographyList.firstOrNull { it.styleName == selectTypography }
+                    ?: HongTypo.BODY_16_B
             Log.e("TAG", "옵션 typography = $typography, index = $index")
             inject = HongTextBuilder()
                 .copy(inject)
@@ -142,36 +163,39 @@ class HongTextPlayground(
             callback.invoke(inject)
         }
 
-        /**
-         * 텍스트 정렬
-         * 좌측 / 우측 / 가운데
-         * width가 WRAP_CONTENT인 경우에는 의도한 대로 적용되지 않으므로 주의!
-         */
-        val textAlignList = HongTextAlign.entries.map { it.alias }
-        val initialTextAlign = inject.align.toHongTextAlignToAlias()
-        PlaygroundManager.addSelectOptionView(
-            activity = activity,
-            initialText = initialTextAlign,
-            label = "$label 텍스트 정렬",
-            description = "width가 WRAP_CONTENT인 경우에는 의도한 대로 적용되지 않으므로 주의!",
-            useDirectCallback = true,
-            selectList = textAlignList,
-            selectedPosition = textAlignList.indexOf(initialTextAlign),
-        ) { selectTextAlign, index ->
-            val textAlign = selectTextAlign.toHongTextAlign()
-            Log.e("TAG", "옵션 textAlign = $selectTextAlign, index = $index")
-            inject = HongTextBuilder()
-                .copy(inject)
-                .textAlign(textAlign)
-                .applyOption()
-            callback.invoke(inject)
+        if (useAlign) {
+            /**
+             * 텍스트 정렬
+             * 좌측 / 우측 / 가운데
+             * width가 WRAP_CONTENT인 경우에는 의도한 대로 적용되지 않으므로 주의!
+             */
+            val textAlignList = HongTextAlign.entries.map { it.alias }
+            val initialTextAlign = inject.align.toHongTextAlignToAlias()
+            PlaygroundManager.addSelectOptionView(
+                activity = activity,
+                initialText = initialTextAlign,
+                label = "$label 텍스트 정렬",
+                description = "width가 WRAP_CONTENT인 경우에는 의도한 대로 적용되지 않으므로 주의!",
+                useDirectCallback = true,
+                selectList = textAlignList,
+                selectedPosition = textAlignList.indexOf(initialTextAlign),
+            ) { selectTextAlign, index ->
+                val textAlign = selectTextAlign.toHongTextAlign()
+                Log.e("TAG", "옵션 textAlign = $selectTextAlign, index = $index")
+                inject = HongTextBuilder()
+                    .copy(inject)
+                    .textAlign(textAlign)
+                    .applyOption()
+                callback.invoke(inject)
+            }
         }
+
 
 
         /** 최대 라인 수 */
         PlaygroundManager.addLabelInputOptionPreview(
             activity = activity,
-            label = "${label}maxLine",
+            label = "maxLine",
             input = if (inject.maxLines == Int.MAX_VALUE) "" else inject.maxLines.toString(),
             useOnlyNumber = true
         ) { maxLines ->
@@ -197,7 +221,7 @@ class HongTextPlayground(
         PlaygroundManager.addSelectOptionView(
             activity = activity,
             initialText = initialOverflow,
-            label = "${label}글 잘림 처리",
+            label = "글 잘림 처리",
             description = "자름(Clip) / ...처리 (Ellipsis) / 보이기 (Visible)",
             useDirectCallback = true,
             selectList = overflowList,
@@ -219,7 +243,7 @@ class HongTextPlayground(
         PlaygroundManager.addSelectOptionView(
             activity = activity,
             initialText = initialLineBreak,
-            label = "${label}lineBreak",
+            label = "줄바꿈 설정",
             description = "시스템에 따름 / 음절 단위로 줄바꿈 / 단어 단위로 줄바꿈",
             useDirectCallback = true,
             selectList = lineBreakList,
@@ -232,30 +256,35 @@ class HongTextPlayground(
             callback.invoke(inject)
         }
 
-        /** 취소선 여부 */
-        PlaygroundManager.addLabelSwitchOptionPreview(
-            activity = activity,
-            label = "${label}취소선 여부",
-            switchState = inject.isEnableCancelLine
-        ) { isEnable ->
-            inject = HongTextBuilder()
-                .copy(inject)
-                .isEnableCancelLine(isEnable)
-                .applyOption()
-            callback.invoke(inject)
+        if (useCancelLine) {
+            /** 취소선 여부 */
+            PlaygroundManager.addLabelSwitchOptionPreview(
+                activity = activity,
+                label = "취소선",
+                switchState = inject.isEnableCancelLine
+            ) { isEnable ->
+                inject = HongTextBuilder()
+                    .copy(inject)
+                    .isEnableCancelLine(isEnable)
+                    .applyOption()
+                callback.invoke(inject)
+            }
         }
 
-        PlaygroundManager.addLabelSwitchOptionPreview(
-            activity = activity,
-            label = "${label}밑줄 여부",
-            switchState = inject.isEnableUnderLine
-        ) { isEnable ->
-            inject = HongTextBuilder()
-                .copy(inject)
-                .isEnableUnderLine(isEnable)
-                .applyOption()
-            callback.invoke(inject)
+        if (useUnderline) {
+            PlaygroundManager.addLabelSwitchOptionPreview(
+                activity = activity,
+                label = "밑줄",
+                switchState = inject.isEnableUnderLine
+            ) { isEnable ->
+                inject = HongTextBuilder()
+                    .copy(inject)
+                    .isEnableUnderLine(isEnable)
+                    .applyOption()
+                callback.invoke(inject)
+            }
         }
+
     }
 
 }

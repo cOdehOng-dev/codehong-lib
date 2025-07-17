@@ -1,37 +1,14 @@
 package com.codehong.library.widget.tab
 
-import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
 
-class HongScrollTabBuilder {
+class HongScrollTabBuilder : HongWidgetCommonBuilder<HongScrollTabOption, HongScrollTabBuilder> {
 
-    var option = HongScrollTabOption()
-
-    fun width(width: Int?) = apply {
-        width?.let { option.width = it }
-    }
-
-    fun height(height: Int?) = apply {
-        height?.let { option.height = it }
-    }
-
-    fun margin(margin: HongSpacingInfo) = apply {
-        option.margin = margin
-    }
-
-    fun padding(padding: HongSpacingInfo) = apply {
-        option.padding = padding
-    }
-
-    fun onClick(onClick: ((HongScrollTabOption) -> Unit)?) = apply {
-        option.click = {
-            if (it is HongScrollTabOption) {
-                onClick?.invoke(it)
-            }
-        }
-    }
+    override val builder: HongScrollTabBuilder = this
+    override val option: HongScrollTabOption = HongScrollTabOption()
 
 
     fun tabList(tabList: List<Any>) = apply {
@@ -98,9 +75,6 @@ class HongScrollTabBuilder {
         option.initialSelectIndex = index
     }
 
-    fun applyOption(): HongScrollTabOption {
-        return option
-    }
 
     fun copy(inject: HongScrollTabOption): HongScrollTabBuilder {
         return HongScrollTabBuilder()

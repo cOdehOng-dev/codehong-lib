@@ -103,14 +103,11 @@ class HongLabelPlayground(
             )
         }
 
-        PlaygroundManager.addOptionTitleView(
-            activity,
-            label = "Label",
-            labelTypo = HongTypo.BODY_16
-        )
         HongTextPlayground(activity).injectPreview(
             injectOption = inject.labelTextOption,
-            includeCommonOption = true
+            includeCommonOption = true,
+            label = "Label",
+            labelTypo = HongTypo.BODY_16
         ) {
             inject = HongLabelBuilder()
                 .copy(inject)
@@ -119,14 +116,11 @@ class HongLabelPlayground(
             callback.invoke(inject)
         }
 
-        PlaygroundManager.addOptionTitleView(
-            activity,
-            label = "Description",
-            labelTypo = HongTypo.BODY_16
-        )
         HongTextPlayground(activity).injectPreview(
             injectOption = inject.descriptionTextOption,
-            includeCommonOption = true
+            includeCommonOption = true,
+            label = "Description",
+            labelTypo = HongTypo.BODY_16
         ) {
             inject = HongLabelBuilder()
                 .copy(inject)

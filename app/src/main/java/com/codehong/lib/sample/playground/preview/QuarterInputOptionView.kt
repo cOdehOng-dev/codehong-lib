@@ -8,6 +8,8 @@ import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.HongLabelOption
+import com.codehong.library.widget.label.input.HongLabelInputBuilder
+import com.codehong.library.widget.label.input.HongLabelInputOption
 import com.codehong.library.widget.language.frameLayout
 import com.codehong.library.widget.language.hongLabel
 import com.codehong.library.widget.language.hongLabelInput
@@ -20,8 +22,6 @@ import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
-import com.codehong.library.widget.label.input.HongLabelInputBuilder
-import com.codehong.library.widget.label.input.HongLabelInputOption
 import com.codehong.library.widget.util.Const
 
 class QuarterInputOptionView @JvmOverloads constructor(
@@ -68,6 +68,13 @@ class QuarterInputOptionView @JvmOverloads constructor(
 
         horizontalLinearLayout {
             layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+            setPadding(
+                paddingLeft,
+                context.dpToPx(10f),
+                paddingRight,
+                paddingBottom
+            )
+
 
             frameLayout {
                 layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT).apply {
