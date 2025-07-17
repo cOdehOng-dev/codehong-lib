@@ -21,6 +21,7 @@ import com.codehong.library.widget.label.toggle.HongLabelSwitchBuilder
 import com.codehong.library.widget.label.toggle.HongLabelSwitchView
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongLayoutParam.Companion.isHongLayoutParam
 import com.codehong.library.widget.rule.HongLayoutParam.Companion.toHongLayoutParamValue
 import com.codehong.library.widget.rule.HongLayoutParam.Companion.toHongLayoutValueToParam
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -130,6 +131,9 @@ object PlaygroundManager {
                             .useOnlyNumber(true)
                             .showInput(initialWidth == Const.DIRECT_INPUT)
                             .inputCallback { inputSize ->
+                                if (inputSize.isHongLayoutParam()) {
+                                    return@inputCallback
+                                }
                                 val selectWidthSize = if (inputSize.isNullOrEmpty()) {
                                     width
                                 } else {
@@ -139,9 +143,7 @@ object PlaygroundManager {
                             }
                             .pickerCallback { selectSize, index ->
                                 Log.e("TAG", "옵션 selectWidth = $selectSize, index = $index")
-                                if (selectSize == HongLayoutParam.MATCH_PARENT.paramName
-                                    || selectSize == HongLayoutParam.WRAP_CONTENT.paramName
-                                ) {
+                                if (selectSize.isHongLayoutParam()) {
                                     hideInput()
                                     selectWidth.invoke(selectSize.toHongLayoutParamValue())
                                 } else {
@@ -176,6 +178,9 @@ object PlaygroundManager {
                             .useOnlyNumber(true)
                             .showInput(initialHeight == Const.DIRECT_INPUT)
                             .inputCallback { inputSize ->
+                                if (inputSize.isHongLayoutParam()) {
+                                    return@inputCallback
+                                }
                                 val selectHeightSize = if (inputSize.isNullOrEmpty()) {
                                     height
                                 } else {
@@ -185,9 +190,7 @@ object PlaygroundManager {
                             }
                             .pickerCallback { selectSize, index ->
                                 Log.e("TAG", "옵션 selectHeight = $selectSize, index = $index")
-                                if (selectSize == HongLayoutParam.MATCH_PARENT.paramName
-                                    || selectSize == HongLayoutParam.WRAP_CONTENT.paramName
-                                ) {
+                                if (selectSize.isHongLayoutParam()) {
                                     hideInput()
                                     selectHeight.invoke(selectSize.toHongLayoutParamValue())
                                 } else {

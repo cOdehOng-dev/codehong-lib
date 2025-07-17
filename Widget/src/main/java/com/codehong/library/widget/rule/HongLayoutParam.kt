@@ -36,5 +36,9 @@ enum class HongLayoutParam(val value: Int, val paramName: String) {
                 else -> ""
             }
         }
+
+        fun String?.isHongLayoutParam(): Boolean {
+            return this == MATCH_PARENT.paramName || this == WRAP_CONTENT.paramName
+        }
     }
 }
