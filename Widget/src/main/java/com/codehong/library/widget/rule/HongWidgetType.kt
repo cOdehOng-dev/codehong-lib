@@ -11,7 +11,7 @@ enum class HongWidgetType(
     TEXT_FILED(4, "TextField", true),
 //    SEARCH_BAR(5, "SearchBar", true),
     TEXT_BUTTON(6, "TextButton", true),
-//    SLIDE_LAYOUT(7, "SlideLayout", true),
+    SELECT_BUTTON(7, "SelectButton", true),
     CALENDAR(8, "Calendar", true),
     HORIZONTAL_PAGER(9, "HorizontalViewPager", true),
     BADGE_TEXT(10, "BadgeText", true),

@@ -8,20 +8,20 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatTextView
+import com.codehong.library.widget.extensions.dpToFloatPx
+import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.widget.extensions.lineBreakSyllable
+import com.codehong.library.widget.extensions.parseColor
+import com.codehong.library.widget.extensions.setLayout
+import com.codehong.library.widget.extensions.setTextSpan
 import com.codehong.library.widget.rule.HongTextLineBreak
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.rule.typo.fontType
 import com.codehong.library.widget.rule.typo.lineHeight
 import com.codehong.library.widget.rule.typo.size
-import com.codehong.library.widget.extensions.dpToFloatPx
-import com.codehong.library.widget.extensions.dpToPx
-import com.codehong.library.widget.extensions.parseColor
-import com.codehong.library.widget.extensions.setLayout
-import com.codehong.library.widget.util.lineBreakSyllable
 import com.codehong.library.widget.util.setTextFont
 import com.codehong.library.widget.util.setTextSize
-import com.codehong.library.widget.util.setTextSpan
 
 class HongTextView @JvmOverloads constructor(
     context: Context,

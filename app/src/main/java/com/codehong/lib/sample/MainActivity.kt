@@ -25,7 +25,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.SampleType.Companion.toType
 import com.codehong.lib.sample.badge.SampleBadgeTextActivity
-import com.codehong.lib.sample.button.SampleTextButtonActivity
+import com.codehong.lib.sample.button.select.SampleSelectButtonActivity
+import com.codehong.lib.sample.button.text.SampleTextButtonActivity
 import com.codehong.lib.sample.calendar.SampleCalendarActivity
 import com.codehong.lib.sample.calendar.SampleCalendarComposeActivity
 import com.codehong.lib.sample.captureshare.SampleCaptureShareActivity
@@ -49,8 +50,8 @@ import com.codehong.lib.sample.videopopup.SampleVideoPopupActivity
 import com.codehong.lib.sample.videopopup.SampleVideoPopupBuilderActivity
 import com.codehong.lib.sample.videopopup.SampleVideoPopupComposeActivity
 import com.codehong.library.widget.R
-import com.codehong.library.widget.button.HongTextButtonBuilder
-import com.codehong.library.widget.button.HongTextButtonCompose
+import com.codehong.library.widget.button.text.HongTextButtonBuilder
+import com.codehong.library.widget.button.text.HongTextButtonCompose
 import com.codehong.library.widget.dynamicisland.DynamicIslandInfo
 import com.codehong.library.widget.dynamicisland.DynamicIslandManager
 import com.codehong.library.widget.rule.HongBorderInfo
@@ -286,6 +287,16 @@ fun SampleTheme(
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
                                                     HongWidgetType.TEXT_BUTTON.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
+                                        HongWidgetType.SELECT_BUTTON -> {
+                                            Intent(activity, SampleSelectButtonActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.SELECT_BUTTON.value
                                                 )
                                                 activity.startActivity(this)
                                             }

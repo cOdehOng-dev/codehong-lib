@@ -80,7 +80,7 @@ class OptionPickerDialog constructor(
 
     override fun show() {
         super.show()
-        binding.clOptionPicker.startAnimation(
+        binding.llOptionPicker.startAnimation(
             AnimationUtils.loadAnimation(
                 context,
                 R.anim.honglib_popup_in
@@ -91,7 +91,7 @@ class OptionPickerDialog constructor(
 
     override fun dismiss() {
         binding.dim.startAnimation(AnimationUtils.loadAnimation(context, R.anim.honglib_fade_out))
-        binding.clOptionPicker.startAnimation(
+        binding.llOptionPicker.startAnimation(
             AnimationUtils.loadAnimation(
                 context,
                 R.anim.honglib_popup_out

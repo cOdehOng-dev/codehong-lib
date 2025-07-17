@@ -33,7 +33,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.R
-import com.codehong.library.widget.player.HongComposeVideoPlayerView
+import com.codehong.library.widget.player.HongVideoPlayerCompose
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.util.dpToSp
 import com.codehong.library.widget.extensions.hongBackground
@@ -112,7 +112,7 @@ fun HongComposeVideoPopupView(
 //                .background(Color.White)
                 .clickable { if (!landingLink.isNullOrEmpty()) clickLanding?.invoke(landingLink) }
         ) {
-            HongComposeVideoPlayerView(
+            HongVideoPlayerCompose(
                 option = option.videoPlayerOption,
                 onEnd = {
                     // 영상 끝날 때 닫기

@@ -2,11 +2,12 @@ package com.codehong.library.widget.label.select
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
-import com.codehong.library.widget.button.HongTextButtonBuilder
-import com.codehong.library.widget.button.HongTextButtonOption
-import com.codehong.library.widget.button.HongTextButtonView
+import com.codehong.library.widget.button.text.HongTextButtonBuilder
+import com.codehong.library.widget.button.text.HongTextButtonOption
+import com.codehong.library.widget.button.text.HongTextButtonView
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
@@ -157,7 +158,7 @@ class HongLabelSelectInputView @JvmOverloads constructor(
     }
 
     private fun initSelectPickerView() {
-        val initial = option.textButtonOption.textOption.text
+        val initial = option.textButtonOption.textOption.text.also { Log.d("TAG", "test here 123123 = $it") }
 
         this.textButtonOption = HongTextButtonBuilder()
             .copy(option.textButtonOption)

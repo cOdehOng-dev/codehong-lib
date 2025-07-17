@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.codehong.library.widget.databinding.HonglibViewDynamicIslandBinding
-import com.codehong.library.widget.util.Utils
+import com.codehong.library.widget.extensions.dpToPx
 import java.lang.ref.WeakReference
 
 class DynamicIslandService : Service() {
@@ -177,7 +177,7 @@ class DynamicIslandService : Service() {
         binding.tvTo.text = info.toCity
 
         val requestOptions = RequestOptions()
-            .transform(RoundedCorners(Utils.dpToPx(this, 10f)))
+            .transform(RoundedCorners(this.dpToPx(10f)))
 
         Glide.with(this)
             .load(info.thumbnailUrl)

@@ -18,8 +18,8 @@ import com.codehong.library.widget.rule.typo.size
 import com.codehong.library.widget.util.dpToSp
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
+import com.codehong.library.widget.extensions.lineBreakSyllable
 import com.codehong.library.widget.extensions.parseComposeColor
-import com.codehong.library.widget.util.lineBreakSyllable
 
 @Composable
 fun HongTextCompose(

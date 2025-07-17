@@ -12,8 +12,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import com.codehong.library.widget.button.HongTextButtonBuilder
-import com.codehong.library.widget.button.HongTextButtonCompose
+import com.codehong.library.widget.button.text.HongTextButtonBuilder
+import com.codehong.library.widget.button.text.HongTextButtonCompose
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.label.HongLabelViewCompose

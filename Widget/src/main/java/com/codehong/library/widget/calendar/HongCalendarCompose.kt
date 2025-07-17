@@ -21,9 +21,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.HongDivider
+import com.codehong.library.widget.calendar.model.HongCalendarDayOfWeekLangType
+import com.codehong.library.widget.calendar.model.HongCalendarSelectBackgroundColorHex
 import com.codehong.library.widget.calendar.model.HongCalendarSelectedType
+import com.codehong.library.widget.calendar.model.InitialSelectedInfo
 import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
@@ -32,6 +36,7 @@ import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextCompose
 import com.codehong.library.widget.text.HongTextOption
+import com.codehong.library.widget.util.HongDateUtil
 import com.codehong.library.widget.util.HongWidgetContainer
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
@@ -375,4 +380,104 @@ private fun DayOfMonthView(
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewHongCalendarCompose() {
+    val option = HongCalendarBuilder()
+        .backgroundColor(HongColor.WHITE_100.hex)
+        .initialSelectedInfo(
+            InitialSelectedInfo(
+                startDate = "20250710",
+                endDate = "20250720"
+            )
+        )
+        .dayOfWeekTextOption(
+            HongTextBuilder()
+                .size(13)
+                .color("#666666")
+                .fontType(HongFont.PRETENDARD_400)
+                .applyOption()
+        )
+        .dayOfWeekLangType(HongCalendarDayOfWeekLangType.KOR)
+        .yearMonthTextOption(
+            HongTextBuilder()
+                .size(19)
+                .color(HongColor.BLACK_100.hex)
+                .fontType(HongFont.PRETENDARD_700)
+                .applyOption()
+        )
+        .yearMonthPattern("yyyy.MM")
+        .selectBackgroundColorHex(
+            HongCalendarSelectBackgroundColorHex(
+                startDayColorHex = HongColor.MAIN_ORANGE_100.hex,
+                endDayColorHex = HongColor.MAIN_ORANGE_100.hex,
+                rangeDaysColorHex = HongColor.MAIN_ORANGE_15.hex
+            )
+        )
+        .startDayTextOption(
+            HongTextBuilder()
+                .size(17)
+                .color(HongColor.WHITE_100.hex)
+                .fontType(HongFont.PRETENDARD_700)
+                .applyOption()
+        )
+        .endDayTextOption(
+            HongTextBuilder()
+                .size(17)
+                .color(HongColor.WHITE_100.hex)
+                .fontType(HongFont.PRETENDARD_700)
+                .applyOption()
+        )
+        .rangeDaysTextOption(
+            HongTextBuilder()
+                .size(17)
+                .color(HongColor.MAIN_ORANGE_100.hex)
+                .fontType(HongFont.PRETENDARD_700)
+                .applyOption()
+        )
+        .holidaysTextOption(
+            HongTextBuilder()
+                .size(17)
+                .color("#ff322e")
+                .fontType(HongFont.PRETENDARD_700)
+                .applyOption()
+        )
+        .pastDaysTextOption(
+            HongTextBuilder()
+                .size(17)
+                .color("#cccccc")
+                .fontType(HongFont.PRETENDARD_700)
+                .applyOption()
+        )
+        .selectTodayTextOption(
+            HongTextBuilder()
+                .size(8)
+                .color(HongColor.WHITE_100.hex)
+                .fontType(HongFont.PRETENDARD_700)
+                .applyOption()
+        )
+        .unselectTodayTextOption(
+            HongTextBuilder()
+                .size(8)
+                .color("#545457")
+                .fontType(HongFont.PRETENDARD_700)
+                .applyOption()
+        )
+        .defaultDayTextOption(
+            HongTextBuilder()
+                .size(17)
+                .color(HongColor.BLACK_100.hex)
+                .fontType(HongFont.PRETENDARD_700)
+                .applyOption()
+        )
+        .spacingHorizontal(16)
+        .bottomSpacingWeek(20)
+        .holidayList(HongDateUtil.KOREAN_HOLIDAY_LIST)
+        .dayOfWeekBottomLineColorHex("#eeeeee")
+        .onSelected { _, _ -> }
+        .applyOption()
+
+    HongCalendarCompose(option)
 }

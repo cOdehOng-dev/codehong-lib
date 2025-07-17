@@ -50,7 +50,8 @@
             android:name=".layout.fadeanimheader.FadeAnimHeaderLayoutActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".textfield.SampleTextFieldActivity"/>
-        <activity android:name=".button.SampleTextButtonActivity"/>
+        <activity android:name=".button.text.SampleTextButtonActivity"/>
+        <activity android:name=".button.select.SampleSelectButtonActivity"/>
         <activity android:name=".image.SampleImageActivity"/>
         <activity android:name=".layout.slide.SampleSlideLayoutActivity"/>
 

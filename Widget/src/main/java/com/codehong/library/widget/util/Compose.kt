@@ -46,9 +46,7 @@ fun dpToPx(dp: Float) = with(LocalDensity.current) { dp.dp.toPx() }
 fun dpToPx(dp: Int) = with(LocalDensity.current) { dp.dp.toPx() }
 
 @Composable
-fun pxToDp(px: Float): Dp {
-    return with(LocalDensity.current) { px.toDp() }
-}
+fun pxToDp(px: Float) = with(LocalDensity.current) { px.toDp() }
 
 @Composable
 fun getStatusHeight(): Dp = WindowInsets.systemBars.asPaddingValues().calculateTopPadding()

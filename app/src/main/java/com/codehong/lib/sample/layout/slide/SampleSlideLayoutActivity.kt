@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.SampleHeader
 import com.codehong.lib.sample.SampleComposeDespContainer
 import com.codehong.library.widget.MarginTopOrBottom
-import com.codehong.library.widget.button.HongTextButtonCompose
-import com.codehong.library.widget.button.HongTextButtonBuilder
+import com.codehong.library.widget.button.text.HongTextButtonCompose
+import com.codehong.library.widget.button.text.HongTextButtonBuilder
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo

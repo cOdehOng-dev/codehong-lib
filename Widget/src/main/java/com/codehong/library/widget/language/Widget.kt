@@ -2,16 +2,35 @@ package com.codehong.library.widget.language
 
 import android.content.Context
 import android.view.ViewGroup
-import com.codehong.library.widget.button.HongTextButtonView
+import com.codehong.library.widget.button.select.HongSelectButtonView
+import com.codehong.library.widget.button.text.HongTextButtonView
 import com.codehong.library.widget.checkbox.HongCheckboxView
 import com.codehong.library.widget.image.HongImageView
 import com.codehong.library.widget.label.HongLabelView
 import com.codehong.library.widget.label.input.HongLabelInputView
 import com.codehong.library.widget.label.select.HongLabelSelectInputView
 import com.codehong.library.widget.label.toggle.HongLabelSwitchView
+import com.codehong.library.widget.text.HongTextView
 import com.codehong.library.widget.textfield.HongTextFieldView
 import com.codehong.library.widget.textfield.view.BackAwareEditText
 import com.codehong.library.widget.toggleswitch.HongSwitchView
+
+fun Context.hongText(
+    block: HongTextView.() -> Unit
+) = HongTextView(this).run {
+    block.invoke(this)
+    this
+}
+
+fun ViewGroup.hongText(
+    block: HongTextView.() -> Unit
+) = HongTextView(this.context).run {
+    block.invoke(this)
+    this@hongText.addView(this)
+    this
+}
+
+
 
 fun Context.hongImage(
     block: HongImageView.() -> Unit
@@ -64,12 +83,25 @@ fun Context.hongTextButton(
     block.invoke(this)
     this
 }
-
 fun ViewGroup.hongTextButton(
     block: HongTextButtonView.() -> Unit
 ) = HongTextButtonView(this.context).run {
     block.invoke(this)
     this@hongTextButton.addView(this)
+    this
+}
+
+fun Context.hongSelectButton(
+    block: HongSelectButtonView.() -> Unit
+) = HongSelectButtonView(this).run {
+    block.invoke(this)
+    this
+}
+fun ViewGroup.hongSelectButton(
+    block: HongSelectButtonView.() -> Unit
+) = HongSelectButtonView(this.context).run {
+    block.invoke(this)
+    this@hongSelectButton.addView(this)
     this
 }
 

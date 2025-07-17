@@ -60,6 +60,9 @@ class HongTextPlayground(
         useAlign: Boolean = true,
         useCancelLine: Boolean = true,
         useUnderline: Boolean = true,
+        useLineBreak: Boolean = true,
+        useOverflow: Boolean = true,
+        useMaxLine: Boolean = true,
         callback: (HongTextOption) -> Unit
     ) {
         var inject = injectOption
@@ -191,69 +194,74 @@ class HongTextPlayground(
         }
 
 
-
-        /** 최대 라인 수 */
-        PlaygroundManager.addLabelInputOptionPreview(
-            activity = activity,
-            label = "maxLine",
-            input = if (inject.maxLines == Int.MAX_VALUE) "" else inject.maxLines.toString(),
-            useOnlyNumber = true
-        ) { maxLines ->
-            inject = HongTextBuilder()
-                .copy(inject)
-                .maxLines(
-                    if (maxLines.isEmpty()) {
-                        Int.MAX_VALUE
-                    } else {
-                        maxLines.toInt()
-                    }
-                )
-                .applyOption()
-            callback.invoke(inject)
+        if (useMaxLine) {
+            /** 최대 라인 수 */
+            PlaygroundManager.addLabelInputOptionPreview(
+                activity = activity,
+                label = "maxLine",
+                input = if (inject.maxLines == Int.MAX_VALUE) "" else inject.maxLines.toString(),
+                useOnlyNumber = true
+            ) { maxLines ->
+                inject = HongTextBuilder()
+                    .copy(inject)
+                    .maxLines(
+                        if (maxLines.isEmpty()) {
+                            Int.MAX_VALUE
+                        } else {
+                            maxLines.toInt()
+                        }
+                    )
+                    .applyOption()
+                callback.invoke(inject)
+            }
         }
 
-        /**
-         * 화면에 표현할 수 있는 최대 글자수를 넘어간 경우 처리 방법
-         * 자름 (Clip) / ... 처리 (Ellipsis)
-         */
-        val overflowList = HongTextOverflow.entries.map { it.alias }
-        val initialOverflow = inject.overflow.toHongTextOverflowToAlias()
-        PlaygroundManager.addSelectOptionView(
-            activity = activity,
-            initialText = initialOverflow,
-            label = "글 잘림 처리",
-            description = "자름(Clip) / ...처리 (Ellipsis) / 보이기 (Visible)",
-            useDirectCallback = true,
-            selectList = overflowList,
-            selectedPosition = overflowList.indexOf(initialOverflow),
-        ) { selectOverflow, _ ->
-            inject = HongTextBuilder()
-                .copy(inject)
-                .overflow(selectOverflow.toHongTextOverFlow())
-                .applyOption()
-            callback.invoke(inject)
+        if (useOverflow) {
+            /**
+             * 화면에 표현할 수 있는 최대 글자수를 넘어간 경우 처리 방법
+             * 자름 (Clip) / ... 처리 (Ellipsis)
+             */
+            val overflowList = HongTextOverflow.entries.map { it.alias }
+            val initialOverflow = inject.overflow.toHongTextOverflowToAlias()
+            PlaygroundManager.addSelectOptionView(
+                activity = activity,
+                initialText = initialOverflow,
+                label = "글 잘림 처리",
+                description = "자름(Clip) / ...처리 (Ellipsis) / 보이기 (Visible)",
+                useDirectCallback = true,
+                selectList = overflowList,
+                selectedPosition = overflowList.indexOf(initialOverflow),
+            ) { selectOverflow, _ ->
+                inject = HongTextBuilder()
+                    .copy(inject)
+                    .overflow(selectOverflow.toHongTextOverFlow())
+                    .applyOption()
+                callback.invoke(inject)
+            }
         }
 
-        /**
-         * 줄바꿈 타입
-         */
-        val lineBreakList = HongTextLineBreak.entries.map { it.alias }.toList()
-        val initialLineBreak = inject.lineBreak.toHongTextLineBreakToAlias()
+        if (useLineBreak) {
+            /**
+             * 줄바꿈 타입
+             */
+            val lineBreakList = HongTextLineBreak.entries.map { it.alias }.toList()
+            val initialLineBreak = inject.lineBreak.toHongTextLineBreakToAlias()
 
-        PlaygroundManager.addSelectOptionView(
-            activity = activity,
-            initialText = initialLineBreak,
-            label = "줄바꿈 설정",
-            description = "시스템에 따름 / 음절 단위로 줄바꿈 / 단어 단위로 줄바꿈",
-            useDirectCallback = true,
-            selectList = lineBreakList,
-            selectedPosition = lineBreakList.indexOf(initialLineBreak),
-        ) { selectLineBreak, _ ->
-            inject = HongTextBuilder()
-                .copy(inject)
-                .lineBreak(selectLineBreak.toHongTextLineBreak())
-                .applyOption()
-            callback.invoke(inject)
+            PlaygroundManager.addSelectOptionView(
+                activity = activity,
+                initialText = initialLineBreak,
+                label = "줄바꿈 설정",
+                description = "시스템에 따름 / 음절 단위로 줄바꿈 / 단어 단위로 줄바꿈",
+                useDirectCallback = true,
+                selectList = lineBreakList,
+                selectedPosition = lineBreakList.indexOf(initialLineBreak),
+            ) { selectLineBreak, _ ->
+                inject = HongTextBuilder()
+                    .copy(inject)
+                    .lineBreak(selectLineBreak.toHongTextLineBreak())
+                    .applyOption()
+                callback.invoke(inject)
+            }
         }
 
         if (useCancelLine) {

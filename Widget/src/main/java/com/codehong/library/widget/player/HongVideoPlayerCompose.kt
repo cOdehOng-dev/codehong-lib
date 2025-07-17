@@ -21,16 +21,16 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
-import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toRoundedCornerShape
-import com.codehong.library.widget.util.Utils
-import com.codehong.library.widget.util.aspectRatio
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
+import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toRoundedCornerShape
+import com.codehong.library.widget.util.Utils
+import com.codehong.library.widget.util.aspectRatio
 
 @OptIn(UnstableApi::class)
 @Composable
-fun HongComposeVideoPlayerView(
+fun HongVideoPlayerCompose(
     option: HongVideoPlayerOption,
     onPlayVideo: () -> Unit = {},
     onRenderingFinish: () -> Unit = {},

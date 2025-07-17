@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import com.codehong.lib.sample.SampleConst
 import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.lib.sample.databinding.ActivitySampleVideoPlayerBinding
-import com.codehong.library.widget.player.HongComposeVideoPlayerView
+import com.codehong.library.widget.player.HongVideoPlayerCompose
 import com.codehong.library.widget.player.HongVideoPlayerBuilder
 import com.codehong.library.widget.player.HongVideoPlayerView
 import com.codehong.library.widget.rule.HongSpacingInfo
@@ -97,7 +97,7 @@ class SampleVideoPlayerActivity : BaseActivity() {
             )
             .ratio("16:9")
             .applyOption()
-        HongComposeVideoPlayerView(
+        HongVideoPlayerCompose(
             option = option
         )
     }

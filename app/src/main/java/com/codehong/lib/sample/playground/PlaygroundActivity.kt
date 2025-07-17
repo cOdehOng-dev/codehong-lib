@@ -1,7 +1,6 @@
 package com.codehong.lib.sample.playground
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.compose.foundation.border
@@ -15,7 +14,8 @@ import androidx.core.content.ContextCompat
 import com.codehong.lib.sample.SampleConst
 import com.codehong.lib.sample.badge.HongBadgeTextPlayground
 import com.codehong.lib.sample.base.BaseActivity
-import com.codehong.lib.sample.button.HongTextButtonPlayground
+import com.codehong.lib.sample.button.select.HongSelectButtonPlayground
+import com.codehong.lib.sample.button.text.HongTextButtonPlayground
 import com.codehong.lib.sample.calendar.CalendarPlayground
 import com.codehong.lib.sample.checkbox.HongCheckboxPlayground
 import com.codehong.lib.sample.closeheader.HongCloseHeaderPlayground
@@ -32,8 +32,10 @@ import com.codehong.lib.sample.toggleswitch.HongSwitchPlayground
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.badge.HongBadgeTextCompose
 import com.codehong.library.widget.badge.HongBadgeTextOption
-import com.codehong.library.widget.button.HongTextButtonCompose
-import com.codehong.library.widget.button.HongTextButtonOption
+import com.codehong.library.widget.button.select.HongSelectButtonCompose
+import com.codehong.library.widget.button.select.HongSelectButtonOption
+import com.codehong.library.widget.button.text.HongTextButtonCompose
+import com.codehong.library.widget.button.text.HongTextButtonOption
 import com.codehong.library.widget.calendar.HongCalendarCompose
 import com.codehong.library.widget.calendar.HongCalendarOption
 import com.codehong.library.widget.checkbox.HongCheckBoxCompose
@@ -175,6 +177,7 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.TEXT_FILED -> HongTextFieldPlayground(this).preview()
             HongWidgetType.CALENDAR -> CalendarPlayground(this).preview()
             HongWidgetType.TEXT_BUTTON -> HongTextButtonPlayground(this).preview()
+            HongWidgetType.SELECT_BUTTON -> HongSelectButtonPlayground(this).preview()
             HongWidgetType.HORIZONTAL_PAGER -> HongHorizontalPagerPlayground(this).preview()
             HongWidgetType.BADGE_TEXT -> HongBadgeTextPlayground(this).preview()
             HongWidgetType.CHECKBOX -> HongCheckboxPlayground(this).preview()
@@ -192,7 +195,6 @@ class PlaygroundActivity : BaseActivity() {
         previewOption: HongWidgetCommonOption
     ) {
         this.previewOption = previewOption
-        Log.d("TAG", "test here previewOption 22 : $previewOption")
         val isBorderOn = viewModel.isBorderOn.value ?: false
         applyPreviewUI(isBorderOn)
     }
@@ -263,6 +265,15 @@ class PlaygroundActivity : BaseActivity() {
                 binding.vComposePreview.setContent {
                     PreviewUI(isBorderOn) {
                         HongTextButtonCompose(previewOption as HongTextButtonOption)
+                    }
+                }
+            }
+
+
+            HongWidgetType.SELECT_BUTTON -> {
+                binding.vComposePreview.setContent {
+                    PreviewUI(isBorderOn) {
+                        HongSelectButtonCompose(previewOption as HongSelectButtonOption)
                     }
                 }
             }
@@ -352,7 +363,6 @@ class PlaygroundActivity : BaseActivity() {
 
             HongWidgetType.SCROLL_TAB -> {
                 binding.vComposePreview.setContent {
-                    Log.e("TAG", "test here previewOption 11 : $previewOption")
                     PreviewUI(isBorderOn) {
                         HongScrollTabCompose(previewOption as HongScrollTabOption) { _, _ -> }
                     }

@@ -1,4 +1,4 @@
-package com.codehong.library.widget.button
+package com.codehong.library.widget.button.text
 
 import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
@@ -52,14 +52,10 @@ data class HongTextButtonOption(
         bottomLeft = DEFAULT_BOTTOM_START_RADIUS,
         bottomRight = DEFAULT_BOTTOM_END_RADIUS
     )
-    override var backgroundColor: HongColor = HongColor.WHITE_100
-    override var backgroundColorHex: String = HongColor.WHITE_100.hex
-    override var border: HongBorderInfo = HongBorderInfo(
-        width = 0,
-        color = HongColor.WHITE_100.hex
-    )
+    override var backgroundColor: HongColor = HongColor.TRANSPARENT
+    override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
+    override var border: HongBorderInfo = HongBorderInfo()
     override var useShapeCircle: Boolean = DEFAULT_USE_SHAPE_CIRCLE
-
     override var shadow = HongShadowInfo()
 
     var textOption = DEFAULT_TEXT_OPTION

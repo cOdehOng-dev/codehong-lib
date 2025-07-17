@@ -16,6 +16,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.color.HongColor.Companion.parseColor
 import kotlin.math.abs
 import kotlin.math.min
 
@@ -28,13 +30,12 @@ class PickerItem @JvmOverloads constructor(
     private val topAndBottomFadingEdgeStrength = 0.9f
     private val snapScrollDuration = 300
     private val selectorMaxFlingVelocityAdjustment = 4
-    private val defaultItemCount = 7
     private val defaultTextSize = context.dpToPx(15f)
 
-    private var mSelectorItemCount: Int
+    private var selectorItemCount: Int = 9
     private var mSelectorVisibleItemCount: Int
-    private var mMinIndex: Int
-    private var mMaxIndex: Int
+    private var minIndex = Integer.MIN_VALUE
+    private var maxIndex = Integer.MAX_VALUE
     private var mMaxValidIndex: Int? = null
     private var mMinValidIndex: Int? = null
 
@@ -45,13 +46,12 @@ class PickerItem @JvmOverloads constructor(
     private var mCurSelectedItemIndex = 0
     private var mWrapSelectorRawPickerPreferred: Boolean
 
-    private var mTextPaint: Paint = Paint()
-    private var mSelectedTextColor: Int
-    private var mUnSelectedTextColor: Int
-    private var mTextSize: Int
+    private val textPaint = Paint()
+    private val selectedTextColor = HongColor.BLACK_100.parseColor()
+    private val unSelectedTextColor = HongColor.BLACK_100.parseColor()
 
-    private var mOverScroller: OverScroller? = null
-    private var mVelocityTracker: VelocityTracker? = null
+    private val overScroller = OverScroller(context, DecelerateInterpolator(2.5f))
+    private var velocityTracker: VelocityTracker? = null
     private val mTouchSlop: Int
     private val mMaximumVelocity: Int
     private val mMinimumVelocity: Int
@@ -66,7 +66,7 @@ class PickerItem @JvmOverloads constructor(
     private var mOnValueChangeListener: OnValueChangeListener? = null
     private var mOnScrollListener: OnScrollListener? = null
     private var mAdapter: PickerItemAdapter? = null
-    private var mSelectedTextScale = 0.3f
+    private val selectedTextScale = 0.3f
 
     interface OnValueChangeListener {
         fun onValueChange(picker: PickerItem, oldVal: String, newVal: String)
@@ -85,35 +85,26 @@ class PickerItem @JvmOverloads constructor(
     /**
      * The current scroll state of the number picker.
      */
-    private var mScrollState = SCROLL_STATE_IDLE
+    private var scrollState = SCROLL_STATE_IDLE
 
     init {
-        mSelectorItemCount = defaultItemCount + 2
-        mRawPickerMiddleItemIndex = (mSelectorItemCount - 1) / 2
-        mSelectorVisibleItemCount = mSelectorItemCount - 2
+        mRawPickerMiddleItemIndex = (selectorItemCount - 1) / 2
+        mSelectorVisibleItemCount = selectorItemCount - 2
         mRawPickerVisibleItemMiddleIndex = (mSelectorVisibleItemCount - 1) / 2
-        mSelectorItemIndices = ArrayList(mSelectorItemCount)
-        mSelectorItemValidStatus = ArrayList(mSelectorItemCount)
+        mSelectorItemIndices = ArrayList(selectorItemCount)
+        mSelectorItemValidStatus = ArrayList(selectorItemCount)
 
-        mMinIndex = Integer.MIN_VALUE
-        mMaxIndex = Integer.MAX_VALUE
         mWrapSelectorRawPickerPreferred = false
-        mSelectedTextScale = 0.3f
 
-        mOverScroller = OverScroller(context, DecelerateInterpolator(2.5f))
         val configuration = ViewConfiguration.get(context)
         mTouchSlop = configuration.scaledTouchSlop
-        mMaximumVelocity =
-            configuration.scaledMaximumFlingVelocity / selectorMaxFlingVelocityAdjustment
+        mMaximumVelocity = configuration.scaledMaximumFlingVelocity / selectorMaxFlingVelocityAdjustment
         mMinimumVelocity = configuration.scaledMinimumFlingVelocity
 
-        mSelectedTextColor = ContextCompat.getColor(context, R.color.honglib_color_000000)
-        mUnSelectedTextColor = ContextCompat.getColor(context, R.color.honglib_color_000000)
-        mTextSize = defaultTextSize
 
-        mTextPaint.run {
+        textPaint.run {
             isAntiAlias = true
-            textSize = mTextSize.toFloat()
+            textSize = defaultTextSize.toFloat()
             textAlign = Paint.Align.CENTER
             style = Paint.Style.FILL_AND_STROKE
             typeface = ResourcesCompat.getFont(context, R.font.pretendard_400)
@@ -159,7 +150,7 @@ class PickerItem @JvmOverloads constructor(
     override fun getSuggestedMinimumHeight(): Int {
         var suggested = super.getSuggestedMinimumWidth()
         if (mSelectorVisibleItemCount > 0) {
-            val fontMetricsInt = mTextPaint.fontMetricsInt
+            val fontMetricsInt = textPaint.fontMetricsInt
             val height = fontMetricsInt.descent - fontMetricsInt.ascent
             suggested = Math.max(suggested, height * mSelectorVisibleItemCount)
         }
@@ -167,22 +158,22 @@ class PickerItem @JvmOverloads constructor(
     }
 
     private fun computeMaximumWidth(): Int {
-        mTextPaint.textSize = mTextSize * 1.3f
+        textPaint.textSize = defaultTextSize * 1.3f
         if (mAdapter != null) {
-            return if (!mAdapter!!.getTextWithMaximumLength().isEmpty()) {
+            return if (mAdapter!!.getTextWithMaximumLength().isNotEmpty()) {
                 val suggestedWith =
-                    mTextPaint.measureText(mAdapter!!.getTextWithMaximumLength()).toInt()
-                mTextPaint.textSize = mTextSize * 1.0f
+                    textPaint.measureText(mAdapter!!.getTextWithMaximumLength()).toInt()
+                textPaint.textSize = defaultTextSize * 1.0f
                 suggestedWith
             } else {
-                val suggestedWith = mTextPaint.measureText("0000").toInt()
-                mTextPaint.textSize = mTextSize * 1.0f
+                val suggestedWith = textPaint.measureText("0000").toInt()
+                textPaint.textSize = defaultTextSize * 1.0f
                 suggestedWith
             }
         }
-        val widthForMinIndex = mTextPaint.measureText(mMinIndex.toString()).toInt()
-        val widthForMaxIndex = mTextPaint.measureText(mMaxIndex.toString()).toInt()
-        mTextPaint.textSize = mTextSize * 1.0f
+        val widthForMinIndex = textPaint.measureText(minIndex.toString()).toInt()
+        val widthForMaxIndex = textPaint.measureText(maxIndex.toString()).toInt()
+        textPaint.textSize = defaultTextSize * 1.0f
         return if (widthForMinIndex > widthForMaxIndex) {
             widthForMinIndex
         } else {
@@ -231,11 +222,11 @@ class PickerItem @JvmOverloads constructor(
         mSelectorItemIndices.clear()
         mSelectorItemValidStatus.clear()
 
-        mCurSelectedItemIndex = if (mMinValidIndex == null || mMinValidIndex!! < mMinIndex) {
-            if (mMinIndex <= 0) {
+        mCurSelectedItemIndex = if (mMinValidIndex == null || mMinValidIndex!! < minIndex) {
+            if (minIndex <= 0) {
                 0
             } else {
-                mMinIndex
+                minIndex
             }
         } else {
             if (mMinValidIndex!! <= 0) {
@@ -245,7 +236,7 @@ class PickerItem @JvmOverloads constructor(
             }
         }
 
-        for (i in 0 until mSelectorItemCount) {
+        for (i in 0 until selectorItemCount) {
             var selectorIndex = mCurSelectedItemIndex + (i - mRawPickerMiddleItemIndex)
             if (mWrapSelectorRawPickerPreferred) {
                 selectorIndex = getWrappedSelectorIndex(selectorIndex)
@@ -271,16 +262,16 @@ class PickerItem @JvmOverloads constructor(
     }
 
     private fun onTouchEventVertical(event: MotionEvent) {
-        if (mVelocityTracker == null) {
-            mVelocityTracker = VelocityTracker.obtain()
+        if (velocityTracker == null) {
+            velocityTracker = VelocityTracker.obtain()
         }
 
-        mVelocityTracker?.addMovement(event)
+        velocityTracker?.addMovement(event)
 
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
-                if (!mOverScroller!!.isFinished) {
-                    mOverScroller!!.forceFinished(true)
+                if (!overScroller.isFinished) {
+                    overScroller.forceFinished(true)
                 }
 
                 mLastY = event.y
@@ -312,12 +303,12 @@ class PickerItem @JvmOverloads constructor(
                     mIsDragging = false
                     parent?.requestDisallowInterceptTouchEvent(false)
 
-                    mVelocityTracker?.computeCurrentVelocity(1000, mMaximumVelocity.toFloat())
-                    val velocity = mVelocityTracker?.yVelocity?.toInt()
+                    velocityTracker?.computeCurrentVelocity(1000, mMaximumVelocity.toFloat())
+                    val velocity = velocityTracker?.yVelocity?.toInt()
 
                     if (abs(velocity!!) > mMinimumVelocity) {
                         mPreviousScrollerY = 0
-                        mOverScroller?.fling(
+                        overScroller.fling(
                             scrollX, scrollY, 0, velocity, 0, 0, Integer.MIN_VALUE,
                             Integer.MAX_VALUE, 0, (getItemHeight() * 0.7).toInt()
                         )
@@ -326,7 +317,6 @@ class PickerItem @JvmOverloads constructor(
                     }
                     recyclerVelocityTracker()
                 } else {
-                    // click event
                     val y = event.y.toInt()
                     handlerClickVertical(y)
                 }
@@ -355,7 +345,7 @@ class PickerItem @JvmOverloads constructor(
 
         if (!mWrapSelectorRawPickerPreferred && y > 0
             && (
-                    mSelectorItemIndices[mRawPickerMiddleItemIndex] <= mMinIndex
+                    mSelectorItemIndices[mRawPickerMiddleItemIndex] <= minIndex
                             || (mMinValidIndex != null && mSelectorItemIndices[mRawPickerMiddleItemIndex] <= mMinValidIndex!!)
                     )
         ) {
@@ -363,8 +353,8 @@ class PickerItem @JvmOverloads constructor(
                 mCurrentFirstItemOffset += y
             } else {
                 mCurrentFirstItemOffset = mInitialFirstItemOffset + (gap / 2)
-                if (!mOverScroller!!.isFinished && !mIsDragging) {
-                    mOverScroller!!.abortAnimation()
+                if (!overScroller!!.isFinished && !mIsDragging) {
+                    overScroller!!.abortAnimation()
                 }
             }
             return
@@ -372,7 +362,7 @@ class PickerItem @JvmOverloads constructor(
 
         if (!mWrapSelectorRawPickerPreferred && y < 0
             && (
-                    mSelectorItemIndices[mRawPickerMiddleItemIndex] >= mMaxIndex
+                    mSelectorItemIndices[mRawPickerMiddleItemIndex] >= maxIndex
                             || (mMaxValidIndex != null && mSelectorItemIndices[mRawPickerMiddleItemIndex] >= mMaxValidIndex!!)
                     )
         ) {
@@ -380,8 +370,8 @@ class PickerItem @JvmOverloads constructor(
                 mCurrentFirstItemOffset += y
             } else {
                 mCurrentFirstItemOffset = mInitialFirstItemOffset - (gap / 2)
-                if (!mOverScroller!!.isFinished && !mIsDragging) {
-                    mOverScroller!!.abortAnimation()
+                if (!overScroller!!.isFinished && !mIsDragging) {
+                    overScroller!!.abortAnimation()
                 }
             }
             return
@@ -394,7 +384,7 @@ class PickerItem @JvmOverloads constructor(
             increaseSelectorsIndex()
             if (!mWrapSelectorRawPickerPreferred
                 && (
-                        mSelectorItemIndices[mRawPickerMiddleItemIndex] >= mMaxIndex
+                        mSelectorItemIndices[mRawPickerMiddleItemIndex] >= maxIndex
                                 || (mMaxValidIndex != null && mSelectorItemIndices[mRawPickerMiddleItemIndex] >= mMaxValidIndex!!)
                         )
             ) {
@@ -407,24 +397,24 @@ class PickerItem @JvmOverloads constructor(
             decreaseSelectorsIndex()
             if (!mWrapSelectorRawPickerPreferred
                 && (
-                        mSelectorItemIndices[mRawPickerMiddleItemIndex] <= mMinIndex
+                        mSelectorItemIndices[mRawPickerMiddleItemIndex] <= minIndex
                                 || (mMinValidIndex != null && mSelectorItemIndices[mRawPickerMiddleItemIndex] <= mMinValidIndex!!)
                         )
             ) {
                 mCurrentFirstItemOffset = mInitialFirstItemOffset
             }
         }
-        onSelectionChanged(mSelectorItemIndices[mRawPickerMiddleItemIndex], true)
+        onSelectionChanged(mSelectorItemIndices[mRawPickerMiddleItemIndex])
     }
 
     override fun computeScroll() {
         super.computeScroll()
-        if (mOverScroller!!.computeScrollOffset()) {
-            val x = mOverScroller!!.currX
-            val y = mOverScroller!!.currY
+        if (overScroller.computeScrollOffset()) {
+            val x = overScroller.currX
+            val y = overScroller.currY
 
             if (mPreviousScrollerY == 0) {
-                mPreviousScrollerY = mOverScroller!!.startY
+                mPreviousScrollerY = overScroller.startY
             }
             scrollBy(x, y - mPreviousScrollerY)
             mPreviousScrollerY = y
@@ -450,7 +440,7 @@ class PickerItem @JvmOverloads constructor(
         }
 
         if (deltaY != 0) {
-            mOverScroller!!.startScroll(scrollX, scrollY, 0, deltaY, 800)
+            overScroller.startScroll(scrollX, scrollY, 0, deltaY, 800)
             invalidateOnAnimation()
         }
 
@@ -458,24 +448,20 @@ class PickerItem @JvmOverloads constructor(
     }
 
     private fun recyclerVelocityTracker() {
-        mVelocityTracker?.recycle()
-        mVelocityTracker = null
-    }
-
-    override fun onScrollChanged(l: Int, t: Int, oldl: Int, oldt: Int) {
-        super.onScrollChanged(l, t, oldl, oldt)
+        velocityTracker?.recycle()
+        velocityTracker = null
     }
 
     private fun onScrollStateChange(scrollState: Int) {
-        if (mScrollState == scrollState) {
+        if (this.scrollState == scrollState) {
             return
         }
-        mScrollState = scrollState
+        this.scrollState = scrollState
         mOnScrollListener?.onScrollStateChange(this, scrollState)
     }
 
     private fun getItemHeight(): Int {
-        return height / (mSelectorItemCount - 2)
+        return height / (selectorItemCount - 2)
     }
 
     private fun getGapHeight(): Int {
@@ -483,7 +469,7 @@ class PickerItem @JvmOverloads constructor(
     }
 
     private fun computeTextHeight(): Int {
-        val metricsInt = mTextPaint.fontMetricsInt
+        val metricsInt = textPaint.fontMetricsInt
         return abs(metricsInt.bottom + metricsInt.top)
     }
 
@@ -497,7 +483,7 @@ class PickerItem @JvmOverloads constructor(
         }
         val itemHeight = getItemHeight()
 
-        val x = when (mTextPaint.textAlign) {
+        val x = when (textPaint.textAlign) {
             Paint.Align.LEFT -> paddingLeft.toFloat()
             Paint.Align.CENTER -> ((right - left) / 2).toFloat()
             Paint.Align.RIGHT -> (right - left).toFloat() - paddingRight.toFloat()
@@ -522,22 +508,22 @@ class PickerItem @JvmOverloads constructor(
 
             if (maxIndexDiffToMid != 0) {
                 scale =
-                    mSelectedTextScale * (itemHeight * maxIndexDiffToMid - offsetToMiddle) / (itemHeight * maxIndexDiffToMid) + 1
+                    selectedTextScale * (itemHeight * maxIndexDiffToMid - offsetToMiddle) / (itemHeight * maxIndexDiffToMid) + 1
             }
 
             if (mSelectorItemValidStatus[i]) {
                 if (offsetToMiddle < mItemHeight / 2) {
-                    mTextPaint.color = mSelectedTextColor
+                    textPaint.color = selectedTextColor
                 } else {
-                    mTextPaint.color = mUnSelectedTextColor
+                    textPaint.color = unSelectedTextColor
                 }
             } else {
-                mTextPaint.color = ContextCompat.getColor(context, R.color.honglib_color_000000)
+                textPaint.color = ContextCompat.getColor(context, R.color.honglib_color_000000)
             }
 
             canvas.save()
             canvas.scale(scale, scale, x, y)
-            canvas.drawText(getValue(mSelectorItemIndices[i]), x, y, mTextPaint)
+            canvas.drawText(getValue(mSelectorItemIndices[i]), x, y, textPaint)
             canvas.restore()
 
             y += itemHeight
@@ -564,8 +550,8 @@ class PickerItem @JvmOverloads constructor(
             mSelectorItemValidStatus[i] = mSelectorItemValidStatus[i + 1]
         }
         var nextScrollSelectorIndex = mSelectorItemIndices[mSelectorItemIndices.size - 2] + 1
-        if (mWrapSelectorRawPickerPreferred && nextScrollSelectorIndex > mMaxIndex) {
-            nextScrollSelectorIndex = mMinIndex
+        if (mWrapSelectorRawPickerPreferred && nextScrollSelectorIndex > maxIndex) {
+            nextScrollSelectorIndex = minIndex
         }
         mSelectorItemIndices[mSelectorItemIndices.size - 1] = nextScrollSelectorIndex
         mSelectorItemValidStatus[mSelectorItemIndices.size - 1] =
@@ -578,8 +564,8 @@ class PickerItem @JvmOverloads constructor(
             mSelectorItemValidStatus[i] = mSelectorItemValidStatus[i - 1]
         }
         var nextScrollSelectorIndex = mSelectorItemIndices[1] - 1
-        if (mWrapSelectorRawPickerPreferred && nextScrollSelectorIndex < mMinIndex) {
-            nextScrollSelectorIndex = mMaxIndex
+        if (mWrapSelectorRawPickerPreferred && nextScrollSelectorIndex < minIndex) {
+            nextScrollSelectorIndex = maxIndex
         }
         mSelectorItemIndices[0] = nextScrollSelectorIndex
         mSelectorItemValidStatus[0] = isValidPosition(nextScrollSelectorIndex)
@@ -587,23 +573,24 @@ class PickerItem @JvmOverloads constructor(
 
     private fun changeValueBySteps(steps: Int) {
         mPreviousScrollerY = 0
-        mOverScroller?.startScroll(0, 0, 0, -mItemHeight * steps, snapScrollDuration)
+        overScroller?.startScroll(0, 0, 0, -mItemHeight * steps, snapScrollDuration)
         invalidate()
     }
 
-    private fun onSelectionChanged(current: Int, notifyChange: Boolean) {
+    private fun onSelectionChanged(current: Int) {
         val previous = mCurSelectedItemIndex
         mCurSelectedItemIndex = current
-        if (notifyChange && previous != current) {
+        if (previous != current) {
             notifyChange(previous, current)
+            mOnValueChangeListener?.onValueChange(this, getValue(previous), getValue(current))
         }
     }
 
     private fun getWrappedSelectorIndex(selectorIndex: Int): Int {
-        if (selectorIndex > mMaxIndex) {
-            return mMinIndex + (selectorIndex - mMaxIndex) % (mMaxIndex - mMinIndex + 1) - 1
-        } else if (selectorIndex < mMinIndex) {
-            return mMaxIndex - (mMinIndex - selectorIndex) % (mMaxIndex - mMinIndex + 1) + 1
+        if (selectorIndex > maxIndex) {
+            return minIndex + (selectorIndex - maxIndex) % (maxIndex - minIndex + 1) - 1
+        } else if (selectorIndex < minIndex) {
+            return maxIndex - (minIndex - selectorIndex) % (maxIndex - minIndex + 1) + 1
         }
         return selectorIndex
     }
@@ -615,9 +602,9 @@ class PickerItem @JvmOverloads constructor(
     private fun validatePosition(position: Int): Int {
         return if (!mWrapSelectorRawPickerPreferred) {
             when {
-                mMaxValidIndex == null && position > mMaxIndex -> mMaxIndex
+                mMaxValidIndex == null && position > maxIndex -> maxIndex
                 mMaxValidIndex != null && position > mMaxValidIndex!! -> mMaxValidIndex!!
-                mMinValidIndex == null && position < mMinIndex -> mMinIndex
+                mMinValidIndex == null && position < minIndex -> minIndex
                 mMinValidIndex != null && position < mMinValidIndex!! -> mMinValidIndex!!
                 else -> position
             }
@@ -633,7 +620,7 @@ class PickerItem @JvmOverloads constructor(
 
         mCurSelectedItemIndex = position
         mSelectorItemIndices.clear()
-        for (i in 0 until mSelectorItemCount) {
+        for (i in 0 until selectorItemCount) {
             var selectorIndex = mCurSelectedItemIndex + (i - mRawPickerMiddleItemIndex)
             if (mWrapSelectorRawPickerPreferred) {
                 selectorIndex = getWrappedSelectorIndex(selectorIndex)
@@ -680,8 +667,8 @@ class PickerItem @JvmOverloads constructor(
         }
 
         if (adapter!!.getSize() != -1 && indexRangeBasedOnAdapterSize) {
-            mMaxIndex = adapter.getSize() - 1
-            mMinIndex = 0
+            maxIndex = adapter.getSize() - 1
+            minIndex = 0
         }
 
         mMaxValidIndex = adapter.getMaxValidIndex()
@@ -703,12 +690,12 @@ class PickerItem @JvmOverloads constructor(
     }
 
     fun setRawPickerItemCount(count: Int) {
-        mSelectorItemCount = count + 2
-        mRawPickerMiddleItemIndex = (mSelectorItemCount - 1) / 2
-        mSelectorVisibleItemCount = mSelectorItemCount - 2
+        selectorItemCount = count + 2
+        mRawPickerMiddleItemIndex = (selectorItemCount - 1) / 2
+        mSelectorVisibleItemCount = selectorItemCount - 2
         mRawPickerVisibleItemMiddleIndex = (mSelectorVisibleItemCount - 1) / 2
-        mSelectorItemIndices = ArrayList(mSelectorItemCount)
-        mSelectorItemValidStatus = ArrayList(mSelectorItemCount)
+        mSelectorItemIndices = ArrayList(selectorItemCount)
+        mSelectorItemValidStatus = ArrayList(selectorItemCount)
         reset()
         invalidate()
     }
@@ -717,8 +704,8 @@ class PickerItem @JvmOverloads constructor(
         mAdapter != null -> mAdapter!!.getValue(position)
         else -> if (!mWrapSelectorRawPickerPreferred) {
             when {
-                position > mMaxIndex -> ""
-                position < mMinIndex -> ""
+                position > maxIndex -> ""
+                position < minIndex -> ""
                 else -> position.toString()
             }
         } else {
@@ -731,19 +718,19 @@ class PickerItem @JvmOverloads constructor(
     }
 
     fun setMaxValue(max: Int) {
-        mMaxIndex = max
+        maxIndex = max
     }
 
     fun getMaxValue(): String {
         return if (mAdapter != null) {
-            mAdapter!!.getValue(mMaxIndex)
+            mAdapter!!.getValue(maxIndex)
         } else {
-            mMaxIndex.toString()
+            maxIndex.toString()
         }
     }
 
     fun setMinValue(min: Int) {
-        mMinIndex = min
+        minIndex = min
     }
 
     fun setMinValidValue(minValid: Int?) {
@@ -756,9 +743,9 @@ class PickerItem @JvmOverloads constructor(
 
     fun getMinValue(): String {
         return if (mAdapter != null) {
-            mAdapter!!.getValue(mMinIndex)
+            mAdapter!!.getValue(minIndex)
         } else {
-            mMinIndex.toString()
+            minIndex.toString()
         }
     }
 

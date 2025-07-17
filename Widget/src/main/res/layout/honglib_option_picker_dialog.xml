@@ -9,7 +9,7 @@
         android:id="@+id/dim"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dimNormal" />
+        android:background="@color/honglib_color_4d252729" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,8 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="88dp" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_option_picker"
+        <LinearLayout
+            android:id="@+id/ll_option_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bottom_sheet_background"
@@ -36,9 +36,6 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="20dp"
                 android:fontFamily="@font/pretendard_700"
                 android:includeFontPadding="false"
@@ -46,14 +43,11 @@
                 android:textSize="20dp"
                 tools:text="옵션"/>
 
-
             <LinearLayout
                 android:id="@+id/container_option_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/tv_title"
-                app:layout_constraintBottom_toTopOf="@id/ll_button"
                 tools:layout_height="50dp"/>
 
             <LinearLayout
@@ -61,14 +55,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginHorizontal="20dp">
 
                 <TextView
                     android:id="@+id/tv_cancel"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
                     android:background="@drawable/honglib_border_6200ee_radius10"
@@ -77,13 +68,12 @@
                     android:text="취소"
                     android:fontFamily="@font/pretendard_700"
                     android:textColor="@color/honglib_color_default"
-                    android:letterSpacing="0.2"
                     android:textSize="15dp"
                     android:layout_marginEnd="5dp"/>
 
                 <TextView
                     android:id="@+id/tv_confirm"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
                     android:background="@drawable/honglib_6200ee_radius10"
@@ -92,13 +82,12 @@
                     android:text="확인"
                     android:fontFamily="@font/pretendard_700"
                     android:textColor="@color/honglib_color_ffffff"
-                    android:letterSpacing="0.2"
                     android:textSize="15dp"
                     android:layout_marginStart="5dp"/>
 
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </LinearLayout>
 </FrameLayout>
