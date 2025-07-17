@@ -1,7 +1,10 @@
 package com.codehong.library.widget.tab
 
+import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
+import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
@@ -11,7 +14,7 @@ import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongScrollTabOption(
     override val type: HongWidgetType = HongWidgetType.SCROLL_TAB
-) : HongWidgetCommonOption {
+) : HongWidgetAdvanceOption {
 
     companion object {
         const val DEFAULT_BORDER_WIDTH = 1
@@ -33,14 +36,6 @@ data class HongScrollTabOption(
         const val DEFAULT_TAB_TEXT_HORIZONTAL_PADDING = 16
         const val DEFAULT_TAB_TEXT_VERTICAL_PADDING = 8
 
-        const val DEFAULT_ALL_RADIUS = 0
-        const val DEFAULT_TOP_RADIUS = 0
-        const val DEFAULT_BOTTOM_RADIUS = 0
-        const val DEFAULT_TOP_LEFT_RADIUS = 0
-        const val DEFAULT_TOP_RIGHT_RADIUS = 0
-        const val DEFAULT_BOTTOM_LEFT_RADIUS = 0
-        const val DEFAULT_BOTTOM_RIGHT_RADIUS = 0
-
         const val DEFAULT_INITIAL_SELECT_INDEX = 0
     }
 
@@ -48,11 +43,15 @@ data class HongScrollTabOption(
 
     override var width: Int = HongLayoutParam.WRAP_CONTENT.value
     override var height: Int = HongLayoutParam.WRAP_CONTENT.value
-    override var margin: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
-    override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
+    override var margin: HongSpacingInfo = HongSpacingInfo()
+    override var padding: HongSpacingInfo = HongSpacingInfo()
     override var backgroundColor: HongColor = HongColor.TRANSPARENT
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
+    override var radius: HongRadiusInfo = HongRadiusInfo()
+    override var border: HongBorderInfo = HongBorderInfo()
+    override var useShapeCircle: Boolean = false
+    override var shadow = HongShadowInfo()
 
     var tabList: List<Any> = emptyList()
 
@@ -83,17 +82,11 @@ data class HongScrollTabOption(
     var tabTextVerticalPadding: Int = DEFAULT_TAB_TEXT_VERTICAL_PADDING
 
 
-    var radius = HongRadiusInfo(
-        all = DEFAULT_ALL_RADIUS,
-        top = DEFAULT_TOP_RADIUS,
-        bottom = DEFAULT_BOTTOM_RADIUS,
-        topLeft = DEFAULT_TOP_LEFT_RADIUS,
-        topRight = DEFAULT_TOP_RIGHT_RADIUS,
-        bottomLeft = DEFAULT_BOTTOM_LEFT_RADIUS,
-        bottomRight = DEFAULT_BOTTOM_RIGHT_RADIUS
-    )
 
     var initialSelectIndex: Int = DEFAULT_INITIAL_SELECT_INDEX
+
+    var tabClick: ((index: Int, item: Any) -> Unit)? = null
+
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -110,6 +103,10 @@ data class HongScrollTabOption(
         if (backgroundColor != other.backgroundColor) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (click != other.click) return false
+        if (radius != other.radius) return false
+        if (border != other.border) return false
+        if (useShapeCircle != other.useShapeCircle) return false
+        if (shadow != other.shadow) return false
         if (tabList != other.tabList) return false
         if (tabTitleList != other.tabTitleList) return false
         if (borderWidth != other.borderWidth) return false
@@ -122,8 +119,8 @@ data class HongScrollTabOption(
         if (tabBetweenPadding != other.tabBetweenPadding) return false
         if (tabTextHorizontalPadding != other.tabTextHorizontalPadding) return false
         if (tabTextVerticalPadding != other.tabTextVerticalPadding) return false
-        if (radius != other.radius) return false
         if (initialSelectIndex != other.initialSelectIndex) return false
+        if (tabClick != other.tabClick) return false
 
         return true
     }
@@ -138,6 +135,10 @@ data class HongScrollTabOption(
         result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + (click?.hashCode() ?: 0)
+        result = 31 * result + radius.hashCode()
+        result = 31 * result + border.hashCode()
+        result = 31 * result + useShapeCircle.hashCode()
+        result = 31 * result + shadow.hashCode()
         result = 31 * result + tabList.hashCode()
         result = 31 * result + tabTitleList.hashCode()
         result = 31 * result + borderWidth
@@ -150,8 +151,8 @@ data class HongScrollTabOption(
         result = 31 * result + tabBetweenPadding
         result = 31 * result + tabTextHorizontalPadding
         result = 31 * result + tabTextVerticalPadding
-        result = 31 * result + radius.hashCode()
         result = 31 * result + initialSelectIndex
+        result = 31 * result + (tabClick?.hashCode() ?: 0)
         return result
     }
 
@@ -166,6 +167,10 @@ data class HongScrollTabOption(
                 "backgroundColor=$backgroundColor, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "click=$click, " +
+                "radius=$radius, " +
+                "border=$border, " +
+                "useShapeCircle=$useShapeCircle, " +
+                "shadow=$shadow, " +
                 "tabList=$tabList, " +
                 "tabTitleList=$tabTitleList, " +
                 "borderWidth=$borderWidth, " +
@@ -178,8 +183,9 @@ data class HongScrollTabOption(
                 "tabBetweenPadding=$tabBetweenPadding, " +
                 "tabTextHorizontalPadding=$tabTextHorizontalPadding, " +
                 "tabTextVerticalPadding=$tabTextVerticalPadding, " +
-                "radius=$radius, " +
-                "initialSelectIndex=$initialSelectIndex" +
+                "initialSelectIndex=$initialSelectIndex, " +
+                "tabClick=$tabClick" +
                 ")"
     }
+
 }

@@ -8,14 +8,14 @@ import android.view.View
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import com.codehong.library.widget.databinding.HonglibItemScrollTabBinding
-import com.codehong.library.widget.rule.HongBorderInfo
-import com.codehong.library.widget.rule.HongSpacingInfo
-import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongMargin
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
+import com.codehong.library.widget.rule.HongBorderInfo
+import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.text.HongTextBuilder
 
 class HongScrollTabView @JvmOverloads constructor(
     context: Context,
@@ -34,7 +34,6 @@ class HongScrollTabView @JvmOverloads constructor(
     private var selectedIndex: Int = 0
     private var tabList: List<Any> = emptyList()
     private var tabTitleList: List<String> = emptyList()
-    private var onTabClick: ((Int, Any) -> Unit)? = null
 
     init {
         isHorizontalScrollBarEnabled = false
@@ -43,10 +42,8 @@ class HongScrollTabView @JvmOverloads constructor(
 
     fun set(
         option: HongScrollTabOption,
-        onTabClick: (Int, Any) -> Unit
     ): HongScrollTabView {
         this.option = option
-        this.onTabClick = onTabClick
         this.tabList = option.tabList
         this.tabTitleList = option.tabTitleList
         this.selectedIndex = option.initialSelectIndex
@@ -134,7 +131,7 @@ class HongScrollTabView @JvmOverloads constructor(
                     if (!isSelected) {
                         scrollToSelectedTab(animated = true)
                     }
-                    onTabClick?.invoke(index, tabList[index])
+                    option.tabClick?.invoke(index, tabList[index])
                 }
             }
         }

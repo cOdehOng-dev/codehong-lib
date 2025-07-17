@@ -75,6 +75,10 @@ class HongScrollTabBuilder : HongWidgetCommonBuilder<HongScrollTabOption, HongSc
         option.initialSelectIndex = index
     }
 
+    fun onTabClick(click: ((index: Int, item: Any) -> Unit)?) = apply {
+        option.tabClick = click
+    }
+
 
     fun copy(inject: HongScrollTabOption): HongScrollTabBuilder {
         return HongScrollTabBuilder()
@@ -82,7 +86,6 @@ class HongScrollTabBuilder : HongWidgetCommonBuilder<HongScrollTabOption, HongSc
             .height(inject.height)
             .margin(inject.margin)
             .padding(inject.padding)
-            .onClick(inject.click)
             .tabList(inject.tabList)
             .tabTitleList(inject.tabTitleList)
             .selectTabTextOption(inject.selectTabTextOption)
@@ -97,5 +100,6 @@ class HongScrollTabBuilder : HongWidgetCommonBuilder<HongScrollTabOption, HongSc
             .tabTextVerticalPadding(inject.tabTextVerticalPadding)
             .radius(inject.radius)
             .initialSelectIndex(inject.initialSelectIndex)
+            .onTabClick(inject.tabClick)
     }
 }

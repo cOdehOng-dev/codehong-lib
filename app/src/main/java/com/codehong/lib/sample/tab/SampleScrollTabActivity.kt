@@ -9,6 +9,7 @@ import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.tab.HongScrollTabBuilder
 import com.codehong.library.widget.tab.HongScrollTabCompose
 import com.codehong.library.widget.tab.HongScrollTabView
+import com.codehong.library.widget.util.HongToastUtil
 
 class SampleScrollTabActivity : BaseSampleMixActivity() {
 
@@ -49,6 +50,9 @@ class SampleScrollTabActivity : BaseSampleMixActivity() {
                 bottomRight = 100
             )
         )
+        .onTabClick { index, item ->
+            HongToastUtil.showToast(this, "선택된 탭: $index, $item")
+        }
         .tabTextHorizontalPadding(12)
         .tabBetweenPadding(6)
         .applyOption()
@@ -93,6 +97,9 @@ class SampleScrollTabActivity : BaseSampleMixActivity() {
                 bottomRight = 100
             )
         )
+        .onTabClick { index, item ->
+            HongToastUtil.showToast(this, "선택된 탭: $index, $item")
+        }
         .tabTextHorizontalPadding(12)
         .tabBetweenPadding(8)
         .applyOption()
@@ -105,7 +112,7 @@ class SampleScrollTabActivity : BaseSampleMixActivity() {
     override fun optionViewList(): List<View> {
         return mutableListOf<View>().apply {
             optionList.forEach {
-                add(HongScrollTabView(this@SampleScrollTabActivity).set(it) { _, _ -> })
+                add(HongScrollTabView(this@SampleScrollTabActivity).set(it))
             }
         }
     }
@@ -113,7 +120,7 @@ class SampleScrollTabActivity : BaseSampleMixActivity() {
     @Composable
     override fun InitCompose() {
         optionList.forEach {
-            HongScrollTabCompose(it) { _, _ -> }
+            HongScrollTabCompose(it)
         }
     }
 }

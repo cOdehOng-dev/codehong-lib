@@ -165,9 +165,6 @@ class PlaygroundActivity : BaseActivity() {
                     }
                     .applyOption()
             )
-//            clickListener { isOn ->
-//                viewModel.isBorderOn.value = isOn
-//            }
         }
 
         when (componentType) {
@@ -364,7 +361,7 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.SCROLL_TAB -> {
                 binding.vComposePreview.setContent {
                     PreviewUI(isBorderOn) {
-                        HongScrollTabCompose(previewOption as HongScrollTabOption) { _, _ -> }
+                        HongScrollTabCompose(previewOption as HongScrollTabOption)
                     }
                 }
             }

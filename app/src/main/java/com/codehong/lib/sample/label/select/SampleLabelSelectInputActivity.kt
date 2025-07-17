@@ -110,10 +110,10 @@ class SampleLabelSelectInputActivity : BaseSampleMixActivity() {
                                 } else {
                                     inputSize.toInt()
                                 }
-                                Log.e("TAG", "test here [테스트] Input selectWidthSize = $selectWidthSize")
+                                Log.e("TAG", "[테스트] Input selectWidthSize = $selectWidthSize")
                             }
                             .pickerCallback { selectSize, index ->
-                                Log.e("TAG", "test here [테스트] Picker selectSize = $selectSize")
+                                Log.e("TAG", "[테스트] Picker selectSize = $selectSize")
                                 if (selectSize == HongLayoutParam.MATCH_PARENT.paramName
                                     || selectSize == HongLayoutParam.WRAP_CONTENT.paramName
                                 ) {
@@ -170,10 +170,10 @@ class SampleLabelSelectInputActivity : BaseSampleMixActivity() {
                 } else {
                     inputSize.toInt()
                 }
-                Log.e("TAG", "test here [테스트] Input selectWidthSize = $selectWidthSize")
+                Log.e("TAG", "[테스트] Input selectWidthSize = $selectWidthSize")
             }
             .pickerCallback { selectSize, index ->
-                Log.e("TAG", "test here [테스트] Picker selectSize = $selectSize")
+                Log.e("TAG", "[테스트] Picker selectSize = $selectSize")
                 if (selectSize == HongLayoutParam.MATCH_PARENT.paramName
                     || selectSize == HongLayoutParam.WRAP_CONTENT.paramName
                 ) {

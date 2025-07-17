@@ -1,6 +1,5 @@
 package com.codehong.library.widget.tab
 
-import android.util.Log
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -27,16 +26,15 @@ import kotlinx.coroutines.delay
 @Composable
 fun HongScrollTabCompose(
     option: HongScrollTabOption,
-    onTabClick: (index: Int, item: Any) -> Unit
+//    onTabClick: (index: Int, item: Any) -> Unit
 ) {
-    Log.w("TAG", "test here option = $option")
     val scrollState = rememberScrollState()
 
     var selectedIndex by remember { mutableIntStateOf(option.initialSelectIndex) }
 
     LaunchedEffect(selectedIndex) {
         delay(200)
-        val centerOffset = (scrollState.maxValue / option.tabList.size.also { Log.d("TAG", "test here size = $it") }) * selectedIndex
+        val centerOffset = (scrollState.maxValue / option.tabList.size) * selectedIndex
         scrollState.animateScrollTo(centerOffset)
     }
 
@@ -120,7 +118,7 @@ fun HongScrollTabCompose(
                             )
                             .disableRippleClickable {
                                 selectedIndex = i
-                                onTabClick(i, item)
+                                option.tabClick?.invoke(i, item)
                             },
                         contentAlignment = Alignment.Center
                     ) {

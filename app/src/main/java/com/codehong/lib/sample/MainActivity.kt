@@ -61,6 +61,7 @@ import com.codehong.library.widget.rule.HongState
 import com.codehong.library.widget.rule.HongTextAlign
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.rule.typo.HongTypo
@@ -161,7 +162,7 @@ fun SampleTheme(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 15.dp)
-                        .background(colorResource(R.color.honglib_color_ffffff))
+                        .background(HongColor.WHITE_100.toColor())
                 ) {
                     Box(
                         modifier = Modifier
@@ -294,12 +295,6 @@ fun SampleTheme(
                                             }
                                         }
 
-//                                        HongWidgetType.SLIDE_LAYOUT -> {
-//                                            Intent(activity, SampleSlideLayoutActivity::class.java).apply {
-//                                                activity.startActivity(this)
-//                                            }
-//                                        }
-
                                         HongWidgetType.CLOSE_HEADER -> {
                                             Intent(activity, SampleCloseHeaderActivity::class.java).apply {
                                                 putExtra(
@@ -413,25 +408,9 @@ fun SampleTheme(
                                         }
 
                                         HongWidgetType.CAPTURE_SHARE -> {
-//                                            OptionPickerDialog(
-//                                                activity,
-//                                                "샘플 선택",
-//                                                sampleTypeList,
-//                                                0
-//                                            ) { selectType, _ ->
-//
-//
-//                                            }
                                             Intent(activity, SampleCaptureShareActivity::class.java).apply {
                                                 activity.startActivity(this)
                                             }
-//                                            Intent(activity, SampleCaptureShareComposeActivity::class.java).apply {
-//                                                putExtra(
-//                                                    SampleConst.WIDGET_TYPE,
-//                                                    HongWidgetType.CAPTURE_SHARE.value
-//                                                )
-//                                                activity.startActivity(this)
-//                                            }
                                         }
 
                                         HongWidgetType.DYNAMIC_ISLAND -> {
