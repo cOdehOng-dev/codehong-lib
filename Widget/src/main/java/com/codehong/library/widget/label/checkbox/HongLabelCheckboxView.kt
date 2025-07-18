@@ -1,4 +1,4 @@
-package com.codehong.library.widget.label.toggle
+package com.codehong.library.widget.label.checkbox
 
 import android.content.Context
 import android.util.AttributeSet
@@ -9,10 +9,11 @@ import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
 import com.codehong.library.widget.language.frameLayout
+import com.codehong.library.widget.language.hongCheckbox
 import com.codehong.library.widget.language.hongLabel
-import com.codehong.library.widget.language.hongSwitch
+import com.codehong.library.widget.rule.HongPosition
 
-class HongLabelSwitchView @JvmOverloads constructor(
+class HongLabelCheckboxView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -23,14 +24,14 @@ class HongLabelSwitchView @JvmOverloads constructor(
         gravity = Gravity.CENTER_VERTICAL
     }
 
-    var option: HongLabelSwitchOption = HongLabelSwitchOption()
+    var option = HongLabelCheckboxOption()
         private set
 
     fun set(
-        option: HongLabelSwitchOption
-    ): HongLabelSwitchView {
-        this.option = option
+        option: HongLabelCheckboxOption
+    ): HongLabelCheckboxView {
         removeAllViews()
+        this.option = option
 
         setLayout(
             option.width,
@@ -46,10 +47,18 @@ class HongLabelSwitchView @JvmOverloads constructor(
         )
         hongPadding(option.padding)
 
+        if (option.checkboxPosition == HongPosition.LEFT) {
+            checkbox()
+        }
+
         frameLayout {
             layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT).apply {
                 weight = 1f
-                marginEnd = context.dpToPx(5f)
+                if (option.checkboxPosition == HongPosition.LEFT) {
+                    marginStart = context.dpToPx(HongLabelCheckboxOption.DEFAULT_BETTWEN_SPACER)
+                } else {
+                    marginEnd = context.dpToPx(HongLabelCheckboxOption.DEFAULT_BETTWEN_SPACER)
+                }
             }
 
             hongLabel {
@@ -57,9 +66,16 @@ class HongLabelSwitchView @JvmOverloads constructor(
             }
         }
 
-        hongSwitch {
-            this.set(option.switchOption)
+        if (option.checkboxPosition != HongPosition.LEFT) {
+            checkbox()
         }
+
         return this
+    }
+
+    private fun checkbox() {
+        hongCheckbox {
+            set(option.checkboxOption)
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.codehong.library.widget.label.toggle
+package com.codehong.library.widget.label.toggleswitch
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row

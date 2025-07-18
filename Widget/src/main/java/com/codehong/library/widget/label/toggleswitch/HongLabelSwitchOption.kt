@@ -1,4 +1,4 @@
-package com.codehong.library.widget.label.toggle
+package com.codehong.library.widget.label.toggleswitch
 
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.label.HongLabelOption

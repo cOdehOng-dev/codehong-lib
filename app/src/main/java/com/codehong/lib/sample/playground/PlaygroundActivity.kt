@@ -22,6 +22,7 @@ import com.codehong.lib.sample.closeheader.HongCloseHeaderPlayground
 import com.codehong.lib.sample.databinding.ActivityPlaygroundBinding
 import com.codehong.lib.sample.image.HongImagePlayground
 import com.codehong.lib.sample.label.HongLabelPlayground
+import com.codehong.lib.sample.label.checkbox.HongLabelCheckboxPlayground
 import com.codehong.lib.sample.label.input.HongLabelInputPlayground
 import com.codehong.lib.sample.label.toggle.HongLabelSwitchPlayground
 import com.codehong.lib.sample.pager.HongHorizontalPagerPlayground
@@ -48,10 +49,12 @@ import com.codehong.library.widget.image.HongImageCompose
 import com.codehong.library.widget.image.HongImageOption
 import com.codehong.library.widget.label.HongLabelOption
 import com.codehong.library.widget.label.HongLabelViewCompose
+import com.codehong.library.widget.label.checkbox.HongLabelCheckboxCompose
+import com.codehong.library.widget.label.checkbox.HongLabelCheckboxOption
 import com.codehong.library.widget.label.input.HongLabelInputCompose
 import com.codehong.library.widget.label.input.HongLabelInputOption
-import com.codehong.library.widget.label.toggle.HongLabelSwitchCompose
-import com.codehong.library.widget.label.toggle.HongLabelSwitchOption
+import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchCompose
+import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchOption
 import com.codehong.library.widget.pager.HongHorizontalPagerCompose
 import com.codehong.library.widget.pager.HongHorizontalPagerOption
 import com.codehong.library.widget.rule.HongLayoutParam
@@ -182,6 +185,7 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.LABEL -> HongLabelPlayground(this).preview()
             HongWidgetType.LABEL_INPUT -> HongLabelInputPlayground(this).preview()
             HongWidgetType.LABEL_SWITCH -> HongLabelSwitchPlayground(this).preview()
+            HongWidgetType.LABEL_CHECKBOX -> HongLabelCheckboxPlayground(this).preview()
             HongWidgetType.SCROLL_TAB -> HongScrollTabPlayground(this).preview()
 //            HongWidgetType.LABEL_SELECT_INPUT -> HongLabelSelectInputPlayground(this).preview()
             else -> {}
@@ -354,6 +358,13 @@ class PlaygroundActivity : BaseActivity() {
                 binding.vComposePreview.setContent {
                     PreviewUI(isBorderOn) {
                         HongLabelSwitchCompose(previewOption as HongLabelSwitchOption)
+                    }
+                }
+            }
+            HongWidgetType.LABEL_CHECKBOX -> {
+                binding.vComposePreview.setContent {
+                    PreviewUI(isBorderOn) {
+                        HongLabelCheckboxCompose(previewOption as HongLabelCheckboxOption)
                     }
                 }
             }

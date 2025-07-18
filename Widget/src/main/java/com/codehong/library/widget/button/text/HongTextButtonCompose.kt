@@ -14,14 +14,14 @@ import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextCompose
 import com.codehong.library.widget.util.HongWidgetContainer
-import com.codehong.library.widget.util.HongWidgetDisableContainer
+import com.codehong.library.widget.util.HongWidgetNoneClickContainer
 
 @Composable
 fun HongTextButtonCompose(
     option: HongTextButtonOption
 ) {
     if (option.state == HongState.DISABLED) {
-        HongWidgetDisableContainer(
+        HongWidgetNoneClickContainer(
             HongTextButtonBuilder()
                 .copy(option)
                 .backgroundColor(HongTextButtonOption.DEFAULT_DISABLE_BACKGROUND_COLOR)

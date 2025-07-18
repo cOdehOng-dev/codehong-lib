@@ -183,7 +183,7 @@ fun HongWidgetContainer(
     }
 }
 @Composable
-fun HongWidgetDisableContainer(
+fun HongWidgetNoneClickContainer(
     option: HongWidgetCommonOption,
     childCompose: @Composable () -> Unit,
 ) {
@@ -234,7 +234,7 @@ fun HongWidgetContainer(
 }
 
 @Composable
-fun HongWidgetDisableContainer(
+fun HongWidgetNoneClickContainer(
     option: HongWidgetAdvanceOption,
     childCompose: @Composable () -> Unit,
 ) {

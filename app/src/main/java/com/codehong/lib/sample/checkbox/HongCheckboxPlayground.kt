@@ -9,6 +9,8 @@ import com.codehong.library.widget.extensions.toFigureInt
 import com.codehong.library.widget.extensions.toFigureString
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.HongState
+import com.codehong.library.widget.rule.HongState.Companion.isEnabled
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
@@ -55,134 +57,161 @@ class HongCheckboxPlayground(
     fun preview() {
         executePreview()
 
+        injectPreview(
+            injectOption = previewOption,
+            includeCommonOption = true
+        ) {
+            previewOption = it
+            executePreview()
+        }
+    }
+
+    fun injectPreview(
+        injectOption: HongCheckboxOption,
+        includeCommonOption: Boolean = false,
+        label: String = "",
+        callback: (HongCheckboxOption) -> Unit
+    ) {
+
+        var inject = injectOption
+
+        if (label.isNotEmpty()) {
+            PlaygroundManager.addOptionTitleView(
+                activity,
+                label = label
+            )
+        }
+
         /** size */
         PlaygroundManager.addLabelInputOptionPreview(
             activity,
             label = "체크박스 사이즈",
             description = "width, height를 동일하게 설정해요.",
-            input = previewOption.size.toFigureString(),
+            input = inject.size.toFigureString(),
             useOnlyNumber = true,
         ) {
-            this.previewOption = HongCheckboxBuilder()
-                .copy(previewOption)
+            inject = HongCheckboxBuilder()
+                .copy(inject)
                 .size(it.toFigureInt())
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** common */
-        commonPreviewOption(
-            useWidth = false,
-            useHeight = false,
-            usePadding = false,
-            selectMargin = { selectMargin ->
-                this.previewOption = HongCheckboxBuilder()
-                    .copy(previewOption)
-                    .margin(selectMargin)
-                    .applyOption()
-                executePreview()
-            }
-        )
-
+        if (includeCommonOption) {
+            commonPreviewOption2(
+                margin = inject.margin,
+                useWidth = false,
+                useHeight = false,
+                usePadding = false,
+                selectMargin = { selectMargin ->
+                    inject = HongCheckboxBuilder()
+                        .copy(inject)
+                        .margin(selectMargin)
+                        .applyOption()
+                    callback.invoke(inject)
+                }
+            )
+        }
 
         /** background color */
         PlaygroundManager.addColorOptionPreview(
             activity,
-            colorHex = previewOption.backgroundColorHex,
+            colorHex = inject.backgroundColorHex,
             label = "background ",
             description = "체크박스의 배경색을 설정해요."
         ) {
-            this.previewOption = HongCheckboxBuilder()
-                .copy(previewOption)
+            inject = HongCheckboxBuilder()
+                .copy(inject)
                 .backgroundColor(it)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
 
         /** checked color */
         PlaygroundManager.addColorOptionPreview(
             activity,
-            colorHex = previewOption.checkedColorHex,
+            colorHex = inject.checkedColorHex,
             label = "체크활성화 background ",
             description = "체크박스가 활성화 되었을 때의 배경색을 설정해요."
         ) {
-            this.previewOption = HongCheckboxBuilder()
-                .copy(previewOption)
+            inject = HongCheckboxBuilder()
+                .copy(inject)
                 .checkedColor(it)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
 
         /** checkmark color */
         PlaygroundManager.addColorOptionPreview(
             activity,
-            colorHex = previewOption.checkmarkColorHex,
+            colorHex = inject.checkmarkColorHex,
             label = "체크 아이콘 ",
             description = "체크박스의 체크 아이콘 color를 설정해요."
         ) {
-            this.previewOption = HongCheckboxBuilder()
-                .copy(previewOption)
+            inject = HongCheckboxBuilder()
+                .copy(inject)
                 .checkmarkColor(it)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
 
         /** border */
         PlaygroundManager.addBorderOptionPreview(
             activity = activity,
-            border = previewOption.border,
+            border = inject.border,
             despWidth = "체크박스의 테두리를 설정해요.",
             despColor = "체크박스의 테두리 color를 설정해요.",
             useTopPadding = true
         ) { selectBorder ->
-            this.previewOption = HongCheckboxBuilder()
-                .copy(previewOption)
+            inject = HongCheckboxBuilder()
+                .copy(inject)
                 .border(selectBorder)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** radius */
         PlaygroundManager.addRadiusOptionPreview(
             activity = activity,
-            radius = previewOption.radius,
+            radius = inject.radius,
             description = "체크박스의 모서리 둥글기를 설정해요.",
             useTopPadding = true
         ) { selectRadius ->
-            this.previewOption = HongCheckboxBuilder()
-                .copy(previewOption)
+            inject = HongCheckboxBuilder()
+                .copy(inject)
                 .radius(selectRadius)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** enable */
         PlaygroundManager.addLabelSwitchOptionPreview(
             activity = activity,
-            label = "체크박스 선택 상태 설정",
-            description = "체크박스의 선택 상태를 설정해요.",
-            switchState = previewOption.isEnabled,
+            label = "체크박스 활성 상태 설정",
+            description = "체크박스의 활성 상태를 설정해요.",
+            switchState = inject.enableState.isEnabled(),
         ) { isChecked ->
-            this.previewOption = HongCheckboxBuilder()
-                .copy(previewOption)
-                .enabled(isChecked)
+            inject = HongCheckboxBuilder()
+                .copy(inject)
+                .enableState(if (isChecked) HongState.ENABLED else HongState.DISABLED)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** useShapeCircle */
         PlaygroundManager.addUseShapeCircleOptionPreview(
             activity = activity,
-            useShapeCircle = previewOption.useShapeCircle,
+            useShapeCircle = inject.useShapeCircle,
         ) { useShapeCircle ->
-            this.previewOption = HongCheckboxBuilder()
-                .copy(previewOption)
+            inject = HongCheckboxBuilder()
+                .copy(inject)
                 .useShapeCircle(useShapeCircle)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
     }
 }

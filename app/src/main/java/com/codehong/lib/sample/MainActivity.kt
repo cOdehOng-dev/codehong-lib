@@ -35,6 +35,7 @@ import com.codehong.lib.sample.closeheader.SampleCloseHeaderActivity
 import com.codehong.lib.sample.dynamicisland.SampleDynamicIslandActivity
 import com.codehong.lib.sample.image.SampleImageActivity
 import com.codehong.lib.sample.label.SampleLabelActivity
+import com.codehong.lib.sample.label.checkbox.SampleLabelCheckboxActivity
 import com.codehong.lib.sample.label.input.SampleLabelInputActivity
 import com.codehong.lib.sample.label.select.SampleLabelSelectInputActivity
 import com.codehong.lib.sample.label.toggle.SampleLabelSwitchActivity
@@ -540,6 +541,16 @@ fun SampleTheme(
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
                                                     HongWidgetType.LABEL_SWITCH.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
+                                        HongWidgetType.LABEL_CHECKBOX -> {
+                                            Intent(activity, SampleLabelCheckboxActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.LABEL_CHECKBOX.value
                                                 )
                                                 activity.startActivity(this)
                                             }

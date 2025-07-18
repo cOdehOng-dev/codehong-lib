@@ -71,7 +71,11 @@ class HongLabelPlayground(
 
         /** common */
         if (includeCommonOption) {
-            commonPreviewOption(
+            commonPreviewOption2(
+                width = inject.width,
+                height = inject.height,
+                margin = inject.margin,
+                padding = inject.padding,
                 selectWidth = { selectWidth ->
                     inject = HongLabelBuilder()
                         .copy(inject)

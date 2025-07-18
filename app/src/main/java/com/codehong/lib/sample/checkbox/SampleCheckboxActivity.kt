@@ -8,6 +8,7 @@ import com.codehong.library.widget.checkbox.HongCheckboxBuilder
 import com.codehong.library.widget.checkbox.HongCheckboxView
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.HongState
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
@@ -44,7 +45,7 @@ class SampleCheckboxActivity : BaseSampleMixActivity() {
 
     private val option2 = HongCheckboxBuilder()
         .size(24)
-        .enabled(false)
+        .enableState(HongState.DISABLED)
         .margin(
             HongSpacingInfo(
                 left = 10f,

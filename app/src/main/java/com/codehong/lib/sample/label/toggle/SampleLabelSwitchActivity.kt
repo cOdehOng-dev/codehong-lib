@@ -3,8 +3,8 @@ package com.codehong.lib.sample.label.toggle
 import android.view.View
 import androidx.compose.runtime.Composable
 import com.codehong.lib.sample.base.BaseSampleMixActivity
-import com.codehong.library.widget.label.toggle.HongLabelSwitchBuilder
-import com.codehong.library.widget.label.toggle.HongLabelSwitchCompose
+import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchBuilder
+import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchCompose
 import com.codehong.library.widget.language.hongLabelSwitch
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor

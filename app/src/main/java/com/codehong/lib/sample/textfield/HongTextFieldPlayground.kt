@@ -95,11 +95,11 @@ class HongTextFieldPlayground constructor(
         }
 
         if (includeCommonOption) {
-            commonPreviewOption(
-                defWidth = inject.width,
-                defHeight = inject.height,
-                defMargin = inject.margin,
-                defPadding = inject.padding,
+            commonPreviewOption2(
+                width = inject.width,
+                height = inject.height,
+                margin = inject.margin,
+                padding = inject.padding,
                 selectWidth = { selectWidth ->
                     inject = HongTextFieldBuilder()
                         .copy(inject)

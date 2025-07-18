@@ -7,9 +7,14 @@ enum class HongState(
     DISABLED("disabled");
 
     companion object {
-        fun String?.fromAlias(): HongState {
+        fun String?.toHonState(): HongState {
             if (this.isNullOrEmpty()) return ENABLED
             return entries.find { it.alias == this } ?: ENABLED
+        }
+
+        fun HongState?.isEnabled(): Boolean {
+            if (this == null) return true
+            return this == ENABLED
         }
     }
 }

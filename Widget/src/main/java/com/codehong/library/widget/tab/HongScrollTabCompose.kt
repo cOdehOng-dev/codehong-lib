@@ -26,7 +26,6 @@ import kotlinx.coroutines.delay
 @Composable
 fun HongScrollTabCompose(
     option: HongScrollTabOption,
-//    onTabClick: (index: Int, item: Any) -> Unit
 ) {
     val scrollState = rememberScrollState()
 

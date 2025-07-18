@@ -62,9 +62,11 @@ class HongSelectButtonPlayground(
         }
 
         if (includeCommonOption) {
-            commonPreviewOption(
+            commonPreviewOption2(
+                height = inject.height,
+                padding = inject.padding,
+                margin = inject.margin,
                 useWidth = false,
-                useHeight = false,
                 selectHeight = { selectHeight ->
                     inject = HongSelectButtonBuilder()
                         .copy(inject)

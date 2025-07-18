@@ -4,8 +4,8 @@ import com.codehong.lib.sample.label.HongLabelPlayground
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.toggleswitch.HongSwitchPlayground
-import com.codehong.library.widget.label.toggle.HongLabelSwitchBuilder
-import com.codehong.library.widget.label.toggle.HongLabelSwitchOption
+import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchBuilder
+import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchOption
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor

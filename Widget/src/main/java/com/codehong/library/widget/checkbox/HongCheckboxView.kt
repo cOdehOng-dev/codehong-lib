@@ -12,6 +12,7 @@ import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.parseColor
 import com.codehong.library.widget.extensions.setLayout
 import com.codehong.library.widget.rule.HongBorderInfo
+import com.codehong.library.widget.rule.HongState.Companion.isEnabled
 import com.codehong.library.widget.rule.color.HongColor
 
 class HongCheckboxView @JvmOverloads constructor(
@@ -29,7 +30,7 @@ class HongCheckboxView @JvmOverloads constructor(
         addView(checkMark)
         gravity = Gravity.CENTER
         setOnClickListener {
-            if (option.isEnabled) {
+            if (option.enableState.isEnabled()) {
                 toggle()
             }
         }
@@ -40,7 +41,7 @@ class HongCheckboxView @JvmOverloads constructor(
     ): HongCheckboxView {
         this.option = option
         this.isChecked = option.checkState
-        this.isEnabled = option.isEnabled
+        this.isEnabled = option.enableState.isEnabled()
         buildCheckBox()
         return this
     }

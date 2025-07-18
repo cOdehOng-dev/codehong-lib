@@ -2,6 +2,7 @@ package com.codehong.library.widget.checkbox
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.HongBorderInfo
+import com.codehong.library.widget.rule.HongState
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
@@ -42,8 +43,8 @@ class HongCheckboxBuilder : HongWidgetCommonBuilder<HongCheckboxOption, HongChec
         option.checkState = checkState
     }
 
-    fun enabled(isEnabled: Boolean) = apply {
-        option.isEnabled = isEnabled
+    fun enableState(enableState: HongState) = apply {
+        option.enableState = enableState
     }
 
     fun useShapeCircle(useShapeCircle: Boolean) = apply {
@@ -67,7 +68,7 @@ class HongCheckboxBuilder : HongWidgetCommonBuilder<HongCheckboxOption, HongChec
             .border(inject.border)
             .radius(inject.radius)
             .checkState(inject.checkState)
-            .enabled(inject.isEnabled)
+            .enableState(inject.enableState)
             .useShapeCircle(inject.useShapeCircle)
     }
 }

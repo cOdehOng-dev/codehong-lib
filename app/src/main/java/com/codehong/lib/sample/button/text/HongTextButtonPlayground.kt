@@ -105,7 +105,10 @@ class HongTextButtonPlayground(
 
         if (includeCommonOption) {
             /** common */
-            commonPreviewOption(
+            commonPreviewOption2(
+                width = inject.width,
+                height = inject.height,
+                margin = inject.margin,
                 usePadding = false,
                 selectWidth = { selectWidth ->
                     inject = HongTextButtonBuilder()

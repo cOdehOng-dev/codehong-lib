@@ -6,6 +6,7 @@ import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.HongState
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
@@ -17,9 +18,8 @@ data class HongCheckboxOption(
     override var isValidComponent: Boolean = true
     override var width: Int = HongLayoutParam.WRAP_CONTENT.value
     override var height: Int = HongLayoutParam.WRAP_CONTENT.value
-    override var margin: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
-
-    override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
+    override var margin: HongSpacingInfo = HongSpacingInfo()
+    override var padding: HongSpacingInfo = HongSpacingInfo()
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
 
     override var backgroundColor: HongColor = HongColor.TRANSPARENT
@@ -37,7 +37,6 @@ data class HongCheckboxOption(
         bottomRight = 4
     )
 
-
     var size: Int = 24
 
     var checkedColor: HongColor = HongColor.MAIN_ORANGE_100
@@ -49,7 +48,7 @@ data class HongCheckboxOption(
 
     var checkState = false
 
-    var isEnabled = true
+    var enableState: HongState = HongState.ENABLED
 
 
     override fun equals(other: Any?): Boolean {
@@ -77,7 +76,7 @@ data class HongCheckboxOption(
         if (checkmarkColor != other.checkmarkColor) return false
         if (checkmarkColorHex != other.checkmarkColorHex) return false
         if (checkState != other.checkState) return false
-        if (isEnabled != other.isEnabled) return false
+        if (enableState != other.enableState) return false
 
         return true
     }
@@ -102,7 +101,7 @@ data class HongCheckboxOption(
         result = 31 * result + checkmarkColor.hashCode()
         result = 31 * result + checkmarkColorHex.hashCode()
         result = 31 * result + checkState.hashCode()
-        result = 31 * result + isEnabled.hashCode()
+        result = 31 * result + enableState.hashCode()
         return result
     }
 
@@ -127,7 +126,7 @@ data class HongCheckboxOption(
                 "checkmarkColor=$checkmarkColor, " +
                 "checkmarkColorHex='$checkmarkColorHex', " +
                 "checkState=$checkState, " +
-                "isEnabled=$isEnabled" +
+                "enableState=$enableState" +
                 ")"
     }
 }

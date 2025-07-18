@@ -1,16 +1,18 @@
-package com.codehong.library.widget.label.toggle
+package com.codehong.library.widget.label.checkbox
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
+import com.codehong.library.widget.checkbox.HongCheckboxBuilder
+import com.codehong.library.widget.checkbox.HongCheckboxOption
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.HongLabelOption
+import com.codehong.library.widget.rule.HongPosition
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
-import com.codehong.library.widget.toggleswitch.HongSwitchOption
 
-class HongLabelSwitchBuilder : HongWidgetCommonBuilder<HongLabelSwitchOption, HongLabelSwitchBuilder> {
+class HongLabelCheckboxBuilder : HongWidgetCommonBuilder<HongLabelCheckboxOption, HongLabelCheckboxBuilder> {
 
-    override val builder: HongLabelSwitchBuilder = this
-    override val option: HongLabelSwitchOption = HongLabelSwitchOption()
+    override val builder: HongLabelCheckboxBuilder = this
+    override val option: HongLabelCheckboxOption = HongLabelCheckboxOption()
 
     fun label(label: String?) = apply {
         option.label = label
@@ -37,7 +39,6 @@ class HongLabelSwitchBuilder : HongWidgetCommonBuilder<HongLabelSwitchOption, Ho
         )
     }
 
-
     fun description(description: String?) = apply {
         option.description = description
         labelOption(
@@ -52,7 +53,6 @@ class HongLabelSwitchBuilder : HongWidgetCommonBuilder<HongLabelSwitchOption, Ho
                 .applyOption()
         )
     }
-
     fun descriptionTextOption(descriptionTextOption: HongTextOption) = apply {
         option.descriptionTextOption = descriptionTextOption
         labelOption(
@@ -68,14 +68,40 @@ class HongLabelSwitchBuilder : HongWidgetCommonBuilder<HongLabelSwitchOption, Ho
         option.labelOption = labelOption
     }
 
-    fun switchOption(switchOption: HongSwitchOption?) = apply {
-        option.switchOption = switchOption ?: HongLabelSwitchOption.DEFAULT_SWITCH_OPTION
+    fun checkState(isChecked: Boolean?) = apply {
+        option.isChecked = isChecked
+        checkboxOption(
+            HongCheckboxBuilder()
+                .copy(option.checkboxOption)
+                .checkState(isChecked ?: option.checkboxOption.checkState)
+                .applyOption()
+        )
+    }
+    fun checkboxSize(size: Int?) = apply {
+        option.checkboxSize = size
+        checkboxOption(
+            HongCheckboxBuilder()
+                .copy(option.checkboxOption)
+                .size(size ?: option.checkboxOption.size)
+                .applyOption()
+        )
+    }
+    fun checkboxOption(checkboxOption: HongCheckboxOption) = apply {
+        option.checkboxOption = HongCheckboxBuilder()
+            .copy(checkboxOption)
+            .size(option.checkboxSize ?: checkboxOption.size)
+            .checkState(option.isChecked ?: checkboxOption.checkState)
+            .applyOption()
     }
 
-    fun copy(inject: HongLabelSwitchOption?): HongLabelSwitchBuilder {
-        if (inject == null) return HongLabelSwitchBuilder()
+    fun checkboxPosition(position: HongPosition?) = apply {
+        option.checkboxPosition = position ?: HongPosition.LEFT
+    }
 
-        return HongLabelSwitchBuilder()
+
+    fun copy(inject: HongLabelCheckboxOption?): HongLabelCheckboxBuilder {
+        if (inject == null) return HongLabelCheckboxBuilder()
+        return HongLabelCheckboxBuilder()
             .width(inject.width)
             .height(inject.height)
             .margin(inject.margin)
@@ -86,6 +112,9 @@ class HongLabelSwitchBuilder : HongWidgetCommonBuilder<HongLabelSwitchOption, Ho
             .description(inject.description)
             .descriptionTextOption(inject.descriptionTextOption)
             .labelOption(inject.labelOption)
-            .switchOption(inject.switchOption)
+            .checkState(inject.isChecked)
+            .checkboxSize(inject.checkboxSize)
+            .checkboxOption(inject.checkboxOption)
+            .checkboxPosition(inject.checkboxPosition)
     }
 }

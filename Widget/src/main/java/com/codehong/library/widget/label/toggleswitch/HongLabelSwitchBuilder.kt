@@ -1,16 +1,16 @@
-package com.codehong.library.widget.label.input
+package com.codehong.library.widget.label.toggleswitch
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.HongLabelOption
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
-import com.codehong.library.widget.textfield.HongTextFieldOption
+import com.codehong.library.widget.toggleswitch.HongSwitchOption
 
-class HongLabelInputBuilder : HongWidgetCommonBuilder<HongLabelInputOption, HongLabelInputBuilder> {
+class HongLabelSwitchBuilder : HongWidgetCommonBuilder<HongLabelSwitchOption, HongLabelSwitchBuilder> {
 
-    override val builder: HongLabelInputBuilder = this
-    override val option: HongLabelInputOption = HongLabelInputOption()
+    override val builder: HongLabelSwitchBuilder = this
+    override val option: HongLabelSwitchOption = HongLabelSwitchOption()
 
     fun label(label: String?) = apply {
         option.label = label
@@ -36,6 +36,7 @@ class HongLabelInputBuilder : HongWidgetCommonBuilder<HongLabelInputOption, Hong
                 .applyOption()
         )
     }
+
 
     fun description(description: String?) = apply {
         option.description = description
@@ -67,13 +68,14 @@ class HongLabelInputBuilder : HongWidgetCommonBuilder<HongLabelInputOption, Hong
         option.labelOption = labelOption
     }
 
-
-    fun textFieldOption(textFieldOption: HongTextFieldOption) = apply {
-        option.textFieldOption = textFieldOption
+    fun switchOption(switchOption: HongSwitchOption?) = apply {
+        option.switchOption = switchOption ?: HongLabelSwitchOption.DEFAULT_SWITCH_OPTION
     }
 
-    fun copy(inject: HongLabelInputOption): HongLabelInputBuilder {
-        return HongLabelInputBuilder()
+    fun copy(inject: HongLabelSwitchOption?): HongLabelSwitchBuilder {
+        if (inject == null) return HongLabelSwitchBuilder()
+
+        return HongLabelSwitchBuilder()
             .width(inject.width)
             .height(inject.height)
             .margin(inject.margin)
@@ -84,10 +86,6 @@ class HongLabelInputBuilder : HongWidgetCommonBuilder<HongLabelInputOption, Hong
             .description(inject.description)
             .descriptionTextOption(inject.descriptionTextOption)
             .labelOption(inject.labelOption)
-            .textFieldOption(inject.textFieldOption)
+            .switchOption(inject.switchOption)
     }
-
-
-
-
 }

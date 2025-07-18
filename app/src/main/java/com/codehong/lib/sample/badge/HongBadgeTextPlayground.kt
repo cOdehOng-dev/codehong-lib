@@ -163,7 +163,5 @@ class HongBadgeTextPlayground(
                 .applyOption()
             executePreview()
         }
-
     }
-
 }

@@ -84,7 +84,10 @@ class HongImagePlayground constructor(
         }
 
         /** common */
-        commonPreviewOption(
+        commonPreviewOption2(
+            width = previewOption.width,
+            height = previewOption.height,
+            margin = previewOption.margin,
             selectWidth = { selectWidth ->
                 this.previewOption = HongImageBuilder()
                     .copy(previewOption)

@@ -17,8 +17,8 @@ import com.codehong.library.widget.label.input.HongLabelInputOption
 import com.codehong.library.widget.label.input.HongLabelInputView
 import com.codehong.library.widget.label.select.HongLabelSelectInputBuilder
 import com.codehong.library.widget.label.select.HongLabelSelectInputView
-import com.codehong.library.widget.label.toggle.HongLabelSwitchBuilder
-import com.codehong.library.widget.label.toggle.HongLabelSwitchView
+import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchBuilder
+import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchView
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongLayoutParam.Companion.isHongLayoutParam

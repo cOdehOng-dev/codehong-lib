@@ -80,6 +80,7 @@
         <activity android:name=".label.input.SampleLabelInputActivity"/>
         <activity android:name=".label.select.SampleLabelSelectInputActivity"/>
         <activity android:name=".label.toggle.SampleLabelSwitchActivity"/>
+        <activity android:name=".label.checkbox.SampleLabelCheckboxActivity"/>
     </application>
 
 </manifest>

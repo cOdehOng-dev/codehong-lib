@@ -60,7 +60,11 @@ class HongSwitchPlayground(
 
         /** common */
         if (includeCommonOption) {
-            commonPreviewOption(
+            commonPreviewOption2(
+                width = inject.width,
+                height = inject.height,
+                margin = inject.margin,
+                padding = inject.padding,
                 selectWidth = { selectWidth ->
                     inject = HongSwitchBuilder()
                         .copy(inject)

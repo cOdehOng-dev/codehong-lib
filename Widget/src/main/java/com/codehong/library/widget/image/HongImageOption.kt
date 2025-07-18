@@ -18,13 +18,6 @@ data class HongImageOption(
 ) : HongWidgetAdvanceOption {
 
     companion object {
-        const val DEFAULT_ALL_RADIUS = 0
-        const val DEFAULT_TOP_RADIUS = 0
-        const val DEFAULT_BOTTOM_RADIUS = 0
-        const val DEFAULT_TOP_START_RADIUS = 0
-        const val DEFAULT_TOP_END_RADIUS = 0
-        const val DEFAULT_BOTTOM_START_RADIUS = 0
-        const val DEFAULT_BOTTOM_END_RADIUS = 0
 
         val DEFAULT_MEMORY_CACHE = CachePolicy.ENABLED
         val DEFAULT_DISK_CACHE = CachePolicy.ENABLED
@@ -38,23 +31,12 @@ data class HongImageOption(
     override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
 
-    override var radius: HongRadiusInfo = HongRadiusInfo(
-        all = DEFAULT_ALL_RADIUS,
-        top = DEFAULT_TOP_RADIUS,
-        bottom = DEFAULT_BOTTOM_RADIUS,
-        topLeft = DEFAULT_TOP_START_RADIUS,
-        topRight = DEFAULT_TOP_END_RADIUS,
-        bottomLeft = DEFAULT_BOTTOM_START_RADIUS,
-        bottomRight = DEFAULT_BOTTOM_END_RADIUS
-    )
+    override var radius: HongRadiusInfo = HongRadiusInfo()
 
     override var backgroundColor: HongColor = HongColor.TRANSPARENT
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
 
-    override var border: HongBorderInfo = HongBorderInfo(
-        width = 0,
-        color = HongColor.TRANSPARENT.hex
-    )
+    override var border: HongBorderInfo = HongBorderInfo()
 
     override var useShapeCircle: Boolean = false
 

@@ -7,14 +7,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.rule.HongBorderInfo
-import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.HongState
+import com.codehong.library.widget.rule.HongState.Companion.isEnabled
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
@@ -25,8 +26,8 @@ import com.codehong.library.widget.util.HongWidgetContainer
 fun HongCheckBoxCompose(
     option: HongCheckboxOption
 ) {
-    var isChecked by remember(option.checkState) { mutableStateOf(option.checkState) }
-    val isEnabled by remember(option.isEnabled) { mutableStateOf(option.isEnabled) }
+    var isChecked by rememberSaveable(option.checkState) { mutableStateOf(option.checkState) }
+    val isEnabled by rememberSaveable(option.enableState.isEnabled()) { mutableStateOf(option.enableState.isEnabled()) }
 
 
     // 상태별 배경색
@@ -86,18 +87,10 @@ fun HongCheckBoxCompose(
 fun PreviewHongCheckboxCompose() {
     val option = HongCheckboxBuilder()
         .size(24)
-        .margin(
-            HongSpacingInfo(
-                left = 10f,
-                right = 10f,
-                top = 10f,
-                bottom = 10f
-            )
-        )
         .backgroundColor(HongColor.TRANSPARENT)
         .checkedColor(HongColor.MAIN_ORANGE_100)
         .checkmarkColor(HongColor.WHITE_100)
-        .enabled(false)
+        .enableState(HongState.DISABLED)
         .border(
             HongBorderInfo(
                 width = 2,
