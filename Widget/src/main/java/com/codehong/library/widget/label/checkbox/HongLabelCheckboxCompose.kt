@@ -119,8 +119,8 @@ fun PreviewHongLabelCheckboxCompose() {
             .padding(horizontal = 20.dp)
     ) {
         HongLabelCheckboxCompose(option)
-        HongLabelCheckboxCompose(option2)
-        HongLabelCheckboxCompose(option3)
-        HongLabelCheckboxCompose(option4)
+//        HongLabelCheckboxCompose(option2)
+//        HongLabelCheckboxCompose(option3)
+//        HongLabelCheckboxCompose(option4)
     }
 }

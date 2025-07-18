@@ -16,14 +16,19 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import com.codehong.library.widget.MarginStartOrEnd
 import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.image.HongImageCompose
 import com.codehong.library.widget.pretendardFontFamily
+import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType.Companion.toKeyboardActions
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextCompose
 import com.codehong.library.widget.util.HongWidgetContainer
 import com.codehong.library.widget.util.checkPasswordType
@@ -278,4 +283,41 @@ fun HongTextFieldCompose(
             }
         }
     }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun PreviewHongTextFieldCompose() {
+    val option1 = HongTextFieldBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(44)
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f,
+                top = 12f,
+                bottom = 12f
+            )
+        )
+        .backgroundColor(HongColor.BLACK_5.hex)
+        .radius(
+            HongRadiusInfo(
+                all = 50
+            )
+        )
+        .placeholderTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .text("값을 입력해주세요.")
+                .applyOption()
+        )
+        .input("입력!!")
+        .inputTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_INPUT)
+                .applyOption()
+        )
+        .cursorColor(HongColor.MAIN_ORANGE_100.hex)
+        .applyOption()
+    HongTextFieldCompose(option = option1)
 }

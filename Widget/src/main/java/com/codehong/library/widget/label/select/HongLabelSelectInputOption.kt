@@ -2,20 +2,25 @@ package com.codehong.library.widget.label.select
 
 import android.os.Parcelable
 import com.codehong.library.widget.HongWidgetCommonOption
+import com.codehong.library.widget.R
 import com.codehong.library.widget.button.text.HongTextButtonBuilder
 import com.codehong.library.widget.button.text.HongTextButtonOption
+import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.HongLabelOption
-import com.codehong.library.widget.label.input.HongLabelInputOption
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
+import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
+import com.codehong.library.widget.textfield.HongTextFieldBuilder
 import com.codehong.library.widget.textfield.HongTextFieldOption
 import kotlinx.parcelize.Parcelize
 
@@ -25,11 +30,90 @@ data class HongLabelSelectInputOption(
 ) : HongWidgetCommonOption, Parcelable {
 
     companion object {
-        val DEFAULT_LABEL_OPTION = HongLabelBuilder()
+        val DEFAULT_LABEL_OPTION = HongTextBuilder()
             .width(HongLayoutParam.MATCH_PARENT.value)
-            .height(HongLayoutParam.WRAP_CONTENT.value)
+            .typography(HongTypo.BODY_15_B)
+            .color(HongColor.BLACK_100)
             .applyOption()
-        val DEFAULT_TEXT_FIELD = HongLabelInputOption.DEFAULT_TEXT_FIELD
+        val DEFAULT_DESCRIPTION_OPTION = HongTextBuilder()
+            .width(HongLayoutParam.MATCH_PARENT.value)
+            .typography(HongTypo.CONTENTS_10)
+            .margin(
+                HongSpacingInfo(
+                    top = 2f
+                )
+            )
+            .color("#333333")
+            .applyOption()
+
+        val DEFAULT_LABEL_VIEW_OPTION = HongLabelBuilder()
+            .width(HongLayoutParam.MATCH_PARENT.value)
+            .backgroundColor(HongColor.TRANSPARENT)
+            .labelTextOption(DEFAULT_LABEL_OPTION)
+            .descriptionTextOption(DEFAULT_DESCRIPTION_OPTION)
+            .applyOption()
+
+        val DEFAULT_TEXT_FIELD = HongTextFieldBuilder()
+            .width(HongLayoutParam.MATCH_PARENT.value)
+            .radius(
+                HongRadiusInfo(
+                    topLeft = 10,
+                    topRight = 10,
+                    bottomLeft = 10,
+                    bottomRight = 10
+                )
+            )
+            .padding(
+                HongSpacingInfo(
+                    top = 11f,
+                    bottom = 11f,
+                    left = 10f,
+                    right = 10f
+                )
+            )
+            .backgroundColor(HongColor.BLACK_5)
+            .inputTextOption(
+                HongTextBuilder()
+                    .backgroundColor(HongColor.TRANSPARENT)
+                    .padding(
+                        HongSpacingInfo(
+                            top = 4f,
+                            bottom = 4f,
+                            left = 4f,
+                            right = 4f
+                        )
+                    )
+                    .typography(HongTypo.BODY_14)
+                    .color(HongColor.BLACK_100)
+                    .applyOption()
+            )
+            .placeholderTextOption(
+                HongTextBuilder()
+                    .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                    .padding(
+                        HongSpacingInfo(
+                            top = 4f,
+                            bottom = 4f,
+                            left = 4f,
+                            right = 4f
+                        )
+                    )
+                    .typography(HongTypo.BODY_14)
+                    .color(HongColor.BLACK_100)
+                    .applyOption()
+            )
+            .clearImageOption(
+                HongImageBuilder()
+                    .width(18)
+                    .height(18)
+                    .scaleType(HongScaleType.CENTER_CROP)
+                    .drawableResId(R.drawable.honglib_ic_close)
+                    .applyOption()
+            )
+            .cursorColor(HongColor.MAIN_ORANGE_100)
+            .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
+            .applyOption()
+
         val DEFAULT_BUTTON_TEXT = HongTextBuilder()
             .typography(HongTypo.BODY_15)
             .color(HongColor.MAIN_ORANGE_100)
@@ -81,7 +165,7 @@ data class HongLabelSelectInputOption(
 
     var label: String? = null
     var description: String? = null
-    var labelOption: HongLabelOption = DEFAULT_LABEL_OPTION
+    var labelOption: HongLabelOption = DEFAULT_LABEL_VIEW_OPTION
 
 
     var input: String? = null

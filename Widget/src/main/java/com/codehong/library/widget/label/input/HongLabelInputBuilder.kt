@@ -3,6 +3,7 @@ package com.codehong.library.widget.label.input
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.HongLabelOption
+import com.codehong.library.widget.label.checkbox.HongLabelCheckboxOption
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
 import com.codehong.library.widget.textfield.HongTextFieldOption
@@ -17,22 +18,19 @@ class HongLabelInputBuilder : HongWidgetCommonBuilder<HongLabelInputOption, Hong
         labelOption(
             HongLabelBuilder()
                 .copy(option.labelOption)
-                .labelTextOption(
-                    HongTextBuilder()
-                        .copy(option.labelOption.labelTextOption)
-                        .text(label)
-                        .applyOption()
-                )
+                .label(label ?: option.labelOption.labelTextOption.text)
                 .applyOption()
         )
     }
-    fun labelTextOption(labelTextOption: HongTextOption) = apply{
-        option.labelTextOption = labelTextOption
+    fun labelTextOption(labelTextOption: HongTextOption?) = apply{
+        option.labelTextOption = HongTextBuilder()
+            .copy(labelTextOption ?: HongLabelCheckboxOption.DEFAULT_LABEL_OPTION)
+            .text(option.label ?: labelTextOption?.text)
+            .applyOption()
         labelOption(
             HongLabelBuilder()
                 .copy(option.labelOption)
-                .label(option.label)
-                .labelTextOption(labelTextOption)
+                .labelTextOption(option.labelTextOption)
                 .applyOption()
         )
     }
@@ -42,29 +40,31 @@ class HongLabelInputBuilder : HongWidgetCommonBuilder<HongLabelInputOption, Hong
         labelOption(
             HongLabelBuilder()
                 .copy(option.labelOption)
-                .descriptionTextOption(
-                    HongTextBuilder()
-                        .copy(option.labelOption.descriptionTextOption)
-                        .text(description)
-                        .applyOption()
-                )
+                .description(description ?: option.labelOption.description.toString())
                 .applyOption()
         )
     }
-
-    fun descriptionTextOption(descriptionTextOption: HongTextOption) = apply {
-        option.descriptionTextOption = descriptionTextOption
+    fun descriptionTextOption(descriptionTextOption: HongTextOption?) = apply {
+        option.descriptionTextOption = HongTextBuilder()
+            .copy(descriptionTextOption ?: HongLabelCheckboxOption.DEFAULT_DESCRIPTION_OPTION)
+            .text(option.label ?: descriptionTextOption?.text)
+            .applyOption()
         labelOption(
             HongLabelBuilder()
                 .copy(option.labelOption)
-                .description(option.description)
-                .descriptionTextOption(descriptionTextOption)
+                .descriptionTextOption(option.descriptionTextOption)
                 .applyOption()
         )
     }
 
     fun labelOption(labelOption: HongLabelOption) = apply {
-        option.labelOption = labelOption
+        option.labelOption = HongLabelBuilder()
+            .copy(labelOption)
+            .label(option.label ?: labelOption.labelTextOption.text)
+            .labelTextOption(option.labelTextOption)
+            .description(option.description ?: labelOption.descriptionTextOption.text)
+            .descriptionTextOption(option.descriptionTextOption)
+            .applyOption()
     }
 
 
@@ -86,8 +86,4 @@ class HongLabelInputBuilder : HongWidgetCommonBuilder<HongLabelInputOption, Hong
             .labelOption(inject.labelOption)
             .textFieldOption(inject.textFieldOption)
     }
-
-
-
-
 }

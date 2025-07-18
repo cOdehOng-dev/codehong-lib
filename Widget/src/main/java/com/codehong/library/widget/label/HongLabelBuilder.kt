@@ -14,27 +14,33 @@ class HongLabelBuilder : HongWidgetCommonBuilder<HongLabelOption, HongLabelBuild
         labelTextOption(
             HongTextBuilder()
                 .copy(option.labelTextOption)
-                .text(label)
+                .text(label ?: option.labelTextOption.text)
                 .applyOption()
         )
     }
 
     fun description(description: String?) = apply {
-        this.option.description = description
+        option.description = description
         descriptionTextOption(
             HongTextBuilder()
                 .copy(option.descriptionTextOption)
-                .text(description)
+                .text(description ?: option.descriptionTextOption.text)
                 .applyOption()
         )
     }
 
-    fun labelTextOption(option: HongTextOption?) = apply {
-        this.option.labelTextOption = option ?: HongLabelOption.DEFAULT_LABEL_OPTION
+    fun labelTextOption(labelTextOption: HongTextOption?) = apply {
+        option.labelTextOption = HongTextBuilder()
+            .copy(labelTextOption ?: HongLabelOption.DEFAULT_LABEL_OPTION)
+            .text(option.label ?: labelTextOption?.text)
+            .applyOption()
     }
 
-    fun descriptionTextOption(option: HongTextOption?) = apply {
-        this.option.descriptionTextOption = option ?: HongLabelOption.DEFAULT_DESCRIPTION_OPTION
+    fun descriptionTextOption(descriptionTextOption: HongTextOption?) = apply {
+        option.descriptionTextOption = HongTextBuilder()
+            .copy(descriptionTextOption ?: HongLabelOption.DEFAULT_DESCRIPTION_OPTION)
+            .text(option.description ?: descriptionTextOption?.text)
+            .applyOption()
     }
 
     fun copy(inject: HongLabelOption): HongLabelBuilder {

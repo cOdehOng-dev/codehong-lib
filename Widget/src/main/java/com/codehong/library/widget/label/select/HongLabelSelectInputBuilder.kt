@@ -16,27 +16,31 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
     override val option: HongLabelSelectInputOption = HongLabelSelectInputOption()
 
     fun label(label: String?) = apply {
-        this.option.label = label
+        option.label = label
         labelOption(
             HongLabelBuilder()
                 .copy(option.labelOption)
-                .label(label)
+                .label(label ?: option.labelOption.labelTextOption.text)
                 .applyOption()
         )
     }
 
     fun description(description: String?) = apply {
-        this.option.description = description
+        option.description = description
         labelOption(
             HongLabelBuilder()
                 .copy(option.labelOption)
-                .description(description)
+                .description(description ?: option.labelOption.description.toString())
                 .applyOption()
         )
     }
 
     fun labelOption(labelOption: HongLabelOption) = apply {
-        this.option.labelOption = labelOption
+        option.labelOption = HongLabelBuilder()
+            .copy(labelOption)
+            .label(option.label ?: labelOption.labelTextOption.text)
+            .description(option.description ?: labelOption.descriptionTextOption.text)
+            .applyOption()
     }
 
     fun inputText(input: String?) = apply {
@@ -133,9 +137,9 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
             .margin(inject.margin)
             .padding(inject.padding)
             .onClick(inject.click)
-            .labelOption(inject.labelOption)
             .label(inject.label)
             .description(inject.description)
+            .labelOption(inject.labelOption)
             .textFieldOption(inject.textFieldOption)
             .inputText(inject.input)
             .placeholder(inject.placeholder)

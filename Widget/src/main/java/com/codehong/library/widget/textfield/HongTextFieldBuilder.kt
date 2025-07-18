@@ -26,26 +26,33 @@ class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTe
 
     fun placeholder(placeholder: String?) = apply {
         option.placeholder = placeholder
-        option.placeholderTextOption = HongTextBuilder()
-            .copy(option.placeholderTextOption)
-            .text(placeholder)
-            .applyOption()
+        placeholderTextOption(
+            HongTextBuilder()
+                .copy(option.placeholderTextOption)
+                .text(placeholder ?: option.placeholder)
+                .applyOption()
+        )
     }
+    fun placeholderTextOption(placeholderTextOption: HongTextOption) = apply {
+        this.option.placeholderTextOption = HongTextBuilder()
+            .copy(placeholderTextOption)
+            .text(this.option.placeholder ?: placeholderTextOption.text)
+            .applyOption()
 
-    fun placeholderTextOption(option: HongTextOption?) = apply {
-        this.option.placeholderTextOption = option ?: HongTextFieldOption.DEFAULT_PLACEHOLDER
     }
 
     fun input(input: String?) = apply {
         option.input = input
         option.inputTextOption = HongTextBuilder()
             .copy(option.inputTextOption)
-            .text(input)
+            .text(input ?: option.inputTextOption.text)
             .applyOption()
     }
-
-    fun inputTextOption(option: HongTextOption) = apply {
-        this.option.inputTextOption = option
+    fun inputTextOption(inputTextOption: HongTextOption) = apply {
+        this.option.inputTextOption = HongTextBuilder()
+            .copy(inputTextOption)
+            .text(this.option.input ?: inputTextOption.text)
+            .applyOption()
     }
 
     fun clearImageOption(option: HongImageOption?) = apply {

@@ -1,12 +1,15 @@
 package com.codehong.library.widget.label.input
 
+import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.R
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.HongLabelOption
+import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongScaleType
+import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
@@ -20,9 +23,32 @@ import com.codehong.library.widget.textfield.HongTextFieldOption
 
 data class HongLabelInputOption(
     override val type: HongWidgetType = HongWidgetType.LABEL_INPUT
-)  : HongWidgetCommonOption {
+)  : HongWidgetAdvanceOption {
 
     companion object {
+        val DEFAULT_LABEL_OPTION = HongTextBuilder()
+            .width(HongLayoutParam.MATCH_PARENT.value)
+            .typography(HongTypo.BODY_15_B)
+            .color(HongColor.BLACK_100)
+            .applyOption()
+
+        val DEFAULT_DESCRIPTION_OPTION = HongTextBuilder()
+            .width(HongLayoutParam.MATCH_PARENT.value)
+            .typography(HongTypo.CONTENTS_10)
+            .margin(
+                HongSpacingInfo(
+                    top = 2f
+                )
+            )
+            .color("#333333")
+            .applyOption()
+
+        val DEFAULT_LABEL_VIEW_OPTION = HongLabelBuilder()
+            .width(HongLayoutParam.MATCH_PARENT.value)
+            .labelTextOption(DEFAULT_LABEL_OPTION)
+            .descriptionTextOption(DEFAULT_DESCRIPTION_OPTION)
+            .applyOption()
+
         val DEFAULT_TEXT_FIELD = HongTextFieldBuilder()
             .width(HongLayoutParam.MATCH_PARENT.value)
             .radius(
@@ -91,24 +117,21 @@ data class HongLabelInputOption(
     override var margin: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
     override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
+    override var useShapeCircle: Boolean = false
+    override var shadow: HongShadowInfo = HongShadowInfo()
+    override var border: HongBorderInfo = HongBorderInfo()
+    override var radius: HongRadiusInfo = HongRadiusInfo()
 
-    override var backgroundColor: HongColor = HongColor.WHITE_100
-    override var backgroundColorHex: String = HongColor.WHITE_100.hex
+    override var backgroundColor: HongColor = HongColor.TRANSPARENT
+    override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
 
     var label: String? = null
-    var labelTextOption = HongTextBuilder()
-        .copy(HongLabelOption.DEFAULT_LABEL_OPTION)
-        .applyOption()
+    var labelTextOption = DEFAULT_LABEL_OPTION
 
     var description: String? = null
-    var descriptionTextOption = HongTextBuilder()
-        .copy(HongLabelOption.DEFAULT_DESCRIPTION_OPTION)
-        .applyOption()
+    var descriptionTextOption = DEFAULT_DESCRIPTION_OPTION
 
-    var labelOption: HongLabelOption = HongLabelBuilder()
-        .labelTextOption(labelTextOption)
-        .descriptionTextOption(descriptionTextOption)
-        .applyOption()
+    var labelOption: HongLabelOption = DEFAULT_LABEL_VIEW_OPTION
 
     var textFieldOption: HongTextFieldOption = DEFAULT_TEXT_FIELD
 
@@ -175,6 +198,4 @@ data class HongLabelInputOption(
                 "textFieldOption=$textFieldOption" +
                 ")"
     }
-
-
 }
