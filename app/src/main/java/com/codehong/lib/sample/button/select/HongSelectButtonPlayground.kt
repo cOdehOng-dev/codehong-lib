@@ -62,7 +62,7 @@ class HongSelectButtonPlayground(
         }
 
         if (includeCommonOption) {
-            commonPreviewOption2(
+            commonPreviewOption(
                 height = inject.height,
                 padding = inject.padding,
                 margin = inject.margin,

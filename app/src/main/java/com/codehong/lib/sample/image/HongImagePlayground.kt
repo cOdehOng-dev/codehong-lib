@@ -1,6 +1,5 @@
 package com.codehong.lib.sample.image
 
-import android.util.Log
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
@@ -14,7 +13,7 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
-class HongImagePlayground constructor(
+class HongImagePlayground(
     playgroundActivity: PlaygroundActivity
 ) : BasePlayground<HongImageOption> {
     companion object {
@@ -55,113 +54,140 @@ class HongImagePlayground constructor(
     fun preview() {
         executePreview()
 
+        injectPreview(
+            injectOption = previewOption,
+            includeCommonOption = true
+        ) {
+            previewOption = it
+            executePreview()
+        }
+    }
+
+    fun injectPreview(
+        injectOption: HongImageOption,
+        includeCommonOption: Boolean = false,
+        label: String = "",
+        callback: (HongImageOption) -> Unit
+    ) {
+        var inject = injectOption
+
+        if (label.isNotEmpty()) {
+            PlaygroundManager.addOptionTitleView(
+                activity,
+                label = label
+            )
+        }
+
         /** url image */
         PlaygroundManager.addLabelInputOptionPreview(
             activity = activity,
             label = "이미지 URL",
-            input = previewOption.imageUrl,
+            input = inject.imageUrl,
         ) { inputText ->
-            previewOption = HongImageBuilder()
-                .copy(previewOption)
+            inject = HongImageBuilder()
+                .copy(inject)
                 .drawableResId(null)
                 .imageUrl(inputText)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** local image */
         PlaygroundManager.addLocalResourceOptionPreview(
             activity = activity,
             label = "로컬 이미지",
-            drawableResId = previewOption.drawableResId
+            drawableResId = inject.drawableResId
         ) { resId ->
-            previewOption = HongImageBuilder()
-                .copy(previewOption)
+            inject = HongImageBuilder()
+                .copy(inject)
                 .imageUrl(null)
                 .drawableResId(resId)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** common */
-        commonPreviewOption2(
-            width = previewOption.width,
-            height = previewOption.height,
-            margin = previewOption.margin,
-            selectWidth = { selectWidth ->
-                this.previewOption = HongImageBuilder()
-                    .copy(previewOption)
-                    .width(selectWidth)
-                    .applyOption()
-                executePreview()
-            },
-            selectHeight = { selectHeight ->
-                this.previewOption = HongImageBuilder()
-                    .copy(previewOption)
-                    .height(selectHeight)
-                    .applyOption()
-                executePreview()
-            },
-            selectMargin = { selectMargin ->
-                this.previewOption = HongImageBuilder()
-                    .copy(previewOption)
-                    .margin(selectMargin)
-                    .applyOption()
-                executePreview()
-            },
-            selectPadding = { selectPadding ->
-                this.previewOption = HongImageBuilder()
-                    .copy(previewOption)
-                    .padding(selectPadding)
-                    .applyOption()
-                executePreview()
-            }
-        )
+        if (includeCommonOption) {
+            commonPreviewOption(
+                width = inject.width,
+                height = inject.height,
+                margin = inject.margin,
+                padding = inject.padding,
+                selectWidth = { selectWidth ->
+                    inject = HongImageBuilder()
+                        .copy(inject)
+                        .width(selectWidth)
+                        .applyOption()
+                    callback.invoke(inject)
+                },
+                selectHeight = { selectHeight ->
+                    inject = HongImageBuilder()
+                        .copy(inject)
+                        .height(selectHeight)
+                        .applyOption()
+                    callback.invoke(inject)
+                },
+                selectMargin = { selectMargin ->
+                    inject = HongImageBuilder()
+                        .copy(inject)
+                        .margin(selectMargin)
+                        .applyOption()
+                    callback.invoke(inject)
+                },
+                selectPadding = { selectPadding ->
+                    inject = HongImageBuilder()
+                        .copy(inject)
+                        .padding(selectPadding)
+                        .applyOption()
+                    callback.invoke(inject)
+                }
+            )
+        }
 
         /** radius */
         PlaygroundManager.addRadiusOptionPreview(
             activity = activity,
-            radius = previewOption.radius,
+            radius = inject.radius,
         ) { selectRadius ->
-            this.previewOption = HongImageBuilder()
-                .copy(previewOption)
+            inject = HongImageBuilder()
+                .copy(inject)
                 .radius(selectRadius)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** border */
         PlaygroundManager.addBorderOptionPreview(
             activity = activity,
-            border = previewOption.border,
+            border = inject.border,
             despWidth = "image의 테두리를 설정해요.",
             despColor = "image의 테두리 color를 설정해요.",
             useTopPadding = true
         ) { selectBorder ->
-            this.previewOption = HongImageBuilder()
-                .copy(previewOption)
+            inject = HongImageBuilder()
+                .copy(inject)
                 .border(selectBorder)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** shadow */
         PlaygroundManager.addShadowOptionPreview(
             activity = activity,
-            shadow = previewOption.shadow
+            shadow = inject.shadow
         ) { selectShadow ->
-            this.previewOption = HongImageBuilder()
-                .copy(previewOption)
+            inject = HongImageBuilder()
+                .copy(inject)
                 .shadow(selectShadow)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** scale type */
         val scaleTypeList = HongScaleType.entries.toList()
         val scaleNameList = scaleTypeList.map { it.value }
         val initial = scaleTypeList
-            .firstOrNull { it == previewOption.scaleType }
+            .firstOrNull { it == inject.scaleType }
             ?: HongScaleType.FIT_START
         PlaygroundManager.addSelectOptionView(
             activity = activity,
@@ -173,63 +199,64 @@ class HongImagePlayground constructor(
             useDirectCallback = true,
         ) { selectScaleType, index ->
             val scaleTypeName = scaleNameList.firstOrNull { it == selectScaleType }
-            Log.e("TAG", "옵션 scaleTypeName = $scaleTypeName, index = $index")
-            previewOption = HongImageBuilder()
-                .copy(previewOption)
+            inject = HongImageBuilder()
+                .copy(inject)
                 .scaleType(scaleTypeName.toHongScaleType())
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** placeholder */
         PlaygroundManager.addLocalResourceOptionPreview(
             activity = activity,
             label = "placeholder",
-            drawableResId = previewOption.drawableResId
+            drawableResId = inject.drawableResId
         ) { resId ->
-            previewOption = HongImageBuilder()
-                .copy(previewOption)
+            inject = HongImageBuilder()
+                .copy(inject)
                 .placeholder(resId)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** error */
         PlaygroundManager.addLocalResourceOptionPreview(
             activity = activity,
             label = "error",
-            drawableResId = previewOption.drawableResId
+            drawableResId = inject.drawableResId
         ) { resId ->
-            previewOption = HongImageBuilder()
-                .copy(previewOption)
+            inject = HongImageBuilder()
+                .copy(inject)
                 .error(resId)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** useShapeCircle */
         PlaygroundManager.addUseShapeCircleOptionPreview(
             activity = activity,
-            useShapeCircle = previewOption.useShapeCircle,
+            useShapeCircle = inject.useShapeCircle,
         ) { useShapeCircle ->
-            this.previewOption = HongImageBuilder()
-                .copy(previewOption)
+            inject = HongImageBuilder()
+                .copy(inject)
                 .useShapeCircle(useShapeCircle)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** background */
         PlaygroundManager.addColorOptionPreview(
             activity,
             label = "background ",
-            colorHex = previewOption.backgroundColorHex
+            colorHex = inject.backgroundColorHex
         ) { selectColorHex ->
-            this.previewOption = HongImageBuilder()
-                .copy(previewOption)
+            inject = HongImageBuilder()
+                .copy(inject)
                 .backgroundColor(selectColorHex)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
+
     }
+
 }

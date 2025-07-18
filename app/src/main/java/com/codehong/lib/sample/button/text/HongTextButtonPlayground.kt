@@ -105,7 +105,7 @@ class HongTextButtonPlayground(
 
         if (includeCommonOption) {
             /** common */
-            commonPreviewOption2(
+            commonPreviewOption(
                 width = inject.width,
                 height = inject.height,
                 margin = inject.margin,

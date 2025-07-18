@@ -29,7 +29,7 @@ data class HongTextButtonOption(
             .applyOption()
 
         val DEFAULT_DISABLE_TEXT_OPTION = HongTextBuilder()
-            .typography(DEFAULT_TEXT_TYPO)
+            .typography(HongTypo.BODY_15_B)
             .color(HongColor.WHITE_60.hex)
             .applyOption()
 

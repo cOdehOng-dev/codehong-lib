@@ -61,107 +61,138 @@ class HongBadgeTextPlayground(
     fun preview() {
         executePreview()
 
+        injectPreview(
+            injectOption = previewOption,
+            includeCommonOption = true
+        ) {
+            previewOption = it
+            executePreview()
+        }
+    }
+
+    fun injectPreview(
+        injectOption: HongBadgeTextOption,
+        includeCommonOption: Boolean = false,
+        label: String = "",
+        callback: (HongBadgeTextOption) -> Unit
+    ) {
+        var inject = injectOption
+
+        if (label.isNotEmpty()) {
+            PlaygroundManager.addOptionTitleView(
+                activity,
+                label = label
+            )
+        }
+
         PlaygroundManager.addOptionTitleView(
             activity,
-            label = "뱃지 옵션"
+            label = "뱃지 옵션",
+            labelTypo = if (label.isNotEmpty()) HongTypo.BODY_15_B else null
         )
 
         /** common */
-        commonPreviewOption(
-            selectWidth = { selectWidth ->
-                this.previewOption = HongBadgeTextBuilder()
-                    .copy(previewOption)
-                    .width(selectWidth)
-                    .applyOption()
-                executePreview()
-            },
-            selectHeight = { selectHeight ->
-                this.previewOption = HongBadgeTextBuilder()
-                    .copy(previewOption)
-                    .height(selectHeight)
-                    .applyOption()
-                executePreview()
-            },
-            selectMargin = { selectMargin ->
-                this.previewOption = HongBadgeTextBuilder()
-                    .copy(previewOption)
-                    .margin(selectMargin)
-                    .applyOption()
-                executePreview()
-            },
-            selectPadding = { selectPadding ->
-                this.previewOption = HongBadgeTextBuilder()
-                    .copy(previewOption)
-                    .padding(selectPadding)
-                    .applyOption()
-                executePreview()
-            }
-        )
+        if (includeCommonOption) {
+            commonPreviewOption(
+                width = inject.width,
+                height = inject.height,
+                margin = inject.margin,
+                padding = inject.padding,
+                selectWidth = { selectWidth ->
+                    inject = HongBadgeTextBuilder()
+                        .copy(inject)
+                        .width(selectWidth)
+                        .applyOption()
+                    callback.invoke(inject)
+                },
+                selectHeight = { selectHeight ->
+                    inject = HongBadgeTextBuilder()
+                        .copy(inject)
+                        .height(selectHeight)
+                        .applyOption()
+                    callback.invoke(inject)
+                },
+                selectMargin = { selectMargin ->
+                    inject = HongBadgeTextBuilder()
+                        .copy(inject)
+                        .margin(selectMargin)
+                        .applyOption()
+                    callback.invoke(inject)
+                },
+                selectPadding = { selectPadding ->
+                    inject = HongBadgeTextBuilder()
+                        .copy(inject)
+                        .padding(selectPadding)
+                        .applyOption()
+                    callback.invoke(inject)
+                }
+            )
+        }
 
         /** radius */
         PlaygroundManager.addRadiusOptionPreview(
             activity = activity,
-            radius = previewOption.radius,
+            radius = inject.radius,
         ) { selectRadius ->
-            this.previewOption = HongBadgeTextBuilder()
-                .copy(previewOption)
+            inject = HongBadgeTextBuilder()
+                .copy(inject)
                 .radius(selectRadius)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** background color */
         PlaygroundManager.addColorOptionPreview(
             activity = activity,
-            label = "background",
-            colorHex = previewOption.backgroundColorHex,
-            useTopPadding = true
+            label = "background ",
+            colorHex = inject.backgroundColorHex,
         ) { selectColor ->
-            this.previewOption = HongBadgeTextBuilder()
-                .copy(previewOption)
+            inject = HongBadgeTextBuilder()
+                .copy(inject)
                 .backgroundColor(selectColor)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** border */
         PlaygroundManager.addBorderOptionPreview(
             activity = activity,
-            border = previewOption.border,
+            border = inject.border,
             despWidth = "badge 테두리를 설정해요.",
             despColor = "badge 테두리 색상을 설정해요.",
-            useTopPadding = true
         ) { selectBorder ->
-            this.previewOption = HongBadgeTextBuilder()
-                .copy(previewOption)
+            inject = HongBadgeTextBuilder()
+                .copy(inject)
                 .border(selectBorder)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         /** shadow */
         PlaygroundManager.addShadowOptionPreview(
             activity = activity,
-            shadow = previewOption.shadow
+            shadow = inject.shadow
         ) { selectShadow ->
-            this.previewOption = HongBadgeTextBuilder()
-                .copy(previewOption)
+            inject = HongBadgeTextBuilder()
+                .copy(inject)
                 .shadow(selectShadow)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
 
         // region 버튼 텍스트
         HongTextPlayground(activity).injectPreview(
-            injectOption = previewOption.textOption,
+            injectOption = inject.textOption,
             includeCommonOption = true,
-            label = "텍스트 옵션"
+            label = "텍스트 옵션",
+            labelTypo = if (label.isNotEmpty()) HongTypo.BODY_15_B else null
         ) {
-            this.previewOption = HongBadgeTextBuilder()
-                .copy(previewOption)
+            inject = HongBadgeTextBuilder()
+                .copy(inject)
                 .textOption(it)
                 .applyOption()
-            executePreview()
+            callback.invoke(inject)
         }
+
     }
 }

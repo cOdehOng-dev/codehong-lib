@@ -56,6 +56,10 @@ class HongLabelCheckboxPlayground(
 
         if (includeCommonOption) {
             commonPreviewOption(
+                width = inject.width,
+                height = inject.height,
+                margin = inject.margin,
+                padding = inject.padding,
                 selectWidth = { selectWidth ->
                     inject = HongLabelCheckboxBuilder()
                         .copy(inject)

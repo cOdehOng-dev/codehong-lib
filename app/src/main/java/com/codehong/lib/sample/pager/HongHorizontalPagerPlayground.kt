@@ -57,6 +57,8 @@ class HongHorizontalPagerPlayground(
 
         /** common */
         commonPreviewOption(
+            height = previewOption.height,
+            margin = previewOption.margin,
             useWidth = false,
             usePadding = false,
             selectHeight = { selectHeight ->

@@ -99,7 +99,7 @@ class HongCheckboxPlayground(
 
         /** common */
         if (includeCommonOption) {
-            commonPreviewOption2(
+            commonPreviewOption(
                 margin = inject.margin,
                 useWidth = false,
                 useHeight = false,

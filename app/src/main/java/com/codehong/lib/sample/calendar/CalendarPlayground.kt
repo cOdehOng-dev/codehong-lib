@@ -13,7 +13,7 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.text.HongTextBuilder
 
-class CalendarPlayground constructor(
+class CalendarPlayground(
     playgroundActivity: PlaygroundActivity
 ) : BasePlayground<HongCalendarOption> {
 
@@ -119,16 +119,25 @@ class CalendarPlayground constructor(
         executePreview()
 
         commonPreviewOption(
+            height = previewOption.height,
+            margin = previewOption.margin,
+            padding = previewOption.padding,
             useWidth = false,
+            usePadding = false,
             selectHeight = {
-
+                previewOption = HongCalendarBuilder()
+                    .copy(previewOption)
+                    .height(it)
+                    .applyOption()
+                executePreview()
             },
             selectMargin = {
-
+                previewOption = HongCalendarBuilder()
+                    .copy(previewOption)
+                    .margin(it)
+                    .applyOption()
+                executePreview()
             },
-            selectPadding = {
-
-            }
         )
     }
 }

@@ -17,49 +17,6 @@ interface BasePlayground<T: HongWidgetCommonOption> {
     }
 
     fun commonPreviewOption(
-        defWidth: Int = previewOption.width,
-        defHeight: Int = previewOption.height,
-        defMargin: HongSpacingInfo = previewOption.margin,
-        defPadding: HongSpacingInfo = previewOption.padding,
-        useWidth: Boolean = true,
-        useHeight: Boolean = true,
-        useMargin: Boolean = true,
-        usePadding: Boolean = true,
-        selectWidth: (Int) -> Unit = {},
-        selectHeight: (Int) -> Unit = {},
-        selectMargin: (HongSpacingInfo) -> Unit = {},
-        selectPadding: (HongSpacingInfo) -> Unit = {}
-    ) {
-        if (useWidth || useHeight) {
-            PlaygroundManager.addSizeOptionPreview(
-                activity = activity,
-                width = defWidth,
-                height = defHeight,
-                selectWidth = selectWidth,
-                selectHeight = selectHeight,
-                useWidth = useWidth,
-                useHeight = useHeight,
-            )
-        }
-
-        if (useMargin) {
-            PlaygroundManager.addMarginOptionPreview(
-                activity = activity,
-                margin = defMargin,
-                callback = selectMargin
-            )
-        }
-
-        if (usePadding) {
-            PlaygroundManager.addPaddingOptionPreview(
-                activity = activity,
-                padding = defPadding,
-                selectPadding = selectPadding,
-            )
-        }
-    }
-
-    fun commonPreviewOption2(
         width: Int = HongLayoutParam.WRAP_CONTENT.value,
         height: Int = HongLayoutParam.WRAP_CONTENT.value,
         margin: HongSpacingInfo = HongSpacingInfo(),
