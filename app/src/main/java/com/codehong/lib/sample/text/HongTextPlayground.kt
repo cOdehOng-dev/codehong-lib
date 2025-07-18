@@ -63,6 +63,7 @@ class HongTextPlayground(
         useLineBreak: Boolean = true,
         useOverflow: Boolean = true,
         useMaxLine: Boolean = true,
+        useTypo: Boolean = true,
         callback: (HongTextOption) -> Unit
     ) {
         var inject = injectOption
@@ -143,27 +144,29 @@ class HongTextPlayground(
         }
 
         /** 텍스트 타이포그라피 */
-        val initialTypography = PlaygroundManager.typographyList.firstOrNull {
-            it == inject.typography
-        } ?: HongTypo.BODY_14
-        PlaygroundManager.addSelectOptionView(
-            activity = activity,
-            initialText = initialTypography.styleName,
-            selectList = PlaygroundManager.typographyNameList,
-            selectedPosition = PlaygroundManager.typographyList.indexOf(initialTypography),
-            label = "typo 설정",
-            description = "헤더 제목의 타이포그라피를 설정해요.",
-            useDirectCallback = true,
-        ) { selectTypography, index ->
-            val typography =
-                PlaygroundManager.typographyList.firstOrNull { it.styleName == selectTypography }
-                    ?: HongTypo.BODY_16_B
-            Log.e("TAG", "옵션 typography = $typography, index = $index")
-            inject = HongTextBuilder()
-                .copy(inject)
-                .typography(typography)
-                .applyOption()
-            callback.invoke(inject)
+        if (useTypo) {
+            val initialTypography = PlaygroundManager.typographyList.firstOrNull {
+                it == inject.typography
+            } ?: HongTypo.BODY_14
+            PlaygroundManager.addSelectOptionView(
+                activity = activity,
+                initialText = initialTypography.styleName,
+                selectList = PlaygroundManager.typographyNameList,
+                selectedPosition = PlaygroundManager.typographyList.indexOf(initialTypography),
+                label = "typo 설정",
+                description = "헤더 제목의 타이포그라피를 설정해요.",
+                useDirectCallback = true,
+            ) { selectTypography, index ->
+                val typography =
+                    PlaygroundManager.typographyList.firstOrNull { it.styleName == selectTypography }
+                        ?: HongTypo.BODY_16_B
+                Log.e("TAG", "옵션 typography = $typography, index = $index")
+                inject = HongTextBuilder()
+                    .copy(inject)
+                    .typography(typography)
+                    .applyOption()
+                callback.invoke(inject)
+            }
         }
 
         if (useAlign) {

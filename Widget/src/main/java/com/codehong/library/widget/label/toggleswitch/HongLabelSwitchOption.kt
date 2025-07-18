@@ -1,12 +1,16 @@
 package com.codehong.library.widget.label.toggleswitch
 
+import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.HongLabelOption
+import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.toggleswitch.HongSwitchBuilder
@@ -14,7 +18,7 @@ import com.codehong.library.widget.toggleswitch.HongSwitchOption
 
 data class HongLabelSwitchOption(
     override val type: HongWidgetType = HongWidgetType.LABEL_SWITCH,
-) : HongWidgetCommonOption {
+) : HongWidgetAdvanceOption {
 
     companion object {
         val DEFAULT_LABEL_OPTION = HongTextBuilder()
@@ -59,7 +63,10 @@ data class HongLabelSwitchOption(
     override var backgroundColor: HongColor = HongColor.WHITE_100
     override var backgroundColorHex: String = HongColor.WHITE_100.hex
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
-
+    override var radius: HongRadiusInfo = HongRadiusInfo()
+    override var border: HongBorderInfo = HongBorderInfo()
+    override var useShapeCircle: Boolean = false
+    override var shadow = HongShadowInfo()
 
     var label: String? = null
     var labelTextOption = DEFAULT_LABEL_OPTION

@@ -77,6 +77,8 @@ class HongLabelInputPlayground(
             ) {
                 this.previewOption = HongLabelInputBuilder()
                     .copy(previewOption)
+                    .label(null)
+                    .description(null)
                     .labelOption(it)
                     .applyOption()
                 executePreview()

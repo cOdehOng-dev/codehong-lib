@@ -112,6 +112,8 @@ class HongLabelCheckboxPlayground(
             ) {
                 inject = HongLabelCheckboxBuilder()
                     .copy(inject)
+                    .label(null)
+                    .description(null)
                     .labelOption(it)
                     .applyOption()
                 callback.invoke(inject)

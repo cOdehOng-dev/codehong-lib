@@ -59,6 +59,8 @@ class HongLabelSwitchPlayground(
             ) {
                 this.previewOption = HongLabelSwitchBuilder()
                     .copy(previewOption)
+                    .label(null)
+                    .description(null)
                     .labelOption(it)
                     .applyOption()
                 executePreview()

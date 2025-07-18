@@ -4,6 +4,7 @@ import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 
+@Deprecated("Use HongWidgetAdvanceOption instead")
 interface HongWidgetCommonOption {
 
     @Deprecated("")

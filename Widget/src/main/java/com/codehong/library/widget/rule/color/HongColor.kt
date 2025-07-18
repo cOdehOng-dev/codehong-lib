@@ -115,8 +115,8 @@ enum class HongColor(val colorName: String, @ColorRes val colorResId: Int, val h
             return entries.find { it.colorName == this }
         }
 
-        fun String?.hexToHongColor(): HongColor? {
-            return entries.find { it.hex == this }
+        fun String?.hexToHongColor(): HongColor {
+            return entries.find { it.hex == this } ?: TRANSPARENT
         }
 
         fun HongColor?.toColor(): Color {

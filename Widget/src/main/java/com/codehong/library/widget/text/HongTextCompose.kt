@@ -11,15 +11,15 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.codehong.library.widget.extensions.hongHeight
+import com.codehong.library.widget.extensions.hongWidth
+import com.codehong.library.widget.extensions.lineBreakSyllable
+import com.codehong.library.widget.extensions.parseComposeColor
 import com.codehong.library.widget.pretendardFontFamily
 import com.codehong.library.widget.rule.HongTextLineBreak
 import com.codehong.library.widget.rule.typo.lineHeight
 import com.codehong.library.widget.rule.typo.size
 import com.codehong.library.widget.util.dpToSp
-import com.codehong.library.widget.extensions.hongHeight
-import com.codehong.library.widget.extensions.hongWidth
-import com.codehong.library.widget.extensions.lineBreakSyllable
-import com.codehong.library.widget.extensions.parseComposeColor
 
 @Composable
 fun HongTextCompose(

@@ -9,6 +9,7 @@ enum class HongWidgetType(
     IMAGE(2, "Image", true),
     CLOSE_HEADER(3, "CloseHeader", true),
     TEXT_FILED(4, "TextField", true),
+    UNDERLINE_TEXT_FIELD(23, "UnderlineTextField", true),
 //    SEARCH_BAR(5, "SearchBar", true),
     TEXT_BUTTON(6, "TextButton", true),
     SELECT_BUTTON(7, "SelectButton", true),

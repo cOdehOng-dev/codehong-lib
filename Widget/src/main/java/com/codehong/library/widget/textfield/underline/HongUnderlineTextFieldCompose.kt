@@ -1,5 +1,6 @@
-package com.codehong.library.widget.textfield.timer
+package com.codehong.library.widget.textfield.underline
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,22 +30,21 @@ import com.codehong.library.widget.pretendardFontFamily
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.color.HongColor.Companion.hexToHongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType.Companion.toKeyboardActions
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextCompose
-import com.codehong.library.widget.textfield.HongTextFieldBuilder
-import com.codehong.library.widget.textfield.HongTextFieldOption
 import com.codehong.library.widget.util.HongWidgetContainer
 import com.codehong.library.widget.util.checkPasswordType
 import com.codehong.library.widget.util.dpToSp
 import com.codehong.library.widget.util.toKeyboardOptions
 
 @Composable
-fun HongTimerTextFieldCompose(
-    option: HongTextFieldOption,
+fun HongUnderlineTextFieldCompose(
+    option: HongUnderlineTextFieldOption
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -107,9 +107,8 @@ fun HongTimerTextFieldCompose(
                                 option.cursorColorHex.toColor()
                             }
                         ),
-                        singleLine = option.singleLine,
-                        maxLines = if (option.singleLine) 1 else option.maxLines,
-                        minLines = option.minLines,
+                        singleLine = true,
+                        maxLines = 1,
                         keyboardOptions = option.keyboardOption.toKeyboardOptions(),
                         keyboardActions = option.keyboardOption.second.toKeyboardActions {
                             if (option.useHideKeyboard) {
@@ -135,8 +134,8 @@ fun HongTimerTextFieldCompose(
             }
 
             HongDivider(
-                color = if (isFocused) HongColor.MAIN_ORANGE_100 else HongColor.GRAY_20,
-                height = 2
+                color = (if (isFocused) option.underlineFocusColorHex.also { Log.d("TAG", "test here focus = $it") } else option.underlineOutFocusColorHex.also { Log.w("TAG", "test here outfocus = $it") }).hexToHongColor(),
+                height = option.underlineHeight
             )
         }
     }
@@ -144,8 +143,8 @@ fun HongTimerTextFieldCompose(
 
 @Composable
 @Preview(showBackground = true)
-fun PreviewHongTimerTextFieldCompose() {
-    val option = HongTextFieldBuilder()
+fun PreviewUnderlineTextFieldCompose() {
+    val option = HongUnderlineTextFieldBuilder()
         .width(HongLayoutParam.MATCH_PARENT.value)
         .height(48)
         .margin(
@@ -159,13 +158,13 @@ fun PreviewHongTimerTextFieldCompose() {
         .backgroundColor(HongColor.WHITE_100.hex)
         .placeholderTextOption(
             HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .copy(HongUnderlineTextFieldOption.DEFAULT_PLACEHOLDER)
                 .text("[지우기 버튼] 값을 입력해주세요.")
                 .applyOption()
         )
         .inputTextOption(
             HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
+                .copy(HongUnderlineTextFieldOption.DEFAULT_INPUT)
                 .applyOption()
         )
         .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
@@ -173,8 +172,8 @@ fun PreviewHongTimerTextFieldCompose() {
         .onTextChanged { trackingText ->
         }
         .clearImageOption(
-            HongTextFieldOption.DEFAULT_CLEAR_IMAGE
+            HongUnderlineTextFieldOption.DEFAULT_CLEAR_IMAGE
         )
         .applyOption()
-    HongTimerTextFieldCompose(option)
+    HongUnderlineTextFieldCompose(option)
 }

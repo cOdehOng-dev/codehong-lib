@@ -9,7 +9,6 @@ import com.codehong.library.widget.label.HongLabelOption
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
 
 class HongLabelPlayground(
     playgroundActivity: PlaygroundActivity
@@ -23,18 +22,8 @@ class HongLabelPlayground(
                     bottom = 20f
                 )
             )
-            .labelTextOption(
-                HongTextBuilder()
-                    .copy(HongLabelOption.DEFAULT_LABEL_OPTION)
-                    .text("text align")
-                    .applyOption()
-            )
-            .descriptionTextOption(
-                HongTextBuilder()
-                    .copy(HongLabelOption.DEFAULT_DESCRIPTION_OPTION)
-                    .text("width가 MATCH_PARENT인 경우, textAlign이 적용되지 않습니다.")
-                    .applyOption()
-            )
+            .label("레이블")
+            .description("레이블 설명하는 테스트입니다.")
             .applyOption()
     }
 
@@ -111,10 +100,15 @@ class HongLabelPlayground(
             injectOption = inject.labelTextOption,
             includeCommonOption = true,
             label = "Label",
-            labelTypo = HongTypo.BODY_16
+            labelTypo = HongTypo.BODY_16,
+            useCancelLine = false,
+            useLineBreak = false,
+            useOverflow = false,
+            useUnderline = false
         ) {
             inject = HongLabelBuilder()
                 .copy(inject)
+                .label(null)
                 .labelTextOption(it)
                 .applyOption()
             callback.invoke(inject)
@@ -124,10 +118,15 @@ class HongLabelPlayground(
             injectOption = inject.descriptionTextOption,
             includeCommonOption = true,
             label = "Description",
-            labelTypo = HongTypo.BODY_16
+            labelTypo = HongTypo.BODY_16,
+            useCancelLine = false,
+            useLineBreak = false,
+            useOverflow = false,
+            useUnderline = false
         ) {
             inject = HongLabelBuilder()
                 .copy(inject)
+                .description(null)
                 .descriptionTextOption(it)
                 .applyOption()
             callback.invoke(inject)

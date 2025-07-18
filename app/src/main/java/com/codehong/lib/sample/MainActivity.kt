@@ -46,6 +46,7 @@ import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.tab.SampleScrollTabActivity
 import com.codehong.lib.sample.text.SampleTextActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
+import com.codehong.lib.sample.textfield.underline.SampleUnderlineTextFieldActivity
 import com.codehong.lib.sample.toggleswitch.SampleSwitchActivity
 import com.codehong.lib.sample.videopopup.SampleVideoPopupActivity
 import com.codehong.lib.sample.videopopup.SampleVideoPopupBuilderActivity
@@ -272,6 +273,17 @@ fun SampleTheme(
                                         HongWidgetType.TEXT_FILED -> {
                                             Intent(activity, SampleTextFieldActivity::class.java).apply {
                                                 putExtra(SampleConst.WIDGET_TYPE, HongWidgetType.TEXT_FILED.value)
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
+
+                                        HongWidgetType.UNDERLINE_TEXT_FIELD -> {
+                                            Intent(activity, SampleUnderlineTextFieldActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.UNDERLINE_TEXT_FIELD.value
+                                                )
                                                 activity.startActivity(this)
                                             }
                                         }
