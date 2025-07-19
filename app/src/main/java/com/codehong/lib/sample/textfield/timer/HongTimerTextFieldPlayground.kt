@@ -121,13 +121,13 @@ class HongTimerTextFieldPlayground(
                 injectOption = inject.countDownTextOption,
                 includeCommonOption = false,
                 label = "타이머 텍스트 설정",
-                description = "text에 00:00 형식으로 입력해주세요.",
                 useAlign = false,
                 useCancelLine = false,
                 useUnderline = false,
                 useLineBreak = false,
                 useMaxLine = false,
                 useOverflow = false,
+                useText = false,
             ) {
                 inject = HongTimerTextFieldBuilder()
                     .copy(inject)
