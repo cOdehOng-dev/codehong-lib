@@ -4,10 +4,13 @@ import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.calendar.model.HongCalendarDayOfWeekLangType
 import com.codehong.library.widget.calendar.model.HongCalendarSelectBackgroundColorHex
 import com.codehong.library.widget.calendar.model.InitialSelectedInfo
+import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.text.HongTextBuilder
 import org.threeten.bp.LocalDate
@@ -105,6 +108,10 @@ data class HongCalendarOption(
     override var backgroundColor: HongColor = HongColor.WHITE_100
     override var backgroundColorHex: String = HongColor.WHITE_100.hex
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
+    override var radius: HongRadiusInfo = HongRadiusInfo()
+    override var shadow: HongShadowInfo = HongShadowInfo()
+    override var border: HongBorderInfo = HongBorderInfo()
+    override var useShapeCircle: Boolean = false
 
     // 요일 하단 라인 색상
     var dayOfWeekBottomLineColorHex = DEFAULT_DAY_OF_WEEK_BOTTOM_LINE_COLOR_HEX

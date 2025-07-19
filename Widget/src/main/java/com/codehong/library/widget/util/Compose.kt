@@ -1,6 +1,5 @@
 package com.codehong.library.widget.util
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -14,14 +13,12 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.extensions.disableRippleClickable
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.hongWidth
-import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType.Companion.toImeAction
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
@@ -174,49 +171,6 @@ fun HongWidgetContainer(
             modifier = Modifier
                 .hongWidth(option.width)
                 .hongHeight(option.height)
-                .hongPadding(option.padding)
-                .background(option.backgroundColorHex.toColor())
-                .disableRippleClickable { option.click?.invoke(option) }
-        ) {
-            childCompose()
-        }
-    }
-}
-@Composable
-fun HongWidgetNoneClickContainer(
-    option: HongWidgetCommonOption,
-    childCompose: @Composable () -> Unit,
-) {
-    Box(
-        modifier = Modifier
-            .hongPadding(option.margin)
-    ) {
-        Box(
-            modifier = Modifier
-                .hongWidth(option.width)
-                .hongHeight(option.height)
-                .hongPadding(option.padding)
-                .background(option.backgroundColorHex.toColor())
-        ) {
-            childCompose()
-        }
-    }
-}
-
-
-@Composable
-fun HongWidgetContainer(
-    option: HongWidgetAdvanceOption,
-    childCompose: @Composable () -> Unit,
-) {
-    Box(
-        modifier = Modifier
-            .hongPadding(option.margin)
-    ) {
-        Box(
-            modifier = Modifier
-                .hongWidth(option.width)
-                .hongHeight(option.height)
                 .hongBackground(
                     backgroundColor = option.backgroundColorHex,
                     border = option.border,
@@ -235,7 +189,7 @@ fun HongWidgetContainer(
 
 @Composable
 fun HongWidgetNoneClickContainer(
-    option: HongWidgetAdvanceOption,
+    option: HongWidgetCommonOption,
     childCompose: @Composable () -> Unit,
 ) {
     Box(

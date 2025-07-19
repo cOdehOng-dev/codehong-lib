@@ -2,13 +2,17 @@ package com.codehong.library.widget.text
 
 import androidx.compose.ui.text.font.FontWeight
 import com.codehong.library.widget.HongWidgetCommonOption
+
+import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongTextAlign
 import com.codehong.library.widget.rule.HongTextLineBreak
 import com.codehong.library.widget.rule.HongTextOverflow
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.rule.typo.fontWeight
@@ -33,7 +37,10 @@ data class HongTextOption(
     override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
 
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
-
+    override var radius: HongRadiusInfo = HongRadiusInfo()
+    override var shadow: HongShadowInfo = HongShadowInfo()
+    override var border: HongBorderInfo = HongBorderInfo()
+    override var useShapeCircle: Boolean = false
 
     var text: String? = null
     var colorHex: String? = null

@@ -1,7 +1,7 @@
 package com.codehong.library.widget.textfield
 
-import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
+
 import com.codehong.library.widget.R
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.image.HongImageOption
@@ -19,7 +19,7 @@ import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongTextFieldOption(
     override val type: HongWidgetType = HongWidgetType.TEXT_FILED
-) : HongWidgetAdvanceOption {
+) : HongWidgetCommonOption {
 
     companion object {
         val DEFAULT_PLACEHOLDER_FONT_TYPE = HongFont.PRETENDARD_400

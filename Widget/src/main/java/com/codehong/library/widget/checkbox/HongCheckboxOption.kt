@@ -1,7 +1,7 @@
 package com.codehong.library.widget.checkbox
 
-import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
+
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -13,7 +13,7 @@ import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
 data class HongCheckboxOption(
     override val type: HongWidgetType = HongWidgetType.CHECKBOX,
-) : HongWidgetAdvanceOption {
+) : HongWidgetCommonOption {
 
     override var isValidComponent: Boolean = true
     override var width: Int = HongLayoutParam.WRAP_CONTENT.value

@@ -1,11 +1,15 @@
 package com.codehong.library.widget.videopopup
 
 import com.codehong.library.widget.HongWidgetCommonOption
+
 import com.codehong.library.widget.player.HongVideoPlayerBuilder
+import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
 data class HongVideoPopupOption(
     override val type: HongWidgetType = HongWidgetType.VIDEO_POPUP
@@ -25,6 +29,10 @@ data class HongVideoPopupOption(
     override var backgroundColor: HongColor = HongColor.TRANSPARENT
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
+    override var radius: HongRadiusInfo = HongRadiusInfo()
+    override var shadow: HongShadowInfo = HongShadowInfo()
+    override var border: HongBorderInfo = HongBorderInfo()
+    override var useShapeCircle: Boolean = false
 
     var videoPlayerOption = HongVideoPlayerBuilder()
         .ratio(DEFAULT_RATIO)

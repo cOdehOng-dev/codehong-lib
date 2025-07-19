@@ -1,7 +1,7 @@
 package com.codehong.library.widget.label.checkbox
 
-import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
+
 import com.codehong.library.widget.checkbox.HongCheckboxBuilder
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.HongLabelOption
@@ -18,7 +18,7 @@ import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongLabelCheckboxOption(
     override val type: HongWidgetType = HongWidgetType.LABEL_CHECKBOX
-) : HongWidgetAdvanceOption {
+) : HongWidgetCommonOption {
 
     companion object {
         val DEFAULT_BETTWEN_SPACER = 10

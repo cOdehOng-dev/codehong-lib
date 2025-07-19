@@ -1,7 +1,7 @@
 package com.codehong.library.widget.tab
 
-import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
+
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -14,7 +14,7 @@ import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongScrollTabOption(
     override val type: HongWidgetType = HongWidgetType.SCROLL_TAB
-) : HongWidgetAdvanceOption {
+) : HongWidgetCommonOption {
 
     companion object {
         const val DEFAULT_BORDER_WIDTH = 1

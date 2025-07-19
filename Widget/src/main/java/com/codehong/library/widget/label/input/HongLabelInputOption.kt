@@ -1,7 +1,7 @@
 package com.codehong.library.widget.label.input
 
-import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
+
 import com.codehong.library.widget.R
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.label.HongLabelBuilder
@@ -23,7 +23,7 @@ import com.codehong.library.widget.textfield.HongTextFieldOption
 
 data class HongLabelInputOption(
     override val type: HongWidgetType = HongWidgetType.LABEL_INPUT
-)  : HongWidgetAdvanceOption {
+)  : HongWidgetCommonOption {
 
     companion object {
         val DEFAULT_LABEL_OPTION = HongTextBuilder()

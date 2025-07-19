@@ -1,7 +1,7 @@
 package com.codehong.library.widget.textfield.timer
 
-import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
+
 import com.codehong.library.widget.R
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.image.HongImageOption
@@ -20,7 +20,7 @@ import com.codehong.library.widget.text.HongTextOption
 
 data class HongTimerTextFieldOption(
     override val type: HongWidgetType = HongWidgetType.TIMER_TEXT_FIELD
-) : HongWidgetAdvanceOption {
+) : HongWidgetCommonOption {
 
     companion object {
         const val DEFAULT_USE_HIDE_KEYBOARD = true

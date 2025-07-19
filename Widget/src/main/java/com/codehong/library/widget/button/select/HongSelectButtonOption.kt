@@ -1,7 +1,7 @@
 package com.codehong.library.widget.button.select
 
-import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
+
 import com.codehong.library.widget.button.text.HongTextButtonBuilder
 import com.codehong.library.widget.button.text.HongTextButtonOption
 import com.codehong.library.widget.rule.HongBorderInfo
@@ -16,7 +16,7 @@ import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongSelectButtonOption(
     override val type: HongWidgetType = HongWidgetType.SELECT_BUTTON
-) : HongWidgetAdvanceOption {
+) : HongWidgetCommonOption {
 
     companion object {
         val DEFAULT_NEGATIVE_TEXT_BUTTON_OPTION = HongTextButtonBuilder()

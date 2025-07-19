@@ -2,8 +2,8 @@ package com.codehong.library.widget.image
 
 import coil.compose.AsyncImagePainter
 import coil.request.CachePolicy
-import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
+
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongScaleType
@@ -15,7 +15,7 @@ import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
 data class HongImageOption(
     override val type: HongWidgetType = HongWidgetType.BADGE_TEXT
-) : HongWidgetAdvanceOption {
+) : HongWidgetCommonOption {
 
     companion object {
 

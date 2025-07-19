@@ -1,7 +1,7 @@
 package com.codehong.library.widget.button.text
 
-import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
+
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -15,7 +15,7 @@ import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongTextButtonOption(
     override val type: HongWidgetType = HongWidgetType.TEXT_BUTTON,
-) : HongWidgetAdvanceOption {
+) : HongWidgetCommonOption {
 
     companion object {
         val DEFAULT_TEXT_TYPO = HongTypo.BODY_16_B

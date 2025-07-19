@@ -11,6 +11,7 @@ import com.codehong.library.widget.label.HongLabelOption
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongScaleType
+import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
@@ -161,6 +162,10 @@ data class HongLabelSelectInputOption(
     override var backgroundColor: HongColor = HongColor.WHITE_100
     override var backgroundColorHex: String = HongColor.WHITE_100.hex
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
+    override var radius: HongRadiusInfo = HongRadiusInfo()
+    override var shadow: HongShadowInfo = HongShadowInfo()
+    override var border: HongBorderInfo = HongBorderInfo()
+    override var useShapeCircle: Boolean = false
 
 
     var label: String? = null

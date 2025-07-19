@@ -1,10 +1,14 @@
 package com.codehong.library.widget.pager
 
 import com.codehong.library.widget.HongWidgetCommonOption
+
+import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
 /**
  * HorizontalPager의 옵션을 정의하는 클래스입니다.
@@ -33,6 +37,10 @@ data class HongHorizontalPagerOption(
 
     override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
+    override var radius: HongRadiusInfo = HongRadiusInfo()
+    override var shadow: HongShadowInfo = HongShadowInfo()
+    override var border: HongBorderInfo = HongBorderInfo()
+    override var useShapeCircle: Boolean = false
 
     override var backgroundColor: HongColor = HongColor.TRANSPARENT
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex

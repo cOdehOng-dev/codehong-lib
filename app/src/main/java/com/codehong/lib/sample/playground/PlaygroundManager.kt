@@ -5,7 +5,7 @@ import android.util.Log
 import com.codehong.lib.sample.R
 import com.codehong.lib.sample.playground.preview.HorizontalOptionView
 import com.codehong.lib.sample.playground.preview.QuarterInputOptionView
-import com.codehong.library.widget.HongWidgetAdvanceOption
+import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.extensions.toFigureFloat
 import com.codehong.library.widget.extensions.toFigureInt
 import com.codehong.library.widget.extensions.toFigureString
@@ -648,7 +648,7 @@ object PlaygroundManager {
                 useTopPadding = false,
                 useOnlyNumber = true,
             ) { borderWidth ->
-                val currentBorder = (activity.previewOption as HongWidgetAdvanceOption).border
+                val currentBorder = (activity.previewOption as HongWidgetCommonOption).border
                 callback(
                     HongBorderInfo(
                         color = currentBorder.color,
@@ -663,7 +663,7 @@ object PlaygroundManager {
                 description = despColor,
                 useTopPadding = false
             ) { borderColor ->
-                val currentBorder = (activity.previewOption as HongWidgetAdvanceOption).border
+                val currentBorder = (activity.previewOption as HongWidgetCommonOption).border
                 callback(
                     HongBorderInfo(
                         color = borderColor,

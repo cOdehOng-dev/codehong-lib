@@ -1,7 +1,7 @@
 package com.codehong.library.widget.label.toggleswitch
 
-import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
+
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.HongLabelOption
 import com.codehong.library.widget.rule.HongBorderInfo
@@ -18,7 +18,7 @@ import com.codehong.library.widget.toggleswitch.HongSwitchOption
 
 data class HongLabelSwitchOption(
     override val type: HongWidgetType = HongWidgetType.LABEL_SWITCH,
-) : HongWidgetAdvanceOption {
+) : HongWidgetCommonOption {
 
     companion object {
         val DEFAULT_LABEL_OPTION = HongTextBuilder()

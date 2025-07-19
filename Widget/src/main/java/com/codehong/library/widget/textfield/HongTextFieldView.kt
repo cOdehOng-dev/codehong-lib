@@ -54,8 +54,8 @@ class HongTextFieldView @JvmOverloads constructor(
 
     private var hasClearButton = false
 
-    private var etInput: AppCompatEditText? = null
-    private var ivClear: HongImageView? = null
+    private var textField: AppCompatEditText? = null
+    private var clearButton: HongImageView? = null
 
 
     fun set(
@@ -88,7 +88,7 @@ class HongTextFieldView @JvmOverloads constructor(
         )
 
         textField {
-            etInput = this
+            textField = this
 
             layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT).apply {
                 weight = 1f
@@ -148,12 +148,12 @@ class HongTextFieldView @JvmOverloads constructor(
                 )
 
                 if (input.isEmpty()) {
-                    ivClear?.visibility = View.GONE
+                    clearButton?.visibility = View.GONE
                 } else {
                     if (hasClearButton) {
-                        ivClear?.visibility = View.VISIBLE
+                        clearButton?.visibility = View.VISIBLE
                     } else {
-                        ivClear?.visibility = View.GONE
+                        clearButton?.visibility = View.GONE
                     }
                 }
 
@@ -174,12 +174,12 @@ class HongTextFieldView @JvmOverloads constructor(
         option.clearImageOption?.let {
             hasClearButton = true
             hongImage {
-                ivClear = this
+                clearButton = this
                 set(
                     HongImageBuilder()
                         .copy(it)
                         .onClick{
-                            etInput?.text?.clear()
+                            textField?.text?.clear()
                         }
                         .applyOption()
                 )
@@ -187,14 +187,14 @@ class HongTextFieldView @JvmOverloads constructor(
         }
 
         if (option.inputTextOption.text.isNullOrEmpty()) {
-            etInput?.setText("")
-            ivClear?.visibility = View.GONE
+            textField?.setText("")
+            clearButton?.visibility = View.GONE
         } else {
-            etInput?.setText(option.inputTextOption.text)
+            textField?.setText(option.inputTextOption.text)
             if (hasClearButton) {
-                ivClear?.visibility = View.VISIBLE
+                clearButton?.visibility = View.VISIBLE
             } else {
-                ivClear?.visibility = View.GONE
+                clearButton?.visibility = View.GONE
             }
         }
         return this

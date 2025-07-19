@@ -1,6 +1,5 @@
 package com.codehong.library.widget.toggleswitch
 
-import com.codehong.library.widget.HongWidgetAdvanceOption
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -11,7 +10,7 @@ import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
 data class HongSwitchOption(
     override val type: HongWidgetType = HongWidgetType.SWITCH
-) : HongWidgetAdvanceOption {
+) : HongWidgetCommonOption {
 
     companion object {
         const val DEFAULT_WIDTH = 55
