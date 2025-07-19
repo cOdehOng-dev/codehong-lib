@@ -1,9 +1,7 @@
 package com.codehong.library.widget.image
 
-import coil.compose.AsyncImagePainter
 import coil.request.CachePolicy
 import com.codehong.library.widget.HongWidgetCommonOption
-
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongScaleType
@@ -16,12 +14,6 @@ import com.codehong.library.widget.rule.radius.HongRadiusInfo
 data class HongImageOption(
     override val type: HongWidgetType = HongWidgetType.BADGE_TEXT
 ) : HongWidgetCommonOption {
-
-    companion object {
-
-        val DEFAULT_MEMORY_CACHE = CachePolicy.ENABLED
-        val DEFAULT_DISK_CACHE = CachePolicy.ENABLED
-    }
 
     override var isValidComponent: Boolean = true
 
@@ -37,6 +29,7 @@ data class HongImageOption(
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
 
     override var border: HongBorderInfo = HongBorderInfo()
+    override var shadow = HongShadowInfo()
 
     override var useShapeCircle: Boolean = false
 
@@ -45,22 +38,18 @@ data class HongImageOption(
     var imageUrl: String? = null
     var placeholder: Int? = null
     var error: Int? = null
-    var onLoading: ((AsyncImagePainter.State.Loading) -> Unit)? = null
-    var onSuccess: ((AsyncImagePainter.State.Success) -> Unit)? = null
-    var onError: ((AsyncImagePainter.State.Error) -> Unit)? = null
+    var onLoading: (() -> Unit)? = null
+    var onSuccess: (() -> Unit)? = null
+    var onError: (() -> Unit)? = null
 
     var scaleType: HongScaleType = HongScaleType.FIT_START
 
-    var memoryCache = DEFAULT_MEMORY_CACHE
-    var diskCache = DEFAULT_DISK_CACHE
+    var memoryCache = CachePolicy.ENABLED
+    var diskCache = CachePolicy.ENABLED
 
-    override var shadow = HongShadowInfo(
-        color = HongColor.TRANSPARENT.hex,
-        blur = 0f,
-        offsetY = 0f,
-        offsetX = 0f,
-        spread = 0f
-    )
+    var imageColor: HongColor? = null
+    var imageColorHex: String? = null
+
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -79,6 +68,7 @@ data class HongImageOption(
         if (backgroundColor != other.backgroundColor) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (border != other.border) return false
+        if (shadow != other.shadow) return false
         if (useShapeCircle != other.useShapeCircle) return false
         if (drawableResId != other.drawableResId) return false
         if (imageUrl != other.imageUrl) return false
@@ -90,7 +80,8 @@ data class HongImageOption(
         if (scaleType != other.scaleType) return false
         if (memoryCache != other.memoryCache) return false
         if (diskCache != other.diskCache) return false
-        if (shadow != other.shadow) return false
+        if (imageColor != other.imageColor) return false
+        if (imageColorHex != other.imageColorHex) return false
 
         return true
     }
@@ -107,6 +98,7 @@ data class HongImageOption(
         result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + border.hashCode()
+        result = 31 * result + shadow.hashCode()
         result = 31 * result + useShapeCircle.hashCode()
         result = 31 * result + (drawableResId ?: 0)
         result = 31 * result + (imageUrl?.hashCode() ?: 0)
@@ -118,7 +110,8 @@ data class HongImageOption(
         result = 31 * result + scaleType.hashCode()
         result = 31 * result + memoryCache.hashCode()
         result = 31 * result + diskCache.hashCode()
-        result = 31 * result + shadow.hashCode()
+        result = 31 * result + (imageColor?.hashCode() ?: 0)
+        result = 31 * result + (imageColorHex?.hashCode() ?: 0)
         return result
     }
 
@@ -135,6 +128,7 @@ data class HongImageOption(
                 "backgroundColor=$backgroundColor, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "border=$border, " +
+                "shadow=$shadow, " +
                 "useShapeCircle=$useShapeCircle, " +
                 "drawableResId=$drawableResId, " +
                 "imageUrl=$imageUrl, " +
@@ -146,7 +140,8 @@ data class HongImageOption(
                 "scaleType=$scaleType, " +
                 "memoryCache=$memoryCache, " +
                 "diskCache=$diskCache, " +
-                "shadow=$shadow" +
+                "imageColor=$imageColor, " +
+                "imageColorHex=$imageColorHex" +
                 ")"
     }
 }

@@ -24,6 +24,7 @@ enum class HongTypo(
     BODY_16_B("body_16_b", 33),
     BODY_15_B("body_15_b", 34),
     BODY_14_B("body_14_b", 35),
+    BODY_13_B("body_13_b", 36),
 
     BODY_20("body_20", 40),
     BODY_18("body_18", 41),
@@ -31,6 +32,7 @@ enum class HongTypo(
     BODY_16("body_16", 43),
     BODY_15("body_15", 44),
     BODY_14("body_14", 45),
+    BODY_13("body_13", 46),
 
     CONTENTS_22_B("contents_22_b", 50),
     CONTENTS_20_B("contents_20_b", 51),
@@ -58,6 +60,7 @@ fun HongTypo.size(): Int = when (this) {
     HongTypo.BODY_16_B, HongTypo.BODY_16 -> 16
     HongTypo.BODY_15_B, HongTypo.BODY_15 -> 15
     HongTypo.BODY_14_B, HongTypo.BODY_14 -> 14
+    HongTypo.BODY_13_B, HongTypo.BODY_13 -> 13
 
     HongTypo.CONTENTS_22_B -> 22
     HongTypo.CONTENTS_20_B, HongTypo.CONTENTS_20 -> 20
@@ -80,6 +83,7 @@ fun HongTypo.lineHeight(): Int = when (this) {
     HongTypo.BODY_16_B, HongTypo.BODY_16 -> 22
     HongTypo.BODY_15_B, HongTypo.BODY_15 -> 20
     HongTypo.BODY_14_B, HongTypo.BODY_14 -> 19
+    HongTypo.BODY_13_B, HongTypo.BODY_13 -> 18
 
     HongTypo.CONTENTS_22_B -> 32
     HongTypo.CONTENTS_20_B -> 26

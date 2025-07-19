@@ -24,7 +24,8 @@ class HongCheckboxView @JvmOverloads constructor(
     private var checkMark = AppCompatImageView(context)
     private var isChecked: Boolean = false
     private var isEnabled = false
-    private var option: HongCheckboxOption = HongCheckboxOption()
+    var option = HongCheckboxOption()
+        private set
 
     init {
         addView(checkMark)
@@ -42,6 +43,23 @@ class HongCheckboxView @JvmOverloads constructor(
         this.option = option
         this.isChecked = option.checkState
         this.isEnabled = option.enableState.isEnabled()
+
+        setLayout(
+            width = option.size,
+            height = option.size,
+        )?.apply {
+            this.leftMargin = context.dpToPx(option.margin.left)
+            this.topMargin = context.dpToPx(option.margin.top)
+            this.rightMargin = context.dpToPx(option.margin.right)
+            this.bottomMargin = context.dpToPx(option.margin.bottom)
+        }
+
+        val checkSize = context.dpToPx(option.size * 0.9f)
+        checkMark.layoutParams = LayoutParams(checkSize, checkSize).apply {
+            gravity = Gravity.CENTER
+        }
+        checkMark.setImageResource(R.drawable.honglib_ic_24_check)
+
         buildCheckBox()
         return this
     }
@@ -59,16 +77,6 @@ class HongCheckboxView @JvmOverloads constructor(
             else -> option.border.color
         }
 
-        setLayout(
-            width = option.size,
-            height = option.size,
-        )?.apply {
-            this.leftMargin = context.dpToPx(option.margin.left)
-            this.topMargin = context.dpToPx(option.margin.top)
-            this.rightMargin = context.dpToPx(option.margin.right)
-            this.bottomMargin = context.dpToPx(option.margin.bottom)
-        }
-
         hongBackground(
             backgroundColor = backgroundColor,
             border = HongBorderInfo(
@@ -78,7 +86,6 @@ class HongCheckboxView @JvmOverloads constructor(
             radius = option.radius
         )
 
-        checkMark.setImageResource(R.drawable.honglib_ic_24_check)
         if (isChecked) {
             checkMark.visibility = View.VISIBLE
             checkMark.setColorFilter(option.checkmarkColorHex.parseColor())
@@ -86,11 +93,6 @@ class HongCheckboxView @JvmOverloads constructor(
             checkMark.setColorFilter(HongColor.GRAY_40.hex.parseColor())
         } else {
             checkMark.visibility = View.INVISIBLE
-        }
-
-        val checkSize = context.dpToPx(option.size * 0.9f)
-        checkMark.layoutParams = LayoutParams(checkSize, checkSize).apply {
-            gravity = Gravity.CENTER
         }
     }
 

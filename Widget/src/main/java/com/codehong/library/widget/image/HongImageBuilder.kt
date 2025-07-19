@@ -1,11 +1,11 @@
 package com.codehong.library.widget.image
 
-import coil.compose.AsyncImagePainter
 import coil.request.CachePolicy
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongShadowInfo
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
 class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuilder> {
@@ -49,15 +49,15 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
         option.useShapeCircle = useShapeCircle
     }
 
-    fun onLoading(onLoading: ((AsyncImagePainter.State.Loading) -> Unit)?) = apply {
+    fun onLoading(onLoading: (() -> Unit)?) = apply {
         option.onLoading = onLoading
     }
 
-    fun onSuccess(onSuccess: ((AsyncImagePainter.State.Success) -> Unit)?) = apply {
+    fun onSuccess(onSuccess: (() -> Unit)?) = apply {
         option.onSuccess = onSuccess
     }
 
-    fun onError(onError: ((AsyncImagePainter.State.Error) -> Unit)?) = apply {
+    fun onError(onError: (() -> Unit)?) = apply {
         option.onError = onError
     }
 
@@ -67,6 +67,14 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
 
     fun diskCache(diskCache: CachePolicy) = apply {
         option.diskCache = diskCache
+    }
+
+    fun imageColor(color: HongColor?) = apply {
+        option.imageColor = color
+        imageColor(color?.hex)
+    }
+    fun imageColor(colorHex: String?) = apply {
+        option.imageColorHex = colorHex
     }
 
     fun copy(inject: HongImageOption?): HongImageBuilder {
@@ -93,5 +101,7 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
             .scaleType(inject.scaleType)
             .memoryCache(inject.memoryCache)
             .diskCache(inject.diskCache)
+            .imageColor(inject.imageColor)
+            .imageColor(inject.imageColorHex)
     }
 }

@@ -1,17 +1,19 @@
 package com.codehong.library.widget.image
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.ImageView
 import coil.imageLoader
 import coil.request.ImageRequest
-import com.codehong.library.widget.rule.HongScaleType.Companion.toScaleType
-import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toRoundedCornersTransformation
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
+import com.codehong.library.widget.extensions.parseColor
 import com.codehong.library.widget.extensions.setLayout
+import com.codehong.library.widget.rule.HongScaleType.Companion.toScaleType
+import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toRoundedCornersTransformation
 
 class HongImageView @JvmOverloads constructor(
     context: Context,
@@ -63,9 +65,28 @@ class HongImageView @JvmOverloads constructor(
                 }
                 .diskCachePolicy(option.diskCache)
                 .memoryCachePolicy(option.memoryCache)
+                .listener(
+                    onSuccess = { _, _ ->
+                        option.onSuccess?.invoke()
+                        option.imageColorHex
+                            ?.takeIf { it.isNotEmpty() }
+                            ?.parseColor()
+                            ?.let {
+                                this.setColorFilter(it, PorterDuff.Mode.SRC_IN)
+                            }
+                    },
+                    onError = { _, _ ->
+                        option.onLoading?.invoke()
+                    },
+                    onStart = {
+                        option.onLoading?.invoke()
+                    },
+                )
                 .build()
 
             context.imageLoader.enqueue(request)
+
+
         }
 
         addView(imageView)

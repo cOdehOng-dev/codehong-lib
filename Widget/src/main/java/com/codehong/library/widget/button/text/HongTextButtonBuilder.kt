@@ -6,7 +6,6 @@ import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongState
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
 
 class HongTextButtonBuilder : HongWidgetCommonBuilder<HongTextButtonOption, HongTextButtonBuilder> {
@@ -31,11 +30,7 @@ class HongTextButtonBuilder : HongWidgetCommonBuilder<HongTextButtonOption, Hong
     }
 
     fun textOption(option: HongTextOption?) = apply {
-        this.option.textOption = option
-            ?: HongTextBuilder()
-                .typography(HongTextButtonOption.DEFAULT_TEXT_TYPO)
-                .color(HongTextButtonOption.DEFAULT_TEXT_COLOR)
-                .applyOption()
+        this.option.textOption = option ?: HongTextButtonOption.DEFAULT_TEXT_OPTION
     }
 
     fun state(state: HongState) = apply {

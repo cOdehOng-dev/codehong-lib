@@ -1,11 +1,7 @@
 package com.codehong.lib.sample.image
 
 import android.view.View
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import com.codehong.lib.sample.base.BaseSampleMixActivity
 import com.codehong.library.widget.R
 import com.codehong.library.widget.image.HongImageBuilder
@@ -15,7 +11,6 @@ import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
-import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
 class SampleImageActivity : BaseSampleMixActivity() {
@@ -43,6 +38,20 @@ class SampleImageActivity : BaseSampleMixActivity() {
         )
         .drawableResId(R.drawable.honglib_ic_20_close)
         .scaleType(HongScaleType.CENTER_CROP)
+        .applyOption()
+
+    private val option22 = HongImageBuilder()
+        .width(13)
+        .height(13)
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                bottom = 20f
+            )
+        )
+        .drawableResId(R.drawable.honglib_ic_24_check)
+        .scaleType(HongScaleType.CENTER_CROP)
+        .imageColor(HongColor.MAIN_ORANGE_100)
         .applyOption()
 
     private val option3 = HongImageBuilder()
@@ -115,6 +124,7 @@ class SampleImageActivity : BaseSampleMixActivity() {
     private val optionList get() = listOf(
         option1,
         option2,
+        option22,
         option3,
         option4,
         option5

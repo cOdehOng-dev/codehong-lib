@@ -80,9 +80,14 @@ fun HongImageCompose(
                 .build(),
             contentDescription = null,
             contentScale = option.scaleType.toContentScale(),
-            onLoading = option.onLoading,
-            onSuccess = option.onSuccess,
-            onError = option.onError
+//            onLoading = {
+//
+//            },
+//            onLoading = {
+//                option.onLoading?.invoke()
+//            },
+//            onSuccess = option.onSuccess,
+//            onError = option.onError
         )
     }
 }

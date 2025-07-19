@@ -42,10 +42,10 @@ class HongLabelCheckboxView @JvmOverloads constructor(
             this.rightMargin = context.dpToPx(option.margin.right)
             this.bottomMargin = context.dpToPx(option.margin.bottom)
         }
+        hongPadding(option.padding)
         hongBackground(
             backgroundColor = option.backgroundColorHex
         )
-        hongPadding(option.padding)
 
         if (option.checkboxPosition == HongPosition.LEFT) {
             checkbox()
@@ -75,7 +75,7 @@ class HongLabelCheckboxView @JvmOverloads constructor(
 
     private fun checkbox() {
         hongCheckbox {
-            set(option.checkboxOption)
+            set(this@HongLabelCheckboxView.option.checkboxOption)
         }
     }
 }

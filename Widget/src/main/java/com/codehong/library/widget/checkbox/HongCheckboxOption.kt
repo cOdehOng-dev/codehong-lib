@@ -45,7 +45,6 @@ data class HongCheckboxOption(
     var checkmarkColor: HongColor = HongColor.WHITE_100
     var checkmarkColorHex: String = HongColor.WHITE_100.hex
 
-
     var checkState = false
 
     var enableState: HongState = HongState.ENABLED

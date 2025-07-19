@@ -6,6 +6,7 @@ enum class HongWidgetType(
     val allowPlayground: Boolean = false,
 ) {
     TEXT(1, "Text", true),
+    CHECK_TEXT(25, "CheckText", true),
     IMAGE(2, "Image", true),
     CLOSE_HEADER(3, "CloseHeader", true),
     TEXT_FILED(4, "TextField", true),
