@@ -46,6 +46,7 @@ import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.tab.SampleScrollTabActivity
 import com.codehong.lib.sample.text.SampleTextActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
+import com.codehong.lib.sample.textfield.timer.SampleTimerTextFieldActivity
 import com.codehong.lib.sample.textfield.underline.SampleUnderlineTextFieldActivity
 import com.codehong.lib.sample.toggleswitch.SampleSwitchActivity
 import com.codehong.lib.sample.videopopup.SampleVideoPopupActivity
@@ -283,6 +284,16 @@ fun SampleTheme(
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
                                                     HongWidgetType.UNDERLINE_TEXT_FIELD.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
+                                        HongWidgetType.TIMER_TEXT_FIELD -> {
+                                            Intent(activity, SampleTimerTextFieldActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.TIMER_TEXT_FIELD.value
                                                 )
                                                 activity.startActivity(this)
                                             }

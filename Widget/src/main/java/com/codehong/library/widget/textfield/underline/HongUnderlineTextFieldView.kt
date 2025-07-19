@@ -40,8 +40,6 @@ class HongUnderlineTextFieldView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private var lastInput: String = ""
-
     var option = HongUnderlineTextFieldOption()
         private set
 
@@ -137,7 +135,6 @@ class HongUnderlineTextFieldView @JvmOverloads constructor(
 
                 doAfterTextChanged { text ->
                     val input = text.toString()
-                    lastInput = input
 
                     checkFont(
                         input = input,

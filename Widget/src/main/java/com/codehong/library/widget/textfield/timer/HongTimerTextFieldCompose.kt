@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -19,7 +21,6 @@ import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import com.codehong.library.widget.HongDivider
-import com.codehong.library.widget.MarginStartOrEnd
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.extensions.toColor
@@ -29,30 +30,47 @@ import com.codehong.library.widget.pretendardFontFamily
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.color.HongColor.Companion.hexToHongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType.Companion.toKeyboardActions
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextCompose
-import com.codehong.library.widget.textfield.HongTextFieldBuilder
-import com.codehong.library.widget.textfield.HongTextFieldOption
 import com.codehong.library.widget.util.HongWidgetContainer
 import com.codehong.library.widget.util.checkPasswordType
 import com.codehong.library.widget.util.dpToSp
 import com.codehong.library.widget.util.toKeyboardOptions
+import java.util.Locale
+import kotlinx.coroutines.delay
 
 @Composable
 fun HongTimerTextFieldCompose(
-    option: HongTextFieldOption,
+    option: HongTimerTextFieldOption
 ) {
     val focusManager = LocalFocusManager.current
 
     var inputText by rememberSaveable(option.inputTextOption.text ?: "") {
         mutableStateOf(option.inputTextOption.text ?: "")
     }
-
     var isFocused by rememberSaveable(false) { mutableStateOf(false) }
+
+    var isFinishTimer by rememberSaveable(false) { mutableStateOf(false) }
+
+    val totalTimeMillis = rememberSaveable(option.min, option.sec) {
+        (option.min * 60 + option.sec) * 1000L
+    }
+    var millisLeft by rememberSaveable { mutableLongStateOf(totalTimeMillis) }
+
+    LaunchedEffect(totalTimeMillis) {
+        while (millisLeft > 0) {
+            delay(1000L)
+            millisLeft -= 1000L
+        }
+        millisLeft = 0L
+        isFinishTimer = true
+        option.onFinish?.invoke()
+    }
 
     HongWidgetContainer(option) {
         Column(
@@ -70,6 +88,7 @@ fun HongTimerTextFieldCompose(
                         .weight(1f)
                         .onFocusChanged { focusState ->
                             isFocused = focusState.isFocused
+
                         },
                     contentAlignment = Alignment.CenterStart
                 ) {
@@ -107,9 +126,8 @@ fun HongTimerTextFieldCompose(
                                 option.cursorColorHex.toColor()
                             }
                         ),
-                        singleLine = option.singleLine,
-                        maxLines = if (option.singleLine) 1 else option.maxLines,
-                        minLines = option.minLines,
+                        singleLine = true,
+                        maxLines = 1,
                         keyboardOptions = option.keyboardOption.toKeyboardOptions(),
                         keyboardActions = option.keyboardOption.second.toKeyboardActions {
                             if (option.useHideKeyboard) {
@@ -119,8 +137,6 @@ fun HongTimerTextFieldCompose(
                         visualTransformation = option.keyboardOption.checkPasswordType()
                     )
                 }
-
-                MarginStartOrEnd(8)
 
                 if (inputText.isNotEmpty()) {
                     HongImageCompose(
@@ -132,11 +148,31 @@ fun HongTimerTextFieldCompose(
                             .applyOption()
                     )
                 }
+
+                val minutes = (millisLeft / 1000) / 60
+                val seconds = (millisLeft / 1000) % 60
+                val formattedTime = String.format(Locale.KOREA,"%02d:%02d", minutes, seconds)
+                HongTextCompose(
+                    HongTextBuilder()
+                        .copy(option.countDownTextOption)
+                        .text(formattedTime)
+                        .applyOption()
+                )
             }
 
             HongDivider(
-                color = if (isFocused) HongColor.MAIN_ORANGE_100 else HongColor.GRAY_20,
-                height = 2
+                color = (
+                        if (isFinishTimer) {
+                            option.underlineFinishColorHex
+                        } else {
+                            if (isFocused) {
+                                option.underlineFocusColorHex
+                            } else {
+                                option.underlineOutFocusColorHex
+                            }
+                        }
+                        ).hexToHongColor(),
+                height = option.underlineHeight
             )
         }
     }
@@ -145,36 +181,29 @@ fun HongTimerTextFieldCompose(
 @Composable
 @Preview(showBackground = true)
 fun PreviewHongTimerTextFieldCompose() {
-    val option = HongTextFieldBuilder()
+    val option = HongTimerTextFieldBuilder()
         .width(HongLayoutParam.MATCH_PARENT.value)
         .height(48)
         .margin(
             HongSpacingInfo(
                 left = 20f,
-                right = 20f,
-                bottom = 20f,
-                top = 20f
+                right = 20f
             )
         )
         .backgroundColor(HongColor.WHITE_100.hex)
-        .placeholderTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                .text("[지우기 버튼] 값을 입력해주세요.")
-                .applyOption()
-        )
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
+        .placeholder("[지우기 버튼] 값을 입력해주세요.")
         .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
         .cursorColor(HongColor.MAIN_ORANGE_100.hex)
-        .onTextChanged { trackingText ->
-        }
+        .onTextChanged { trackingText -> }
         .clearImageOption(
-            HongTextFieldOption.DEFAULT_CLEAR_IMAGE
+            HongImageBuilder()
+                .copy(HongTimerTextFieldOption.DEFAULT_CLEAR_IMAGE)
+                .width(16)
+                .height(16)
+                .applyOption()
         )
+        .sec(10)
+        .underlineFinishColor(HongColor.RED_100)
         .applyOption()
     HongTimerTextFieldCompose(option)
 }

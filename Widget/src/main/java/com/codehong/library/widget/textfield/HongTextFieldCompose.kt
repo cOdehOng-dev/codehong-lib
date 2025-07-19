@@ -17,7 +17,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
-import com.codehong.library.widget.MarginStartOrEnd
 import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.image.HongImageCompose
@@ -104,8 +103,6 @@ fun HongTextFieldCompose(
                         )
                     }
 
-                    MarginStartOrEnd(8)
-
                     if (inputText.isNotEmpty()) {
                         HongImageCompose(
                             option = HongImageBuilder()
@@ -172,7 +169,6 @@ fun HongTextFieldCompose(
                             visualTransformation = option.keyboardOption.checkPasswordType()
                         )
                     }
-                    MarginStartOrEnd(8)
 
                     if (inputText.isNotEmpty()) {
                         HongImageCompose(

@@ -28,11 +28,6 @@ class SampleUnderlineTextFieldActivity : BaseSampleMixActivity() {
         )
         .backgroundColor(HongColor.WHITE_100.hex)
         .placeholder("[지우기 버튼] 값을 입력해주세요.")
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongUnderlineTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
         .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
         .cursorColor(HongColor.MAIN_ORANGE_100.hex)
         .onTextChanged { trackingText ->
