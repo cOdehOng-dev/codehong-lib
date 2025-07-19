@@ -3,13 +3,15 @@ package com.codehong.library.widget.textfield
 import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
-import android.view.LayoutInflater
+import android.view.Gravity
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import com.codehong.library.widget.R
-import com.codehong.library.widget.databinding.HonglibViewTextFieldBinding
 import com.codehong.library.widget.extensions.checkFont
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
@@ -20,6 +22,12 @@ import com.codehong.library.widget.extensions.setUseHideKeyboard
 import com.codehong.library.widget.extensions.toKeyboardOptions
 import com.codehong.library.widget.extensions.toParseColor
 import com.codehong.library.widget.image.HongImageBuilder
+import com.codehong.library.widget.image.HongImageView
+import com.codehong.library.widget.language.hongImage
+import com.codehong.library.widget.language.textField
+import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.color.HongColor.Companion.parseColor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -32,8 +40,11 @@ class HongTextFieldView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    private val binding =
-        HonglibViewTextFieldBinding.inflate(LayoutInflater.from(context), this, true)
+    init {
+        layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        orientation = HORIZONTAL
+        gravity = Gravity.CENTER_VERTICAL
+    }
 
     private var debounceJob: Job? = null
     private var lastInput: String = ""
@@ -43,35 +54,61 @@ class HongTextFieldView @JvmOverloads constructor(
 
     private var hasClearButton = false
 
+    private var etInput: AppCompatEditText? = null
+    private var ivClear: HongImageView? = null
+
 
     fun set(
         option: HongTextFieldOption
     ): HongTextFieldView {
         this.option = option
 
-        with(binding.llContainer) {
-            setLayout(
-                option.width,
-                option.height
-            )?.apply {
-                this.leftMargin = context.dpToPx(option.margin.left)
-                this.topMargin = context.dpToPx(option.margin.top)
-                this.rightMargin = context.dpToPx(option.margin.right)
-                this.bottomMargin = context.dpToPx(option.margin.bottom)
-            }
-            hongPadding(option.padding)
-            hongBackground(
-                backgroundColor = option.backgroundColorHex,
-                border = option.border,
-                useShapeCircle = option.useShapeCircle,
-                radius = option.radius,
-            )
+        setLayout(
+            option.width,
+            option.height
+        )?.apply {
+            this.leftMargin = context.dpToPx(option.margin.left)
+            this.topMargin = context.dpToPx(option.margin.top)
+            this.rightMargin = context.dpToPx(option.margin.right)
+            this.bottomMargin = context.dpToPx(option.margin.bottom)
         }
+        hongPadding(
+            HongSpacingInfo(
+                left = option.padding.left,
+                right = option.padding.right,
+                top = 0f,
+                bottom = 0f
+            )
+        )
+        hongBackground(
+            backgroundColor = option.backgroundColorHex,
+            border = option.border,
+            useShapeCircle = option.useShapeCircle,
+            radius = option.radius,
+        )
 
-        with(binding.etInput) {
+        textField {
+            etInput = this
+
+            layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT).apply {
+                weight = 1f
+            }
+            setBackgroundColor(HongColor.TRANSPARENT.parseColor())
+
+            setOnKeyListener { v, keyCode, event ->
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
+                    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(v.windowToken, 0)
+                    true
+                } else {
+                    false
+                }
+            }
+
             setOnFocusChangeListener { _, hasFocus ->
                 isCursorVisible = hasFocus
             }
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 this.textCursorDrawable = ContextCompat.getDrawable(
                     context,
@@ -111,12 +148,12 @@ class HongTextFieldView @JvmOverloads constructor(
                 )
 
                 if (input.isEmpty()) {
-                    binding.ivClear.visibility = View.GONE
+                    ivClear?.visibility = View.GONE
                 } else {
                     if (hasClearButton) {
-                        binding.ivClear.visibility = View.VISIBLE
+                        ivClear?.visibility = View.VISIBLE
                     } else {
-                        binding.ivClear.visibility = View.GONE
+                        ivClear?.visibility = View.GONE
                     }
                 }
 
@@ -136,25 +173,28 @@ class HongTextFieldView @JvmOverloads constructor(
 
         option.clearImageOption?.let {
             hasClearButton = true
-            binding.ivClear.set(
-                HongImageBuilder()
-                    .copy(it)
-                    .onClick{
-                        binding.etInput.text?.clear()
-                    }
-                    .applyOption()
-            )
+            hongImage {
+                ivClear = this
+                set(
+                    HongImageBuilder()
+                        .copy(it)
+                        .onClick{
+                            etInput?.text?.clear()
+                        }
+                        .applyOption()
+                )
+            }
         }
 
         if (option.inputTextOption.text.isNullOrEmpty()) {
-            binding.etInput.setText("")
-            binding.ivClear.visibility = View.GONE
+            etInput?.setText("")
+            ivClear?.visibility = View.GONE
         } else {
-            binding.etInput.setText(option.inputTextOption.text)
+            etInput?.setText(option.inputTextOption.text)
             if (hasClearButton) {
-                binding.ivClear.visibility = View.VISIBLE
+                ivClear?.visibility = View.VISIBLE
             } else {
-                binding.ivClear.visibility = View.GONE
+                ivClear?.visibility = View.GONE
             }
         }
         return this

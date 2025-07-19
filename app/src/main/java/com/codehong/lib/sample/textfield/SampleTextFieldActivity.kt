@@ -25,8 +25,6 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
             HongSpacingInfo(
                 left = 16f,
                 right = 16f,
-                top = 12f,
-                bottom = 12f
             )
         )
         .margin(
@@ -64,9 +62,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
         .padding(
             HongSpacingInfo(
                 left = 16f,
-                right = 16f,
-                top = 12f,
-                bottom = 12f
+                right = 16f
             )
         )
         .margin(
@@ -105,9 +101,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
         .padding(
             HongSpacingInfo(
                 left = 16f,
-                right = 16f,
-                top = 12f,
-                bottom = 12f
+                right = 16f
             )
         )
         .margin(
@@ -145,9 +139,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
         .padding(
             HongSpacingInfo(
                 left = 16f,
-                right = 16f,
-                top = 12f,
-                bottom = 12f
+                right = 16f
             )
         )
         .margin(
@@ -189,9 +181,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
         .padding(
             HongSpacingInfo(
                 left = 16f,
-                right = 16f,
-                top = 12f,
-                bottom = 12f
+                right = 16f
             )
         )
         .margin(
@@ -229,9 +219,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
         .padding(
             HongSpacingInfo(
                 left = 16f,
-                right = 16f,
-                top = 12f,
-                bottom = 12f
+                right = 16f
             )
         )
         .margin(
@@ -270,9 +258,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
         .padding(
             HongSpacingInfo(
                 left = 16f,
-                right = 16f,
-                top = 12f,
-                bottom = 12f
+                right = 16f
             )
         )
         .margin(
@@ -311,9 +297,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
         .padding(
             HongSpacingInfo(
                 left = 16f,
-                right = 16f,
-                top = 12f,
-                bottom = 12f
+                right = 16f
             )
         )
         .margin(
@@ -352,9 +336,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
         .padding(
             HongSpacingInfo(
                 left = 16f,
-                right = 16f,
-                top = 12f,
-                bottom = 12f
+                right = 16f
             )
         )
         .margin(
@@ -398,9 +380,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
         .padding(
             HongSpacingInfo(
                 left = 16f,
-                right = 16f,
-                top = 12f,
-                bottom = 12f
+                right = 16f
             )
         )
         .margin(
@@ -440,9 +420,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
         .padding(
             HongSpacingInfo(
                 left = 16f,
-                right = 16f,
-                top = 12f,
-                bottom = 12f
+                right = 16f
             )
         )
         .margin(

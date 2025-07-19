@@ -2,6 +2,7 @@ package com.codehong.library.widget.language
 
 import android.content.Context
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatEditText
 import com.codehong.library.widget.button.select.HongSelectButtonView
 import com.codehong.library.widget.button.text.HongTextButtonView
 import com.codehong.library.widget.checkbox.HongCheckboxView
@@ -12,8 +13,8 @@ import com.codehong.library.widget.label.select.HongLabelSelectInputView
 import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchView
 import com.codehong.library.widget.text.HongTextView
 import com.codehong.library.widget.textfield.HongTextFieldView
-import com.codehong.library.widget.textfield.view.BackAwareEditText
 import com.codehong.library.widget.toggleswitch.HongSwitchView
+
 
 fun Context.hongText(
     block: HongTextView.() -> Unit
@@ -180,17 +181,4 @@ fun ViewGroup.hongCheckbox(
     this
 }
 
-fun Context.hongBackAwareEditText(
-    block: BackAwareEditText.() -> Unit
-) = BackAwareEditText(this).run {
-    block.invoke(this)
-    this
-}
 
-fun ViewGroup.hongBackAwareEditText(
-    block: BackAwareEditText.() -> Unit
-) = BackAwareEditText(this.context).run {
-    block.invoke(this)
-    this@hongBackAwareEditText.addView(this)
-    this
-}

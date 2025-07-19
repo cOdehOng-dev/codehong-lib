@@ -1,6 +1,5 @@
 package com.codehong.library.widget.textfield.underline
 
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -134,7 +133,7 @@ fun HongUnderlineTextFieldCompose(
             }
 
             HongDivider(
-                color = (if (isFocused) option.underlineFocusColorHex.also { Log.d("TAG", "test here focus = $it") } else option.underlineOutFocusColorHex.also { Log.w("TAG", "test here outfocus = $it") }).hexToHongColor(),
+                color = (if (isFocused) option.underlineFocusColorHex else option.underlineOutFocusColorHex).hexToHongColor(),
                 height = option.underlineHeight
             )
         }
