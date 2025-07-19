@@ -1,5 +1,7 @@
 package com.codehong.lib.sample
 
+import android.content.Context
+import android.view.ViewGroup
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,12 +12,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import com.codehong.lib.sample.playground.preview.HorizontalOptionView
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextCompose
 import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.text.HongTextCompose
 
 @Composable
 fun SampleHeader(
@@ -65,4 +68,19 @@ fun SampleComposeDespContainer(
     ) {
         testCompose()
     }
+}
+
+fun Context.horizontalOptionView(
+    block: HorizontalOptionView.() -> Unit
+) = HorizontalOptionView(this).run {
+    block.invoke(this)
+    this
+}
+
+fun ViewGroup.horizontalOptionView(
+    block: HorizontalOptionView.() -> Unit
+) = HorizontalOptionView(this.context).run {
+    block.invoke(this)
+    this@horizontalOptionView.addView(this)
+    this
 }

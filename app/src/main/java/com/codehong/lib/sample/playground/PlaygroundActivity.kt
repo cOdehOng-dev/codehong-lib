@@ -29,6 +29,7 @@ import com.codehong.lib.sample.pager.HongHorizontalPagerPlayground
 import com.codehong.lib.sample.tab.HongScrollTabPlayground
 import com.codehong.lib.sample.text.HongTextPlayground
 import com.codehong.lib.sample.textfield.HongTextFieldPlayground
+import com.codehong.lib.sample.textfield.timer.HongTimerTextFieldPlayground
 import com.codehong.lib.sample.textfield.underline.HongUnderlineTextFieldPlayground
 import com.codehong.lib.sample.toggleswitch.HongSwitchPlayground
 import com.codehong.library.widget.HongWidgetCommonOption
@@ -70,6 +71,8 @@ import com.codehong.library.widget.text.HongTextCompose
 import com.codehong.library.widget.text.HongTextOption
 import com.codehong.library.widget.textfield.HongTextFieldCompose
 import com.codehong.library.widget.textfield.HongTextFieldOption
+import com.codehong.library.widget.textfield.timer.HongTimerTextFieldCompose
+import com.codehong.library.widget.textfield.timer.HongTimerTextFieldOption
 import com.codehong.library.widget.textfield.underline.HongUnderlineTextFieldCompose
 import com.codehong.library.widget.textfield.underline.HongUnderlineTextFieldOption
 import com.codehong.library.widget.toggleswitch.HongSwitchBuilder
@@ -179,6 +182,7 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.CLOSE_HEADER -> HongCloseHeaderPlayground(this).preview()
             HongWidgetType.TEXT_FILED -> HongTextFieldPlayground(this).preview()
             HongWidgetType.UNDERLINE_TEXT_FIELD -> HongUnderlineTextFieldPlayground(this).preview()
+            HongWidgetType.TIMER_TEXT_FIELD -> HongTimerTextFieldPlayground(this).preview()
             HongWidgetType.CALENDAR -> CalendarPlayground(this).preview()
             HongWidgetType.TEXT_BUTTON -> HongTextButtonPlayground(this).preview()
             HongWidgetType.SELECT_BUTTON -> HongSelectButtonPlayground(this).preview()
@@ -269,6 +273,13 @@ class PlaygroundActivity : BaseActivity() {
                 binding.vComposePreview.setContent {
                     PreviewUI(isBorderOn) {
                         HongUnderlineTextFieldCompose(previewOption as HongUnderlineTextFieldOption)
+                    }
+                }
+            }
+            HongWidgetType.TIMER_TEXT_FIELD -> {
+                binding.vComposePreview.setContent {
+                    PreviewUI(isBorderOn) {
+                        HongTimerTextFieldCompose(previewOption as HongTimerTextFieldOption)
                     }
                 }
             }
