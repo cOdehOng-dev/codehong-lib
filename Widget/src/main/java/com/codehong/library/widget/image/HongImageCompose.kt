@@ -2,6 +2,7 @@ package com.codehong.library.widget.image
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
@@ -12,6 +13,7 @@ import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.hongWidth
+import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongScaleType.Companion.toContentScale
 import com.codehong.library.widget.rule.HongSpacingInfo
@@ -80,14 +82,7 @@ fun HongImageCompose(
                 .build(),
             contentDescription = null,
             contentScale = option.scaleType.toContentScale(),
-//            onLoading = {
-//
-//            },
-//            onLoading = {
-//                option.onLoading?.invoke()
-//            },
-//            onSuccess = option.onSuccess,
-//            onError = option.onError
+            colorFilter = ColorFilter.tint(option.imageColor.toColor())
         )
     }
 }

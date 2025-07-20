@@ -72,7 +72,6 @@ class HongCheckboxPlayground(
         label: String = "",
         callback: (HongCheckboxOption) -> Unit
     ) {
-
         var inject = injectOption
 
         if (label.isNotEmpty()) {

@@ -70,11 +70,10 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
     }
 
     fun imageColor(color: HongColor?) = apply {
-        option.imageColor = color
         imageColor(color?.hex)
     }
     fun imageColor(colorHex: String?) = apply {
-        option.imageColorHex = colorHex
+        option.imageColor = colorHex
     }
 
     fun copy(inject: HongImageOption?): HongImageBuilder {
@@ -102,6 +101,6 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
             .memoryCache(inject.memoryCache)
             .diskCache(inject.diskCache)
             .imageColor(inject.imageColor)
-            .imageColor(inject.imageColorHex)
+            .imageColor(inject.imageColor)
     }
 }

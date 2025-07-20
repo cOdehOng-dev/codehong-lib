@@ -50,7 +50,6 @@ class HongTextBuilder : HongWidgetCommonBuilder<HongTextOption, HongTextBuilder>
         }
     }
 
-
     fun color(hongColor: HongColor) = apply {
         option.colorHex = hongColor.hex
     }

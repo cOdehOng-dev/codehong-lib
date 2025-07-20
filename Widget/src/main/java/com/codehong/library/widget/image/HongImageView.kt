@@ -68,7 +68,7 @@ class HongImageView @JvmOverloads constructor(
                 .listener(
                     onSuccess = { _, _ ->
                         option.onSuccess?.invoke()
-                        option.imageColorHex
+                        option.imageColor
                             ?.takeIf { it.isNotEmpty() }
                             ?.parseColor()
                             ?.let {

@@ -58,7 +58,7 @@ class HongCheckboxView @JvmOverloads constructor(
         checkMark.layoutParams = LayoutParams(checkSize, checkSize).apply {
             gravity = Gravity.CENTER
         }
-        checkMark.setImageResource(R.drawable.honglib_ic_24_check)
+        checkMark.setImageResource(R.drawable.honglib_ic_check)
 
         buildCheckBox()
         return this

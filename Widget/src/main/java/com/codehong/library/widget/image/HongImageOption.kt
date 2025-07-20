@@ -47,8 +47,7 @@ data class HongImageOption(
     var memoryCache = CachePolicy.ENABLED
     var diskCache = CachePolicy.ENABLED
 
-    var imageColor: HongColor? = null
-    var imageColorHex: String? = null
+    var imageColor: String? = null
 
 
     override fun equals(other: Any?): Boolean {
@@ -81,7 +80,6 @@ data class HongImageOption(
         if (memoryCache != other.memoryCache) return false
         if (diskCache != other.diskCache) return false
         if (imageColor != other.imageColor) return false
-        if (imageColorHex != other.imageColorHex) return false
 
         return true
     }
@@ -111,7 +109,6 @@ data class HongImageOption(
         result = 31 * result + memoryCache.hashCode()
         result = 31 * result + diskCache.hashCode()
         result = 31 * result + (imageColor?.hashCode() ?: 0)
-        result = 31 * result + (imageColorHex?.hashCode() ?: 0)
         return result
     }
 
@@ -140,8 +137,7 @@ data class HongImageOption(
                 "scaleType=$scaleType, " +
                 "memoryCache=$memoryCache, " +
                 "diskCache=$diskCache, " +
-                "imageColor=$imageColor, " +
-                "imageColorHex=$imageColorHex" +
+                "imageColor=$imageColor" +
                 ")"
     }
 }

@@ -42,15 +42,15 @@ data class HongCheckTextOption(
     var text: String? = null
     var textOption: HongTextOption = DEFAULT_TEXT_OPTION
 
-    var size: Int = 23
-    var checkColor: HongColor = HongColor.MAIN_ORANGE_100
-    var checkColorHex: String = HongColor.MAIN_ORANGE_100.hex
+    var checkSize: Int = 30
 
-    var uncheckColor: HongColor = HongColor.GRAY_60
-    var uncheckColorHex: String = HongColor.GRAY_60.hex
+    var checkColor: String = HongColor.MAIN_ORANGE_100.hex
+
+    var uncheckColor: String = HongColor.GRAY_60.hex
 
     var checkState: Boolean = false
 
+    var arrowSize: Int = 24
     var onCheck: ((Boolean) -> Unit)? = null
 
 
@@ -75,12 +75,11 @@ data class HongCheckTextOption(
         if (shadow != other.shadow) return false
         if (text != other.text) return false
         if (textOption != other.textOption) return false
-        if (size != other.size) return false
+        if (checkSize != other.checkSize) return false
         if (checkColor != other.checkColor) return false
-        if (checkColorHex != other.checkColorHex) return false
         if (uncheckColor != other.uncheckColor) return false
-        if (uncheckColorHex != other.uncheckColorHex) return false
         if (checkState != other.checkState) return false
+        if (arrowSize != other.arrowSize) return false
         if (onCheck != other.onCheck) return false
 
         return true
@@ -102,12 +101,11 @@ data class HongCheckTextOption(
         result = 31 * result + shadow.hashCode()
         result = 31 * result + (text?.hashCode() ?: 0)
         result = 31 * result + textOption.hashCode()
-        result = 31 * result + size
+        result = 31 * result + checkSize
         result = 31 * result + checkColor.hashCode()
-        result = 31 * result + checkColorHex.hashCode()
         result = 31 * result + uncheckColor.hashCode()
-        result = 31 * result + uncheckColorHex.hashCode()
         result = 31 * result + checkState.hashCode()
+        result = 31 * result + arrowSize
         result = 31 * result + (onCheck?.hashCode() ?: 0)
         return result
     }
@@ -129,12 +127,11 @@ data class HongCheckTextOption(
                 "shadow=$shadow, " +
                 "text=$text, " +
                 "textOption=$textOption, " +
-                "size=$size, " +
-                "checkColor=$checkColor, " +
-                "checkColorHex='$checkColorHex', " +
-                "uncheckColor=$uncheckColor, " +
-                "uncheckColorHex='$uncheckColorHex', " +
+                "checkSize=$checkSize, " +
+                "checkColor='$checkColor', " +
+                "uncheckColor='$uncheckColor', " +
                 "checkState=$checkState, " +
+                "arrowSize=$arrowSize, " +
                 "onCheck=$onCheck" +
                 ")"
     }

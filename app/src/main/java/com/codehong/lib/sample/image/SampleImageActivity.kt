@@ -49,7 +49,7 @@ class SampleImageActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .drawableResId(R.drawable.honglib_ic_24_check)
+        .drawableResId(R.drawable.honglib_ic_check)
         .scaleType(HongScaleType.CENTER_CROP)
         .imageColor(HongColor.MAIN_ORANGE_100)
         .applyOption()

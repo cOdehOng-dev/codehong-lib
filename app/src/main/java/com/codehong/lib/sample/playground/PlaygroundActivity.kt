@@ -28,6 +28,7 @@ import com.codehong.lib.sample.label.toggle.HongLabelSwitchPlayground
 import com.codehong.lib.sample.pager.HongHorizontalPagerPlayground
 import com.codehong.lib.sample.tab.HongScrollTabPlayground
 import com.codehong.lib.sample.text.HongTextPlayground
+import com.codehong.lib.sample.text.check.HongCheckTextPlayground
 import com.codehong.lib.sample.textfield.HongTextFieldPlayground
 import com.codehong.lib.sample.textfield.timer.HongTimerTextFieldPlayground
 import com.codehong.lib.sample.textfield.underline.HongUnderlineTextFieldPlayground
@@ -70,6 +71,8 @@ import com.codehong.library.widget.tab.HongScrollTabCompose
 import com.codehong.library.widget.tab.HongScrollTabOption
 import com.codehong.library.widget.text.HongTextCompose
 import com.codehong.library.widget.text.HongTextOption
+import com.codehong.library.widget.text.check.HongCheckTextCompose
+import com.codehong.library.widget.text.check.HongCheckTextOption
 import com.codehong.library.widget.textfield.HongTextFieldCompose
 import com.codehong.library.widget.textfield.HongTextFieldOption
 import com.codehong.library.widget.textfield.timer.HongTimerTextFieldCompose
@@ -179,6 +182,7 @@ class PlaygroundActivity : BaseActivity() {
 
         when (componentType) {
             HongWidgetType.TEXT -> HongTextPlayground(this).preview()
+            HongWidgetType.CHECK_TEXT -> HongCheckTextPlayground(this).preview()
             HongWidgetType.IMAGE -> HongImagePlayground(this).preview()
             HongWidgetType.CLOSE_HEADER -> HongCloseHeaderPlayground(this).preview()
             HongWidgetType.TEXT_FILED -> HongTextFieldPlayground(this).preview()
@@ -243,6 +247,13 @@ class PlaygroundActivity : BaseActivity() {
                 binding.vComposePreview.setContent {
                     PreviewUI(isBorderOn) {
                         HongTextCompose(previewOption as HongTextOption)
+                    }
+                }
+            }
+            HongWidgetType.CHECK_TEXT -> {
+                binding.vComposePreview.setContent {
+                    PreviewUI(isBorderOn) {
+                        HongCheckTextCompose(previewOption as HongCheckTextOption)
                     }
                 }
             }
