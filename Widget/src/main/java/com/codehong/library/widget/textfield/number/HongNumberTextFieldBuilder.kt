@@ -67,6 +67,10 @@ class HongNumberTextFieldBuilder
         option.onTextChanged = onTextChanged
     }
 
+    fun useDecimal(useDecimal: Boolean) = apply {
+        option.useDecimal = useDecimal
+    }
+
     fun copy(inject: HongNumberTextFieldOption?): HongNumberTextFieldBuilder {
         if (inject == null) return HongNumberTextFieldBuilder()
 
@@ -86,5 +90,6 @@ class HongNumberTextFieldBuilder
             .keyboardOption(inject.keyboardOption)
             .onTextChanged(inject.onTextChanged)
             .backgroundColor(inject.backgroundColorHex)
+            .useDecimal(inject.useDecimal)
     }
 }

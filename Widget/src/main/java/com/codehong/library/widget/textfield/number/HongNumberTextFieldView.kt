@@ -155,7 +155,11 @@ class HongNumberTextFieldView @JvmOverloads constructor(
                     if (cleanString.isNotEmpty()) {
                         try {
                             val parsed = cleanString.toLong()
-                            val formatted = DecimalFormat("#,###").format(parsed)
+                            val formatted = if (option.useDecimal) {
+                                DecimalFormat("#,###").format(parsed)
+                            } else {
+                                parsed.toString()
+                            }
 
                             textField?.setText(formatted)
                             textField?.setSelection(formatted.length)

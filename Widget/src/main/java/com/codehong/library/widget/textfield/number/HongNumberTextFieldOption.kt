@@ -91,4 +91,92 @@ data class HongNumberTextFieldOption(
 
     var onTextChanged: (String) -> Unit = {}
 
+    var useDecimal = true
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as HongNumberTextFieldOption
+
+        if (type != other.type) return false
+        if (isValidComponent != other.isValidComponent) return false
+        if (width != other.width) return false
+        if (height != other.height) return false
+        if (margin != other.margin) return false
+        if (padding != other.padding) return false
+        if (click != other.click) return false
+        if (backgroundColorHex != other.backgroundColorHex) return false
+        if (radius != other.radius) return false
+        if (shadow != other.shadow) return false
+        if (border != other.border) return false
+        if (useShapeCircle != other.useShapeCircle) return false
+        if (placeholderTextOption != other.placeholderTextOption) return false
+        if (inputTextOption != other.inputTextOption) return false
+        if (clearImageOption != other.clearImageOption) return false
+        if (input != other.input) return false
+        if (placeholder != other.placeholder) return false
+        if (cursorColor != other.cursorColor) return false
+        if (useHideKeyboard != other.useHideKeyboard) return false
+        if (keyboardOption != other.keyboardOption) return false
+        if (onTextChanged != other.onTextChanged) return false
+        if (useDecimal != other.useDecimal) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = type.hashCode()
+        result = 31 * result + isValidComponent.hashCode()
+        result = 31 * result + width
+        result = 31 * result + height
+        result = 31 * result + margin.hashCode()
+        result = 31 * result + padding.hashCode()
+        result = 31 * result + (click?.hashCode() ?: 0)
+        result = 31 * result + backgroundColorHex.hashCode()
+        result = 31 * result + radius.hashCode()
+        result = 31 * result + shadow.hashCode()
+        result = 31 * result + border.hashCode()
+        result = 31 * result + useShapeCircle.hashCode()
+        result = 31 * result + placeholderTextOption.hashCode()
+        result = 31 * result + inputTextOption.hashCode()
+        result = 31 * result + (clearImageOption?.hashCode() ?: 0)
+        result = 31 * result + (input?.hashCode() ?: 0)
+        result = 31 * result + (placeholder?.hashCode() ?: 0)
+        result = 31 * result + cursorColor.hashCode()
+        result = 31 * result + useHideKeyboard.hashCode()
+        result = 31 * result + keyboardOption.hashCode()
+        result = 31 * result + onTextChanged.hashCode()
+        result = 31 * result + useDecimal.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "HongNumberTextFieldOption(" +
+                "type=$type, " +
+                "isValidComponent=$isValidComponent, " +
+                "width=$width, " +
+                "height=$height, " +
+                "margin=$margin, " +
+                "padding=$padding, " +
+                "click=$click, " +
+                "backgroundColorHex='$backgroundColorHex', " +
+                "radius=$radius, " +
+                "shadow=$shadow, " +
+                "border=$border, " +
+                "useShapeCircle=$useShapeCircle, " +
+                "placeholderTextOption=$placeholderTextOption, " +
+                "inputTextOption=$inputTextOption, " +
+                "clearImageOption=$clearImageOption, " +
+                "input=$input, " +
+                "placeholder=$placeholder, " +
+                "cursorColor='$cursorColor', " +
+                "useHideKeyboard=$useHideKeyboard, " +
+                "keyboardOption=$keyboardOption, " +
+                "onTextChanged=$onTextChanged, " +
+                "useDecimal=$useDecimal" +
+                ")"
+    }
+
+
 }

@@ -45,13 +45,16 @@ fun HongNumberTextFieldCompose(
 
     HongWidgetContainer(option) {
 
-// ✅ 초기값도 decimal 포맷 적용 (여기!)
         val initialFormatted = remember(option.inputTextOption.text) {
-            option.inputTextOption.text
-                ?.replace(",", "")
-                ?.toLongOrNull()
-                ?.let { DecimalFormat("#,###").format(it) }
-                ?: ""
+            if (option.useDecimal) {
+                option.inputTextOption.text
+                    ?.replace(",", "")
+                    ?.toLongOrNull()
+                    ?.let { DecimalFormat("#,###").format(it) }
+                    ?: ""
+            } else {
+                option.inputTextOption.text ?: ""
+            }
         }
 
         var inputText by rememberSaveable(initialFormatted) {
@@ -91,8 +94,8 @@ fun HongNumberTextFieldCompose(
 
                         isFormatting = true // 🔧 포맷 시작
 
-                        inputText = formatted
-                        option.onTextChanged(formatted)
+                        inputText = if (option.useDecimal) formatted else it
+                        option.onTextChanged(if (option.useDecimal) formatted else it)
 
                         isFormatting = false // 🔧 포맷 종료
                     },

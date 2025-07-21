@@ -55,10 +55,33 @@ class SampleNumberTextFieldActivity : BaseSampleMixActivity() {
         .cursorColor(HongColor.MAIN_ORANGE_100.hex)
         .applyOption()
 
+    private val option3 = HongNumberTextFieldBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(48)
+        .margin(
+            HongSpacingInfo(
+                left = 20f,
+                right = 20f,
+                bottom = 20f
+            )
+        )
+        .backgroundColor(HongColor.WHITE_100)
+        .placeholderTextOption(
+            HongTextBuilder()
+                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
+                .text("값을 입력해주세요.")
+                .applyOption()
+        )
+        .input("53600")
+        .useDecimal(false)
+        .cursorColor(HongColor.MAIN_ORANGE_100.hex)
+        .applyOption()
+
 
     private val optionList get() = listOf(
         option,
-        option2
+        option2,
+        option3
     )
 
 
