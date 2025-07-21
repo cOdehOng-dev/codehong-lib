@@ -1,7 +1,6 @@
 package com.codehong.lib.sample.text
 
 import android.view.View
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import com.codehong.lib.sample.base.BaseSampleMixActivity
 import com.codehong.library.widget.rule.HongLayoutParam
@@ -33,18 +32,54 @@ class SampleTextActivity : BaseSampleMixActivity() {
         .applyOption()
 
 
+    private val option3 = HongTextBuilder()
+        .text("14342")
+        .typography(HongTypo.BODY_16_B)
+        .lineBreak(HongTextLineBreak.DEFAULT)
+        .margin(HongSpacingInfo(10f, 10f, 10f, 10f))
+        .useNumberDecimal(true)
+        .applyOption()
+
+    private val option4 = HongTextBuilder()
+        .text("14342")
+        .typography(HongTypo.BODY_16_B)
+        .lineBreak(HongTextLineBreak.DEFAULT)
+        .margin(HongSpacingInfo(10f, 10f, 10f, 10f))
+        .useNumberDecimal(false)
+        .applyOption()
+
+
+    private val option5 = HongTextBuilder()
+        .text("숫자가 아닌 텍스트 입니다")
+        .typography(HongTypo.BODY_16_B)
+        .lineBreak(HongTextLineBreak.DEFAULT)
+        .margin(HongSpacingInfo(10f, 10f, 10f, 10f))
+        .useNumberDecimal(true)
+        .applyOption()
+
+
+    private val optionList get() = listOf(
+        option1,
+        option2,
+        option3,
+        option4,
+        option5
+    )
+
+
+
     override fun optionViewList(): List<View> {
-        return listOf(
-            HongTextView(this).set(option = option1),
-            HongTextView(this).set(option = option2)
-        )
+        return mutableListOf<View>().apply {
+            optionList.forEach {
+                add(HongTextView(this@SampleTextActivity).set(option = it))
+            }
+        }
     }
 
     @Composable
     override fun InitCompose() {
-        Column {
-            HongTextCompose(option = option1)
-            HongTextCompose(option = option2)
+        optionList.forEach {
+            HongTextCompose(option = it)
         }
     }
 }

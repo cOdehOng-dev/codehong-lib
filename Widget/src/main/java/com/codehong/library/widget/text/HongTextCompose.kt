@@ -20,6 +20,7 @@ import com.codehong.library.widget.rule.HongTextLineBreak
 import com.codehong.library.widget.rule.typo.lineHeight
 import com.codehong.library.widget.rule.typo.size
 import com.codehong.library.widget.util.dpToSp
+import java.text.DecimalFormat
 
 @Composable
 fun HongTextCompose(
@@ -43,7 +44,19 @@ fun HongTextCompose(
     }
 
     val isLineBreakSyllable = option.lineBreak == HongTextLineBreak.SYLLABLE
-    var fullText = option.text ?: ""
+
+    var fullText = if (option.useNumberDecimal) {
+        val clean = (option.text ?: "").replace(",", "").trim()
+        when {
+            clean.toLongOrNull() != null -> DecimalFormat("#,###").format(clean.toLong())
+            clean.toDoubleOrNull() != null -> DecimalFormat("#,##0.##").format(clean.toDouble())
+            else -> option.text ?: ""
+        }
+    } else {
+        option.text ?: ""
+    }
+
+
 
     if (isLineBreakSyllable) {
         fullText = fullText.lineBreakSyllable() ?: ""

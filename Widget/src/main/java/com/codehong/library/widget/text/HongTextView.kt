@@ -22,6 +22,7 @@ import com.codehong.library.widget.rule.typo.lineHeight
 import com.codehong.library.widget.rule.typo.size
 import com.codehong.library.widget.util.setTextFont
 import com.codehong.library.widget.util.setTextSize
+import java.text.DecimalFormat
 
 class HongTextView @JvmOverloads constructor(
     context: Context,
@@ -104,14 +105,26 @@ class HongTextView @JvmOverloads constructor(
             textView.ellipsize = it
         }
 
-        textView.text = option.text
+        val resultText = if (option.useNumberDecimal) {
+            option.text?.let {
+                val clean = it.replace(",", "").trim()
+                when {
+                    clean.toLongOrNull() != null -> DecimalFormat("#,###").format(clean.toLong())
+                    clean.toDoubleOrNull() != null -> DecimalFormat("#,##0.##").format(clean.toDouble())
+                    else -> it
+                }
+            }
+        } else {
+            option.text
+        }
+        textView.text = resultText
 
         option.spanTextBuilderList?.let {
             val spannableText = SpannableString(
                 if (lineBreakType == HongTextLineBreak.SYLLABLE) {
-                    option.text.lineBreakSyllable()
+                    resultText.lineBreakSyllable()
                 } else {
-                    option.text
+                    resultText
                 }
             )
 
@@ -174,10 +187,8 @@ class HongTextView @JvmOverloads constructor(
         textView.setTextSize(size, HongTextOption.DEFAULT_TYPOGRAPHY.size())
         textView.setTextFont(fontType, HongTextOption.DEFAULT_TYPOGRAPHY.fontType())
 
-        // 폰트가 가지고 있는 lineHeight 값 추출
         val fontLineHeight = textView.paint.getFontMetrics(textView.paint.fontMetrics)
 
-        // 디자이너가 요청한 lineHeight 값
         val figmaLineHeight = context.dpToFloatPx(lineHeight)
 
         textView.setLineSpacing(0f, figmaLineHeight / fontLineHeight)

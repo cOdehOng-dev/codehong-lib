@@ -110,6 +110,10 @@ class HongTextBuilder : HongWidgetCommonBuilder<HongTextOption, HongTextBuilder>
         option.isTextRequired = isRequired
     }
 
+    fun useNumberDecimal(useDecimal: Boolean) = apply {
+        option.useNumberDecimal = useDecimal
+    }
+
     fun copy(inject: HongTextOption): HongTextBuilder {
         return HongTextBuilder()
             .width(inject.width)
@@ -130,5 +134,6 @@ class HongTextBuilder : HongWidgetCommonBuilder<HongTextOption, HongTextBuilder>
             .isEnableUnderLine(inject.isEnableUnderLine)
             .spanTextBuilderList(inject.spanTextBuilderList)
             .isTextRequired(inject.isTextRequired)
+            .useNumberDecimal(inject.useNumberDecimal)
     }
 }

@@ -60,6 +60,8 @@ data class HongTextOption(
 
     var isTextRequired: Boolean = false
 
+    var useNumberDecimal = false
+
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
 
     internal val lineHeight: Int?
@@ -80,6 +82,7 @@ data class HongTextOption(
                     margin.bottom > 0f
             )
 
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -93,6 +96,10 @@ data class HongTextOption(
         if (margin != other.margin) return false
         if (padding != other.padding) return false
         if (click != other.click) return false
+        if (radius != other.radius) return false
+        if (shadow != other.shadow) return false
+        if (border != other.border) return false
+        if (useShapeCircle != other.useShapeCircle) return false
         if (text != other.text) return false
         if (colorHex != other.colorHex) return false
         if (typography != other.typography) return false
@@ -106,6 +113,7 @@ data class HongTextOption(
         if (isEnableUnderLine != other.isEnableUnderLine) return false
         if (spanTextBuilderList != other.spanTextBuilderList) return false
         if (isTextRequired != other.isTextRequired) return false
+        if (useNumberDecimal != other.useNumberDecimal) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
 
         return true
@@ -119,6 +127,10 @@ data class HongTextOption(
         result = 31 * result + margin.hashCode()
         result = 31 * result + padding.hashCode()
         result = 31 * result + (click?.hashCode() ?: 0)
+        result = 31 * result + radius.hashCode()
+        result = 31 * result + shadow.hashCode()
+        result = 31 * result + border.hashCode()
+        result = 31 * result + useShapeCircle.hashCode()
         result = 31 * result + (text?.hashCode() ?: 0)
         result = 31 * result + (colorHex?.hashCode() ?: 0)
         result = 31 * result + (typography?.hashCode() ?: 0)
@@ -132,6 +144,7 @@ data class HongTextOption(
         result = 31 * result + isEnableUnderLine.hashCode()
         result = 31 * result + (spanTextBuilderList?.hashCode() ?: 0)
         result = 31 * result + isTextRequired.hashCode()
+        result = 31 * result + useNumberDecimal.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         return result
     }
@@ -145,6 +158,10 @@ data class HongTextOption(
                 "margin=$margin, " +
                 "padding=$padding, " +
                 "click=$click, " +
+                "radius=$radius, " +
+                "shadow=$shadow, " +
+                "border=$border, " +
+                "useShapeCircle=$useShapeCircle, " +
                 "text=$text, " +
                 "colorHex=$colorHex, " +
                 "typography=$typography, " +
@@ -158,6 +175,7 @@ data class HongTextOption(
                 "isEnableUnderLine=$isEnableUnderLine, " +
                 "spanTextBuilderList=$spanTextBuilderList, " +
                 "isTextRequired=$isTextRequired, " +
+                "useNumberDecimal=$useNumberDecimal, " +
                 "backgroundColorHex='$backgroundColorHex'" +
                 ")"
     }
