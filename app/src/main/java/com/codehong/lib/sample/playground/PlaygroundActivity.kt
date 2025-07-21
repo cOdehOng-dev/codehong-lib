@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.codehong.lib.sample.SampleConst
-import com.codehong.lib.sample.badge.HongBadgeTextPlayground
+import com.codehong.lib.sample.badge.HongTextBadgePlayground
 import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.lib.sample.button.select.HongSelectButtonPlayground
 import com.codehong.lib.sample.button.text.HongTextButtonPlayground
@@ -36,8 +36,8 @@ import com.codehong.lib.sample.textfield.timer.HongTimerTextFieldPlayground
 import com.codehong.lib.sample.textfield.underline.HongUnderlineTextFieldPlayground
 import com.codehong.lib.sample.toggleswitch.HongSwitchPlayground
 import com.codehong.library.widget.HongWidgetCommonOption
-import com.codehong.library.widget.badge.HongBadgeTextCompose
-import com.codehong.library.widget.badge.HongBadgeTextOption
+import com.codehong.library.widget.text.badge.HongTextBadgeCompose
+import com.codehong.library.widget.text.badge.HongTextBadgeOption
 import com.codehong.library.widget.button.select.HongSelectButtonCompose
 import com.codehong.library.widget.button.select.HongSelectButtonOption
 import com.codehong.library.widget.button.text.HongTextButtonCompose
@@ -199,7 +199,7 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.TEXT_BUTTON -> HongTextButtonPlayground(this).preview()
             HongWidgetType.SELECT_BUTTON -> HongSelectButtonPlayground(this).preview()
             HongWidgetType.HORIZONTAL_PAGER -> HongHorizontalPagerPlayground(this).preview()
-            HongWidgetType.BADGE_TEXT -> HongBadgeTextPlayground(this).preview()
+            HongWidgetType.TEXT_BADGE -> HongTextBadgePlayground(this).preview()
             HongWidgetType.CHECKBOX -> HongCheckboxPlayground(this).preview()
             HongWidgetType.SWITCH -> HongSwitchPlayground(this).preview()
             HongWidgetType.LABEL -> HongLabelPlayground(this).preview()
@@ -372,10 +372,10 @@ class PlaygroundActivity : BaseActivity() {
                 }
             }
 
-            HongWidgetType.BADGE_TEXT -> {
+            HongWidgetType.TEXT_BADGE -> {
                 binding.vComposePreview.setContent {
                     PreviewUI(isBorderOn) {
-                        HongBadgeTextCompose(previewOption as HongBadgeTextOption)
+                        HongTextBadgeCompose(previewOption as HongTextBadgeOption)
                     }
                 }
             }

@@ -1,15 +1,16 @@
-package com.codehong.library.widget.badge
+package com.codehong.library.widget.text.badge
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
 
-class HongBadgeTextBuilder : HongWidgetCommonBuilder<HongBadgeTextOption, HongBadgeTextBuilder> {
+class HongTextBadgeBuilder : HongWidgetCommonBuilder<HongTextBadgeOption, HongTextBadgeBuilder> {
 
-    override val builder: HongBadgeTextBuilder = this
-    override val option: HongBadgeTextOption = HongBadgeTextOption()
+    override val builder: HongTextBadgeBuilder = this
+    override val option: HongTextBadgeOption = HongTextBadgeOption()
 
     fun border(borderInfo: HongBorderInfo) = apply {
         option.border = borderInfo
@@ -23,12 +24,22 @@ class HongBadgeTextBuilder : HongWidgetCommonBuilder<HongBadgeTextOption, HongBa
         option.shadow = shadow
     }
 
-    fun textOption(option: HongTextOption?) = apply {
-        this.option.textOption = option ?: HongBadgeTextOption.DEFAULT_TEXT_OPTION
+    fun text(text: String?) = apply {
+        option.text = text
+        option.textOption = HongTextBuilder()
+            .copy(option.textOption)
+            .text(text ?: option.textOption.text)
+            .applyOption()
+    }
+    fun textOption(textOption: HongTextOption) = apply {
+        option.textOption = HongTextBuilder()
+            .copy(textOption)
+            .text(textOption.text ?: option.text)
+            .applyOption()
     }
 
-    fun copy(inject: HongBadgeTextOption): HongBadgeTextBuilder {
-        return HongBadgeTextBuilder()
+    fun copy(inject: HongTextBadgeOption): HongTextBadgeBuilder {
+        return HongTextBadgeBuilder()
             .width(inject.width)
             .height(inject.height)
             .margin(inject.margin)
@@ -38,6 +49,7 @@ class HongBadgeTextBuilder : HongWidgetCommonBuilder<HongBadgeTextOption, HongBa
             .border(inject.border)
             .radius(inject.radius)
             .shadow(inject.shadow)
+            .text(inject.text)
             .textOption(inject.textOption)
     }
 }

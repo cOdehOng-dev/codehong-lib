@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.SampleType.Companion.toType
-import com.codehong.lib.sample.badge.SampleBadgeTextActivity
+import com.codehong.lib.sample.badge.SampleTextBadgeActivity
 import com.codehong.lib.sample.button.select.SampleSelectButtonActivity
 import com.codehong.lib.sample.button.text.SampleTextButtonActivity
 import com.codehong.lib.sample.calendar.SampleCalendarActivity
@@ -443,11 +443,11 @@ fun SampleTheme(
                                             }
                                         }
 
-                                        HongWidgetType.BADGE_TEXT -> {
-                                            Intent(activity, SampleBadgeTextActivity::class.java).apply {
+                                        HongWidgetType.TEXT_BADGE -> {
+                                            Intent(activity, SampleTextBadgeActivity::class.java).apply {
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
-                                                    HongWidgetType.BADGE_TEXT.value
+                                                    HongWidgetType.TEXT_BADGE.value
                                                 )
                                                 activity.startActivity(this)
                                             }

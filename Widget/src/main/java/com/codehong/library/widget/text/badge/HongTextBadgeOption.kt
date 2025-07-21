@@ -1,4 +1,4 @@
-package com.codehong.library.widget.badge
+package com.codehong.library.widget.text.badge
 
 import com.codehong.library.widget.HongWidgetCommonOption
 
@@ -13,21 +13,11 @@ import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
 
-data class HongBadgeTextOption(
-    override val type: HongWidgetType = HongWidgetType.BADGE_TEXT
+data class HongTextBadgeOption(
+    override val type: HongWidgetType = HongWidgetType.TEXT_BADGE
 ) : HongWidgetCommonOption {
 
     companion object {
-        const val DEFAULT_BORDER_WIDTH = 1
-        val DEFAULT_BORDER_COLOR = HongColor.WHITE_100.hex
-        const val DEFAULT_ALL_RADIUS = 0
-        const val DEFAULT_TOP_RADIUS = 0
-        const val DEFAULT_BOTTOM_RADIUS = 0
-        const val DEFAULT_TOP_START_RADIUS = 0
-        const val DEFAULT_TOP_END_RADIUS = 0
-        const val DEFAULT_BOTTOM_START_RADIUS = 0
-        const val DEFAULT_BOTTOM_END_RADIUS = 0
-
         val DEFAULT_TEXT_OPTION = HongTextBuilder()
             .color(HongColor.MAIN_ORANGE_100)
             .typography(HongTypo.CONTENTS_12_B)
@@ -40,34 +30,27 @@ data class HongBadgeTextOption(
     override var margin: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
     override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
+    override var useShapeCircle: Boolean = false
 
-    override var radius: HongRadiusInfo = HongRadiusInfo(
-        all = DEFAULT_ALL_RADIUS,
-        top = DEFAULT_TOP_RADIUS,
-        bottom = DEFAULT_BOTTOM_RADIUS,
-        topLeft = DEFAULT_TOP_START_RADIUS,
-        topRight = DEFAULT_TOP_END_RADIUS,
-        bottomLeft = DEFAULT_BOTTOM_START_RADIUS,
-        bottomRight = DEFAULT_BOTTOM_END_RADIUS
-    )
+    override var radius: HongRadiusInfo = HongRadiusInfo()
 
     override var backgroundColorHex: String = HongColor.WHITE_100.hex
 
     override var border: HongBorderInfo = HongBorderInfo(
-        width = DEFAULT_BORDER_WIDTH,
-        color = DEFAULT_BORDER_COLOR
+        width = 1,
+        color = HongColor.WHITE_100.hex
     )
 
-    override var useShapeCircle: Boolean = false
     override var shadow = HongShadowInfo()
 
+    var text: String? = null
     var textOption: HongTextOption = DEFAULT_TEXT_OPTION
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as HongBadgeTextOption
+        other as HongTextBadgeOption
 
         if (type != other.type) return false
         if (isValidComponent != other.isValidComponent) return false

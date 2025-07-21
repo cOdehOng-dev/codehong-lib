@@ -4,8 +4,6 @@ import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
 import com.codehong.lib.sample.text.HongTextPlayground
-import com.codehong.library.widget.badge.HongBadgeTextBuilder
-import com.codehong.library.widget.badge.HongBadgeTextOption
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
@@ -13,13 +11,15 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.text.badge.HongTextBadgeBuilder
+import com.codehong.library.widget.text.badge.HongTextBadgeOption
 
-class HongBadgeTextPlayground(
+class HongTextBadgePlayground(
     playgroundActivity: PlaygroundActivity
-) : BasePlayground<HongBadgeTextOption> {
+) : BasePlayground<HongTextBadgeOption> {
 
     companion object {
-        private val DEFAULT_PREVIEW_OPTION = HongBadgeTextBuilder()
+        private val DEFAULT_PREVIEW_OPTION = HongTextBadgeBuilder()
             .padding(
                 HongSpacingInfo(
                     top = 1.5f,
@@ -55,8 +55,8 @@ class HongBadgeTextPlayground(
 
 
     override val activity: PlaygroundActivity = playgroundActivity
-    override var previewOption: HongBadgeTextOption = DEFAULT_PREVIEW_OPTION
-    override val widgetType: HongWidgetType = HongWidgetType.BADGE_TEXT
+    override var previewOption: HongTextBadgeOption = DEFAULT_PREVIEW_OPTION
+    override val widgetType: HongWidgetType = HongWidgetType.TEXT_BADGE
 
     fun preview() {
         executePreview()
@@ -71,10 +71,10 @@ class HongBadgeTextPlayground(
     }
 
     fun injectPreview(
-        injectOption: HongBadgeTextOption,
+        injectOption: HongTextBadgeOption,
         includeCommonOption: Boolean = false,
         label: String = "",
-        callback: (HongBadgeTextOption) -> Unit
+        callback: (HongTextBadgeOption) -> Unit
     ) {
         var inject = injectOption
 
@@ -99,28 +99,28 @@ class HongBadgeTextPlayground(
                 margin = inject.margin,
                 padding = inject.padding,
                 selectWidth = { selectWidth ->
-                    inject = HongBadgeTextBuilder()
+                    inject = HongTextBadgeBuilder()
                         .copy(inject)
                         .width(selectWidth)
                         .applyOption()
                     callback.invoke(inject)
                 },
                 selectHeight = { selectHeight ->
-                    inject = HongBadgeTextBuilder()
+                    inject = HongTextBadgeBuilder()
                         .copy(inject)
                         .height(selectHeight)
                         .applyOption()
                     callback.invoke(inject)
                 },
                 selectMargin = { selectMargin ->
-                    inject = HongBadgeTextBuilder()
+                    inject = HongTextBadgeBuilder()
                         .copy(inject)
                         .margin(selectMargin)
                         .applyOption()
                     callback.invoke(inject)
                 },
                 selectPadding = { selectPadding ->
-                    inject = HongBadgeTextBuilder()
+                    inject = HongTextBadgeBuilder()
                         .copy(inject)
                         .padding(selectPadding)
                         .applyOption()
@@ -134,7 +134,7 @@ class HongBadgeTextPlayground(
             activity = activity,
             radius = inject.radius,
         ) { selectRadius ->
-            inject = HongBadgeTextBuilder()
+            inject = HongTextBadgeBuilder()
                 .copy(inject)
                 .radius(selectRadius)
                 .applyOption()
@@ -147,7 +147,7 @@ class HongBadgeTextPlayground(
             label = "background ",
             colorHex = inject.backgroundColorHex,
         ) { selectColor ->
-            inject = HongBadgeTextBuilder()
+            inject = HongTextBadgeBuilder()
                 .copy(inject)
                 .backgroundColor(selectColor)
                 .applyOption()
@@ -161,7 +161,7 @@ class HongBadgeTextPlayground(
             despWidth = "badge 테두리를 설정해요.",
             despColor = "badge 테두리 색상을 설정해요.",
         ) { selectBorder ->
-            inject = HongBadgeTextBuilder()
+            inject = HongTextBadgeBuilder()
                 .copy(inject)
                 .border(selectBorder)
                 .applyOption()
@@ -173,7 +173,7 @@ class HongBadgeTextPlayground(
             activity = activity,
             shadow = inject.shadow
         ) { selectShadow ->
-            inject = HongBadgeTextBuilder()
+            inject = HongTextBadgeBuilder()
                 .copy(inject)
                 .shadow(selectShadow)
                 .applyOption()
@@ -181,18 +181,23 @@ class HongBadgeTextPlayground(
         }
 
         // region 버튼 텍스트
-        HongTextPlayground(activity).injectPreview(
-            injectOption = inject.textOption,
-            includeCommonOption = true,
-            label = "텍스트 옵션",
-            labelTypo = if (label.isNotEmpty()) HongTypo.BODY_15_B else null
-        ) {
-            inject = HongBadgeTextBuilder()
-                .copy(inject)
-                .textOption(it)
-                .applyOption()
-            callback.invoke(inject)
-        }
-
+        HongTextPlayground(activity)
+            .injectPreview(
+                injectOption = inject.textOption,
+                includeCommonOption = true,
+                label = "텍스트 옵션",
+                labelTypo = if (label.isNotEmpty()) HongTypo.BODY_15_B else null,
+                useUnderline = false,
+                useOverflow = false,
+                useCancelLine = false,
+                useLineBreak = false,
+                useMaxLine = false
+            ) {
+                inject = HongTextBadgeBuilder()
+                    .copy(inject)
+                    .textOption(it)
+                    .applyOption()
+                callback.invoke(inject)
+            }
     }
 }
