@@ -46,11 +46,6 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 .text("값을 입력해주세요.")
                 .applyOption()
         )
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
         .cursorColor(HongColor.MAIN_ORANGE_100.hex)
         .onTextChanged { trackingText ->
         }

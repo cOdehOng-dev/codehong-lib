@@ -30,6 +30,7 @@ import com.codehong.lib.sample.tab.HongScrollTabPlayground
 import com.codehong.lib.sample.text.HongTextPlayground
 import com.codehong.lib.sample.text.check.HongCheckTextPlayground
 import com.codehong.lib.sample.textfield.HongTextFieldPlayground
+import com.codehong.lib.sample.textfield.number.HongNumberTextFieldPlayground
 import com.codehong.lib.sample.textfield.timer.HongTimerTextFieldPlayground
 import com.codehong.lib.sample.textfield.underline.HongUnderlineTextFieldPlayground
 import com.codehong.lib.sample.toggleswitch.HongSwitchPlayground
@@ -75,6 +76,8 @@ import com.codehong.library.widget.text.check.HongCheckTextCompose
 import com.codehong.library.widget.text.check.HongCheckTextOption
 import com.codehong.library.widget.textfield.HongTextFieldCompose
 import com.codehong.library.widget.textfield.HongTextFieldOption
+import com.codehong.library.widget.textfield.number.HongNumberTextFieldCompose
+import com.codehong.library.widget.textfield.number.HongNumberTextFieldOption
 import com.codehong.library.widget.textfield.timer.HongTimerTextFieldCompose
 import com.codehong.library.widget.textfield.timer.HongTimerTextFieldOption
 import com.codehong.library.widget.textfield.underline.HongUnderlineTextFieldCompose
@@ -188,6 +191,7 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.TEXT_FILED -> HongTextFieldPlayground(this).preview()
             HongWidgetType.UNDERLINE_TEXT_FIELD -> HongUnderlineTextFieldPlayground(this).preview()
             HongWidgetType.TIMER_TEXT_FIELD -> HongTimerTextFieldPlayground(this).preview()
+            HongWidgetType.NUMBER_TEXT_FIELD -> HongNumberTextFieldPlayground(this).preview()
             HongWidgetType.CALENDAR -> CalendarPlayground(this).preview()
             HongWidgetType.TEXT_BUTTON -> HongTextButtonPlayground(this).preview()
             HongWidgetType.SELECT_BUTTON -> HongSelectButtonPlayground(this).preview()
@@ -295,6 +299,14 @@ class PlaygroundActivity : BaseActivity() {
                     }
                 }
             }
+            HongWidgetType.NUMBER_TEXT_FIELD -> {
+                binding.vComposePreview.setContent {
+                    PreviewUI(isBorderOn) {
+                        HongNumberTextFieldCompose(previewOption as HongNumberTextFieldOption)
+                    }
+                }
+            }
+
 
             HongWidgetType.TEXT_BUTTON -> {
                 binding.vComposePreview.setContent {

@@ -47,6 +47,7 @@ import com.codehong.lib.sample.tab.SampleScrollTabActivity
 import com.codehong.lib.sample.text.SampleTextActivity
 import com.codehong.lib.sample.text.check.SampleCheckTextActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
+import com.codehong.lib.sample.textfield.number.SampleNumberTextFieldActivity
 import com.codehong.lib.sample.textfield.timer.SampleTimerTextFieldActivity
 import com.codehong.lib.sample.textfield.underline.SampleUnderlineTextFieldActivity
 import com.codehong.lib.sample.toggleswitch.SampleSwitchActivity
@@ -308,6 +309,17 @@ fun SampleTheme(
                                                 activity.startActivity(this)
                                             }
                                         }
+
+                                        HongWidgetType.NUMBER_TEXT_FIELD -> {
+                                            Intent(activity, SampleNumberTextFieldActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.NUMBER_TEXT_FIELD.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
 
                                         HongWidgetType.TEXT_BUTTON -> {
                                             Intent(activity, SampleTextButtonActivity::class.java).apply {

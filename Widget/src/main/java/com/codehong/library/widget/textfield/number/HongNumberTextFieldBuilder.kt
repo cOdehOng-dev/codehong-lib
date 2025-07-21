@@ -1,28 +1,17 @@
-package com.codehong.library.widget.textfield
+package com.codehong.library.widget.textfield.number
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.image.HongImageOption
-import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
-import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
 
-class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTextFieldBuilder> {
-
-    override val builder: HongTextFieldBuilder = this
-    override val option: HongTextFieldOption = HongTextFieldOption()
-
-
-    fun radius(radius: HongRadiusInfo) = apply {
-        option.radius = radius
-    }
-
-    fun border(border: HongBorderInfo) = apply {
-        option.border = border
-    }
+class HongNumberTextFieldBuilder
+    : HongWidgetCommonBuilder<HongNumberTextFieldOption, HongNumberTextFieldBuilder> {
+    override val builder: HongNumberTextFieldBuilder = this
+    override val option: HongNumberTextFieldOption = HongNumberTextFieldOption()
 
     fun placeholder(placeholder: String?) = apply {
         option.placeholder = placeholder
@@ -70,32 +59,18 @@ class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTe
         this.option.useHideKeyboard = useHideKeyboard
     }
 
-    fun singleLine(singleLine: Boolean) = apply {
-        this.option.singleLine = singleLine
-    }
-
-    fun maxLines(maxLines: Int) = apply {
-        this.option.maxLines = maxLines
-    }
-
-    fun minLines(minLines: Int) = apply {
-        this.option.minLines = minLines
-    }
-
     fun keyboardOption(keyboardOption: Pair<HongKeyboardType, HongKeyboardActionType>?) = apply {
-        this.option.keyboardOption = keyboardOption ?: HongTextFieldOption.DEFAULT_KEYBOARD_OPTION
-    }
-
-    fun delayInputCallback(delay: Long) = apply {
-        this.option.delayInputCallback = delay
+        this.option.keyboardOption = keyboardOption ?: HongNumberTextFieldOption.DEFAULT_KEYBOARD_OPTION
     }
 
     fun onTextChanged(onTextChanged: ((String) -> Unit)) = apply {
         option.onTextChanged = onTextChanged
     }
 
-    fun copy(inject: HongTextFieldOption): HongTextFieldBuilder {
-        return HongTextFieldBuilder()
+    fun copy(inject: HongNumberTextFieldOption?): HongNumberTextFieldBuilder {
+        if (inject == null) return HongNumberTextFieldBuilder()
+
+        return HongNumberTextFieldBuilder()
             .width(inject.width)
             .height(inject.height)
             .margin(inject.margin)
@@ -108,15 +83,9 @@ class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTe
             .clearImageOption(inject.clearImageOption)
             .cursorColor(inject.cursorColor)
             .useHideKeyboard(inject.useHideKeyboard)
-            .singleLine(inject.singleLine)
-            .maxLines(inject.maxLines)
-            .minLines(inject.minLines)
             .keyboardOption(inject.keyboardOption)
             .onTextChanged(inject.onTextChanged)
-            .delayInputCallback(inject.delayInputCallback)
             .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
-            .radius(inject.radius)
-            .border(inject.border)
     }
 }

@@ -51,6 +51,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".textfield.SampleTextFieldActivity"/>
         <activity android:name=".textfield.underline.SampleUnderlineTextFieldActivity"/>
+        <activity android:name=".textfield.number.SampleNumberTextFieldActivity"/>
         <activity android:name=".textfield.timer.SampleTimerTextFieldActivity"/>
         <activity android:name=".button.text.SampleTextButtonActivity"/>
         <activity android:name=".button.select.SampleSelectButtonActivity"/>
