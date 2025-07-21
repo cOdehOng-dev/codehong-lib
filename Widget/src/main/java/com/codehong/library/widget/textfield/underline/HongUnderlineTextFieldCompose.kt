@@ -99,10 +99,10 @@ fun HongUnderlineTextFieldCompose(
                             platformStyle = PlatformTextStyle(includeFontPadding = false)
                         ),
                         cursorBrush = SolidColor(
-                            if (option.cursorColorHex.isEmpty()) {
+                            if (option.cursorColor.isEmpty()) {
                                 HongColor.MAIN_ORANGE_100.toColor()
                             } else {
-                                option.cursorColorHex.toColor()
+                                option.cursorColor.toColor()
                             }
                         ),
                         singleLine = true,
@@ -130,7 +130,7 @@ fun HongUnderlineTextFieldCompose(
             }
 
             HongDivider(
-                color = (if (isFocused) option.underlineFocusColorHex else option.underlineOutFocusColorHex).hexToHongColor(),
+                color = (if (isFocused) option.underlineFocusColor else option.underlineOutFocusColor).hexToHongColor(),
                 height = option.underlineHeight
             )
         }

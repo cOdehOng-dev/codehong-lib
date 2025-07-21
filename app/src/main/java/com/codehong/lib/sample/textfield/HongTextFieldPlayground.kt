@@ -203,7 +203,7 @@ class HongTextFieldPlayground(
         /** cursor 컬러 */
         PlaygroundManager.addColorOptionPreview(
             activity = activity,
-            colorHex = inject.cursorColorHex,
+            colorHex = inject.cursorColor,
             label = "cursor "
         ) {
             inject = HongTextFieldBuilder()

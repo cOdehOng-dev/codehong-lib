@@ -32,7 +32,6 @@ import com.codehong.library.widget.language.view
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.parseColor
-import com.codehong.library.widget.textfield.HongTextFieldOption
 
 class HongUnderlineTextFieldView @JvmOverloads constructor(
     context: Context,
@@ -102,9 +101,9 @@ class HongUnderlineTextFieldView @JvmOverloads constructor(
                     isCursorVisible = hasFocus
 
                     if (hasFocus) {
-                        underlineView?.setBackgroundColor(option.underlineFocusColorHex.parseColor())
+                        underlineView?.setBackgroundColor(option.underlineFocusColor.parseColor())
                     } else {
-                        underlineView?.setBackgroundColor(option.underlineOutFocusColorHex.parseColor())
+                        underlineView?.setBackgroundColor(option.underlineOutFocusColor.parseColor())
                     }
                 }
 
@@ -117,17 +116,17 @@ class HongUnderlineTextFieldView @JvmOverloads constructor(
                 this.maxLines = 1
 
                 this.setText(option.inputTextOption.text ?: "")
-                this.setTextColor((option.inputTextOption.colorHex ?: HongTextFieldOption.DEFAULT_INPUT_COLOR).toParseColor())
-                this.textSize = (option.inputTextOption.size ?: HongTextFieldOption.DEFAULT_INPUT_SIZE).toFloat()
+                this.setTextColor((option.inputTextOption.colorHex ?: HongUnderlineTextFieldOption.DEFAULT_INPUT_COLOR).toParseColor())
+                this.textSize = (option.inputTextOption.size ?: HongUnderlineTextFieldOption.DEFAULT_INPUT_SIZE).toFloat()
 
                 setHintStyle(option.placeholderTextOption)
 
                 checkFont(
                     input = this.text.toString(),
                     hintFontId = option.placeholderTextOption.fontType?.font
-                        ?: HongTextFieldOption.DEFAULT_PLACEHOLDER_FONT_TYPE.font,
+                        ?: HongUnderlineTextFieldOption.DEFAULT_PLACEHOLDER_FONT,
                     inputFontId = option.inputTextOption.fontType?.font
-                        ?: HongTextFieldOption.DEFAULT_INPUT_FONT_TYPE.font,
+                        ?: HongUnderlineTextFieldOption.DEFAULT_INPUT_FONT,
                 )
 
                 toKeyboardOptions(option.keyboardOption)
@@ -139,9 +138,9 @@ class HongUnderlineTextFieldView @JvmOverloads constructor(
                     checkFont(
                         input = input,
                         hintFontId = option.placeholderTextOption.fontType?.font
-                            ?: HongTextFieldOption.DEFAULT_PLACEHOLDER_FONT_TYPE.font,
+                            ?: HongUnderlineTextFieldOption.DEFAULT_PLACEHOLDER_FONT,
                         inputFontId = option.inputTextOption.fontType?.font
-                            ?: HongTextFieldOption.DEFAULT_INPUT_FONT_TYPE.font,
+                            ?: HongUnderlineTextFieldOption.DEFAULT_INPUT_FONT,
                     )
 
                     if (input.isEmpty()) {
@@ -177,7 +176,7 @@ class HongUnderlineTextFieldView @JvmOverloads constructor(
             layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, context.dpToPx(option.underlineHeight)).apply {
                 gravity = Gravity.BOTTOM
             }
-            setBackgroundColor(option.underlineOutFocusColorHex.parseColor())
+            setBackgroundColor(option.underlineOutFocusColor.parseColor())
         }
 
         if (option.inputTextOption.text.isNullOrEmpty()) {

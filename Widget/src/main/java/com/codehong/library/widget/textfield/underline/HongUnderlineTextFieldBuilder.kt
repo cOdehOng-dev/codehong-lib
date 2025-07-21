@@ -44,16 +44,15 @@ class HongUnderlineTextFieldBuilder : HongWidgetCommonBuilder<HongUnderlineTextF
             .applyOption()
     }
 
-
     fun clearImageOption(option: HongImageOption?) = apply {
         this.option.clearImageOption = option
     }
+
     fun cursorColor(cursorColor: HongColor) = apply {
-        option.cursorColor = cursorColor
         cursorColor(cursorColor.hex)
     }
     fun cursorColor(cursorColor: String) = apply {
-        this.option.cursorColorHex = cursorColor
+        this.option.cursorColor = cursorColor
     }
 
     fun useHideKeyboard(useHideKeyboard: Boolean) = apply {
@@ -69,21 +68,19 @@ class HongUnderlineTextFieldBuilder : HongWidgetCommonBuilder<HongUnderlineTextF
     }
 
     fun underlineFocusColor(underlineFocusColor: HongColor) = apply {
-        option.underlineFocusColor = underlineFocusColor
         underlineFocusColor(underlineFocusColor.hex)
     }
 
     fun underlineFocusColor(underlineFocusColorHex: String) = apply {
-        option.underlineFocusColorHex = underlineFocusColorHex
+        option.underlineFocusColor = underlineFocusColorHex
     }
 
     fun underlineOutFocusColor(underlineOutFocusColor: HongColor) = apply {
-        option.underlineOutFocusColor = underlineOutFocusColor
         underlineOutFocusColor(underlineOutFocusColor.hex)
     }
 
     fun underlineOutFocusColor(underlineOutFocusColorHex: String) = apply {
-        option.underlineOutFocusColorHex = underlineOutFocusColorHex
+        option.underlineOutFocusColor = underlineOutFocusColorHex
     }
 
     fun underlineHeight(underlineHeight: Int) = apply {
@@ -105,16 +102,13 @@ class HongUnderlineTextFieldBuilder : HongWidgetCommonBuilder<HongUnderlineTextF
             .inputTextOption(inject.inputTextOption)
             .clearImageOption(inject.clearImageOption)
             .cursorColor(inject.cursorColor)
-            .cursorColor(inject.cursorColorHex)
             .useHideKeyboard(inject.useHideKeyboard)
             .keyboardOption(inject.keyboardOption)
             .onTextChanged(inject.onTextChanged)
             .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
             .underlineFocusColor(inject.underlineFocusColor)
-            .underlineFocusColor(inject.underlineFocusColorHex)
             .underlineOutFocusColor(inject.underlineOutFocusColor)
-            .underlineOutFocusColor(inject.underlineOutFocusColorHex)
             .underlineHeight(inject.underlineHeight)
 
     }

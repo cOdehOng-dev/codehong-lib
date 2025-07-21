@@ -1,7 +1,6 @@
 package com.codehong.library.widget.textfield
 
 import com.codehong.library.widget.HongWidgetCommonOption
-
 import com.codehong.library.widget.R
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.image.HongImageOption
@@ -14,7 +13,9 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.rule.typo.HongFont
+import com.codehong.library.widget.rule.typo.HongTypo
+import com.codehong.library.widget.rule.typo.fontType
+import com.codehong.library.widget.rule.typo.size
 import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongTextFieldOption(
@@ -22,12 +23,12 @@ data class HongTextFieldOption(
 ) : HongWidgetCommonOption {
 
     companion object {
-        val DEFAULT_PLACEHOLDER_FONT_TYPE = HongFont.PRETENDARD_400
-        const val DEFAULT_PLACEHOLDER_SIZE = 16
-        val DEFAULT_PLACEHOLDER_COLOR = HongColor.BLACK_30.hex
+        val DEFAULT_PLACEHOLDER_TYPO = HongTypo.BODY_16
+        val DEFAULT_PLACEHOLDER_FONT = DEFAULT_PLACEHOLDER_TYPO.fontType().font
 
-        val DEFAULT_INPUT_FONT_TYPE = HongFont.PRETENDARD_700
-        const val DEFAULT_INPUT_SIZE = 16
+        val DEFAULT_INPUT_TYPO = HongTypo.BODY_16_B
+        val DEFAULT_INPUT_FONT = DEFAULT_INPUT_TYPO.fontType().font
+        val DEFAULT_INPUT_SIZE = DEFAULT_INPUT_TYPO.size()
         val DEFAULT_INPUT_COLOR = HongColor.BLACK_100.hex
 
         const val DEFAULT_USE_HIDE_KEYBOARD = true
@@ -47,15 +48,13 @@ data class HongTextFieldOption(
 
         val DEFAULT_PLACEHOLDER = HongTextBuilder()
             .width(HongLayoutParam.MATCH_PARENT.value)
-            .fontType(DEFAULT_PLACEHOLDER_FONT_TYPE)
-            .size(DEFAULT_PLACEHOLDER_SIZE)
-            .color(DEFAULT_PLACEHOLDER_COLOR)
+            .typography(DEFAULT_PLACEHOLDER_TYPO)
+            .color(HongColor.BLACK_30.hex)
             .applyOption()
 
         val DEFAULT_INPUT = HongTextBuilder()
             .width(HongLayoutParam.MATCH_PARENT.value)
-            .fontType(DEFAULT_INPUT_FONT_TYPE)
-            .size(DEFAULT_INPUT_SIZE)
+            .typography(DEFAULT_INPUT_TYPO)
             .color(DEFAULT_INPUT_COLOR)
             .applyOption()
 
@@ -96,8 +95,7 @@ data class HongTextFieldOption(
     var input: String? = null
     var placeholder: String? = null
 
-    var cursorColor: HongColor = HongColor.MAIN_ORANGE_100
-    var cursorColorHex: String = HongColor.MAIN_ORANGE_100.hex
+    var cursorColor: String = HongColor.MAIN_ORANGE_100.hex
     var useHideKeyboard: Boolean = DEFAULT_USE_HIDE_KEYBOARD
     var singleLine: Boolean = DEFAULT_SINGLE_LINE
     var maxLines: Int = DEFAULT_MAX_LINES
@@ -135,7 +133,6 @@ data class HongTextFieldOption(
         if (input != other.input) return false
         if (placeholder != other.placeholder) return false
         if (cursorColor != other.cursorColor) return false
-        if (cursorColorHex != other.cursorColorHex) return false
         if (useHideKeyboard != other.useHideKeyboard) return false
         if (singleLine != other.singleLine) return false
         if (maxLines != other.maxLines) return false
@@ -167,7 +164,6 @@ data class HongTextFieldOption(
         result = 31 * result + (input?.hashCode() ?: 0)
         result = 31 * result + (placeholder?.hashCode() ?: 0)
         result = 31 * result + cursorColor.hashCode()
-        result = 31 * result + cursorColorHex.hashCode()
         result = 31 * result + useHideKeyboard.hashCode()
         result = 31 * result + singleLine.hashCode()
         result = 31 * result + maxLines
@@ -198,8 +194,7 @@ data class HongTextFieldOption(
                 "clearImageOption=$clearImageOption, " +
                 "input=$input, " +
                 "placeholder=$placeholder, " +
-                "cursorColor=$cursorColor, " +
-                "cursorColorHex='$cursorColorHex', " +
+                "cursorColor='$cursorColor', " +
                 "useHideKeyboard=$useHideKeyboard, " +
                 "singleLine=$singleLine, " +
                 "maxLines=$maxLines, " +

@@ -127,9 +127,9 @@ class HongTextFieldView @JvmOverloads constructor(
             checkFont(
                 input = this.text.toString(),
                 hintFontId = option.placeholderTextOption.fontType?.font
-                    ?: HongTextFieldOption.DEFAULT_PLACEHOLDER_FONT_TYPE.font,
+                    ?: HongTextFieldOption.DEFAULT_PLACEHOLDER_FONT,
                 inputFontId = option.inputTextOption.fontType?.font
-                    ?: HongTextFieldOption.DEFAULT_INPUT_FONT_TYPE.font,
+                    ?: HongTextFieldOption.DEFAULT_INPUT_FONT,
             )
 
             toKeyboardOptions(option.keyboardOption)
@@ -142,9 +142,9 @@ class HongTextFieldView @JvmOverloads constructor(
                 checkFont(
                     input = input,
                     hintFontId = option.placeholderTextOption.fontType?.font
-                        ?: HongTextFieldOption.DEFAULT_PLACEHOLDER_FONT_TYPE.font,
+                        ?: HongTextFieldOption.DEFAULT_PLACEHOLDER_FONT,
                     inputFontId = option.inputTextOption.fontType?.font
-                        ?: HongTextFieldOption.DEFAULT_INPUT_FONT_TYPE.font,
+                        ?: HongTextFieldOption.DEFAULT_INPUT_FONT,
                 )
 
                 if (input.isEmpty()) {

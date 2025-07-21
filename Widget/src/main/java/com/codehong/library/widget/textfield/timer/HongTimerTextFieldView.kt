@@ -34,7 +34,6 @@ import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.parseColor
 import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.textfield.HongTextFieldOption
 import com.codehong.library.widget.util.CountdownTimerHelper
 
 class HongTimerTextFieldView @JvmOverloads constructor(
@@ -126,17 +125,17 @@ class HongTimerTextFieldView @JvmOverloads constructor(
                 this.maxLines = 1
 
                 this.setText(option.inputTextOption.text ?: "")
-                this.setTextColor((option.inputTextOption.colorHex ?: HongTextFieldOption.DEFAULT_INPUT_COLOR).toParseColor())
-                this.textSize = (option.inputTextOption.size ?: HongTextFieldOption.DEFAULT_INPUT_SIZE).toFloat()
+                this.setTextColor((option.inputTextOption.colorHex ?: HongTimerTextFieldOption.DEFAULT_INPUT_COLOR).toParseColor())
+                this.textSize = (option.inputTextOption.size ?: HongTimerTextFieldOption.DEFAULT_INPUT_SIZE).toFloat()
 
                 setHintStyle(option.placeholderTextOption)
 
                 checkFont(
                     input = this.text.toString(),
                     hintFontId = option.placeholderTextOption.fontType?.font
-                        ?: HongTextFieldOption.DEFAULT_PLACEHOLDER_FONT_TYPE.font,
+                        ?: HongTimerTextFieldOption.DEFAULT_PLACEHOLDER_FONT,
                     inputFontId = option.inputTextOption.fontType?.font
-                        ?: HongTextFieldOption.DEFAULT_INPUT_FONT_TYPE.font,
+                        ?: HongTimerTextFieldOption.DEFAULT_INPUT_FONT,
                 )
 
                 toKeyboardOptions(option.keyboardOption)
@@ -148,9 +147,9 @@ class HongTimerTextFieldView @JvmOverloads constructor(
                     checkFont(
                         input = input,
                         hintFontId = option.placeholderTextOption.fontType?.font
-                            ?: HongTextFieldOption.DEFAULT_PLACEHOLDER_FONT_TYPE.font,
+                            ?: HongTimerTextFieldOption.DEFAULT_PLACEHOLDER_FONT,
                         inputFontId = option.inputTextOption.fontType?.font
-                            ?: HongTextFieldOption.DEFAULT_INPUT_FONT_TYPE.font,
+                            ?: HongTimerTextFieldOption.DEFAULT_INPUT_FONT,
                     )
 
                     if (input.isEmpty()) {

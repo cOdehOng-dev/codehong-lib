@@ -110,7 +110,7 @@ class HongUnderlineTextFieldPlayground(
         /** underline 활성화 컬러 */
         PlaygroundManager.addColorOptionPreview(
             activity = activity,
-            colorHex = inject.underlineFocusColorHex,
+            colorHex = inject.underlineFocusColor,
             label = "underline 활성화 "
         ) {
             inject = HongUnderlineTextFieldBuilder()
@@ -123,7 +123,7 @@ class HongUnderlineTextFieldPlayground(
         /** underline 비활성화 컬러 */
         PlaygroundManager.addColorOptionPreview(
             activity = activity,
-            colorHex = inject.underlineOutFocusColorHex,
+            colorHex = inject.underlineOutFocusColor,
             label = "underline 비활성화 "
         ) {
             inject = HongUnderlineTextFieldBuilder()
@@ -192,7 +192,7 @@ class HongUnderlineTextFieldPlayground(
         /** cursor 컬러 */
         PlaygroundManager.addColorOptionPreview(
             activity = activity,
-            colorHex = inject.cursorColorHex,
+            colorHex = inject.cursorColor,
             label = "cursor "
         ) {
             inject = HongUnderlineTextFieldBuilder()

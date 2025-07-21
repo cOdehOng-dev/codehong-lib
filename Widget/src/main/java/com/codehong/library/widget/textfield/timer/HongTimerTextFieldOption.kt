@@ -15,6 +15,8 @@ import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
+import com.codehong.library.widget.rule.typo.fontType
+import com.codehong.library.widget.rule.typo.size
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
 
@@ -24,6 +26,14 @@ data class HongTimerTextFieldOption(
 
     companion object {
         const val DEFAULT_USE_HIDE_KEYBOARD = true
+
+        val DEFAULT_PLACEHOLDER_TYPO = HongTypo.BODY_16
+        val DEFAULT_PLACEHOLDER_FONT = DEFAULT_PLACEHOLDER_TYPO.fontType().font
+
+        val DEFAULT_INPUT_TYPO = HongTypo.BODY_16_B
+        val DEFAULT_INPUT_FONT = DEFAULT_INPUT_TYPO.fontType().font
+        val DEFAULT_INPUT_SIZE = DEFAULT_INPUT_TYPO.size()
+        val DEFAULT_INPUT_COLOR = HongColor.BLACK_100.hex
 
         val DEFAULT_KEYBOARD_OPTION = Pair(
             HongKeyboardType.NUMBER,

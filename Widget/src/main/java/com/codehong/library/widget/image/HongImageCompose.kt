@@ -56,22 +56,13 @@ fun HongImageCompose(
                             context,
                             it
                         )
-                    } ?: run {
-                        ContextCompat.getDrawable(
-                            context,
-                            R.drawable.honglib_bg_image_placeholder
-                        )
-                    })
+                    }
+                )
                 .error(
                     option.error?.let {
                         ContextCompat.getDrawable(
                             context,
                             it
-                        )
-                    } ?: run {
-                        ContextCompat.getDrawable(
-                            context,
-                            R.drawable.honglib_bg_image_placeholder
                         )
                     }
                 )
@@ -82,7 +73,7 @@ fun HongImageCompose(
                 .build(),
             contentDescription = null,
             contentScale = option.scaleType.toContentScale(),
-            colorFilter = ColorFilter.tint(option.imageColor.toColor())
+            colorFilter = option.imageColor?.let { ColorFilter.tint(it.toColor()) }
         )
     }
 }

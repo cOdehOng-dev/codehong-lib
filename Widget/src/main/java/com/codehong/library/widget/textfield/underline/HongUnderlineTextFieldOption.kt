@@ -14,6 +14,8 @@ import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
+import com.codehong.library.widget.rule.typo.fontType
+import com.codehong.library.widget.rule.typo.size
 import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongUnderlineTextFieldOption(
@@ -21,7 +23,13 @@ data class HongUnderlineTextFieldOption(
 ) : HongWidgetCommonOption {
 
     companion object {
-        const val DEFAULT_USE_HIDE_KEYBOARD = true
+        val DEFAULT_PLACEHOLDER_TYPO = HongTypo.BODY_16
+        val DEFAULT_PLACEHOLDER_FONT = DEFAULT_PLACEHOLDER_TYPO.fontType().font
+
+        val DEFAULT_INPUT_TYPO = HongTypo.BODY_16_B
+        val DEFAULT_INPUT_FONT = DEFAULT_INPUT_TYPO.fontType().font
+        val DEFAULT_INPUT_SIZE = DEFAULT_INPUT_TYPO.size()
+        val DEFAULT_INPUT_COLOR = HongColor.BLACK_100.hex
 
         val DEFAULT_KEYBOARD_OPTION = Pair(
             HongKeyboardType.NUMBER,
@@ -30,14 +38,14 @@ data class HongUnderlineTextFieldOption(
 
         val DEFAULT_PLACEHOLDER = HongTextBuilder()
             .width(HongLayoutParam.MATCH_PARENT.value)
-            .typography(HongTypo.BODY_16)
+            .typography(DEFAULT_PLACEHOLDER_TYPO)
             .color(HongColor.BLACK_30)
             .applyOption()
 
         val DEFAULT_INPUT = HongTextBuilder()
             .width(HongLayoutParam.MATCH_PARENT.value)
-            .typography(HongTypo.BODY_16_B)
-            .color(HongColor.BLACK_100)
+            .typography(DEFAULT_INPUT_TYPO)
+            .color(DEFAULT_INPUT_COLOR)
             .applyOption()
 
         val DEFAULT_CLEAR_IMAGE = HongImageBuilder()
@@ -77,19 +85,16 @@ data class HongUnderlineTextFieldOption(
     var placeholderTextOption = DEFAULT_PLACEHOLDER
     var inputTextOption = DEFAULT_INPUT
 
-    var cursorColor: HongColor = HongColor.MAIN_ORANGE_100
-    var cursorColorHex: String = HongColor.MAIN_ORANGE_100.hex
-    var useHideKeyboard: Boolean = DEFAULT_USE_HIDE_KEYBOARD
+    var cursorColor: String = HongColor.MAIN_ORANGE_100.hex
+    var useHideKeyboard: Boolean = true
 
     var keyboardOption = DEFAULT_KEYBOARD_OPTION
 
     var onTextChanged: (String) -> Unit = {}
 
-    var underlineFocusColor: HongColor = HongColor.MAIN_ORANGE_100
-    var underlineFocusColorHex: String = HongColor.MAIN_ORANGE_100.hex
+    var underlineFocusColor: String = HongColor.MAIN_ORANGE_100.hex
 
-    var underlineOutFocusColor: HongColor = HongColor.GRAY_20
-    var underlineOutFocusColorHex: String = HongColor.GRAY_20.hex
+    var underlineOutFocusColor: String = HongColor.GRAY_20.hex
 
     var underlineHeight = 2
 
@@ -119,14 +124,11 @@ data class HongUnderlineTextFieldOption(
         if (placeholderTextOption != other.placeholderTextOption) return false
         if (inputTextOption != other.inputTextOption) return false
         if (cursorColor != other.cursorColor) return false
-        if (cursorColorHex != other.cursorColorHex) return false
         if (useHideKeyboard != other.useHideKeyboard) return false
         if (keyboardOption != other.keyboardOption) return false
         if (onTextChanged != other.onTextChanged) return false
         if (underlineFocusColor != other.underlineFocusColor) return false
-        if (underlineFocusColorHex != other.underlineFocusColorHex) return false
         if (underlineOutFocusColor != other.underlineOutFocusColor) return false
-        if (underlineOutFocusColorHex != other.underlineOutFocusColorHex) return false
         if (underlineHeight != other.underlineHeight) return false
 
         return true
@@ -152,14 +154,11 @@ data class HongUnderlineTextFieldOption(
         result = 31 * result + placeholderTextOption.hashCode()
         result = 31 * result + inputTextOption.hashCode()
         result = 31 * result + cursorColor.hashCode()
-        result = 31 * result + cursorColorHex.hashCode()
         result = 31 * result + useHideKeyboard.hashCode()
         result = 31 * result + keyboardOption.hashCode()
         result = 31 * result + onTextChanged.hashCode()
         result = 31 * result + underlineFocusColor.hashCode()
-        result = 31 * result + underlineFocusColorHex.hashCode()
         result = 31 * result + underlineOutFocusColor.hashCode()
-        result = 31 * result + underlineOutFocusColorHex.hashCode()
         result = 31 * result + underlineHeight
         return result
     }
@@ -184,15 +183,12 @@ data class HongUnderlineTextFieldOption(
                 "placeholder=$placeholder, " +
                 "placeholderTextOption=$placeholderTextOption, " +
                 "inputTextOption=$inputTextOption, " +
-                "cursorColor=$cursorColor, " +
-                "cursorColorHex='$cursorColorHex', " +
+                "cursorColor='$cursorColor', " +
                 "useHideKeyboard=$useHideKeyboard, " +
                 "keyboardOption=$keyboardOption, " +
                 "onTextChanged=$onTextChanged, " +
-                "underlineFocusColor=$underlineFocusColor, " +
-                "underlineFocusColorHex='$underlineFocusColorHex', " +
-                "underlineOutFocusColor=$underlineOutFocusColor, " +
-                "underlineOutFocusColorHex='$underlineOutFocusColorHex', " +
+                "underlineFocusColor='$underlineFocusColor', " +
+                "underlineOutFocusColor='$underlineOutFocusColor', " +
                 "underlineHeight=$underlineHeight" +
                 ")"
     }

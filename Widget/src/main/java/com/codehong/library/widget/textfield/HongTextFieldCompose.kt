@@ -84,10 +84,10 @@ fun HongTextFieldCompose(
                                 platformStyle = PlatformTextStyle(includeFontPadding = false)
                             ),
                             cursorBrush = SolidColor(
-                                if (option.cursorColorHex.isEmpty()) {
+                                if (option.cursorColor.isEmpty()) {
                                     HongColor.MAIN_ORANGE_100.toColor()
                                 } else {
-                                    option.cursorColorHex.toColor()
+                                    option.cursorColor.toColor()
                                 }
                             ),
                             singleLine = option.singleLine,
@@ -151,10 +151,10 @@ fun HongTextFieldCompose(
                                 platformStyle = PlatformTextStyle(includeFontPadding = false)
                             ),
                             cursorBrush = SolidColor(
-                                if (option.cursorColorHex.isEmpty()) {
+                                if (option.cursorColor.isEmpty()) {
                                     HongColor.MAIN_ORANGE_100.toColor()
                                 } else {
-                                    option.cursorColorHex.toColor()
+                                    option.cursorColor.toColor()
                                 }
                             ),
                             singleLine = option.singleLine,
@@ -218,10 +218,10 @@ fun HongTextFieldCompose(
                         platformStyle = PlatformTextStyle(includeFontPadding = false)
                     ),
                     cursorBrush = SolidColor(
-                        if (option.cursorColorHex.isEmpty()) {
+                        if (option.cursorColor.isEmpty()) {
                             HongColor.MAIN_ORANGE_100.toColor()
                         } else {
-                            option.cursorColorHex.toColor()
+                            option.cursorColor.toColor()
                         }
                     ),
                     singleLine = option.singleLine,
@@ -259,10 +259,10 @@ fun HongTextFieldCompose(
                         platformStyle = PlatformTextStyle(includeFontPadding = false)
                     ),
                     cursorBrush = SolidColor(
-                        if (option.cursorColorHex.isEmpty()) {
+                        if (option.cursorColor.isEmpty()) {
                             HongColor.MAIN_ORANGE_100.toColor()
                         } else {
-                            option.cursorColorHex.toColor()
+                            option.cursorColor.toColor()
                         }
                     ),
                     singleLine = option.singleLine,
