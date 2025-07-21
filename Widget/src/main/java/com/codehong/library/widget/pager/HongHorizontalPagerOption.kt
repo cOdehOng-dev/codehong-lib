@@ -42,7 +42,6 @@ data class HongHorizontalPagerOption(
     override var border: HongBorderInfo = HongBorderInfo()
     override var useShapeCircle: Boolean = false
 
-    override var backgroundColor: HongColor = HongColor.TRANSPARENT
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
 
     var pageSpacing: Int = 0
@@ -80,7 +79,6 @@ data class HongHorizontalPagerOption(
         if (margin != other.margin) return false
         if (padding != other.padding) return false
         if (click != other.click) return false
-        if (backgroundColor != other.backgroundColor) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (pageSpacing != other.pageSpacing) return false
         if (pageInfoList != other.pageInfoList) return false
@@ -102,7 +100,6 @@ data class HongHorizontalPagerOption(
         result = 31 * result + margin.hashCode()
         result = 31 * result + padding.hashCode()
         result = 31 * result + (click?.hashCode() ?: 0)
-        result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + pageSpacing
         result = 31 * result + (pageInfoList?.hashCode() ?: 0)
@@ -124,7 +121,6 @@ data class HongHorizontalPagerOption(
                 "margin=$margin, " +
                 "padding=$padding, " +
                 "click=$click, " +
-                "backgroundColor=$backgroundColor, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "pageSpacing=$pageSpacing, " +
                 "pageInfoList=$pageInfoList, " +

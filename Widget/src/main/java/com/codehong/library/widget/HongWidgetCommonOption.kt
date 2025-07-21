@@ -4,7 +4,6 @@ import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
-import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
 interface HongWidgetCommonOption {
@@ -16,7 +15,7 @@ interface HongWidgetCommonOption {
     var padding: HongSpacingInfo
     var click: ((HongWidgetCommonOption) -> Unit)?
 
-    var backgroundColor: HongColor
+//    var backgroundColor: HongColor
     var backgroundColorHex: String
 
     var radius: HongRadiusInfo

@@ -37,7 +37,6 @@ class HongSelectButtonBuilder : HongWidgetCommonBuilder<HongSelectButtonOption, 
             .margin(inject.margin)
             .padding(inject.padding)
             .onClick(inject.click)
-            .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
             .negativeTextButtonOption(inject.negativeTextButtonOption)
             .positiveTextButtonOption(inject.positiveTextButtonOption)

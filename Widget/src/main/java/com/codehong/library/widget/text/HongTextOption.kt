@@ -60,7 +60,6 @@ data class HongTextOption(
 
     var isTextRequired: Boolean = false
 
-    override var backgroundColor: HongColor = HongColor.TRANSPARENT
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
 
     internal val lineHeight: Int?
@@ -107,7 +106,6 @@ data class HongTextOption(
         if (isEnableUnderLine != other.isEnableUnderLine) return false
         if (spanTextBuilderList != other.spanTextBuilderList) return false
         if (isTextRequired != other.isTextRequired) return false
-        if (backgroundColor != other.backgroundColor) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
 
         return true
@@ -134,7 +132,6 @@ data class HongTextOption(
         result = 31 * result + isEnableUnderLine.hashCode()
         result = 31 * result + (spanTextBuilderList?.hashCode() ?: 0)
         result = 31 * result + isTextRequired.hashCode()
-        result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         return result
     }
@@ -161,7 +158,6 @@ data class HongTextOption(
                 "isEnableUnderLine=$isEnableUnderLine, " +
                 "spanTextBuilderList=$spanTextBuilderList, " +
                 "isTextRequired=$isTextRequired, " +
-                "backgroundColor=$backgroundColor, " +
                 "backgroundColorHex='$backgroundColorHex'" +
                 ")"
     }

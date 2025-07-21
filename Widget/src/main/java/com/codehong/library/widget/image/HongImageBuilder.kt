@@ -86,7 +86,6 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
             .onClick(inject.click)
             .radius(inject.radius)
             .shadow(inject.shadow)
-            .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
             .border(inject.border)
             .useShapeCircle(inject.useShapeCircle)

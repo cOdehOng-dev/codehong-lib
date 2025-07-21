@@ -26,7 +26,6 @@ class HongCloseHeaderBuilder : HongWidgetCommonBuilder<HongCloseHeaderOption, Ho
             .onClick(inject.click)
             .headerTitleTextOption(inject.headerTitleTextOption)
             .close(inject.close)
-            .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
     }
 

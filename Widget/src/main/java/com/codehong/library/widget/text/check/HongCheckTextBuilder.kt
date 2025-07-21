@@ -67,7 +67,6 @@ class HongCheckTextBuilder : HongWidgetCommonBuilder<HongCheckTextOption, HongCh
             .margin(inject.margin)
             .padding(inject.padding)
             .onClick(inject.click)
-            .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
             .text(inject.text)
             .textOption(inject.textOption)

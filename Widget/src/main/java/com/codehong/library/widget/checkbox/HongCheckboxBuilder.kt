@@ -59,7 +59,6 @@ class HongCheckboxBuilder : HongWidgetCommonBuilder<HongCheckboxOption, HongChec
             .padding(inject.padding)
             .onClick(inject.click)
             .size(inject.size)
-            .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
             .checkedColor(inject.checkedColor)
             .checkedColor(inject.checkedColorHex)

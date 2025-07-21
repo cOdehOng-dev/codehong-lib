@@ -85,7 +85,6 @@ class HongNumberTextFieldBuilder
             .useHideKeyboard(inject.useHideKeyboard)
             .keyboardOption(inject.keyboardOption)
             .onTextChanged(inject.onTextChanged)
-            .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
     }
 }

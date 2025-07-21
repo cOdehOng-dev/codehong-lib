@@ -105,7 +105,6 @@ class HongUnderlineTextFieldBuilder : HongWidgetCommonBuilder<HongUnderlineTextF
             .useHideKeyboard(inject.useHideKeyboard)
             .keyboardOption(inject.keyboardOption)
             .onTextChanged(inject.onTextChanged)
-            .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
             .underlineFocusColor(inject.underlineFocusColor)
             .underlineOutFocusColor(inject.underlineOutFocusColor)

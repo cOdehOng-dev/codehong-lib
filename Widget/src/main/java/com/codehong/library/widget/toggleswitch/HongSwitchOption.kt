@@ -25,7 +25,6 @@ data class HongSwitchOption(
     override var margin: HongSpacingInfo = HongSpacingInfo()
     override var padding: HongSpacingInfo = HongSpacingInfo()
 
-    override var backgroundColor: HongColor = HongColor.TRANSPARENT
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
 
@@ -65,7 +64,6 @@ data class HongSwitchOption(
         if (height != other.height) return false
         if (margin != other.margin) return false
         if (padding != other.padding) return false
-        if (backgroundColor != other.backgroundColor) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (click != other.click) return false
         if (switchClick != other.switchClick) return false
@@ -93,7 +91,6 @@ data class HongSwitchOption(
         result = 31 * result + height
         result = 31 * result + margin.hashCode()
         result = 31 * result + padding.hashCode()
-        result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + (click?.hashCode() ?: 0)
         result = 31 * result + (switchClick?.hashCode() ?: 0)
@@ -121,7 +118,6 @@ data class HongSwitchOption(
                 "height=$height, " +
                 "margin=$margin, " +
                 "padding=$padding, " +
-                "backgroundColor=$backgroundColor, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "click=$click, " +
                 "switchClick=$switchClick, " +

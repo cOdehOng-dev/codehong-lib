@@ -52,7 +52,6 @@ data class HongBadgeTextOption(
     )
 
     override var backgroundColorHex: String = HongColor.WHITE_100.hex
-    override var backgroundColor: HongColor = HongColor.WHITE_100
 
     override var border: HongBorderInfo = HongBorderInfo(
         width = DEFAULT_BORDER_WIDTH,
@@ -79,7 +78,6 @@ data class HongBadgeTextOption(
         if (click != other.click) return false
         if (radius != other.radius) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
-        if (backgroundColor != other.backgroundColor) return false
         if (border != other.border) return false
         if (useShapeCircle != other.useShapeCircle) return false
         if (shadow != other.shadow) return false
@@ -98,7 +96,6 @@ data class HongBadgeTextOption(
         result = 31 * result + (click?.hashCode() ?: 0)
         result = 31 * result + radius.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
-        result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + border.hashCode()
         result = 31 * result + useShapeCircle.hashCode()
         result = 31 * result + shadow.hashCode()
@@ -117,7 +114,6 @@ data class HongBadgeTextOption(
                 "click=$click, " +
                 "radius=$radius, " +
                 "backgroundColorHex='$backgroundColorHex', " +
-                "backgroundColor=$backgroundColor, " +
                 "border=$border, " +
                 "useShapeCircle=$useShapeCircle, " +
                 "shadow=$shadow, " +

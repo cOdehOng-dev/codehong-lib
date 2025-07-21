@@ -81,7 +81,6 @@ data class HongTimerTextFieldOption(
     override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
 
-    override var backgroundColor: HongColor = HongColor.TRANSPARENT
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
 
     override var radius: HongRadiusInfo = HongRadiusInfo()

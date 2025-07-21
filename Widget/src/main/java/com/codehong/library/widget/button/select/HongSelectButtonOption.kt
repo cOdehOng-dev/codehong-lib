@@ -85,7 +85,7 @@ data class HongSelectButtonOption(
     override var height: Int = HongLayoutParam.WRAP_CONTENT.value
     override var margin: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
     override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
-    override var backgroundColor: HongColor = HongColor.WHITE_100
+    
     override var backgroundColorHex: String = HongColor.WHITE_100.hex
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
     override var border: HongBorderInfo = HongBorderInfo()
@@ -112,7 +112,6 @@ data class HongSelectButtonOption(
         if (height != other.height) return false
         if (margin != other.margin) return false
         if (padding != other.padding) return false
-        if (backgroundColor != other.backgroundColor) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (click != other.click) return false
         if (border != other.border) return false
@@ -134,7 +133,6 @@ data class HongSelectButtonOption(
         result = 31 * result + height
         result = 31 * result + margin.hashCode()
         result = 31 * result + padding.hashCode()
-        result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + (click?.hashCode() ?: 0)
         result = 31 * result + border.hashCode()
@@ -156,7 +154,6 @@ data class HongSelectButtonOption(
                 "height=$height, " +
                 "margin=$margin, " +
                 "padding=$padding, " +
-                "backgroundColor=$backgroundColor, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "click=$click, " +
                 "border=$border, " +

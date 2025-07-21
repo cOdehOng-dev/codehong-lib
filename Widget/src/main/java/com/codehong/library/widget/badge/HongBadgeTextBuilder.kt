@@ -34,7 +34,6 @@ class HongBadgeTextBuilder : HongWidgetCommonBuilder<HongBadgeTextOption, HongBa
             .margin(inject.margin)
             .padding(inject.padding)
             .onClick(inject.click)
-            .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
             .border(inject.border)
             .radius(inject.radius)

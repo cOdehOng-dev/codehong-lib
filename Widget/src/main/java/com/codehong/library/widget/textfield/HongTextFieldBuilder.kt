@@ -63,7 +63,7 @@ class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTe
         cursorColor(cursorColor.hex)
     }
     fun cursorColor(cursorColor: String) = apply {
-        this.option.cursorColor = cursorColor
+        this.option.cursorColorHex = cursorColor
     }
 
     fun useHideKeyboard(useHideKeyboard: Boolean) = apply {
@@ -106,7 +106,7 @@ class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTe
             .input(inject.input)
             .inputTextOption(inject.inputTextOption)
             .clearImageOption(inject.clearImageOption)
-            .cursorColor(inject.cursorColor)
+            .cursorColor(inject.cursorColorHex)
             .useHideKeyboard(inject.useHideKeyboard)
             .singleLine(inject.singleLine)
             .maxLines(inject.maxLines)
@@ -114,7 +114,6 @@ class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTe
             .keyboardOption(inject.keyboardOption)
             .onTextChanged(inject.onTextChanged)
             .delayInputCallback(inject.delayInputCallback)
-            .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
             .radius(inject.radius)
             .border(inject.border)

@@ -81,7 +81,6 @@ data class HongLabelCheckboxOption(
     override var useShapeCircle: Boolean = false
     override var shadow = HongShadowInfo()
 
-    override var backgroundColor: HongColor = HongColor.TRANSPARENT
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
 
 
@@ -117,7 +116,6 @@ data class HongLabelCheckboxOption(
         if (border != other.border) return false
         if (useShapeCircle != other.useShapeCircle) return false
         if (shadow != other.shadow) return false
-        if (backgroundColor != other.backgroundColor) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (label != other.label) return false
         if (labelTextOption != other.labelTextOption) return false
@@ -144,7 +142,6 @@ data class HongLabelCheckboxOption(
         result = 31 * result + border.hashCode()
         result = 31 * result + useShapeCircle.hashCode()
         result = 31 * result + shadow.hashCode()
-        result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + (label?.hashCode() ?: 0)
         result = 31 * result + labelTextOption.hashCode()
@@ -171,7 +168,6 @@ data class HongLabelCheckboxOption(
                 "border=$border, " +
                 "useShapeCircle=$useShapeCircle, " +
                 "shadow=$shadow, " +
-                "backgroundColor=$backgroundColor, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "label=$label, " +
                 "labelTextOption=$labelTextOption, " +

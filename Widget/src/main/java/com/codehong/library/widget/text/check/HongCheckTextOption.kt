@@ -33,7 +33,6 @@ data class HongCheckTextOption(
     override var padding: HongSpacingInfo = HongSpacingInfo()
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
     override var radius: HongRadiusInfo = HongRadiusInfo()
-    override var backgroundColor: HongColor = HongColor.TRANSPARENT
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
     override var border: HongBorderInfo = HongBorderInfo()
     override var useShapeCircle: Boolean = DEFAULT_USE_SHAPE_CIRCLE
@@ -68,7 +67,6 @@ data class HongCheckTextOption(
         if (padding != other.padding) return false
         if (click != other.click) return false
         if (radius != other.radius) return false
-        if (backgroundColor != other.backgroundColor) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (border != other.border) return false
         if (useShapeCircle != other.useShapeCircle) return false
@@ -94,7 +92,6 @@ data class HongCheckTextOption(
         result = 31 * result + padding.hashCode()
         result = 31 * result + (click?.hashCode() ?: 0)
         result = 31 * result + radius.hashCode()
-        result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + border.hashCode()
         result = 31 * result + useShapeCircle.hashCode()
@@ -120,7 +117,6 @@ data class HongCheckTextOption(
                 "padding=$padding, " +
                 "click=$click, " +
                 "radius=$radius, " +
-                "backgroundColor=$backgroundColor, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "border=$border, " +
                 "useShapeCircle=$useShapeCircle, " +

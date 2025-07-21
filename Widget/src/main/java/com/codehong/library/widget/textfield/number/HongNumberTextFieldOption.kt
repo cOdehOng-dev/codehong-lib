@@ -69,7 +69,7 @@ data class HongNumberTextFieldOption(
     override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
 
-    override var backgroundColor: HongColor = HongColor.BLACK_5
+
     override var backgroundColorHex: String = HongColor.BLACK_5.hex
 
     override var radius: HongRadiusInfo = HongRadiusInfo()

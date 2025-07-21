@@ -30,7 +30,6 @@ interface HongWidgetCommonBuilder<T : HongWidgetCommonOption, S> {
     }
 
     fun backgroundColor(color: HongColor): S {
-        option.backgroundColor = color
         backgroundColor(color.hex)
         return builder
     }

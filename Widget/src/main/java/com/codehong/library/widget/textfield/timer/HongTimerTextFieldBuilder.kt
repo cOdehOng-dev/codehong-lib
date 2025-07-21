@@ -136,7 +136,6 @@ class HongTimerTextFieldBuilder :
             .useHideKeyboard(inject.useHideKeyboard)
             .keyboardOption(inject.keyboardOption)
             .onTextChanged(inject.onTextChanged)
-            .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
             .underlineFocusColor(inject.underlineFocusColor)
             .underlineFocusColor(inject.underlineFocusColorHex)

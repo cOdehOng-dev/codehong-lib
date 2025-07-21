@@ -50,7 +50,6 @@ class HongLabelBuilder : HongWidgetCommonBuilder<HongLabelOption, HongLabelBuild
             .margin(inject.margin)
             .padding(inject.padding)
             .onClick(inject.click)
-            .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
             .label(inject.label)
             .labelTextOption(inject.labelTextOption)

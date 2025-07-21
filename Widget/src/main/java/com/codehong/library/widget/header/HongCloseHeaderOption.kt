@@ -24,7 +24,6 @@ data class HongCloseHeaderOption(
     override var margin: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
     override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
-    override var backgroundColor: HongColor = HongColor.WHITE_100
     override var backgroundColorHex: String = HongColor.WHITE_100.hex
     override var radius: HongRadiusInfo = HongRadiusInfo()
     override var shadow: HongShadowInfo = HongShadowInfo()
@@ -54,7 +53,6 @@ data class HongCloseHeaderOption(
         if (margin != other.margin) return false
         if (padding != other.padding) return false
         if (click != other.click) return false
-        if (backgroundColor != other.backgroundColor) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (headerTitleTextOption != other.headerTitleTextOption) return false
         if (close != other.close) return false
@@ -70,7 +68,6 @@ data class HongCloseHeaderOption(
         result = 31 * result + margin.hashCode()
         result = 31 * result + padding.hashCode()
         result = 31 * result + (click?.hashCode() ?: 0)
-        result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + headerTitleTextOption.hashCode()
         result = 31 * result + (close?.hashCode() ?: 0)
@@ -86,7 +83,6 @@ data class HongCloseHeaderOption(
                 "margin=$margin, " +
                 "padding=$padding, " +
                 "click=$click, " +
-                "backgroundColor=$backgroundColor, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "headerTitleTextOption=$headerTitleTextOption, " +
                 "close=$close" +

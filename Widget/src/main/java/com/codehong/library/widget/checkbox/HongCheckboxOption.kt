@@ -22,7 +22,6 @@ data class HongCheckboxOption(
     override var padding: HongSpacingInfo = HongSpacingInfo()
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
 
-    override var backgroundColor: HongColor = HongColor.TRANSPARENT
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
     override var shadow: HongShadowInfo = HongShadowInfo()
     override var useShapeCircle: Boolean = false
@@ -63,7 +62,6 @@ data class HongCheckboxOption(
         if (margin != other.margin) return false
         if (padding != other.padding) return false
         if (click != other.click) return false
-        if (backgroundColor != other.backgroundColor) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (shadow != other.shadow) return false
         if (useShapeCircle != other.useShapeCircle) return false
@@ -88,7 +86,6 @@ data class HongCheckboxOption(
         result = 31 * result + margin.hashCode()
         result = 31 * result + padding.hashCode()
         result = 31 * result + (click?.hashCode() ?: 0)
-        result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + shadow.hashCode()
         result = 31 * result + useShapeCircle.hashCode()
@@ -113,7 +110,6 @@ data class HongCheckboxOption(
                 "margin=$margin, " +
                 "padding=$padding, " +
                 "click=$click, " +
-                "backgroundColor=$backgroundColor, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "shadow=$shadow, " +
                 "useShapeCircle=$useShapeCircle, " +

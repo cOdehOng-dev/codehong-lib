@@ -46,7 +46,6 @@ data class HongVideoPlayerOption(
 
     override var shadow: HongShadowInfo = HongShadowInfo()
 
-    override var backgroundColor: HongColor = HongColor.TRANSPARENT
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
     override var useShapeCircle: Boolean = false
 
@@ -69,7 +68,6 @@ data class HongVideoPlayerOption(
         if (radius != other.radius) return false
         if (border != other.border) return false
         if (shadow != other.shadow) return false
-        if (backgroundColor != other.backgroundColor) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (useShapeCircle != other.useShapeCircle) return false
         if (videoUrl != other.videoUrl) return false
@@ -89,7 +87,6 @@ data class HongVideoPlayerOption(
         result = 31 * result + radius.hashCode()
         result = 31 * result + border.hashCode()
         result = 31 * result + shadow.hashCode()
-        result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + useShapeCircle.hashCode()
         result = 31 * result + (videoUrl?.hashCode() ?: 0)
@@ -109,7 +106,6 @@ data class HongVideoPlayerOption(
                 "radius=$radius, " +
                 "border=$border, " +
                 "shadow=$shadow, " +
-                "backgroundColor=$backgroundColor, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "useShapeCircle=$useShapeCircle, " +
                 "videoUrl=$videoUrl, " +

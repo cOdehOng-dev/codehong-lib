@@ -64,7 +64,6 @@ class HongSwitchBuilder : HongWidgetCommonBuilder<HongSwitchOption, HongSwitchBu
             .margin(inject.margin)
             .padding(inject.padding)
             .onClick(inject.click)
-            .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
             .onColor(inject.onColor)
             .onColor(inject.onColorHex)

@@ -79,7 +79,7 @@ data class HongTextFieldOption(
     override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
 
-    override var backgroundColor: HongColor = HongColor.BLACK_5
+
     override var backgroundColorHex: String = HongColor.BLACK_5.hex
 
     override var radius: HongRadiusInfo = HongRadiusInfo()
@@ -95,7 +95,7 @@ data class HongTextFieldOption(
     var input: String? = null
     var placeholder: String? = null
 
-    var cursorColor: String = HongColor.MAIN_ORANGE_100.hex
+    var cursorColorHex: String = HongColor.MAIN_ORANGE_100.hex
     var useHideKeyboard: Boolean = DEFAULT_USE_HIDE_KEYBOARD
     var singleLine: Boolean = DEFAULT_SINGLE_LINE
     var maxLines: Int = DEFAULT_MAX_LINES
@@ -121,7 +121,6 @@ data class HongTextFieldOption(
         if (margin != other.margin) return false
         if (padding != other.padding) return false
         if (click != other.click) return false
-        if (backgroundColor != other.backgroundColor) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (radius != other.radius) return false
         if (shadow != other.shadow) return false
@@ -132,7 +131,7 @@ data class HongTextFieldOption(
         if (clearImageOption != other.clearImageOption) return false
         if (input != other.input) return false
         if (placeholder != other.placeholder) return false
-        if (cursorColor != other.cursorColor) return false
+        if (cursorColorHex != other.cursorColorHex) return false
         if (useHideKeyboard != other.useHideKeyboard) return false
         if (singleLine != other.singleLine) return false
         if (maxLines != other.maxLines) return false
@@ -152,7 +151,6 @@ data class HongTextFieldOption(
         result = 31 * result + margin.hashCode()
         result = 31 * result + padding.hashCode()
         result = 31 * result + (click?.hashCode() ?: 0)
-        result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + radius.hashCode()
         result = 31 * result + shadow.hashCode()
@@ -163,7 +161,7 @@ data class HongTextFieldOption(
         result = 31 * result + (clearImageOption?.hashCode() ?: 0)
         result = 31 * result + (input?.hashCode() ?: 0)
         result = 31 * result + (placeholder?.hashCode() ?: 0)
-        result = 31 * result + cursorColor.hashCode()
+        result = 31 * result + cursorColorHex.hashCode()
         result = 31 * result + useHideKeyboard.hashCode()
         result = 31 * result + singleLine.hashCode()
         result = 31 * result + maxLines
@@ -183,7 +181,6 @@ data class HongTextFieldOption(
                 "margin=$margin, " +
                 "padding=$padding, " +
                 "click=$click, " +
-                "backgroundColor=$backgroundColor, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "radius=$radius, " +
                 "shadow=$shadow, " +
@@ -194,7 +191,7 @@ data class HongTextFieldOption(
                 "clearImageOption=$clearImageOption, " +
                 "input=$input, " +
                 "placeholder=$placeholder, " +
-                "cursorColor='$cursorColor', " +
+                "cursorColorHex='$cursorColorHex', " +
                 "useHideKeyboard=$useHideKeyboard, " +
                 "singleLine=$singleLine, " +
                 "maxLines=$maxLines, " +

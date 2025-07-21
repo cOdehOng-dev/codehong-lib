@@ -48,7 +48,6 @@ class HongTextButtonBuilder : HongWidgetCommonBuilder<HongTextButtonOption, Hong
             .radius(inject.radius)
             .shadow(inject.shadow)
             .textOption(inject.textOption)
-            .backgroundColor(inject.backgroundColor)
             .backgroundColor(inject.backgroundColorHex)
             .border(inject.border)
             .state(inject.state)

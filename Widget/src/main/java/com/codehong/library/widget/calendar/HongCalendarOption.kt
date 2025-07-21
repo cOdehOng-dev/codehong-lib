@@ -105,7 +105,7 @@ data class HongCalendarOption(
     override var height: Int = HongLayoutParam.MATCH_PARENT.value
     override var margin: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
     override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
-    override var backgroundColor: HongColor = HongColor.WHITE_100
+    
     override var backgroundColorHex: String = HongColor.WHITE_100.hex
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
     override var radius: HongRadiusInfo = HongRadiusInfo()
@@ -162,7 +162,6 @@ data class HongCalendarOption(
         if (height != other.height) return false
         if (margin != other.margin) return false
         if (padding != other.padding) return false
-        if (backgroundColor != other.backgroundColor) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (click != other.click) return false
         if (dayOfWeekBottomLineColorHex != other.dayOfWeekBottomLineColorHex) return false
@@ -198,7 +197,6 @@ data class HongCalendarOption(
         result = 31 * result + height
         result = 31 * result + margin.hashCode()
         result = 31 * result + padding.hashCode()
-        result = 31 * result + backgroundColor.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + (click?.hashCode() ?: 0)
         result = 31 * result + dayOfWeekBottomLineColorHex.hashCode()
@@ -234,7 +232,6 @@ data class HongCalendarOption(
                 "height=$height, " +
                 "margin=$margin, " +
                 "padding=$padding, " +
-                "backgroundColor=$backgroundColor, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "click=$click, " +
                 "dayOfWeekBottomLineColorHex='$dayOfWeekBottomLineColorHex', " +
