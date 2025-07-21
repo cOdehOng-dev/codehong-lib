@@ -36,7 +36,7 @@ class HongTextFieldPlayground(
                     bottom = 20f
                 )
             )
-            .backgroundColor(HongColor.BLACK_5.hex)
+            .backgroundColor(HongColor.BLACK_05.hex)
             .radius(
                 HongRadiusInfo(
                     topLeft = 50,
@@ -174,7 +174,6 @@ class HongTextFieldPlayground(
             ) {
                 inject = HongTextFieldBuilder()
                     .copy(inject)
-                    .placeholder(null)
                     .placeholderTextOption(it)
                     .applyOption()
                 callback.invoke(inject)

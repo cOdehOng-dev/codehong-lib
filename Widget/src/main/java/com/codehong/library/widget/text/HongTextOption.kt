@@ -41,6 +41,7 @@ data class HongTextOption(
     override var shadow: HongShadowInfo = HongShadowInfo()
     override var border: HongBorderInfo = HongBorderInfo()
     override var useShapeCircle: Boolean = false
+    override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
 
     var text: String? = null
     var colorHex: String? = null
@@ -62,7 +63,6 @@ data class HongTextOption(
 
     var useNumberDecimal = false
 
-    override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
 
     internal val lineHeight: Int?
         get() = typography?.lineHeight()

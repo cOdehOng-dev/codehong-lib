@@ -57,7 +57,7 @@ class SampleVideoPopupActivity : BaseActivity() {
         binding.vVideoPopup.set(
             option = option,
             onShow = {
-                applyStatusBarColor(com.codehong.library.widget.R.color.honglib_color_9929292d)
+                applyStatusBarColor(com.codehong.library.widget.R.color.honglib_color_29292d_60)
             },
             onHide = { isClickClose ->
                 hidePopup(isClickClose)

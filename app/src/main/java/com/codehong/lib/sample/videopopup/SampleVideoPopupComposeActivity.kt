@@ -64,7 +64,7 @@ class SampleVideoPopupComposeActivity : BaseActivity() {
             HongComposeVideoPopupView(
                 option = option,
                 onShow = {
-                    applyStatusBarColor(R.color.honglib_color_9929292d)
+                    applyStatusBarColor(R.color.honglib_color_29292d_60)
                 },
                 onHide = { isClickClose ->
                     hidePopup(isClickClose)

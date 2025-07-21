@@ -46,6 +46,7 @@ import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.tab.SampleScrollTabActivity
 import com.codehong.lib.sample.text.SampleTextActivity
 import com.codehong.lib.sample.text.check.SampleCheckTextActivity
+import com.codehong.lib.sample.text.unit.SampleTextUnitActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
 import com.codehong.lib.sample.textfield.number.SampleNumberTextFieldActivity
 import com.codehong.lib.sample.textfield.timer.SampleTimerTextFieldActivity
@@ -265,11 +266,20 @@ fun SampleTheme(
                                                 activity.startActivity(this)
                                             }
                                         }
-                                        HongWidgetType.CHECK_TEXT -> {
+                                        HongWidgetType.TEXT_CHECK -> {
                                             Intent(activity, SampleCheckTextActivity::class.java).apply {
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
-                                                    HongWidgetType.CHECK_TEXT.value
+                                                    HongWidgetType.TEXT_CHECK.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+                                        HongWidgetType.TEXT_UNIT -> {
+                                            Intent(activity, SampleTextUnitActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.TEXT_UNIT.value
                                                 )
                                                 activity.startActivity(this)
                                             }

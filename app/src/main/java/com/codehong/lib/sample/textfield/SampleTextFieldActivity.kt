@@ -34,7 +34,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .backgroundColor(HongColor.BLACK_5.hex)
+        .backgroundColor(HongColor.BLACK_05.hex)
         .radius(
             HongRadiusInfo(
                 all = 50
@@ -67,7 +67,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .backgroundColor(HongColor.BLACK_5.hex)
+        .backgroundColor(HongColor.BLACK_05.hex)
         .radius(
             HongRadiusInfo(
                 all = 50
@@ -106,7 +106,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .backgroundColor(HongColor.BLACK_5.hex)
+        .backgroundColor(HongColor.BLACK_05.hex)
         .radius(
             HongRadiusInfo(
                 all = 50
@@ -144,7 +144,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .backgroundColor(HongColor.BLACK_5.hex)
+        .backgroundColor(HongColor.BLACK_05.hex)
         .radius(
             HongRadiusInfo(
                 all = 50
@@ -186,7 +186,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .backgroundColor(HongColor.BLACK_5.hex)
+        .backgroundColor(HongColor.BLACK_05.hex)
         .radius(
             HongRadiusInfo(
                 all = 50
@@ -224,7 +224,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .backgroundColor(HongColor.BLACK_5.hex)
+        .backgroundColor(HongColor.BLACK_05.hex)
         .radius(
             HongRadiusInfo(
                 all = 50
@@ -263,7 +263,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .backgroundColor(HongColor.BLACK_5.hex)
+        .backgroundColor(HongColor.BLACK_05.hex)
         .radius(
             HongRadiusInfo(
                 all = 50
@@ -302,7 +302,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .backgroundColor(HongColor.BLACK_5.hex)
+        .backgroundColor(HongColor.BLACK_05.hex)
         .radius(
             HongRadiusInfo(
                 all = 50
@@ -341,7 +341,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .backgroundColor(HongColor.BLACK_5.hex)
+        .backgroundColor(HongColor.BLACK_05.hex)
         .radius(
             HongRadiusInfo(
                 all = 50
@@ -385,7 +385,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .backgroundColor(HongColor.BLACK_5.hex)
+        .backgroundColor(HongColor.BLACK_05.hex)
         .radius(
             HongRadiusInfo(
                 all = 50
@@ -425,7 +425,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .backgroundColor(HongColor.BLACK_5.hex)
+        .backgroundColor(HongColor.BLACK_05.hex)
         .radius(
             HongRadiusInfo(
                 all = 50

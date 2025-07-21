@@ -13,7 +13,7 @@
         android:id="@+id/v_dim"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/honglib_color_9929292d"
+        android:background="@color/honglib_color_29292d_60"
         android:alpha="0" />
 
     <!-- 슬라이딩 뷰 -->

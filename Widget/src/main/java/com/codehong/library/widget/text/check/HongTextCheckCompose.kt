@@ -23,7 +23,7 @@ import com.codehong.library.widget.text.HongTextCompose
 import com.codehong.library.widget.util.HongWidgetContainer
 
 @Composable
-fun HongCheckTextCompose(
+fun HongTextCheckCompose(
     option: HongCheckTextOption
 ) {
     HongWidgetContainer(option) {
@@ -95,5 +95,5 @@ fun PreviewHongCheckTextCompose() {
         .onCheck {}
         .applyOption()
 
-    HongCheckTextCompose(option)
+    HongTextCheckCompose(option)
 }

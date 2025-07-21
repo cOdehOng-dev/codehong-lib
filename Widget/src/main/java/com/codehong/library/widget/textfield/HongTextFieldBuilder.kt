@@ -34,11 +34,10 @@ class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTe
         )
     }
     fun placeholderTextOption(placeholderTextOption: HongTextOption) = apply {
-        this.option.placeholderTextOption = HongTextBuilder()
+        option.placeholderTextOption = HongTextBuilder()
             .copy(placeholderTextOption)
-            .text(this.option.placeholder ?: placeholderTextOption.text)
+            .text(placeholderTextOption.text ?: option.placeholder)
             .applyOption()
-
     }
 
     fun input(input: String?) = apply {
@@ -49,9 +48,9 @@ class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTe
             .applyOption()
     }
     fun inputTextOption(inputTextOption: HongTextOption) = apply {
-        this.option.inputTextOption = HongTextBuilder()
+        option.inputTextOption = HongTextBuilder()
             .copy(inputTextOption)
-            .text(this.option.input ?: inputTextOption.text)
+            .text(inputTextOption.text ?: option.input)
             .applyOption()
     }
 
@@ -101,6 +100,7 @@ class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTe
             .margin(inject.margin)
             .padding(inject.padding)
             .onClick(inject.click)
+            .backgroundColor(inject.backgroundColorHex)
             .placeholder(inject.placeholder)
             .placeholderTextOption(inject.placeholderTextOption)
             .input(inject.input)
@@ -114,7 +114,6 @@ class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTe
             .keyboardOption(inject.keyboardOption)
             .onTextChanged(inject.onTextChanged)
             .delayInputCallback(inject.delayInputCallback)
-            .backgroundColor(inject.backgroundColorHex)
             .radius(inject.radius)
             .border(inject.border)
     }

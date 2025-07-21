@@ -9,7 +9,7 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.check.HongCheckTextBuilder
-import com.codehong.library.widget.text.check.HongCheckTextCompose
+import com.codehong.library.widget.text.check.HongTextCheckCompose
 import com.codehong.library.widget.text.check.HongCheckTextOption
 import com.codehong.library.widget.text.check.HongCheckTextView
 
@@ -68,7 +68,7 @@ class SampleCheckTextActivity : BaseSampleMixActivity() {
     @Composable
     override fun InitCompose() {
         optionList.forEach { option ->
-            HongCheckTextCompose(option)
+            HongTextCheckCompose(option)
         }
     }
 }

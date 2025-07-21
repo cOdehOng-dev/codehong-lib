@@ -13,7 +13,7 @@ import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.check.HongCheckTextBuilder
 import com.codehong.library.widget.text.check.HongCheckTextOption
 
-class HongCheckTextPlayground(
+class HongTextCheckPlayground(
     playgroundActivity: PlaygroundActivity
 ) : BasePlayground<HongCheckTextOption> {
 
@@ -34,7 +34,7 @@ class HongCheckTextPlayground(
     }
     override val activity: PlaygroundActivity = playgroundActivity
     override var previewOption: HongCheckTextOption = DEFAULT_PREVIEW_OPTION
-    override val widgetType: HongWidgetType = HongWidgetType.CHECK_TEXT
+    override val widgetType: HongWidgetType = HongWidgetType.TEXT_CHECK
 
     fun preview() {
         executePreview()
@@ -139,6 +139,7 @@ class HongCheckTextPlayground(
             ) {
                 inject = HongCheckTextBuilder()
                     .copy(inject)
+                    .text(it.text)
                     .textOption(it)
                     .applyOption()
                 callback.invoke(inject)

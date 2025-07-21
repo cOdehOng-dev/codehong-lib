@@ -80,7 +80,7 @@ data class HongTextFieldOption(
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
 
 
-    override var backgroundColorHex: String = HongColor.BLACK_5.hex
+    override var backgroundColorHex: String = HongColor.BLACK_05.hex
 
     override var radius: HongRadiusInfo = HongRadiusInfo()
     override var shadow: HongShadowInfo = HongShadowInfo()

@@ -14,7 +14,7 @@ import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
 
 data class HongCheckTextOption(
-    override val type: HongWidgetType = HongWidgetType.CHECK_TEXT,
+    override val type: HongWidgetType = HongWidgetType.TEXT_CHECK,
 ) : HongWidgetCommonOption {
 
     companion object {

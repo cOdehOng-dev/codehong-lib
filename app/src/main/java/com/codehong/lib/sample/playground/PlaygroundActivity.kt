@@ -28,14 +28,14 @@ import com.codehong.lib.sample.label.toggle.HongLabelSwitchPlayground
 import com.codehong.lib.sample.pager.HongHorizontalPagerPlayground
 import com.codehong.lib.sample.tab.HongScrollTabPlayground
 import com.codehong.lib.sample.text.HongTextPlayground
-import com.codehong.lib.sample.text.check.HongCheckTextPlayground
+import com.codehong.lib.sample.text.check.HongTextCheckPlayground
+import com.codehong.lib.sample.text.unit.HongTextUnitPlayground
 import com.codehong.lib.sample.textfield.HongTextFieldPlayground
 import com.codehong.lib.sample.textfield.number.HongNumberTextFieldPlayground
 import com.codehong.lib.sample.textfield.timer.HongTimerTextFieldPlayground
 import com.codehong.lib.sample.textfield.underline.HongUnderlineTextFieldPlayground
 import com.codehong.lib.sample.toggleswitch.HongSwitchPlayground
 import com.codehong.library.widget.HongWidgetCommonOption
-
 import com.codehong.library.widget.badge.HongBadgeTextCompose
 import com.codehong.library.widget.badge.HongBadgeTextOption
 import com.codehong.library.widget.button.select.HongSelectButtonCompose
@@ -72,8 +72,10 @@ import com.codehong.library.widget.tab.HongScrollTabCompose
 import com.codehong.library.widget.tab.HongScrollTabOption
 import com.codehong.library.widget.text.HongTextCompose
 import com.codehong.library.widget.text.HongTextOption
-import com.codehong.library.widget.text.check.HongCheckTextCompose
 import com.codehong.library.widget.text.check.HongCheckTextOption
+import com.codehong.library.widget.text.check.HongTextCheckCompose
+import com.codehong.library.widget.text.unit.HongTextUnitCompose
+import com.codehong.library.widget.text.unit.HongTextUnitOption
 import com.codehong.library.widget.textfield.HongTextFieldCompose
 import com.codehong.library.widget.textfield.HongTextFieldOption
 import com.codehong.library.widget.textfield.number.HongNumberTextFieldCompose
@@ -185,7 +187,8 @@ class PlaygroundActivity : BaseActivity() {
 
         when (componentType) {
             HongWidgetType.TEXT -> HongTextPlayground(this).preview()
-            HongWidgetType.CHECK_TEXT -> HongCheckTextPlayground(this).preview()
+            HongWidgetType.TEXT_CHECK -> HongTextCheckPlayground(this).preview()
+            HongWidgetType.TEXT_UNIT -> HongTextUnitPlayground(this).preview()
             HongWidgetType.IMAGE -> HongImagePlayground(this).preview()
             HongWidgetType.CLOSE_HEADER -> HongCloseHeaderPlayground(this).preview()
             HongWidgetType.TEXT_FILED -> HongTextFieldPlayground(this).preview()
@@ -254,10 +257,17 @@ class PlaygroundActivity : BaseActivity() {
                     }
                 }
             }
-            HongWidgetType.CHECK_TEXT -> {
+            HongWidgetType.TEXT_CHECK -> {
                 binding.vComposePreview.setContent {
                     PreviewUI(isBorderOn) {
-                        HongCheckTextCompose(previewOption as HongCheckTextOption)
+                        HongTextCheckCompose(previewOption as HongCheckTextOption)
+                    }
+                }
+            }
+            HongWidgetType.TEXT_UNIT -> {
+                binding.vComposePreview.setContent {
+                    PreviewUI(isBorderOn) {
+                        HongTextUnitCompose(previewOption as HongTextUnitOption)
                     }
                 }
             }

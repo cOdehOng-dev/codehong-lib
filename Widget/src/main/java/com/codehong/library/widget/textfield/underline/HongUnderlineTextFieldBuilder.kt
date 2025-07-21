@@ -24,9 +24,9 @@ class HongUnderlineTextFieldBuilder : HongWidgetCommonBuilder<HongUnderlineTextF
         )
     }
     fun placeholderTextOption(placeholderTextOption: HongTextOption) = apply {
-        this.option.placeholderTextOption = HongTextBuilder()
+        option.placeholderTextOption = HongTextBuilder()
             .copy(placeholderTextOption)
-            .text(this.option.placeholder ?: placeholderTextOption.text)
+            .text(placeholderTextOption.text ?: option.placeholder)
             .applyOption()
     }
 
@@ -38,9 +38,9 @@ class HongUnderlineTextFieldBuilder : HongWidgetCommonBuilder<HongUnderlineTextF
             .applyOption()
     }
     fun inputTextOption(inputTextOption: HongTextOption) = apply {
-        this.option.inputTextOption = HongTextBuilder()
+        option.inputTextOption = HongTextBuilder()
             .copy(inputTextOption)
-            .text(this.option.input ?: inputTextOption.text)
+            .text(inputTextOption.text ?: option.input)
             .applyOption()
     }
 

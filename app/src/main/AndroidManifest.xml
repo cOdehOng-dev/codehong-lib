@@ -71,6 +71,7 @@
         <activity android:name=".playground.PlaygroundActivity"/>
         <activity android:name=".text.SampleTextActivity"/>
         <activity android:name=".text.check.SampleCheckTextActivity"/>
+        <activity android:name=".text.unit.SampleTextUnitActivity"/>
         <activity android:name=".captureshare.SampleCaptureShareActivity" />
         <activity android:name=".captureshare.SampleCaptureShareComposeActivity"/>
         <activity android:name=".dynamicisland.SampleDynamicIslandActivity"/>

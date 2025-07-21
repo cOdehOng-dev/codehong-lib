@@ -88,7 +88,7 @@ class HongTextPlayground(
                     .copy(inject)
                     .text(text)
                     .applyOption()
-                callback.invoke(inject)
+                callback.invoke(inject.also {Log.d("TAG", "test here result 222 = ${it.text}")})
             }
         }
 

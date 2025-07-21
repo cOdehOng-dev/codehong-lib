@@ -40,6 +40,6 @@ fun MarginTopOrBottom(value: Int) {
 
 @Composable
 @UiComposable
-fun MarginStartOrEnd(value: Int) {
+fun MarginLeftOrRight(value: Int) {
     Spacer(modifier = Modifier.width(value.dp))
 }

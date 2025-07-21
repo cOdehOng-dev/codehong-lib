@@ -25,9 +25,9 @@ class HongTimerTextFieldBuilder :
         )
     }
     fun placeholderTextOption(placeholderTextOption: HongTextOption) = apply {
-        this.option.placeholderTextOption = HongTextBuilder()
+        option.placeholderTextOption = HongTextBuilder()
             .copy(placeholderTextOption)
-            .text(this.option.placeholder ?: placeholderTextOption.text)
+            .text(placeholderTextOption.text ?: option.placeholder)
             .applyOption()
     }
 
@@ -39,12 +39,11 @@ class HongTimerTextFieldBuilder :
             .applyOption()
     }
     fun inputTextOption(inputTextOption: HongTextOption) = apply {
-        this.option.inputTextOption = HongTextBuilder()
+        option.inputTextOption = HongTextBuilder()
             .copy(inputTextOption)
-            .text(this.option.input ?: inputTextOption.text)
+            .text(inputTextOption.text ?: option.input)
             .applyOption()
     }
-
 
     fun clearImageOption(option: HongImageOption?) = apply {
         this.option.clearImageOption = option

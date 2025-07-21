@@ -163,7 +163,6 @@ class HongUnderlineTextFieldPlayground(
             ) {
                 inject = HongUnderlineTextFieldBuilder()
                     .copy(inject)
-                    .placeholder(null)
                     .placeholderTextOption(it)
                     .applyOption()
                 callback.invoke(inject)

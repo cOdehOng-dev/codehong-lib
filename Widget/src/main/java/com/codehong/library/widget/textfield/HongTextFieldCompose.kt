@@ -295,7 +295,7 @@ fun PreviewHongTextFieldCompose() {
                 bottom = 12f
             )
         )
-        .backgroundColor(HongColor.BLACK_5.hex)
+        .backgroundColor(HongColor.BLACK_05.hex)
         .radius(
             HongRadiusInfo(
                 all = 50

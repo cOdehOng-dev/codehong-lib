@@ -191,7 +191,6 @@ class HongTimerTextFieldPlayground(
             ) {
                 inject = HongTimerTextFieldBuilder()
                     .copy(inject)
-                    .placeholder(null)
                     .placeholderTextOption(it)
                     .applyOption()
                 callback.invoke(inject)

@@ -72,7 +72,7 @@ data class HongLabelSelectInputOption(
                     right = 10f
                 )
             )
-            .backgroundColor(HongColor.BLACK_5)
+            .backgroundColor(HongColor.BLACK_05)
             .inputTextOption(
                 HongTextBuilder()
                     .backgroundColor(HongColor.TRANSPARENT)
