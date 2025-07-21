@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.codehong.lib.sample.SampleConst
-import com.codehong.lib.sample.badge.HongTextBadgePlayground
+import com.codehong.lib.sample.text.badge.HongTextBadgePlayground
 import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.lib.sample.button.select.HongSelectButtonPlayground
 import com.codehong.lib.sample.button.text.HongTextButtonPlayground

@@ -1,4 +1,4 @@
-package com.codehong.lib.sample.badge
+package com.codehong.lib.sample.text.badge
 
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity

@@ -1,4 +1,4 @@
-package com.codehong.lib.sample.badge
+package com.codehong.lib.sample.text.badge
 
 import android.view.View
 import androidx.compose.runtime.Composable
