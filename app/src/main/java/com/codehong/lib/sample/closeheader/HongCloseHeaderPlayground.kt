@@ -113,36 +113,5 @@ class HongCloseHeaderPlayground(
                 .applyOption()
             executePreview()
         }
-//        HongSelectInputView(activity).setSelectView(
-//            HongSelectInputBuilder()
-//                .padding(
-//                    HongSpacingInfo(
-//                        top = Const.PLAYGROUND_TOP_PADDING_FLOAT
-//                    )
-//                )
-//                .label("typo 설정")
-//                .buttonText(initialTypography.styleName)
-//                .selectList(PlaygroundManager.typographyNameList)
-//                .selectPosition(PlaygroundManager.typographyList.indexOf(initialTypography))
-//                .useDirectCallback(true)
-//                .pickerCallback { selectTypography, i ->
-//                    val typography = PlaygroundManager.typographyList
-//                        .firstOrNull { it.styleName == selectTypography }
-//                        ?: HongTypo.BODY_16_B
-//                    previewOption = HongCloseHeaderBuilder()
-//                        .copy(previewOption)
-//                        .headerTitleTextOption(
-//                            HongTextBuilder()
-//                                .copy(previewOption.headerTitleTextOption)
-//                                .typography(typography)
-//                                .applyOption()
-//                        )
-//                        .applyOption()
-//                    executePreview()
-//                }
-//                .applyOption()
-//        ).also {
-//            activity.addOptionView(it)
-//        }
     }
 }

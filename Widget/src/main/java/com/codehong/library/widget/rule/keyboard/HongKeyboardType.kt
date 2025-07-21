@@ -3,7 +3,15 @@ package com.codehong.library.widget.rule.keyboard
 import androidx.compose.ui.text.input.KeyboardType
 
 enum class HongKeyboardType {
-    TEXT, NUMBER, PHONE, EMAIL, PASSWORD, NUMBER_PASSWORD, URL, DECIMAL, ASCIITEXT;
+    TEXT,
+    NUMBER,
+    PHONE, EMAIL,
+    PASSWORD,
+    NUMBER_PASSWORD,
+    URL,
+    DECIMAL,
+    ASCIITEXT
+    ;
     
     companion object {
         fun HongKeyboardType.toKeyboardType(): KeyboardType {

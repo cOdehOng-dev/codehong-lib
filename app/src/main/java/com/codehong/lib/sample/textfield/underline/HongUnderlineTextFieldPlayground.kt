@@ -214,5 +214,60 @@ class HongUnderlineTextFieldPlayground(
                 .applyOption()
             callback.invoke(inject)
         }
+
+
+        /** keyboardType */
+        val keyboardTypeList = HongKeyboardType.entries.map { it.name }
+        val initialKeyboardType = inject.keyboardOption.first
+        PlaygroundManager.addSelectOptionView(
+            activity,
+            initialText = initialKeyboardType.name,
+            label = "키보드 타입 설정",
+            description = "키보드 타입을 설정해요.",
+            useDirectCallback = true,
+            selectList = keyboardTypeList,
+            selectedPosition = keyboardTypeList.indexOf(initialKeyboardType.name)
+        ) { selectKeyboardType, _ ->
+            val keyboardType = HongKeyboardType.entries.firstOrNull {
+                it.name == selectKeyboardType
+            } ?: HongKeyboardType.TEXT
+            inject = HongUnderlineTextFieldBuilder()
+                .copy(inject)
+                .keyboardOption(
+                    Pair(
+                        keyboardType,
+                        inject.keyboardOption.second
+                    )
+                )
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        /** keyboardActionType */
+        val keyboardActionTypeList = HongKeyboardActionType.entries.map { it.name }
+        val initialKeyboardActionType = inject.keyboardOption.second
+        PlaygroundManager.addSelectOptionView(
+            activity,
+            initialText = initialKeyboardActionType.name,
+            label = "키보드 액션 타입 설정",
+            description = "키보드 액션 타입을 설정해요.",
+            useDirectCallback = true,
+            selectList = keyboardActionTypeList,
+            selectedPosition = keyboardActionTypeList.indexOf(initialKeyboardActionType.name)
+        ) { selectKeyboardActionType, _ ->
+            val keyboardActionType = HongKeyboardActionType.entries.firstOrNull {
+                it.name == selectKeyboardActionType
+            } ?: HongKeyboardActionType.DONE
+            inject = HongUnderlineTextFieldBuilder()
+                .copy(inject)
+                .keyboardOption(
+                    Pair(
+                        inject.keyboardOption.first,
+                        keyboardActionType
+                    )
+                )
+                .applyOption()
+            callback.invoke(inject)
+        }
     }
 }

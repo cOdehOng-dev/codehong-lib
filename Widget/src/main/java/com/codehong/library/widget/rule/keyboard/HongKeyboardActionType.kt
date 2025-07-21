@@ -5,7 +5,13 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.ui.text.input.ImeAction
 
 enum class HongKeyboardActionType {
-    GO, SEARCH, SEND, NEXT, DONE, PREVIOUS;
+    GO,
+    SEARCH,
+    SEND,
+    NEXT,
+    DONE,
+    PREVIOUS
+    ;
 
     companion object {
         fun HongKeyboardActionType.toKeyboardActions(
