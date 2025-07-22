@@ -3,6 +3,8 @@ package com.codehong.lib.sample.map
 import com.google.gson.annotations.SerializedName
 
 data class NaverDirectionResponse(
+    val code: Int,
+    val message: String,
     val route: Route
 )
 

@@ -50,12 +50,14 @@ class HongTextUnitView @JvmOverloads constructor(
             set(option.textOption)
         }
 
-        hongText {
-            set(
-                HongTextBuilder()
-                    .copy(option.unitTextOption)
-                    .applyOption()
-            )
+        if (option.useUnit) {
+            hongText {
+                set(
+                    HongTextBuilder()
+                        .copy(option.unitTextOption)
+                        .applyOption()
+                )
+            }
         }
 
         return this

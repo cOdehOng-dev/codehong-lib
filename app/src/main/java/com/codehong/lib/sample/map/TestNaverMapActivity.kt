@@ -6,8 +6,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.widget.util.HongToastUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapView
@@ -28,14 +29,18 @@ class TestNaverMapActivity : AppCompatActivity() {
     private lateinit var mapView: MapView
     private lateinit var map: NaverMap
     private lateinit var marker: Marker
+    private lateinit var startMarker: Marker
+    private lateinit var endMarker: Marker
 
-    private var pathCoords: List<LatLng> = emptyList()  // 네이버 경로 API에서 받은 경로 좌표 리스트
+    private var pathCoords: List<LatLng> = emptyList()
 
     private val sectionDistances = mutableListOf<Float>()
     private val visited = mutableSetOf<Int>()
     private var totalDistance = 0f
     private var movedDistance = 0f
-    private val speedPerSecond = 5f // 5m/s
+    private var lastNotifiedDistance = 0f
+    private val speedPerSecond = 5f
+    private val alarmDistance = 1000f
 
     private val handler = Handler(Looper.getMainLooper())
 
@@ -50,7 +55,6 @@ class TestNaverMapActivity : AppCompatActivity() {
         }
     }
 
-    // 지도 조작 시 마커 따라 카메라 이동 멈추고, 5초 후 다시 따라오기
     private var followMarker = true
     private val followRunnable = Runnable {
         followMarker = true
@@ -65,12 +69,9 @@ class TestNaverMapActivity : AppCompatActivity() {
         mapView.getMapAsync { naverMap ->
             map = naverMap
 
-            // 지도 조작 이벤트 리스너 등록
             map.addOnCameraChangeListener { _, isCameraTrackingMode ->
-                // 카메라가 자동 이동 중이면 무시
                 if (isCameraTrackingMode) return@addOnCameraChangeListener
 
-                // 사용자가 조작 시작 시 따라오기 끔
                 if (followMarker) {
                     followMarker = false
                     handler.removeCallbacks(followRunnable)
@@ -98,11 +99,10 @@ class TestNaverMapActivity : AppCompatActivity() {
 
         val service = retrofit.create(NaverDirectionService::class.java)
 
-        // TODO: 발급받은 API 키로 바꿔주세요
         val apiKeyId = "7q99m8ujdt"
         val apiKey = "Pb7hGj6pa8qesXelcVqJ1KUXdVPDkMN1JIo5VgZj"
-        val start = "126.82551646411272,37.55969195722661" // 경도,위도
-        val goal = "126.92416255521461,37.52191399818966"    // 경도,위도
+        val start = "126.82551646411272,37.55969195722661"
+        val goal = "126.92416255521461,37.52191399818966"
 
         service.getDrivingRoute(apiKeyId, apiKey, start, goal, null, option = "traavoidcaronly")
             .enqueue(object : Callback<NaverDirectionResponse> {
@@ -115,14 +115,15 @@ class TestNaverMapActivity : AppCompatActivity() {
                             ?.map { LatLng(it[1], it[0]) } ?: emptyList()
 
                         if (pathCoords.isNotEmpty()) {
+                            // 경로 선
                             PathOverlay().apply {
                                 coords = pathCoords
-                                color = Color.BLUE
-                                width = 10
+                                color = Color.GREEN
+                                width = dpToPx(3)
                                 map = this@TestNaverMapActivity.map
                             }
 
-                            // 마커 초기화
+                            // 움직이는 마커
                             marker = Marker().apply {
                                 position = pathCoords.first()
                                 icon = MarkerIcons.BLACK
@@ -131,11 +132,30 @@ class TestNaverMapActivity : AppCompatActivity() {
                                 map = this@TestNaverMapActivity.map
                             }
 
-                            // 카메라 초기 위치 설정
+                            // 출발지 마커
+                            startMarker = Marker().apply {
+                                position = pathCoords.first()
+                                icon = MarkerIcons.RED
+                                width = 50
+                                height = 70
+                                captionText = "출발지"
+                                map = this@TestNaverMapActivity.map
+                            }
+
+                            // 도착지 마커
+                            endMarker = Marker().apply {
+                                position = pathCoords.last()
+                                icon = MarkerIcons.BLUE
+                                width = 50
+                                height = 70
+                                captionText = "도착지"
+                                map = this@TestNaverMapActivity.map
+                            }
+
+                            // 초기 카메라 위치
                             map.moveCamera(CameraUpdate.scrollTo(pathCoords.first()))
                             map.moveCamera(CameraUpdate.zoomTo(16.5))
 
-                            // API 경로 기준 거리 계산 후 시뮬레이션 시작
                             initRouteWithPathCoords()
                             startSimulation()
                         }
@@ -155,6 +175,7 @@ class TestNaverMapActivity : AppCompatActivity() {
         totalDistance = 0f
         visited.clear()
         movedDistance = 0f
+        lastNotifiedDistance = 0f
 
         for (i in 0 until pathCoords.size - 1) {
             val result = FloatArray(1)
@@ -171,11 +192,18 @@ class TestNaverMapActivity : AppCompatActivity() {
     private fun startSimulation() {
         handler.removeCallbacks(moveRunnable)
         movedDistance = 0f
+        lastNotifiedDistance = 0f
         handler.post(moveRunnable)
     }
 
     private fun moveMarkerAlongRoute(moved: Float) {
         var accumulated = 0f
+
+        // ✅ 거리 알림
+        if (moved - lastNotifiedDistance >= alarmDistance) {
+            lastNotifiedDistance += alarmDistance
+            HongToastUtil.showToast(this, "🚗 이동 거리: ${lastNotifiedDistance.toInt()}m")
+        }
 
         for (i in 0 until sectionDistances.size) {
             val section = sectionDistances[i]
@@ -221,10 +249,9 @@ class TestNaverMapActivity : AppCompatActivity() {
             else -> "알 수 없음"
         }
         Log.d("Route", "📍도달: $name")
-        Toast.makeText(this, "📍도달: $name", Toast.LENGTH_SHORT).show()
+        HongToastUtil.showToast(this, "📍도달: $name")
     }
 
-    // 생명주기 콜백들
     override fun onStart() {
         super.onStart()
         mapView.onStart()

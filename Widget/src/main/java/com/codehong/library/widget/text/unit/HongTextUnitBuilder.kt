@@ -1,5 +1,6 @@
 package com.codehong.library.widget.text.unit
 
+import android.util.Log
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
@@ -38,6 +39,10 @@ class HongTextUnitBuilder : HongWidgetCommonBuilder<HongTextUnitOption, HongText
             .applyOption()
     }
 
+    fun useUnit(use: Boolean) = apply {
+        option.useUnit = use
+    }
+
     fun copy(inject: HongTextUnitOption?): HongTextUnitBuilder {
         if (inject == null) return HongTextUnitBuilder()
 
@@ -49,7 +54,8 @@ class HongTextUnitBuilder : HongWidgetCommonBuilder<HongTextUnitOption, HongText
             .onClick(inject.click)
             .text(inject.text)
             .textOption(inject.textOption)
-            .unitText(inject.unitText)
+            .unitText(inject.unitText.also { Log.e("TAG", "test here copy unit = ${inject.unitText}") })
             .backgroundColor(inject.backgroundColorHex)
+            .useUnit(inject.useUnit)
     }
 }

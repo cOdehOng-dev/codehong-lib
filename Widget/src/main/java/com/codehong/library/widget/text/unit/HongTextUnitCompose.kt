@@ -23,7 +23,10 @@ fun HongTextUnitCompose(
             verticalAlignment = Alignment.CenterVertically
         ) {
             HongTextCompose(option.textOption)
-            HongTextCompose(option.unitTextOption)
+
+            if (option.useUnit) {
+                HongTextCompose(option.unitTextOption)
+            }
         }
     }
 }
@@ -42,6 +45,7 @@ fun PreviewHongTextUnitCompose() {
         )
         .text("1000")
         .unitText("장")
+        .useUnit(true)
         .useNumberDecimal(true)
         .applyOption()
     HongTextUnitCompose(option)

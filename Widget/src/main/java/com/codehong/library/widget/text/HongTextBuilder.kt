@@ -114,7 +114,8 @@ class HongTextBuilder : HongWidgetCommonBuilder<HongTextOption, HongTextBuilder>
         option.useNumberDecimal = useDecimal
     }
 
-    fun copy(inject: HongTextOption): HongTextBuilder {
+    fun copy(inject: HongTextOption?): HongTextBuilder {
+        if (inject == null) return HongTextBuilder()
         return HongTextBuilder()
             .width(inject.width)
             .height(inject.height)

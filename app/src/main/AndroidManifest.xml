@@ -76,6 +76,7 @@
         <activity android:name=".text.SampleTextActivity"/>
         <activity android:name=".text.check.SampleCheckTextActivity"/>
         <activity android:name=".text.unit.SampleTextUnitActivity"/>
+        <activity android:name=".text.updown.SampleTextUpDownActivity"/>
         <activity android:name=".captureshare.SampleCaptureShareActivity" />
         <activity android:name=".captureshare.SampleCaptureShareComposeActivity"/>
         <activity android:name=".dynamicisland.SampleDynamicIslandActivity"/>
@@ -92,6 +93,7 @@
         <activity android:name=".label.checkbox.SampleLabelCheckboxActivity"/>
 
         <activity android:name=".map.TestNaverMapActivity"/>
+        <activity android:name=".map.compose.TestNaverMapComposeActivity"/>
     </application>
 
 </manifest>

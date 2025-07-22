@@ -13,6 +13,6 @@ interface NaverDirectionService {
         @Query("start") start: String,    // "경도,위도"
         @Query("goal") goal: String,      // "경도,위도"
         @Query("waypoints") waypoints: String? = null, // "경도,위도|경도,위도"
-        @Query("option") option: String? = null
+        @Query("option") option: String = "traavoidcaronly"
     ): Call<NaverDirectionResponse>
 }

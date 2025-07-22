@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.andoridx.compose.ui.graphics)
     implementation(libs.threetenapb)
     implementation(libs.naver.map.sdk)
+    implementation(libs.naver.map.compose)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
