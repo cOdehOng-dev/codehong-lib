@@ -24,6 +24,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
+        <meta-data
+            android:name="com.naver.maps.map.NCP_KEY_ID"
+            android:value="7q99m8ujdt" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -86,6 +90,8 @@
         <activity android:name=".label.select.SampleLabelSelectInputActivity"/>
         <activity android:name=".label.toggle.SampleLabelSwitchActivity"/>
         <activity android:name=".label.checkbox.SampleLabelCheckboxActivity"/>
+
+        <activity android:name=".map.TestNaverMapActivity"/>
     </application>
 
 </manifest>

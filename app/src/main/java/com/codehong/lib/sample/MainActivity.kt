@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.SampleType.Companion.toType
-import com.codehong.lib.sample.text.badge.SampleTextBadgeActivity
 import com.codehong.lib.sample.button.select.SampleSelectButtonActivity
 import com.codehong.lib.sample.button.text.SampleTextButtonActivity
 import com.codehong.lib.sample.calendar.SampleCalendarActivity
@@ -39,12 +38,14 @@ import com.codehong.lib.sample.label.checkbox.SampleLabelCheckboxActivity
 import com.codehong.lib.sample.label.input.SampleLabelInputActivity
 import com.codehong.lib.sample.label.select.SampleLabelSelectInputActivity
 import com.codehong.lib.sample.label.toggle.SampleLabelSwitchActivity
+import com.codehong.lib.sample.map.TestNaverMapActivity
 import com.codehong.lib.sample.pager.SampleHorizontalPagerActivity
 import com.codehong.lib.sample.picker.OptionPickerActivity
 import com.codehong.lib.sample.player.SampleVideoPlayerActivity
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.tab.SampleScrollTabActivity
 import com.codehong.lib.sample.text.SampleTextActivity
+import com.codehong.lib.sample.text.badge.SampleTextBadgeActivity
 import com.codehong.lib.sample.text.check.SampleCheckTextActivity
 import com.codehong.lib.sample.text.unit.SampleTextUnitActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
@@ -260,6 +261,11 @@ fun SampleTheme(
                                 )
                                 .onClick {
                                     when (item.widgetType) {
+                                        HongWidgetType.MAP -> {
+                                            Intent(activity, TestNaverMapActivity::class.java).apply {
+                                                activity.startActivity(this)
+                                            }
+                                        }
                                         HongWidgetType.TEXT -> {
                                             Intent(activity, SampleTextActivity::class.java).apply {
                                                 putExtra(SampleConst.WIDGET_TYPE, HongWidgetType.TEXT.value)
