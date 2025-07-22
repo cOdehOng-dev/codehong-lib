@@ -48,6 +48,11 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.andoridx.compose.ui.graphics)
     implementation(libs.threetenapb)
+    implementation(libs.naver.map.sdk)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.okhttp.logging.interceptor)
 
 
     debugImplementation(libs.androidx.compose.tooling)
