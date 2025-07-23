@@ -38,7 +38,6 @@ import com.codehong.lib.sample.label.checkbox.SampleLabelCheckboxActivity
 import com.codehong.lib.sample.label.input.SampleLabelInputActivity
 import com.codehong.lib.sample.label.select.SampleLabelSelectInputActivity
 import com.codehong.lib.sample.label.toggle.SampleLabelSwitchActivity
-import com.codehong.lib.sample.map.compose.TestNaverMapComposeActivity
 import com.codehong.lib.sample.pager.SampleHorizontalPagerActivity
 import com.codehong.lib.sample.picker.OptionPickerActivity
 import com.codehong.lib.sample.player.SampleVideoPlayerActivity
@@ -262,14 +261,6 @@ fun SampleTheme(
                                 )
                                 .onClick {
                                     when (item.widgetType) {
-                                        HongWidgetType.MAP -> {
-                                            Intent(activity, TestNaverMapComposeActivity::class.java).apply {
-                                                activity.startActivity(this)
-                                            }
-//                                            Intent(activity, TestNaverMapActivity::class.java).apply {
-//                                                activity.startActivity(this)
-//                                            }
-                                        }
                                         HongWidgetType.TEXT -> {
                                             Intent(activity, SampleTextActivity::class.java).apply {
                                                 putExtra(SampleConst.WIDGET_TYPE, HongWidgetType.TEXT.value)

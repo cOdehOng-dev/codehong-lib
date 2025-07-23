@@ -36,13 +36,10 @@ media3 = "1.7.1"
 
 google-accompanist-pager = "0.28.0"
 google-accompanist-pager-indicators = "0.28.0"
-google-accompanist-drawablepainter = "0.31.1-alpha"
+google-accompanist-drawablepainter = "0.32.0"
 threetenapb = "1.3.0"
 jetbrainsKotlinJvm = "1.9.0"
 timber = "5.0.1"
-
-naver-map-sdk = "3.22.0"
-naver-map-compose = "1.8.2"
 
 retrofit = "2.9.0"
 
@@ -139,10 +136,6 @@ threetenapb = { group = "com.jakewharton.threetenabp", name = "threetenabp", ver
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 android-maven-gradle-plugin = { module = "com.github.dcendents:android-maven-gradle-plugin", version.ref = "android-maven-plugin" }
-
-
-naver-map-sdk = { group = "com.naver.maps", name = "map-sdk", version.ref = "naver-map-sdk" }
-naver-map-compose = { group = "io.github.fornewid", name = "naver-map-compose", version.ref = "naver-map-compose" }
 
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }

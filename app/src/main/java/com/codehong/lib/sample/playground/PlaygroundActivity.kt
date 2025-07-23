@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.codehong.lib.sample.SampleConst
-import com.codehong.lib.sample.text.badge.HongTextBadgePlayground
 import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.lib.sample.button.select.HongSelectButtonPlayground
 import com.codehong.lib.sample.button.text.HongTextButtonPlayground
@@ -28,16 +27,16 @@ import com.codehong.lib.sample.label.toggle.HongLabelSwitchPlayground
 import com.codehong.lib.sample.pager.HongHorizontalPagerPlayground
 import com.codehong.lib.sample.tab.HongScrollTabPlayground
 import com.codehong.lib.sample.text.HongTextPlayground
+import com.codehong.lib.sample.text.badge.HongTextBadgePlayground
 import com.codehong.lib.sample.text.check.HongTextCheckPlayground
 import com.codehong.lib.sample.text.unit.HongTextUnitPlayground
+import com.codehong.lib.sample.text.updown.HongTextUpDownPlayground
 import com.codehong.lib.sample.textfield.HongTextFieldPlayground
 import com.codehong.lib.sample.textfield.number.HongNumberTextFieldPlayground
 import com.codehong.lib.sample.textfield.timer.HongTimerTextFieldPlayground
 import com.codehong.lib.sample.textfield.underline.HongUnderlineTextFieldPlayground
 import com.codehong.lib.sample.toggleswitch.HongSwitchPlayground
 import com.codehong.library.widget.HongWidgetCommonOption
-import com.codehong.library.widget.text.badge.HongTextBadgeCompose
-import com.codehong.library.widget.text.badge.HongTextBadgeOption
 import com.codehong.library.widget.button.select.HongSelectButtonCompose
 import com.codehong.library.widget.button.select.HongSelectButtonOption
 import com.codehong.library.widget.button.text.HongTextButtonCompose
@@ -72,10 +71,14 @@ import com.codehong.library.widget.tab.HongScrollTabCompose
 import com.codehong.library.widget.tab.HongScrollTabOption
 import com.codehong.library.widget.text.HongTextCompose
 import com.codehong.library.widget.text.HongTextOption
+import com.codehong.library.widget.text.badge.HongTextBadgeCompose
+import com.codehong.library.widget.text.badge.HongTextBadgeOption
 import com.codehong.library.widget.text.check.HongCheckTextOption
 import com.codehong.library.widget.text.check.HongTextCheckCompose
 import com.codehong.library.widget.text.unit.HongTextUnitCompose
 import com.codehong.library.widget.text.unit.HongTextUnitOption
+import com.codehong.library.widget.text.updown.HongTextUpDownCompose
+import com.codehong.library.widget.text.updown.HongTextUpDownOption
 import com.codehong.library.widget.textfield.HongTextFieldCompose
 import com.codehong.library.widget.textfield.HongTextFieldOption
 import com.codehong.library.widget.textfield.number.HongNumberTextFieldCompose
@@ -189,6 +192,7 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.TEXT -> HongTextPlayground(this).preview()
             HongWidgetType.TEXT_CHECK -> HongTextCheckPlayground(this).preview()
             HongWidgetType.TEXT_UNIT -> HongTextUnitPlayground(this).preview()
+            HongWidgetType.TEXT_UP_DOWN -> HongTextUpDownPlayground(this).preview()
             HongWidgetType.IMAGE -> HongImagePlayground(this).preview()
             HongWidgetType.CLOSE_HEADER -> HongCloseHeaderPlayground(this).preview()
             HongWidgetType.TEXT_FILED -> HongTextFieldPlayground(this).preview()
@@ -268,6 +272,13 @@ class PlaygroundActivity : BaseActivity() {
                 binding.vComposePreview.setContent {
                     PreviewUI(isBorderOn) {
                         HongTextUnitCompose(previewOption as HongTextUnitOption)
+                    }
+                }
+            }
+            HongWidgetType.TEXT_UP_DOWN -> {
+                binding.vComposePreview.setContent {
+                    PreviewUI(isBorderOn) {
+                        HongTextUpDownCompose(previewOption as HongTextUpDownOption)
                     }
                 }
             }

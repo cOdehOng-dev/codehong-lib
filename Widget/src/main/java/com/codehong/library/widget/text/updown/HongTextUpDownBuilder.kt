@@ -37,16 +37,31 @@ class HongTextUpDownBuilder : HongWidgetCommonBuilder<HongTextUpDownOption, Hong
         option.useDecimal = useDecimal
     }
 
-    fun onResult(onResult: (Int) -> Unit) = apply {
-        option.onResult = onResult
-    }
-
     fun buttonSize(size: Int) = apply {
         option.buttonSize = size
     }
 
-    fun spaceBetweenButtonAndDisplay(gap: Int) = apply {
+    fun spaceButtonAndDisplay(gap: Int) = apply {
         option.spaceButtonAndDisplay = gap
+    }
+
+    fun broderColor(color: HongColor) = apply {
+        option.borderColorHex = color.hex
+    }
+    fun broderColor(colorHex: String) = apply {
+        option.borderColorHex = colorHex
+    }
+
+    fun iconColor(color: HongColor) = apply {
+        option.iconColorHex = color.hex
+    }
+
+    fun iconColor(colorHex: String) = apply {
+        option.iconColorHex = colorHex
+    }
+
+    fun onResult(onResult: (Int) -> Unit) = apply {
+        option.onResult = onResult
     }
 
     fun copy(inject: HongTextUpDownOption?): HongTextUpDownBuilder {
@@ -67,6 +82,8 @@ class HongTextUpDownBuilder : HongWidgetCommonBuilder<HongTextUpDownOption, Hong
             .displayColor(inject.displayColorHex)
             .useDecimal(inject.useDecimal)
             .buttonSize(inject.buttonSize)
-            .spaceBetweenButtonAndDisplay(inject.spaceButtonAndDisplay)
+            .spaceButtonAndDisplay(inject.spaceButtonAndDisplay)
+            .broderColor(inject.borderColorHex)
+            .iconColor(inject.iconColorHex)
     }
 }

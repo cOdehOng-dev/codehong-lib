@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import com.codehong.lib.sample.base.BaseSampleMixActivity
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.text.updown.HongTextUpDownBuilder
+import com.codehong.library.widget.text.updown.HongTextUpDownCompose
 import com.codehong.library.widget.text.updown.HongTextUpDownView
 
 class SampleTextUpDownActivity : BaseSampleMixActivity() {
@@ -18,7 +19,7 @@ class SampleTextUpDownActivity : BaseSampleMixActivity() {
         )
         .amount(7)
         .unit("장")
-        .spaceBetweenButtonAndDisplay(8)
+        .spaceButtonAndDisplay(8)
         .gap(1)
         .applyOption()
 
@@ -36,6 +37,8 @@ class SampleTextUpDownActivity : BaseSampleMixActivity() {
 
     @Composable
     override fun InitCompose() {
-
+        optionList.forEach {
+            HongTextUpDownCompose(it)
+        }
     }
 }

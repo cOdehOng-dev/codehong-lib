@@ -5,7 +5,6 @@ enum class HongWidgetType(
     val value: String,
     val allowPlayground: Boolean = false,
 ) {
-    MAP(99999, "Map", false),
     TEXT(1, "Text", true),
     TEXT_CHECK(26, "TextCheck", true),
     TEXT_UP_DOWN(27, "TextUpDown", true),

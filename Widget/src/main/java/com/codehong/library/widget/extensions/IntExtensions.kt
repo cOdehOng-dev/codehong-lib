@@ -8,3 +8,12 @@ fun Int?.toFigureString(): String {
         ""
     }
 }
+
+fun Int?.toFigureStringCoverZero(): String {
+    if (this == null) return "0"
+    return if (this > 0) {
+        this.toString()
+    } else {
+        "0"
+    }
+}

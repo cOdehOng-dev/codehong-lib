@@ -92,8 +92,6 @@
         <activity android:name=".label.toggle.SampleLabelSwitchActivity"/>
         <activity android:name=".label.checkbox.SampleLabelCheckboxActivity"/>
 
-        <activity android:name=".map.TestNaverMapActivity"/>
-        <activity android:name=".map.compose.TestNaverMapComposeActivity"/>
     </application>
 
 </manifest>

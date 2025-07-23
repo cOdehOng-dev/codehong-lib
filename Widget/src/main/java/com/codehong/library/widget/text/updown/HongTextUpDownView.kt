@@ -10,7 +10,7 @@ import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
-import com.codehong.library.widget.extensions.toFigureString
+import com.codehong.library.widget.extensions.toFigureStringCoverZero
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.language.frameLayout
 import com.codehong.library.widget.language.hongImage
@@ -18,7 +18,6 @@ import com.codehong.library.widget.language.hongTextUnit
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongScaleType
-import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.unit.HongTextUnitBuilder
 import com.codehong.library.widget.text.unit.HongTextUnitOption
@@ -73,7 +72,7 @@ class HongTextUpDownView @JvmOverloads constructor(
                     .border(
                         HongBorderInfo(
                             width = 1,
-                            color = HongColor.GRAY_30.hex
+                            color = option.borderColorHex
                         )
                     )
                     .drawableResId(R.drawable.honglib_ic_minus)
@@ -88,7 +87,7 @@ class HongTextUpDownView @JvmOverloads constructor(
                     }
                     .useShapeCircle(true)
                     .scaleType(HongScaleType.CENTER_CROP)
-                    .imageColor(HongColor.GRAY_50)
+                    .imageColor(option.iconColorHex)
                     .applyOption()
             )
         }
@@ -114,7 +113,7 @@ class HongTextUpDownView @JvmOverloads constructor(
                     .border(
                         HongBorderInfo(
                             width = 1,
-                            color = HongColor.GRAY_30.hex
+                            color = option.borderColorHex
                         )
                     )
                     .drawableResId(R.drawable.honglib_ic_plus)
@@ -129,7 +128,7 @@ class HongTextUpDownView @JvmOverloads constructor(
                     }
                     .useShapeCircle(true)
                     .scaleType(HongScaleType.CENTER_CROP)
-                    .imageColor(HongColor.GRAY_50)
+                    .imageColor(option.iconColorHex)
                     .applyOption()
             )
         }
@@ -145,7 +144,7 @@ class HongTextUpDownView @JvmOverloads constructor(
                 HongTextBuilder()
                     .width(HongLayoutParam.WRAP_CONTENT.value)
                     .height(HongLayoutParam.WRAP_CONTENT.value)
-                    .text(amount.toFigureString())
+                    .text(amount.toFigureStringCoverZero())
                     .typography(option.displayTypo)
                     .color(option.displayColorHex)
                     .applyOption()

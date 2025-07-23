@@ -926,7 +926,6 @@ object PlaygroundManager {
         }
     }
 
-
     fun selectInputOptionView(
         activity: PlaygroundActivity,
         initialButtonText: String?,
@@ -962,6 +961,31 @@ object PlaygroundManager {
                 .pickerCallback(selectOptionCallback)
                 .applyOption()
         )
+    }
+
+    fun addSelectTypoOptionView(
+        activity: PlaygroundActivity,
+        typo: HongTypo,
+        label: String,
+        description: String = "",
+        callback: (HongTypo) -> Unit
+    ) {
+        val initialTypography = typographyList.firstOrNull {
+            it == typo
+        } ?: HongTypo.BODY_14
+        addSelectOptionView(
+            activity = activity,
+            initialText = initialTypography.styleName,
+            selectList = typographyNameList,
+            selectedPosition = typographyList.indexOf(initialTypography),
+            label = label,
+            description = description,
+            useDirectCallback = true,
+        ) { selectTypography, index ->
+            val typography = typographyList.firstOrNull { it.styleName == selectTypography }
+                    ?: HongTypo.BODY_16_B
+            callback(typography)
+        }
     }
 
 
