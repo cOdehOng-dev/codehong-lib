@@ -3,9 +3,9 @@ package com.codehong.library.widget.text.badge
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongShadowInfo
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.text.HongTextOption
+import com.codehong.library.widget.rule.typo.HongTypo
 
 class HongTextBadgeBuilder : HongWidgetCommonBuilder<HongTextBadgeOption, HongTextBadgeBuilder> {
 
@@ -26,16 +26,17 @@ class HongTextBadgeBuilder : HongWidgetCommonBuilder<HongTextBadgeOption, HongTe
 
     fun text(text: String?) = apply {
         option.text = text
-        option.textOption = HongTextBuilder()
-            .copy(option.textOption)
-            .text(text ?: option.textOption.text)
-            .applyOption()
     }
-    fun textOption(textOption: HongTextOption) = apply {
-        option.textOption = HongTextBuilder()
-            .copy(textOption)
-            .text(textOption.text ?: option.text)
-            .applyOption()
+
+    fun textColor(textColor: HongColor) = apply {
+        option.textColorHex = textColor.hex
+    }
+    fun textColor(textColorHex: String?) = apply {
+        option.textColorHex = textColorHex
+    }
+
+    fun textTypo(typo: HongTypo) = apply {
+        option.textTypography = typo
     }
 
     fun copy(inject: HongTextBadgeOption): HongTextBadgeBuilder {
@@ -50,6 +51,7 @@ class HongTextBadgeBuilder : HongWidgetCommonBuilder<HongTextBadgeOption, HongTe
             .radius(inject.radius)
             .shadow(inject.shadow)
             .text(inject.text)
-            .textOption(inject.textOption)
+            .textColor(inject.textColorHex)
+            .textTypo(inject.textTypography)
     }
 }

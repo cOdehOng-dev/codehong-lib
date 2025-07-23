@@ -15,12 +15,14 @@ import com.codehong.library.widget.util.HongWidgetContainer
 fun HongTextBadgeCompose(
     option: HongTextBadgeOption
 ) {
-    if (option.textOption.text.isNullOrEmpty()) return
-
     HongWidgetContainer(option) {
         HongTextCompose(
             HongTextBuilder()
-                .copy(option.textOption)
+                .width(option.width)
+                .height(option.height)
+                .text(option.text)
+                .color(option.textColorHex)
+                .typography(option.textTypography)
                 .maxLines(1)
                 .applyOption()
         )
@@ -39,19 +41,9 @@ fun PreviewHongTextBadgeCompose() {
                 right = 4f
             )
         )
-        .margin(
-            HongSpacingInfo(
-                bottom = 10f,
-                left = 20f
-            )
-        )
-        .textOption(
-            HongTextBuilder()
-                .text("모두 파랑파랑파랑해")
-                .color("#8e43e7")
-                .typography(HongTypo.CONTENTS_12_B)
-                .applyOption()
-        )
+        .text("모두 파랑파랑파랑해")
+        .textColor(HongColor.PURPLE_100.hex)
+        .textTypo(HongTypo.CONTENTS_12_B)
         .backgroundColor(HongColor.WHITE_100.hex)
         .border(
             HongBorderInfo(

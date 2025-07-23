@@ -43,7 +43,11 @@ class HongTextBadgeView @JvmOverloads constructor(
         hongText {
             set(
                 HongTextBuilder()
-                    .copy(option.textOption)
+                    .width(option.width)
+                    .height(option.height)
+                    .text(option.text)
+                    .color(option.textColorHex)
+                    .typography(option.textTypography)
                     .maxLines(1)
                     .applyOption()
             )

@@ -120,6 +120,20 @@ enum class HongColor(val colorName: String, @ColorRes val colorResId: Int, val h
     YELLOW_10("yellow_10", R.color.honglib_color_fdc400_10, "#1AFDC400"),
     YELLOW_05("yellow_05", R.color.honglib_color_fdc400_05, "#0DFDC400"),
 
+    PURPLE_100("purple_100", R.color.honglib_color_8e43e7, "#FF8E43E7"),
+    PURPLE_90("purple_90", R.color.honglib_color_8e43e7_90, "#E68E43E7"),
+    PURPLE_80("purple_80", R.color.honglib_color_8e43e7_80, "#CC8E43E7"),
+    PURPLE_70("purple_70", R.color.honglib_color_8e43e7_70, "#B38E43E7"),
+    PURPLE_60("purple_60", R.color.honglib_color_8e43e7_60, "#998E43E7"),
+    PURPLE_50("purple_50", R.color.honglib_color_8e43e7_50, "#808E43E7"),
+    PURPLE_40("purple_40", R.color.honglib_color_8e43e7_40, "#668E43E7"),
+    PURPLE_30("purple_30", R.color.honglib_color_8e43e7_30, "#4D8E43E7"),
+    PURPLE_25("purple_25", R.color.honglib_color_8e43e7_25, "#408E43E7"),
+    PURPLE_20("purple_20", R.color.honglib_color_8e43e7_20, "#338E43E7"),
+    PURPLE_15("purple_15", R.color.honglib_color_8e43e7_15, "#268E43E7"),
+    PURPLE_10("purple_10", R.color.honglib_color_8e43e7_10, "#1A8E43E7"),
+    PURPLE_05("purple_05", R.color.honglib_color_8e43e7_05, "#0D8E43E7"),
+
 
     LINE("line", R.color.honglib_color_eaeaea, "#ffeaeaea"),
 

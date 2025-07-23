@@ -3,14 +3,12 @@ package com.codehong.lib.sample.text.badge
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
-import com.codehong.lib.sample.text.HongTextPlayground
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.badge.HongTextBadgeBuilder
 import com.codehong.library.widget.text.badge.HongTextBadgeOption
 
@@ -28,18 +26,14 @@ class HongTextBadgePlayground(
                     right = 4f
                 )
             )
-            .textOption(
-                HongTextBuilder()
-                    .text("모두 보라보라해해에에에")
-                    .color("#8e43e7")
-                    .typography(HongTypo.CONTENTS_12_B)
-                    .applyOption()
-            )
+            .text("모두 보라보라해해에에에")
+            .textColor(HongColor.PURPLE_100)
+            .textTypo(HongTypo.CONTENTS_12_B)
             .backgroundColor(HongColor.WHITE_100.hex)
             .border(
                 HongBorderInfo(
                     width = 1,
-                    color = "#dfb4fc",
+                    color = HongColor.PURPLE_30.hex,
                 )
             )
             .radius(
@@ -52,7 +46,6 @@ class HongTextBadgePlayground(
             )
             .applyOption()
     }
-
 
     override val activity: PlaygroundActivity = playgroundActivity
     override var previewOption: HongTextBadgeOption = DEFAULT_PREVIEW_OPTION
@@ -180,24 +173,42 @@ class HongTextBadgePlayground(
             callback.invoke(inject)
         }
 
-        // region 버튼 텍스트
-        HongTextPlayground(activity)
-            .injectPreview(
-                injectOption = inject.textOption,
-                includeCommonOption = true,
-                label = "텍스트 옵션",
-                labelTypo = if (label.isNotEmpty()) HongTypo.BODY_15_B else null,
-                useUnderline = false,
-                useOverflow = false,
-                useCancelLine = false,
-                useLineBreak = false,
-                useMaxLine = false
-            ) {
-                inject = HongTextBadgeBuilder()
-                    .copy(inject)
-                    .textOption(it)
-                    .applyOption()
-                callback.invoke(inject)
-            }
+        /** text */
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity,
+            input = inject.text,
+            label = "텍스트",
+        ) {
+            inject = HongTextBadgeBuilder()
+                .copy(inject)
+                .text(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        /** text color */
+        PlaygroundManager.addColorOptionPreview(
+            activity,
+            colorHex = inject.textColorHex,
+            label = "텍스트 ",
+        ) {
+            inject = HongTextBadgeBuilder()
+                .copy(inject)
+                .textColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+        /** typo */
+        PlaygroundManager.addSelectTypoOptionView(
+            activity,
+            typo = inject.textTypography,
+            label = "텍스트 typo 설정"
+        ) {
+            inject = HongTextBadgeBuilder()
+                .copy(inject)
+                .textTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
     }
 }

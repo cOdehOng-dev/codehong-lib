@@ -7,9 +7,7 @@ import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.badge.HongTextBadgeBuilder
 import com.codehong.library.widget.text.badge.HongTextBadgeCompose
 import com.codehong.library.widget.text.badge.HongTextBadgeView
@@ -32,14 +30,9 @@ class SampleTextBadgeActivity : BaseSampleMixActivity() {
                 left = 20f
             )
         )
-        .textOption(
-            HongTextBuilder()
-                .text("오늘이 마지막 세일!!!")
-                .color("#ff322e")
-                .size(12)
-                .fontType(HongFont.PRETENDARD_700)
-                .applyOption()
-        )
+        .text("오늘이 마지막 세일!!!")
+        .textColor(HongColor.PURPLE_100.hex)
+        .textTypo(HongTypo.CONTENTS_12_B)
         .backgroundColor("#12ff322e")
         .radius(
             HongRadiusInfo(
@@ -63,18 +56,13 @@ class SampleTextBadgeActivity : BaseSampleMixActivity() {
                 left = 20f
             )
         )
-        .textOption(
-            HongTextBuilder()
-                .text("모두 파랑파랑파랑해")
-                .color("#8e43e7")
-                .size(12)
-                .fontType(HongFont.PRETENDARD_700)
-                .applyOption()
-        )
+        .text("모두 파랑파랑파랑해")
+        .textColor(HongColor.PURPLE_100.hex)
+        .textTypo(HongTypo.CONTENTS_12_B)
         .backgroundColor(HongColor.WHITE_100.hex)
         .border(
             HongBorderInfo(
-                color = "#dfb4fc",
+                color = HongColor.PURPLE_50.hex,
                 width = 1
             )
         )
@@ -100,13 +88,9 @@ class SampleTextBadgeActivity : BaseSampleMixActivity() {
                 left = 20f
             )
         )
-        .textOption(
-            HongTextBuilder()
-                .text("지금이 아니면 상품 없음")
-                .color("#ff322e")
-                .typography(HongTypo.CONTENTS_12_B)
-                .applyOption()
-        )
+        .text("지금이 아니면 상품 없음")
+        .textColor(HongColor.PURPLE_100.hex)
+        .textTypo(HongTypo.CONTENTS_12_B)
         .backgroundColor("#12ff322e")
         .radius(
             HongRadiusInfo(
@@ -130,14 +114,9 @@ class SampleTextBadgeActivity : BaseSampleMixActivity() {
                 left = 20f
             )
         )
-        .textOption(
-            HongTextBuilder()
-                .text("모두 보라보라해해에에에")
-                .color("#8e43e7")
-                .size(12)
-                .fontType(HongFont.PRETENDARD_700)
-                .applyOption()
-        )
+        .text("모두 보라보라해해에에에")
+        .textColor(HongColor.PURPLE_100.hex)
+        .textTypo(HongTypo.CONTENTS_12_B)
         .backgroundColor(HongColor.WHITE_100.hex)
         .border(
             HongBorderInfo(
@@ -168,14 +147,9 @@ class SampleTextBadgeActivity : BaseSampleMixActivity() {
                 left = 20f
             )
         )
-        .textOption(
-            HongTextBuilder()
-                .text("지금이 아니면 상품 없음 3000")
-                .color("#ff322e")
-                .size(12)
-                .fontType(HongFont.PRETENDARD_700)
-                .applyOption()
-        )
+        .text("지금이 아니면 상품 없음 3000")
+        .textColor(HongColor.PURPLE_100.hex)
+        .textTypo(HongTypo.CONTENTS_12_B)
         .backgroundColor("#12ff322e")
         .radius(
             HongRadiusInfo(
@@ -193,7 +167,6 @@ class SampleTextBadgeActivity : BaseSampleMixActivity() {
     )
 
     override fun optionViewList(): List<View> {
-
         return mutableListOf<View>().apply {
             optionList.forEach {
                 add(HongTextBadgeView(this@SampleTextBadgeActivity).set(it))
