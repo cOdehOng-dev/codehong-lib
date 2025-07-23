@@ -8,20 +8,21 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatTextView
+import com.codehong.library.widget.extensions.dpToFloatPx
+import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.widget.extensions.lineBreakSyllable
+import com.codehong.library.widget.extensions.parseColor
+import com.codehong.library.widget.extensions.setLayout
+import com.codehong.library.widget.extensions.setTextSpan
 import com.codehong.library.widget.rule.HongTextLineBreak
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.rule.typo.fontType
 import com.codehong.library.widget.rule.typo.lineHeight
 import com.codehong.library.widget.rule.typo.size
-import com.codehong.library.widget.util.dpToFloatPx
-import com.codehong.library.widget.util.dpToPx
-import com.codehong.library.widget.util.lineBreakSyllable
-import com.codehong.library.widget.util.parseColor
-import com.codehong.library.widget.util.setLayout
 import com.codehong.library.widget.util.setTextFont
 import com.codehong.library.widget.util.setTextSize
-import com.codehong.library.widget.util.setTextSpan
+import java.text.DecimalFormat
 
 class HongTextView @JvmOverloads constructor(
     context: Context,
@@ -104,31 +105,41 @@ class HongTextView @JvmOverloads constructor(
             textView.ellipsize = it
         }
 
-        textView.text = option.text
+        val resultText = if (option.useNumberDecimal) {
+            option.text?.let {
+                val clean = it.replace(",", "").trim()
+                when {
+                    clean.toLongOrNull() != null -> DecimalFormat("#,###").format(clean.toLong())
+                    clean.toDoubleOrNull() != null -> DecimalFormat("#,##0.##").format(clean.toDouble())
+                    else -> it
+                }
+            }
+        } else {
+            option.text
+        }
+        textView.text = resultText
 
-        option.spanTextsProperty?.let {
+        option.spanTextBuilderList?.let {
             val spannableText = SpannableString(
                 if (lineBreakType == HongTextLineBreak.SYLLABLE) {
-                    option.text.lineBreakSyllable()
+                    resultText.lineBreakSyllable()
                 } else {
-                    option.text
+                    resultText
                 }
             )
 
-            it.forEach { spanProperty ->
-                spanProperty.injectOption(option)
+            it.forEach { spanOption ->
+                spanOption.injectOption(option)
                 spannableText.setTextSpan(
                     context,
-                    spanProperty,
+                    spanOption,
                     lineBreakType
                 )
             }
 
             textView.text = spannableText
         }
-
         return this
-
     }
 
     fun setColor(@ColorInt colorInt: Int) {
@@ -176,10 +187,8 @@ class HongTextView @JvmOverloads constructor(
         textView.setTextSize(size, HongTextOption.DEFAULT_TYPOGRAPHY.size())
         textView.setTextFont(fontType, HongTextOption.DEFAULT_TYPOGRAPHY.fontType())
 
-        // 폰트가 가지고 있는 lineHeight 값 추출
         val fontLineHeight = textView.paint.getFontMetrics(textView.paint.fontMetrics)
 
-        // 디자이너가 요청한 lineHeight 값
         val figmaLineHeight = context.dpToFloatPx(lineHeight)
 
         textView.setLineSpacing(0f, figmaLineHeight / fontLineHeight)

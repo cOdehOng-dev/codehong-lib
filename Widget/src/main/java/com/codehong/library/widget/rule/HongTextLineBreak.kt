@@ -6,8 +6,14 @@ enum class HongTextLineBreak(val alias: String) {
     SPACE("space"); // 단어 단위 줄바꿈
 
     companion object {
-        fun String?.toNdsTextLineBreak(): HongTextLineBreak {
-            return values().firstOrNull { it.alias.equals(this, true) } ?: DEFAULT
+        fun String?.toHongTextLineBreak(): HongTextLineBreak {
+            return entries.firstOrNull { it.alias.equals(this, true) } ?: DEFAULT
         }
+
+        fun HongTextLineBreak?.toHongTextLineBreakToAlias(): String {
+            return this?.alias ?: DEFAULT.alias
+        }
+
+
     }
 }

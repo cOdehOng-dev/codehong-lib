@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="@color/color_ffffff">
+    android:background="@color/honglib_color_ffffff">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_start"
@@ -40,7 +40,7 @@
         android:textSize="18dp"
         android:maxLines="1"
         android:ellipsize="end"
-        android:textColor="@color/color_111111"
+        android:textColor="@color/honglib_color_111111"
         android:fontFamily="@font/pretendard_500"
         android:includeFontPadding="false"
         android:gravity="center"

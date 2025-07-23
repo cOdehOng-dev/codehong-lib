@@ -1,53 +1,24 @@
 package com.codehong.lib.sample
 
+import android.content.Context
+import android.view.ViewGroup
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.MarginTopOrBottom
+import com.codehong.lib.sample.playground.preview.HorizontalOptionView
+import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongText
-
-@Composable
-fun SampleScaffold(
-    title: String,
-    horizontalPadding: Int = 0,
-    content: @Composable ColumnScope.() -> Unit
-) {
-    val scrollState = rememberScrollState()
-    Scaffold(
-        modifier = Modifier
-            .background(colorResource(id = HongColor.WHITE_100.colorResId)),
-        topBar = {
-            SampleHeader(title = title)
-        }
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it)
-                .padding(start = horizontalPadding.dp, end = horizontalPadding.dp)
-                .background(colorResource(HongColor.WHITE_100.colorResId))
-                .verticalScroll(scrollState)
-        ) {
-            MarginTopOrBottom(value = 30)
-            content()
-        }
-    }
-}
+import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.text.HongTextCompose
 
 @Composable
 fun SampleHeader(
@@ -57,39 +28,59 @@ fun SampleHeader(
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp)
-            .background(colorResource(id = HongColor.MAIN_PURPLE.colorResId)),
+            .background(colorResource(id = HongColor.MAIN_ORANGE_100.colorResId)),
         contentAlignment = Alignment.Center
     ) {
-        HongText(
-            text = title,
-            typo = HongTypo.BODY_18_B,
-            colorType = HongColor.WHITE_100
+        HongTextCompose(
+            option = HongTextBuilder()
+                .text(title)
+                .color(HongColor.WHITE_100.hex)
+                .typography(HongTypo.BODY_18_B)
+                .applyOption()
         )
     }
 }
 
 @Composable
-fun SampleMenu(
-    title: String,
-    horizontalPadding: Int = 0,
+fun SampleComposeDespContainer(
+    desp: String,
     testCompose: @Composable () -> Unit
 ) {
-    HongText(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp)
-            .background(colorResource(id = HongColor.WHITE_100.colorResId)),
-        text = title,
-        typo = HongTypo.BODY_18_B,
-        colorType = HongColor.BLACK_100
+    HongTextCompose(
+        option = HongTextBuilder()
+            .width(HongLayoutParam.MATCH_PARENT.value)
+            .text(desp)
+            .padding(
+                HongSpacingInfo(
+                    left = 20f,
+                    right = 20f,
+                )
+            )
+            .color(HongColor.BLACK_100.hex)
+            .typography(HongTypo.BODY_14_B)
+            .applyOption()
     )
-    MarginTopOrBottom(10)
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = horizontalPadding.dp)
+            .background(colorResource(id = HongColor.WHITE_100.colorResId))
+            .padding(top = 10.dp, bottom = 25.dp)
     ) {
         testCompose()
     }
-    MarginTopOrBottom(25)
+}
+
+fun Context.horizontalOptionView(
+    block: HorizontalOptionView.() -> Unit
+) = HorizontalOptionView(this).run {
+    block.invoke(this)
+    this
+}
+
+fun ViewGroup.horizontalOptionView(
+    block: HorizontalOptionView.() -> Unit
+) = HorizontalOptionView(this.context).run {
+    block.invoke(this)
+    this@horizontalOptionView.addView(this)
+    this
 }

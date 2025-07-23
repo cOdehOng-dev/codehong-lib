@@ -3,18 +3,20 @@ package com.codehong.lib.sample.videopopup
 import android.os.Bundle
 import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.lib.sample.databinding.ActivitySampleVideoPopupBuilderBinding
+import com.codehong.library.widget.player.HongVideoPlayerBuilder
 import com.codehong.library.widget.rule.HongWidgetType
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.util.HongToastUtil
 import com.codehong.library.widget.util.applyStatusBarColor
+import com.codehong.library.widget.videopopup.HongVideoPopupBuilder
 import com.codehong.library.widget.videopopup.HongVideoPopupManager
-import com.codehong.library.widget.videopopup.builder.HongVideoPopupBuilderView
-import com.codehong.library.widget.videopopup.builder.HongVideoPopupOption
+import com.codehong.library.widget.videopopup.HongVideoPopupView
 
 class SampleVideoPopupBuilderActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySampleVideoPopupBuilderBinding
 
-    private var videoPopupView: HongVideoPopupBuilderView? = null
+    private var videoPopupView: HongVideoPopupView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,19 +46,25 @@ class SampleVideoPopupBuilderActivity : BaseActivity() {
     }
 
     private fun setup() {
-        val option = HongVideoPopupOption.Builder()
-            .setVideoUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")
-            .setRadiusDp(14)
-            .setRatio("16:9")
-            .setLandingLink("https://github.com/cOdehOng-dev")
-            .setTopLeft(true)
-            .setTopRight(true)
-            .build()
-        this.videoPopupView = HongVideoPopupBuilderView(this)
+        val option = HongVideoPopupBuilder()
+            .videoPlayerOption(
+                HongVideoPlayerBuilder()
+                    .setVideoUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")
+                    .ratio("16:9")
+                    .radius(
+                        HongRadiusInfo(
+                            top = 14
+                        )
+                    )
+                    .applyOption()
+            )
+            .landingLink("https://github.com/cOdehOng-dev")
+            .applyOption()
+        this.videoPopupView = HongVideoPopupView(this)
             .set(
                 option,
                 onShow = {
-                    applyStatusBarColor(com.codehong.library.widget.R.color.honglib_color_9929292d)
+                    applyStatusBarColor(com.codehong.library.widget.R.color.honglib_color_29292d_60)
                 },
                 onHide = { isClickClose ->
                     hidePopup(isClickClose)
@@ -83,7 +91,7 @@ class SampleVideoPopupBuilderActivity : BaseActivity() {
     private fun hidePopup(isClickClose: Boolean) {
         applyStatusBarColor(com.codehong.library.widget.R.color.honglib_color_ffffff)
         if (isClickClose) {
-            HongVideoPopupManager.saveOneDayLastSeenTimestamp(this@SampleVideoPopupBuilderActivity)
+            HongVideoPopupManager.saveOneDayLastSeenTimestamp(this)
         }
     }
 }

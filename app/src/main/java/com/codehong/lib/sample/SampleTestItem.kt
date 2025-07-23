@@ -4,5 +4,5 @@ import com.codehong.library.widget.rule.HongWidgetType
 
 data class SampleTestItem(
     val title: String,
-    val compose: HongWidgetType
+    val widgetType: HongWidgetType
 )

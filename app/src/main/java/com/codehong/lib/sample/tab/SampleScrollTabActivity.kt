@@ -1,106 +1,126 @@
 package com.codehong.lib.sample.tab
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
-import com.codehong.lib.sample.SampleHeader
-import com.codehong.lib.sample.SampleMenu
+import android.view.View
+import androidx.compose.runtime.Composable
+import com.codehong.lib.sample.base.BaseSampleMixActivity
+import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
-import com.codehong.library.widget.MarginTopOrBottom
-import com.codehong.library.widget.model.HongComposeColor
-import com.codehong.library.widget.tab.HongScrollTab
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.tab.HongScrollTabBuilder
+import com.codehong.library.widget.tab.HongScrollTabCompose
+import com.codehong.library.widget.tab.HongScrollTabView
+import com.codehong.library.widget.util.HongToastUtil
 
-class SampleScrollTabActivity : ComponentActivity() {
+class SampleScrollTabActivity : BaseSampleMixActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            Scaffold(
-                topBar = {
-                    SampleHeader(title = "ScrollTab")
-                }
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(colorResource(HongColor.WHITE_100.colorResId))
-                        .padding(it)
-                ) {
-                    MarginTopOrBottom(30)
-                    SampleMenu(title = "스크롤 탭") {
-                        HongScrollTab(
-                            tabList = listOf(
-                                "패키지",
-                                "국내숙소",
-                                "해외숙소",
-                                "투어·티켓"
-                            ),
-                            tabTitleList = listOf(
-                                "패키지",
-                                "국내숙소",
-                                "해외숙소",
-                                "투어·티켓"
-                            ),
-                            allRadius = 100,
-                            selectBackgroundColor = HongComposeColor(
-                                type = HongColor.BLACK_100
-                            ),
-                            tabTextHorizontalPadding = 12,
-                            tabLayoutStartPadding = 16,
-                            tabLayoutEndPadding = 16,
-                            tabBetweenPadding = 6
-                        ) { i, item ->
-                            (item as? String)?.let {
+    private val option1 = HongScrollTabBuilder()
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f
+            )
+        )
+        .margin(
+            HongSpacingInfo(
+                bottom = 20f
+            )
+        )
+        .tabList(
+            listOf(
+                "패키지",
+                "국내숙소",
+                "해외숙소",
+                "투어·티켓"
+            )
+        )
+        .tabTitleList(
+            listOf(
+                "패키지",
+                "국내숙소",
+                "해외숙소",
+                "투어·티켓"
+            )
+        )
+        .selectBackgroundColor(HongColor.BLACK_100.hex)
+        .radius(
+            HongRadiusInfo(
+                topLeft = 100,
+                topRight = 100,
+                bottomLeft = 100,
+                bottomRight = 100
+            )
+        )
+        .onTabClick { index, item ->
+            HongToastUtil.showToast(this, "선택된 탭: $index, $item")
+        }
+        .tabTextHorizontalPadding(12)
+        .tabBetweenPadding(6)
+        .applyOption()
 
-                            }
-                        }
-                    }
+    private val option2 = HongScrollTabBuilder()
+        .padding(
+            HongSpacingInfo(
+                left = 16f,
+                right = 16f
+            )
+        )
+        .tabList(
+            listOf(
+                "뮤지컬",
+                "콘서트",
+                "스포츠",
+                "전시/행사",
+                "클래식/무용",
+                "아동/가족",
+                "연극",
+                "레저/캠핑"
+            )
+        )
+        .tabTitleList(
+            listOf(
+                "뮤지컬",
+                "콘서트",
+                "스포츠",
+                "전시/행사",
+                "클래식/무용",
+                "아동/가족",
+                "연극",
+                "레저/캠핑"
+            )
+        )
+        .selectBackgroundColor(HongColor.MAIN_ORANGE_100.hex)
+        .radius(
+            HongRadiusInfo(
+                topLeft = 100,
+                topRight = 100,
+                bottomLeft = 100,
+                bottomRight = 100
+            )
+        )
+        .onTabClick { index, item ->
+            HongToastUtil.showToast(this, "선택된 탭: $index, $item")
+        }
+        .tabTextHorizontalPadding(12)
+        .tabBetweenPadding(8)
+        .applyOption()
 
-                    SampleMenu(title = "스크롤 탭") {
-                        HongScrollTab(
-                            tabList = listOf(
-                                "뮤지컬",
-                                "콘서트",
-                                "스포츠",
-                                "전시/행사",
-                                "클래식/무용",
-                                "아동/가족",
-                                "연극",
-                                "레저/캠핑"
-                            ),
-                            tabTitleList = listOf(
-                                "뮤지컬",
-                                "콘서트",
-                                "스포츠",
-                                "전시/행사",
-                                "클래식/무용",
-                                "아동/가족",
-                                "연극",
-                                "레저/캠핑"
-                            ),
-                            allRadius = 100,
-                            selectBackgroundColor = HongComposeColor(
-                                type = HongColor.MAIN_PURPLE
-                            ),
-                            tabTextHorizontalPadding = 12,
-                            tabLayoutStartPadding = 16,
-                            tabLayoutEndPadding = 16,
-                            tabBetweenPadding = 8
-                        ) { i, item ->
-                            (item as? String)?.let {
+    private val optionList get() = listOf(
+        option1,
+        option2
+    )
 
-                            }
-                        }
-                    }
-                }
+    override fun optionViewList(): List<View> {
+        return mutableListOf<View>().apply {
+            optionList.forEach {
+                add(HongScrollTabView(this@SampleScrollTabActivity).set(it))
             }
+        }
+    }
+
+    @Composable
+    override fun InitCompose() {
+        optionList.forEach {
+            HongScrollTabCompose(it)
         }
     }
 }

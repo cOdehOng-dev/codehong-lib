@@ -1,0 +1,117 @@
+package com.codehong.library.widget.button.text
+
+import com.codehong.library.widget.HongWidgetCommonOption
+
+import com.codehong.library.widget.rule.HongBorderInfo
+import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongShadowInfo
+import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.HongState
+import com.codehong.library.widget.rule.HongWidgetType
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.rule.typo.HongTypo
+import com.codehong.library.widget.text.HongTextBuilder
+
+data class HongTextButtonOption(
+    override val type: HongWidgetType = HongWidgetType.TEXT_BUTTON,
+) : HongWidgetCommonOption {
+
+    companion object {
+        val DEFAULT_TEXT_TYPO = HongTypo.BODY_16_B
+        val DEFAULT_TEXT_COLOR = HongColor.WHITE_100.hex
+
+        const val DEFAULT_USE_SHAPE_CIRCLE = false
+
+        val DEFAULT_TEXT_OPTION = HongTextBuilder()
+            .typography(DEFAULT_TEXT_TYPO)
+            .color(DEFAULT_TEXT_COLOR)
+            .applyOption()
+
+        val DEFAULT_DISABLE_TEXT_OPTION = HongTextBuilder()
+            .typography(HongTypo.BODY_15_B)
+            .color(HongColor.WHITE_60.hex)
+            .applyOption()
+
+        val DEFAULT_DISABLE_BACKGROUND_COLOR = HongColor.GRAY_70
+    }
+
+    override var isValidComponent: Boolean = true
+
+    override var width: Int = HongLayoutParam.WRAP_CONTENT.value
+    override var height: Int = HongLayoutParam.WRAP_CONTENT.value
+    override var margin: HongSpacingInfo = HongSpacingInfo()
+    override var padding: HongSpacingInfo = HongSpacingInfo()
+    override var click: ((HongWidgetCommonOption) -> Unit)? = null
+    override var radius: HongRadiusInfo = HongRadiusInfo()
+    override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
+    override var border: HongBorderInfo = HongBorderInfo()
+    override var useShapeCircle: Boolean = DEFAULT_USE_SHAPE_CIRCLE
+    override var shadow = HongShadowInfo()
+
+    var textOption = DEFAULT_TEXT_OPTION
+
+    var state: HongState = HongState.ENABLED
+
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as HongTextButtonOption
+
+        if (type != other.type) return false
+        if (isValidComponent != other.isValidComponent) return false
+        if (width != other.width) return false
+        if (height != other.height) return false
+        if (margin != other.margin) return false
+        if (padding != other.padding) return false
+        if (click != other.click) return false
+        if (radius != other.radius) return false
+        if (backgroundColorHex != other.backgroundColorHex) return false
+        if (border != other.border) return false
+        if (useShapeCircle != other.useShapeCircle) return false
+        if (shadow != other.shadow) return false
+        if (textOption != other.textOption) return false
+        if (state != other.state) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = type.hashCode()
+        result = 31 * result + isValidComponent.hashCode()
+        result = 31 * result + width
+        result = 31 * result + height
+        result = 31 * result + margin.hashCode()
+        result = 31 * result + padding.hashCode()
+        result = 31 * result + (click?.hashCode() ?: 0)
+        result = 31 * result + radius.hashCode()
+        result = 31 * result + backgroundColorHex.hashCode()
+        result = 31 * result + border.hashCode()
+        result = 31 * result + useShapeCircle.hashCode()
+        result = 31 * result + shadow.hashCode()
+        result = 31 * result + textOption.hashCode()
+        result = 31 * result + state.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "HongTextButtonOption(" +
+                "type=$type, " +
+                "isValidComponent=$isValidComponent, " +
+                "width=$width, " +
+                "height=$height, " +
+                "margin=$margin, " +
+                "padding=$padding, " +
+                "click=$click, " +
+                "radius=$radius, " +
+                "backgroundColorHex='$backgroundColorHex', " +
+                "border=$border, " +
+                "useShapeCircle=$useShapeCircle, " +
+                "shadow=$shadow, " +
+                "textOption=$textOption, " +
+                "state=$state" +
+                ")"
+    }
+}

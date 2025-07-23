@@ -7,6 +7,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.codehong.lib.sample.databinding.ViewHeaderBinding
 
+@Deprecated("위젯으로 수정")
 class HeaderView : ConstraintLayout {
 
     constructor(context: Context) : super(context)

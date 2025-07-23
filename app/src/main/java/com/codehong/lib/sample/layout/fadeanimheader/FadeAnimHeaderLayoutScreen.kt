@@ -8,16 +8,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import com.codehong.library.widget.R
-import com.codehong.library.widget.model.HongComposeColor
-import com.codehong.library.widget.text.HongText
 
 @Composable
 fun FadeAnimHeaderLayoutHeader(
@@ -49,26 +43,26 @@ fun FadeAnimHeaderLayoutHeader(
                 .background(colorResource(id = if (isTransparent) R.color.honglib_color_ffffff else R.color.honglib_color_000000))
         )
 
-        HongText(
-            modifier = Modifier
-                .constrainAs(tvTitle) {
-                    start.linkTo(ivBack.end, 4.dp)
-                    end.linkTo(ivShare.start, 4.dp)
-                    top.linkTo(topGuideline)
-                    bottom.linkTo(bottomGuideline)
-                    width = Dimension.fillToConstraints
-                }
-                .alpha(if (isTransparent) 0f else 1f),
-            text = "헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더",
-            size = 16,
-            fontWeight = FontWeight.W700,
-            color = HongComposeColor(
-                resId = R.color.honglib_color_29292d
-            ),
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            isEmptyOrNullHideView = false
-        )
+//        HongText(
+//            modifier = Modifier
+//                .constrainAs(tvTitle) {
+//                    start.linkTo(ivBack.end, 4.dp)
+//                    end.linkTo(ivShare.start, 4.dp)
+//                    top.linkTo(topGuideline)
+//                    bottom.linkTo(bottomGuideline)
+//                    width = Dimension.fillToConstraints
+//                }
+//                .alpha(if (isTransparent) 0f else 1f),
+//            text = "헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더",
+//            size = 16,
+//            fontWeight = FontWeight.W700,
+//            color = HongComposeColor(
+//                resId = R.color.honglib_color_29292d
+//            ),
+//            maxLines = 1,
+//            overflow = TextOverflow.Ellipsis,
+//            isEmptyOrNullHideView = false
+//        )
 
         Spacer(
             modifier = Modifier

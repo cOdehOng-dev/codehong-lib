@@ -12,7 +12,9 @@ import android.text.style.TypefaceSpan
 import android.text.style.UnderlineSpan
 import java.util.regex.Pattern
 
-class TextSpan(private val newType: Typeface) : TypefaceSpan("") {
+class TextSpan(
+    private val newType: Typeface
+) : TypefaceSpan("") {
 
     override fun updateDrawState(ds: TextPaint) {
         applyCustomTypeFace(ds, newType)

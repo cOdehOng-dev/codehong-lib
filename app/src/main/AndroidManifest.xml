@@ -15,14 +15,18 @@
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_app_logo"
         android:label="${appName}"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_app_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Codehonglib"
         android:networkSecurityConfig="@xml/network_security_config"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.naver.maps.map.NCP_KEY_ID"
+            android:value="7q99m8ujdt" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -50,25 +54,44 @@
             android:name=".layout.fadeanimheader.FadeAnimHeaderLayoutActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".textfield.SampleTextFieldActivity"/>
-        <activity android:name=".button.SampleTextButtonActivity"/>
+        <activity android:name=".textfield.underline.SampleUnderlineTextFieldActivity"/>
+        <activity android:name=".textfield.number.SampleNumberTextFieldActivity"/>
+        <activity android:name=".textfield.timer.SampleTimerTextFieldActivity"/>
+        <activity android:name=".button.text.SampleTextButtonActivity"/>
+        <activity android:name=".button.select.SampleSelectButtonActivity"/>
         <activity android:name=".image.SampleImageActivity"/>
         <activity android:name=".layout.slide.SampleSlideLayoutActivity"/>
-        <activity android:name=".calendar.SampleCalendarActivity1"/>
-        <activity android:name=".header.SampleHeaderActivity"/>
+
+        <activity android:name=".calendar.SampleCalendarActivity"/>
+        <activity android:name=".calendar.SampleCalendarComposeActivity"/>
+
+        <activity android:name=".closeheader.SampleCloseHeaderActivity"/>
         <activity android:name=".pager.SampleHorizontalPagerActivity"/>
-        <activity android:name=".text.SampleBadgeTextActivity"/>
+        <activity android:name=".text.badge.SampleTextBadgeActivity"/>
         <activity android:name=".tab.SampleScrollTabActivity"/>
 
         <activity android:name=".picker.OptionPickerActivity"/>
 
         <activity android:name=".playground.PlaygroundActivity"/>
         <activity android:name=".text.SampleTextActivity"/>
+        <activity android:name=".text.check.SampleCheckTextActivity"/>
+        <activity android:name=".text.unit.SampleTextUnitActivity"/>
+        <activity android:name=".text.updown.SampleTextUpDownActivity"/>
         <activity android:name=".captureshare.SampleCaptureShareActivity" />
+        <activity android:name=".captureshare.SampleCaptureShareComposeActivity"/>
         <activity android:name=".dynamicisland.SampleDynamicIslandActivity"/>
         <activity android:name=".videopopup.SampleVideoPopupActivity"/>
         <activity android:name=".videopopup.SampleVideoPopupBuilderActivity"/>
         <activity android:name=".player.SampleVideoPlayerActivity"/>
         <activity android:name=".videopopup.SampleVideoPopupComposeActivity"/>
+        <activity android:name=".checkbox.SampleCheckboxActivity"/>
+        <activity android:name=".toggleswitch.SampleSwitchActivity"/>
+        <activity android:name=".label.SampleLabelActivity"/>
+        <activity android:name=".label.input.SampleLabelInputActivity"/>
+        <activity android:name=".label.select.SampleLabelSelectInputActivity"/>
+        <activity android:name=".label.toggle.SampleLabelSwitchActivity"/>
+        <activity android:name=".label.checkbox.SampleLabelCheckboxActivity"/>
+
     </application>
 
 </manifest>

@@ -22,10 +22,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInParent
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.R
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.util.dpToPx
+import com.codehong.library.widget.extensions.toColor
 import kotlin.math.abs
 
 @Composable
@@ -67,7 +67,7 @@ fun FadeAnimHeaderLayout(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(firstItemHeight.dp)
-                                .background(colorResource(id = R.color.honglib_transparent))
+                                .background(HongColor.TRANSPARENT.hex.toColor())
                                 .onGloballyPositioned { layoutCoordinates ->
                                     firstItemOffset = layoutCoordinates.positionInParent().y.toInt()
                                 },

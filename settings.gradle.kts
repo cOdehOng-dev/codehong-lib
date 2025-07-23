@@ -24,6 +24,7 @@ dependencyResolutionManagement {
                 password = githubProperties.getProperty("token")
             }
         }
+        maven("https://repository.map.naver.com/archive/maven")
     }
     versionCatalogs {
 //        create("libs") {
