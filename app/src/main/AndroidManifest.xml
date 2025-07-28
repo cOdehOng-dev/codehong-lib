@@ -70,7 +70,7 @@
         <activity android:name=".closeheader.SampleCloseHeaderActivity"/>
         <activity android:name=".pager.SampleHorizontalPagerActivity"/>
         <activity android:name=".text.badge.SampleTextBadgeActivity"/>
-        <activity android:name=".tab.SampleScrollTabActivity"/>
+        <activity android:name=".tab.scroll.SampleTabScrollActivity"/>
         <activity android:name=".tab.segment.SampleTabSegmentActivity"/>
 
 

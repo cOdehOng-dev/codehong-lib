@@ -1,4 +1,4 @@
-package com.codehong.library.widget.tab
+package com.codehong.library.widget.tab.scroll
 
 import android.content.Context
 import android.util.AttributeSet
@@ -17,7 +17,7 @@ import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.text.HongTextBuilder
 
-class HongScrollTabView @JvmOverloads constructor(
+class HongTabScrollView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -28,7 +28,7 @@ class HongScrollTabView @JvmOverloads constructor(
         gravity = Gravity.CENTER_VERTICAL
     }
 
-    var option = HongScrollTabOption()
+    var option = HongTabScrollOption()
         private set
 
     private var selectedIndex: Int = 0
@@ -41,11 +41,11 @@ class HongScrollTabView @JvmOverloads constructor(
     }
 
     fun set(
-        option: HongScrollTabOption,
-    ): HongScrollTabView {
+        option: HongTabScrollOption,
+    ): HongTabScrollView {
         this.option = option
         this.tabList = option.tabList
-        this.tabTitleList = option.tabTitleList
+        this.tabTitleList = option.tabTextList
         this.selectedIndex = option.initialSelectIndex
 
         drawTabs()
@@ -87,17 +87,17 @@ class HongScrollTabView @JvmOverloads constructor(
         with(itemBinding.flContainer) {
             hongBackground(
                 backgroundColor = if (isSelected) {
-                    option.selectBackgroundColor
+                    option.selectBackgroundColorHex
                 } else {
-                    option.unselectBackgroundColor
+                    option.unselectBackgroundColorHex
                 },
                 border = HongBorderInfo(
                     color = if (isSelected) {
-                        option.selectBorderColor
+                        option.selectBorderColorHex
                     } else {
-                        option.unselectBorderColor
+                        option.unselectBorderColorHex
                     },
-                    width = option.borderWidth,
+                    width = option.unselectBorderWidth,
                 ),
                 radius = option.radius,
             )
@@ -139,21 +139,23 @@ class HongScrollTabView @JvmOverloads constructor(
 
         itemBinding.vDummyTab.set(
             option = HongTextBuilder()
-                .copy(option.selectTabTextOption)
                 .text(tabTitle)
+                .typography(option.selectTabTextTypo)
                 .applyOption()
         )
 
         itemBinding.vTab.set(
             option = if (isSelected) {
                 HongTextBuilder()
-                    .copy(option.selectTabTextOption)
                     .text(tabTitle)
+                    .typography(option.selectTabTextTypo)
+                    .color(option.selectTabTextColorHex)
                     .applyOption()
             } else {
                 HongTextBuilder()
-                    .copy(option.unselectTabTextOption)
                     .text(tabTitle)
+                    .typography(option.unselectTabTextTypo)
+                    .color(option.unselectTabTextColorHex)
                     .applyOption()
             }
         )

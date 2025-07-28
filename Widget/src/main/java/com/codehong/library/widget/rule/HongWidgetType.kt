@@ -21,7 +21,7 @@ enum class HongWidgetType(
     SELECT_BUTTON(7, "SelectButton", true),
     CALENDAR(8, "Calendar", true),
     HORIZONTAL_PAGER(9, "HorizontalViewPager", true),
-    SCROLL_TAB(11, "ScrollTab", true),
+    TAB_SCROLL(11, "TabScroll", true),
     TAB_SEGMENT(27, "TabSegment", true),
     CAPTURE_SHARE(12, "CaptureShare", false),
     DYNAMIC_ISLAND(13, "DynamicIsland", false),

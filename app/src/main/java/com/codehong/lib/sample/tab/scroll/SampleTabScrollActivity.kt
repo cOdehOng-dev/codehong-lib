@@ -1,4 +1,4 @@
-package com.codehong.lib.sample.tab
+package com.codehong.lib.sample.tab.scroll
 
 import android.view.View
 import androidx.compose.runtime.Composable
@@ -6,14 +6,14 @@ import com.codehong.lib.sample.base.BaseSampleMixActivity
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.tab.HongScrollTabBuilder
-import com.codehong.library.widget.tab.HongScrollTabCompose
-import com.codehong.library.widget.tab.HongScrollTabView
+import com.codehong.library.widget.tab.scroll.HongTabScrollBuilder
+import com.codehong.library.widget.tab.scroll.HongTabScrollCompose
+import com.codehong.library.widget.tab.scroll.HongTabScrollView
 import com.codehong.library.widget.util.HongToastUtil
 
-class SampleScrollTabActivity : BaseSampleMixActivity() {
+class SampleTabScrollActivity : BaseSampleMixActivity() {
 
-    private val option1 = HongScrollTabBuilder()
+    private val option1 = HongTabScrollBuilder()
         .padding(
             HongSpacingInfo(
                 left = 16f,
@@ -33,7 +33,7 @@ class SampleScrollTabActivity : BaseSampleMixActivity() {
                 "투어·티켓"
             )
         )
-        .tabTitleList(
+        .tabTextList(
             listOf(
                 "패키지",
                 "국내숙소",
@@ -57,7 +57,7 @@ class SampleScrollTabActivity : BaseSampleMixActivity() {
         .tabBetweenPadding(6)
         .applyOption()
 
-    private val option2 = HongScrollTabBuilder()
+    private val option2 = HongTabScrollBuilder()
         .padding(
             HongSpacingInfo(
                 left = 16f,
@@ -76,7 +76,7 @@ class SampleScrollTabActivity : BaseSampleMixActivity() {
                 "레저/캠핑"
             )
         )
-        .tabTitleList(
+        .tabTextList(
             listOf(
                 "뮤지컬",
                 "콘서트",
@@ -112,7 +112,7 @@ class SampleScrollTabActivity : BaseSampleMixActivity() {
     override fun optionViewList(): List<View> {
         return mutableListOf<View>().apply {
             optionList.forEach {
-                add(HongScrollTabView(this@SampleScrollTabActivity).set(it))
+                add(HongTabScrollView(this@SampleTabScrollActivity).set(it))
             }
         }
     }
@@ -120,7 +120,7 @@ class SampleScrollTabActivity : BaseSampleMixActivity() {
     @Composable
     override fun InitCompose() {
         optionList.forEach {
-            HongScrollTabCompose(it)
+            HongTabScrollCompose(it)
         }
     }
 }

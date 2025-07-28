@@ -42,7 +42,7 @@ import com.codehong.lib.sample.pager.SampleHorizontalPagerActivity
 import com.codehong.lib.sample.picker.OptionPickerActivity
 import com.codehong.lib.sample.player.SampleVideoPlayerActivity
 import com.codehong.lib.sample.playground.PlaygroundActivity
-import com.codehong.lib.sample.tab.SampleScrollTabActivity
+import com.codehong.lib.sample.tab.scroll.SampleTabScrollActivity
 import com.codehong.lib.sample.tab.segment.SampleTabSegmentActivity
 import com.codehong.lib.sample.text.SampleTextActivity
 import com.codehong.lib.sample.text.badge.SampleTextBadgeActivity
@@ -464,11 +464,11 @@ fun SampleTheme(
                                             }
                                         }
 
-                                        HongWidgetType.SCROLL_TAB -> {
-                                            Intent(activity, SampleScrollTabActivity::class.java).apply {
+                                        HongWidgetType.TAB_SCROLL -> {
+                                            Intent(activity, SampleTabScrollActivity::class.java).apply {
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
-                                                    HongWidgetType.SCROLL_TAB.value
+                                                    HongWidgetType.TAB_SCROLL.value
                                                 )
                                                 activity.startActivity(this)
                                             }

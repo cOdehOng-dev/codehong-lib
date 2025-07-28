@@ -25,7 +25,7 @@ import com.codehong.lib.sample.label.checkbox.HongLabelCheckboxPlayground
 import com.codehong.lib.sample.label.input.HongLabelInputPlayground
 import com.codehong.lib.sample.label.toggle.HongLabelSwitchPlayground
 import com.codehong.lib.sample.pager.HongHorizontalPagerPlayground
-import com.codehong.lib.sample.tab.HongTabScrollPlayground
+import com.codehong.lib.sample.tab.scroll.HongTabScrollPlayground
 import com.codehong.lib.sample.tab.segment.HongTabSegmentPlayground
 import com.codehong.lib.sample.text.HongTextPlayground
 import com.codehong.lib.sample.text.badge.HongTextBadgePlayground
@@ -68,8 +68,8 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.HongWidgetType.Companion.toHongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.tab.HongScrollTabCompose
-import com.codehong.library.widget.tab.HongScrollTabOption
+import com.codehong.library.widget.tab.scroll.HongTabScrollCompose
+import com.codehong.library.widget.tab.scroll.HongTabScrollOption
 import com.codehong.library.widget.tab.segment.HongTabSegmentCompose
 import com.codehong.library.widget.tab.segment.HongTabSegmentOption
 import com.codehong.library.widget.text.HongTextCompose
@@ -213,7 +213,7 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.LABEL_INPUT -> HongLabelInputPlayground(this).preview()
             HongWidgetType.LABEL_SWITCH -> HongLabelSwitchPlayground(this).preview()
             HongWidgetType.LABEL_CHECKBOX -> HongLabelCheckboxPlayground(this).preview()
-            HongWidgetType.SCROLL_TAB -> HongTabScrollPlayground(this).preview()
+            HongWidgetType.TAB_SCROLL -> HongTabScrollPlayground(this).preview()
             HongWidgetType.TAB_SEGMENT -> HongTabSegmentPlayground(this).preview()
 //            HongWidgetType.LABEL_SELECT_INPUT -> HongLabelSelectInputPlayground(this).preview()
             else -> {}
@@ -440,10 +440,10 @@ class PlaygroundActivity : BaseActivity() {
                 }
             }
 
-            HongWidgetType.SCROLL_TAB -> {
+            HongWidgetType.TAB_SCROLL -> {
                 binding.vComposePreview.setContent {
                     PreviewUI(isBorderOn) {
-                        HongScrollTabCompose(previewOption as HongScrollTabOption)
+                        HongTabScrollCompose(previewOption as HongTabScrollOption)
                     }
                 }
             }
