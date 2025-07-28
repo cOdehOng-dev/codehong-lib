@@ -153,7 +153,7 @@ class HongTextButtonPlayground(
             /** background color */
             PlaygroundManager.addColorOptionPreview(
                 activity = activity,
-                label = "background",
+                label = "background ",
                 colorHex = inject.backgroundColorHex
             ) { selectColor ->
                 inject = HongTextButtonBuilder()

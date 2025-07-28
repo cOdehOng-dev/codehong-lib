@@ -89,7 +89,7 @@ fun Modifier.hongHeight(
     }
 }
 
-fun Modifier.hongPadding(
+fun Modifier.hongSpacing(
     padding: HongSpacingInfo
 ): Modifier {
     return Modifier

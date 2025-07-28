@@ -17,7 +17,7 @@ import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.extensions.disableRippleClickable
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongHeight
-import com.codehong.library.widget.extensions.hongPadding
+import com.codehong.library.widget.extensions.hongSpacing
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType.Companion.toImeAction
@@ -165,25 +165,21 @@ fun HongWidgetContainer(
 ) {
     Box(
         modifier = Modifier
-            .hongPadding(option.margin)
+            .hongSpacing(option.margin)
+            .hongWidth(option.width)
+            .hongHeight(option.height)
+            .hongBackground(
+                backgroundColor = option.backgroundColorHex,
+                border = option.border,
+                shadow = option.shadow,
+                radius = option.radius,
+                useShapeCircle = option.useShapeCircle,
+            )
+            .hongSpacing(option.padding)
+            .disableRippleClickable { option.click?.invoke(option) },
+        contentAlignment = Alignment.Center
     ) {
-        Box(
-            modifier = Modifier
-                .hongWidth(option.width)
-                .hongHeight(option.height)
-                .hongBackground(
-                    backgroundColor = option.backgroundColorHex,
-                    border = option.border,
-                    shadow = option.shadow,
-                    radius = option.radius,
-                    useShapeCircle = option.useShapeCircle,
-                )
-                .hongPadding(option.padding)
-                .disableRippleClickable { option.click?.invoke(option) },
-            contentAlignment = Alignment.Center
-        ) {
-            childCompose()
-        }
+        childCompose()
     }
 }
 
@@ -194,7 +190,7 @@ fun HongWidgetNoneClickContainer(
 ) {
     Box(
         modifier = Modifier
-            .hongPadding(option.margin)
+            .hongSpacing(option.margin)
     ) {
         Box(
             modifier = Modifier
@@ -207,7 +203,7 @@ fun HongWidgetNoneClickContainer(
                     radius = option.radius,
                     useShapeCircle = option.useShapeCircle,
                 )
-                .hongPadding(option.padding),
+                .hongSpacing(option.padding),
             contentAlignment = Alignment.Center
         ) {
             childCompose()

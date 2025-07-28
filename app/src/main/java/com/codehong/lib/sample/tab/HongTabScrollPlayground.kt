@@ -13,7 +13,7 @@ import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.tab.HongScrollTabBuilder
 import com.codehong.library.widget.tab.HongScrollTabOption
 
-class HongScrollTabPlayground(
+class HongTabScrollPlayground(
     playgroundActivity: PlaygroundActivity
 ) : BasePlayground<HongScrollTabOption> {
 

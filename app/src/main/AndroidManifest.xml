@@ -50,6 +50,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".picker.OptionPickerActivity"/>
+
         <activity
             android:name=".layout.fadeanimheader.FadeAnimHeaderLayoutActivity"
             android:screenOrientation="portrait" />
@@ -69,8 +71,8 @@
         <activity android:name=".pager.SampleHorizontalPagerActivity"/>
         <activity android:name=".text.badge.SampleTextBadgeActivity"/>
         <activity android:name=".tab.SampleScrollTabActivity"/>
+        <activity android:name=".tab.segment.SampleTabSegmentActivity"/>
 
-        <activity android:name=".picker.OptionPickerActivity"/>
 
         <activity android:name=".playground.PlaygroundActivity"/>
         <activity android:name=".text.SampleTextActivity"/>

@@ -11,7 +11,7 @@ import coil.request.ImageRequest
 import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongHeight
-import com.codehong.library.widget.extensions.hongPadding
+import com.codehong.library.widget.extensions.hongSpacing
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.rule.HongScaleType
@@ -47,7 +47,7 @@ fun HongImageCompose(
                     backgroundColor = option.backgroundColorHex,
                     useShapeCircle = option.useShapeCircle,
                 )
-                .hongPadding(option.padding),
+                .hongSpacing(option.padding),
             model = ImageRequest.Builder(context)
                 .data(imageInfo)
                 .placeholder(

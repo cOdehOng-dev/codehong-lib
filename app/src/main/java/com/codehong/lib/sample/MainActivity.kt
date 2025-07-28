@@ -43,6 +43,7 @@ import com.codehong.lib.sample.picker.OptionPickerActivity
 import com.codehong.lib.sample.player.SampleVideoPlayerActivity
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.tab.SampleScrollTabActivity
+import com.codehong.lib.sample.tab.segment.SampleTabSegmentActivity
 import com.codehong.lib.sample.text.SampleTextActivity
 import com.codehong.lib.sample.text.badge.SampleTextBadgeActivity
 import com.codehong.lib.sample.text.check.SampleCheckTextActivity
@@ -468,6 +469,16 @@ fun SampleTheme(
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
                                                     HongWidgetType.SCROLL_TAB.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
+                                        HongWidgetType.TAB_SEGMENT -> {
+                                            Intent(activity, SampleTabSegmentActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.TAB_SEGMENT.value
                                                 )
                                                 activity.startActivity(this)
                                             }
