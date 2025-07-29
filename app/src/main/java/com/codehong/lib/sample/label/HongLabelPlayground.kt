@@ -3,7 +3,6 @@ package com.codehong.lib.sample.label
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
-import com.codehong.lib.sample.text.HongTextPlayground
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.HongLabelOption
 import com.codehong.library.widget.rule.HongSpacingInfo
@@ -96,38 +95,87 @@ class HongLabelPlayground(
             )
         }
 
-        HongTextPlayground(activity).injectPreview(
-            injectOption = inject.labelTextOption,
-            includeCommonOption = true,
-            label = "Label",
-            labelTypo = HongTypo.BODY_16,
-            useCancelLine = false,
-            useLineBreak = false,
-            useOverflow = false,
-            useUnderline = false
+        PlaygroundManager.addOptionTitleView(
+            activity,
+            label = "label 설정",
+            labelTypo = HongTypo.BODY_16_B
+        )
+
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity,
+            input = inject.label,
+            label = "label 텍스트",
         ) {
             inject = HongLabelBuilder()
                 .copy(inject)
-                .label(null)
-                .labelTextOption(it)
+                .label(it)
                 .applyOption()
             callback.invoke(inject)
         }
 
-        HongTextPlayground(activity).injectPreview(
-            injectOption = inject.descriptionTextOption,
-            includeCommonOption = true,
-            label = "Description",
-            labelTypo = HongTypo.BODY_16,
-            useCancelLine = false,
-            useLineBreak = false,
-            useOverflow = false,
-            useUnderline = false
+        PlaygroundManager.addColorOptionPreview(
+            activity,
+            colorHex = inject.labelColorHex,
+            label = "label ",
         ) {
             inject = HongLabelBuilder()
                 .copy(inject)
-                .description(null)
-                .descriptionTextOption(it)
+                .labelColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addSelectTypoOptionView(
+            activity,
+            typo = inject.labelTypo,
+            label = "label 폰트",
+        ) {
+            inject = HongLabelBuilder()
+                .copy(inject)
+                .labelTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addOptionTitleView(
+            activity,
+            label = "description 설정",
+            labelTypo = HongTypo.BODY_16_B
+        )
+
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity,
+            input = inject.label,
+            label = "description 텍스트",
+        ) {
+            inject = HongLabelBuilder()
+                .copy(inject)
+                .description(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+
+        PlaygroundManager.addColorOptionPreview(
+            activity,
+            colorHex = inject.labelColorHex,
+            label = "description ",
+        ) {
+            inject = HongLabelBuilder()
+                .copy(inject)
+                .descriptionColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addSelectTypoOptionView(
+            activity,
+            typo = inject.labelTypo,
+            label = "description 폰트",
+        ) {
+            inject = HongLabelBuilder()
+                .copy(inject)
+                .descriptionTypo(it)
                 .applyOption()
             callback.invoke(inject)
         }

@@ -41,8 +41,6 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
         option.descriptionTypo = typo
     }
 
-
-
     fun inputText(input: String?) = apply {
         this.option.input = input
         textFieldOption(

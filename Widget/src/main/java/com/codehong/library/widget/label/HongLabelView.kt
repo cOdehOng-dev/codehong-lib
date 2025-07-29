@@ -8,6 +8,9 @@ import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
+import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextView
 
 class HongLabelView @JvmOverloads constructor(
@@ -20,14 +23,16 @@ class HongLabelView @JvmOverloads constructor(
         orientation = VERTICAL
     }
 
-    private var option = HongLabelOption()
+    var option = HongLabelOption()
+        private set
 
     fun set(
         option: HongLabelOption
     ): HongLabelView {
+        removeAllViews()
+
         this.option = option
 
-        removeAllViews()
 
         setLayout(
             option.width,
@@ -41,16 +46,35 @@ class HongLabelView @JvmOverloads constructor(
         hongPadding(option.padding)
         hongBackground(option.backgroundColorHex)
 
-        if (option.labelTextOption.text.isNullOrEmpty()) {
+        if (option.label.isNullOrEmpty()) {
             this.visibility = View.GONE
         } else {
             this.visibility = View.VISIBLE
             this.addView(
-                HongTextView(context).set(option.labelTextOption)
+                HongTextView(context).set(
+                    HongTextBuilder()
+                        .width(HongLayoutParam.MATCH_PARENT.value)
+                        .text(option.label)
+                        .typography(option.labelTypo)
+                        .color(option.labelColorHex)
+                        .applyOption()
+                )
             )
-            if (!option.descriptionTextOption.text.isNullOrEmpty()) {
+            if (!option.description.isNullOrEmpty()) {
                 this.addView(
-                    HongTextView(context).set(option.descriptionTextOption)
+                    HongTextView(context).set(
+                        HongTextBuilder()
+                            .width(HongLayoutParam.MATCH_PARENT.value)
+                            .margin(
+                                HongSpacingInfo(
+                                    top = 2f
+                                )
+                            )
+                            .text(option.description)
+                            .typography(option.descriptionTypo)
+                            .color(option.descriptionColorHex)
+                            .applyOption()
+                    )
                 )
             }
         }

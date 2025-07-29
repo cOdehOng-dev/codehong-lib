@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
+import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.text.HongTextBuilder
@@ -16,7 +17,7 @@ import com.codehong.library.widget.util.HongWidgetContainer
 fun HongLabelViewCompose(
     option: HongLabelOption
 ) {
-    if (option.labelTextOption.text.isNullOrEmpty()) return
+    if (option.label.isNullOrEmpty()) return
 
     HongWidgetContainer(option) {
         Column(
@@ -24,10 +25,29 @@ fun HongLabelViewCompose(
                 .hongWidth(option.width)
                 .hongHeight(option.height)
         ) {
-            HongTextCompose(option.labelTextOption)
+            HongTextCompose(
+                HongTextBuilder()
+                    .width(HongLayoutParam.MATCH_PARENT.value)
+                    .text(option.label)
+                    .typography(option.labelTypo)
+                    .color(option.labelColorHex)
+                    .applyOption()
+            )
 
-            if (!option.descriptionTextOption.text.isNullOrEmpty())  {
-                HongTextCompose(option.descriptionTextOption)
+            if (!option.description.isNullOrEmpty())  {
+                HongTextCompose(
+                    HongTextBuilder()
+                        .width(HongLayoutParam.MATCH_PARENT.value)
+                        .margin(
+                            HongSpacingInfo(
+                                top = 2f
+                            )
+                        )
+                        .text(option.description)
+                        .typography(option.descriptionTypo)
+                        .color(option.descriptionColorHex)
+                        .applyOption()
+                )
 
             }
 
@@ -37,7 +57,7 @@ fun HongLabelViewCompose(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewHongLabelViewCompose() {
+fun PreviewHongLabelViewCompose2() {
     val option = HongLabelBuilder()
         .backgroundColor(HongColor.WHITE_100)
         .padding(
@@ -48,18 +68,8 @@ fun PreviewHongLabelViewCompose() {
                 bottom = 20f
             )
         )
-        .labelTextOption(
-            HongTextBuilder()
-                .copy(HongLabelOption.DEFAULT_LABEL_OPTION)
-                .text("text align")
-                .applyOption()
-        )
-        .descriptionTextOption(
-            HongTextBuilder()
-                .copy(HongLabelOption.DEFAULT_DESCRIPTION_OPTION)
-                .text("width가 MATCH_PARENT인 경우, textAlign이 적용되지 않습니다.")
-                .applyOption()
-        )
+        .label("text align")
+        .description("width가 MATCH_PARENT인 경우, textAlign이 적용되지 않습니다.")
         .applyOption()
 
     HongLabelViewCompose(option)

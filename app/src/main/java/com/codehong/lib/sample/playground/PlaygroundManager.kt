@@ -10,7 +10,6 @@ import com.codehong.library.widget.extensions.toFigureFloat
 import com.codehong.library.widget.extensions.toFigureInt
 import com.codehong.library.widget.extensions.toFigureString
 import com.codehong.library.widget.label.HongLabelBuilder
-import com.codehong.library.widget.label.HongLabelOption
 import com.codehong.library.widget.label.HongLabelView
 import com.codehong.library.widget.label.input.HongLabelInputBuilder
 import com.codehong.library.widget.label.input.HongLabelInputOption
@@ -70,22 +69,12 @@ object PlaygroundManager {
                             top = (if (useTopPadding) Const.PLAYGROUND_TOP_PADDING else 0).toFloat(),
                         )
                     )
-                    .labelTextOption(
-                        HongTextBuilder()
-                            .copy(HongLabelOption.DEFAULT_LABEL_OPTION)
-                            .text(label)
-                            .typography(labelTypo ?: HongTypo.BODY_17_B)
-                            .color(HongColor.MAIN_ORANGE_100)
-                            .applyOption()
-                    )
-                    .descriptionTextOption(
-                        HongTextBuilder()
-                            .copy(HongLabelOption.DEFAULT_DESCRIPTION_OPTION)
-                            .text(description)
-                            .typography(descriptionTypo ?: HongTypo.CONTENTS_12)
-                            .color(HongColor.BLACK_100)
-                            .applyOption()
-                    )
+                    .label(label)
+                    .labelTypo(labelTypo ?: HongTypo.BODY_17_B)
+                    .labelColor(HongColor.MAIN_ORANGE_100)
+                    .description(description)
+                    .descriptionTypo(descriptionTypo ?: HongTypo.CONTENTS_12)
+                    .descriptionColor(HongColor.BLACK_100)
                     .applyOption()
             ).apply {
                 activity.addOptionView(this)

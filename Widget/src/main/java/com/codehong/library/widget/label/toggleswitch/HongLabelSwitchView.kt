@@ -8,9 +8,9 @@ import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
-import com.codehong.library.widget.label.HongLabelBuilder2
+import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.language.frameLayout
-import com.codehong.library.widget.language.hongLabel2
+import com.codehong.library.widget.language.hongLabel
 import com.codehong.library.widget.language.hongSwitch
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.color.HongColor
@@ -56,9 +56,9 @@ class HongLabelSwitchView @JvmOverloads constructor(
                 marginEnd = context.dpToPx(5f)
             }
 
-            hongLabel2 {
+            hongLabel {
                 set(
-                    HongLabelBuilder2()
+                    HongLabelBuilder()
                         .width(HongLayoutParam.MATCH_PARENT.value)
                         .backgroundColor(HongColor.TRANSPARENT)
                         .label(option.label)

@@ -1,10 +1,7 @@
 package com.codehong.library.widget.label.checkbox
 
 import com.codehong.library.widget.HongWidgetCommonOption
-
 import com.codehong.library.widget.checkbox.HongCheckboxBuilder
-import com.codehong.library.widget.label.HongLabelBuilder
-import com.codehong.library.widget.label.HongLabelOption
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongPosition
@@ -14,41 +11,16 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongLabelCheckboxOption(
     override val type: HongWidgetType = HongWidgetType.LABEL_CHECKBOX
 ) : HongWidgetCommonOption {
 
     companion object {
-        val DEFAULT_BETTWEN_SPACER = 10
-        val DEFAULT_LABEL_OPTION = HongTextBuilder()
-            .width(HongLayoutParam.WRAP_CONTENT.value)
-            .typography(HongTypo.BODY_15_B)
-            .color(HongColor.BLACK_100)
-            .applyOption()
+        const val DEFAULT_BETWEEN_SPACER = 10
 
-        val DEFAULT_DESCRIPTION_OPTION = HongTextBuilder()
-            .width(HongLayoutParam.WRAP_CONTENT.value)
-            .typography(HongTypo.CONTENTS_10)
-            .margin(
-                HongSpacingInfo(
-                    top = 2f
-                )
-            )
-            .color("#333333")
-            .applyOption()
-
-        val DEFAULT_LABEL_VIEW_OPTION = HongLabelBuilder()
-            .width(HongLayoutParam.WRAP_CONTENT.value)
-            .backgroundColor(HongColor.TRANSPARENT)
-            .labelTextOption(DEFAULT_LABEL_OPTION)
-            .descriptionTextOption(DEFAULT_DESCRIPTION_OPTION)
-            .applyOption()
-
-        val DEFAULT_CHECKBOX_SIZE = 22
         val DEFAULT_CHECKBOX_OPTION = HongCheckboxBuilder()
-            .size(DEFAULT_CHECKBOX_SIZE)
+            .size(22)
             .backgroundColor(HongColor.TRANSPARENT)
             .checkedColor(HongColor.MAIN_ORANGE_100)
             .checkmarkColor(HongColor.WHITE_100)
@@ -85,11 +57,12 @@ data class HongLabelCheckboxOption(
 
 
     var label: String? = null
-    var labelTextOption = DEFAULT_LABEL_OPTION
-    var description: String? = null
-    var descriptionTextOption = DEFAULT_DESCRIPTION_OPTION
+    var labelColorHex: String = HongColor.BLACK_100.hex
+    var labelTypo: HongTypo = HongTypo.BODY_15_B
 
-    var labelOption: HongLabelOption = DEFAULT_LABEL_VIEW_OPTION
+    var description: String? = null
+    var descriptionColorHex: String = HongColor.BLACK_60.hex
+    var descriptionTypo: HongTypo = HongTypo.CONTENTS_10
 
     var checkboxOption = DEFAULT_CHECKBOX_OPTION
 
@@ -118,10 +91,11 @@ data class HongLabelCheckboxOption(
         if (shadow != other.shadow) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (label != other.label) return false
-        if (labelTextOption != other.labelTextOption) return false
+        if (labelColorHex != other.labelColorHex) return false
+        if (labelTypo != other.labelTypo) return false
         if (description != other.description) return false
-        if (descriptionTextOption != other.descriptionTextOption) return false
-        if (labelOption != other.labelOption) return false
+        if (descriptionColorHex != other.descriptionColorHex) return false
+        if (descriptionTypo != other.descriptionTypo) return false
         if (checkboxOption != other.checkboxOption) return false
         if (checkboxSize != other.checkboxSize) return false
         if (isChecked != other.isChecked) return false
@@ -144,10 +118,11 @@ data class HongLabelCheckboxOption(
         result = 31 * result + shadow.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + (label?.hashCode() ?: 0)
-        result = 31 * result + labelTextOption.hashCode()
+        result = 31 * result + labelColorHex.hashCode()
+        result = 31 * result + labelTypo.hashCode()
         result = 31 * result + (description?.hashCode() ?: 0)
-        result = 31 * result + descriptionTextOption.hashCode()
-        result = 31 * result + labelOption.hashCode()
+        result = 31 * result + descriptionColorHex.hashCode()
+        result = 31 * result + descriptionTypo.hashCode()
         result = 31 * result + checkboxOption.hashCode()
         result = 31 * result + (checkboxSize ?: 0)
         result = 31 * result + (isChecked?.hashCode() ?: 0)
@@ -170,16 +145,15 @@ data class HongLabelCheckboxOption(
                 "shadow=$shadow, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "label=$label, " +
-                "labelTextOption=$labelTextOption, " +
+                "labelColorHex='$labelColorHex', " +
+                "labelTypo=$labelTypo, " +
                 "description=$description, " +
-                "descriptionTextOption=$descriptionTextOption, " +
-                "labelOption=$labelOption, " +
+                "descriptionColorHex='$descriptionColorHex', " +
+                "descriptionTypo=$descriptionTypo, " +
                 "checkboxOption=$checkboxOption, " +
                 "checkboxSize=$checkboxSize, " +
                 "isChecked=$isChecked, " +
                 "checkboxPosition=$checkboxPosition" +
                 ")"
     }
-
-
 }

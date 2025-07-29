@@ -1,13 +1,13 @@
 package com.codehong.lib.sample.label.checkbox
 
 import com.codehong.lib.sample.checkbox.HongCheckboxPlayground
-import com.codehong.lib.sample.label.HongLabelPlayground
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
 import com.codehong.library.widget.label.checkbox.HongLabelCheckboxBuilder
 import com.codehong.library.widget.label.checkbox.HongLabelCheckboxOption
 import com.codehong.library.widget.rule.HongWidgetType
+import com.codehong.library.widget.rule.typo.HongTypo
 
 class HongLabelCheckboxPlayground(
     playgroundActivity: PlaygroundActivity
@@ -104,19 +104,89 @@ class HongLabelCheckboxPlayground(
                 callback.invoke(inject)
             }
 
-        HongLabelPlayground(activity)
-            .injectPreview(
-                injectOption = inject.labelOption,
-                includeCommonOption = true,
-                label = "라벨 설정"
-            ) {
-                inject = HongLabelCheckboxBuilder()
-                    .copy(inject)
-                    .label(null)
-                    .description(null)
-                    .labelOption(it)
-                    .applyOption()
-                callback.invoke(inject)
-            }
+        PlaygroundManager.addOptionTitleView(
+            activity,
+            label = "label 설정",
+            labelTypo = HongTypo.BODY_16_B
+        )
+
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity,
+            input = inject.label,
+            label = "label 텍스트",
+        ) {
+            inject = HongLabelCheckboxBuilder()
+                .copy(inject)
+                .label(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addColorOptionPreview(
+            activity,
+            colorHex = inject.labelColorHex,
+            label = "label ",
+        ) {
+            inject = HongLabelCheckboxBuilder()
+                .copy(inject)
+                .labelColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addSelectTypoOptionView(
+            activity,
+            typo = inject.labelTypo,
+            label = "label 폰트",
+        ) {
+            inject = HongLabelCheckboxBuilder()
+                .copy(inject)
+                .labelTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addOptionTitleView(
+            activity,
+            label = "description 설정",
+            labelTypo = HongTypo.BODY_16_B
+        )
+
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity,
+            input = inject.label,
+            label = "description 텍스트",
+        ) {
+            inject = HongLabelCheckboxBuilder()
+                .copy(inject)
+                .description(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+
+        PlaygroundManager.addColorOptionPreview(
+            activity,
+            colorHex = inject.labelColorHex,
+            label = "description ",
+        ) {
+            inject = HongLabelCheckboxBuilder()
+                .copy(inject)
+                .descriptionColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addSelectTypoOptionView(
+            activity,
+            typo = inject.labelTypo,
+            label = "description 폰트",
+        ) {
+            inject = HongLabelCheckboxBuilder()
+                .copy(inject)
+                .descriptionTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
     }
 }

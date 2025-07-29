@@ -14,9 +14,12 @@ import com.codehong.library.widget.checkbox.HongCheckBoxCompose
 import com.codehong.library.widget.checkbox.HongCheckboxBuilder
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
+import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.HongLabelViewCompose
+import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongPosition
 import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.util.HongWidgetNoneClickContainer
 
 @Composable
@@ -34,14 +37,25 @@ fun HongLabelCheckboxCompose(
                 HongCheckBoxCompose(option.checkboxOption)
                 Spacer(
                     modifier = Modifier
-                        .size(HongLabelCheckboxOption.DEFAULT_BETTWEN_SPACER.dp)
+                        .size(HongLabelCheckboxOption.DEFAULT_BETWEEN_SPACER.dp)
                 )
             }
-            HongLabelViewCompose(option.labelOption)
+            HongLabelViewCompose(
+                HongLabelBuilder()
+                    .width(HongLayoutParam.WRAP_CONTENT.value)
+                    .backgroundColor(HongColor.TRANSPARENT)
+                    .label(option.label)
+                    .labelColor(option.labelColorHex)
+                    .labelTypo(option.labelTypo)
+                    .description(option.description)
+                    .descriptionColor(option.descriptionColorHex)
+                    .descriptionTypo(option.descriptionTypo)
+                    .applyOption()
+            )
             if (option.checkboxPosition != HongPosition.LEFT) {
                 Spacer(
                     modifier = Modifier
-                        .size(HongLabelCheckboxOption.DEFAULT_BETTWEN_SPACER.dp)
+                        .size(HongLabelCheckboxOption.DEFAULT_BETWEEN_SPACER.dp)
                 )
                 HongCheckBoxCompose(option.checkboxOption)
             }

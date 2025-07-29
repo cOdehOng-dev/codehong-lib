@@ -11,8 +11,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
-import com.codehong.library.widget.label.HongLabelBuilder2
-import com.codehong.library.widget.label.HongLabelViewCompose2
+import com.codehong.library.widget.label.HongLabelBuilder
+import com.codehong.library.widget.label.HongLabelViewCompose
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
@@ -35,8 +35,8 @@ fun HongLabelSwitchCompose(
                 modifier = Modifier
                     .weight(1f)
             ) {
-                HongLabelViewCompose2(
-                    HongLabelBuilder2()
+                HongLabelViewCompose(
+                    HongLabelBuilder()
                         .width(HongLayoutParam.MATCH_PARENT.value)
                         .backgroundColor(HongColor.TRANSPARENT)
                         .label(option.label)

@@ -1,7 +1,6 @@
 package com.codehong.library.widget.label
 
 import com.codehong.library.widget.HongWidgetCommonOption
-
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -10,30 +9,10 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongLabelOption(
     override val type: HongWidgetType = HongWidgetType.LABEL
 ) : HongWidgetCommonOption {
-
-    companion object {
-        val DEFAULT_LABEL_OPTION = HongTextBuilder()
-            .width(HongLayoutParam.MATCH_PARENT.value)
-            .typography(HongTypo.BODY_15_B)
-            .color(HongColor.BLACK_100)
-            .applyOption()
-
-        val DEFAULT_DESCRIPTION_OPTION = HongTextBuilder()
-            .width(HongLayoutParam.MATCH_PARENT.value)
-            .typography(HongTypo.CONTENTS_10)
-            .margin(
-                HongSpacingInfo(
-                    top = 2f
-                )
-            )
-            .color("#333333")
-            .applyOption()
-    }
 
     override var isValidComponent: Boolean = true
 
@@ -50,9 +29,12 @@ data class HongLabelOption(
     override var useShapeCircle: Boolean = false
 
     var label: String? = null
+    var labelColorHex: String = HongColor.BLACK_100.hex
+    var labelTypo: HongTypo = HongTypo.BODY_15_B
+
     var description: String? = null
-    var labelTextOption = DEFAULT_LABEL_OPTION
-    var descriptionTextOption = DEFAULT_DESCRIPTION_OPTION
+    var descriptionColorHex: String = HongColor.BLACK_60.hex
+    var descriptionTypo: HongTypo = HongTypo.CONTENTS_10
 
 
     override fun equals(other: Any?): Boolean {
@@ -69,10 +51,16 @@ data class HongLabelOption(
         if (padding != other.padding) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (click != other.click) return false
+        if (radius != other.radius) return false
+        if (shadow != other.shadow) return false
+        if (border != other.border) return false
+        if (useShapeCircle != other.useShapeCircle) return false
         if (label != other.label) return false
+        if (labelColorHex != other.labelColorHex) return false
+        if (labelTypo != other.labelTypo) return false
         if (description != other.description) return false
-        if (labelTextOption != other.labelTextOption) return false
-        if (descriptionTextOption != other.descriptionTextOption) return false
+        if (descriptionColorHex != other.descriptionColorHex) return false
+        if (descriptionTypo != other.descriptionTypo) return false
 
         return true
     }
@@ -86,15 +74,21 @@ data class HongLabelOption(
         result = 31 * result + padding.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + (click?.hashCode() ?: 0)
+        result = 31 * result + radius.hashCode()
+        result = 31 * result + shadow.hashCode()
+        result = 31 * result + border.hashCode()
+        result = 31 * result + useShapeCircle.hashCode()
         result = 31 * result + (label?.hashCode() ?: 0)
+        result = 31 * result + labelColorHex.hashCode()
+        result = 31 * result + labelTypo.hashCode()
         result = 31 * result + (description?.hashCode() ?: 0)
-        result = 31 * result + labelTextOption.hashCode()
-        result = 31 * result + descriptionTextOption.hashCode()
+        result = 31 * result + descriptionColorHex.hashCode()
+        result = 31 * result + descriptionTypo.hashCode()
         return result
     }
 
     override fun toString(): String {
-        return "HongLabelOption(" +
+        return "HongLabelOption2(" +
                 "type=$type, " +
                 "isValidComponent=$isValidComponent, " +
                 "width=$width, " +
@@ -103,10 +97,18 @@ data class HongLabelOption(
                 "padding=$padding, " +
                 "backgroundColorHex='$backgroundColorHex', " +
                 "click=$click, " +
+                "radius=$radius, " +
+                "shadow=$shadow, " +
+                "border=$border, " +
+                "useShapeCircle=$useShapeCircle, " +
                 "label=$label, " +
+                "labelColorHex='$labelColorHex', " +
+                "labelTypo=$labelTypo, " +
                 "description=$description, " +
-                "labelTextOption=$labelTextOption, " +
-                "descriptionTextOption=$descriptionTextOption" +
+                "descriptionColorHex='$descriptionColorHex', " +
+                "descriptionTypo=$descriptionTypo" +
                 ")"
     }
+
+
 }

@@ -8,10 +8,13 @@ import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
+import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.language.frameLayout
 import com.codehong.library.widget.language.hongCheckbox
 import com.codehong.library.widget.language.hongLabel
+import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongPosition
+import com.codehong.library.widget.rule.color.HongColor
 
 class HongLabelCheckboxView @JvmOverloads constructor(
     context: Context,
@@ -55,14 +58,25 @@ class HongLabelCheckboxView @JvmOverloads constructor(
             layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT).apply {
                 weight = 1f
                 if (option.checkboxPosition == HongPosition.LEFT) {
-                    marginStart = context.dpToPx(HongLabelCheckboxOption.DEFAULT_BETTWEN_SPACER)
+                    marginStart = context.dpToPx(HongLabelCheckboxOption.DEFAULT_BETWEEN_SPACER)
                 } else {
-                    marginEnd = context.dpToPx(HongLabelCheckboxOption.DEFAULT_BETTWEN_SPACER)
+                    marginEnd = context.dpToPx(HongLabelCheckboxOption.DEFAULT_BETWEEN_SPACER)
                 }
             }
 
             hongLabel {
-                this.set(option.labelOption)
+                set(
+                    HongLabelBuilder()
+                        .width(HongLayoutParam.WRAP_CONTENT.value)
+                        .backgroundColor(HongColor.TRANSPARENT)
+                        .label(option.label)
+                        .labelColor(option.labelColorHex)
+                        .labelTypo(option.labelTypo)
+                        .description(option.description)
+                        .descriptionColor(option.descriptionColorHex)
+                        .descriptionTypo(option.descriptionTypo)
+                        .applyOption()
+                )
             }
         }
 

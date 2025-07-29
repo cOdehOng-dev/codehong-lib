@@ -11,8 +11,8 @@ import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
-import com.codehong.library.widget.label.HongLabelBuilder2
-import com.codehong.library.widget.language.hongLabel2
+import com.codehong.library.widget.label.HongLabelBuilder
+import com.codehong.library.widget.language.hongLabel
 import com.codehong.library.widget.language.hongTextButton
 import com.codehong.library.widget.language.hongTextField
 import com.codehong.library.widget.rule.HongLayoutParam
@@ -64,9 +64,9 @@ class HongLabelSelectInputView @JvmOverloads constructor(
         hongBackground(
             backgroundColor = option.backgroundColorHex
         )
-        hongLabel2 {
+        hongLabel {
             set(
-                HongLabelBuilder2()
+                HongLabelBuilder()
                     .width(HongLayoutParam.MATCH_PARENT.value)
                     .backgroundColor(HongColor.TRANSPARENT)
                     .label(option.label)
@@ -104,9 +104,9 @@ class HongLabelSelectInputView @JvmOverloads constructor(
             backgroundColor = option.backgroundColorHex
         )
 
-        hongLabel2 {
+        hongLabel {
             set(
-                HongLabelBuilder2()
+                HongLabelBuilder()
                     .width(HongLayoutParam.MATCH_PARENT.value)
                     .backgroundColor(HongColor.TRANSPARENT)
                     .label(option.label)
