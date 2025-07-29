@@ -17,7 +17,7 @@ enum class HongWidgetType(
     TIMER_TEXT_FIELD(24, "TimerTextField", true),
     NUMBER_TEXT_FIELD(25, "NumberTextField", true),
 //    SEARCH_BAR(5, "SearchBar", true),
-    TEXT_BUTTON(6, "TextButton", true),
+    BUTTON_TEXT(6, "ButtonText", true),
     SELECT_BUTTON(7, "SelectButton", true),
     CALENDAR(8, "Calendar", true),
     HORIZONTAL_PAGER(9, "HorizontalViewPager", true),

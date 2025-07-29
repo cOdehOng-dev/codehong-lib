@@ -3,9 +3,9 @@ package com.codehong.lib.sample.button.text
 import android.view.View
 import androidx.compose.runtime.Composable
 import com.codehong.lib.sample.base.BaseSampleMixActivity
-import com.codehong.library.widget.button.text.HongTextButtonBuilder
-import com.codehong.library.widget.button.text.HongTextButtonCompose
-import com.codehong.library.widget.button.text.HongTextButtonView
+import com.codehong.library.widget.button.text2.HongTextButtonBuilder2
+import com.codehong.library.widget.button.text2.HongTextButtonCompose2
+import com.codehong.library.widget.button.text2.HongTextButtonView2
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -14,11 +14,10 @@ import com.codehong.library.widget.rule.HongState
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
 
 class SampleTextButtonActivity : BaseSampleMixActivity() {
 
-    private val option1 = HongTextButtonBuilder()
+    private val option1 = HongTextButtonBuilder2()
         .width(HongLayoutParam.MATCH_PARENT.value)
         .height(48)
         .margin(
@@ -28,13 +27,9 @@ class SampleTextButtonActivity : BaseSampleMixActivity() {
                 bottom = 10f
             )
         )
-        .textOption(
-            HongTextBuilder()
-                .text("검색하기")
-                .typography(HongTypo.BODY_15_B)
-                .color(HongColor.WHITE_100)
-                .applyOption()
-        )
+        .text("검색하기")
+        .textTypo(HongTypo.BODY_15_B)
+        .textColor(HongColor.WHITE_100)
         .backgroundColor(HongColor.MAIN_ORANGE_100.hex)
         .radius(
             HongRadiusInfo(
@@ -43,7 +38,7 @@ class SampleTextButtonActivity : BaseSampleMixActivity() {
         )
         .applyOption()
 
-    private val option2 = HongTextButtonBuilder()
+    private val option2 = HongTextButtonBuilder2()
         .width(HongLayoutParam.MATCH_PARENT.value)
         .height(48)
         .margin(
@@ -53,13 +48,9 @@ class SampleTextButtonActivity : BaseSampleMixActivity() {
                 bottom = 10f
             )
         )
-        .textOption(
-            HongTextBuilder()
-                .text("이동하기")
-                .typography(HongTypo.BODY_15_B)
-                .color(HongColor.WHITE_100.hex)
-                .applyOption()
-        )
+        .text("이동하기")
+        .textTypo(HongTypo.BODY_15_B)
+        .textColor(HongColor.WHITE_100.hex)
         .backgroundColor(HongColor.MAIN_ORANGE_100.hex)
         .radius(
             HongRadiusInfo(
@@ -77,7 +68,7 @@ class SampleTextButtonActivity : BaseSampleMixActivity() {
         )
         .applyOption()
 
-    private val option3 = HongTextButtonBuilder()
+    private val option3 = HongTextButtonBuilder2()
         .width(HongLayoutParam.MATCH_PARENT.value)
         .height(48)
         .margin(
@@ -101,17 +92,13 @@ class SampleTextButtonActivity : BaseSampleMixActivity() {
                 color = HongColor.MAIN_ORANGE_100.hex
             )
         )
-        .textOption(
-            HongTextBuilder()
-                .text("취소")
-                .typography(HongTypo.BODY_15_B)
-                .color(HongColor.MAIN_ORANGE_100.hex)
-                .applyOption()
-        )
+        .text("취소")
+        .textTypo(HongTypo.BODY_15_B)
+        .textColor(HongColor.MAIN_ORANGE_100.hex)
         .backgroundColor(HongColor.WHITE_100.hex)
         .applyOption()
 
-    private val option4 = HongTextButtonBuilder()
+    private val option4 = HongTextButtonBuilder2()
         .width(HongLayoutParam.MATCH_PARENT.value)
         .height(48)
         .state(HongState.DISABLED)
@@ -122,13 +109,9 @@ class SampleTextButtonActivity : BaseSampleMixActivity() {
                 bottom = 10f
             )
         )
-        .textOption(
-            HongTextBuilder()
-                .text("이동하기")
-                .typography(HongTypo.BODY_15_B)
-                .color(HongColor.WHITE_100.hex)
-                .applyOption()
-        )
+        .text("이동하기")
+        .textTypo(HongTypo.BODY_15_B)
+        .textColor(HongColor.WHITE_100.hex)
         .backgroundColor(HongColor.MAIN_ORANGE_100.hex)
         .radius(
             HongRadiusInfo(
@@ -146,17 +129,18 @@ class SampleTextButtonActivity : BaseSampleMixActivity() {
         )
         .applyOption()
 
-    private val optionList get() = listOf(
-        option1,
-        option2,
-        option3,
-        option4
-    )
+    private val optionList
+        get() = listOf(
+            option1,
+            option2,
+            option3,
+            option4
+        )
 
     override fun optionViewList(): List<View> {
         return mutableListOf<View>().apply {
             optionList.forEach {
-                add(HongTextButtonView(this@SampleTextButtonActivity).set(it))
+                add(HongTextButtonView2(this@SampleTextButtonActivity).set(it))
             }
         }
     }
@@ -164,7 +148,7 @@ class SampleTextButtonActivity : BaseSampleMixActivity() {
     @Composable
     override fun InitCompose() {
         optionList.forEach {
-            HongTextButtonCompose(it)
+            HongTextButtonCompose2(it)
         }
     }
 }

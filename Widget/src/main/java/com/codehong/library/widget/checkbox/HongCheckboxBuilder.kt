@@ -16,16 +16,14 @@ class HongCheckboxBuilder : HongWidgetCommonBuilder<HongCheckboxOption, HongChec
     }
 
     fun checkedColor(color: HongColor) = apply {
-        option.checkedColor = color
-        checkedColor(color.hex)
+        option.checkedColorHex = color.hex
     }
     fun checkedColor(colorHex: String) = apply {
         option.checkedColorHex = colorHex
     }
 
     fun checkmarkColor(color: HongColor) = apply {
-        option.checkmarkColor = color
-        checkmarkColor(color.hex)
+        option.checkmarkColorHex = color.hex
     }
     fun checkmarkColor(colorHex: String) = apply {
         option.checkmarkColorHex = colorHex
@@ -60,9 +58,7 @@ class HongCheckboxBuilder : HongWidgetCommonBuilder<HongCheckboxOption, HongChec
             .onClick(inject.click)
             .size(inject.size)
             .backgroundColor(inject.backgroundColorHex)
-            .checkedColor(inject.checkedColor)
             .checkedColor(inject.checkedColorHex)
-            .checkmarkColor(inject.checkmarkColor)
             .checkmarkColor(inject.checkmarkColorHex)
             .border(inject.border)
             .radius(inject.radius)

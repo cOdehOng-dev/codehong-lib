@@ -38,10 +38,7 @@ data class HongCheckboxOption(
 
     var size: Int = 24
 
-    var checkedColor: HongColor = HongColor.MAIN_ORANGE_100
     var checkedColorHex: String =  HongColor.MAIN_ORANGE_100.hex
-
-    var checkmarkColor: HongColor = HongColor.WHITE_100
     var checkmarkColorHex: String = HongColor.WHITE_100.hex
 
     var checkState = false
@@ -68,9 +65,7 @@ data class HongCheckboxOption(
         if (border != other.border) return false
         if (radius != other.radius) return false
         if (size != other.size) return false
-        if (checkedColor != other.checkedColor) return false
         if (checkedColorHex != other.checkedColorHex) return false
-        if (checkmarkColor != other.checkmarkColor) return false
         if (checkmarkColorHex != other.checkmarkColorHex) return false
         if (checkState != other.checkState) return false
         if (enableState != other.enableState) return false
@@ -92,9 +87,7 @@ data class HongCheckboxOption(
         result = 31 * result + border.hashCode()
         result = 31 * result + radius.hashCode()
         result = 31 * result + size
-        result = 31 * result + checkedColor.hashCode()
         result = 31 * result + checkedColorHex.hashCode()
-        result = 31 * result + checkmarkColor.hashCode()
         result = 31 * result + checkmarkColorHex.hashCode()
         result = 31 * result + checkState.hashCode()
         result = 31 * result + enableState.hashCode()
@@ -116,9 +109,7 @@ data class HongCheckboxOption(
                 "border=$border, " +
                 "radius=$radius, " +
                 "size=$size, " +
-                "checkedColor=$checkedColor, " +
                 "checkedColorHex='$checkedColorHex', " +
-                "checkmarkColor=$checkmarkColor, " +
                 "checkmarkColorHex='$checkmarkColorHex', " +
                 "checkState=$checkState, " +
                 "enableState=$enableState" +

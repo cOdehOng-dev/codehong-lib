@@ -14,7 +14,7 @@ import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongTextButtonOption(
-    override val type: HongWidgetType = HongWidgetType.TEXT_BUTTON,
+    override val type: HongWidgetType = HongWidgetType.BUTTON_TEXT,
 ) : HongWidgetCommonOption {
 
     companion object {

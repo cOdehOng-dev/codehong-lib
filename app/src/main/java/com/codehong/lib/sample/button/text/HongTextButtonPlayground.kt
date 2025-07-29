@@ -3,24 +3,21 @@ package com.codehong.lib.sample.button.text
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
-import com.codehong.lib.sample.text.HongTextPlayground
-import com.codehong.library.widget.button.text.HongTextButtonBuilder
-import com.codehong.library.widget.button.text.HongTextButtonOption
+import com.codehong.library.widget.button.text2.HongTextButtonBuilder2
+import com.codehong.library.widget.button.text2.HongTextButtonOption2
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
 
 class HongTextButtonPlayground(
     playgroundActivity: PlaygroundActivity
-) : BasePlayground<HongTextButtonOption> {
+) : BasePlayground<HongTextButtonOption2> {
 
     companion object {
-        private val DEFAULT_PREVIEW_OPTION = HongTextButtonBuilder()
+        private val DEFAULT_PREVIEW_OPTION = HongTextButtonBuilder2()
             .width(HongLayoutParam.MATCH_PARENT.value)
             .height(48)
             .padding(
@@ -36,15 +33,9 @@ class HongTextButtonPlayground(
                     bottom = 10f
                 )
             )
-            .textOption(
-                HongTextBuilder()
-                    .text("검색하기")
-                    .size(15)
-                    .fontType(HongFont.PRETENDARD_700)
-                    .color(HongColor.WHITE_100)
-                    .maxLines(1)
-                    .applyOption()
-            )
+            .text("검색하기")
+            .textTypo(HongTypo.BODY_15_B)
+            .textColor(HongColor.WHITE_100)
             .backgroundColor(HongColor.MAIN_ORANGE_100.hex)
             .radius(
                 HongRadiusInfo(
@@ -58,8 +49,8 @@ class HongTextButtonPlayground(
     }
 
     override val activity: PlaygroundActivity = playgroundActivity
-    override var previewOption: HongTextButtonOption = DEFAULT_PREVIEW_OPTION
-    override val widgetType: HongWidgetType = HongWidgetType.TEXT_BUTTON
+    override var previewOption: HongTextButtonOption2 = DEFAULT_PREVIEW_OPTION
+    override val widgetType: HongWidgetType = HongWidgetType.BUTTON_TEXT
 
     fun preview() {
         executePreview()
@@ -74,7 +65,7 @@ class HongTextButtonPlayground(
     }
     
     fun injectPreview(
-        injectOption: HongTextButtonOption,
+        injectOption: HongTextButtonOption2,
         includeCommonOption: Boolean = false,
         label: String = "",
         labelTypo: HongTypo? = null,
@@ -84,7 +75,7 @@ class HongTextButtonPlayground(
         useShadow: Boolean = true,
         useBackgroundColor: Boolean = true,
         useBorder: Boolean = true,
-        callback: (HongTextButtonOption) -> Unit
+        callback: (HongTextButtonOption2) -> Unit
     ) {
         var inject = injectOption
         if (label.isNotEmpty()) {
@@ -111,21 +102,21 @@ class HongTextButtonPlayground(
                 margin = inject.margin,
                 usePadding = false,
                 selectWidth = { selectWidth ->
-                    inject = HongTextButtonBuilder()
+                    inject = HongTextButtonBuilder2()
                         .copy(inject)
                         .width(selectWidth)
                         .applyOption()
                     callback.invoke(inject)
                 },
                 selectHeight = { selectHeight ->
-                    inject = HongTextButtonBuilder()
+                    inject = HongTextButtonBuilder2()
                         .copy(inject)
                         .height(selectHeight)
                         .applyOption()
                     callback.invoke(inject)
                 },
                 selectMargin = { selectMargin ->
-                    inject = HongTextButtonBuilder()
+                    inject = HongTextButtonBuilder2()
                         .copy(inject)
                         .margin(selectMargin)
                         .applyOption()
@@ -140,7 +131,7 @@ class HongTextButtonPlayground(
                 activity = activity,
                 radius = inject.radius,
             ) { selectRadius ->
-                inject = HongTextButtonBuilder()
+                inject = HongTextButtonBuilder2()
                     .copy(inject)
                     .radius(selectRadius)
                     .applyOption()
@@ -156,7 +147,7 @@ class HongTextButtonPlayground(
                 label = "background ",
                 colorHex = inject.backgroundColorHex
             ) { selectColor ->
-                inject = HongTextButtonBuilder()
+                inject = HongTextButtonBuilder2()
                     .copy(inject)
                     .backgroundColor(selectColor)
                     .applyOption()
@@ -173,7 +164,7 @@ class HongTextButtonPlayground(
                 despColor = "버튼 테두리 색상을 설정해요.",
                 useTopPadding = true
             ) { selectBorder ->
-                inject = HongTextButtonBuilder()
+                inject = HongTextButtonBuilder2()
                     .copy(inject)
                     .border(selectBorder)
                     .applyOption()
@@ -187,7 +178,7 @@ class HongTextButtonPlayground(
                 activity = activity,
                 shadow = inject.shadow
             ) { selectShadow ->
-                inject = HongTextButtonBuilder()
+                inject = HongTextButtonBuilder2()
                     .copy(inject)
                     .shadow(selectShadow)
                     .applyOption()
@@ -196,21 +187,57 @@ class HongTextButtonPlayground(
         }
 
         // region 버튼 텍스트
-        HongTextPlayground(activity).injectPreview(
-            inject.textOption,
-            includeCommonOption = false,
-            label = "텍스트 옵션",
-            labelTypo = if (label.isNotEmpty()) HongTypo.BODY_15_B else null,
-            useUnderline = false,
-            useCancelLine = false,
-            useAlign = false
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity,
+            input = inject.text,
+            label = "버튼 텍스트",
         ) {
-            inject = HongTextButtonBuilder()
+            inject = HongTextButtonBuilder2()
                 .copy(inject)
-                .textOption(it)
+                .text(it)
                 .applyOption()
             callback.invoke(inject)
         }
+
+        PlaygroundManager.addSelectTypoOptionView(
+            activity,
+            typo = inject.textTypo,
+            label = "버튼 텍스트 폰트",
+        ) {
+            inject = HongTextButtonBuilder2()
+                .copy(inject)
+                .textTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addColorOptionPreview(
+            activity,
+            label = "버튼 텍스트 ",
+            colorHex = inject.textColorHex
+        ) {
+            inject = HongTextButtonBuilder2()
+                .copy(inject)
+                .textColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+//        HongTextPlayground(activity).injectPreview(
+//            inject.textOption,
+//            includeCommonOption = false,
+//            label = "텍스트 옵션",
+//            labelTypo = if (label.isNotEmpty()) HongTypo.BODY_15_B else null,
+//            useUnderline = false,
+//            useCancelLine = false,
+//            useAlign = false
+//        ) {
+//            inject = HongTextButtonBuilder2()
+//                .copy(inject)
+//                .textOption(it)
+//                .applyOption()
+//            callback.invoke(inject)
+//        }
         // endregion
 
         

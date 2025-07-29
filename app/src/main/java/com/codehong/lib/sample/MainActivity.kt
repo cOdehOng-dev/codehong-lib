@@ -342,11 +342,11 @@ fun SampleTheme(
                                         }
 
 
-                                        HongWidgetType.TEXT_BUTTON -> {
+                                        HongWidgetType.BUTTON_TEXT -> {
                                             Intent(activity, SampleTextButtonActivity::class.java).apply {
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
-                                                    HongWidgetType.TEXT_BUTTON.value
+                                                    HongWidgetType.BUTTON_TEXT.value
                                                 )
                                                 activity.startActivity(this)
                                             }

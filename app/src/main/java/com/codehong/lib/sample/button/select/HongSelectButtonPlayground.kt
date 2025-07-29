@@ -1,7 +1,6 @@
 package com.codehong.lib.sample.button.select
 
 import android.util.Log
-import com.codehong.lib.sample.button.text.HongTextButtonPlayground
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
@@ -91,32 +90,32 @@ class HongSelectButtonPlayground(
             )
         }
 
-        HongTextButtonPlayground(activity)
-            .injectPreview(
-                injectOption = previewOption.negativeTextButtonOption,
-                includeCommonOption = false,
-                label = "취소 버튼 옵션",
-                useShadow = false
-            ) {
-                inject = HongSelectButtonBuilder()
-                    .copy(inject)
-                    .negativeTextButtonOption(it)
-                    .applyOption()
-                callback.invoke(inject)
-            }
-
-        HongTextButtonPlayground(activity)
-            .injectPreview(
-                injectOption = previewOption.positiveTextButtonOption,
-                includeCommonOption = false,
-                label = "확인 버튼 옵션",
-                useShadow = false
-            ) {
-                inject = HongSelectButtonBuilder()
-                    .copy(inject)
-                    .positiveTextButtonOption(it)
-                    .applyOption()
-                callback.invoke(inject)
-            }
+//        HongTextButtonPlayground(activity)
+//            .injectPreview(
+//                injectOption = previewOption.negativeTextButtonOption,
+//                includeCommonOption = false,
+//                label = "취소 버튼 옵션",
+//                useShadow = false
+//            ) {
+//                inject = HongSelectButtonBuilder()
+//                    .copy(inject)
+//                    .negativeTextButtonOption(it)
+//                    .applyOption()
+//                callback.invoke(inject)
+//            }
+//
+//        HongTextButtonPlayground(activity)
+//            .injectPreview(
+//                injectOption = previewOption.positiveTextButtonOption,
+//                includeCommonOption = false,
+//                label = "확인 버튼 옵션",
+//                useShadow = false
+//            ) {
+//                inject = HongSelectButtonBuilder()
+//                    .copy(inject)
+//                    .positiveTextButtonOption(it)
+//                    .applyOption()
+//                callback.invoke(inject)
+//            }
     }
 }
