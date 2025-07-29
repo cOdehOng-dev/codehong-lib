@@ -1,9 +1,7 @@
 package com.codehong.library.widget.label.toggleswitch
 
 import com.codehong.library.widget.HongWidgetCommonOption
-
 import com.codehong.library.widget.label.HongLabelBuilder
-import com.codehong.library.widget.label.HongLabelOption
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -69,76 +67,18 @@ data class HongLabelSwitchOption(
     override var shadow = HongShadowInfo()
 
     var label: String? = null
-    var labelTextOption = DEFAULT_LABEL_OPTION
+    var labelColorHex: String = HongColor.BLACK_100.hex
+    var labelTypo: HongTypo = HongTypo.BODY_15_B
 
     var description: String? = null
-    var descriptionTextOption = DEFAULT_DESCRIPTION_OPTION
+    var descriptionColorHex: String = HongColor.BLACK_60.hex
+    var descriptionTypo: HongTypo = HongTypo.CONTENTS_10
 
-    var labelOption: HongLabelOption = DEFAULT_LABEL_VIEW_OPTION
+
+
 
     var switchOption: HongSwitchOption = DEFAULT_SWITCH_OPTION
 
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as HongLabelSwitchOption
-
-        if (type != other.type) return false
-        if (isValidComponent != other.isValidComponent) return false
-        if (width != other.width) return false
-        if (height != other.height) return false
-        if (margin != other.margin) return false
-        if (padding != other.padding) return false
-        if (backgroundColorHex != other.backgroundColorHex) return false
-        if (click != other.click) return false
-        if (label != other.label) return false
-        if (labelTextOption != other.labelTextOption) return false
-        if (description != other.description) return false
-        if (descriptionTextOption != other.descriptionTextOption) return false
-        if (labelOption != other.labelOption) return false
-        if (switchOption != other.switchOption) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = type.hashCode()
-        result = 31 * result + isValidComponent.hashCode()
-        result = 31 * result + width
-        result = 31 * result + height
-        result = 31 * result + margin.hashCode()
-        result = 31 * result + padding.hashCode()
-        result = 31 * result + backgroundColorHex.hashCode()
-        result = 31 * result + (click?.hashCode() ?: 0)
-        result = 31 * result + (label?.hashCode() ?: 0)
-        result = 31 * result + labelTextOption.hashCode()
-        result = 31 * result + (description?.hashCode() ?: 0)
-        result = 31 * result + descriptionTextOption.hashCode()
-        result = 31 * result + labelOption.hashCode()
-        result = 31 * result + switchOption.hashCode()
-        return result
-    }
-
-    override fun toString(): String {
-        return "HongLabelSwitchOption(" +
-                "type=$type, " +
-                "isValidComponent=$isValidComponent, " +
-                "width=$width, " +
-                "height=$height, " +
-                "margin=$margin, " +
-                "padding=$padding, " +
-                "backgroundColorHex='$backgroundColorHex', " +
-                "click=$click, " +
-                "label=$label, " +
-                "labelTextOption=$labelTextOption, " +
-                "description=$description, " +
-                "descriptionTextOption=$descriptionTextOption, " +
-                "labelOption=$labelOption, " +
-                "switchOption=$switchOption" +
-                ")"
-    }
 
 
 }

@@ -1,7 +1,6 @@
 package com.codehong.library.widget.label
 
 import com.codehong.library.widget.HongWidgetCommonOption
-
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -10,30 +9,10 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongLabelOption2(
     override val type: HongWidgetType = HongWidgetType.LABEL
 ) : HongWidgetCommonOption {
-
-    companion object {
-        val DEFAULT_LABEL_OPTION = HongTextBuilder()
-            .width(HongLayoutParam.MATCH_PARENT.value)
-            .typography(HongTypo.BODY_15_B)
-            .color(HongColor.BLACK_100)
-            .applyOption()
-
-        val DEFAULT_DESCRIPTION_OPTION = HongTextBuilder()
-            .width(HongLayoutParam.MATCH_PARENT.value)
-            .typography(HongTypo.CONTENTS_10)
-            .margin(
-                HongSpacingInfo(
-                    top = 2f
-                )
-            )
-            .color("#333333")
-            .applyOption()
-    }
 
     override var isValidComponent: Boolean = true
 
@@ -56,6 +35,8 @@ data class HongLabelOption2(
     var description: String? = null
     var descriptionColorHex: String = HongColor.BLACK_60.hex
     var descriptionTypo: HongTypo = HongTypo.CONTENTS_10
+
+    
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

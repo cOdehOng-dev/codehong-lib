@@ -1,10 +1,8 @@
 package com.codehong.library.widget.label.toggleswitch
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
-import com.codehong.library.widget.label.HongLabelBuilder
-import com.codehong.library.widget.label.HongLabelOption
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.text.HongTextOption
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.toggleswitch.HongSwitchOption
 
 class HongLabelSwitchBuilder : HongWidgetCommonBuilder<HongLabelSwitchOption, HongLabelSwitchBuilder> {
@@ -14,56 +12,28 @@ class HongLabelSwitchBuilder : HongWidgetCommonBuilder<HongLabelSwitchOption, Ho
 
     fun label(label: String?) = apply {
         option.label = label
-        labelOption(
-            HongLabelBuilder()
-                .copy(option.labelOption)
-                .label(label ?: option.labelOption.labelTextOption.text)
-                .applyOption()
-        )
     }
-    fun labelTextOption(labelTextOption: HongTextOption?) = apply{
-        option.labelTextOption = HongTextBuilder()
-            .copy(labelTextOption ?: HongLabelSwitchOption.DEFAULT_LABEL_OPTION)
-            .text(option.label ?: labelTextOption?.text)
-            .applyOption()
-        labelOption(
-            HongLabelBuilder()
-                .copy(option.labelOption)
-                .labelTextOption(option.labelTextOption)
-                .applyOption()
-        )
+    fun labelColor(color: HongColor) = apply {
+        option.labelColorHex = color.hex
+    }
+    fun labelColor(colorHex: String) = apply {
+        option.labelColorHex = colorHex
+    }
+    fun labelTypo(typo: HongTypo) = apply {
+        option.labelTypo = typo
     }
 
     fun description(description: String?) = apply {
         option.description = description
-        labelOption(
-            HongLabelBuilder()
-                .copy(option.labelOption)
-                .description(description ?: option.labelOption.description.toString())
-                .applyOption()
-        )
     }
-    fun descriptionTextOption(descriptionTextOption: HongTextOption?) = apply {
-        option.descriptionTextOption = HongTextBuilder()
-            .copy(descriptionTextOption ?: HongLabelSwitchOption.DEFAULT_DESCRIPTION_OPTION)
-            .text(option.label ?: descriptionTextOption?.text)
-            .applyOption()
-        labelOption(
-            HongLabelBuilder()
-                .copy(option.labelOption)
-                .descriptionTextOption(option.descriptionTextOption)
-                .applyOption()
-        )
+    fun descriptionColor(color: HongColor) = apply {
+        option.descriptionColorHex = color.hex
     }
-
-    fun labelOption(labelOption: HongLabelOption) = apply {
-        option.labelOption = HongLabelBuilder()
-            .copy(labelOption)
-            .label(option.label ?: labelOption.labelTextOption.text)
-            .labelTextOption(option.labelTextOption)
-            .description(option.description ?: labelOption.descriptionTextOption.text)
-            .descriptionTextOption(option.descriptionTextOption)
-            .applyOption()
+    fun descriptionColor(colorHex: String) = apply {
+        option.descriptionColorHex = colorHex
+    }
+    fun descriptionTypo(typo: HongTypo) = apply {
+        option.descriptionTypo = typo
     }
 
     fun switchOption(switchOption: HongSwitchOption?) = apply {
@@ -79,11 +49,13 @@ class HongLabelSwitchBuilder : HongWidgetCommonBuilder<HongLabelSwitchOption, Ho
             .margin(inject.margin)
             .padding(inject.padding)
             .onClick(inject.click)
-            .label(inject.label)
-            .labelTextOption(inject.labelTextOption)
-            .description(inject.description)
-            .descriptionTextOption(inject.descriptionTextOption)
-            .labelOption(inject.labelOption)
             .switchOption(inject.switchOption)
+
+            .label(inject.label)
+            .labelColor(inject.labelColorHex)
+            .labelTypo(inject.labelTypo)
+            .description(inject.description)
+            .descriptionColor(inject.descriptionColorHex)
+            .descriptionTypo(inject.descriptionTypo)
     }
 }

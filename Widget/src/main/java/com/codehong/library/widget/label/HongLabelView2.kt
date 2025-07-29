@@ -23,14 +23,16 @@ class HongLabelView2 @JvmOverloads constructor(
         orientation = VERTICAL
     }
 
-    private var option = HongLabelOption2()
-
+    var option = HongLabelOption2()
+        private set
+    
     fun set(
         option: HongLabelOption2
     ): HongLabelView2 {
+        removeAllViews()
+
         this.option = option
 
-        removeAllViews()
 
         setLayout(
             option.width,

@@ -45,6 +45,7 @@ class HongLabelBuilder2 : HongWidgetCommonBuilder<HongLabelOption2, HongLabelBui
             .padding(inject.padding)
             .onClick(inject.click)
             .backgroundColor(inject.backgroundColorHex)
+            
             .label(inject.label)
             .labelColor(inject.labelColorHex)
             .labelTypo(inject.labelTypo)

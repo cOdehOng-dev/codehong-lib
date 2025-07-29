@@ -1,14 +1,15 @@
 package com.codehong.lib.sample.label.toggle
 
-import com.codehong.lib.sample.label.HongLabelPlayground
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
+import com.codehong.lib.sample.playground.PlaygroundManager
 import com.codehong.lib.sample.toggleswitch.HongSwitchPlayground
 import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchBuilder
 import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchOption
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.toggleswitch.HongSwitchBuilder
 
 class HongLabelSwitchPlayground(
@@ -16,7 +17,7 @@ class HongLabelSwitchPlayground(
 ) : BasePlayground<HongLabelSwitchOption> {
 
     companion object {
-        val DEFAULT_PREVIEW_OPTION = HongLabelSwitchBuilder()
+        private val DEFAULT_PREVIEW_OPTION = HongLabelSwitchBuilder()
             .padding(
                 HongSpacingInfo(
                     top = 20f,
@@ -51,32 +52,166 @@ class HongLabelSwitchPlayground(
     fun preview() {
         executePreview()
 
-        HongLabelPlayground(activity)
-            .injectPreview(
-                injectOption = previewOption.labelOption,
-                includeCommonOption = true,
-                label = "Label 옵션"
-            ) {
-                this.previewOption = HongLabelSwitchBuilder()
-                    .copy(previewOption)
-                    .label(null)
-                    .description(null)
-                    .labelOption(it)
-                    .applyOption()
-                executePreview()
-            }
+        injectPreview(
+            injectOption = previewOption,
+            includeCommonOption = true
+        ) {
+            previewOption = it
+            executePreview()
+        }
+    }
+
+    fun injectPreview(
+        injectOption: HongLabelSwitchOption,
+        includeCommonOption: Boolean = false,
+        label: String = "",
+        callback: (HongLabelSwitchOption) -> Unit
+    ) {
+        var inject = injectOption
+
+        if (label.isNotEmpty()) {
+            PlaygroundManager.addOptionTitleView(
+                activity,
+                label = label
+            )
+        }
+
+        if (includeCommonOption) {
+            commonPreviewOption(
+                margin = inject.margin,
+                padding = inject.padding,
+                useWidth = false,
+                useHeight = false,
+                selectWidth = { selectWidth ->
+                    inject = HongLabelSwitchBuilder()
+                        .copy(inject)
+                        .width(selectWidth)
+                        .applyOption()
+                    callback.invoke(inject)
+                },
+                selectHeight = { selectHeight ->
+                    inject = HongLabelSwitchBuilder()
+                        .copy(inject)
+                        .height(selectHeight)
+                        .applyOption()
+                    callback.invoke(inject)
+                },
+                selectMargin = { selectMargin ->
+                    inject = HongLabelSwitchBuilder()
+                        .copy(inject)
+                        .margin(selectMargin)
+                        .applyOption()
+                    callback.invoke(inject)
+                },
+                selectPadding = { selectPadding ->
+                    inject = HongLabelSwitchBuilder()
+                        .copy(inject)
+                        .padding(selectPadding)
+                        .applyOption()
+                    callback.invoke(inject)
+                }
+            )
+        }
+
+        PlaygroundManager.addOptionTitleView(
+            activity,
+            label = "label 설정",
+            labelTypo = HongTypo.BODY_16_B
+        )
+
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity,
+            input = inject.label,
+            label = "label 텍스트",
+        ) {
+            inject = HongLabelSwitchBuilder()
+                .copy(inject)
+                .label(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addColorOptionPreview(
+            activity,
+            colorHex = inject.labelColorHex,
+            label = "label ",
+        ) {
+            inject = HongLabelSwitchBuilder()
+                .copy(inject)
+                .labelColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addSelectTypoOptionView(
+            activity,
+            typo = inject.labelTypo,
+            label = "label 폰트",
+        ) {
+            inject = HongLabelSwitchBuilder()
+                .copy(inject)
+                .labelTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+
+
+
+        PlaygroundManager.addOptionTitleView(
+            activity,
+            label = "description 설정",
+            labelTypo = HongTypo.BODY_16_B
+        )
+
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity,
+            input = inject.label,
+            label = "description 텍스트",
+        ) {
+            inject = HongLabelSwitchBuilder()
+                .copy(inject)
+                .description(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+
+        PlaygroundManager.addColorOptionPreview(
+            activity,
+            colorHex = inject.labelColorHex,
+            label = "description ",
+        ) {
+            inject = HongLabelSwitchBuilder()
+                .copy(inject)
+                .descriptionColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addSelectTypoOptionView(
+            activity,
+            typo = inject.labelTypo,
+            label = "description 폰트",
+        ) {
+            inject = HongLabelSwitchBuilder()
+                .copy(inject)
+                .descriptionTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
 
         HongSwitchPlayground(activity)
             .injectPreview(
-                injectOption = previewOption.switchOption,
+                injectOption = inject.switchOption,
                 includeCommonOption = true,
                 label = "Switch 옵션"
             ) {
-                this.previewOption = HongLabelSwitchBuilder()
-                    .copy(previewOption)
+                inject = HongLabelSwitchBuilder()
+                    .copy(inject)
                     .switchOption(it)
                     .applyOption()
-                executePreview()
+                callback.invoke(inject)
             }
     }
 }
