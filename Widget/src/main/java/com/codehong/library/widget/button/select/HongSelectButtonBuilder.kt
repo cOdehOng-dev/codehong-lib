@@ -1,8 +1,9 @@
 package com.codehong.library.widget.button.select
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
-import com.codehong.library.widget.button.text.HongTextButtonOption
 import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.typo.HongTypo
 
 class HongSelectButtonBuilder : HongWidgetCommonBuilder<HongSelectButtonOption, HongSelectButtonBuilder> {
 
@@ -13,24 +14,68 @@ class HongSelectButtonBuilder : HongWidgetCommonBuilder<HongSelectButtonOption, 
         this.option.width = HongLayoutParam.MATCH_PARENT.value
     }
 
-    fun negativeTextButtonOption(option: HongTextButtonOption?) = apply {
-        this.option.negativeTextButtonOption = option ?: HongSelectButtonOption.DEFAULT_NEGATIVE_TEXT_BUTTON_OPTION
+    fun negativeText(text: String?) = apply {
+        option.negativeText = text ?: ""
     }
 
-    fun positiveTextButtonOption(option: HongTextButtonOption?) = apply {
-        this.option.positiveTextButtonOption = option ?: HongSelectButtonOption.DEFAULT_POSITIVE_TEXT_BUTTON_OPTION
+    fun negativeTextTypo(typo: HongTypo) = apply {
+        option.negativeTextTypo = typo
     }
 
-    fun negativeClick(click: (() -> Unit)?) = apply {
+    fun negativeTextColor(color: HongColor) = apply {
+        option.negativeTextColorHex = color.hex
+    }
+
+    fun negativeTextColor(colorHex: String) = apply {
+        option.negativeTextColorHex = colorHex
+    }
+
+    fun negativeBorderColor(color: HongColor) = apply {
+        option.negativeBorderColorHex = color.hex
+    }
+
+    fun negativeBorderColor(colorHex: String) = apply {
+        option.negativeBorderColorHex = colorHex
+    }
+
+
+    fun positiveText(text: String?) = apply {
+        option.positiveText = text ?: ""
+    }
+
+    fun positiveTextTypo(typo: HongTypo) = apply {
+        option.positiveTextTypo = typo
+    }
+
+    fun positiveTextColor(color: HongColor) = apply {
+        option.positiveTextColorHex = color.hex
+    }
+
+    fun positiveTextColor(colorHex: String) = apply {
+        option.positiveTextColorHex = colorHex
+    }
+
+    fun positiveBackgroundColor(color: HongColor) = apply {
+        option.positiveBackgroundColorHex = color.hex
+    }
+
+    fun positiveBackgroundColor(colorHex: String) = apply {
+        option.positiveBackgroundColorHex = colorHex
+    }
+
+    
+
+    fun onNegativeClick(click: (() -> Unit)?) = apply {
         this.option.negativeClick = click
     }
 
-    fun positiveClick(click: (() -> Unit)?) = apply {
+    fun onPositiveClick(click: (() -> Unit)?) = apply {
         this.option.positiveClick = click
     }
 
     fun copy(inject: HongSelectButtonOption?): HongSelectButtonBuilder {
         if (inject == null) return HongSelectButtonBuilder()
+
         return HongSelectButtonBuilder()
             .width(inject.width)
             .height(inject.height)
@@ -38,9 +83,15 @@ class HongSelectButtonBuilder : HongWidgetCommonBuilder<HongSelectButtonOption, 
             .padding(inject.padding)
             .onClick(inject.click)
             .backgroundColor(inject.backgroundColorHex)
-            .negativeTextButtonOption(inject.negativeTextButtonOption)
-            .positiveTextButtonOption(inject.positiveTextButtonOption)
-            .negativeClick(inject.negativeClick)
-            .positiveClick(inject.positiveClick)
+            .negativeText(inject.negativeText)
+            .negativeTextTypo(inject.negativeTextTypo)
+            .negativeTextColor(inject.negativeTextColorHex)
+            .negativeBorderColor(inject.negativeBorderColorHex)
+            .positiveText(inject.positiveText)
+            .positiveTextTypo(inject.positiveTextTypo)
+            .positiveTextColor(inject.positiveTextColorHex)
+            .positiveBackgroundColor(inject.positiveBackgroundColorHex)
+            .onNegativeClick(inject.negativeClick)
+            .onPositiveClick(inject.positiveClick)
     }
 }

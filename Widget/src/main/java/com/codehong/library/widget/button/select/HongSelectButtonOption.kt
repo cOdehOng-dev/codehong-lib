@@ -1,9 +1,6 @@
 package com.codehong.library.widget.button.select
 
 import com.codehong.library.widget.HongWidgetCommonOption
-
-import com.codehong.library.widget.button.text.HongTextButtonBuilder
-import com.codehong.library.widget.button.text.HongTextButtonOption
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -12,79 +9,16 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongSelectButtonOption(
-    override val type: HongWidgetType = HongWidgetType.SELECT_BUTTON
+    override val type: HongWidgetType = HongWidgetType.BUTTON_SELECT
 ) : HongWidgetCommonOption {
-
-    companion object {
-        val DEFAULT_NEGATIVE_TEXT_BUTTON_OPTION = HongTextButtonBuilder()
-            .width(HongLayoutParam.MATCH_PARENT.value)
-            .height(48)
-            .padding(
-                HongSpacingInfo(
-                    top = 8f,
-                    bottom = 8f
-                )
-            )
-            .radius(
-                HongRadiusInfo(
-                    topLeft = 10,
-                    topRight = 10,
-                    bottomLeft = 10,
-                    bottomRight = 10
-                )
-            )
-            .border(
-                HongBorderInfo(
-                    width = 1,
-                    color = HongColor.MAIN_ORANGE_100.hex
-                )
-            )
-            .textOption(
-                HongTextBuilder()
-                    .text("취소")
-                    .typography(HongTypo.BODY_15_B)
-                    .color(HongColor.MAIN_ORANGE_100.hex)
-                    .applyOption()
-            )
-            .backgroundColor(HongColor.WHITE_100.hex)
-            .applyOption()
-
-        val DEFAULT_POSITIVE_TEXT_BUTTON_OPTION = HongTextButtonBuilder()
-            .width(HongLayoutParam.MATCH_PARENT.value)
-            .height(48)
-            .padding(
-                HongSpacingInfo(
-                    top = 8f,
-                    bottom = 8f
-                )
-            )
-            .radius(
-                HongRadiusInfo(
-                    topLeft = 10,
-                    topRight = 10,
-                    bottomLeft = 10,
-                    bottomRight = 10
-                )
-            )
-            .textOption(
-                HongTextBuilder()
-                    .text("확인")
-                    .typography(HongTypo.BODY_15_B)
-                    .color(HongColor.WHITE_100.hex)
-                    .applyOption()
-            )
-            .backgroundColor(HongColor.MAIN_ORANGE_100)
-            .applyOption()
-    }
 
     override var isValidComponent: Boolean = true
     override var width: Int = HongLayoutParam.MATCH_PARENT.value
     override var height: Int = HongLayoutParam.WRAP_CONTENT.value
-    override var margin: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
-    override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
+    override var margin: HongSpacingInfo = HongSpacingInfo()
+    override var padding: HongSpacingInfo = HongSpacingInfo()
     
     override var backgroundColorHex: String = HongColor.WHITE_100.hex
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
@@ -93,12 +27,18 @@ data class HongSelectButtonOption(
     override var shadow = HongShadowInfo()
     override var radius: HongRadiusInfo = HongRadiusInfo()
 
-    var negativeTextButtonOption: HongTextButtonOption = DEFAULT_NEGATIVE_TEXT_BUTTON_OPTION
-    var positiveTextButtonOption: HongTextButtonOption = DEFAULT_POSITIVE_TEXT_BUTTON_OPTION
+    var negativeText: String = "취소"
+    var negativeTextTypo: HongTypo = HongTypo.BODY_15_B
+    var negativeTextColorHex: String = HongColor.MAIN_ORANGE_100.hex
+    var negativeBorderColorHex: String = HongColor.MAIN_ORANGE_100.hex
+
+    var positiveText: String = "확인"
+    var positiveTextTypo: HongTypo = HongTypo.BODY_15_B
+    var positiveTextColorHex: String = HongColor.WHITE_100.hex
+    var positiveBackgroundColorHex: String = HongColor.MAIN_ORANGE_100.hex
 
     var positiveClick: (() -> Unit)? = null
     var negativeClick: (() -> Unit)? = null
-
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -118,8 +58,14 @@ data class HongSelectButtonOption(
         if (useShapeCircle != other.useShapeCircle) return false
         if (shadow != other.shadow) return false
         if (radius != other.radius) return false
-        if (negativeTextButtonOption != other.negativeTextButtonOption) return false
-        if (positiveTextButtonOption != other.positiveTextButtonOption) return false
+        if (negativeText != other.negativeText) return false
+        if (negativeTextTypo != other.negativeTextTypo) return false
+        if (negativeTextColorHex != other.negativeTextColorHex) return false
+        if (negativeBorderColorHex != other.negativeBorderColorHex) return false
+        if (positiveText != other.positiveText) return false
+        if (positiveTextTypo != other.positiveTextTypo) return false
+        if (positiveTextColorHex != other.positiveTextColorHex) return false
+        if (positiveBackgroundColorHex != other.positiveBackgroundColorHex) return false
         if (positiveClick != other.positiveClick) return false
         if (negativeClick != other.negativeClick) return false
 
@@ -139,8 +85,14 @@ data class HongSelectButtonOption(
         result = 31 * result + useShapeCircle.hashCode()
         result = 31 * result + shadow.hashCode()
         result = 31 * result + radius.hashCode()
-        result = 31 * result + negativeTextButtonOption.hashCode()
-        result = 31 * result + positiveTextButtonOption.hashCode()
+        result = 31 * result + negativeText.hashCode()
+        result = 31 * result + negativeTextTypo.hashCode()
+        result = 31 * result + negativeTextColorHex.hashCode()
+        result = 31 * result + negativeBorderColorHex.hashCode()
+        result = 31 * result + positiveText.hashCode()
+        result = 31 * result + positiveTextTypo.hashCode()
+        result = 31 * result + positiveTextColorHex.hashCode()
+        result = 31 * result + positiveBackgroundColorHex.hashCode()
         result = 31 * result + (positiveClick?.hashCode() ?: 0)
         result = 31 * result + (negativeClick?.hashCode() ?: 0)
         return result
@@ -160,10 +112,17 @@ data class HongSelectButtonOption(
                 "useShapeCircle=$useShapeCircle, " +
                 "shadow=$shadow, " +
                 "radius=$radius, " +
-                "negativeTextButtonOption=$negativeTextButtonOption, " +
-                "positiveTextButtonOption=$positiveTextButtonOption, " +
+                "negativeText='$negativeText', " +
+                "negativeTextTypo=$negativeTextTypo, " +
+                "negativeTextColorHex='$negativeTextColorHex', " +
+                "negativeBorderColorHex='$negativeBorderColorHex', " +
+                "positiveText='$positiveText', " +
+                "positiveTextTypo=$positiveTextTypo, " +
+                "positiveTextColorHex='$positiveTextColorHex', " +
+                "positiveBackgroundColorHex='$positiveBackgroundColorHex', " +
                 "positiveClick=$positiveClick, " +
                 "negativeClick=$negativeClick" +
                 ")"
     }
+
 }

@@ -8,11 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.button.text.HongTextButtonBuilder
-import com.codehong.library.widget.button.text.HongTextButtonCompose
+import com.codehong.library.widget.button.text2.HongTextButtonBuilder2
+import com.codehong.library.widget.button.text2.HongTextButtonCompose2
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
+import com.codehong.library.widget.rule.HongBorderInfo
+import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.util.HongWidgetContainer
 
 @Composable
@@ -29,9 +32,33 @@ fun HongSelectButtonCompose(
                 modifier = Modifier
                     .weight(1f)
             ) {
-                HongTextButtonCompose(
-                    HongTextButtonBuilder()
-                        .copy(option.negativeTextButtonOption)
+                HongTextButtonCompose2(
+                    HongTextButtonBuilder2()
+                        .width(HongLayoutParam.MATCH_PARENT.value)
+                        .height(48)
+                        .padding(
+                            HongSpacingInfo(
+                                top = 8f,
+                                bottom = 8f
+                            )
+                        )
+                        .radius(
+                            HongRadiusInfo(
+                                topLeft = 10,
+                                topRight = 10,
+                                bottomLeft = 10,
+                                bottomRight = 10
+                            )
+                        )
+                        .border(
+                            HongBorderInfo(
+                                width = 1,
+                                color = option.negativeBorderColorHex
+                            )
+                        )
+                        .text(option.negativeText)
+                        .textTypo(option.negativeTextTypo)
+                        .textColor(option.negativeTextColorHex)
                         .onClick {
                             option.negativeClick?.invoke()
                         }
@@ -46,9 +73,28 @@ fun HongSelectButtonCompose(
                 modifier = Modifier
                     .weight(1f)
             ) {
-                HongTextButtonCompose(
-                    HongTextButtonBuilder()
-                        .copy(option.positiveTextButtonOption)
+                HongTextButtonCompose2(
+                    HongTextButtonBuilder2()
+                        .width(HongLayoutParam.MATCH_PARENT.value)
+                        .height(48)
+                        .padding(
+                            HongSpacingInfo(
+                                top = 8f,
+                                bottom = 8f
+                            )
+                        )
+                        .radius(
+                            HongRadiusInfo(
+                                topLeft = 10,
+                                topRight = 10,
+                                bottomLeft = 10,
+                                bottomRight = 10
+                            )
+                        )
+                        .text(option.positiveText)
+                        .textTypo(option.positiveTextTypo)
+                        .textColor(option.positiveTextColorHex)
+                        .backgroundColor(option.positiveBackgroundColorHex)
                         .onClick {
                             option.positiveClick?.invoke()
                         }

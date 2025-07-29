@@ -8,6 +8,7 @@ import com.codehong.library.widget.button.select.HongSelectButtonBuilder
 import com.codehong.library.widget.button.select.HongSelectButtonOption
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
+import com.codehong.library.widget.rule.typo.HongTypo
 
 class HongSelectButtonPlayground(
     playgroundActivity: PlaygroundActivity
@@ -21,10 +22,10 @@ class HongSelectButtonPlayground(
                     right = 20f,
                 )
             )
-            .negativeClick {
+            .onNegativeClick {
                 Log.d("TAG", "취소 버튼!!")
             }
-            .positiveClick {
+            .onPositiveClick {
                 Log.d("TAG", "확인 버튼!!")
             }
             .applyOption()
@@ -32,7 +33,7 @@ class HongSelectButtonPlayground(
 
     override val activity: PlaygroundActivity = playgroundActivity
     override var previewOption: HongSelectButtonOption = DEFAULT_PREVIEW_OPTION
-    override val widgetType: HongWidgetType = HongWidgetType.SELECT_BUTTON
+    override val widgetType: HongWidgetType = HongWidgetType.BUTTON_SELECT
 
     fun preview() {
         executePreview()
@@ -88,6 +89,90 @@ class HongSelectButtonPlayground(
                     callback.invoke(inject)
                 }
             )
+        }
+
+
+        PlaygroundManager.addOptionTitleView(
+            activity,
+            label = "취소 버튼 설정",
+            labelTypo = HongTypo.BODY_16_B
+        )
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity,
+            input = inject.negativeText,
+            label = "버튼 텍스트",
+        ) {
+            inject = HongSelectButtonBuilder()
+                .copy(inject)
+                .negativeText(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addSelectTypoOptionView(
+            activity,
+            typo = inject.negativeTextTypo,
+            label = "버튼 텍스트 폰트",
+        ) {
+            inject = HongSelectButtonBuilder()
+                .copy(inject)
+                .negativeTextTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addColorOptionPreview(
+            activity,
+            label = "버튼 텍스트 ",
+            colorHex = inject.negativeTextColorHex
+        ) {
+            inject = HongSelectButtonBuilder()
+                .copy(inject)
+                .negativeTextColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+
+        PlaygroundManager.addOptionTitleView(
+            activity,
+            label = "확인 버튼 설정",
+            labelTypo = HongTypo.BODY_16_B
+        )
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity,
+            input = inject.positiveText,
+            label = "버튼 텍스트",
+        ) {
+            inject = HongSelectButtonBuilder()
+                .copy(inject)
+                .positiveText(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addSelectTypoOptionView(
+            activity,
+            typo = inject.positiveTextTypo,
+            label = "버튼 텍스트 폰트",
+        ) {
+            inject = HongSelectButtonBuilder()
+                .copy(inject)
+                .positiveTextTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addColorOptionPreview(
+            activity,
+            label = "버튼 텍스트 ",
+            colorHex = inject.positiveTextColorHex
+        ) {
+            inject = HongSelectButtonBuilder()
+                .copy(inject)
+                .positiveTextColor(it)
+                .applyOption()
+            callback.invoke(inject)
         }
 
 //        HongTextButtonPlayground(activity)

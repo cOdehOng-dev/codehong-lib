@@ -352,11 +352,11 @@ fun SampleTheme(
                                             }
                                         }
 
-                                        HongWidgetType.SELECT_BUTTON -> {
+                                        HongWidgetType.BUTTON_SELECT -> {
                                             Intent(activity, SampleSelectButtonActivity::class.java).apply {
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
-                                                    HongWidgetType.SELECT_BUTTON.value
+                                                    HongWidgetType.BUTTON_SELECT.value
                                                 )
                                                 activity.startActivity(this)
                                             }

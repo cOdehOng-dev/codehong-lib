@@ -204,7 +204,7 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.NUMBER_TEXT_FIELD -> HongNumberTextFieldPlayground(this).preview()
             HongWidgetType.CALENDAR -> CalendarPlayground(this).preview()
             HongWidgetType.BUTTON_TEXT -> HongTextButtonPlayground(this).preview()
-            HongWidgetType.SELECT_BUTTON -> HongSelectButtonPlayground(this).preview()
+            HongWidgetType.BUTTON_SELECT -> HongSelectButtonPlayground(this).preview()
             HongWidgetType.HORIZONTAL_PAGER -> HongHorizontalPagerPlayground(this).preview()
             HongWidgetType.TEXT_BADGE -> HongTextBadgePlayground(this).preview()
             HongWidgetType.CHECKBOX -> HongCheckboxPlayground(this).preview()
@@ -342,7 +342,7 @@ class PlaygroundActivity : BaseActivity() {
             }
 
 
-            HongWidgetType.SELECT_BUTTON -> {
+            HongWidgetType.BUTTON_SELECT -> {
                 binding.vComposePreview.setContent {
                     PreviewUI(isBorderOn) {
                         HongSelectButtonCompose(previewOption as HongSelectButtonOption)

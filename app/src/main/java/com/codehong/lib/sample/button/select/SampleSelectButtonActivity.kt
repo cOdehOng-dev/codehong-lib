@@ -18,10 +18,10 @@ class SampleSelectButtonActivity : BaseSampleMixActivity() {
                 right = 20f,
             )
         )
-        .negativeClick {
+        .onNegativeClick {
             Log.d("TAG", "취소 버튼!!")
         }
-        .positiveClick {
+        .onPositiveClick {
             Log.d("TAG", "확인 버튼!!")
         }
         .applyOption()

@@ -127,10 +127,10 @@ class OptionPickerDialog constructor(
                                     right = 20f,
                                 )
                             )
-                            .negativeClick {
+                            .onNegativeClick {
                                 dismiss()
                             }
-                            .positiveClick {
+                            .onPositiveClick {
                                 dismiss()
                                 selectOptionCallback.invoke(selectOption, selectedPosition)
                             }

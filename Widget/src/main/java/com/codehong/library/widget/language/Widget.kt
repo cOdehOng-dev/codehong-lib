@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.ViewGroup
 import com.codehong.library.widget.button.select.HongSelectButtonView
 import com.codehong.library.widget.button.text.HongTextButtonView
+import com.codehong.library.widget.button.text2.HongTextButtonView2
 import com.codehong.library.widget.checkbox.HongCheckboxView
 import com.codehong.library.widget.image.HongImageView
 import com.codehong.library.widget.label.HongLabelView
@@ -105,6 +106,20 @@ fun ViewGroup.hongTextButton(
 ) = HongTextButtonView(this.context).run {
     block.invoke(this)
     this@hongTextButton.addView(this)
+    this
+}
+
+fun Context.hongTextButton2(
+    block: HongTextButtonView2.() -> Unit
+) = HongTextButtonView2(this).run {
+    block.invoke(this)
+    this
+}
+fun ViewGroup.hongTextButton2(
+    block: HongTextButtonView2.() -> Unit
+) = HongTextButtonView2(this.context).run {
+    block.invoke(this)
+    this@hongTextButton2.addView(this)
     this
 }
 
