@@ -7,9 +7,12 @@ import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
-import com.codehong.library.widget.language.hongLabel
+import com.codehong.library.widget.label.HongLabelBuilder2
+import com.codehong.library.widget.language.hongLabel2
 import com.codehong.library.widget.language.hongTextField
+import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
 
 class HongLabelInputView @JvmOverloads constructor(
@@ -28,9 +31,10 @@ class HongLabelInputView @JvmOverloads constructor(
     fun set(
         option: HongLabelInputOption
     ): HongLabelInputView {
+        removeAllViews()
+
         this.option = option
 
-        removeAllViews()
 
         setLayout(
             option.width,
@@ -47,9 +51,20 @@ class HongLabelInputView @JvmOverloads constructor(
         hongPadding(option.padding)
 
 
-        if (!option.labelOption.labelTextOption.text.isNullOrEmpty()) {
-            hongLabel {
-                set(option.labelOption)
+        if (!option.label.isNullOrEmpty()) {
+            hongLabel2 {
+                set(
+                    HongLabelBuilder2()
+                        .width(HongLayoutParam.MATCH_PARENT.value)
+                        .backgroundColor(HongColor.TRANSPARENT)
+                        .label(option.label)
+                        .labelColor(option.labelColorHex)
+                        .labelTypo(option.labelTypo)
+                        .description(option.description)
+                        .descriptionColor(option.descriptionColorHex)
+                        .descriptionTypo(option.descriptionTypo)
+                        .applyOption()
+                )
             }
         }
 

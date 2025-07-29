@@ -7,7 +7,6 @@ import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.label.HongLabelBuilder
-import com.codehong.library.widget.label.HongLabelOption
 import com.codehong.library.widget.label.input.HongLabelInputBuilder
 import com.codehong.library.widget.label.input.HongLabelInputOption
 import com.codehong.library.widget.language.frameLayout
@@ -146,13 +145,6 @@ class QuarterInputOptionView @JvmOverloads constructor(
         return HongLabelInputBuilder()
             .width(HongLayoutParam.MATCH_PARENT.value)
             .label(inputInit.first)
-            .labelTextOption(
-                HongTextBuilder()
-                    .copy(HongLabelOption.DEFAULT_LABEL_OPTION)
-                    .text(inputInit.first)
-                    .typography(HongTypo.CONTENTS_12_B)
-                    .applyOption()
-            )
             .textFieldOption(
                 HongTextFieldBuilder()
                     .copy(HongLabelInputOption.DEFAULT_TEXT_FIELD)

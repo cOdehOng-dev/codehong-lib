@@ -155,9 +155,6 @@ class HongLabelSwitchPlayground(
             callback.invoke(inject)
         }
 
-
-
-
         PlaygroundManager.addOptionTitleView(
             activity,
             label = "description 설정",

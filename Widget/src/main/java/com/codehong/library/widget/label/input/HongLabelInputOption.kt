@@ -1,11 +1,8 @@
 package com.codehong.library.widget.label.input
 
 import com.codehong.library.widget.HongWidgetCommonOption
-
 import com.codehong.library.widget.R
 import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.label.HongLabelBuilder
-import com.codehong.library.widget.label.HongLabelOption
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongScaleType
@@ -43,11 +40,6 @@ data class HongLabelInputOption(
             .color("#333333")
             .applyOption()
 
-        val DEFAULT_LABEL_VIEW_OPTION = HongLabelBuilder()
-            .width(HongLayoutParam.MATCH_PARENT.value)
-            .labelTextOption(DEFAULT_LABEL_OPTION)
-            .descriptionTextOption(DEFAULT_DESCRIPTION_OPTION)
-            .applyOption()
 
         val DEFAULT_TEXT_FIELD = HongTextFieldBuilder()
             .width(HongLayoutParam.MATCH_PARENT.value)
@@ -125,12 +117,12 @@ data class HongLabelInputOption(
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
 
     var label: String? = null
-    var labelTextOption = DEFAULT_LABEL_OPTION
+    var labelColorHex: String = HongColor.BLACK_100.hex
+    var labelTypo: HongTypo = HongTypo.BODY_15_B
 
     var description: String? = null
-    var descriptionTextOption = DEFAULT_DESCRIPTION_OPTION
-
-    var labelOption: HongLabelOption = DEFAULT_LABEL_VIEW_OPTION
+    var descriptionColorHex: String = HongColor.BLACK_60.hex
+    var descriptionTypo: HongTypo = HongTypo.CONTENTS_10
 
     var textFieldOption: HongTextFieldOption = DEFAULT_TEXT_FIELD
 
@@ -147,12 +139,17 @@ data class HongLabelInputOption(
         if (margin != other.margin) return false
         if (padding != other.padding) return false
         if (click != other.click) return false
+        if (useShapeCircle != other.useShapeCircle) return false
+        if (shadow != other.shadow) return false
+        if (border != other.border) return false
+        if (radius != other.radius) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
-        if (labelTextOption != other.labelTextOption) return false
-        if (descriptionTextOption != other.descriptionTextOption) return false
-        if (labelOption != other.labelOption) return false
         if (label != other.label) return false
+        if (labelColorHex != other.labelColorHex) return false
+        if (labelTypo != other.labelTypo) return false
         if (description != other.description) return false
+        if (descriptionColorHex != other.descriptionColorHex) return false
+        if (descriptionTypo != other.descriptionTypo) return false
         if (textFieldOption != other.textFieldOption) return false
 
         return true
@@ -166,12 +163,17 @@ data class HongLabelInputOption(
         result = 31 * result + margin.hashCode()
         result = 31 * result + padding.hashCode()
         result = 31 * result + (click?.hashCode() ?: 0)
+        result = 31 * result + useShapeCircle.hashCode()
+        result = 31 * result + shadow.hashCode()
+        result = 31 * result + border.hashCode()
+        result = 31 * result + radius.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
-        result = 31 * result + labelTextOption.hashCode()
-        result = 31 * result + descriptionTextOption.hashCode()
-        result = 31 * result + labelOption.hashCode()
         result = 31 * result + (label?.hashCode() ?: 0)
+        result = 31 * result + labelColorHex.hashCode()
+        result = 31 * result + labelTypo.hashCode()
         result = 31 * result + (description?.hashCode() ?: 0)
+        result = 31 * result + descriptionColorHex.hashCode()
+        result = 31 * result + descriptionTypo.hashCode()
         result = 31 * result + textFieldOption.hashCode()
         return result
     }
@@ -185,12 +187,17 @@ data class HongLabelInputOption(
                 "margin=$margin, " +
                 "padding=$padding, " +
                 "click=$click, " +
+                "useShapeCircle=$useShapeCircle, " +
+                "shadow=$shadow, " +
+                "border=$border, " +
+                "radius=$radius, " +
                 "backgroundColorHex='$backgroundColorHex', " +
-                "labelTextOption=$labelTextOption, " +
-                "descriptionTextOption=$descriptionTextOption, " +
-                "labelOption=$labelOption, " +
                 "label=$label, " +
+                "labelColorHex='$labelColorHex', " +
+                "labelTypo=$labelTypo, " +
                 "description=$description, " +
+                "descriptionColorHex='$descriptionColorHex', " +
+                "descriptionTypo=$descriptionTypo, " +
                 "textFieldOption=$textFieldOption" +
                 ")"
     }
