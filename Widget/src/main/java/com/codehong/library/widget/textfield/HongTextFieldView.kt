@@ -61,6 +61,8 @@ class HongTextFieldView @JvmOverloads constructor(
     fun set(
         option: HongTextFieldOption
     ): HongTextFieldView {
+        removeAllViews()
+
         this.option = option
 
         setLayout(

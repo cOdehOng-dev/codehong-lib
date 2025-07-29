@@ -7,6 +7,7 @@ import com.codehong.library.widget.button.text.HongTextButtonView
 import com.codehong.library.widget.checkbox.HongCheckboxView
 import com.codehong.library.widget.image.HongImageView
 import com.codehong.library.widget.label.HongLabelView
+import com.codehong.library.widget.label.HongLabelView2
 import com.codehong.library.widget.label.input.HongLabelInputView
 import com.codehong.library.widget.label.select.HongLabelSelectInputView
 import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchView
@@ -76,6 +77,21 @@ fun ViewGroup.hongLabel(
 ) = HongLabelView(this.context).run {
     block.invoke(this)
     this@hongLabel.addView(this)
+    this
+}
+
+fun Context.hongLabel2(
+    block: HongLabelView2.() -> Unit
+) = HongLabelView2(this).run {
+    block.invoke(this)
+    this
+}
+
+fun ViewGroup.hongLabel2(
+    block: HongLabelView2.() -> Unit
+) = HongLabelView2(this.context).run {
+    block.invoke(this)
+    this@hongLabel2.addView(this)
     this
 }
 

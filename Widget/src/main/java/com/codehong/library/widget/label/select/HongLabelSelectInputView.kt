@@ -11,10 +11,13 @@ import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
-import com.codehong.library.widget.language.hongLabel
+import com.codehong.library.widget.label.HongLabelBuilder2
+import com.codehong.library.widget.language.hongLabel2
 import com.codehong.library.widget.language.hongTextButton
 import com.codehong.library.widget.language.hongTextField
+import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.text.HongTextBuilder
@@ -61,8 +64,19 @@ class HongLabelSelectInputView @JvmOverloads constructor(
         hongBackground(
             backgroundColor = option.backgroundColorHex
         )
-        hongLabel {
-            set(option.labelOption)
+        hongLabel2 {
+            set(
+                HongLabelBuilder2()
+                    .width(HongLayoutParam.MATCH_PARENT.value)
+                    .backgroundColor(HongColor.TRANSPARENT)
+                    .label(option.label)
+                    .labelTypo(option.labelTypo)
+                    .labelColor(option.labelColorHex)
+                    .description(option.description)
+                    .descriptionTypo(option.descriptionTypo)
+                    .descriptionColor(option.descriptionColorHex)
+                    .applyOption()
+            )
         }
 
         initSelectPickerView()
@@ -90,8 +104,19 @@ class HongLabelSelectInputView @JvmOverloads constructor(
             backgroundColor = option.backgroundColorHex
         )
 
-        hongLabel {
-            set(option.labelOption)
+        hongLabel2 {
+            set(
+                HongLabelBuilder2()
+                    .width(HongLayoutParam.MATCH_PARENT.value)
+                    .backgroundColor(HongColor.TRANSPARENT)
+                    .label(option.label)
+                    .labelTypo(option.labelTypo)
+                    .labelColor(option.labelColorHex)
+                    .description(option.description)
+                    .descriptionTypo(option.descriptionTypo)
+                    .descriptionColor(option.descriptionColorHex)
+                    .applyOption()
+            )
         }
 
         initSelectPickerView()
@@ -121,7 +146,8 @@ class HongLabelSelectInputView @JvmOverloads constructor(
             )
             .applyOption()
 
-        this.textField = hongTextField {
+        hongTextField {
+            textField = this
             set(this@HongLabelSelectInputView.option.textFieldOption)
         }
 
@@ -170,7 +196,7 @@ class HongLabelSelectInputView @JvmOverloads constructor(
             .onClick {
                 OptionPickerDialog(
                     context,
-                    title = "${option.labelOption.label} 옵션 선택",
+                    title = "${option.label} 옵션 선택",
                     optionList = option.selectList,
                     selectedPosition = currentPosition,
                     useDirectCallback = option.useDirectCallback

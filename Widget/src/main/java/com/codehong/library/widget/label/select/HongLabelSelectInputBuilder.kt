@@ -3,8 +3,8 @@ package com.codehong.library.widget.label.select
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.button.text.HongTextButtonBuilder
 import com.codehong.library.widget.button.text.HongTextButtonOption
-import com.codehong.library.widget.label.HongLabelBuilder
-import com.codehong.library.widget.label.HongLabelOption
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextOption
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
@@ -17,31 +17,31 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
 
     fun label(label: String?) = apply {
         option.label = label
-        labelOption(
-            HongLabelBuilder()
-                .copy(option.labelOption)
-                .label(label ?: option.labelOption.labelTextOption.text)
-                .applyOption()
-        )
+    }
+    fun labelColor(color: HongColor) = apply {
+        option.labelColorHex = color.hex
+    }
+    fun labelColor(colorHex: String) = apply {
+        option.labelColorHex = colorHex
+    }
+    fun labelTypo(typo: HongTypo) = apply {
+        option.labelTypo = typo
     }
 
     fun description(description: String?) = apply {
         option.description = description
-        labelOption(
-            HongLabelBuilder()
-                .copy(option.labelOption)
-                .description(description ?: option.labelOption.description.toString())
-                .applyOption()
-        )
+    }
+    fun descriptionColor(color: HongColor) = apply {
+        option.descriptionColorHex = color.hex
+    }
+    fun descriptionColor(colorHex: String) = apply {
+        option.descriptionColorHex = colorHex
+    }
+    fun descriptionTypo(typo: HongTypo) = apply {
+        option.descriptionTypo = typo
     }
 
-    fun labelOption(labelOption: HongLabelOption) = apply {
-        option.labelOption = HongLabelBuilder()
-            .copy(labelOption)
-            .label(option.label ?: labelOption.labelTextOption.text)
-            .description(option.description ?: labelOption.descriptionTextOption.text)
-            .applyOption()
-    }
+
 
     fun inputText(input: String?) = apply {
         this.option.input = input
@@ -138,8 +138,11 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
             .padding(inject.padding)
             .onClick(inject.click)
             .label(inject.label)
+            .labelColor(inject.labelColorHex)
+            .labelTypo(inject.labelTypo)
             .description(inject.description)
-            .labelOption(inject.labelOption)
+            .descriptionColor(inject.descriptionColorHex)
+            .descriptionTypo(inject.descriptionTypo)
             .textFieldOption(inject.textFieldOption)
             .inputText(inject.input)
             .placeholder(inject.placeholder)

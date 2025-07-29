@@ -144,7 +144,6 @@ object PlaygroundManager {
                                 selectWidth.invoke(selectWidthSize)
                             }
                             .pickerCallback { selectSize, index ->
-                                Log.e("TAG", "옵션 selectWidth = $selectSize, index = $index")
                                 if (selectSize.isHongLayoutParam()) {
                                     hideInput()
                                     selectWidth.invoke(selectSize.toHongLayoutParamValue())
@@ -191,7 +190,6 @@ object PlaygroundManager {
                                 selectHeight.invoke(selectHeightSize)
                             }
                             .pickerCallback { selectSize, index ->
-                                Log.e("TAG", "옵션 selectHeight = $selectSize, index = $index")
                                 if (selectSize.isHongLayoutParam()) {
                                     hideInput()
                                     selectHeight.invoke(selectSize.toHongLayoutParamValue())
