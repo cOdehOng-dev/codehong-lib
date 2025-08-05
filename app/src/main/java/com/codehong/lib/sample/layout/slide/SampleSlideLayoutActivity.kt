@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.SampleComposeDespContainer
 import com.codehong.lib.sample.SampleHeader
 import com.codehong.library.widget.MarginTopOrBottom
-import com.codehong.library.widget.button.text2.HongTextButtonBuilder2
-import com.codehong.library.widget.button.text2.HongTextButtonCompose2
+import com.codehong.library.widget.button.text.HongButtonTextBuilder
+import com.codehong.library.widget.button.text.HongButtonTextCompose
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
@@ -49,8 +49,8 @@ class SampleSlideLayoutActivity : ComponentActivity() {
                                 .fillMaxWidth()
                                 .height(48.dp)
                         ) {
-                            HongTextButtonCompose2(
-                                option = HongTextButtonBuilder2()
+                            HongButtonTextCompose(
+                                option = HongButtonTextBuilder()
                                     .padding(
                                         HongSpacingInfo(
                                             left = 20f,
