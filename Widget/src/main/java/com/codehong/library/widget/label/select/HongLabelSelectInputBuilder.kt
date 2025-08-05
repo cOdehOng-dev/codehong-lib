@@ -2,9 +2,10 @@ package com.codehong.library.widget.label.select
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
+import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
-import com.codehong.library.widget.textfield.HongTextFieldOption
 
 class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInputOption, HongLabelSelectInputBuilder> {
 
@@ -39,26 +40,18 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
 
     fun inputText(input: String?) = apply {
         this.option.input = input
-        textFieldOption(
-            HongTextFieldBuilder()
-                .copy(option.textFieldOption)
-                .input(input)
-                .applyOption()
-        )
+        this.option.textFieldOption = HongTextFieldBuilder()
+            .copy(option.textFieldOption)
+            .input(input)
+            .applyOption()
     }
 
     fun placeholder(placeholder: String?) = apply {
         this.option.placeholder = placeholder
-        textFieldOption(
-            HongTextFieldBuilder()
-                .copy(option.textFieldOption)
-                .placeholder(placeholder)
-                .applyOption()
-        )
-    }
-
-    fun textFieldOption(textFieldOption: HongTextFieldOption) = apply {
-        this.option.textFieldOption = textFieldOption
+        this.option.textFieldOption = HongTextFieldBuilder()
+            .copy(option.textFieldOption)
+            .placeholder(placeholder)
+            .applyOption()
     }
 
     fun buttonText(buttonText: String?) = apply {
@@ -86,6 +79,15 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
 
     fun useOnlyNumber(useOnlyNumber: Boolean) = apply {
         this.option.useOnlyNumber = useOnlyNumber
+        option.textFieldOption = HongTextFieldBuilder()
+            .copy(option.textFieldOption)
+            .keyboardOption(
+                Pair(
+                    if (option.useOnlyNumber) HongKeyboardType.NUMBER else HongKeyboardType.TEXT,
+                    HongKeyboardActionType.DONE
+                )
+            )
+            .applyOption()
     }
     fun useDirectCallback(useDirectCallback: Boolean) = apply {
         this.option.useDirectCallback = useDirectCallback
@@ -101,6 +103,12 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
 
     fun inputCallback(inputCallback: ((String?) -> Unit)?) = apply {
         this.option.inputCallback = inputCallback
+        option.textFieldOption = HongTextFieldBuilder()
+            .copy(option.textFieldOption)
+            .onTextChanged {
+                inputCallback?.invoke(it)
+            }
+            .applyOption()
     }
 
 
@@ -117,7 +125,6 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
             .description(inject.description)
             .descriptionColor(inject.descriptionColorHex)
             .descriptionTypo(inject.descriptionTypo)
-            .textFieldOption(inject.textFieldOption)
             .inputText(inject.input)
             .placeholder(inject.placeholder)
             .buttonText(inject.buttonText)

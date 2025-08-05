@@ -18,11 +18,8 @@ import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
-import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
-import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.textfield.HongTextFieldBuilder
 import com.codehong.library.widget.textfield.HongTextFieldView
 import com.codehong.library.widget.util.picker.OptionPickerDialog
 
@@ -155,27 +152,8 @@ class HongLabelSelectInputView @JvmOverloads constructor(
 
         this.option = HongLabelSelectInputBuilder()
             .copy(option)
-            .textFieldOption(
-                HongTextFieldBuilder()
-                    .copy(option.textFieldOption)
-                    .margin(
-                        HongSpacingInfo(
-                            top = 10f
-                        )
-                    )
-                    .input(option.textFieldOption.inputTextOption.text ?: option.buttonText)
-                    .placeholder(option.textFieldOption.placeholderTextOption.text)
-                    .keyboardOption(
-                        Pair(
-                            if (option.useOnlyNumber) HongKeyboardType.NUMBER else HongKeyboardType.TEXT,
-                            HongKeyboardActionType.DONE
-                        )
-                    )
-                    .onTextChanged {
-                        option.inputCallback?.invoke(it)
-                    }
-                    .applyOption()
-            )
+            .inputText(option.input ?: option.buttonText)
+            .placeholder(option.placeholder)
             .applyOption()
 
         hongTextField {
@@ -203,12 +181,7 @@ class HongLabelSelectInputView @JvmOverloads constructor(
     fun setInputText(input: String) {
         this.option = HongLabelSelectInputBuilder()
             .copy(option)
-            .textFieldOption(
-                HongTextFieldBuilder()
-                    .copy(option.textFieldOption)
-                    .input(input)
-                    .applyOption()
-            )
+            .inputText(input)
             .applyOption()
         textField?.set(option.textFieldOption)
 

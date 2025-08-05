@@ -28,6 +28,11 @@ data class HongLabelSelectInputOption(
     companion object {
         val DEFAULT_TEXT_FIELD = HongTextFieldBuilder()
             .width(HongLayoutParam.MATCH_PARENT.value)
+            .margin(
+                HongSpacingInfo(
+                    top = 10f
+                )
+            )
             .radius(
                 HongRadiusInfo(
                     topLeft = 10,
@@ -93,8 +98,8 @@ data class HongLabelSelectInputOption(
 
     override var width: Int = HongLayoutParam.MATCH_PARENT.value
     override var height: Int = HongLayoutParam.WRAP_CONTENT.value
-    override var margin: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
-    override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
+    override var margin: HongSpacingInfo = HongSpacingInfo()
+    override var padding: HongSpacingInfo = HongSpacingInfo()
     
     override var backgroundColorHex: String = HongColor.WHITE_100.hex
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
@@ -115,10 +120,8 @@ data class HongLabelSelectInputOption(
 
     var input: String? = null
     var placeholder: String? = null
+
     var textFieldOption: HongTextFieldOption = DEFAULT_TEXT_FIELD
-
-
-
 
 
     var buttonText: String? = null
@@ -137,9 +140,6 @@ data class HongLabelSelectInputOption(
 
     var pickerCallback: ((String, Int) -> Unit)? = null
     var inputCallback: ((String?) -> Unit)? = null
-
-
-
 
 
     override fun equals(other: Any?): Boolean {
@@ -170,7 +170,8 @@ data class HongLabelSelectInputOption(
         if (placeholder != other.placeholder) return false
         if (textFieldOption != other.textFieldOption) return false
         if (buttonText != other.buttonText) return false
-//        if (textButtonOption != other.textButtonOption) return false
+        if (buttonTextColorHex != other.buttonTextColorHex) return false
+        if (buttonTextTypo != other.buttonTextTypo) return false
         if (selectPosition != other.selectPosition) return false
         if (selectList != other.selectList) return false
         if (useOnlyNumber != other.useOnlyNumber) return false
@@ -205,7 +206,8 @@ data class HongLabelSelectInputOption(
         result = 31 * result + (placeholder?.hashCode() ?: 0)
         result = 31 * result + textFieldOption.hashCode()
         result = 31 * result + (buttonText?.hashCode() ?: 0)
-//        result = 31 * result + textButtonOption.hashCode()
+        result = 31 * result + buttonTextColorHex.hashCode()
+        result = 31 * result + buttonTextTypo.hashCode()
         result = 31 * result + selectPosition
         result = 31 * result + selectList.hashCode()
         result = 31 * result + useOnlyNumber.hashCode()
@@ -240,7 +242,8 @@ data class HongLabelSelectInputOption(
                 "placeholder=$placeholder, " +
                 "textFieldOption=$textFieldOption, " +
                 "buttonText=$buttonText, " +
-//                "textButtonOption=$textButtonOption, " +
+                "buttonTextColorHex='$buttonTextColorHex', " +
+                "buttonTextTypo=$buttonTextTypo, " +
                 "selectPosition=$selectPosition, " +
                 "selectList=$selectList, " +
                 "useOnlyNumber=$useOnlyNumber, " +
