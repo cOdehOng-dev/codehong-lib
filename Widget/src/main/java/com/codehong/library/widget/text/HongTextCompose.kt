@@ -147,7 +147,7 @@ fun HongTextCompose(
                 lineHeight = dpToSp(
                     dp = option.lineHeight ?: HongTextOption.DEFAULT_TYPOGRAPHY.lineHeight()
                 ),
-                letterSpacing = (-0.05).sp, // TextView 보다 자간이 살짝 넓어서 시각적 차이를 줄이기 위해 값 조정
+                letterSpacing = (-0.05).sp,
                 textAlign = option.align.value,
                 maxLines = option.maxLines,
                 overflow = option.overflow.value,
@@ -177,7 +177,7 @@ fun HongTextCompose(
             lineHeight = dpToSp(
                 dp = option.lineHeight ?: HongTextOption.DEFAULT_TYPOGRAPHY.lineHeight()
             ),
-            letterSpacing = (-0.05).sp, // TextView 보다 자간이 살짝 넓어서 시각적 차이를 줄이기 위해 값 조정
+            letterSpacing = (-0.05).sp,
             textAlign = option.align.value,
             maxLines = option.maxLines,
             overflow = option.overflow.value,

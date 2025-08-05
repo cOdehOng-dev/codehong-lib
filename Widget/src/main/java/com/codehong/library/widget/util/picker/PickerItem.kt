@@ -117,13 +117,11 @@ class PickerItem @JvmOverloads constructor(
         super.onLayout(changed, left, top, right, bottom)
 
         if (changed) {
-            // need to do all this when we know our size
             initializeSelectorRawPicker()
         }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        // Try greedily to fit the max width and height.
         var layoutParams: ViewGroup.LayoutParams? = layoutParams
         if (layoutParams == null) {
             layoutParams = ViewGroup.LayoutParams(
@@ -353,8 +351,8 @@ class PickerItem @JvmOverloads constructor(
                 mCurrentFirstItemOffset += y
             } else {
                 mCurrentFirstItemOffset = mInitialFirstItemOffset + (gap / 2)
-                if (!overScroller!!.isFinished && !mIsDragging) {
-                    overScroller!!.abortAnimation()
+                if (!overScroller.isFinished && !mIsDragging) {
+                    overScroller.abortAnimation()
                 }
             }
             return
@@ -764,32 +762,6 @@ class PickerItem @JvmOverloads constructor(
             mMinValidIndex != null && position < mMinValidIndex!! -> false
             mMaxValidIndex != null && position > mMaxValidIndex!! -> false
             else -> true
-        }
-    }
-
-    abstract class PickerItemAdapter {
-
-        abstract fun getValue(position: Int): String
-
-        abstract fun getPosition(vale: String): Int
-
-        abstract fun getTextWithMaximumLength(): String
-
-        open fun getSize(): Int = -1
-
-        open fun getMinValidIndex(): Int? {
-            return null
-        }
-
-        open fun getMaxValidIndex(): Int? {
-            return null
-        }
-
-        var picker: PickerItem? = null
-
-        fun notifyDataSetChanged() {
-            picker?.setAdapter(this)
-            picker?.requestLayout()
         }
     }
 }

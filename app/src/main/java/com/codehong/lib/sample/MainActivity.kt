@@ -40,6 +40,7 @@ import com.codehong.lib.sample.label.select.SampleLabelSelectInputActivity
 import com.codehong.lib.sample.label.toggle.SampleLabelSwitchActivity
 import com.codehong.lib.sample.pager.SampleHorizontalPagerActivity
 import com.codehong.lib.sample.picker.OptionPickerActivity
+import com.codehong.lib.sample.picker.SamplePickerComposeActivity
 import com.codehong.lib.sample.player.SampleVideoPlayerActivity
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.tab.scroll.SampleTabScrollActivity
@@ -630,6 +631,43 @@ fun SampleTheme(
                                                 )
                                                 activity.startActivity(this)
                                             }
+                                        }
+
+                                        HongWidgetType.PICKER -> {
+                                            OptionPickerDialog(
+                                                activity,
+                                                "샘플 선택",
+                                                listOf(
+                                                    "view",
+                                                    "compose",
+                                                ),
+                                                0
+                                            ) { selectType, _ ->
+                                                Handler(Looper.getMainLooper()).postDelayed({
+                                                    when (selectType) {
+                                                        "view" -> {
+                                                            Intent(activity, SampleCalendarComposeActivity::class.java).apply {
+                                                                putExtra(
+                                                                    SampleConst.INITIAL_DATE,
+                                                                    false
+                                                                )
+                                                                putExtra(
+                                                                    SampleConst.WIDGET_TYPE,
+                                                                    HongWidgetType.CALENDAR.value
+                                                                )
+                                                                activity.startActivity(this)
+                                                            }
+                                                        }
+
+                                                        "compose" -> {
+                                                            Intent(activity, SamplePickerComposeActivity::class.java).apply {
+                                                                activity.startActivity(this)
+                                                            }
+                                                        }
+                                                        else -> {}
+                                                    }
+                                                }, 200)
+                                            }.show()
                                         }
 
                                         else -> {

@@ -94,6 +94,8 @@
         <activity android:name=".label.toggle.SampleLabelSwitchActivity"/>
         <activity android:name=".label.checkbox.SampleLabelCheckboxActivity"/>
 
+        <activity android:name=".picker.SamplePickerComposeActivity"/>
+
     </application>
 
 </manifest>

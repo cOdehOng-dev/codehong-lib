@@ -79,7 +79,7 @@ class SampleVideoPopupComposeActivity : BaseActivity() {
     }
 
     private fun hidePopup(isClickClose: Boolean) {
-        applyStatusBarColor(com.codehong.library.widget.R.color.honglib_color_ffffff)
+        applyStatusBarColor(R.color.honglib_color_ffffff)
         if (isClickClose) {
             HongVideoPopupManager.saveOneDayLastSeenTimestamp(this@SampleVideoPopupComposeActivity)
         }

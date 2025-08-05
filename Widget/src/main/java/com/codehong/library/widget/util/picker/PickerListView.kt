@@ -48,7 +48,7 @@ class PickerListView @JvmOverloads constructor(
                     max = it
                 }
             }
-            setAdapter(object : PickerItem.PickerItemAdapter() {
+            setAdapter(object : PickerItemAdapter() {
                 override fun getValue(position: Int): String {
                     return try {
                         list[position]

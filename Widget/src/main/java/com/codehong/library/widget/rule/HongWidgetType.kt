@@ -34,6 +34,7 @@ enum class HongWidgetType(
     LABEL_SELECT_INPUT(20, "LabelSelectInput", false),
     LABEL_SWITCH(21, "LabelSwitch", true),
     LABEL_CHECKBOX(22, "LabelCheckbox", true),
+    PICKER(29, "Picker", false),
     NO_VALUE(-1, "no_value");
 
     companion object {
