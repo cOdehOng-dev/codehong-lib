@@ -32,8 +32,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.R
-import com.codehong.library.widget.button.text2.HongTextButtonBuilder2
-import com.codehong.library.widget.button.text2.HongTextButtonCompose2
+import com.codehong.library.widget.button.text.HongButtonTextBuilder
+import com.codehong.library.widget.button.text.HongButtonTextCompose
 import com.codehong.library.widget.extensions.disableRippleClickable
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongHeight
@@ -200,8 +200,8 @@ fun HongPickerCompose(
                     }
                 }
 
-                HongTextButtonCompose2(
-                    HongTextButtonBuilder2()
+                HongButtonTextCompose(
+                    HongButtonTextBuilder()
                         .width(HongLayoutParam.MATCH_PARENT.value)
                         .height(48)
                         .margin(

@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.codehong.library.widget.button.text2.HongTextButtonBuilder2
-import com.codehong.library.widget.button.text2.HongTextButtonCompose2
+import com.codehong.library.widget.button.text.HongButtonTextBuilder
+import com.codehong.library.widget.button.text.HongButtonTextCompose
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.rule.HongBorderInfo
@@ -32,8 +32,8 @@ fun HongSelectButtonCompose(
                 modifier = Modifier
                     .weight(1f)
             ) {
-                HongTextButtonCompose2(
-                    HongTextButtonBuilder2()
+                HongButtonTextCompose(
+                    HongButtonTextBuilder()
                         .width(HongLayoutParam.MATCH_PARENT.value)
                         .height(48)
                         .padding(
@@ -73,8 +73,8 @@ fun HongSelectButtonCompose(
                 modifier = Modifier
                     .weight(1f)
             ) {
-                HongTextButtonCompose2(
-                    HongTextButtonBuilder2()
+                HongButtonTextCompose(
+                    HongButtonTextBuilder()
                         .width(HongLayoutParam.MATCH_PARENT.value)
                         .height(48)
                         .padding(

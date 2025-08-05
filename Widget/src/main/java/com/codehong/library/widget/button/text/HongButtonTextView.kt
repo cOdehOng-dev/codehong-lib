@@ -1,4 +1,4 @@
-package com.codehong.library.widget.button.text2
+package com.codehong.library.widget.button.text
 
 import android.content.Context
 import android.util.AttributeSet
@@ -15,7 +15,7 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongTextBuilder
 
-class HongTextButtonView2 @JvmOverloads constructor(
+class HongButtonTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -26,12 +26,12 @@ class HongTextButtonView2 @JvmOverloads constructor(
         gravity = Gravity.CENTER
     }
 
-    var option = HongTextButtonOption2()
+    var option = HongButtonTextOption()
         private set
 
     fun set(
-        option: HongTextButtonOption2
-    ): HongTextButtonView2 {
+        option: HongButtonTextOption
+    ): HongButtonTextView {
         removeAllViews()
         this.option = option
 
@@ -52,7 +52,7 @@ class HongTextButtonView2 @JvmOverloads constructor(
         if (option.state == HongState.DISABLED) {
             this.isEnabled = false
             hongBackground(
-                backgroundColor = HongTextButtonOption2.DEFAULT_DISABLE_BACKGROUND_COLOR.hex,
+                backgroundColor = HongButtonTextOption.DEFAULT_DISABLE_BACKGROUND_COLOR.hex,
                 useShapeCircle = option.useShapeCircle,
                 radius = option.radius,
             )

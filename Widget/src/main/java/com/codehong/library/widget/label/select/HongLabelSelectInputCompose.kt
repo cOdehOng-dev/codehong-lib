@@ -12,12 +12,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import com.codehong.library.widget.button.text.HongTextButtonBuilder
-import com.codehong.library.widget.button.text.HongTextButtonCompose
+import com.codehong.library.widget.button.text.HongButtonTextBuilder
+import com.codehong.library.widget.button.text.HongButtonTextCompose
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.HongLabelViewCompose
+import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongLayoutParam.Companion.toHongLayoutValueToParam
 import com.codehong.library.widget.rule.HongSpacingInfo
@@ -25,7 +26,8 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
-import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
 import com.codehong.library.widget.textfield.HongTextFieldCompose
 import com.codehong.library.widget.util.Const
@@ -44,7 +46,7 @@ fun HongLabelSelectInputCompose(
         ) {
             val context = LocalContext.current
             var currentPosition by rememberSaveable(option.selectPosition) { mutableIntStateOf(option.selectPosition) }
-            var initial by rememberSaveable(option.textButtonOption.textOption.text) { mutableStateOf(option.textButtonOption.textOption.text) }
+            var initial by rememberSaveable(option.buttonText) { mutableStateOf(option.buttonText) }
 
             HongLabelViewCompose(
                 HongLabelBuilder()
@@ -59,15 +61,44 @@ fun HongLabelSelectInputCompose(
                     .applyOption()
             )
 
-            val textButtonOption = HongTextButtonBuilder()
-                .copy(option.textButtonOption)
-                .textOption(
-                    HongTextBuilder()
-                        .color(option.buttonTextColorHex)
-                        .typography(option.buttonTextTypo)
-                        .text(if (!initial.isNullOrEmpty()) initial else "")
-                        .applyOption()
+            val defaultButtonTextOption = HongButtonTextBuilder()
+                .width(HongLayoutParam.MATCH_PARENT.value)
+                .height(48)
+                .radius(
+                    HongRadiusInfo(
+                        topLeft = 10,
+                        topRight = 10,
+                        bottomLeft = 10,
+                        bottomRight = 10
+                    )
                 )
+                .padding(
+                    HongSpacingInfo(
+                        top = 14f,
+                        bottom = 14f
+                    )
+                )
+                .margin(
+                    HongSpacingInfo(
+                        top = 10f,
+                    )
+                )
+                .textTypo(HongTypo.BODY_15)
+                .textColor(HongColor.MAIN_ORANGE_100)
+                .border(
+                    HongBorderInfo(
+                        width = 1,
+                        color = HongColor.MAIN_ORANGE_100.hex
+                    )
+                )
+                .backgroundColor(HongColor.WHITE_100)
+                .applyOption()
+
+            val textButtonOption = HongButtonTextBuilder()
+                .copy(defaultButtonTextOption)
+                .textColor(option.buttonTextColorHex)
+                .textTypo(option.buttonTextTypo)
+                .text(if (!initial.isNullOrEmpty()) initial else "")
                 .onClick {
                     OptionPickerDialog(
                         context,
@@ -86,7 +117,7 @@ fun HongLabelSelectInputCompose(
                 }
                 .applyOption()
 
-            HongTextButtonCompose(textButtonOption)
+            HongButtonTextCompose(textButtonOption)
 
             if (option.showInput) {
                 val textFieldOption = HongTextFieldBuilder()

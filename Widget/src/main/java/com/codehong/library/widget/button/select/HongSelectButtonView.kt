@@ -3,13 +3,13 @@ package com.codehong.library.widget.button.select
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
-import com.codehong.library.widget.button.text2.HongTextButtonBuilder2
+import com.codehong.library.widget.button.text.HongButtonTextBuilder
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
 import com.codehong.library.widget.language.frameLayout
-import com.codehong.library.widget.language.hongTextButton2
+import com.codehong.library.widget.language.hongTextButton
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
@@ -55,9 +55,9 @@ class HongSelectButtonView @JvmOverloads constructor(
                 marginEnd = context.dpToPx(5f)
             }
 
-            hongTextButton2 {
+            hongTextButton {
                 set(
-                    HongTextButtonBuilder2()
+                    HongButtonTextBuilder()
                         .width(HongLayoutParam.MATCH_PARENT.value)
                         .height(48)
                         .padding(
@@ -97,9 +97,9 @@ class HongSelectButtonView @JvmOverloads constructor(
                 marginStart = context.dpToPx(5f)
             }
 
-            hongTextButton2 {
+            hongTextButton {
                 set(
-                    HongTextButtonBuilder2()
+                    HongButtonTextBuilder()
                         .width(HongLayoutParam.MATCH_PARENT.value)
                         .height(48)
                         .padding(

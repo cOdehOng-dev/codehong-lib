@@ -1,4 +1,4 @@
-package com.codehong.library.widget.button.text2
+package com.codehong.library.widget.button.text
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.HongBorderInfo
@@ -9,10 +9,10 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 
-class HongTextButtonBuilder2 : HongWidgetCommonBuilder<HongTextButtonOption2, HongTextButtonBuilder2> {
+class HongButtonTextBuilder : HongWidgetCommonBuilder<HongButtonTextOption, HongButtonTextBuilder> {
 
-    override val builder: HongTextButtonBuilder2 = this
-    override val option: HongTextButtonOption2 = HongTextButtonOption2()
+    override val builder: HongButtonTextBuilder = this
+    override val option: HongButtonTextOption = HongButtonTextOption()
 
     override fun padding(padding: HongSpacingInfo) = apply {
         option.padding = HongSpacingInfo()
@@ -54,10 +54,10 @@ class HongTextButtonBuilder2 : HongWidgetCommonBuilder<HongTextButtonOption2, Ho
 
 
 
-    fun copy(inject: HongTextButtonOption2?): HongTextButtonBuilder2 {
-        if (inject == null) return HongTextButtonBuilder2()
+    fun copy(inject: HongButtonTextOption?): HongButtonTextBuilder {
+        if (inject == null) return HongButtonTextBuilder()
 
-        return HongTextButtonBuilder2()
+        return HongButtonTextBuilder()
             .width(inject.width)
             .height(inject.height)
             .margin(inject.margin)

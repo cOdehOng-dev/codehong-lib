@@ -1,7 +1,6 @@
 package com.codehong.library.widget.text.check
 
 import com.codehong.library.widget.HongWidgetCommonOption
-import com.codehong.library.widget.button.text.HongTextButtonOption.Companion.DEFAULT_USE_SHAPE_CIRCLE
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -35,7 +34,7 @@ data class HongCheckTextOption(
     override var radius: HongRadiusInfo = HongRadiusInfo()
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
     override var border: HongBorderInfo = HongBorderInfo()
-    override var useShapeCircle: Boolean = DEFAULT_USE_SHAPE_CIRCLE
+    override var useShapeCircle: Boolean = false
     override var shadow = HongShadowInfo()
 
     var text: String? = null

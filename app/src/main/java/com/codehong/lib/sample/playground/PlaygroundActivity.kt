@@ -40,8 +40,8 @@ import com.codehong.lib.sample.toggleswitch.HongSwitchPlayground
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.button.select.HongSelectButtonCompose
 import com.codehong.library.widget.button.select.HongSelectButtonOption
-import com.codehong.library.widget.button.text2.HongTextButtonCompose2
-import com.codehong.library.widget.button.text2.HongTextButtonOption2
+import com.codehong.library.widget.button.text.HongButtonTextCompose
+import com.codehong.library.widget.button.text.HongButtonTextOption
 import com.codehong.library.widget.calendar.HongCalendarCompose
 import com.codehong.library.widget.calendar.HongCalendarOption
 import com.codehong.library.widget.checkbox.HongCheckBoxCompose
@@ -336,7 +336,7 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.BUTTON_TEXT -> {
                 binding.vComposePreview.setContent {
                     PreviewUI(isBorderOn) {
-                        HongTextButtonCompose2(previewOption as HongTextButtonOption2)
+                        HongButtonTextCompose(previewOption as HongButtonTextOption)
                     }
                 }
             }

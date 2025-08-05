@@ -4,9 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
-import com.codehong.library.widget.button.text.HongTextButtonBuilder
-import com.codehong.library.widget.button.text.HongTextButtonOption
-import com.codehong.library.widget.button.text.HongTextButtonView
+import com.codehong.library.widget.button.text.HongButtonTextBuilder
+import com.codehong.library.widget.button.text.HongButtonTextView
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
@@ -15,12 +14,14 @@ import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.language.hongLabel
 import com.codehong.library.widget.language.hongTextButton
 import com.codehong.library.widget.language.hongTextField
+import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
-import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
 import com.codehong.library.widget.textfield.HongTextFieldView
 import com.codehong.library.widget.util.picker.OptionPickerDialog
@@ -41,9 +42,40 @@ class HongLabelSelectInputView @JvmOverloads constructor(
     private var currentPosition = 0
 
     private var textField: HongTextFieldView? = null
-    private var textButton: HongTextButtonView? = null
+    private var textButton: HongButtonTextView? = null
 
-    private var textButtonOption: HongTextButtonOption? = null
+    private var textButtonOption = HongButtonTextBuilder()
+        .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(48)
+        .radius(
+            HongRadiusInfo(
+                topLeft = 10,
+                topRight = 10,
+                bottomLeft = 10,
+                bottomRight = 10
+            )
+        )
+        .padding(
+            HongSpacingInfo(
+                top = 14f,
+                bottom = 14f
+            )
+        )
+        .margin(
+            HongSpacingInfo(
+                top = 10f,
+            )
+        )
+        .textTypo(HongTypo.BODY_15)
+        .textColor(HongColor.MAIN_ORANGE_100)
+        .border(
+            HongBorderInfo(
+                width = 1,
+                color = HongColor.MAIN_ORANGE_100.hex
+            )
+        )
+        .backgroundColor(HongColor.WHITE_100)
+        .applyOption()
 
     fun setSelectView(
         option: HongLabelSelectInputOption,
@@ -131,7 +163,7 @@ class HongLabelSelectInputView @JvmOverloads constructor(
                             top = 10f
                         )
                     )
-                    .input(option.textFieldOption.inputTextOption.text ?: option.textButtonOption.textOption.text)
+                    .input(option.textFieldOption.inputTextOption.text ?: option.buttonText)
                     .placeholder(option.textFieldOption.placeholderTextOption.text)
                     .keyboardOption(
                         Pair(
@@ -183,17 +215,15 @@ class HongLabelSelectInputView @JvmOverloads constructor(
     }
 
     private fun initSelectPickerView() {
-        val initial = option.textButtonOption.textOption.text
+        val initial = option.buttonText
 
-        this.textButtonOption = HongTextButtonBuilder()
-            .copy(option.textButtonOption)
-            .textOption(
-                HongTextBuilder()
-                    .text(if (!initial.isNullOrEmpty()) initial else "")
-                    .color(option.buttonTextColorHex)
-                    .typography(option.buttonTextTypo)
-                    .applyOption()
-            )
+        val beforeButtonTextOption = textButtonOption
+
+        this.textButtonOption = HongButtonTextBuilder()
+            .copy(beforeButtonTextOption)
+            .text(if (!initial.isNullOrEmpty()) initial else "")
+            .textColor(option.buttonTextColorHex)
+            .textTypo(option.buttonTextTypo)
             .onClick {
                 OptionPickerDialog(
                     context,
@@ -205,24 +235,17 @@ class HongLabelSelectInputView @JvmOverloads constructor(
                     this.currentPosition = index
                     this.option = HongLabelSelectInputBuilder()
                         .copy(option)
-                        .textButtonOption(
-                            HongTextButtonBuilder()
-                                .copy(
-                                    HongTextButtonBuilder()
-                                        .copy(textButtonOption)
-                                        .textOption(
-                                            HongTextBuilder()
-                                                .color(option.buttonTextColorHex)
-                                                .typography(option.buttonTextTypo)
-                                                .text(selectOption)
-                                                .applyOption()
-                                        )
-                                        .applyOption()
-                                )
-                                .applyOption()
-                        )
+                        .buttonTextColor(option.buttonTextColorHex)
+                        .buttonTextTypo(option.buttonTextTypo)
+                        .buttonText(selectOption)
                         .applyOption()
-                    textButton?.set(option.textButtonOption)
+                    textButton?.set(HongButtonTextBuilder()
+                        .copy(textButtonOption)
+                        .textColor(option.buttonTextColorHex)
+                        .textTypo(option.buttonTextTypo)
+                        .text(selectOption)
+                        .applyOption()
+                    )
                     option.pickerCallback?.invoke(selectOption, option.selectList.indexOf(selectOption))
                 }.show()
             }
@@ -230,15 +253,14 @@ class HongLabelSelectInputView @JvmOverloads constructor(
 
         this.option = HongLabelSelectInputBuilder()
             .copy(option)
-            .textButtonOption(
-                HongTextButtonBuilder()
-                    .copy(textButtonOption)
-                    .applyOption()
-            )
+            .buttonText(if (!initial.isNullOrEmpty()) initial else "")
+            .buttonTextColor(option.buttonTextColorHex)
+            .buttonTextTypo(option.buttonTextTypo)
             .applyOption()
 
-        this.textButton = hongTextButton {
-            set(this@HongLabelSelectInputView.option.textButtonOption)
+        hongTextButton {
+            textButton = this
+            set(textButtonOption)
         }
     }
 }

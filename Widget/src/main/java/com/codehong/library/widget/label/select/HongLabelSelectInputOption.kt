@@ -3,8 +3,6 @@ package com.codehong.library.widget.label.select
 import android.os.Parcelable
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.R
-import com.codehong.library.widget.button.text.HongTextButtonBuilder
-import com.codehong.library.widget.button.text.HongTextButtonOption
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
@@ -89,42 +87,6 @@ data class HongLabelSelectInputOption(
             .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
             .applyOption()
 
-        val DEFAULT_BUTTON_TEXT = HongTextBuilder()
-            .typography(HongTypo.BODY_15)
-            .color(HongColor.MAIN_ORANGE_100)
-            .applyOption()
-
-        val DEFAULT_TEXT_BUTTON = HongTextButtonBuilder()
-            .width(HongLayoutParam.MATCH_PARENT.value)
-            .height(48)
-            .radius(
-                HongRadiusInfo(
-                    topLeft = 10,
-                    topRight = 10,
-                    bottomLeft = 10,
-                    bottomRight = 10
-                )
-            )
-            .padding(
-                HongSpacingInfo(
-                    top = 14f,
-                    bottom = 14f
-                )
-            )
-            .margin(
-                HongSpacingInfo(
-                    top = 10f,
-                )
-            )
-            .textOption(DEFAULT_BUTTON_TEXT)
-            .border(
-                HongBorderInfo(
-                    width = 1,
-                    color = HongColor.MAIN_ORANGE_100.hex
-                )
-            )
-            .backgroundColor(HongColor.WHITE_100)
-            .applyOption()
     }
 
     override var isValidComponent: Boolean = true
@@ -150,20 +112,19 @@ data class HongLabelSelectInputOption(
     var descriptionColorHex: String = HongColor.BLACK_60.hex
     var descriptionTypo: HongTypo = HongTypo.CONTENTS_10
 
-//    var labelOption: HongLabelOption = DEFAULT_LABEL_VIEW_OPTION
-
 
     var input: String? = null
     var placeholder: String? = null
     var textFieldOption: HongTextFieldOption = DEFAULT_TEXT_FIELD
 
+
+
+
+
     var buttonText: String? = null
     var buttonTextColorHex: String = HongColor.MAIN_ORANGE_100.hex
     var buttonTextTypo = HongTypo.BODY_15
 
-
-//    var buttonTextOption: HongTextOption = DEFAULT_BUTTON_TEXT
-    var textButtonOption: HongTextButtonOption = DEFAULT_TEXT_BUTTON
 
     var selectPosition: Int = 0
     var selectList: List<String> = emptyList()
@@ -176,6 +137,11 @@ data class HongLabelSelectInputOption(
 
     var pickerCallback: ((String, Int) -> Unit)? = null
     var inputCallback: ((String?) -> Unit)? = null
+
+
+
+
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -204,7 +170,7 @@ data class HongLabelSelectInputOption(
         if (placeholder != other.placeholder) return false
         if (textFieldOption != other.textFieldOption) return false
         if (buttonText != other.buttonText) return false
-        if (textButtonOption != other.textButtonOption) return false
+//        if (textButtonOption != other.textButtonOption) return false
         if (selectPosition != other.selectPosition) return false
         if (selectList != other.selectList) return false
         if (useOnlyNumber != other.useOnlyNumber) return false
@@ -239,7 +205,7 @@ data class HongLabelSelectInputOption(
         result = 31 * result + (placeholder?.hashCode() ?: 0)
         result = 31 * result + textFieldOption.hashCode()
         result = 31 * result + (buttonText?.hashCode() ?: 0)
-        result = 31 * result + textButtonOption.hashCode()
+//        result = 31 * result + textButtonOption.hashCode()
         result = 31 * result + selectPosition
         result = 31 * result + selectList.hashCode()
         result = 31 * result + useOnlyNumber.hashCode()
@@ -274,7 +240,7 @@ data class HongLabelSelectInputOption(
                 "placeholder=$placeholder, " +
                 "textFieldOption=$textFieldOption, " +
                 "buttonText=$buttonText, " +
-                "textButtonOption=$textButtonOption, " +
+//                "textButtonOption=$textButtonOption, " +
                 "selectPosition=$selectPosition, " +
                 "selectList=$selectList, " +
                 "useOnlyNumber=$useOnlyNumber, " +

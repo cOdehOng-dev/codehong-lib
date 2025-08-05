@@ -1,11 +1,8 @@
 package com.codehong.library.widget.label.select
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
-import com.codehong.library.widget.button.text.HongTextButtonBuilder
-import com.codehong.library.widget.button.text.HongTextButtonOption
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
 import com.codehong.library.widget.textfield.HongTextFieldOption
 
@@ -66,29 +63,7 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
 
     fun buttonText(buttonText: String?) = apply {
         this.option.buttonText = buttonText
-        textButtonOption(
-            HongTextButtonBuilder()
-                .copy(option.textButtonOption)
-                .textOption(
-                    HongTextBuilder()
-                        .text(buttonText)
-                        .color(option.buttonTextColorHex)
-                        .typography(option.buttonTextTypo)
-                        .applyOption()
-                )
-                .applyOption()
-        )
     }
-
-//    fun buttonTextOption(buttonTextOption: HongTextOption) = apply {
-//        this.option.buttonTextOption = buttonTextOption
-//        textButtonOption(
-//            HongTextButtonBuilder()
-//                .copy(option.textButtonOption)
-//                .textOption(buttonTextOption)
-//                .applyOption()
-//        )
-//    }
 
     fun buttonTextColor(color: HongColor) = apply {
         this.option.buttonTextColorHex = color.hex
@@ -99,10 +74,6 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
 
     fun buttonTextTypo(typo: HongTypo) = apply {
         this.option.buttonTextTypo = typo
-    }
-
-    fun textButtonOption(textButtonOption: HongTextButtonOption) = apply {
-        this.option.textButtonOption = textButtonOption
     }
 
     fun selectPosition(selectPosition: Int) = apply {
@@ -149,7 +120,6 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
             .textFieldOption(inject.textFieldOption)
             .inputText(inject.input)
             .placeholder(inject.placeholder)
-            .textButtonOption(inject.textButtonOption)
             .buttonText(inject.buttonText)
             .buttonTextColor(inject.buttonTextColorHex)
             .buttonTextTypo(inject.buttonTextTypo)

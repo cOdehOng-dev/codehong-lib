@@ -10,41 +10,42 @@ import com.codehong.library.widget.rule.HongState
 import com.codehong.library.widget.rule.HongTextAlign
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.rule.typo.HongFont
+import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextCompose
 import com.codehong.library.widget.util.HongWidgetContainer
 import com.codehong.library.widget.util.HongWidgetNoneClickContainer
 
 @Composable
-fun HongTextButtonCompose(
-    option: HongTextButtonOption
+fun HongButtonTextCompose(
+    option: HongButtonTextOption
 ) {
     if (option.state == HongState.DISABLED) {
         HongWidgetNoneClickContainer(
-            HongTextButtonBuilder()
+            HongButtonTextBuilder()
                 .copy(option)
-                .backgroundColor(HongTextButtonOption.DEFAULT_DISABLE_BACKGROUND_COLOR)
+                .backgroundColor(HongButtonTextOption.DEFAULT_DISABLE_BACKGROUND_COLOR)
                 .border(HongBorderInfo())
                 .applyOption()
         ) {
             HongTextCompose(
                 option = HongTextBuilder()
-                    .copy(HongTextButtonOption.DEFAULT_DISABLE_TEXT_OPTION)
-                    .text(option.textOption.text)
                     .width(HongLayoutParam.MATCH_PARENT.value)
+                    .text(option.text)
+                    .typography(HongTypo.BODY_15_B)
+                    .color(HongColor.WHITE_60.hex)
                     .textAlign(HongTextAlign.CENTER)
                     .applyOption()
             )
         }
     } else {
-        HongWidgetContainer(
-            option
-        ) {
+        HongWidgetContainer(option) {
             HongTextCompose(
                 option = HongTextBuilder()
-                    .copy(option.textOption)
                     .width(HongLayoutParam.MATCH_PARENT.value)
+                    .text(option.text)
+                    .typography(option.textTypo)
+                    .color(option.textColorHex)
                     .textAlign(HongTextAlign.CENTER)
                     .applyOption()
             )
@@ -55,7 +56,7 @@ fun HongTextButtonCompose(
 @Preview(showBackground = true)
 @Composable
 fun PreviewHongTextButtonCompose() {
-    val option = HongTextButtonBuilder()
+    val option = HongButtonTextBuilder()
         .width(HongLayoutParam.MATCH_PARENT.value)
         .height(48)
         .margin(
@@ -66,14 +67,9 @@ fun PreviewHongTextButtonCompose() {
                 bottom = 10f
             )
         )
-        .textOption(
-            HongTextBuilder()
-                .text("검색하기")
-                .size(15)
-                .fontType(HongFont.PRETENDARD_700)
-                .color(HongColor.WHITE_100)
-                .applyOption()
-        )
+        .text("검색하기")
+        .textTypo(HongTypo.BODY_15_B)
+        .textColor(HongColor.WHITE_100)
         .backgroundColor(HongColor.MAIN_ORANGE_100.hex)
         .radius(
             HongRadiusInfo(
@@ -82,9 +78,8 @@ fun PreviewHongTextButtonCompose() {
         )
         .applyOption()
 
-    val option2 = HongTextButtonBuilder()
+    val option2 = HongButtonTextBuilder()
         .width(HongLayoutParam.MATCH_PARENT.value)
-        .state(HongState.DISABLED)
         .height(48)
         .margin(
             HongSpacingInfo(
@@ -94,24 +89,20 @@ fun PreviewHongTextButtonCompose() {
                 bottom = 10f
             )
         )
-        .textOption(
-            HongTextBuilder()
-                .text("검색하기")
-                .size(15)
-                .fontType(HongFont.PRETENDARD_700)
-                .color(HongColor.WHITE_100)
-                .applyOption()
-        )
+        .text("검색하기")
+        .textTypo(HongTypo.BODY_15_B)
+        .textColor(HongColor.WHITE_100)
         .backgroundColor(HongColor.MAIN_ORANGE_100.hex)
         .radius(
             HongRadiusInfo(
                 all = 12
             )
         )
+        .state(HongState.DISABLED)
         .applyOption()
 
     Column {
-        HongTextButtonCompose(option)
-        HongTextButtonCompose(option2)
+        HongButtonTextCompose(option)
+        HongButtonTextCompose(option2)
     }
 }

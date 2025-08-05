@@ -59,8 +59,8 @@ import com.codehong.lib.sample.videopopup.SampleVideoPopupActivity
 import com.codehong.lib.sample.videopopup.SampleVideoPopupBuilderActivity
 import com.codehong.lib.sample.videopopup.SampleVideoPopupComposeActivity
 import com.codehong.library.widget.R
-import com.codehong.library.widget.button.text2.HongTextButtonBuilder2
-import com.codehong.library.widget.button.text2.HongTextButtonCompose2
+import com.codehong.library.widget.button.text.HongButtonTextBuilder
+import com.codehong.library.widget.button.text.HongButtonTextCompose
 import com.codehong.library.widget.dynamicisland.DynamicIslandInfo
 import com.codehong.library.widget.dynamicisland.DynamicIslandManager
 import com.codehong.library.widget.rule.HongBorderInfo
@@ -195,8 +195,8 @@ fun SampleTheme(
                         modifier = Modifier
                             .weight(1.5f)
                     ) {
-                        HongTextButtonCompose2(
-                            option = HongTextButtonBuilder2()
+                        HongButtonTextCompose(
+                            option = HongButtonTextBuilder()
                                 .height(50)
                                 .state(
                                     if (item.widgetType.allowPlayground) HongState.ENABLED else HongState.DISABLED
@@ -234,8 +234,8 @@ fun SampleTheme(
                         modifier = Modifier
                             .weight(1f)
                     ) {
-                        HongTextButtonCompose2(
-                            option = HongTextButtonBuilder2()
+                        HongButtonTextCompose(
+                            option = HongButtonTextBuilder()
                                 .height(50)
                                 .text("샘플")
                                 .textTypo(HongTypo.BODY_14_B)

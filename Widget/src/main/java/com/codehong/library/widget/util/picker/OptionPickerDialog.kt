@@ -13,14 +13,14 @@ import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import com.codehong.library.widget.R
 import com.codehong.library.widget.button.select.HongSelectButtonBuilder
-import com.codehong.library.widget.button.text2.HongTextButtonBuilder2
+import com.codehong.library.widget.button.text.HongButtonTextBuilder
 import com.codehong.library.widget.databinding.HonglibOptionPickerDialogBinding
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.setLayout
 import com.codehong.library.widget.language.hongSelectButton
 import com.codehong.library.widget.language.hongText
-import com.codehong.library.widget.language.hongTextButton2
+import com.codehong.library.widget.language.hongTextButton
 import com.codehong.library.widget.language.verticalLinearLayout
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
@@ -138,9 +138,9 @@ class OptionPickerDialog constructor(
                     )
                 }
             } else {
-                hongTextButton2 {
+                hongTextButton {
                     set(
-                        HongTextButtonBuilder2()
+                        HongButtonTextBuilder()
                             .width(HongLayoutParam.MATCH_PARENT.value)
                             .height(48)
                             .onClick {

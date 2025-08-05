@@ -1,7 +1,6 @@
 package com.codehong.library.widget.button.text
 
 import com.codehong.library.widget.HongWidgetCommonOption
-
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -11,28 +10,12 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
 
-data class HongTextButtonOption(
+data class HongButtonTextOption(
     override val type: HongWidgetType = HongWidgetType.BUTTON_TEXT,
 ) : HongWidgetCommonOption {
 
     companion object {
-        val DEFAULT_TEXT_TYPO = HongTypo.BODY_16_B
-        val DEFAULT_TEXT_COLOR = HongColor.WHITE_100.hex
-
-        const val DEFAULT_USE_SHAPE_CIRCLE = false
-
-        val DEFAULT_TEXT_OPTION = HongTextBuilder()
-            .typography(DEFAULT_TEXT_TYPO)
-            .color(DEFAULT_TEXT_COLOR)
-            .applyOption()
-
-        val DEFAULT_DISABLE_TEXT_OPTION = HongTextBuilder()
-            .typography(HongTypo.BODY_15_B)
-            .color(HongColor.WHITE_60.hex)
-            .applyOption()
-
         val DEFAULT_DISABLE_BACKGROUND_COLOR = HongColor.GRAY_70
     }
 
@@ -46,19 +29,20 @@ data class HongTextButtonOption(
     override var radius: HongRadiusInfo = HongRadiusInfo()
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
     override var border: HongBorderInfo = HongBorderInfo()
-    override var useShapeCircle: Boolean = DEFAULT_USE_SHAPE_CIRCLE
+    override var useShapeCircle: Boolean = false
     override var shadow = HongShadowInfo()
 
-    var textOption = DEFAULT_TEXT_OPTION
+    var text: String = ""
+    var textTypo: HongTypo = HongTypo.BODY_16_B
+    var textColorHex: String = HongColor.WHITE_100.hex
 
     var state: HongState = HongState.ENABLED
-
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as HongTextButtonOption
+        other as HongButtonTextOption
 
         if (type != other.type) return false
         if (isValidComponent != other.isValidComponent) return false
@@ -72,7 +56,9 @@ data class HongTextButtonOption(
         if (border != other.border) return false
         if (useShapeCircle != other.useShapeCircle) return false
         if (shadow != other.shadow) return false
-        if (textOption != other.textOption) return false
+        if (text != other.text) return false
+        if (textTypo != other.textTypo) return false
+        if (textColorHex != other.textColorHex) return false
         if (state != other.state) return false
 
         return true
@@ -91,13 +77,15 @@ data class HongTextButtonOption(
         result = 31 * result + border.hashCode()
         result = 31 * result + useShapeCircle.hashCode()
         result = 31 * result + shadow.hashCode()
-        result = 31 * result + textOption.hashCode()
+        result = 31 * result + text.hashCode()
+        result = 31 * result + textTypo.hashCode()
+        result = 31 * result + textColorHex.hashCode()
         result = 31 * result + state.hashCode()
         return result
     }
 
     override fun toString(): String {
-        return "HongTextButtonOption(" +
+        return "HongTextButtonOption2(" +
                 "type=$type, " +
                 "isValidComponent=$isValidComponent, " +
                 "width=$width, " +
@@ -110,8 +98,12 @@ data class HongTextButtonOption(
                 "border=$border, " +
                 "useShapeCircle=$useShapeCircle, " +
                 "shadow=$shadow, " +
-                "textOption=$textOption, " +
+                "text='$text', " +
+                "textTypo=$textTypo, " +
+                "textColorHex='$textColorHex', " +
                 "state=$state" +
                 ")"
     }
+
+
 }
