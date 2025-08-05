@@ -6,7 +6,6 @@ import com.codehong.library.widget.button.text.HongTextButtonOption
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.text.HongTextOption
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
 import com.codehong.library.widget.textfield.HongTextFieldOption
 
@@ -67,33 +66,39 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
 
     fun buttonText(buttonText: String?) = apply {
         this.option.buttonText = buttonText
-        buttonTextOption(
-            HongTextBuilder()
-                .copy(option.buttonTextOption)
-                .text(buttonText)
-                .applyOption()
-        )
         textButtonOption(
             HongTextButtonBuilder()
                 .copy(option.textButtonOption)
                 .textOption(
                     HongTextBuilder()
-                        .copy(option.buttonTextOption)
                         .text(buttonText)
+                        .color(option.buttonTextColorHex)
+                        .typography(option.buttonTextTypo)
                         .applyOption()
                 )
                 .applyOption()
         )
     }
 
-    fun buttonTextOption(buttonTextOption: HongTextOption) = apply {
-        this.option.buttonTextOption = buttonTextOption
-        textButtonOption(
-            HongTextButtonBuilder()
-                .copy(option.textButtonOption)
-                .textOption(buttonTextOption)
-                .applyOption()
-        )
+//    fun buttonTextOption(buttonTextOption: HongTextOption) = apply {
+//        this.option.buttonTextOption = buttonTextOption
+//        textButtonOption(
+//            HongTextButtonBuilder()
+//                .copy(option.textButtonOption)
+//                .textOption(buttonTextOption)
+//                .applyOption()
+//        )
+//    }
+
+    fun buttonTextColor(color: HongColor) = apply {
+        this.option.buttonTextColorHex = color.hex
+    }
+    fun buttonTextColor(colorHex: String) = apply {
+        this.option.buttonTextColorHex = colorHex
+    }
+
+    fun buttonTextTypo(typo: HongTypo) = apply {
+        this.option.buttonTextTypo = typo
     }
 
     fun textButtonOption(textButtonOption: HongTextButtonOption) = apply {
@@ -145,8 +150,9 @@ class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInput
             .inputText(inject.input)
             .placeholder(inject.placeholder)
             .textButtonOption(inject.textButtonOption)
-            .buttonTextOption(inject.buttonTextOption)
             .buttonText(inject.buttonText)
+            .buttonTextColor(inject.buttonTextColorHex)
+            .buttonTextTypo(inject.buttonTextTypo)
             .selectPosition(inject.selectPosition)
             .selectList(inject.selectList)
             .useOnlyNumber(inject.useOnlyNumber)

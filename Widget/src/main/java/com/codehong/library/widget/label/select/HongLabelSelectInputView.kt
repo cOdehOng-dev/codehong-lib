@@ -189,8 +189,9 @@ class HongLabelSelectInputView @JvmOverloads constructor(
             .copy(option.textButtonOption)
             .textOption(
                 HongTextBuilder()
-                    .copy(option.buttonTextOption)
                     .text(if (!initial.isNullOrEmpty()) initial else "")
+                    .color(option.buttonTextColorHex)
+                    .typography(option.buttonTextTypo)
                     .applyOption()
             )
             .onClick {
@@ -211,7 +212,8 @@ class HongLabelSelectInputView @JvmOverloads constructor(
                                         .copy(textButtonOption)
                                         .textOption(
                                             HongTextBuilder()
-                                                .copy(option.buttonTextOption)
+                                                .color(option.buttonTextColorHex)
+                                                .typography(option.buttonTextTypo)
                                                 .text(selectOption)
                                                 .applyOption()
                                         )

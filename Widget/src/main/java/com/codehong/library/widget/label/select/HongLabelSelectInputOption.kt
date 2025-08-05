@@ -18,7 +18,6 @@ import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.text.HongTextOption
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
 import com.codehong.library.widget.textfield.HongTextFieldOption
 import kotlinx.parcelize.Parcelize
@@ -159,7 +158,11 @@ data class HongLabelSelectInputOption(
     var textFieldOption: HongTextFieldOption = DEFAULT_TEXT_FIELD
 
     var buttonText: String? = null
-    var buttonTextOption: HongTextOption = DEFAULT_BUTTON_TEXT
+    var buttonTextColorHex: String = HongColor.MAIN_ORANGE_100.hex
+    var buttonTextTypo = HongTypo.BODY_15
+
+
+//    var buttonTextOption: HongTextOption = DEFAULT_BUTTON_TEXT
     var textButtonOption: HongTextButtonOption = DEFAULT_TEXT_BUTTON
 
     var selectPosition: Int = 0
@@ -201,7 +204,6 @@ data class HongLabelSelectInputOption(
         if (placeholder != other.placeholder) return false
         if (textFieldOption != other.textFieldOption) return false
         if (buttonText != other.buttonText) return false
-        if (buttonTextOption != other.buttonTextOption) return false
         if (textButtonOption != other.textButtonOption) return false
         if (selectPosition != other.selectPosition) return false
         if (selectList != other.selectList) return false
@@ -237,7 +239,6 @@ data class HongLabelSelectInputOption(
         result = 31 * result + (placeholder?.hashCode() ?: 0)
         result = 31 * result + textFieldOption.hashCode()
         result = 31 * result + (buttonText?.hashCode() ?: 0)
-        result = 31 * result + buttonTextOption.hashCode()
         result = 31 * result + textButtonOption.hashCode()
         result = 31 * result + selectPosition
         result = 31 * result + selectList.hashCode()
@@ -273,7 +274,6 @@ data class HongLabelSelectInputOption(
                 "placeholder=$placeholder, " +
                 "textFieldOption=$textFieldOption, " +
                 "buttonText=$buttonText, " +
-                "buttonTextOption=$buttonTextOption, " +
                 "textButtonOption=$textButtonOption, " +
                 "selectPosition=$selectPosition, " +
                 "selectList=$selectList, " +

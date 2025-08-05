@@ -63,7 +63,8 @@ fun HongLabelSelectInputCompose(
                 .copy(option.textButtonOption)
                 .textOption(
                     HongTextBuilder()
-                        .copy(option.buttonTextOption)
+                        .color(option.buttonTextColorHex)
+                        .typography(option.buttonTextTypo)
                         .text(if (!initial.isNullOrEmpty()) initial else "")
                         .applyOption()
                 )
