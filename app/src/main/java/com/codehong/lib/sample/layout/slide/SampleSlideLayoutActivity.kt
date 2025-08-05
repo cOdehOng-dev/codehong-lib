@@ -15,16 +15,15 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.codehong.lib.sample.SampleHeader
 import com.codehong.lib.sample.SampleComposeDespContainer
+import com.codehong.lib.sample.SampleHeader
 import com.codehong.library.widget.MarginTopOrBottom
-import com.codehong.library.widget.button.text.HongTextButtonCompose
-import com.codehong.library.widget.button.text.HongTextButtonBuilder
+import com.codehong.library.widget.button.text2.HongTextButtonBuilder2
+import com.codehong.library.widget.button.text2.HongTextButtonCompose2
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.rule.typo.HongFont
-import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.rule.typo.HongTypo
 
 class SampleSlideLayoutActivity : ComponentActivity() {
 
@@ -50,22 +49,17 @@ class SampleSlideLayoutActivity : ComponentActivity() {
                                 .fillMaxWidth()
                                 .height(48.dp)
                         ) {
-                            HongTextButtonCompose(
-                                option = HongTextButtonBuilder()
+                            HongTextButtonCompose2(
+                                option = HongTextButtonBuilder2()
                                     .padding(
                                         HongSpacingInfo(
                                             left = 20f,
                                             right = 20f
                                         )
                                     )
-                                    .textOption(
-                                        HongTextBuilder()
-                                            .text("뷰 슬라이드")
-                                            .size(15)
-                                            .fontType(HongFont.PRETENDARD_700)
-                                            .color(HongColor.WHITE_100.hex)
-                                            .applyOption()
-                                    )
+                                    .text("뷰 슬라이드")
+                                    .textTypo(HongTypo.BODY_15_B)
+                                    .textColor(HongColor.WHITE_100)
                                     .backgroundColor(HongColor.MAIN_ORANGE_100.hex)
                                     .radius(
                                         HongRadiusInfo(

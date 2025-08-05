@@ -11,6 +11,8 @@ import com.codehong.library.widget.language.hongText
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongState
 import com.codehong.library.widget.rule.HongTextAlign
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.HongTextBuilder
 
 class HongTextButtonView2 @JvmOverloads constructor(
@@ -59,8 +61,8 @@ class HongTextButtonView2 @JvmOverloads constructor(
                     HongTextBuilder()
                         .width(HongLayoutParam.MATCH_PARENT.value)
                         .text(option.text)
-                        .typography(option.textTypo)
-                        .color(option.textColorHex)
+                        .typography(HongTypo.BODY_15_B)
+                        .color(HongColor.WHITE_60.hex)
                         .textAlign(HongTextAlign.CENTER)
                         .maxLines(1)
                         .applyOption()

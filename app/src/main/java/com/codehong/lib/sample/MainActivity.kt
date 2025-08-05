@@ -59,15 +59,14 @@ import com.codehong.lib.sample.videopopup.SampleVideoPopupActivity
 import com.codehong.lib.sample.videopopup.SampleVideoPopupBuilderActivity
 import com.codehong.lib.sample.videopopup.SampleVideoPopupComposeActivity
 import com.codehong.library.widget.R
-import com.codehong.library.widget.button.text.HongTextButtonBuilder
-import com.codehong.library.widget.button.text.HongTextButtonCompose
+import com.codehong.library.widget.button.text2.HongTextButtonBuilder2
+import com.codehong.library.widget.button.text2.HongTextButtonCompose2
 import com.codehong.library.widget.dynamicisland.DynamicIslandInfo
 import com.codehong.library.widget.dynamicisland.DynamicIslandManager
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongState
-import com.codehong.library.widget.rule.HongTextAlign
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
@@ -196,8 +195,8 @@ fun SampleTheme(
                         modifier = Modifier
                             .weight(1.5f)
                     ) {
-                        HongTextButtonCompose(
-                            option = HongTextButtonBuilder()
+                        HongTextButtonCompose2(
+                            option = HongTextButtonBuilder2()
                                 .height(50)
                                 .state(
                                     if (item.widgetType.allowPlayground) HongState.ENABLED else HongState.DISABLED
@@ -207,14 +206,9 @@ fun SampleTheme(
                                         right = 5f
                                     )
                                 )
-                                .textOption(
-                                    HongTextBuilder()
-                                        .text("Playground")
-                                        .typography(HongTypo.BODY_14_B)
-                                        .color(HongColor.MAIN_ORANGE_100)
-                                        .textAlign(HongTextAlign.CENTER)
-                                        .applyOption()
-                                )
+                                .text("Playground")
+                                .textTypo(HongTypo.BODY_14_B)
+                                .textColor(HongColor.MAIN_ORANGE_100)
                                 .backgroundColor(HongColor.WHITE_100.hex)
                                 .radius(
                                     HongRadiusInfo(all = 14)
@@ -240,17 +234,12 @@ fun SampleTheme(
                         modifier = Modifier
                             .weight(1f)
                     ) {
-                        HongTextButtonCompose(
-                            option = HongTextButtonBuilder()
+                        HongTextButtonCompose2(
+                            option = HongTextButtonBuilder2()
                                 .height(50)
-                                .textOption(
-                                    HongTextBuilder()
-                                        .text("샘플")
-                                        .typography(HongTypo.BODY_14_B)
-                                        .color(HongColor.MAIN_ORANGE_100)
-                                        .textAlign(HongTextAlign.CENTER)
-                                        .applyOption()
-                                )
+                                .text("샘플")
+                                .textTypo(HongTypo.BODY_14_B)
+                                .textColor(HongColor.MAIN_ORANGE_100)
                                 .backgroundColor(HongColor.WHITE_100.hex)
                                 .radius(
                                     HongRadiusInfo(all = 14)

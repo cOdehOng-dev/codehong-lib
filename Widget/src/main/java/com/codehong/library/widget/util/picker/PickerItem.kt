@@ -368,8 +368,8 @@ class PickerItem @JvmOverloads constructor(
                 mCurrentFirstItemOffset += y
             } else {
                 mCurrentFirstItemOffset = mInitialFirstItemOffset - (gap / 2)
-                if (!overScroller!!.isFinished && !mIsDragging) {
-                    overScroller!!.abortAnimation()
+                if (!overScroller.isFinished && !mIsDragging) {
+                    overScroller.abortAnimation()
                 }
             }
             return
