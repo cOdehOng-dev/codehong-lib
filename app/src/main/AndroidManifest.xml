@@ -96,6 +96,8 @@
 
         <activity android:name=".picker.SamplePickerComposeActivity"/>
 
+        <activity android:name=".button.icon.SampleButtonIconActivity"/>
+
     </application>
 
 </manifest>

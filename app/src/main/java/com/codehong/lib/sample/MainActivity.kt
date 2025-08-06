@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.SampleType.Companion.toType
+import com.codehong.lib.sample.button.icon.SampleButtonIconActivity
 import com.codehong.lib.sample.button.select.SampleSelectButtonActivity
 import com.codehong.lib.sample.button.text.SampleTextButtonActivity
 import com.codehong.lib.sample.calendar.SampleCalendarActivity
@@ -252,6 +253,7 @@ fun SampleTheme(
                                 )
                                 .onClick {
                                     when (item.widgetType) {
+                                        // test here 수정
                                         HongWidgetType.TEXT -> {
                                             Intent(activity, SampleTextActivity::class.java).apply {
                                                 putExtra(SampleConst.WIDGET_TYPE, HongWidgetType.TEXT.value)
@@ -347,6 +349,16 @@ fun SampleTheme(
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
                                                     HongWidgetType.BUTTON_SELECT.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
+                                        HongWidgetType.BUTTON_ICON -> {
+                                            Intent(activity, SampleButtonIconActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.BUTTON_ICON.value
                                                 )
                                                 activity.startActivity(this)
                                             }

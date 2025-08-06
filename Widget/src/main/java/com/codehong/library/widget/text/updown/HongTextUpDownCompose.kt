@@ -37,7 +37,6 @@ fun HongTextUpDownCompose(
                 .hongHeight(option.height),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
             HongImageCompose(
                 HongImageBuilder()
                     .width(option.buttonSize)

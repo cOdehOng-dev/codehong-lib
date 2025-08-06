@@ -157,12 +157,15 @@ fun getAlphaColor(colorHexCode: String, alpha: Int): String {
     return "#$prefix${colorHexCode.removePrefix("#")}"
 }
 
-
 @Composable
 fun HongWidgetContainer(
     option: HongWidgetCommonOption,
     childCompose: @Composable () -> Unit,
 ) {
+    if (option.click == null) {
+        HongWidgetNoneClickContainer(option, childCompose)
+        return
+    }
     Box(
         modifier = Modifier
             .hongSpacing(option.margin)
