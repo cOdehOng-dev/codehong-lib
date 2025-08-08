@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.SampleType.Companion.toType
+import com.codehong.lib.sample.bottomsheet.SampleBottomSheetSelectActivity
 import com.codehong.lib.sample.button.icon.SampleButtonIconActivity
 import com.codehong.lib.sample.button.select.SampleSelectButtonActivity
 import com.codehong.lib.sample.button.text.SampleTextButtonActivity
@@ -44,14 +45,17 @@ import com.codehong.lib.sample.picker.OptionPickerActivity
 import com.codehong.lib.sample.picker.SamplePickerComposeActivity
 import com.codehong.lib.sample.player.SampleVideoPlayerActivity
 import com.codehong.lib.sample.playground.PlaygroundActivity
+import com.codehong.lib.sample.tab.flow.SampleTabFlowActivity
 import com.codehong.lib.sample.tab.scroll.SampleTabScrollActivity
 import com.codehong.lib.sample.tab.segment.SampleTabSegmentActivity
 import com.codehong.lib.sample.text.SampleTextActivity
 import com.codehong.lib.sample.text.badge.SampleTextBadgeActivity
 import com.codehong.lib.sample.text.check.SampleCheckTextActivity
+import com.codehong.lib.sample.text.count.SampleTextCountActivity
 import com.codehong.lib.sample.text.unit.SampleTextUnitActivity
 import com.codehong.lib.sample.text.updown.SampleTextUpDownActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
+import com.codehong.lib.sample.textfield.border.SampleTextFieldBorderActivity
 import com.codehong.lib.sample.textfield.number.SampleNumberTextFieldActivity
 import com.codehong.lib.sample.textfield.timer.SampleTimerTextFieldActivity
 import com.codehong.lib.sample.textfield.underline.SampleUnderlineTextFieldActivity
@@ -124,6 +128,12 @@ class MainActivity : ComponentActivity() {
 fun SampleTheme(
     activity: ComponentActivity
 ) {
+    val sampleTypeList = listOf(
+        SampleType.XML.value,
+        SampleType.OPTION_BUILDER.value,
+        SampleType.COMPOSE.value
+    )
+
     Scaffold(
         topBar = {
             Box(
@@ -253,7 +263,6 @@ fun SampleTheme(
                                 )
                                 .onClick {
                                     when (item.widgetType) {
-                                        // test here 수정
                                         HongWidgetType.TEXT -> {
                                             Intent(activity, SampleTextActivity::class.java).apply {
                                                 putExtra(SampleConst.WIDGET_TYPE, HongWidgetType.TEXT.value)
@@ -283,6 +292,15 @@ fun SampleTheme(
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
                                                     HongWidgetType.TEXT_UP_DOWN.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+                                        HongWidgetType.TEXT_COUNT -> {
+                                            Intent(activity, SampleTextCountActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.TEXT_COUNT.value
                                                 )
                                                 activity.startActivity(this)
                                             }
@@ -332,6 +350,17 @@ fun SampleTheme(
                                                 activity.startActivity(this)
                                             }
                                         }
+
+                                        HongWidgetType.TEXT_FIELD_BORDER -> {
+                                            Intent(activity, SampleTextFieldBorderActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.TEXT_FIELD_BORDER.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
 
 
                                         HongWidgetType.BUTTON_TEXT -> {
@@ -481,6 +510,16 @@ fun SampleTheme(
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
                                                     HongWidgetType.TAB_SEGMENT.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
+                                        HongWidgetType.TAB_FLOW -> {
+                                            Intent(activity, SampleTabFlowActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.TAB_FLOW.value
                                                 )
                                                 activity.startActivity(this)
                                             }
@@ -671,6 +710,16 @@ fun SampleTheme(
                                             }.show()
                                         }
 
+                                        HongWidgetType.BOTTOM_SHEET_SELECT -> {
+                                            Intent(activity, SampleBottomSheetSelectActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.BOTTOM_SHEET_SELECT.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
                                         else -> {
                                             Intent(activity, OptionPickerActivity::class.java).apply {
                                                 activity.startActivity(this)
@@ -687,11 +736,11 @@ fun SampleTheme(
     }
 }
 
-private val sampleTypeList = listOf(
-    SampleType.XML.value,
-    SampleType.OPTION_BUILDER.value,
-    SampleType.COMPOSE.value
-)
+//private val sampleTypeList = listOf(
+//    SampleType.XML.value,
+//    SampleType.OPTION_BUILDER.value,
+//    SampleType.COMPOSE.value
+//)
 
 enum class SampleType(
     val value: String

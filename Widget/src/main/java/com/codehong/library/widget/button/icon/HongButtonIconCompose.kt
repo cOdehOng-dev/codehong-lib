@@ -19,7 +19,7 @@ import com.codehong.library.widget.util.HongWidgetContainer
 
 @Composable
 fun HongButtonIconCompose(
-    option: HongIconButtonOption
+    option: HongButtonIconOption
 ) {
     val iconColorState = if (option.state == HongClickState.DISABLE) {
         HongColor.GRAY_20.hex
@@ -50,7 +50,7 @@ fun HongButtonIconCompose(
         else -> 0
     }
 
-    val containerOption = HongIconButtonBuilder()
+    val containerOption = HongButtonIconBuilder()
         .copy(option)
         .width(buttonSize)
         .height(buttonSize)
@@ -67,7 +67,7 @@ fun HongButtonIconCompose(
                 modifier = Modifier
                     .size(buttonSize.dp)
                     .hongBackground(
-                        backgroundColor = backgroundColorState,
+                        color = backgroundColorState,
                         border = HongBorderInfo(
                             width = 1,
                             color = borderColorState

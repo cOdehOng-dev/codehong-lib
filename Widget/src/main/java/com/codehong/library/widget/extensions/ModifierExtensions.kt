@@ -165,8 +165,25 @@ fun Modifier.dropShadow(
 }
 // endregion shadow
 
+
 fun Modifier.hongBackground(
-    backgroundColor: String = HongColor.TRANSPARENT.hex,
+    color: HongColor = HongColor.TRANSPARENT,
+    border: HongBorderInfo = HongBorderInfo(),
+    shadow: HongShadowInfo = HongShadowInfo(),
+    radius: HongRadiusInfo = HongRadiusInfo(),
+    useShapeCircle: Boolean = false,
+): Modifier {
+    return hongBackground(
+        color = color.hex,
+        border = border,
+        shadow = shadow,
+        radius = radius,
+        useShapeCircle = useShapeCircle
+    )
+}
+
+fun Modifier.hongBackground(
+    color: String = HongColor.TRANSPARENT.hex,
     border: HongBorderInfo = HongBorderInfo(),
     shadow: HongShadowInfo = HongShadowInfo(),
     radius: HongRadiusInfo = HongRadiusInfo(),
@@ -180,7 +197,7 @@ fun Modifier.hongBackground(
                     shape = radius.toRoundCornerShape(useShapeCircle)
                 )
                 .background(
-                    color = backgroundColor.toColor(),
+                    color = color.toColor(),
                     shape = radius.toRoundCornerShape(useShapeCircle)
                 )
         }
@@ -198,7 +215,7 @@ fun Modifier.hongBackground(
                 shape = radius.toRoundCornerShape(useShapeCircle)
             )
             .background(
-                color = backgroundColor.toColor(),
+                color = color.toColor(),
                 shape = radius.toRoundCornerShape(useShapeCircle)
             )
     }
@@ -215,7 +232,7 @@ fun Modifier.hongBackground(
                 shape = radius.toRoundCornerShape(useShapeCircle)
             )
             .background(
-                color = backgroundColor.toColor(),
+                color = color.toColor(),
                 shape = radius.toRoundCornerShape(useShapeCircle)
             )
     }
@@ -238,7 +255,7 @@ fun Modifier.hongBackground(
             shape = radius.toRoundCornerShape(useShapeCircle)
         )
         .background(
-            color = backgroundColor.toColor(),
+            color = color.toColor(),
             shape = radius.toRoundCornerShape(useShapeCircle)
         )
 }

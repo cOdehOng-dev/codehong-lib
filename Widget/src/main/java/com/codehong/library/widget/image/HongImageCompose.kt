@@ -44,7 +44,7 @@ fun HongImageCompose(
                     border = option.border,
                     radius = option.radius,
                     shadow = option.shadow,
-                    backgroundColor = option.backgroundColorHex,
+                    color = option.backgroundColorHex,
                     useShapeCircle = option.useShapeCircle,
                 )
                 .hongSpacing(option.padding),

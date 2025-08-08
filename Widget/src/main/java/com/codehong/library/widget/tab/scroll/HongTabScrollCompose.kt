@@ -88,7 +88,7 @@ fun HongTabScrollCompose(
 //                            }
 //                        )
                         .hongBackground(
-                            backgroundColor = if (isSelected) {
+                            color = if (isSelected) {
                                 option.selectBackgroundColorHex
                             } else {
                                 option.unselectBackgroundColorHex

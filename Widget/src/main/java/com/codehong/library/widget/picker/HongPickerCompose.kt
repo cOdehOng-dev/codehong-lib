@@ -83,7 +83,7 @@ fun HongPickerCompose(
                 modifier = Modifier
                     .fillMaxSize()
                     .hongBackground(
-                        backgroundColor = HongColor.GRAY_30.hex
+                        color = HongColor.GRAY_30.hex
                     )
                     .disableRippleClickable {
                         if (option.useDimClickCLose) {
@@ -109,7 +109,7 @@ fun HongPickerCompose(
                 modifier = Modifier
                     .fillMaxWidth()
                     .hongBackground(
-                        backgroundColor = option.backgroundColorHex,
+                        color = option.backgroundColorHex,
                         radius = HongRadiusInfo(
                             topLeft = option.radius.topLeft,
                             topRight = option.radius.topRight
@@ -259,7 +259,7 @@ private fun Picker(
                 .fillMaxWidth()
                 .height(36.dp)
                 .hongBackground(
-                    backgroundColor = HongColor.GRAY_10.hex,
+                    color = HongColor.GRAY_10.hex,
                     radius = HongRadiusInfo(
                         topLeft = 8,
                         topRight = 8,

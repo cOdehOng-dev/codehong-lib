@@ -144,7 +144,7 @@ fun HongVideoPlayerCompose(
                 .hongHeight(option.height)
                 .aspectRatio(option.ratio.aspectRatio())
                 .hongBackground(
-                    backgroundColor = option.backgroundColorHex,
+                    color = option.backgroundColorHex,
                     radius = option.radius,
                     useShapeCircle = option.useShapeCircle,
                     shadow = option.shadow,

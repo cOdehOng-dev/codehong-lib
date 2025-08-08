@@ -52,7 +52,7 @@ fun HongTabSegmentCompose(
             modifier = Modifier
                 .hongSpacing(option.margin)
                 .hongBackground(
-                    backgroundColor = option.backgroundColorHex,
+                    color = option.backgroundColorHex,
                     radius = option.radius,
                 )
                 .hongSpacing(option.padding)
@@ -62,7 +62,7 @@ fun HongTabSegmentCompose(
                 modifier = Modifier
                     .offset(x = indicatorOffset)
                     .hongBackground(
-                        backgroundColor = option.indicatorColorHex,
+                        color = option.indicatorColorHex,
                         radius = option.radius
                     )
                     .hongWidth(option.tabWidth)

@@ -1,18 +1,18 @@
-package com.codehong.library.widget.tab.flow
+package com.codehong.library.widget.textfield.border
 
 import android.content.Context
 import androidx.compose.ui.platform.ComposeView
 
-class HongTabFlowView(
+class HongTextFieldBorderView(
     private val context: Context
 ) {
 
     fun set(
-        option: HongTabFlowOption
+        option: HongTextFieldBorderOption
     ): ComposeView {
         return ComposeView(context).apply {
             setContent {
-                HongTabFlowCompose(option)
+                HongTextFieldBorderCompose(option)
             }
         }
     }

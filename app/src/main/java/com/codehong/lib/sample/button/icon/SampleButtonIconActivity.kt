@@ -5,8 +5,8 @@ import android.view.View
 import androidx.compose.runtime.Composable
 import com.codehong.lib.sample.R
 import com.codehong.lib.sample.base.BaseSampleMixActivity
+import com.codehong.library.widget.button.icon.HongButtonIconBuilder
 import com.codehong.library.widget.button.icon.HongButtonIconCompose
-import com.codehong.library.widget.button.icon.HongIconButtonBuilder
 import com.codehong.library.widget.rule.HongClickState
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.button.HongButtonIconType
@@ -21,7 +21,7 @@ class SampleButtonIconActivity : BaseSampleMixActivity() {
     @Composable
     override fun InitCompose() {
         HongButtonIconCompose(
-            option = HongIconButtonBuilder()
+            option = HongButtonIconBuilder()
                 .margin(
                     HongSpacingInfo(
                         left = 20f
@@ -37,7 +37,7 @@ class SampleButtonIconActivity : BaseSampleMixActivity() {
         )
 
         HongButtonIconCompose(
-            option = HongIconButtonBuilder()
+            option = HongButtonIconBuilder()
                 .buttonType(HongButtonIconType.SIZE_32)
                 .iconResId(R.drawable.ic_close)
                 .state(HongClickState.ENABLE)
@@ -48,7 +48,7 @@ class SampleButtonIconActivity : BaseSampleMixActivity() {
         )
 
         HongButtonIconCompose(
-            option = HongIconButtonBuilder()
+            option = HongButtonIconBuilder()
                 .buttonType(HongButtonIconType.SIZE_32)
                 .iconResId(R.drawable.ic_close)
                 .state(HongClickState.DISABLE)

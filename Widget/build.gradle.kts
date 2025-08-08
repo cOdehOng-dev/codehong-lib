@@ -43,7 +43,9 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.andoridx.compose.ui.graphics)
     implementation(libs.threetenapb)
+
     implementation(libs.google.accompanist.drawablepainter)
+    implementation(libs.google.accompanist.flowlayout)
 
 
     implementation(libs.androidx.media3.exoplayer)

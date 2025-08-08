@@ -172,7 +172,7 @@ fun HongWidgetContainer(
             .hongWidth(option.width)
             .hongHeight(option.height)
             .hongBackground(
-                backgroundColor = option.backgroundColorHex,
+                color = option.backgroundColorHex,
                 border = option.border,
                 shadow = option.shadow,
                 radius = option.radius,
@@ -200,7 +200,7 @@ fun HongWidgetNoneClickContainer(
                 .hongWidth(option.width)
                 .hongHeight(option.height)
                 .hongBackground(
-                    backgroundColor = option.backgroundColorHex,
+                    color = option.backgroundColorHex,
                     border = option.border,
                     shadow = option.shadow,
                     radius = option.radius,

@@ -130,6 +130,7 @@ androidx-media3-datasource = { group = "androidx.media3", name = "media3-datasou
 google-accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "google-accompanist-pager" }
 google-accompanist-pager-indicators = { group = "com.google.accompanist", name = "accompanist-pager-indicators", version.ref = "google-accompanist-pager-indicators" }
 google-accompanist-drawablepainter = { group = "com.google.accompanist", name = "accompanist-drawablepainter", version.ref = "google-accompanist-drawablepainter" }
+google-accompanist-flowlayout = { group = "com.google.accompanist", name = "accompanist-flowlayout", version = "0.36.0" }
 
 # etc
 threetenapb = { group = "com.jakewharton.threetenabp", name = "threetenabp", version.ref = "threetenapb" }

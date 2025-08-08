@@ -105,7 +105,7 @@ fun HongComposeVideoPopupView(
                 .offset { IntOffset(0, with(density) { offsetY.roundToPx() }) }
                 .fillMaxWidth()
                 .hongBackground(
-                    backgroundColor = HongColor.WHITE_100.hex,
+                    color = HongColor.WHITE_100.hex,
                     radius = option.videoPlayerOption.radius,
                 )
 //                .clip(RoundedCornerShape(topStart = topRadius.dp, topEnd = topRadius.dp))

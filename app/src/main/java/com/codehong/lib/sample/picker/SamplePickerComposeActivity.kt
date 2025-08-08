@@ -34,7 +34,7 @@ class SamplePickerComposeActivity : BaseActivity() {
                 modifier = Modifier
                     .fillMaxSize()
                     .hongBackground(
-                        backgroundColor = HongColor.WHITE_100.hex
+                        color = HongColor.WHITE_100.hex
                     ),
                 contentAlignment = Alignment.Center
             ) {

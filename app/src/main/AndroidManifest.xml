@@ -97,7 +97,12 @@
         <activity android:name=".picker.SamplePickerComposeActivity"/>
 
         <activity android:name=".button.icon.SampleButtonIconActivity"/>
+        <activity android:name=".text.count.SampleTextCountActivity"/>
 
+        <activity android:name=".tab.flow.SampleTabFlowActivity"/>
+        <activity android:name=".textfield.border.SampleTextFieldBorderActivity"/>
+
+        <activity android:name=".bottomsheet.SampleBottomSheetSelectActivity"/>
     </application>
 
 </manifest>

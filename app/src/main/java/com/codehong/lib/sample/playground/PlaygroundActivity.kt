@@ -25,14 +25,17 @@ import com.codehong.lib.sample.label.checkbox.HongLabelCheckboxPlayground
 import com.codehong.lib.sample.label.input.HongLabelInputPlayground
 import com.codehong.lib.sample.label.toggle.HongLabelSwitchPlayground
 import com.codehong.lib.sample.pager.HongHorizontalPagerPlayground
+import com.codehong.lib.sample.tab.flow.HongTabFlowPlayground
 import com.codehong.lib.sample.tab.scroll.HongTabScrollPlayground
 import com.codehong.lib.sample.tab.segment.HongTabSegmentPlayground
 import com.codehong.lib.sample.text.HongTextPlayground
 import com.codehong.lib.sample.text.badge.HongTextBadgePlayground
 import com.codehong.lib.sample.text.check.HongTextCheckPlayground
+import com.codehong.lib.sample.text.count.HongTextCountPlayground
 import com.codehong.lib.sample.text.unit.HongTextUnitPlayground
 import com.codehong.lib.sample.text.updown.HongTextUpDownPlayground
 import com.codehong.lib.sample.textfield.HongTextFieldPlayground
+import com.codehong.lib.sample.textfield.border.HongTextFieldBorderPlayground
 import com.codehong.lib.sample.textfield.number.HongNumberTextFieldPlayground
 import com.codehong.lib.sample.textfield.timer.HongTimerTextFieldPlayground
 import com.codehong.lib.sample.textfield.underline.HongUnderlineTextFieldPlayground
@@ -215,6 +218,9 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.LABEL_CHECKBOX -> HongLabelCheckboxPlayground(this).preview()
             HongWidgetType.TAB_SCROLL -> HongTabScrollPlayground(this).preview()
             HongWidgetType.TAB_SEGMENT -> HongTabSegmentPlayground(this).preview()
+            HongWidgetType.TAB_FLOW -> HongTabFlowPlayground(this).preview()
+            HongWidgetType.TEXT_COUNT -> HongTextCountPlayground(this).preview()
+            HongWidgetType.TEXT_FIELD_BORDER -> HongTextFieldBorderPlayground(this).preview()
 //            HongWidgetType.LABEL_SELECT_INPUT -> HongLabelSelectInputPlayground(this).preview()
             else -> {}
         }

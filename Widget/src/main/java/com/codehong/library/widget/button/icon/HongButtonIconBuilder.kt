@@ -7,10 +7,10 @@ import com.codehong.library.widget.rule.button.HongButtonIconType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
-class HongIconButtonBuilder : HongWidgetCommonBuilder<HongIconButtonOption, HongIconButtonBuilder> {
+class HongButtonIconBuilder : HongWidgetCommonBuilder<HongButtonIconOption, HongButtonIconBuilder> {
 
-    override val builder: HongIconButtonBuilder = this
-    override val option: HongIconButtonOption = HongIconButtonOption()
+    override val builder: HongButtonIconBuilder = this
+    override val option: HongButtonIconOption = HongButtonIconOption()
 
     fun buttonType(type: HongButtonIconType) = apply {
         option.buttonType = type
@@ -43,10 +43,10 @@ class HongIconButtonBuilder : HongWidgetCommonBuilder<HongIconButtonOption, Hong
         option.useShapeCircle = useShapeCircle
     }
 
-    fun copy(inject: HongIconButtonOption?): HongIconButtonBuilder {
-        if (inject == null) return HongIconButtonBuilder()
+    fun copy(inject: HongButtonIconOption?): HongButtonIconBuilder {
+        if (inject == null) return HongButtonIconBuilder()
 
-        return HongIconButtonBuilder()
+        return HongButtonIconBuilder()
             .width(inject.width)
             .height(inject.height)
             .margin(inject.margin)

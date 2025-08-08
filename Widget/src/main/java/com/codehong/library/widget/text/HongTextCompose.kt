@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -105,7 +107,7 @@ fun HongTextCompose(
                             dp = (builder.option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size()).dp
                         ),
                         fontFamily = pretendardFontFamily,
-                        textDecoration = spanTextDecoration
+                        textDecoration = spanTextDecoration,
                     ),
                     start = startIndex,
                     end = endIndex
@@ -137,10 +139,6 @@ fun HongTextCompose(
                     .hongWidth(option.width)
                     .hongHeight(option.height),
                 text = text,
-                color = (
-                        option.colorHex
-                            ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
-                        ).parseComposeColor(),
                 fontFamily = pretendardFontFamily,
                 fontWeight = option.fontWeight,
                 fontSize = dpToSp(dp = (option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size())),
@@ -152,7 +150,14 @@ fun HongTextCompose(
                 maxLines = option.maxLines,
                 overflow = option.overflow.value,
                 textDecoration = textDecoration,
-                onTextLayout = onTextLayout ?: {}
+                onTextLayout = onTextLayout ?: {},
+                style = TextStyle(
+                    color = (
+                            option.colorHex
+                                ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
+                            ).parseComposeColor(),
+                    platformStyle = PlatformTextStyle(includeFontPadding = false)
+                )
             )
         }
     } else {
@@ -167,10 +172,7 @@ fun HongTextCompose(
                 .hongWidth(option.width)
                 .hongHeight(option.height),
             text = text,
-            color = (
-                    option.colorHex
-                        ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
-                    ).parseComposeColor(),
+
             fontFamily = pretendardFontFamily,
             fontWeight = option.fontWeight,
             fontSize = dpToSp(dp = (option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size())),
@@ -182,7 +184,14 @@ fun HongTextCompose(
             maxLines = option.maxLines,
             overflow = option.overflow.value,
             textDecoration = textDecoration,
-            onTextLayout = onTextLayout ?: {}
+            onTextLayout = onTextLayout ?: {},
+            style = TextStyle(
+                color = (
+                        option.colorHex
+                            ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
+                        ).parseComposeColor(),
+                platformStyle = PlatformTextStyle(includeFontPadding = false)
+            )
         )
     }
 }
