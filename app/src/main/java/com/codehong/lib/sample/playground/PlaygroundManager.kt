@@ -1,697 +1,1018 @@
 package com.codehong.lib.sample.playground
 
+import android.content.Context
 import android.util.Log
-import androidx.compose.ui.text.style.TextAlign
-import com.codehong.lib.sample.playground.preview.InputOptionView
-import com.codehong.lib.sample.playground.preview.MixPickerInputOptionView
-import com.codehong.lib.sample.playground.preview.PickerOptionView
+import com.codehong.lib.sample.R
+import com.codehong.lib.sample.playground.preview.HorizontalOptionView
 import com.codehong.lib.sample.playground.preview.QuarterInputOptionView
-import com.codehong.lib.sample.playground.preview.ToggleOptionView
-import com.codehong.library.widget.HongSpacingInfo
 import com.codehong.library.widget.HongWidgetCommonOption
+import com.codehong.library.widget.extensions.toFigureFloat
+import com.codehong.library.widget.extensions.toFigureInt
+import com.codehong.library.widget.extensions.toFigureString
+import com.codehong.library.widget.label.HongLabelBuilder
+import com.codehong.library.widget.label.HongLabelView
+import com.codehong.library.widget.label.input.HongLabelInputBuilder
+import com.codehong.library.widget.label.input.HongLabelInputOption
+import com.codehong.library.widget.label.input.HongLabelInputView
+import com.codehong.library.widget.label.select.HongLabelSelectInputBuilder
+import com.codehong.library.widget.label.select.HongLabelSelectInputView
+import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchBuilder
+import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchView
+import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
-import com.codehong.library.widget.rule.HongTextAlign
-import com.codehong.library.widget.rule.HongTextLineBreak
-import com.codehong.library.widget.rule.HongTextOverflow
-import com.codehong.library.widget.rule.HongWidgetType
+import com.codehong.library.widget.rule.HongLayoutParam.Companion.isHongLayoutParam
+import com.codehong.library.widget.rule.HongLayoutParam.Companion.toHongLayoutParamValue
+import com.codehong.library.widget.rule.HongLayoutParam.Companion.toHongLayoutValueToParam
+import com.codehong.library.widget.rule.HongShadowInfo
+import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
-import com.codehong.library.widget.rule.toHongLayoutParamValue
+import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
+import com.codehong.library.widget.rule.keyboard.HongKeyboardType
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextOption
-import com.codehong.library.widget.text.HongTextView
+import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.textfield.HongTextFieldBuilder
+import com.codehong.library.widget.toggleswitch.HongSwitchBuilder
+import com.codehong.library.widget.util.Const
 
 object PlaygroundManager {
 
-    private const val FIXED_SIZE = "FIXED_SIZE"
+    val widthHeightSizeList = listOf(
+        HongLayoutParam.MATCH_PARENT.paramName,
+        HongLayoutParam.WRAP_CONTENT.paramName,
+        Const.DIRECT_INPUT
+    )
+
+    val hongColorList: List<HongColor> = HongColor.entries
+//    private val hongColorNameList: List<String> = hongColorList.map { it.colorName }
+//    private val hongColorHexList: List<String> = hongColorList.map { it.hex }
+
+    val typographyList = HongTypo.entries
+    val typographyNameList = typographyList.map { it.styleName }
 
     /**
-     * TEXT
+     * 옵션 제목 뷰
      */
-    fun previewText(
-        activity: PlaygroundActivity
+    fun addOptionTitleView(
+        activity: PlaygroundActivity,
+        label: String,
+        description: String = "",
+        labelTypo: HongTypo? = null,
+        descriptionTypo: HongTypo? = null,
+        useTopPadding: Boolean = true
     ) {
-        val builder =
-            HongTextOption.Builder().text("Text").width(150).typography(HongTypo.BODY_16_B)
-                .color(HongColor.BLACK_100).lineBreak(HongTextLineBreak.DEFAULT)
-
-        val defTextOption = builder.build()
-
-        activity.applyPreview(HongTextView(activity).set(option = defTextOption))
-
-        /** 텍스트 내용 */
-        val textOptionView = InputOptionView(activity).apply {
-            init(
-                title = "text",
-                initial = defTextOption.text
-            )
-            observe { text ->
-                Log.e("TAG", "옵션 text = $text")
-                activity.applyPreview(
-                    HongTextView(activity).set(
-                        option = builder.text(text).build()
+        HongLabelView(activity)
+            .set(
+                HongLabelBuilder()
+                    .padding(
+                        HongSpacingInfo(
+                            top = (if (useTopPadding) Const.PLAYGROUND_TOP_PADDING else 0).toFloat(),
+                        )
                     )
-                )
+                    .label(label)
+                    .labelTypo(labelTypo ?: HongTypo.BODY_17_B)
+                    .labelColor(HongColor.MAIN_ORANGE_100)
+                    .description(description)
+                    .descriptionTypo(descriptionTypo ?: HongTypo.CONTENTS_12)
+                    .descriptionColor(HongColor.BLACK_100)
+                    .applyOption()
+            ).apply {
+                activity.addOptionView(this)
             }
-        }
-        activity.addOptionView(textOptionView)
-
-        commonOptionView(
-            activity = activity,
-            type = HongWidgetType.TEXT,
-            defOption = defTextOption,
-            inputBuilder = builder
-        )
-
-        /** 텍스트 컬러 */
-        val hexColorOptionView = InputOptionView(activity).apply {
-            init(
-                title = "hexColor",
-                initial = defTextOption.colorHex
-            )
-            observe { hexColor ->
-                var resultHexColor = hexColor
-                if (!hexColor.isNullOrEmpty() && !hexColor.startsWith("#")) {
-                    resultHexColor = "#$hexColor"
-                }
-                Log.e("TAG", "옵션 hexColor = $resultHexColor")
-                activity.applyPreview(
-                    HongTextView(activity).set(
-                        option = builder.color(resultHexColor).build()
-                    )
-                )
-            }
-        }
-        activity.addOptionView(hexColorOptionView)
-
-        val hongColorOptionView = PickerOptionView(activity).apply {
-            val initialSemanticColor = hongColorList.firstOrNull {
-                it.hex == defTextOption.colorHex
-            }
-            init(
-                title = "color",
-                initial = initialSemanticColor?.colorName
-            )
-            observe(
-                title = "color",
-                pickerList = hongColorNameList,
-                selectPosition = hongColorList.indexOf(initialSemanticColor ?: 0),
-                isDirectCallback = true
-            ) { selectColor, index ->
-                val hongColor =
-                    hongColorList.firstOrNull { it.colorName == selectColor } ?: HongColor.BLACK_100
-
-                Log.e("TAG", "옵션 hongColor = $hongColor, index = $index")
-                hexColorOptionView.setOption(hongColor.hex)
-                activity.applyPreview(
-                    HongTextView(activity).set(
-                        option = builder.color(hongColor.hex).build()
-                    )
-                )
-            }
-        }
-        activity.addOptionView(hongColorOptionView)
-
-        /** 텍스트 타이포그라피 */
-        val typographyOptionView = PickerOptionView(activity).apply {
-            val initialTypography = typographyList.firstOrNull {
-                it == defTextOption.typography
-            }
-            init(
-                title = "typography",
-                initial = initialTypography?.styleName
-            )
-            observe(
-                title = "typography",
-                pickerList = typographyNameList,
-                selectPosition = typographyList.indexOf(initialTypography ?: 0),
-                isDirectCallback = true
-            ) { selectTypography, index ->
-                val typography = typographyList.firstOrNull { it.styleName == selectTypography }
-                    ?: HongTypo.BODY_16_B
-
-                Log.e("TAG", "옵션 typography = $typography, index = $index")
-                activity.applyPreview(
-                    HongTextView(activity).set(
-                        option = builder.typography(typography).build()
-                    )
-                )
-            }
-        }
-        activity.addOptionView(typographyOptionView)
-
-        /**
-         * 텍스트 정렬
-         * 좌측 / 우측 / 가운데
-         * width가 WRAP_CONTENT인 경우에는 의도한 대로 적용되지 않으므로 주의!
-         */
-        val textAlignOptionView = PickerOptionView(activity).apply {
-            val initialTextAlign = when (defTextOption.align.value) {
-                TextAlign.Left -> "left"
-                TextAlign.Right -> "right"
-                else -> "center"
-            }
-            init(
-                title = "textAlign",
-                desp = "width가 WRAP_CONTENT인 경우에는 의도한 대로 적용되지 않으므로 주의!",
-                initial = initialTextAlign
-            )
-            observe(
-                title = "textAlign",
-                pickerList = textAlignList,
-                selectPosition = textAlignList.indexOf(initialTextAlign),
-                isDirectCallback = true
-            ) { selectTextAlign, index ->
-                val textAlign = when (selectTextAlign) {
-                    "left" -> HongTextAlign.LEFT
-                    "right" -> HongTextAlign.RIGHT
-                    else -> HongTextAlign.CENTER
-                }
-                Log.e("TAG", "옵션 textAlign = $selectTextAlign, index = $index")
-                activity.applyPreview(
-                    HongTextView(activity).set(
-                        option = builder.textAlign(textAlign).build()
-                    )
-                )
-            }
-        }
-        activity.addOptionView(textAlignOptionView)
-
-        /** 최대 라인 수 */
-        val maxLineOptionView = InputOptionView(activity).apply {
-            val initialMaxLine = defTextOption.maxLines
-            init(
-                title = "maxLine",
-                initial = initialMaxLine.toString(),
-                isNumberType = true
-            )
-            observe { maxLines ->
-                val resultMaxLines = if (maxLines.isNullOrEmpty()) {
-                    Int.MAX_VALUE
-                } else {
-                    maxLines.toInt()
-                }
-                Log.e("TAG", "옵션 maxLines = $resultMaxLines")
-                activity.applyPreview(
-                    HongTextView(activity).set(
-                        option = builder.maxLines(resultMaxLines).build()
-                    )
-                )
-            }
-        }
-        activity.addOptionView(maxLineOptionView)
-
-        /**
-         * 화면에 표현할 수 있는 최대 글자수를 넘어간 경우 처리 방법
-         * 자름 (Clip) / ... 처리 (Ellipsis)
-         */
-        val overflowList = listOf("clip", "ellipsis", "visible")
-        val overflowOptionView = PickerOptionView(activity).apply {
-            val initialOverflow = when (defTextOption.overflow) {
-                HongTextOverflow.CLIP -> "clip"
-                HongTextOverflow.ELLIPSIS -> "ellipsis"
-                HongTextOverflow.VISIBLE -> "visible"
-                else -> "ellipsis"
-            }
-            init(
-                title = "overflow",
-                initial = initialOverflow
-            )
-            observe(
-                title = "overflow",
-                pickerList = overflowList,
-                selectPosition = overflowList.indexOf(initialOverflow),
-                isDirectCallback = true
-            ) { selectOverflow, index ->
-
-                val resultOverflow = when (selectOverflow) {
-                    "clip" -> HongTextOverflow.CLIP
-                    "ellipsis" -> HongTextOverflow.ELLIPSIS
-                    "visible" -> HongTextOverflow.VISIBLE
-                    else -> HongTextOverflow.ELLIPSIS
-                }
-
-                Log.e("TAG", "옵션 selectOverflow = $resultOverflow, index = $index")
-                activity.applyPreview(
-                    HongTextView(activity).set(
-                        option = builder.overflow(resultOverflow).build()
-                    )
-                )
-            }
-        }
-        activity.addOptionView(overflowOptionView)
-
-        /**
-         * 줄바꿈 타입
-         */
-        val lineBreakOptionView = PickerOptionView(activity).apply {
-            val lineBreakList = HongTextLineBreak.values().map { it.alias }.toList()
-            val initialLineBreak = when (defTextOption.lineBreak) {
-                HongTextLineBreak.DEFAULT -> "default"
-                HongTextLineBreak.SYLLABLE -> "syllable"
-                HongTextLineBreak.SPACE -> "space"
-                else -> "default"
-            }
-            init(
-                title = "lineBreak",
-                initial = initialLineBreak,
-                desp = "시스템에 따름 / 음절 단위로 줄바꿈 / 단어 단위로 줄바꿈"
-            )
-            observe(
-                title = "lineBreak",
-                pickerList = lineBreakList,
-                selectPosition = lineBreakList.indexOf(initialLineBreak),
-                isDirectCallback = true
-            ) { selectLineBreak, index ->
-                val lineBreak = when (selectLineBreak) {
-                    HongTextLineBreak.DEFAULT.alias -> HongTextLineBreak.DEFAULT
-                    HongTextLineBreak.SYLLABLE.alias -> HongTextLineBreak.SYLLABLE
-                    HongTextLineBreak.SPACE.alias -> HongTextLineBreak.SPACE
-                    else -> HongTextLineBreak.DEFAULT
-                }
-                Log.e("TAG", "옵션 lineBreak = $selectLineBreak, index = $index")
-                activity.applyPreview(
-                    HongTextView(activity).set(
-                        option = builder.lineBreak(lineBreak).build()
-                    )
-                )
-            }
-        }
-        activity.addOptionView(lineBreakOptionView)
-
-        /** 취소선 여부 */
-        val isEnableCancelLineOptionView = ToggleOptionView(activity).apply {
-            init(
-                title = "isEnableCancelLine",
-                initial = defTextOption.isEnableCancelLine
-            )
-            observe { isEnable ->
-                Log.e("TAG", "옵션 isEnableCancelLine = $isEnable")
-                activity.applyPreview(
-                    HongTextView(activity).set(
-                        option = builder.isEnableCancelLine(isEnable).build()
-                    )
-                )
-            }
-        }
-        activity.addOptionView(isEnableCancelLineOptionView)
-
-        val isEnableUnderLineOptionView = ToggleOptionView(activity).apply {
-            init(
-                title = "isEnableUnderLine",
-                initial = defTextOption.isEnableUnderLine
-            )
-            observe { isEnable ->
-                Log.e("TAG", "옵션 isEnableUnderLine = $isEnable")
-                activity.applyPreview(
-                    HongTextView(activity).set(
-                        option = builder.isEnableUnderLine(isEnable).build()
-                    )
-                )
-            }
-        }
-        activity.addOptionView(isEnableUnderLineOptionView)
     }
 
-    private val hongColorList: List<HongColor> get() = HongColor.values().toList()
-
-    private val hongColorNameList: List<String> get() = hongColorList.map { it.colorName }
-
-    private val typographyList get() = HongTypo.values().toList()
-    private val typographyNameList get() = typographyList.map { it.styleName }
-
-    private val textAlignList get() = listOf("left", "right", "center")
-
-    private fun commonOptionView(
+    /**
+     * width/height
+     */
+    fun addSizeOptionPreview(
         activity: PlaygroundActivity,
-        type: HongWidgetType,
-        defOption: HongWidgetCommonOption,
-        inputBuilder: Any
+        width: Int,
+        height: Int,
+        label: String = "",
+        description: String = "",
+        useTopPadding: Boolean = true,
+        useWidth: Boolean = true,
+        useHeight: Boolean = true,
+        selectWidth: (Int) -> Unit,
+        selectHeight: (Int) -> Unit
     ) {
-        val builder = when (type) {
-            HongWidgetType.TEXT -> inputBuilder as HongTextOption.Builder
-            else -> inputBuilder as? HongTextOption.Builder
-        } ?: return
-
-        val widthHeightSizeList = listOf(
-            HongLayoutParam.MATCH_PARENT.paramName,
-            HongLayoutParam.WRAP_CONTENT.paramName,
-            FIXED_SIZE
-        )
-
-        val defWidth = defOption.width
-
-        val initialWidth = when (defWidth) {
-            HongLayoutParam.MATCH_PARENT.value -> HongLayoutParam.MATCH_PARENT.paramName
-            HongLayoutParam.WRAP_CONTENT.value -> HongLayoutParam.WRAP_CONTENT.paramName
-            else -> ""
-        }
-
-        val widthLayoutParamOptionView = MixPickerInputOptionView(activity).apply {
-            if (initialWidth.isEmpty()) {
-                showInput()
-                setOption(defWidth.toString())
-            } else {
-                hideInput()
-            }
-            init(
-                title = "width",
-                initial = initialWidth,
-                isNumberType = true
-            )
-            observe(
-                title = "width",
-                pickerList = widthHeightSizeList,
-                selectPosition = widthHeightSizeList.indexOf(initialWidth.ifEmpty { "FIXED_SIZE" }),
-                pickerCallback = { selectSize, index ->
-                    Log.e("TAG", "옵션 selectWidth = $selectSize, index = $index")
-                    if (selectSize == HongLayoutParam.MATCH_PARENT.paramName
-                        || selectSize == HongLayoutParam.WRAP_CONTENT.paramName
-                    ) {
-                        hideInput()
-                        activity.applyPreview(
-                            HongTextView(activity).set(
-                                option = builder.width(selectSize.toHongLayoutParamValue()).build()
+        HorizontalOptionView(activity).set(
+            label = label,
+            description = description,
+            useTopPadding = useTopPadding,
+            leftOptionView = useWidth.takeIf { it }?.let {
+                HongLabelSelectInputView(activity).apply {
+                    val initialWidth =
+                        width.toHongLayoutValueToParam().ifEmpty { Const.DIRECT_INPUT }
+                    setSelectInputView(
+                        HongLabelSelectInputBuilder()
+                            .label("${label}width")
+                            .description(description)
+                            .buttonText(initialWidth)
+                            .inputText(
+                                if (initialWidth == Const.DIRECT_INPUT) {
+                                    width.toString()
+                                } else {
+                                    initialWidth
+                                }
                             )
-                        )
-                    } else {
-                        showInput()
-                        setOption("200")
-                    }
-                },
-                inputCallback = { inputSize ->
-                    activity.applyPreview(
-                        HongTextView(activity).set(
-                            option = builder.width(
-                                if (inputSize.isNullOrEmpty()) {
-                                    defWidth
+                            .selectList(widthHeightSizeList)
+                            .selectPosition(widthHeightSizeList.indexOf(initialWidth.ifEmpty { Const.DIRECT_INPUT }))
+                            .useDirectCallback(true)
+                            .useOnlyNumber(true)
+                            .showInput(initialWidth == Const.DIRECT_INPUT)
+                            .inputCallback { inputSize ->
+                                if (inputSize.isHongLayoutParam()) {
+                                    return@inputCallback
+                                }
+                                val selectWidthSize = if (inputSize.isNullOrEmpty()) {
+                                    width
                                 } else {
                                     inputSize.toInt()
                                 }
-                            ).build()
-                        )
+                                selectWidth.invoke(selectWidthSize)
+                            }
+                            .pickerCallback { selectSize, index ->
+                                if (selectSize.isHongLayoutParam()) {
+                                    hideInput()
+                                    selectWidth.invoke(selectSize.toHongLayoutParamValue())
+                                } else {
+                                    showInput()
+                                    setInputText("200")
+                                    selectWidth.invoke(200)
+                                }
+                            }
+                            .applyOption()
                     )
                 }
-            )
-        }
-        activity.addOptionView(widthLayoutParamOptionView)
-
-        val defHeight = defOption.height
-
-        val initialHeight = when (defHeight) {
-            HongLayoutParam.MATCH_PARENT.value -> HongLayoutParam.MATCH_PARENT.paramName
-            HongLayoutParam.WRAP_CONTENT.value -> HongLayoutParam.WRAP_CONTENT.paramName
-            else -> ""
-        }
-
-        val heightLayoutParamOptionView = MixPickerInputOptionView(activity).apply {
-            if (initialHeight.isEmpty()) {
-                setOption(defHeight.toString())
-                showInput()
-            } else {
-                hideInput()
-            }
-            init(
-                title = "height",
-                initial = initialHeight,
-                isNumberType = true
-            )
-            observe(
-                title = "height",
-                pickerList = widthHeightSizeList,
-                selectPosition = widthHeightSizeList.indexOf(
-                    initialHeight.ifEmpty {
-                        "FIXED_SIZE"
-                    }
-                ),
-                pickerCallback = { selectSize, index ->
-                    Log.e("TAG", "옵션 selectHeight = $selectSize, index = $index")
-                    if (selectSize == HongLayoutParam.MATCH_PARENT.paramName
-                        || selectSize == HongLayoutParam.WRAP_CONTENT.paramName
-                    ) {
-                        hideInput()
-                        activity.applyPreview(
-                            HongTextView(activity).set(
-                                option = builder.height(selectSize.toHongLayoutParamValue()).build()
+            },
+            rightOptionView = useHeight.takeIf { it }?.let {
+                HongLabelSelectInputView(activity).apply {
+                    val initialHeight =
+                        height.toHongLayoutValueToParam().ifEmpty { Const.DIRECT_INPUT }
+                    setSelectInputView(
+                        HongLabelSelectInputBuilder()
+                            .label("${label}height")
+                            .description(description)
+                            .buttonText(initialHeight)
+                            .inputText(
+                                if (initialHeight == Const.DIRECT_INPUT) {
+                                    height.toString()
+                                } else {
+                                    initialHeight
+                                }
                             )
-                        )
-                    } else {
-                        showInput()
-                        setOption("50")
-                    }
-                },
-                inputCallback = { inputSize ->
-                    activity.applyPreview(
-                        HongTextView(activity).set(
-                            option = builder.height(
-                                if (inputSize.isNullOrEmpty()) {
-                                    defHeight
+                            .selectList(widthHeightSizeList)
+                            .selectPosition(widthHeightSizeList.indexOf(initialHeight.ifEmpty { Const.DIRECT_INPUT }))
+                            .useDirectCallback(true)
+                            .useOnlyNumber(true)
+                            .showInput(initialHeight == Const.DIRECT_INPUT)
+                            .inputCallback { inputSize ->
+                                if (inputSize.isHongLayoutParam()) {
+                                    return@inputCallback
+                                }
+                                val selectHeightSize = if (inputSize.isNullOrEmpty()) {
+                                    height
                                 } else {
                                     inputSize.toInt()
                                 }
-                            ).build()
-                        )
+                                selectHeight.invoke(selectHeightSize)
+                            }
+                            .pickerCallback { selectSize, index ->
+                                if (selectSize.isHongLayoutParam()) {
+                                    hideInput()
+                                    selectHeight.invoke(selectSize.toHongLayoutParamValue())
+                                } else {
+                                    showInput()
+                                    setInputText("50")
+                                    selectHeight.invoke(50)
+                                }
+                            }
+                            .applyOption()
                     )
                 }
-            )
+            },
+        ).also {
+            activity.addOptionView(it)
         }
-        activity.addOptionView(heightLayoutParamOptionView)
+    }
 
-        val marginOptionView = QuarterInputOptionView(activity).apply {
-            val defTopMarginFloat = defOption.margin.top
-            val initialTopMargin = if (defTopMarginFloat > 0f) {
-                defTopMarginFloat.toString()
-            } else {
-                ""
-            }
-            val defBottomMarginFloat = defOption.margin.bottom
-            val initialBottomMargin = if (defBottomMarginFloat > 0f) {
-                defBottomMarginFloat.toString()
-            } else {
-                ""
-            }
-            val defLeftMarginFloat = defOption.margin.left
-            val initialLeftMargin = if (defLeftMarginFloat > 0f) {
-                defLeftMarginFloat.toString()
-            } else {
-                ""
-            }
-            val defRightMarginFloat = defOption.margin.right
-            val initialRightMargin = if (defRightMarginFloat > 0f) {
-                defRightMarginFloat.toString()
-            } else {
-                ""
-            }
-
-            init(
-                mainTitle = "margin",
-                inputInit1 = Triple("top", initialTopMargin, true),
-                inputInit2 = Triple("bottom", initialBottomMargin, true),
-                inputInit3 = Triple("left", initialLeftMargin, true),
-                inputInit4 = Triple("right", initialRightMargin, true)
-            )
-
-            observe(
+    /**
+     * margin
+     */
+    fun addMarginOptionPreview(
+        activity: PlaygroundActivity,
+        margin: HongSpacingInfo,
+        label: String = "",
+        description: String = "",
+        useTopPadding: Boolean = true,
+        callback: (HongSpacingInfo) -> Unit
+    ) {
+        var initMargin = margin
+        QuarterInputOptionView(activity).apply {
+            set(
+                label = "${label}margin",
+                description = description,
+                useTopPadding = useTopPadding,
+                inputInit1 = Triple("top", initMargin.top.toFigureString(), true),
+                inputInit2 = Triple("bottom", initMargin.bottom.toFigureString(), true),
+                inputInit3 = Triple("left", initMargin.left.toFigureString(), true),
+                inputInit4 = Triple("right", initMargin.right.toFigureString(), true),
                 inputCallback1 = { topMargin ->
-                    val resultTopMargin = if (topMargin.isNullOrEmpty()) {
-                        0f
-                    } else {
-                        topMargin.toFloat()
-                    }
-                    Log.e("TAG", "옵션 topMargin = $resultTopMargin")
-                    activity.applyPreview(
-                        HongTextView(activity).set(
-                            option = builder.margin(
-                                HongSpacingInfo(
-                                    left = defOption.margin.left,
-                                    top = resultTopMargin,
-                                    right = defOption.margin.right,
-                                    bottom = defOption.margin.bottom
-                                )
-                            ).build()
-                        )
+                    callback.invoke(
+                        HongSpacingInfo(
+                            left = initMargin.left,
+                            top = topMargin.toFigureFloat(),
+                            right = initMargin.right,
+                            bottom = initMargin.bottom
+                        ).apply {
+                            initMargin = this
+                        }
                     )
                 },
                 inputCallback2 = { bottomMargin ->
-                    val resultBottomMargin = if (bottomMargin.isNullOrEmpty()) {
-                        0f
-                    } else {
-                        bottomMargin.toFloat()
-                    }
-                    Log.e("TAG", "옵션 bottomMargin = $resultBottomMargin")
-                    activity.applyPreview(
-                        HongTextView(activity).set(
-                            option = builder.margin(
-                                HongSpacingInfo(
-                                    left = defOption.margin.left,
-                                    top = defOption.margin.top,
-                                    right = defOption.margin.right,
-                                    bottom = resultBottomMargin
-                                )
-                            ).build()
-                        )
+                    callback.invoke(
+                        HongSpacingInfo(
+                            left = initMargin.left,
+                            top = initMargin.top,
+                            right = initMargin.right,
+                            bottom = bottomMargin.toFigureFloat()
+                        ).apply {
+                            initMargin = this
+                        }
                     )
                 },
                 inputCallback3 = { leftMargin ->
-                    val resultLeftMargin = if (leftMargin.isNullOrEmpty()) {
-                        0f
-                    } else {
-                        leftMargin.toFloat()
-                    }
-                    Log.e("TAG", "옵션 leftMargin = $resultLeftMargin")
-                    activity.applyPreview(
-                        HongTextView(activity).set(
-                            option = builder.margin(
-                                HongSpacingInfo(
-                                    left = resultLeftMargin,
-                                    top = defOption.margin.top,
-                                    right = defOption.margin.right,
-                                    bottom = defOption.margin.bottom
-                                )
-                            ).build()
-                        )
+                    callback.invoke(
+                        HongSpacingInfo(
+                            left = leftMargin.toFigureFloat(),
+                            top = initMargin.top,
+                            right = initMargin.right,
+                            bottom = initMargin.bottom
+                        ).apply {
+                            initMargin = this
+                        }
                     )
                 },
                 inputCallback4 = { rightMargin ->
-                    val resultRightMargin = if (rightMargin.isNullOrEmpty()) {
-                        0f
-                    } else {
-                        rightMargin.toFloat()
-                    }
-                    Log.e("TAG", "옵션 rightMargin = $resultRightMargin")
-                    activity.applyPreview(
-                        HongTextView(activity).set(
-                            option = builder.margin(
-                                HongSpacingInfo(
-                                    left = defOption.margin.left,
-                                    top = defOption.margin.top,
-                                    right = resultRightMargin,
-                                    bottom = defOption.margin.bottom
-                                )
-                            ).build()
-                        )
+                    callback.invoke(
+                        HongSpacingInfo(
+                            left = initMargin.left,
+                            top = initMargin.top,
+                            right = rightMargin.toFigureFloat(),
+                            bottom = initMargin.bottom
+                        ).apply {
+                            initMargin = this
+                        }
                     )
                 }
             )
+        }.apply {
+            activity.addOptionView(this)
         }
-        activity.addOptionView(marginOptionView)
+    }
 
-        val paddingOptionView = QuarterInputOptionView(activity).apply {
-            val defTopPaddingFloat = defOption.padding.top
-            val initialTopPadding = if (defTopPaddingFloat > 0f) {
-                defTopPaddingFloat.toString()
-            } else {
-                ""
-            }
-            val defBottomPaddingFloat = defOption.padding.bottom
-            val initialBottomPadding = if (defBottomPaddingFloat > 0f) {
-                defBottomPaddingFloat.toString()
-            } else {
-                ""
-            }
-            val defLeftPaddingFloat = defOption.padding.left
-            val initialLeftPadding = if (defLeftPaddingFloat > 0f) {
-                defLeftPaddingFloat.toString()
-            } else {
-                ""
-            }
-            val defRightPaddingFloat = defOption.padding.right
-            val initialRightPadding = if (defRightPaddingFloat > 0f) {
-                defRightPaddingFloat.toString()
-            } else {
-                ""
-            }
-
-            init(
-                mainTitle = "padding",
-                inputInit1 = Triple("top", initialTopPadding, true),
-                inputInit2 = Triple("bottom", initialBottomPadding, true),
-                inputInit3 = Triple("left", initialLeftPadding, true),
-                inputInit4 = Triple("right", initialRightPadding, true)
-            )
-
-            observe(
+    /**
+     * padding
+     */
+    fun addPaddingOptionPreview(
+        activity: PlaygroundActivity,
+        padding: HongSpacingInfo,
+        label: String = "",
+        description: String = "",
+        selectPadding: (HongSpacingInfo) -> Unit
+    ) {
+        var initPadding = padding
+        QuarterInputOptionView(activity).apply {
+            set(
+                label = "${label}padding",
+                description = description,
+                inputInit1 = Triple("top", initPadding.top.toFigureString(), true),
+                inputInit2 = Triple("bottom", initPadding.bottom.toFigureString(), true),
+                inputInit3 = Triple("left", initPadding.left.toFigureString(), true),
+                inputInit4 = Triple("right", initPadding.right.toFigureString(), true),
                 inputCallback1 = { topPadding ->
-                    val resultTopPadding = if (topPadding.isNullOrEmpty()) {
-                        0f
-                    } else {
-                        topPadding.toFloat()
-                    }
-                    Log.e("TAG", "옵션 topPadding = $resultTopPadding")
-                    activity.applyPreview(
-                        HongTextView(activity).set(
-                            option = builder.padding(
-                                HongSpacingInfo(
-                                    left = defOption.padding.left,
-                                    top = resultTopPadding,
-                                    right = defOption.padding.right,
-                                    bottom = defOption.padding.bottom
-                                )
-                            ).build()
-                        )
+                    selectPadding.invoke(
+                        HongSpacingInfo(
+                            left = initPadding.left,
+                            top = topPadding.toFigureFloat(),
+                            right = initPadding.right,
+                            bottom = initPadding.bottom
+                        ).apply {
+                            initPadding = this
+                        }
                     )
                 },
                 inputCallback2 = { bottomPadding ->
-                    val resultBottomPadding = if (bottomPadding.isNullOrEmpty()) {
-                        0f
-                    } else {
-                        bottomPadding.toFloat()
-                    }
-                    Log.e("TAG", "옵션 bottomPadding = $resultBottomPadding")
-                    activity.applyPreview(
-                        HongTextView(activity).set(
-                            option = builder.padding(
-                                HongSpacingInfo(
-                                    left = defOption.padding.left,
-                                    top = defOption.padding.top,
-                                    right = defOption.padding.right,
-                                    bottom = resultBottomPadding
-                                )
-                            ).build()
-                        )
+                    selectPadding.invoke(
+                        HongSpacingInfo(
+                            left = initPadding.left,
+                            top = initPadding.top,
+                            right = initPadding.right,
+                            bottom = bottomPadding.toFigureFloat()
+                        ).apply {
+                            initPadding = this
+                        }
                     )
                 },
                 inputCallback3 = { leftPadding ->
-                    val resultLeftPadding = if (leftPadding.isNullOrEmpty()) {
-                        0f
-                    } else {
-                        leftPadding.toFloat()
-                    }
-                    Log.e("TAG", "옵션 leftPadding = $resultLeftPadding")
-                    activity.applyPreview(
-                        HongTextView(activity).set(
-                            option = builder.padding(
-                                HongSpacingInfo(
-                                    left = resultLeftPadding,
-                                    top = defOption.padding.top,
-                                    right = defOption.padding.right,
-                                    bottom = defOption.padding.bottom
-                                )
-                            ).build()
-                        )
+                    selectPadding.invoke(
+                        HongSpacingInfo(
+                            left = leftPadding.toFigureFloat(),
+                            top = initPadding.top,
+                            right = initPadding.right,
+                            bottom = initPadding.bottom
+                        ).apply {
+                            initPadding = this
+                        }
                     )
                 },
                 inputCallback4 = { rightPadding ->
-                    val resultRightPadding = if (rightPadding.isNullOrEmpty()) {
-                        0f
-                    } else {
-                        rightPadding.toFloat()
-                    }
-                    Log.e("TAG", "옵션 rightPadding = $resultRightPadding")
-                    activity.applyPreview(
-                        HongTextView(activity).set(
-                            option = builder.padding(
-                                HongSpacingInfo(
-                                    left = defOption.padding.left,
-                                    top = defOption.padding.top,
-                                    right = resultRightPadding,
-                                    bottom = defOption.padding.bottom
-                                )
-                            ).build()
-                        )
+                    selectPadding.invoke(
+                        HongSpacingInfo(
+                            left = initPadding.left,
+                            top = initPadding.top,
+                            right = rightPadding.toFigureFloat(),
+                            bottom = initPadding.bottom
+                        ).apply {
+                            initPadding = this
+                        }
                     )
                 }
             )
+        }.apply {
+            activity.addOptionView(this)
         }
-        activity.addOptionView(paddingOptionView)
+    }
+
+    /**
+     * radius
+     */
+    fun addRadiusOptionPreview(
+        activity: PlaygroundActivity,
+        radius: HongRadiusInfo,
+        label: String = "",
+        description: String = "",
+        useTopPadding: Boolean = true,
+        callback: (HongRadiusInfo) -> Unit
+    ) {
+        QuarterInputOptionView(activity).apply {
+            var initRadius = radius
+            set(
+                label = "${label}radius",
+                useTopPadding = useTopPadding,
+                description = description,
+                inputInit1 = Triple("topLeft", initRadius.topLeft.toFigureString(), true),
+                inputInit2 = Triple("topRight", initRadius.topRight.toFigureString(), true),
+                inputInit3 = Triple("bottomLeft", initRadius.bottomLeft.toFigureString(), true),
+                inputInit4 = Triple("bottomRight", initRadius.bottomRight.toFigureString(), true),
+                inputCallback1 = { topLeft ->
+                    callback.invoke(
+                        HongRadiusInfo(
+                            topLeft = topLeft.toFigureInt(),
+                            topRight = initRadius.topRight,
+                            bottomLeft = initRadius.bottomLeft,
+                            bottomRight = initRadius.bottomRight
+                        ).apply {
+                            initRadius = this
+                        }
+                    )
+                },
+                inputCallback2 = { topRight ->
+                    callback.invoke(
+                        HongRadiusInfo(
+                            topLeft = initRadius.topLeft,
+                            topRight = topRight.toFigureInt(),
+                            bottomLeft = initRadius.bottomLeft,
+                            bottomRight = initRadius.bottomRight
+                        ).apply {
+                            initRadius = this
+                        }
+                    )
+                },
+                inputCallback3 = { bottomLeft ->
+                    callback.invoke(
+                        HongRadiusInfo(
+                            topLeft = initRadius.topLeft,
+                            topRight = initRadius.topRight,
+                            bottomLeft = bottomLeft.toFigureInt(),
+                            bottomRight = initRadius.bottomRight
+                        ).apply {
+                            initRadius = this
+                        }
+                    )
+                },
+                inputCallback4 = { bottomRight ->
+                    callback.invoke(
+                        HongRadiusInfo(
+                            topLeft = initRadius.topLeft,
+                            topRight = initRadius.topRight,
+                            bottomLeft = initRadius.bottomLeft,
+                            bottomRight = bottomRight.toFigureInt()
+                        ).apply {
+                            initRadius = this
+                        }
+                    )
+                }
+            )
+        }.apply {
+            activity.addOptionView(this)
+        }
+    }
+
+    /**
+     * color
+     */
+    fun selectColorOptionView(
+        activity: PlaygroundActivity,
+        colorHex: String?,
+        useTopPadding: Boolean,
+        label: String = "",
+        description: String = "",
+        callback: (hex: String) -> Unit
+    ): HongLabelSelectInputView {
+        return HongLabelSelectInputView(activity).apply {
+            val colorOptionList = hongColorList.map { it.colorName }.toMutableList()
+            colorOptionList.add(0, Const.DIRECT_INPUT)
+            val initialColor = hongColorList.firstOrNull { it.hex == colorHex }
+
+            setSelectInputView(
+                HongLabelSelectInputBuilder()
+                    .padding(
+                        HongSpacingInfo(
+                            top = if (useTopPadding) Const.PLAYGROUND_TOP_PADDING_FLOAT else 0f,
+                        )
+                    )
+                    .label("${label}color")
+                    .description(description)
+                    .placeholder("hexCode를 입력하세요. (ex: #ff000000)")
+                    .buttonText(if (!initialColor?.colorName.isNullOrEmpty()) initialColor?.colorName else Const.DIRECT_INPUT)
+                    .inputText(initialColor?.hex ?: (colorHex ?: ""))
+                    .selectList(colorOptionList)
+                    .selectPosition(if (initialColor != null) colorOptionList.indexOf(initialColor.colorName) else 0)
+                    .useDirectCallback(true)
+                    .useOnlyNumber(false)
+                    .showInput(initialColor == null)
+                    .inputCallback { hexColor ->
+                        var resultHexColor = hexColor
+                        if (!hexColor.isNullOrEmpty() && !hexColor.startsWith("#")) {
+                            resultHexColor = "#$hexColor"
+                        }
+                        Log.e("TAG", "옵션 hexColor = $resultHexColor")
+                        callback.invoke(resultHexColor ?: HongColor.TRANSPARENT.hex)
+                    }
+                    .pickerCallback { selectColor, index ->
+                        val hongColor =
+                            hongColorList.firstOrNull { it.colorName == selectColor }
+                                ?: HongColor.BLACK_100
+                        Log.e("TAG", "옵션 selectColor = $selectColor")
+                        if (selectColor == Const.DIRECT_INPUT) {
+                            showInput()
+                            setInputText("")
+                            callback.invoke("")
+                        } else {
+                            hideInput()
+                            callback.invoke(hongColor.hex)
+                        }
+                    }
+                    .applyOption()
+            )
+        }
+    }
+
+    fun addColorOptionPreview(
+        activity: PlaygroundActivity,
+        colorHex: String?,
+        label: String = "",
+        description: String = "",
+        useTopPadding: Boolean = true,
+        callback: (hex: String) -> Unit
+    ) {
+        selectColorOptionView(
+            activity,
+            colorHex = colorHex,
+            label = label,
+            description = description,
+            useTopPadding = useTopPadding,
+            callback = callback
+        ).also {
+            activity.addOptionView(it)
+        }
+    }
+
+    /**
+     * shadow
+     */
+    fun addShadowOptionPreview(
+        activity: PlaygroundActivity,
+        shadow: HongShadowInfo,
+        title: String = "",
+        useTopPadding: Boolean = true,
+        selectShadow: (HongShadowInfo) -> Unit
+    ) {
+        var initShadow = shadow
+        addColorOptionPreview(
+            activity,
+            label = "${title}shadow ",
+            colorHex = initShadow.color,
+            useTopPadding = useTopPadding,
+        ) { selectColorHex ->
+            selectShadow.invoke(
+                HongShadowInfo(
+                    color = selectColorHex,
+                    blur = initShadow.blur,
+                    offsetY = initShadow.offsetY,
+                    offsetX = initShadow.offsetX,
+                    spread = initShadow.spread
+                ).apply {
+                    initShadow = this
+                }
+            )
+        }
+
+        QuarterInputOptionView(activity).apply {
+            set(
+                label = "${title}shadow option",
+                inputInit1 = Triple("blur", initShadow.blur.toFigureString(), true),
+                inputInit2 = Triple("spread", initShadow.spread.toFigureString(), true),
+                inputInit3 = Triple("offsetX", initShadow.offsetX.toFigureString(), true),
+                inputInit4 = Triple("offsetY", initShadow.offsetY.toFigureString(), true),
+                inputCallback1 = { blur ->
+                    selectShadow.invoke(
+                        HongShadowInfo(
+                            color = initShadow.color,
+                            blur = blur.toFigureFloat(),
+                            offsetY = initShadow.offsetY,
+                            offsetX = initShadow.offsetX,
+                            spread = initShadow.spread
+                        ).apply {
+                            initShadow = this
+                        }
+                    )
+                },
+                inputCallback2 = { spread ->
+                    selectShadow.invoke(
+                        HongShadowInfo(
+                            color = initShadow.color,
+                            blur = initShadow.blur,
+                            offsetY = initShadow.offsetY,
+                            offsetX = initShadow.offsetX,
+                            spread = spread.toFigureFloat()
+                        ).apply {
+                            initShadow = this
+                        }
+                    )
+                },
+                inputCallback3 = { offsetX ->
+                    selectShadow.invoke(
+                        HongShadowInfo(
+                            color = initShadow.color,
+                            blur = initShadow.blur,
+                            offsetY = initShadow.offsetY,
+                            offsetX = offsetX.toFigureFloat(),
+                            spread = initShadow.spread
+                        ).apply {
+                            initShadow = this
+                        }
+                    )
+                },
+                inputCallback4 = { offsetY ->
+                    selectShadow.invoke(
+                        HongShadowInfo(
+                            color = initShadow.color,
+                            blur = initShadow.blur,
+                            offsetY = offsetY.toFigureFloat(),
+                            offsetX = initShadow.offsetX,
+                            spread = initShadow.spread
+                        ).apply {
+                            initShadow = this
+                        }
+                    )
+                }
+            )
+        }.apply {
+            activity.addOptionView(this)
+        }
+    }
+
+    /**
+     * useShapeCircle
+     */
+    fun addUseShapeCircleOptionPreview(
+        activity: PlaygroundActivity,
+        useShapeCircle: Boolean,
+        label: String = "",
+        description: String = "",
+        callback: (Boolean) -> Unit
+    ) {
+        addLabelSwitchOptionPreview(
+            activity = activity,
+            label = "${label}원형 설정",
+            description = "${description}원형 모양으로 사용해요.",
+            switchState = useShapeCircle,
+            switchCallback = callback
+        )
+    }
+
+    /**
+     * border
+     */
+    fun addBorderOptionPreview(
+        activity: PlaygroundActivity,
+        border: HongBorderInfo,
+        label: String = "",
+        despWidth: String = "",
+        despColor: String = "",
+        useTopPadding: Boolean = true,
+        callback: (HongBorderInfo) -> Unit
+    ) {
+        HorizontalOptionView(activity).set(
+            leftOptionView = labelInputPreview(
+                activity = activity,
+                input = border.width.toFigureString(),
+                label = "${label}border width",
+                description = despWidth,
+                useTopPadding = false,
+                useOnlyNumber = true,
+            ) { borderWidth ->
+                val currentBorder = (activity.previewOption as HongWidgetCommonOption).border
+                callback(
+                    HongBorderInfo(
+                        color = currentBorder.color,
+                        width = borderWidth.toFigureInt()
+                    )
+                )
+            },
+            rightOptionView = selectColorOptionView(
+                activity = activity,
+                colorHex = border.color,
+                label = "${label}border ",
+                description = despColor,
+                useTopPadding = false
+            ) { borderColor ->
+                val currentBorder = (activity.previewOption as HongWidgetCommonOption).border
+                callback(
+                    HongBorderInfo(
+                        color = borderColor,
+                        width = if (currentBorder.width > 0) currentBorder.width else 1
+                    )
+                )
+            },
+            useTopPadding = useTopPadding
+        ).also {
+            activity.addOptionView(it)
+        }
+    }
+
+    fun addLabelInputOptionPreview(
+        activity: PlaygroundActivity,
+        input: String?,
+        label: String,
+        description: String = "",
+        useTopPadding: Boolean = true,
+        useOnlyNumber: Boolean = false,
+        callback: (String) -> Unit
+    ) {
+        labelInputPreview(
+            activity = activity,
+            input = input,
+            label = label,
+            description = description,
+            useTopPadding = useTopPadding,
+            useOnlyNumber = useOnlyNumber,
+            callback = callback
+        ).also {
+            activity.addOptionView(it)
+        }
+    }
+
+    fun labelInputPreview(
+        activity: PlaygroundActivity,
+        input: String?,
+        label: String,
+        description: String = "",
+        useTopPadding: Boolean = true,
+        useOnlyNumber: Boolean = false,
+        callback: (String) -> Unit
+    ): HongLabelInputView {
+        return HongLabelInputView(activity).set(
+            HongLabelInputBuilder()
+                .width(HongLayoutParam.MATCH_PARENT.value)
+                .padding(
+                    HongSpacingInfo(
+                        top = (if (useTopPadding) Const.PLAYGROUND_TOP_PADDING else 0).toFloat(),
+                    )
+                )
+                .label(label)
+                .description(description)
+                .textFieldOption(
+                    HongTextFieldBuilder()
+                        .copy(HongLabelInputOption.DEFAULT_TEXT_FIELD)
+                        .height(48)
+                        .inputTextOption(
+                            HongTextBuilder()
+                                .width(HongLayoutParam.MATCH_PARENT.value)
+                                .typography(HongTypo.BODY_14)
+                                .color(HongColor.BLACK_100)
+                                .text(input)
+                                .applyOption()
+                        )
+                        .keyboardOption(
+                            Pair(
+                                if (useOnlyNumber) {
+                                    HongKeyboardType.NUMBER
+                                } else {
+                                    HongKeyboardType.TEXT
+                                }, HongKeyboardActionType.DONE
+                            )
+                        )
+                        .onTextChanged(callback)
+                        .applyOption()
+                )
+                .applyOption()
+        )
+    }
+
+    fun addLabelSwitchOptionPreview(
+        activity: PlaygroundActivity,
+        label: String,
+        description: String  ="",
+        switchState: Boolean,
+        useTopPadding: Boolean = true,
+        switchCallback: (Boolean) -> Unit
+    ) {
+        labelSwitchView(
+            activity = activity,
+            label = label,
+            description = description,
+            switchState = switchState,
+            useTopPadding = useTopPadding,
+            switchCallback = switchCallback
+        ).also {
+            activity.addOptionView(it)
+        }
+    }
+    fun labelSwitchView(
+        activity: PlaygroundActivity,
+        label: String,
+        description: String  ="",
+        switchState: Boolean,
+        useTopPadding: Boolean = true,
+        switchCallback: (Boolean) -> Unit
+    ): HongLabelSwitchView {
+        return HongLabelSwitchView(activity).set(
+            HongLabelSwitchBuilder()
+                .padding(
+                    HongSpacingInfo(
+                        top = if (useTopPadding) Const.PLAYGROUND_TOP_PADDING_FLOAT else 0f
+                    )
+                )
+                .label(label)
+                .description(description)
+                .switchOption(
+                    HongSwitchBuilder()
+                        .width(55)
+                        .height(30)
+                        .onColor(HongColor.MAIN_ORANGE_100)
+                        .offColor(HongColor.GRAY_20)
+                        .cursorSize(25)
+                        .cursorHorizontalMargin(3)
+                        .cursorColor(HongColor.WHITE_100)
+                        .initialState(switchState)
+                        .switchClick { _, isEnable ->
+                            switchCallback(isEnable)
+                        }
+                        .applyOption()
+                )
+                .applyOption()
+        )
+    }
+
+
+    /**
+     * drawable 리소스 이름 목록 가져오기
+     */
+    fun addLocalResourceOptionPreview(
+        activity: PlaygroundActivity,
+        label: String,
+        drawableResId: Int?,
+        selectResId: (Int?) -> Unit
+    ) {
+        val drawableList = getLibraryDrawableResNameList()
+        val initial = if (drawableResId != null) {
+            drawableList.firstOrNull {
+                it == activity.resources.getResourceEntryName(drawableResId)
+            }
+        } else {
+            drawableList.first()
+        }
+        addSelectOptionView(
+            activity = activity,
+            initialText = initial,
+            selectList = drawableList,
+            selectedPosition = drawableList.indexOf(initial ?: 0),
+            label = label,
+            useDirectCallback = true,
+        ) { selectDrawable, index ->
+            val drawable =
+                drawableList.firstOrNull { it == selectDrawable }
+            Log.e("TAG", "옵션 drawable = $drawable, index = $index")
+            selectResId.invoke(
+                if (drawable.isNullOrEmpty()) null
+                else getDrawableResIdByNameFromLibrary(drawable)
+            )
+        }
+    }
+
+    fun addSelectOptionView(
+        activity: PlaygroundActivity,
+        initialText: String?,
+        label: String,
+        useDirectCallback: Boolean,
+        selectList: List<String>,
+        selectedPosition: Int,
+        description: String = "",
+        useTopPadding: Boolean = true,
+        selectOptionCallback: (String, Int) -> Unit
+    ) {
+        selectOptionView(
+            activity = activity,
+            initialText = initialText,
+            label = label,
+            selectList = selectList,
+            selectedPosition = selectedPosition,
+            description = description,
+            useDirectCallback = useDirectCallback,
+            useTopPadding = useTopPadding,
+            selectOptionCallback = selectOptionCallback
+        ).also {
+            activity.addOptionView(it)
+        }
+    }
+
+    fun selectOptionView(
+        activity: PlaygroundActivity,
+        initialText: String?,
+        label: String,
+        useDirectCallback: Boolean,
+        selectList: List<String>,
+        selectedPosition: Int,
+        description: String = "",
+        useTopPadding: Boolean = true,
+        selectOptionCallback: (String, Int) -> Unit
+    ): HongLabelSelectInputView {
+        return HongLabelSelectInputView(activity).setSelectView(
+            HongLabelSelectInputBuilder()
+                .padding(
+                    HongSpacingInfo(
+                        top = if (useTopPadding) Const.PLAYGROUND_TOP_PADDING_FLOAT else 0f
+                    )
+                )
+                .label(label)
+                .description(description)
+                .buttonText(initialText)
+                .selectList(selectList)
+                .selectPosition(selectedPosition)
+                .useDirectCallback(useDirectCallback)
+                .pickerCallback(selectOptionCallback)
+                .applyOption()
+        )
+    }
+
+    fun addSelectInputOptionView(
+        activity: PlaygroundActivity,
+        initialButtonText: String?,
+        initialInputText: String?,
+        label: String,
+        selectList: List<String>,
+        selectedPosition: Int,
+        showInput: Boolean,
+        useDirectCallback: Boolean,
+        description: String = "",
+        useOnlyNumber: Boolean = false,
+        useTopPadding: Boolean = true,
+        inputCallback: (String?) -> Unit,
+        selectOptionCallback: (String, Int) -> Unit
+    ) {
+        selectInputOptionView(
+            activity = activity,
+            initialButtonText = initialButtonText,
+            initialInputText = initialInputText,
+            label = label,
+            selectList = selectList,
+            selectedPosition = selectedPosition,
+            showInput = showInput,
+            description = description,
+            useDirectCallback = useDirectCallback,
+            useOnlyNumber = useOnlyNumber,
+            useTopPadding = useTopPadding,
+            inputCallback = inputCallback,
+            selectOptionCallback = selectOptionCallback
+        ).also {
+            activity.addOptionView(it)
+        }
+    }
+
+    fun selectInputOptionView(
+        activity: PlaygroundActivity,
+        initialButtonText: String?,
+        initialInputText: String?,
+        label: String,
+        selectList: List<String>,
+        selectedPosition: Int,
+        showInput: Boolean,
+        useDirectCallback: Boolean,
+        description: String = "",
+        useOnlyNumber: Boolean = false,
+        useTopPadding: Boolean = true,
+        inputCallback: (String?) -> Unit,
+        selectOptionCallback: (String, Int) -> Unit,
+    ): HongLabelSelectInputView {
+        return HongLabelSelectInputView(activity).setSelectInputView(
+            HongLabelSelectInputBuilder()
+                .padding(
+                    HongSpacingInfo(
+                        top = if (useTopPadding) Const.PLAYGROUND_TOP_PADDING_FLOAT else 0f
+                    )
+                )
+                .label(label)
+                .description(description)
+                .buttonText(initialButtonText)
+                .inputText(initialInputText)
+                .selectList(selectList)
+                .selectPosition(selectedPosition)
+                .useDirectCallback(useDirectCallback)
+                .useOnlyNumber(useOnlyNumber)
+                .showInput(showInput)
+                .inputCallback(inputCallback)
+                .pickerCallback(selectOptionCallback)
+                .applyOption()
+        )
+    }
+
+    fun addSelectTypoOptionView(
+        activity: PlaygroundActivity,
+        typo: HongTypo,
+        label: String,
+        description: String = "",
+        callback: (HongTypo) -> Unit
+    ) {
+        val initialTypography = typographyList.firstOrNull {
+            it == typo
+        } ?: HongTypo.BODY_14
+        addSelectOptionView(
+            activity = activity,
+            initialText = initialTypography.styleName,
+            selectList = typographyNameList,
+            selectedPosition = typographyList.indexOf(initialTypography),
+            label = label,
+            description = description,
+            useDirectCallback = true,
+        ) { selectTypography, index ->
+            val typography = typographyList.firstOrNull { it.styleName == selectTypography }
+                    ?: HongTypo.BODY_16_B
+            callback(typography)
+        }
+    }
+
+
+    fun getDrawableResourceNameList(context: Context): List<String> {
+        val drawables = R.drawable::class.java.fields
+        return drawables.mapNotNull { field ->
+            try {
+                val resourceId = field.getInt(null)
+                context.resources.getResourceEntryName(resourceId)
+            } catch (e: Exception) {
+                null
+            }
+        }
+    }
+
+    fun getDrawableResIdByName(name: String): Int? {
+        return try {
+            val field = R.drawable::class.java.getDeclaredField(name)
+            field.getInt(null)
+        } catch (e: Exception) {
+            null // 이름이 없거나 오류 발생 시
+        }
+    }
+
+    fun getLibraryDrawableResNameList(): List<String> {
+        return try {
+            val drawableClass = Class.forName("com.codehong.library.widget.R\$drawable")
+            drawableClass.fields.mapNotNull { it.name }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    fun getDrawableResIdByNameFromLibrary(name: String): Int? {
+        return try {
+            val drawableClass = Class.forName("com.codehong.library.widget.R\$drawable")
+            val field = drawableClass.getDeclaredField(name)
+            field.getInt(null)
+        } catch (e: Exception) {
+            null // 해당 이름의 drawable이 없거나 오류 발생
+        }
     }
 }

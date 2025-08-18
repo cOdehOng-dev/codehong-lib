@@ -5,21 +5,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.codehong.library.widget.extensions.hongHeight
+import com.codehong.library.widget.extensions.hongWidth
+import com.codehong.library.widget.extensions.lineBreakSyllable
+import com.codehong.library.widget.extensions.parseComposeColor
 import com.codehong.library.widget.pretendardFontFamily
 import com.codehong.library.widget.rule.HongTextLineBreak
 import com.codehong.library.widget.rule.typo.lineHeight
 import com.codehong.library.widget.rule.typo.size
-import com.codehong.library.widget.util.adjustHeight
-import com.codehong.library.widget.util.adjustWidth
 import com.codehong.library.widget.util.dpToSp
-import com.codehong.library.widget.util.lineBreakSyllable
-import com.codehong.library.widget.util.parseComposeColor
+import java.text.DecimalFormat
 
 @Composable
 fun HongTextCompose(
@@ -43,7 +46,19 @@ fun HongTextCompose(
     }
 
     val isLineBreakSyllable = option.lineBreak == HongTextLineBreak.SYLLABLE
-    var fullText = option.text ?: ""
+
+    var fullText = if (option.useNumberDecimal) {
+        val clean = (option.text ?: "").replace(",", "").trim()
+        when {
+            clean.toLongOrNull() != null -> DecimalFormat("#,###").format(clean.toLong())
+            clean.toDoubleOrNull() != null -> DecimalFormat("#,##0.##").format(clean.toDouble())
+            else -> option.text ?: ""
+        }
+    } else {
+        option.text ?: ""
+    }
+
+
 
     if (isLineBreakSyllable) {
         fullText = fullText.lineBreakSyllable() ?: ""
@@ -52,17 +67,17 @@ fun HongTextCompose(
     val text = buildAnnotatedString {
         this.append(fullText)
 
-        if (option.spanTextsProperty.isNullOrEmpty()) {
+        if (option.spanTextBuilderList.isNullOrEmpty()) {
             return@buildAnnotatedString
         }
 
-        option.spanTextsProperty?.forEach { spanProperty ->
-            spanProperty.injectOption(option)
+        option.spanTextBuilderList?.forEach { builder ->
+            builder.injectOption(option)
 
             val target = if (isLineBreakSyllable) {
-                spanProperty.text?.lineBreakSyllable()
+                builder.option.text?.lineBreakSyllable()
             } else {
-                spanProperty.text
+                builder.option.text
             }
 
             target?.toRegex()?.findAll(fullText)?.forEach { matchResult ->
@@ -70,12 +85,12 @@ fun HongTextCompose(
                 val endIndex = matchResult.range.last + 1
 
                 var spanTextDecoration: TextDecoration? = null
-                if (spanProperty.isEnableCancelLine || spanProperty.isEnableUnderLine) {
+                if (builder.option.isEnableCancelLine || builder.option.isEnableUnderLine) {
                     val decoList = mutableListOf<TextDecoration>()
-                    if (spanProperty.isEnableCancelLine) {
+                    if (builder.option.isEnableCancelLine) {
                         decoList.add(TextDecoration.LineThrough)
                     }
-                    if (spanProperty.isEnableUnderLine) {
+                    if (builder.option.isEnableUnderLine) {
                         decoList.add(TextDecoration.Underline)
                     }
                     spanTextDecoration = TextDecoration.combine(decoList)
@@ -84,15 +99,15 @@ fun HongTextCompose(
                 this.addStyle(
                     style = SpanStyle(
                         color = (
-                                spanProperty.colorHex
+                                builder.option.colorHex
                                     ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
                                 ).parseComposeColor(),
-                        fontWeight = spanProperty.fontWeight,
+                        fontWeight = builder.option.fontWeight,
                         fontSize = dpToSp(
-                            dp = (spanProperty.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size()).dp
+                            dp = (builder.option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size()).dp
                         ),
                         fontFamily = pretendardFontFamily,
-                        textDecoration = spanTextDecoration
+                        textDecoration = spanTextDecoration,
                     ),
                     start = startIndex,
                     end = endIndex
@@ -110,8 +125,8 @@ fun HongTextCompose(
                     end = option.margin.right.dp,
                     bottom = option.margin.bottom.dp
                 )
-                .adjustWidth(option.width)
-                .adjustHeight(option.height)
+                .hongWidth(option.width)
+                .hongHeight(option.height)
         ) {
             Text(
                 modifier = Modifier
@@ -121,25 +136,28 @@ fun HongTextCompose(
                         end = option.padding.right.dp,
                         bottom = option.padding.bottom.dp
                     )
-                    .adjustWidth(option.width)
-                    .adjustHeight(option.height),
+                    .hongWidth(option.width)
+                    .hongHeight(option.height),
                 text = text,
-                color = (
-                        option.colorHex
-                            ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
-                        ).parseComposeColor(),
                 fontFamily = pretendardFontFamily,
                 fontWeight = option.fontWeight,
                 fontSize = dpToSp(dp = (option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size())),
                 lineHeight = dpToSp(
                     dp = option.lineHeight ?: HongTextOption.DEFAULT_TYPOGRAPHY.lineHeight()
                 ),
-                letterSpacing = (-0.05).sp, // TextView 보다 자간이 살짝 넓어서 시각적 차이를 줄이기 위해 값 조정
+                letterSpacing = (-0.05).sp,
                 textAlign = option.align.value,
                 maxLines = option.maxLines,
                 overflow = option.overflow.value,
                 textDecoration = textDecoration,
-                onTextLayout = onTextLayout ?: {}
+                onTextLayout = onTextLayout ?: {},
+                style = TextStyle(
+                    color = (
+                            option.colorHex
+                                ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
+                            ).parseComposeColor(),
+                    platformStyle = PlatformTextStyle(includeFontPadding = false)
+                )
             )
         }
     } else {
@@ -151,25 +169,29 @@ fun HongTextCompose(
                     end = option.padding.right.dp,
                     bottom = option.padding.bottom.dp
                 )
-                .adjustWidth(option.width)
-                .adjustHeight(option.height),
+                .hongWidth(option.width)
+                .hongHeight(option.height),
             text = text,
-            color = (
-                    option.colorHex
-                        ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
-                    ).parseComposeColor(),
+
             fontFamily = pretendardFontFamily,
             fontWeight = option.fontWeight,
             fontSize = dpToSp(dp = (option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size())),
             lineHeight = dpToSp(
                 dp = option.lineHeight ?: HongTextOption.DEFAULT_TYPOGRAPHY.lineHeight()
             ),
-            letterSpacing = (-0.05).sp, // TextView 보다 자간이 살짝 넓어서 시각적 차이를 줄이기 위해 값 조정
+            letterSpacing = (-0.05).sp,
             textAlign = option.align.value,
             maxLines = option.maxLines,
             overflow = option.overflow.value,
             textDecoration = textDecoration,
-            onTextLayout = onTextLayout ?: {}
+            onTextLayout = onTextLayout ?: {},
+            style = TextStyle(
+                color = (
+                        option.colorHex
+                            ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
+                        ).parseComposeColor(),
+                platformStyle = PlatformTextStyle(includeFontPadding = false)
+            )
         )
     }
 }

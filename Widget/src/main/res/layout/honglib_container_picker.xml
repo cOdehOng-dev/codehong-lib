@@ -20,7 +20,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/honglib_color_b3ffffff"
+            android:background="@color/honglib_color_ffffff_70"
             android:layout_weight="1">
 
             <View
@@ -38,7 +38,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/honglib_color_b3ffffff"
+            android:background="@color/honglib_color_ffffff_70"
             android:layout_weight="1">
 
             <View

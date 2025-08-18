@@ -3,35 +3,42 @@ package com.codehong.library.widget.rule
 enum class HongLayoutParam(val value: Int, val paramName: String) {
     MATCH_PARENT(-1, "MATCH_PARENT"),
     WRAP_CONTENT(-2, "WRAP_CONTENT")
-}
+    ;
 
-fun HongLayoutParam.toHongLayoutParamValue(): Int {
-    return when (this) {
-        HongLayoutParam.MATCH_PARENT -> HongLayoutParam.MATCH_PARENT.value
-        HongLayoutParam.WRAP_CONTENT -> HongLayoutParam.WRAP_CONTENT.value
-    }
-}
+    companion object {
+        fun String?.toHongLayoutParamValue(): Int {
+            return when (this) {
+                MATCH_PARENT.paramName -> MATCH_PARENT.value
+                WRAP_CONTENT.paramName -> WRAP_CONTENT.value
+                else -> WRAP_CONTENT.value
+            }
+        }
 
-fun HongLayoutParam.toParamName(): String {
-    return when (this) {
-        HongLayoutParam.MATCH_PARENT -> HongLayoutParam.MATCH_PARENT.paramName
-        HongLayoutParam.WRAP_CONTENT -> HongLayoutParam.WRAP_CONTENT.paramName
-    }
-}
+        fun HongLayoutParam.toParamName(): String {
+            return when (this) {
+                MATCH_PARENT -> MATCH_PARENT.paramName
+                WRAP_CONTENT -> WRAP_CONTENT.paramName
+            }
+        }
 
-fun Int?.toHongLayoutValueToParam(): String {
-    return when (this) {
-        HongLayoutParam.MATCH_PARENT.value -> HongLayoutParam.MATCH_PARENT.paramName
-        HongLayoutParam.WRAP_CONTENT.value -> HongLayoutParam.WRAP_CONTENT.paramName
-        else -> HongLayoutParam.WRAP_CONTENT.paramName
-    }
-}
+        // TODO HONG 구조 변경
+        fun HongLayoutParam.toHongLayoutParamValue(): Int {
+            return when (this) {
+                MATCH_PARENT -> MATCH_PARENT.value
+                WRAP_CONTENT -> WRAP_CONTENT.value
+            }
+        }
 
+        fun Int?.toHongLayoutValueToParam(): String {
+            return when (this) {
+                MATCH_PARENT.value -> MATCH_PARENT.paramName
+                WRAP_CONTENT.value -> WRAP_CONTENT.paramName
+                else -> ""
+            }
+        }
 
-fun String?.toHongLayoutParamValue(): Int {
-    return when (this) {
-        HongLayoutParam.MATCH_PARENT.paramName -> HongLayoutParam.MATCH_PARENT.value
-        HongLayoutParam.WRAP_CONTENT.paramName -> HongLayoutParam.WRAP_CONTENT.value
-        else -> HongLayoutParam.WRAP_CONTENT.value
+        fun String?.isHongLayoutParam(): Boolean {
+            return this == MATCH_PARENT.paramName || this == WRAP_CONTENT.paramName
+        }
     }
 }

@@ -26,18 +26,18 @@ abstract class BaseSampleComposeActivity : BaseActivity() {
         }
 
         binding.vHeader.init(
-            title = "${widgetType?.value} 샘플",
+            title = "${widgetType?.value}",
             back = {
                 finish()
             }
         )
 
         binding.vCompose.setContent {
-            InitSample()
+            InitCompose()
         }
     }
 
     @Composable
-    protected abstract fun InitSample()
+    protected abstract fun InitCompose()
 
 }

@@ -5,11 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/color_ffffff">
+    android:background="@color/honglib_color_ffffff">
+
+    <com.codehong.lib.sample.playground.preview.HeaderView
+        android:id="@+id/v_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/v_header"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -18,7 +28,7 @@
             android:textSize="30dp"
             android:fontFamily="@font/pretendard_700"
             android:includeFontPadding="false"
-            android:textColor="@color/teal_200"
+            android:textColor="@color/honglib_color_ff8224"
             android:layout_gravity="center"/>
     </FrameLayout>
 

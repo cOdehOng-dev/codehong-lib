@@ -6,7 +6,6 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
 
 
     <!-- transparent -->
@@ -32,12 +31,7 @@
     <color name="color_0A000000">#0A000000</color>
     <color name="color_29000000">#29000000</color>
 
-
-    <!-- white -->
-    <color name="color_ffffff">#ffffff</color>
-
     <!-- gray -->
-    <color name="color_111111">#111111</color>
     <color name="color_1c1c1e">#1c1c1e</color>
     <color name="color_222222">#222222</color>
     <color name="color_333333">#333333</color>
@@ -80,10 +74,7 @@
 
     <color name="color_7e7e81">#7e7e81</color>
 
-    <color name="color_8e43e7">#8e43e7</color>
-    <color name="color_148e43e7">#148e43e7</color> <!--8%-->
 
-    <color name="color_1769ff">#1769ff</color>
     <color name="color_ff322e">#ff322e</color>
 
     <color name="color_ffc2ab">#ffc2ab</color>

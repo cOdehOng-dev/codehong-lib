@@ -34,13 +34,18 @@ dependencies {
     implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.compose.rxjava2)
     implementation(libs.androidx.compose.material3.adaptive)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.viewpager2)
 
     implementation(libs.google.accompanist.pager)
     implementation(libs.google.accompanist.pager.indicators)
-    implementation(libs.compose.coil)
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
     implementation(libs.andoridx.compose.ui.graphics)
     implementation(libs.threetenapb)
+
     implementation(libs.google.accompanist.drawablepainter)
+    implementation(libs.google.accompanist.flowlayout)
 
 
     implementation(libs.androidx.media3.exoplayer)

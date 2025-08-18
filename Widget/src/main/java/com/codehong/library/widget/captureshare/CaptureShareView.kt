@@ -22,7 +22,7 @@ import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.codehong.library.widget.databinding.HonglibViewCaptureShareBinding
 import com.codehong.library.widget.util.PermissionManager
-import com.codehong.library.widget.util.isAppForeground
+import com.codehong.library.widget.extensions.isAppForeground
 import java.io.File
 import java.io.FileOutputStream
 
