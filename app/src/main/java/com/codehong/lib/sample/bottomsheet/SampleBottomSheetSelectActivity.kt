@@ -27,8 +27,8 @@ class SampleBottomSheetSelectActivity : BaseSampleComposeActivity() {
 
     @Composable
     override fun InitCompose() {
-        var show1 by remember { mutableStateOf(false) }
-        var show2 by remember { mutableStateOf(false) }
+        var show1 by remember(false) { mutableStateOf(false) }
+        var show2 by remember(false) { mutableStateOf(false) }
         Box(
             modifier = Modifier
                 .fillMaxSize()

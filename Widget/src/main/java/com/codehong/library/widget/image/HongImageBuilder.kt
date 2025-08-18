@@ -69,8 +69,8 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
         option.diskCache = diskCache
     }
 
-    fun imageColor(color: HongColor?) = apply {
-        imageColor(color?.hex)
+    fun imageColor(color: HongColor) = apply {
+        option.imageColor = color.hex
     }
     fun imageColor(colorHex: String?) = apply {
         option.imageColor = colorHex
@@ -99,7 +99,6 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
             .scaleType(inject.scaleType)
             .memoryCache(inject.memoryCache)
             .diskCache(inject.diskCache)
-            .imageColor(inject.imageColor)
             .imageColor(inject.imageColor)
     }
 }

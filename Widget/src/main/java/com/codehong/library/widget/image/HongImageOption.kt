@@ -12,7 +12,7 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
 data class HongImageOption(
-    override val type: HongWidgetType = HongWidgetType.TEXT_BADGE
+    override val type: HongWidgetType = HongWidgetType.IMAGE
 ) : HongWidgetCommonOption {
 
     override var isValidComponent: Boolean = true

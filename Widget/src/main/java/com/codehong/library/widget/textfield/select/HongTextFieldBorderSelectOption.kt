@@ -1,4 +1,4 @@
-package com.codehong.library.widget.textfield.border
+package com.codehong.library.widget.textfield.select
 
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.rule.HongBorderInfo
@@ -11,10 +11,9 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 
-data class HongTextFieldBorderOption(
-    override val type: HongWidgetType = HongWidgetType.TEXT_FIELD_BORDER
+data class HongTextFieldBorderSelectOption(
+    override val type: HongWidgetType = HongWidgetType.TEXT_FIELD_BORDER_SELECT
 ) : HongWidgetCommonOption {
-
     override var isValidComponent: Boolean = true
 
     override var width: Int = HongLayoutParam.WRAP_CONTENT.value
@@ -45,7 +44,6 @@ data class HongTextFieldBorderOption(
     var inputBackgroundColorHex: String = HongColor.WHITE_100.hex
 
 
-
     var label: String = ""
     var labelColoHex: String = HongColor.BLACK_100.hex
     var labelTypo: HongTypo = HongTypo.CONTENTS_12
@@ -65,13 +63,10 @@ data class HongTextFieldBorderOption(
     var state: HongInputState = HongInputState.ENABLE
 
 
-    var suffix: String = ""
-    var suffixTypo = HongTypo.BODY_16
-
-    var useClearButton = true
-
     var useNumberKeypad: Boolean = false
 
-    var onChangeInput: (String) -> Unit = {}
+    var useDirectInput: Boolean = false
 
+    var onSelectionClick: () -> Unit = {}
+    var onChangeInput: (String) -> Unit = {}
 }

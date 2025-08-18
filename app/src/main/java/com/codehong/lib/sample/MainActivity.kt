@@ -34,6 +34,8 @@ import com.codehong.lib.sample.captureshare.SampleCaptureShareActivity
 import com.codehong.lib.sample.checkbox.SampleCheckboxActivity
 import com.codehong.lib.sample.closeheader.SampleCloseHeaderActivity
 import com.codehong.lib.sample.dynamicisland.SampleDynamicIslandActivity
+import com.codehong.lib.sample.graph.SampleGraphBarActivity
+import com.codehong.lib.sample.graph.SampleGraphLineActivity
 import com.codehong.lib.sample.image.SampleImageActivity
 import com.codehong.lib.sample.label.SampleLabelActivity
 import com.codehong.lib.sample.label.checkbox.SampleLabelCheckboxActivity
@@ -56,6 +58,7 @@ import com.codehong.lib.sample.text.unit.SampleTextUnitActivity
 import com.codehong.lib.sample.text.updown.SampleTextUpDownActivity
 import com.codehong.lib.sample.textfield.SampleTextFieldActivity
 import com.codehong.lib.sample.textfield.border.SampleTextFieldBorderActivity
+import com.codehong.lib.sample.textfield.borderselect.SampleTextFieldBorderSelectActivity
 import com.codehong.lib.sample.textfield.number.SampleNumberTextFieldActivity
 import com.codehong.lib.sample.textfield.timer.SampleTimerTextFieldActivity
 import com.codehong.lib.sample.textfield.underline.SampleUnderlineTextFieldActivity
@@ -356,6 +359,16 @@ fun SampleTheme(
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
                                                     HongWidgetType.TEXT_FIELD_BORDER.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
+                                        HongWidgetType.TEXT_FIELD_BORDER_SELECT -> {
+                                            Intent(activity, SampleTextFieldBorderSelectActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.TEXT_FIELD_BORDER_SELECT.value
                                                 )
                                                 activity.startActivity(this)
                                             }
@@ -715,6 +728,26 @@ fun SampleTheme(
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
                                                     HongWidgetType.BOTTOM_SHEET_SELECT.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
+                                        HongWidgetType.GRAPH -> {
+                                            Intent(activity, SampleGraphLineActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.GRAPH.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
+                                        HongWidgetType.GRAPH_BAR -> {
+                                            Intent(activity, SampleGraphBarActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.GRAPH_BAR.value
                                                 )
                                                 activity.startActivity(this)
                                             }

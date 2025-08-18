@@ -17,6 +17,7 @@ enum class HongWidgetType(
     TIMER_TEXT_FIELD("TimerTextField", true),
     NUMBER_TEXT_FIELD("NumberTextField", true),
     TEXT_FIELD_BORDER("TextFieldBorder", true),
+    TEXT_FIELD_BORDER_SELECT("TextFieldBorderSelect", true),
     //    SEARCH_BAR("SearchBar", true),
     BUTTON_TEXT("ButtonText", true),
     BUTTON_SELECT("ButtonSelect", true),
@@ -39,6 +40,8 @@ enum class HongWidgetType(
     LABEL_CHECKBOX("LabelCheckbox", true),
     PICKER("Picker", false),
     BOTTOM_SHEET_SELECT("BottomSheetSelect", false),
+    GRAPH("Graph", true),
+    GRAPH_BAR("GraphBar", true),
     NO_VALUE("no_value");
 
     companion object {

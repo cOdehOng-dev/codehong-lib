@@ -1,4 +1,4 @@
-package com.codehong.library.widget.textfield.border
+package com.codehong.library.widget.textfield.select
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
@@ -31,10 +30,10 @@ import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongSpacing
 import com.codehong.library.widget.extensions.toColor
-import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.image.HongImageCompose
+import com.codehong.library.widget.icon.HongIcon
 import com.codehong.library.widget.pretendardFontFamily
 import com.codehong.library.widget.rule.HongBorderInfo
+import com.codehong.library.widget.rule.HongIconType
 import com.codehong.library.widget.rule.HongInputState
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
@@ -45,20 +44,23 @@ import com.codehong.library.widget.rule.typo.fontWeight
 import com.codehong.library.widget.rule.typo.size
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextCompose
+import com.codehong.library.widget.textfield.border.HongTextFieldBorderBuilder
 import com.codehong.library.widget.util.HongWidgetContainer
 import com.codehong.library.widget.util.dpToSp
 
 @Composable
-fun HongTextFieldBorderCompose(
-    option: HongTextFieldBorderOption,
+fun HongTextFieldBorderSelect(
+    option: HongTextFieldBorderSelectOption,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
     val focusManager = LocalFocusManager.current
 
-    var input by remember(option.initialInput) { mutableStateOf(option.initialInput) }
+    val input by remember(option.initialInput) { mutableStateOf(option.initialInput) }
 
     val isEnabled = option.state == HongInputState.ENABLE
+    val isTextInputEnabled = isEnabled && option.useDirectInput
+
 
     val borderColor = when {
         !isEnabled -> HongColor.GRAY_10.hex
@@ -88,12 +90,17 @@ fun HongTextFieldBorderCompose(
 
     val paddingMarginOption = HongTextFieldBorderBuilder()
         .width(HongLayoutParam.MATCH_PARENT.value)
+        .height(HongLayoutParam.WRAP_CONTENT.value)
+        .backgroundColor(option.backgroundColorHex)
         .padding(option.padding)
         .margin(option.margin)
         .applyOption()
 
     HongWidgetContainer(paddingMarginOption) {
-        Column {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -110,6 +117,7 @@ fun HongTextFieldBorderCompose(
                     modifier = Modifier
                         .weight(1f)
                 ) {
+                    // 라벨과 Required 표시
                     Row(
                         modifier = Modifier
                             .padding(
@@ -178,12 +186,11 @@ fun HongTextFieldBorderCompose(
                                 value = input,
                                 onValueChange = {
                                     if (isEnabled) {
-                                        input = it
                                         option.onChangeInput(it)
                                     }
                                 },
-                                enabled = isEnabled,
-                                readOnly = !isEnabled,
+                                enabled = isTextInputEnabled,
+                                readOnly = !isTextInputEnabled,
                                 textStyle = TextStyle(
                                     color = inputTextColor.toColor(),
                                     fontFamily = pretendardFontFamily,
@@ -214,59 +221,35 @@ fun HongTextFieldBorderCompose(
 
                 Row(
                     modifier = Modifier
-                        .padding(top = 28.dp)
+                        .padding(top = 28.dp),
                 ) {
-                    if (option.suffix.isNotEmpty()) {
-                        Box(
-                            modifier = Modifier
-                                .padding(
-                                    end = if (input.isNotEmpty() && isEnabled && option.useClearButton) 0.dp else 20.dp
-                                )
-                                .width(40.dp)
-                                .height(52.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            HongTextCompose(
-                                HongTextBuilder()
-                                    .text(option.suffix)
-                                    .typography(option.suffixTypo)
-                                    .color(inputTextColor)
-                                    .applyOption()
-                            )
-
-                        }
-                    }
-
-                    if (input.isNotEmpty()
-                        && isEnabled
-                        && option.useClearButton
+                    Box(
+                        modifier = Modifier
+                            .width(60.dp)
+                            .height(52.dp)
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = null
+                            ) {
+                                option.onSelectionClick()
+                            },
+                        contentAlignment = Alignment.Center
                     ) {
-                        Box(
-                            modifier = Modifier
-                                .width(60.dp)
-                                .height(52.dp)
-                                .clickable(
-                                    interactionSource = remember { MutableInteractionSource() },
-                                    indication = null
-                                ) {
-                                    input = ""
-                                    option.onChangeInput("")
-                                },
-                            contentAlignment = Alignment.Center
-                        ) {
-                            HongImageCompose(
-                                HongImageBuilder()
-                                    .width(20)
-                                    .height(20)
-                                    .drawableResId(R.drawable.honglib_ic_20_circle_close_fill)
-                                    .applyOption()
-                            )
-                        }
+                        HongIcon(
+                            type = HongIconType.H20,
+                            resId = R.drawable.honglib_ic_20_arrow_down,
+                            iconColor = HongColor.GRAY_30,
+                        )
+//                        Icon(
+//                            type = IconType.H20,
+//                            resId = R.drawable.honglib_ic_20_arrow_down,
+//                            color = SemanticColor.CONTENT_TERTIARY
+//                        )
                     }
-
                 }
             }
 
+            // 헬퍼 텍스트
             if (option.helperText.isNotEmpty()) {
                 HongTextCompose(
                     HongTextBuilder()

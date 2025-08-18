@@ -1,4 +1,4 @@
-package com.codehong.library.widget.textfield.border
+package com.codehong.library.widget.textfield.select
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.HongInputState
@@ -6,10 +6,10 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 
-class HongTextFieldBorderBuilder : HongWidgetCommonBuilder<HongTextFieldBorderOption, HongTextFieldBorderBuilder> {
+class HongTextFieldBorderSelectBuilder : HongWidgetCommonBuilder<HongTextFieldBorderSelectOption, HongTextFieldBorderSelectBuilder> {
 
-    override val builder: HongTextFieldBorderBuilder = this
-    override val option: HongTextFieldBorderOption = HongTextFieldBorderOption()
+    override val builder: HongTextFieldBorderSelectBuilder = this
+    override val option: HongTextFieldBorderSelectOption = HongTextFieldBorderSelectOption()
 
 
     fun inputRadius(radiusInfo: HongRadiusInfo) = apply {
@@ -86,29 +86,27 @@ class HongTextFieldBorderBuilder : HongWidgetCommonBuilder<HongTextFieldBorderOp
         option.state = state
     }
 
-    fun suffix(suffix: String) = apply {
-        option.suffix = suffix
-    }
-    fun suffixTypo(typo: HongTypo) = apply {
-        option.suffixTypo = typo
-    }
-
-    fun useClearButton(useClearButton: Boolean) = apply {
-        option.useClearButton = useClearButton
-    }
 
     fun useNumberKeypad(useNumberKeypad: Boolean) = apply {
         option.useNumberKeypad = useNumberKeypad
+    }
+
+    fun useDirectInput(useDirectInput: Boolean) = apply {
+        option.useDirectInput = useDirectInput
     }
 
     fun onChangeInput(onChange: (String) -> Unit) = apply {
         option.onChangeInput = onChange
     }
 
-    fun copy(inject: HongTextFieldBorderOption?): HongTextFieldBorderBuilder {
-        if (inject == null) return HongTextFieldBorderBuilder()
+    fun onSelectionClick(onClick: () -> Unit) = apply {
+        option.onSelectionClick = onClick
+    }
 
-        return HongTextFieldBorderBuilder()
+    fun copy(inject: HongTextFieldBorderSelectOption?): HongTextFieldBorderSelectBuilder {
+        if (inject == null) return HongTextFieldBorderSelectBuilder()
+
+        return HongTextFieldBorderSelectBuilder()
             .inputRadius(inject.inputRadius)
             .enableBorderColor(inject.enableBorderColorHex)
             .focusedBorderColor(inject.focusedBorderColorHex)
@@ -125,10 +123,9 @@ class HongTextFieldBorderBuilder : HongWidgetCommonBuilder<HongTextFieldBorderOp
             .helperTextTypo(inject.helperTextTypo)
             .isRequired(inject.isRequired)
             .state(inject.state)
-            .suffix(inject.suffix)
-            .suffixTypo(inject.suffixTypo)
             .onChangeInput(inject.onChangeInput)
-            .useClearButton(inject.useClearButton)
+            .onSelectionClick(inject.onSelectionClick)
+            .useDirectInput(inject.useDirectInput)
             .useNumberKeypad(inject.useNumberKeypad)
     }
 }
