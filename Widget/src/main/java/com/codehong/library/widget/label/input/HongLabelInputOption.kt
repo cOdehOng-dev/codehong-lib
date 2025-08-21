@@ -2,7 +2,6 @@ package com.codehong.library.widget.label.input
 
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.R
-import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongScaleType
@@ -14,100 +13,23 @@ import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.textfield.HongTextFieldBuilder
-import com.codehong.library.widget.textfield.HongTextFieldOption
 
 data class HongLabelInputOption(
     override val type: HongWidgetType = HongWidgetType.LABEL_INPUT
 )  : HongWidgetCommonOption {
 
     companion object {
-        val DEFAULT_LABEL_OPTION = HongTextBuilder()
-            .width(HongLayoutParam.MATCH_PARENT.value)
-            .typography(HongTypo.BODY_15_B)
-            .color(HongColor.BLACK_100)
-            .applyOption()
-
-        val DEFAULT_DESCRIPTION_OPTION = HongTextBuilder()
-            .width(HongLayoutParam.MATCH_PARENT.value)
-            .typography(HongTypo.CONTENTS_10)
-            .margin(
-                HongSpacingInfo(
-                    top = 2f
-                )
-            )
-            .color("#333333")
-            .applyOption()
-
-
-        val DEFAULT_TEXT_FIELD = HongTextFieldBuilder()
-            .width(HongLayoutParam.MATCH_PARENT.value)
-            .radius(
-                HongRadiusInfo(
-                    topLeft = 10,
-                    topRight = 10,
-                    bottomLeft = 10,
-                    bottomRight = 10
-                )
-            )
-            .padding(
-                HongSpacingInfo(
-                    top = 11f,
-                    bottom = 11f,
-                    left = 10f,
-                    right = 10f
-                )
-            )
-            .backgroundColor(HongColor.BLACK_05)
-            .inputTextOption(
-                HongTextBuilder()
-                    .backgroundColor(HongColor.TRANSPARENT)
-                    .padding(
-                        HongSpacingInfo(
-                            top = 4f,
-                            bottom = 4f,
-                            left = 4f,
-                            right = 4f
-                        )
-                    )
-                    .typography(HongTypo.BODY_14)
-                    .color(HongColor.BLACK_100)
-                    .applyOption()
-            )
-            .placeholderTextOption(
-                HongTextBuilder()
-                    .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                    .padding(
-                        HongSpacingInfo(
-                            top = 4f,
-                            bottom = 4f,
-                            left = 4f,
-                            right = 4f
-                        )
-                    )
-                    .typography(HongTypo.BODY_14)
-                    .color(HongColor.BLACK_100)
-                    .applyOption()
-            )
-            .clearImageOption(
-                HongImageBuilder()
-                    .width(18)
-                    .height(18)
-                    .scaleType(HongScaleType.CENTER_CROP)
-                    .drawableResId(R.drawable.honglib_ic_close)
-                    .applyOption()
-            )
-            .cursorColor(HongColor.MAIN_ORANGE_100)
-            .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
-            .applyOption()
+        val DEFAULT_KEYBOARD_OPTION = Pair(
+            HongKeyboardType.TEXT,
+            HongKeyboardActionType.DONE
+        )
     }
 
     override var isValidComponent: Boolean = true
     override var width: Int = HongLayoutParam.WRAP_CONTENT.value
     override var height: Int = HongLayoutParam.WRAP_CONTENT.value
-    override var margin: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
-    override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
+    override var margin: HongSpacingInfo = HongSpacingInfo()
+    override var padding: HongSpacingInfo = HongSpacingInfo()
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
     override var useShapeCircle: Boolean = false
     override var shadow: HongShadowInfo = HongShadowInfo()
@@ -124,7 +46,23 @@ data class HongLabelInputOption(
     var descriptionColorHex: String = HongColor.BLACK_60.hex
     var descriptionTypo: HongTypo = HongTypo.CONTENTS_10
 
-    var textFieldOption: HongTextFieldOption = DEFAULT_TEXT_FIELD
+
+    var placeholder: String? = null
+    var placeholderTypo: HongTypo = HongTypo.BODY_16
+    var placeholderColorHex: String = HongColor.BLACK_30.hex
+
+    var input: String? = null
+    var inputTypo: HongTypo = HongTypo.BODY_14
+    var inputColorHex: String = HongColor.BLACK_100.hex
+
+    var clearIconRes: Int? = R.drawable.honglib_ic_20_circle_close_fill
+    var clearIconSize: Int = 18
+    var clearIconScaleType: HongScaleType = HongScaleType.CENTER_CROP
+    var clearIconMargin: HongSpacingInfo = HongSpacingInfo(left = 8f)
+
+    var keyboardOption = DEFAULT_KEYBOARD_OPTION
+
+    var onTextChanged: (String) -> Unit = {}
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -150,7 +88,18 @@ data class HongLabelInputOption(
         if (description != other.description) return false
         if (descriptionColorHex != other.descriptionColorHex) return false
         if (descriptionTypo != other.descriptionTypo) return false
-        if (textFieldOption != other.textFieldOption) return false
+        if (placeholder != other.placeholder) return false
+        if (placeholderTypo != other.placeholderTypo) return false
+        if (placeholderColorHex != other.placeholderColorHex) return false
+        if (input != other.input) return false
+        if (inputTypo != other.inputTypo) return false
+        if (inputColorHex != other.inputColorHex) return false
+        if (clearIconRes != other.clearIconRes) return false
+        if (clearIconSize != other.clearIconSize) return false
+        if (clearIconScaleType != other.clearIconScaleType) return false
+        if (clearIconMargin != other.clearIconMargin) return false
+        if (keyboardOption != other.keyboardOption) return false
+        if (onTextChanged != other.onTextChanged) return false
 
         return true
     }
@@ -174,7 +123,18 @@ data class HongLabelInputOption(
         result = 31 * result + (description?.hashCode() ?: 0)
         result = 31 * result + descriptionColorHex.hashCode()
         result = 31 * result + descriptionTypo.hashCode()
-        result = 31 * result + textFieldOption.hashCode()
+        result = 31 * result + (placeholder?.hashCode() ?: 0)
+        result = 31 * result + placeholderTypo.hashCode()
+        result = 31 * result + placeholderColorHex.hashCode()
+        result = 31 * result + (input?.hashCode() ?: 0)
+        result = 31 * result + inputTypo.hashCode()
+        result = 31 * result + inputColorHex.hashCode()
+        result = 31 * result + (clearIconRes ?: 0)
+        result = 31 * result + clearIconSize
+        result = 31 * result + clearIconScaleType.hashCode()
+        result = 31 * result + clearIconMargin.hashCode()
+        result = 31 * result + keyboardOption.hashCode()
+        result = 31 * result + onTextChanged.hashCode()
         return result
     }
 
@@ -198,7 +158,20 @@ data class HongLabelInputOption(
                 "description=$description, " +
                 "descriptionColorHex='$descriptionColorHex', " +
                 "descriptionTypo=$descriptionTypo, " +
-                "textFieldOption=$textFieldOption" +
+                "placeholder=$placeholder, " +
+                "placeholderTypo=$placeholderTypo, " +
+                "placeholderColorHex='$placeholderColorHex', " +
+                "input=$input, " +
+                "inputTypo=$inputTypo, " +
+                "inputColorHex='$inputColorHex', " +
+                "clearIconRes=$clearIconRes, " +
+                "clearIconSize=$clearIconSize, " +
+                "clearIconScaleType=$clearIconScaleType, " +
+                "clearIconMargin=$clearIconMargin, " +
+                "keyboardOption=$keyboardOption, " +
+                "onTextChanged=$onTextChanged" +
                 ")"
     }
+
+
 }

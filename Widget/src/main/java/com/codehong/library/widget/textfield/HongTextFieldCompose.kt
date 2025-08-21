@@ -27,6 +27,8 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType.Companion.toKeyboardActions
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.rule.typo.fontWeight
+import com.codehong.library.widget.rule.typo.size
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextCompose
 import com.codehong.library.widget.util.HongWidgetContainer
@@ -41,13 +43,18 @@ fun HongTextFieldCompose(
 ) {
     val focusManager = LocalFocusManager.current
 
-    val hasRemoveButton = option.clearImageOption != null
-    val hasDelayInputCallback = option.delayInputCallback > HongTextFieldOption.DEFAULT_DELAY_INPUT_CALLBACK
+    val hasRemoveButton = option.clearIconRes != null
+    val hasDelayInputCallback =
+        option.delayInputCallback > HongTextFieldOption.DEFAULT_DELAY_INPUT_CALLBACK
 
     when {
         hasRemoveButton && hasDelayInputCallback -> {
             val debounceTime = option.delayInputCallback
-            var inputText by rememberSaveable { mutableStateOf(option.inputTextOption.text ?: "") }
+            var inputText by rememberSaveable(option.input ?: "") {
+                mutableStateOf(
+                    option.input ?: ""
+                )
+            }
             var debouncedInput by rememberSaveable { mutableStateOf("") }
 
             LaunchedEffect(inputText) {
@@ -64,10 +71,16 @@ fun HongTextFieldCompose(
                         contentAlignment = Alignment.CenterStart
                     ) {
                         if (inputText.isEmpty()) {
-                            HongTextCompose(option.placeholderTextOption)
+                            HongTextCompose(
+                                HongTextBuilder()
+                                    .width(HongLayoutParam.MATCH_PARENT.value)
+                                    .padding(option.placeholderPadding)
+                                    .text(option.placeholder ?: "")
+                                    .typography(option.placeholderTypo)
+                                    .color(option.placeholderColorHex)
+                                    .applyOption()
+                            )
                         }
-
-                        val inputTextOption = option.inputTextOption
 
                         BasicTextField(
                             modifier = Modifier
@@ -77,9 +90,9 @@ fun HongTextFieldCompose(
                                 inputText = it
                             },
                             textStyle = TextStyle(
-                                color = inputTextOption.colorHex.toColor(),
-                                fontWeight = inputTextOption.fontType?.weight,
-                                fontSize = dpToSp(dp = inputTextOption.size ?: 10),
+                                color = option.inputColorHex.toColor(),
+                                fontWeight = option.inputTypo.fontWeight(),
+                                fontSize = dpToSp(dp = option.inputTypo.size()),
                                 fontFamily = pretendardFontFamily,
                                 platformStyle = PlatformTextStyle(includeFontPadding = false)
                             ),
@@ -106,7 +119,10 @@ fun HongTextFieldCompose(
                     if (inputText.isNotEmpty()) {
                         HongImageCompose(
                             option = HongImageBuilder()
-                                .copy(option.clearImageOption)
+                                .width(option.clearIconSize)
+                                .height(option.clearIconSize)
+                                .margin(option.clearIconMargin)
+                                .drawableResId(option.clearIconRes)
                                 .onClick {
                                     inputText = ""
                                 }
@@ -119,7 +135,11 @@ fun HongTextFieldCompose(
 
         hasRemoveButton -> {
             HongWidgetContainer(option) {
-                var inputText by rememberSaveable(option.inputTextOption.text ?: "") { mutableStateOf(option.inputTextOption.text ?: "") }
+                var inputText by rememberSaveable(option.input ?: "") {
+                    mutableStateOf(
+                        option.input ?: ""
+                    )
+                }
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -129,11 +149,15 @@ fun HongTextFieldCompose(
                     ) {
                         if (inputText.isEmpty()) {
                             HongTextCompose(
-                                option = option.placeholderTextOption
+                                option = HongTextBuilder()
+                                    .width(HongLayoutParam.MATCH_PARENT.value)
+                                    .padding(option.placeholderPadding)
+                                    .text(option.placeholder ?: "")
+                                    .typography(option.placeholderTypo)
+                                    .color(option.placeholderColorHex)
+                                    .applyOption()
                             )
                         }
-
-                        val inputTextOption = option.inputTextOption
 
                         BasicTextField(
                             modifier = Modifier
@@ -144,9 +168,9 @@ fun HongTextFieldCompose(
                                 option.onTextChanged(it)
                             },
                             textStyle = TextStyle(
-                                color = inputTextOption.colorHex.toColor(),
-                                fontWeight = inputTextOption.fontType?.weight,
-                                fontSize = dpToSp(dp = inputTextOption.size ?: 10),
+                                color = option.inputColorHex.toColor(),
+                                fontWeight = option.inputTypo.fontWeight(),
+                                fontSize = dpToSp(dp = option.inputTypo.size()),
                                 fontFamily = pretendardFontFamily,
                                 platformStyle = PlatformTextStyle(includeFontPadding = false)
                             ),
@@ -173,7 +197,10 @@ fun HongTextFieldCompose(
                     if (inputText.isNotEmpty()) {
                         HongImageCompose(
                             option = HongImageBuilder()
-                                .copy(option.clearImageOption)
+                                .width(option.clearIconSize)
+                                .height(option.clearIconSize)
+                                .margin(option.clearIconMargin)
+                                .drawableResId(option.clearIconRes)
                                 .onClick {
                                     inputText = ""
                                 }
@@ -186,7 +213,11 @@ fun HongTextFieldCompose(
 
         hasDelayInputCallback -> {
             val debounceTime = option.delayInputCallback
-            var inputText by rememberSaveable { mutableStateOf(option.inputTextOption.text ?: "") }
+            var inputText by rememberSaveable(option.input ?: "") {
+                mutableStateOf(
+                    option.input ?: ""
+                )
+            }
             var debouncedInput by rememberSaveable { mutableStateOf("") }
 
             LaunchedEffect(inputText) {
@@ -198,10 +229,16 @@ fun HongTextFieldCompose(
 
             HongWidgetContainer(option) {
                 if (inputText.isEmpty()) {
-                    HongTextCompose(option = option.placeholderTextOption)
+                    HongTextCompose(
+                        option = HongTextBuilder()
+                            .width(HongLayoutParam.MATCH_PARENT.value)
+                            .padding(option.placeholderPadding)
+                            .text(option.placeholder ?: "")
+                            .typography(option.placeholderTypo)
+                            .color(option.placeholderColorHex)
+                            .applyOption()
+                    )
                 }
-
-                val inputTextOption = option.inputTextOption
 
                 BasicTextField(
                     modifier = Modifier.fillMaxWidth(),
@@ -211,9 +248,9 @@ fun HongTextFieldCompose(
                     },
 
                     textStyle = TextStyle(
-                        color = inputTextOption.colorHex.toColor(),
-                        fontWeight = inputTextOption.fontType?.weight,
-                        fontSize = dpToSp(dp = inputTextOption.size ?: 10),
+                        color = option.inputColorHex.toColor(),
+                        fontWeight = option.inputTypo.fontWeight(),
+                        fontSize = dpToSp(dp = option.inputTypo.size()),
                         fontFamily = pretendardFontFamily,
                         platformStyle = PlatformTextStyle(includeFontPadding = false)
                     ),
@@ -237,11 +274,25 @@ fun HongTextFieldCompose(
                 )
             }
         }
+
         else -> {
             HongWidgetContainer(option) {
-                var input by rememberSaveable(option.inputTextOption.text ?: "") { mutableStateOf(option.inputTextOption.text ?: "") }
+                var input by rememberSaveable(option.input ?: "") {
+                    mutableStateOf(
+                        option.input ?: ""
+                    )
+                }
                 if (input.isEmpty()) {
-                    HongTextCompose(option.placeholderTextOption)
+                    HongTextCompose(
+                        HongTextBuilder()
+                            .width(HongLayoutParam.MATCH_PARENT.value)
+                            .padding(option.placeholderPadding)
+                            .text(option.placeholder ?: "")
+                            .padding(option.placeholderPadding)
+                            .typography(option.placeholderTypo)
+                            .color(option.placeholderColorHex)
+                            .applyOption()
+                    )
                 }
 
                 BasicTextField(
@@ -252,9 +303,9 @@ fun HongTextFieldCompose(
                         option.onTextChanged(it)
                     },
                     textStyle = TextStyle(
-                        color = option.inputTextOption.colorHex.toColor(),
-                        fontWeight = option.inputTextOption.fontType?.weight,
-                        fontSize = dpToSp(dp = option.inputTextOption.size ?: 10),
+                        color = option.inputColorHex.toColor(),
+                        fontWeight = option.inputTypo.fontWeight(),
+                        fontSize = dpToSp(dp = option.inputTypo.size()),
                         fontFamily = pretendardFontFamily,
                         platformStyle = PlatformTextStyle(includeFontPadding = false)
                     ),
@@ -301,18 +352,8 @@ fun PreviewHongTextFieldCompose() {
                 all = 50
             )
         )
-        .placeholderTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                .text("값을 입력해주세요.")
-                .applyOption()
-        )
+        .placeholder("값을 입력해주세요.")
         .input("입력!!")
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
         .cursorColor(HongColor.MAIN_ORANGE_100.hex)
         .applyOption()
     HongTextFieldCompose(option = option1)

@@ -52,9 +52,81 @@ data class HongLabelSwitchOption(
 
     var switchOption: HongSwitchOption = DEFAULT_SWITCH_OPTION
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
 
+        other as HongLabelSwitchOption
 
+        if (type != other.type) return false
+        if (isValidComponent != other.isValidComponent) return false
+        if (width != other.width) return false
+        if (height != other.height) return false
+        if (margin != other.margin) return false
+        if (padding != other.padding) return false
+        if (backgroundColorHex != other.backgroundColorHex) return false
+        if (click != other.click) return false
+        if (radius != other.radius) return false
+        if (border != other.border) return false
+        if (useShapeCircle != other.useShapeCircle) return false
+        if (shadow != other.shadow) return false
+        if (label != other.label) return false
+        if (labelColorHex != other.labelColorHex) return false
+        if (labelTypo != other.labelTypo) return false
+        if (description != other.description) return false
+        if (descriptionColorHex != other.descriptionColorHex) return false
+        if (descriptionTypo != other.descriptionTypo) return false
+        if (switchOption != other.switchOption) return false
 
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = type.hashCode()
+        result = 31 * result + isValidComponent.hashCode()
+        result = 31 * result + width
+        result = 31 * result + height
+        result = 31 * result + margin.hashCode()
+        result = 31 * result + padding.hashCode()
+        result = 31 * result + backgroundColorHex.hashCode()
+        result = 31 * result + (click?.hashCode() ?: 0)
+        result = 31 * result + radius.hashCode()
+        result = 31 * result + border.hashCode()
+        result = 31 * result + useShapeCircle.hashCode()
+        result = 31 * result + shadow.hashCode()
+        result = 31 * result + (label?.hashCode() ?: 0)
+        result = 31 * result + labelColorHex.hashCode()
+        result = 31 * result + labelTypo.hashCode()
+        result = 31 * result + (description?.hashCode() ?: 0)
+        result = 31 * result + descriptionColorHex.hashCode()
+        result = 31 * result + descriptionTypo.hashCode()
+        result = 31 * result + switchOption.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "HongLabelSwitchOption(" +
+                "type=$type, " +
+                "isValidComponent=$isValidComponent, " +
+                "width=$width, " +
+                "height=$height, " +
+                "margin=$margin, " +
+                "padding=$padding, " +
+                "backgroundColorHex='$backgroundColorHex', " +
+                "click=$click, " +
+                "radius=$radius, " +
+                "border=$border, " +
+                "useShapeCircle=$useShapeCircle, " +
+                "shadow=$shadow, " +
+                "label=$label, " +
+                "labelColorHex='$labelColorHex', " +
+                "labelTypo=$labelTypo, " +
+                "description=$description, " +
+                "descriptionColorHex='$descriptionColorHex', " +
+                "descriptionTypo=$descriptionTypo, " +
+                "switchOption=$switchOption" +
+                ")"
+    }
 
 
 }

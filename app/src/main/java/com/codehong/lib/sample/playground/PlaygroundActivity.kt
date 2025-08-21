@@ -19,6 +19,9 @@ import com.codehong.lib.sample.calendar.CalendarPlayground
 import com.codehong.lib.sample.checkbox.HongCheckboxPlayground
 import com.codehong.lib.sample.closeheader.HongCloseHeaderPlayground
 import com.codehong.lib.sample.databinding.ActivityPlaygroundBinding
+import com.codehong.lib.sample.graph.HongGraphBarPlayground
+import com.codehong.lib.sample.graph.HongGraphLinePlayground
+import com.codehong.lib.sample.icon.HongIconPlayground
 import com.codehong.lib.sample.image.HongImagePlayground
 import com.codehong.lib.sample.label.HongLabelPlayground
 import com.codehong.lib.sample.label.checkbox.HongLabelCheckboxPlayground
@@ -36,9 +39,9 @@ import com.codehong.lib.sample.text.unit.HongTextUnitPlayground
 import com.codehong.lib.sample.text.updown.HongTextUpDownPlayground
 import com.codehong.lib.sample.textfield.HongTextFieldPlayground
 import com.codehong.lib.sample.textfield.border.HongTextFieldBorderPlayground
-import com.codehong.lib.sample.textfield.number.HongNumberTextFieldPlayground
-import com.codehong.lib.sample.textfield.timer.HongTimerTextFieldPlayground
-import com.codehong.lib.sample.textfield.underline.HongUnderlineTextFieldPlayground
+import com.codehong.lib.sample.textfield.number.HongTextFieldNumberPlayground
+import com.codehong.lib.sample.textfield.timer.HongTextFieldTimerPlayground
+import com.codehong.lib.sample.textfield.underline.HongTextFieldUnderlinePlayground
 import com.codehong.lib.sample.toggleswitch.HongSwitchPlayground
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.button.select.HongSelectButtonCompose
@@ -50,8 +53,13 @@ import com.codehong.library.widget.calendar.HongCalendarOption
 import com.codehong.library.widget.checkbox.HongCheckBoxCompose
 import com.codehong.library.widget.checkbox.HongCheckboxOption
 import com.codehong.library.widget.extensions.toColor
-import com.codehong.library.widget.header.HongCloseHeaderCompose
-import com.codehong.library.widget.header.HongCloseHeaderOption
+import com.codehong.library.widget.graph.HongGraphOption
+import com.codehong.library.widget.graph.bar.HongGraphBarCompose
+import com.codehong.library.widget.graph.line.HongGraphLineCompose
+import com.codehong.library.widget.header.HongHeaderCloseCompose
+import com.codehong.library.widget.header.HongHeaderCloseOption
+import com.codehong.library.widget.icon.HongIconCompose
+import com.codehong.library.widget.icon.HongIconOption
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.image.HongImageCompose
 import com.codehong.library.widget.image.HongImageOption
@@ -71,6 +79,8 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.HongWidgetType.Companion.toHongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.tab.flow.HongTabFlowCompose
+import com.codehong.library.widget.tab.flow.HongTabFlowOption
 import com.codehong.library.widget.tab.scroll.HongTabScrollCompose
 import com.codehong.library.widget.tab.scroll.HongTabScrollOption
 import com.codehong.library.widget.tab.segment.HongTabSegmentCompose
@@ -81,6 +91,8 @@ import com.codehong.library.widget.text.badge.HongTextBadgeCompose
 import com.codehong.library.widget.text.badge.HongTextBadgeOption
 import com.codehong.library.widget.text.check.HongCheckTextOption
 import com.codehong.library.widget.text.check.HongTextCheckCompose
+import com.codehong.library.widget.text.count.HongTextCountCompose
+import com.codehong.library.widget.text.count.HongTextCountOption
 import com.codehong.library.widget.text.unit.HongTextUnitCompose
 import com.codehong.library.widget.text.unit.HongTextUnitOption
 import com.codehong.library.widget.text.updown.HongTextUpDownCompose
@@ -88,11 +100,11 @@ import com.codehong.library.widget.text.updown.HongTextUpDownOption
 import com.codehong.library.widget.textfield.HongTextFieldCompose
 import com.codehong.library.widget.textfield.HongTextFieldOption
 import com.codehong.library.widget.textfield.number.HongNumberTextFieldCompose
-import com.codehong.library.widget.textfield.number.HongNumberTextFieldOption
+import com.codehong.library.widget.textfield.number.HongTextFieldNumberOption
+import com.codehong.library.widget.textfield.timer.HongTextFieldTimerOption
 import com.codehong.library.widget.textfield.timer.HongTimerTextFieldCompose
-import com.codehong.library.widget.textfield.timer.HongTimerTextFieldOption
+import com.codehong.library.widget.textfield.underline.HongTextFieldUnderlineOption
 import com.codehong.library.widget.textfield.underline.HongUnderlineTextFieldCompose
-import com.codehong.library.widget.textfield.underline.HongUnderlineTextFieldOption
 import com.codehong.library.widget.toggleswitch.HongSwitchBuilder
 import com.codehong.library.widget.toggleswitch.HongSwitchCompose
 import com.codehong.library.widget.toggleswitch.HongSwitchOption
@@ -200,11 +212,11 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.TEXT_UNIT -> HongTextUnitPlayground(this).preview()
             HongWidgetType.TEXT_UP_DOWN -> HongTextUpDownPlayground(this).preview()
             HongWidgetType.IMAGE -> HongImagePlayground(this).preview()
-            HongWidgetType.CLOSE_HEADER -> HongCloseHeaderPlayground(this).preview()
+            HongWidgetType.HEADER_CLOSE -> HongCloseHeaderPlayground(this).preview()
             HongWidgetType.TEXT_FILED -> HongTextFieldPlayground(this).preview()
-            HongWidgetType.UNDERLINE_TEXT_FIELD -> HongUnderlineTextFieldPlayground(this).preview()
-            HongWidgetType.TIMER_TEXT_FIELD -> HongTimerTextFieldPlayground(this).preview()
-            HongWidgetType.NUMBER_TEXT_FIELD -> HongNumberTextFieldPlayground(this).preview()
+            HongWidgetType.TEXT_FIELD_UNDERLINE -> HongTextFieldUnderlinePlayground(this).preview()
+            HongWidgetType.TEXT_FIELD_TIMER -> HongTextFieldTimerPlayground(this).preview()
+            HongWidgetType.TEXT_FIELD_NUMBER -> HongTextFieldNumberPlayground(this).preview()
             HongWidgetType.CALENDAR -> CalendarPlayground(this).preview()
             HongWidgetType.BUTTON_TEXT -> HongTextButtonPlayground(this).preview()
             HongWidgetType.BUTTON_SELECT -> HongSelectButtonPlayground(this).preview()
@@ -221,7 +233,9 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.TAB_FLOW -> HongTabFlowPlayground(this).preview()
             HongWidgetType.TEXT_COUNT -> HongTextCountPlayground(this).preview()
             HongWidgetType.TEXT_FIELD_BORDER -> HongTextFieldBorderPlayground(this).preview()
-//            HongWidgetType.LABEL_SELECT_INPUT -> HongLabelSelectInputPlayground(this).preview()
+            HongWidgetType.ICON -> HongIconPlayground(this).preview()
+            HongWidgetType.GRAPH_BAR -> HongGraphBarPlayground(this).preview()
+            HongWidgetType.GRAPH_LINE -> HongGraphLinePlayground(this).preview()
             else -> {}
         }
     }
@@ -260,210 +274,60 @@ class PlaygroundActivity : BaseActivity() {
         }
     }
 
-    private fun applyPreviewUI(
-        isBorderOn: Boolean
-    ) {
-        when (componentType) {
-            HongWidgetType.TEXT -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongTextCompose(previewOption as HongTextOption)
-                    }
-                }
-            }
-            HongWidgetType.TEXT_CHECK -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongTextCheckCompose(previewOption as HongCheckTextOption)
-                    }
-                }
-            }
-            HongWidgetType.TEXT_UNIT -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongTextUnitCompose(previewOption as HongTextUnitOption)
-                    }
-                }
-            }
-            HongWidgetType.TEXT_UP_DOWN -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongTextUpDownCompose(previewOption as HongTextUpDownOption)
-                    }
-                }
-            }
-
-            HongWidgetType.IMAGE -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongImageCompose(previewOption as HongImageOption)
-                    }
-                }
-            }
-
-            HongWidgetType.CLOSE_HEADER -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongCloseHeaderCompose(previewOption as HongCloseHeaderOption)
-                    }
-                }
-            }
-
-            HongWidgetType.TEXT_FILED -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongTextFieldCompose(previewOption as HongTextFieldOption)
-                    }
-                }
-            }
-            HongWidgetType.UNDERLINE_TEXT_FIELD -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongUnderlineTextFieldCompose(previewOption as HongUnderlineTextFieldOption)
-                    }
-                }
-            }
-            HongWidgetType.TIMER_TEXT_FIELD -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongTimerTextFieldCompose(previewOption as HongTimerTextFieldOption)
-                    }
-                }
-            }
-            HongWidgetType.NUMBER_TEXT_FIELD -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongNumberTextFieldCompose(previewOption as HongNumberTextFieldOption)
-                    }
-                }
-            }
-
-
-            HongWidgetType.BUTTON_TEXT -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongButtonTextCompose(previewOption as HongButtonTextOption)
-                    }
-                }
-            }
-
-
-            HongWidgetType.BUTTON_SELECT -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongSelectButtonCompose(previewOption as HongSelectButtonOption)
-                    }
-                }
-            }
-
-            HongWidgetType.CALENDAR -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongCalendarCompose(previewOption as HongCalendarOption)
-                    }
-                }
-            }
-
-            HongWidgetType.HORIZONTAL_PAGER -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongHorizontalPagerCompose(
-                            previewOption as HongHorizontalPagerOption
-                        ) { item ->
-                            (item as? String)
-                                ?.toString()
-                                ?.takeIf { it.isNotEmpty() }
-                                ?.let { imageUrl ->
-                                    HongImageCompose(
-                                        option = HongImageBuilder()
-                                            .width(HongLayoutParam.MATCH_PARENT.value)
-                                            .height(150)
-                                            .imageUrl(imageUrl)
-                                            .radius(
-                                                HongRadiusInfo(
-                                                    all = 12
-                                                )
+    private fun applyPreviewUI(isBorderOn: Boolean) {
+        binding.vComposePreview.setContent {
+            PreviewUI(isBorderOn) {
+                when (componentType) {
+                    HongWidgetType.TEXT -> HongTextCompose(previewOption as HongTextOption)
+                    HongWidgetType.TEXT_CHECK -> HongTextCheckCompose(previewOption as HongCheckTextOption)
+                    HongWidgetType.TEXT_UNIT -> HongTextUnitCompose(previewOption as HongTextUnitOption)
+                    HongWidgetType.TEXT_UP_DOWN -> HongTextUpDownCompose(previewOption as HongTextUpDownOption)
+                    HongWidgetType.TEXT_COUNT -> HongTextCountCompose(previewOption as HongTextCountOption)
+                    HongWidgetType.IMAGE -> HongImageCompose(previewOption as HongImageOption)
+                    HongWidgetType.HEADER_CLOSE -> HongHeaderCloseCompose(previewOption as HongHeaderCloseOption)
+                    HongWidgetType.TEXT_FILED -> HongTextFieldCompose(previewOption as HongTextFieldOption)
+                    HongWidgetType.TEXT_FIELD_UNDERLINE -> HongUnderlineTextFieldCompose(previewOption as HongTextFieldUnderlineOption)
+                    HongWidgetType.TEXT_FIELD_TIMER -> HongTimerTextFieldCompose(previewOption as HongTextFieldTimerOption)
+                    HongWidgetType.TEXT_FIELD_NUMBER -> HongNumberTextFieldCompose(previewOption as HongTextFieldNumberOption)
+                    HongWidgetType.BUTTON_TEXT -> HongButtonTextCompose(previewOption as HongButtonTextOption)
+                    HongWidgetType.BUTTON_SELECT -> HongSelectButtonCompose(previewOption as HongSelectButtonOption)
+                    HongWidgetType.CALENDAR -> HongCalendarCompose(previewOption as HongCalendarOption)
+                    HongWidgetType.HORIZONTAL_PAGER -> HongHorizontalPagerCompose(previewOption as HongHorizontalPagerOption) { item ->
+                        (item as? String)
+                            ?.toString()
+                            ?.takeIf { it.isNotEmpty() }
+                            ?.let { imageUrl ->
+                                HongImageCompose(
+                                    option = HongImageBuilder()
+                                        .width(HongLayoutParam.MATCH_PARENT.value)
+                                        .height(150)
+                                        .imageUrl(imageUrl)
+                                        .radius(
+                                            HongRadiusInfo(
+                                                all = 12
                                             )
-                                            .scaleType(HongScaleType.CENTER_CROP)
-                                            .applyOption()
-                                    )
-                                }
-                        }
+                                        )
+                                        .scaleType(HongScaleType.CENTER_CROP)
+                                        .applyOption()
+                                )
+                            }
                     }
+                    HongWidgetType.TEXT_BADGE -> HongTextBadgeCompose(previewOption as HongTextBadgeOption)
+                    HongWidgetType.CHECKBOX -> HongCheckBoxCompose(previewOption as HongCheckboxOption)
+                    HongWidgetType.SWITCH -> HongSwitchCompose(previewOption as HongSwitchOption)
+                    HongWidgetType.LABEL -> HongLabelViewCompose(previewOption as HongLabelOption)
+                    HongWidgetType.LABEL_INPUT -> HongLabelInputCompose(previewOption as HongLabelInputOption)
+                    HongWidgetType.LABEL_SWITCH -> HongLabelSwitchCompose(previewOption as HongLabelSwitchOption)
+                    HongWidgetType.LABEL_CHECKBOX -> HongLabelCheckboxCompose(previewOption as HongLabelCheckboxOption)
+                    HongWidgetType.TAB_SCROLL -> HongTabScrollCompose(previewOption as HongTabScrollOption)
+                    HongWidgetType.TAB_SEGMENT -> HongTabSegmentCompose(previewOption as HongTabSegmentOption)
+                    HongWidgetType.TAB_FLOW -> HongTabFlowCompose(previewOption as HongTabFlowOption)
+                    HongWidgetType.ICON -> HongIconCompose(previewOption as HongIconOption)
+                    HongWidgetType.GRAPH_BAR -> HongGraphBarCompose(previewOption as HongGraphOption)
+                    HongWidgetType.GRAPH_LINE -> HongGraphLineCompose(previewOption as HongGraphOption)
+                    else -> {}
                 }
             }
-
-            HongWidgetType.TEXT_BADGE -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongTextBadgeCompose(previewOption as HongTextBadgeOption)
-                    }
-                }
-            }
-
-            HongWidgetType.CHECKBOX -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongCheckBoxCompose(previewOption as HongCheckboxOption)
-                    }
-                }
-            }
-
-            HongWidgetType.SWITCH -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongSwitchCompose(previewOption as HongSwitchOption)
-                    }
-                }
-            }
-            HongWidgetType.LABEL -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongLabelViewCompose(previewOption as HongLabelOption)
-                    }
-                }
-            }
-
-            HongWidgetType.LABEL_INPUT -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongLabelInputCompose(previewOption as HongLabelInputOption)
-                    }
-                }
-            }
-            HongWidgetType.LABEL_SWITCH -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongLabelSwitchCompose(previewOption as HongLabelSwitchOption)
-                    }
-                }
-            }
-            HongWidgetType.LABEL_CHECKBOX -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongLabelCheckboxCompose(previewOption as HongLabelCheckboxOption)
-                    }
-                }
-            }
-
-            HongWidgetType.TAB_SCROLL -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongTabScrollCompose(previewOption as HongTabScrollOption)
-                    }
-                }
-            }
-
-            HongWidgetType.TAB_SEGMENT -> {
-                binding.vComposePreview.setContent {
-                    PreviewUI(isBorderOn) {
-                        HongTabSegmentCompose(previewOption as HongTabSegmentOption)
-                    }
-                }
-            }
-
-
-            else -> return
         }
     }
 }

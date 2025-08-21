@@ -12,6 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import com.codehong.library.widget.Consts
 import com.codehong.library.widget.button.text.HongButtonTextBuilder
 import com.codehong.library.widget.button.text.HongButtonTextCompose
 import com.codehong.library.widget.extensions.hongHeight
@@ -30,7 +31,6 @@ import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
 import com.codehong.library.widget.textfield.HongTextFieldCompose
-import com.codehong.library.widget.util.Const
 import com.codehong.library.widget.util.HongWidgetContainer
 import com.codehong.library.widget.util.picker.OptionPickerDialog
 
@@ -169,11 +169,11 @@ fun PreviewHongLabelSelectCompose() {
     val widthHeightSizeList = listOf(
         HongLayoutParam.MATCH_PARENT.paramName,
         HongLayoutParam.WRAP_CONTENT.paramName,
-        Const.DIRECT_INPUT
+        Consts.DIRECT_INPUT
     )
     val width = 1
     val initialWidth =
-        width.toHongLayoutValueToParam().ifEmpty { Const.DIRECT_INPUT }
+        width.toHongLayoutValueToParam().ifEmpty { Consts.DIRECT_INPUT }
 
     val option2 = HongLabelSelectInputBuilder()
         .padding(
@@ -188,17 +188,17 @@ fun PreviewHongLabelSelectCompose() {
         .description("width를 선택해주세요.")
         .buttonText(initialWidth)
         .inputText(
-            if (initialWidth == Const.DIRECT_INPUT) {
+            if (initialWidth == Consts.DIRECT_INPUT) {
                 width.toString()
             } else {
                 initialWidth
             }
         )
         .selectList(widthHeightSizeList)
-        .selectPosition(widthHeightSizeList.indexOf(initialWidth.ifEmpty { Const.DIRECT_INPUT }))
+        .selectPosition(widthHeightSizeList.indexOf(initialWidth.ifEmpty { Consts.DIRECT_INPUT }))
         .useDirectCallback(true)
         .useOnlyNumber(true)
-        .showInput(initialWidth == Const.DIRECT_INPUT)
+        .showInput(initialWidth == Consts.DIRECT_INPUT)
         .inputCallback { inputSize -> }
         .pickerCallback { selectSize, index -> }
         .applyOption()

@@ -48,9 +48,7 @@ fun HongLabelViewCompose(
                         .color(option.descriptionColorHex)
                         .applyOption()
                 )
-
             }
-
         }
     }
 }

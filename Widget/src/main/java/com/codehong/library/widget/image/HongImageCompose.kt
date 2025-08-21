@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -14,9 +13,7 @@ import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongSpacing
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.extensions.toColor
-import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongScaleType.Companion.toContentScale
-import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toRoundedCornersTransformation
 import com.codehong.library.widget.util.HongWidgetContainer
 
@@ -76,21 +73,4 @@ fun HongImageCompose(
             colorFilter = option.imageColor?.let { ColorFilter.tint(it.toColor()) }
         )
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewHongImageCompose() {
-    val option = HongImageBuilder()
-        .width(20)
-        .height(20)
-        .margin(
-            HongSpacingInfo(
-                left = 20f
-            )
-        )
-        .drawableResId(R.drawable.honglib_ic_20_close)
-        .scaleType(HongScaleType.CENTER_CROP)
-        .applyOption()
-    HongImageCompose(option)
 }

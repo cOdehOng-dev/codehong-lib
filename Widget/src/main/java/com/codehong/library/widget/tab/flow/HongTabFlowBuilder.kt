@@ -23,8 +23,6 @@ class HongTabFlowBuilder : HongWidgetCommonBuilder<HongTabFlowOption, HongTabFlo
         option.maxRowCount = maxRowCount
     }
 
-
-
     fun betweenTabSpacing(betweenTabSpacing: Int) = apply {
         option.betweenTabSpacing = betweenTabSpacing
     }
@@ -47,7 +45,7 @@ class HongTabFlowBuilder : HongWidgetCommonBuilder<HongTabFlowOption, HongTabFlo
     fun unselectTabBackgroundColor(unselectTabBackgroundColor: HongColor) = apply {
         option.unselectTabBackgroundColorHex = unselectTabBackgroundColor.hex
     }
-    fun unselectTabBackgroundColorHex(unselectTabBackgroundColorHex: String) = apply {
+    fun unselectTabBackgroundColor(unselectTabBackgroundColorHex: String) = apply {
         option.unselectTabBackgroundColorHex = unselectTabBackgroundColorHex
     }
 
@@ -89,6 +87,8 @@ class HongTabFlowBuilder : HongWidgetCommonBuilder<HongTabFlowOption, HongTabFlo
         if (inject == null) return HongTabFlowBuilder()
 
         return HongTabFlowBuilder()
+            .padding(inject.padding)
+            .margin(inject.margin)
             .tabList(inject.tabList)
             .initialSelectedIndex(inject.initialSelectedIndex)
             .maxRowCount(inject.maxRowCount)
@@ -96,7 +96,7 @@ class HongTabFlowBuilder : HongWidgetCommonBuilder<HongTabFlowOption, HongTabFlo
             .rowSpacing(inject.rowSpacing)
             .tabRadius(inject.tabRadius)
             .selectBackgroundColor(inject.selectBackgroundColorHex)
-            .unselectTabBackgroundColorHex(inject.unselectTabBackgroundColorHex)
+            .unselectTabBackgroundColor(inject.unselectTabBackgroundColorHex)
             .selectedBorder(inject.selectedBorder)
             .unselectedBorder(inject.unselectedBorder)
             .selectTextColor(inject.selectTextColorHex)

@@ -1,14 +1,14 @@
 package com.codehong.library.widget.textfield
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
-import com.codehong.library.widget.image.HongImageOption
 import com.codehong.library.widget.rule.HongBorderInfo
+import com.codehong.library.widget.rule.HongScaleType
+import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.text.HongTextOption
+import com.codehong.library.widget.rule.typo.HongTypo
 
 class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTextFieldBuilder> {
 
@@ -26,40 +26,53 @@ class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTe
 
     fun placeholder(placeholder: String?) = apply {
         option.placeholder = placeholder
-        placeholderTextOption(
-            HongTextBuilder()
-                .copy(option.placeholderTextOption)
-                .text(placeholder ?: option.placeholder)
-                .applyOption()
-        )
     }
-    fun placeholderTextOption(placeholderTextOption: HongTextOption) = apply {
-        option.placeholderTextOption = HongTextBuilder()
-            .copy(placeholderTextOption)
-            .text(placeholderTextOption.text ?: option.placeholder)
-            .applyOption()
+
+    fun placeholderColor(color: HongColor) = apply {
+        option.placeholderColorHex = color.hex
+    }
+    fun placeholderColor(color: String) = apply {
+        option.placeholderColorHex = color
+    }
+
+    fun placeholderTypo(typo: HongTypo) = apply {
+        option.placeholderTypo = typo
+    }
+
+    fun placeholderPadding(padding: HongSpacingInfo) = apply {
+        option.placeholderPadding = padding
     }
 
     fun input(input: String?) = apply {
         option.input = input
-        option.inputTextOption = HongTextBuilder()
-            .copy(option.inputTextOption)
-            .text(input ?: option.inputTextOption.text)
-            .applyOption()
-    }
-    fun inputTextOption(inputTextOption: HongTextOption) = apply {
-        option.inputTextOption = HongTextBuilder()
-            .copy(inputTextOption)
-            .text(inputTextOption.text ?: option.input)
-            .applyOption()
     }
 
-    fun clearImageOption(option: HongImageOption?) = apply {
-        this.option.clearImageOption = option
+    fun inputTypo(typo: HongTypo) = apply {
+        option.inputTypo = typo
+    }
+
+    fun inputColor(color: HongColor) = apply {
+        option.inputColorHex = color.hex
+    }
+    fun inputColor(color: String) = apply {
+        option.inputColorHex = color
+    }
+
+    fun clearIconRes(resId: Int?) = apply {
+        this.option.clearIconRes = resId
+    }
+    fun clearIconSize(size: Int) = apply {
+        this.option.clearIconSize = size
+    }
+    fun clearIconScaleType(scaleType: HongScaleType) = apply {
+        this.option.clearIconScaleType = scaleType
+    }
+    fun clearIconMargin(margin: HongSpacingInfo) = apply {
+        this.option.clearIconMargin = margin
     }
 
     fun cursorColor(cursorColor: HongColor) = apply {
-        cursorColor(cursorColor.hex)
+        option.cursorColorHex = cursorColor.hex
     }
     fun cursorColor(cursorColor: String) = apply {
         this.option.cursorColorHex = cursorColor
@@ -102,10 +115,16 @@ class HongTextFieldBuilder : HongWidgetCommonBuilder<HongTextFieldOption, HongTe
             .onClick(inject.click)
             .backgroundColor(inject.backgroundColorHex)
             .placeholder(inject.placeholder)
-            .placeholderTextOption(inject.placeholderTextOption)
+            .placeholderColor(inject.placeholderColorHex)
+            .placeholderTypo(inject.placeholderTypo)
+            .placeholderPadding(inject.placeholderPadding)
             .input(inject.input)
-            .inputTextOption(inject.inputTextOption)
-            .clearImageOption(inject.clearImageOption)
+            .inputTypo(inject.inputTypo)
+            .inputColor(inject.inputColorHex)
+            .clearIconRes(inject.clearIconRes)
+            .clearIconSize(inject.clearIconSize)
+            .clearIconMargin(inject.clearIconMargin)
+            .clearIconScaleType(inject.clearIconScaleType)
             .cursorColor(inject.cursorColorHex)
             .useHideKeyboard(inject.useHideKeyboard)
             .singleLine(inject.singleLine)

@@ -109,7 +109,7 @@ class HongSelectButtonPlayground(
             callback.invoke(inject)
         }
 
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.negativeTextTypo,
             label = "버튼 텍스트 폰트",
@@ -151,7 +151,7 @@ class HongSelectButtonPlayground(
             callback.invoke(inject)
         }
 
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.positiveTextTypo,
             label = "버튼 텍스트 폰트",

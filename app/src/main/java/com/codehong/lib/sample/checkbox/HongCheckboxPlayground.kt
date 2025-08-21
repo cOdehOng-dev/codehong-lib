@@ -174,7 +174,7 @@ class HongCheckboxPlayground(
         }
 
         /** radius */
-        PlaygroundManager.addRadiusOptionPreview(
+        PlaygroundManager.addViewRadiusOption(
             activity = activity,
             radius = inject.radius,
             description = "체크박스의 모서리 둥글기를 설정해요.",

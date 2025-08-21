@@ -3,10 +3,8 @@ package com.codehong.library.widget.label.select
 import android.os.Parcelable
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.R
-import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
-import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
@@ -15,7 +13,6 @@ import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
 import com.codehong.library.widget.textfield.HongTextFieldOption
 import kotlinx.parcelize.Parcelize
@@ -50,44 +47,20 @@ data class HongLabelSelectInputOption(
                 )
             )
             .backgroundColor(HongColor.BLACK_05)
-            .inputTextOption(
-                HongTextBuilder()
-                    .backgroundColor(HongColor.TRANSPARENT)
-                    .padding(
-                        HongSpacingInfo(
-                            top = 4f,
-                            bottom = 4f,
-                            left = 4f,
-                            right = 4f
-                        )
-                    )
-                    .typography(HongTypo.BODY_14)
-                    .color(HongColor.BLACK_100)
-                    .applyOption()
+            .inputTypo(HongTypo.BODY_14)
+            .inputColor(HongColor.BLACK_100)
+            .placeholderPadding(
+                HongSpacingInfo(
+                    top = 4f,
+                    bottom = 4f,
+                    left = 4f,
+                    right = 4f
+                )
             )
-            .placeholderTextOption(
-                HongTextBuilder()
-                    .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                    .padding(
-                        HongSpacingInfo(
-                            top = 4f,
-                            bottom = 4f,
-                            left = 4f,
-                            right = 4f
-                        )
-                    )
-                    .typography(HongTypo.BODY_14)
-                    .color(HongColor.BLACK_100)
-                    .applyOption()
-            )
-            .clearImageOption(
-                HongImageBuilder()
-                    .width(18)
-                    .height(18)
-                    .scaleType(HongScaleType.CENTER_CROP)
-                    .drawableResId(R.drawable.honglib_ic_close)
-                    .applyOption()
-            )
+            .placeholderTypo(HongTypo.BODY_14)
+            .placeholderColor(HongColor.BLACK_100)
+            .clearIconSize(18)
+            .clearIconRes(R.drawable.honglib_ic_close)
             .cursorColor(HongColor.MAIN_ORANGE_100)
             .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
             .applyOption()

@@ -1,7 +1,7 @@
 package com.codehong.library.widget.videopopup
 
 import android.content.Context
-import com.codehong.library.widget.util.Const
+import com.codehong.library.widget.Consts
 import com.codehong.library.widget.util.HongDateUtil
 
 object HongVideoPopupManager {
@@ -13,7 +13,7 @@ object HongVideoPopupManager {
 
         try {
             val lastHiddenMillis = getOneDayLastSeenTimestamp(context)
-            if (lastHiddenMillis == Const.NO_VALUE) return true
+            if (lastHiddenMillis == Consts.NO_VALUE) return true
 
             val checkNoShowTime = HongDateUtil.checkNoShowTime(lastHiddenMillis, HongDateUtil.MINUTES_IN_A_DAY)
             return checkNoShowTime.first
@@ -25,22 +25,22 @@ object HongVideoPopupManager {
 
     fun getOneDayLastSeenTimestamp(context: Context?): Long {
         if (context == null) {
-            return Const.NO_VALUE
+            return Consts.NO_VALUE
         }
 
         val prefs =
-            context.getSharedPreferences(Const.PREF_DATA_STORE, Context.MODE_PRIVATE)
-        return prefs.getLong(Const.KEY_VIDEO_POPUP_NO_SHOW_ONE_DAY, Const.NO_VALUE)
+            context.getSharedPreferences(Consts.PREF_DATA_STORE, Context.MODE_PRIVATE)
+        return prefs.getLong(Consts.KEY_VIDEO_POPUP_NO_SHOW_ONE_DAY, Consts.NO_VALUE)
     }
 
     fun saveOneDayLastSeenTimestamp(context: Context?) {
         if (context == null) {
             return
         }
-        val prefs = context.getSharedPreferences(Const.PREF_DATA_STORE, Context.MODE_PRIVATE)
+        val prefs = context.getSharedPreferences(Consts.PREF_DATA_STORE, Context.MODE_PRIVATE)
         val editor = prefs.edit()
         val nowMillis = System.currentTimeMillis()
-        editor.putLong(Const.KEY_VIDEO_POPUP_NO_SHOW_ONE_DAY, nowMillis)
+        editor.putLong(Consts.KEY_VIDEO_POPUP_NO_SHOW_ONE_DAY, nowMillis)
         editor.apply()
     }
 
@@ -50,9 +50,9 @@ object HongVideoPopupManager {
             return
         }
         val prefs =
-            context.getSharedPreferences(Const.PREF_DATA_STORE, Context.MODE_PRIVATE)
+            context.getSharedPreferences(Consts.PREF_DATA_STORE, Context.MODE_PRIVATE)
         val editor = prefs.edit()
-        editor.putLong(Const.KEY_VIDEO_POPUP_NO_SHOW_ONE_DAY, Const.NO_VALUE)
+        editor.putLong(Consts.KEY_VIDEO_POPUP_NO_SHOW_ONE_DAY, Consts.NO_VALUE)
         editor.apply()
     }
 }

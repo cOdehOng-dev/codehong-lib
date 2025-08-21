@@ -3,7 +3,7 @@ package com.codehong.lib.sample.textfield
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
-import com.codehong.lib.sample.text.HongTextPlayground
+import com.codehong.library.widget.R
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
@@ -120,7 +120,7 @@ class HongTextFieldPlayground(
         }
 
 
-        PlaygroundManager.addRadiusOptionPreview(
+        PlaygroundManager.addViewRadiusOption(
             activity = activity,
             radius = inject.radius,
         ) { selectRadius ->
@@ -160,44 +160,78 @@ class HongTextFieldPlayground(
         }
 
         /** placeholder */
-        HongTextPlayground(activity)
-            .injectPreview(
-                injectOption = inject.placeholderTextOption,
-                includeCommonOption = false,
-                label = "placeholder 설정",
-                useAlign = false,
-                useCancelLine = false,
-                useUnderline = false,
-                useLineBreak = false,
-                useMaxLine = false,
-                useOverflow = false,
-            ) {
-                inject = HongTextFieldBuilder()
-                    .copy(inject)
-                    .placeholderTextOption(it)
-                    .applyOption()
-                callback.invoke(inject)
-            }
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity = activity,
+            label = "placeholder",
+            input = inject.placeholder,
+        ) {
+            inject = HongTextFieldBuilder()
+                .copy(inject)
+                .placeholder(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addViewSelectTypoOption(
+            activity,
+            label = "placeholder typo",
+            typo = inject.placeholderTypo,
+        ) {
+            inject = HongTextFieldBuilder()
+                .copy(inject)
+                .placeholderTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addColorOptionPreview(
+            activity = activity,
+            label = "placeholder ",
+            colorHex = inject.placeholderColorHex
+        ) {
+            inject = HongTextFieldBuilder()
+                .copy(inject)
+                .placeholderColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
 
         /** input */
-        HongTextPlayground(activity)
-            .injectPreview(
-                injectOption = inject.inputTextOption,
-                includeCommonOption = false,
-                label = "입력 설정",
-                useAlign = false,
-                useCancelLine = false,
-                useUnderline = false,
-                useLineBreak = false,
-                useMaxLine = false,
-                useOverflow = false,
-            ) {
-                inject = HongTextFieldBuilder()
-                    .copy(inject)
-                    .inputTextOption(it)
-                    .applyOption()
-                callback.invoke(inject)
-            }
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity = activity,
+            label = "입력 값",
+            input = inject.input,
+        ) {
+            inject = HongTextFieldBuilder()
+                .copy(inject)
+                .input(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addViewSelectTypoOption(
+            activity,
+            typo = inject.inputTypo,
+            label = "입력 값 typo",
+        ) {
+            inject = HongTextFieldBuilder()
+                .copy(inject)
+                .inputTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addColorOptionPreview(
+            activity = activity,
+            label = "입력 값 ",
+            colorHex = inject.inputColorHex
+        ) {
+            inject = HongTextFieldBuilder()
+                .copy(inject)
+                .inputColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
 
         /** cursor 컬러 */
         PlaygroundManager.addColorOptionPreview(
@@ -221,9 +255,9 @@ class HongTextFieldPlayground(
         ) { isEnable ->
             inject = HongTextFieldBuilder()
                 .copy(inject)
-                .clearImageOption(
+                .clearIconRes(
                     if (isEnable) {
-                        HongTextFieldOption.DEFAULT_CLEAR_IMAGE
+                        R.drawable.honglib_ic_20_circle_close_fill
                     } else {
                         null
                     }
@@ -235,7 +269,7 @@ class HongTextFieldPlayground(
         /** keyboardType */
         val keyboardTypeList = HongKeyboardType.entries.map { it.name }
         val initialKeyboardType = inject.keyboardOption.first
-        PlaygroundManager.addSelectOptionView(
+        PlaygroundManager.addViewSelectOption(
             activity,
             initialText = initialKeyboardType.name,
             label = "키보드 타입 설정",
@@ -262,7 +296,7 @@ class HongTextFieldPlayground(
         /** keyboardActionType */
         val keyboardActionTypeList = HongKeyboardActionType.entries.map { it.name }
         val initialKeyboardActionType = inject.keyboardOption.second
-        PlaygroundManager.addSelectOptionView(
+        PlaygroundManager.addViewSelectOption(
             activity,
             initialText = initialKeyboardActionType.name,
             label = "키보드 액션 타입 설정",

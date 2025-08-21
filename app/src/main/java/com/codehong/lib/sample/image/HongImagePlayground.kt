@@ -145,7 +145,7 @@ class HongImagePlayground(
         }
 
         /** radius */
-        PlaygroundManager.addRadiusOptionPreview(
+        PlaygroundManager.addViewRadiusOption(
             activity = activity,
             radius = inject.radius,
         ) { selectRadius ->
@@ -189,7 +189,7 @@ class HongImagePlayground(
         val initial = scaleTypeList
             .firstOrNull { it == inject.scaleType }
             ?: HongScaleType.FIT_START
-        PlaygroundManager.addSelectOptionView(
+        PlaygroundManager.addViewSelectOption(
             activity = activity,
             initialText = initial.value,
             label = "scale type",

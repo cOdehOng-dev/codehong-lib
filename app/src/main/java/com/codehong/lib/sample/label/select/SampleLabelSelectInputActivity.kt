@@ -13,13 +13,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.base.BaseSampleMixActivity
+import com.codehong.library.widget.Consts
 import com.codehong.library.widget.label.select.HongLabelSelectInputBuilder
 import com.codehong.library.widget.label.select.HongLabelSelectInputCompose
 import com.codehong.library.widget.label.select.HongLabelSelectInputView
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongLayoutParam.Companion.toHongLayoutValueToParam
 import com.codehong.library.widget.rule.HongSpacingInfo
-import com.codehong.library.widget.util.Const
 
 class SampleLabelSelectInputActivity : BaseSampleMixActivity() {
 
@@ -62,10 +62,10 @@ class SampleLabelSelectInputActivity : BaseSampleMixActivity() {
     private val widthHeightSizeList = listOf(
         HongLayoutParam.MATCH_PARENT.paramName,
         HongLayoutParam.WRAP_CONTENT.paramName,
-        Const.DIRECT_INPUT
+        Consts.DIRECT_INPUT
     )
     private val testWidth = 1
-    private val initialWidth = testWidth.toHongLayoutValueToParam().ifEmpty { Const.DIRECT_INPUT }
+    private val initialWidth = testWidth.toHongLayoutValueToParam().ifEmpty { Consts.DIRECT_INPUT }
 
     private val optionList get() = listOf(
         option1,
@@ -93,17 +93,17 @@ class SampleLabelSelectInputActivity : BaseSampleMixActivity() {
                             .description("width를 선택해주세요.")
                             .buttonText(initialWidth)
                             .inputText(
-                                if (initialWidth == Const.DIRECT_INPUT) {
+                                if (initialWidth == Consts.DIRECT_INPUT) {
                                     testWidth.toString()
                                 } else {
                                     initialWidth
                                 }
                             )
                             .selectList(widthHeightSizeList)
-                            .selectPosition(widthHeightSizeList.indexOf(initialWidth.ifEmpty { Const.DIRECT_INPUT }))
+                            .selectPosition(widthHeightSizeList.indexOf(initialWidth.ifEmpty { Consts.DIRECT_INPUT }))
                             .useDirectCallback(true)
                             .useOnlyNumber(true)
-                            .showInput(initialWidth == Const.DIRECT_INPUT)
+                            .showInput(initialWidth == Consts.DIRECT_INPUT)
                             .inputCallback { inputSize ->
                                 val selectWidthSize = if (inputSize.isNullOrEmpty()) {
                                     testWidth
@@ -153,17 +153,17 @@ class SampleLabelSelectInputActivity : BaseSampleMixActivity() {
             .description("width를 선택해주세요.")
             .buttonText(initialWidth)
             .inputText(
-                if (initialWidth == Const.DIRECT_INPUT) {
+                if (initialWidth == Consts.DIRECT_INPUT) {
                     testWidth.toString()
                 } else {
                     initialWidth
                 }
             )
             .selectList(widthHeightSizeList)
-            .selectPosition(widthHeightSizeList.indexOf(initialWidth.ifEmpty { Const.DIRECT_INPUT }))
+            .selectPosition(widthHeightSizeList.indexOf(initialWidth.ifEmpty { Consts.DIRECT_INPUT }))
             .useDirectCallback(true)
             .useOnlyNumber(true)
-            .showInput(initialWidth == Const.DIRECT_INPUT)
+            .showInput(initialWidth == Consts.DIRECT_INPUT)
             .inputCallback { inputSize ->
                 val selectWidthSize = if (inputSize.isNullOrEmpty()) {
                     testWidth

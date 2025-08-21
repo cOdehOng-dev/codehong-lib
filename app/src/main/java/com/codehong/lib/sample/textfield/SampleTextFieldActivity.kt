@@ -10,10 +10,8 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
 import com.codehong.library.widget.textfield.HongTextFieldCompose
-import com.codehong.library.widget.textfield.HongTextFieldOption
 import com.codehong.library.widget.textfield.HongTextFieldView
 
 class SampleTextFieldActivity : BaseSampleMixActivity() {
@@ -40,12 +38,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 all = 50
             )
         )
-        .placeholderTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                .text("값을 입력해주세요.")
-                .applyOption()
-        )
+        .placeholder("값을 입력해주세요.")
         .cursorColor(HongColor.MAIN_ORANGE_100.hex)
         .onTextChanged { trackingText ->
         }
@@ -73,17 +66,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 all = 50
             )
         )
-        .placeholderTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                .text("[키보드 done 버튼] 값을 입력해주세요.")
-                .applyOption()
-        )
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
+        .placeholder("[키보드 done 버튼] 값을 입력해주세요.")
         .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
         .cursorColor(HongColor.MAIN_ORANGE_100.hex)
         .onTextChanged { trackingText ->
@@ -112,17 +95,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 all = 50
             )
         )
-        .placeholderTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                .text("[숫자 키패드] 값을 입력해주세요.")
-                .applyOption()
-        )
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
+        .placeholder("[숫자 키패드] 값을 입력해주세요.")
         .keyboardOption(Pair(HongKeyboardType.NUMBER, HongKeyboardActionType.DONE))
         .onTextChanged { trackingText ->
         }
@@ -150,24 +123,12 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 all = 50
             )
         )
-        .placeholderTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                .text("[지우기 버튼] 값을 입력해주세요.")
-                .applyOption()
-        )
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
+        .placeholder("[지우기 버튼] 값을 입력해주세요.")
         .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
         .cursorColor(HongColor.MAIN_ORANGE_100.hex)
         .onTextChanged { trackingText ->
         }
-        .clearImageOption(
-            HongTextFieldOption.DEFAULT_CLEAR_IMAGE
-        )
+        .clearIconRes(com.codehong.library.widget.R.drawable.honglib_ic_20_circle_close_fill)
         .applyOption()
 
     private val option5 = HongTextFieldBuilder()
@@ -192,17 +153,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 all = 50
             )
         )
-        .placeholderTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                .text("[password] 값을 입력해주세요.")
-                .applyOption()
-        )
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
+        .placeholder("[password] 값을 입력해주세요.")
         .keyboardOption(Pair(HongKeyboardType.PASSWORD, HongKeyboardActionType.DONE))
         .onTextChanged { trackingText ->
         }
@@ -230,17 +181,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 all = 50
             )
         )
-        .placeholderTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                .text("[키보드 go] 값을 입력해주세요.")
-                .applyOption()
-        )
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
+        .placeholder("[키보드 go] 값을 입력해주세요.")
         .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.GO))
         .cursorColor(HongColor.MAIN_ORANGE_100.hex)
         .onTextChanged { trackingText ->
@@ -269,17 +210,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 all = 50
             )
         )
-        .placeholderTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                .text("[키보드 search] 값을 입력해주세요.")
-                .applyOption()
-        )
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
+        .placeholder("[키보드 search] 값을 입력해주세요.")
         .cursorColor(HongColor.MAIN_ORANGE_100.hex)
         .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.SEARCH))
         .onTextChanged { trackingText ->
@@ -308,17 +239,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 all = 50
             )
         )
-        .placeholderTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                .text("[키보드 send] 값을 입력해주세요.")
-                .applyOption()
-        )
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
+        .placeholder("[키보드 send] 값을 입력해주세요.")
         .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.SEND))
         .cursorColor(HongColor.MAIN_ORANGE_100.hex)
         .onTextChanged { trackingText ->
@@ -347,17 +268,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 all = 50
             )
         )
-        .placeholderTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                .text("[number password] 값을 입력해주세요.")
-                .applyOption()
-        )
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
+        .placeholder("[number password] 값을 입력해주세요.")
         .keyboardOption(
             Pair(
                 HongKeyboardType.NUMBER_PASSWORD,
@@ -391,17 +302,7 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 all = 50
             )
         )
-        .placeholderTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                .text("[딜레이] 값을 입력해주세요.")
-                .applyOption()
-        )
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
+        .placeholder("[딜레이] 값을 입력해주세요.")
         .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
         .delayInputCallback(500L)
         .onTextChanged { trackingText ->
@@ -431,25 +332,13 @@ class SampleTextFieldActivity : BaseSampleMixActivity() {
                 all = 50
             )
         )
-        .placeholderTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                .text("딜레이 삭제 버튼 값을 입력해주세요.")
-                .applyOption()
-        )
-        .inputTextOption(
-            HongTextBuilder()
-                .copy(HongTextFieldOption.DEFAULT_INPUT)
-                .applyOption()
-        )
+        .placeholder("딜레이 삭제 버튼 값을 입력해주세요.")
         .keyboardOption(Pair(HongKeyboardType.TEXT, HongKeyboardActionType.DONE))
         .delayInputCallback(500L)
         .onTextChanged { trackingText ->
             Log.d("TAG", "TextField 딜레이 입력[삭제 버튼 포함] = $trackingText")
         }
-        .clearImageOption(
-            HongTextFieldOption.DEFAULT_CLEAR_IMAGE
-        )
+        .clearIconRes(com.codehong.library.widget.R.drawable.honglib_ic_20_circle_close_fill)
         .applyOption()
 
     private val optionList get() = listOf(

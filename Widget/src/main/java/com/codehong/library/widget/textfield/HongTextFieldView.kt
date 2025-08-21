@@ -25,9 +25,13 @@ import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.image.HongImageView
 import com.codehong.library.widget.language.hongImage
 import com.codehong.library.widget.language.textField
+import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.parseColor
+import com.codehong.library.widget.rule.typo.fontType
+import com.codehong.library.widget.rule.typo.size
+import com.codehong.library.widget.text.HongTextBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -120,18 +124,24 @@ class HongTextFieldView @JvmOverloads constructor(
             this.maxLines = if (option.singleLine) 1 else option.maxLines
             this.minLines = option.minLines
 
-            this.setText(option.inputTextOption.text ?: "")
-            this.setTextColor((option.inputTextOption.colorHex ?: HongTextFieldOption.DEFAULT_INPUT_COLOR).toParseColor())
-            this.textSize = (option.inputTextOption.size ?: HongTextFieldOption.DEFAULT_INPUT_SIZE).toFloat()
+            this.setText(option.input ?: "")
+            this.setTextColor((option.inputColorHex).toParseColor())
+            this.textSize = (option.inputTypo.size()).toFloat()
 
-            setHintStyle(option.placeholderTextOption)
+            setHintStyle(
+                HongTextBuilder()
+                    .width(HongLayoutParam.MATCH_PARENT.value)
+                    .padding(option.placeholderPadding)
+                    .text(option.placeholder)
+                    .typography(option.placeholderTypo)
+                    .color(option.placeholderColorHex)
+                    .applyOption()
+            )
 
             checkFont(
                 input = this.text.toString(),
-                hintFontId = option.placeholderTextOption.fontType?.font
-                    ?: HongTextFieldOption.DEFAULT_PLACEHOLDER_FONT,
-                inputFontId = option.inputTextOption.fontType?.font
-                    ?: HongTextFieldOption.DEFAULT_INPUT_FONT,
+                hintFontId = option.placeholderTypo.fontType().font,
+                inputFontId = option.inputTypo.fontType().font
             )
 
             toKeyboardOptions(option.keyboardOption)
@@ -143,10 +153,8 @@ class HongTextFieldView @JvmOverloads constructor(
 
                 checkFont(
                     input = input,
-                    hintFontId = option.placeholderTextOption.fontType?.font
-                        ?: HongTextFieldOption.DEFAULT_PLACEHOLDER_FONT,
-                    inputFontId = option.inputTextOption.fontType?.font
-                        ?: HongTextFieldOption.DEFAULT_INPUT_FONT,
+                    hintFontId = option.placeholderTypo.fontType().font,
+                    inputFontId = option.inputTypo.fontType().font
                 )
 
                 if (input.isEmpty()) {
@@ -173,13 +181,16 @@ class HongTextFieldView @JvmOverloads constructor(
             }
         }
 
-        option.clearImageOption?.let {
+        option.clearIconRes?.let {
             hasClearButton = true
             hongImage {
                 clearButton = this
                 set(
                     HongImageBuilder()
-                        .copy(it)
+                        .width(option.clearIconSize)
+                        .height(option.clearIconSize)
+                        .margin(option.clearIconMargin)
+                        .drawableResId(option.clearIconRes)
                         .onClick{
                             textField?.text?.clear()
                         }
@@ -188,11 +199,11 @@ class HongTextFieldView @JvmOverloads constructor(
             }
         }
 
-        if (option.inputTextOption.text.isNullOrEmpty()) {
+        if (option.input.isNullOrEmpty()) {
             textField?.setText("")
             clearButton?.visibility = View.GONE
         } else {
-            textField?.setText(option.inputTextOption.text)
+            textField?.setText(option.input)
             if (hasClearButton) {
                 clearButton?.visibility = View.VISIBLE
             } else {

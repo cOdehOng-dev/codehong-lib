@@ -2,7 +2,7 @@ package com.codehong.lib.sample.textfield.borderselect
 
 import android.util.Log
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -53,7 +53,7 @@ class SampleTextFieldBorderSelectActivity : BaseSampleComposeActivity() {
 
         Box(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(16.dp)
                 .hongBackground(
                     color = HongColor.WHITE_100

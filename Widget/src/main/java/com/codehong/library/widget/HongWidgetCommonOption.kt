@@ -15,7 +15,6 @@ interface HongWidgetCommonOption {
     var padding: HongSpacingInfo
     var click: ((HongWidgetCommonOption) -> Unit)?
 
-//    var backgroundColor: HongColor
     var backgroundColorHex: String
 
     var radius: HongRadiusInfo

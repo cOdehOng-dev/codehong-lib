@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
+import com.codehong.library.widget.Consts
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.language.frameLayout
@@ -12,7 +13,6 @@ import com.codehong.library.widget.language.horizontalLinearLayout
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.parseColor
-import com.codehong.library.widget.util.Const
 
 class HorizontalOptionView @JvmOverloads constructor(
     context: Context,
@@ -39,7 +39,7 @@ class HorizontalOptionView @JvmOverloads constructor(
 
         setPadding(
             paddingLeft,
-            if (useTopPadding) context.dpToPx(Const.PLAYGROUND_TOP_PADDING) else 0,
+            if (useTopPadding) context.dpToPx(Consts.PLAYGROUND_TOP_PADDING) else 0,
             paddingRight,
             paddingBottom
         )

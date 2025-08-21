@@ -106,7 +106,7 @@ class HongTabScrollPlayground(
         /**************************************************************
          * selectTabTextTypo
          **************************************************************/
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.selectTabTextTypo,
             label = "활성 탭 텍스트 폰트",
@@ -179,7 +179,7 @@ class HongTabScrollPlayground(
         /**************************************************************
          * unselectTabTextTypo
          **************************************************************/
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.unselectTabTextTypo,
             label = "비활성 탭 텍스트 폰트",
@@ -300,7 +300,7 @@ class HongTabScrollPlayground(
         /**************************************************************
          * radius
          **************************************************************/
-        PlaygroundManager.addRadiusOptionPreview(
+        PlaygroundManager.addViewRadiusOption(
             activity,
             radius = previewOption.radius,
             label = "탭 ",

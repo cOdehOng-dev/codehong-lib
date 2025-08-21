@@ -116,7 +116,7 @@ class HongTextUpDownPlayground(
         }
 
         /** displayTypo */
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.displayTypo,
             label = "텍스트 typo 설정"

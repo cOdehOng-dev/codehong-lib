@@ -123,7 +123,7 @@ class HongTextBadgePlayground(
         }
 
         /** radius */
-        PlaygroundManager.addRadiusOptionPreview(
+        PlaygroundManager.addViewRadiusOption(
             activity = activity,
             radius = inject.radius,
         ) { selectRadius ->
@@ -199,7 +199,7 @@ class HongTextBadgePlayground(
             callback.invoke(inject)
         }
         /** typo */
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.textTypography,
             label = "텍스트 typo 설정"

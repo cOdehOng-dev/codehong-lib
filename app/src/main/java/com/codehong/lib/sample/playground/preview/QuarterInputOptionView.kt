@@ -3,9 +3,8 @@ package com.codehong.lib.sample.playground.preview
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
-import com.codehong.library.widget.R
+import com.codehong.library.widget.Consts
 import com.codehong.library.widget.extensions.dpToPx
-import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.input.HongLabelInputBuilder
 import com.codehong.library.widget.label.input.HongLabelInputOption
@@ -14,14 +13,8 @@ import com.codehong.library.widget.language.hongLabel
 import com.codehong.library.widget.language.hongLabelInput
 import com.codehong.library.widget.language.horizontalLinearLayout
 import com.codehong.library.widget.rule.HongLayoutParam
-import com.codehong.library.widget.rule.HongSpacingInfo
-import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
-import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.textfield.HongTextFieldBuilder
-import com.codehong.library.widget.util.Const
 
 class QuarterInputOptionView @JvmOverloads constructor(
     context: Context,
@@ -49,7 +42,7 @@ class QuarterInputOptionView @JvmOverloads constructor(
     ) {
         setPadding(
             paddingLeft,
-            if (useTopPadding) context.dpToPx(Const.PLAYGROUND_TOP_PADDING) else 0,
+            if (useTopPadding) context.dpToPx(Consts.PLAYGROUND_TOP_PADDING) else 0,
             paddingRight,
             paddingBottom
         )
@@ -145,41 +138,18 @@ class QuarterInputOptionView @JvmOverloads constructor(
         return HongLabelInputBuilder()
             .width(HongLayoutParam.MATCH_PARENT.value)
             .label(inputInit.first)
-            .textFieldOption(
-                HongTextFieldBuilder()
-                    .copy(HongLabelInputOption.DEFAULT_TEXT_FIELD)
-                    .inputTextOption(
-                        HongTextBuilder()
-                            .width(HongLayoutParam.MATCH_PARENT.value)
-                            .typography(HongTypo.BODY_14)
-                            .color(HongColor.BLACK_100)
-                            .text(inputInit.second)
-                            .applyOption()
-                    )
-                    .keyboardOption(
-                        Pair(
-                            if (inputInit.third) {
-                                HongKeyboardType.NUMBER
-                            } else {
-                                HongKeyboardType.TEXT
-                            }, HongKeyboardActionType.DONE
-                        )
-                    )
-                    .clearImageOption(
-                        HongImageBuilder()
-                            .width(13)
-                            .height(13)
-                            .margin(
-                                HongSpacingInfo(
-                                    left = 8f
-                                )
-                            )
-                            .drawableResId(R.drawable.honglib_ic_close)
-                            .applyOption()
-                    )
-                    .onTextChanged(callback)
-                    .applyOption()
+            .input(inputInit.second)
+            .keyboardOption(
+                Pair(
+                    if (inputInit.third) {
+                        HongKeyboardType.NUMBER
+                    } else {
+                        HongKeyboardType.TEXT
+                    }, HongKeyboardActionType.DONE
+                )
             )
+            .clearIconSize(13)
+            .onTextChanged(callback)
             .applyOption()
     }
 }
