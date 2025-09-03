@@ -103,6 +103,7 @@
         <activity android:name=".textfield.border.SampleTextFieldBorderActivity"/>
 
         <activity android:name=".bottomsheet.SampleBottomSheetSelectActivity"/>
+        <activity android:name=".bottomsheet.SampleBottomSheetSwipeActivity"/>
         <activity android:name=".textfield.borderselect.SampleTextFieldBorderSelectActivity"/>
 
         <activity android:name=".graph.SampleGraphLineActivity"/>

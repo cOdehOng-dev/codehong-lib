@@ -23,6 +23,12 @@ class HongHeaderCloseBuilder : HongWidgetCommonBuilder<HongHeaderCloseOption, Ho
         option.titleColorHex = colorHex
     }
 
+    fun closeIconColor(color: HongColor) = apply {
+        option.closeIconColorHex = color.hex
+    }
+    fun closeIconColor(colorHex: String) = apply {
+        option.closeIconColorHex = colorHex
+    }
     fun close(onClose: () -> Unit) = apply {
         option.onCloseClick = onClose
     }
@@ -38,6 +44,7 @@ class HongHeaderCloseBuilder : HongWidgetCommonBuilder<HongHeaderCloseOption, Ho
             .title(inject.title)
             .titleColor(inject.titleColorHex)
             .titleTypo(inject.titleTypo)
+            .closeIconColor(inject.closeIconColorHex)
             .close(inject.onCloseClick)
             .backgroundColor(inject.backgroundColorHex)
     }

@@ -23,6 +23,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.SampleType.Companion.toType
 import com.codehong.lib.sample.bottomsheet.SampleBottomSheetSelectActivity
+import com.codehong.lib.sample.bottomsheet.SampleBottomSheetSwipeActivity
 import com.codehong.lib.sample.button.icon.SampleButtonIconActivity
 import com.codehong.lib.sample.button.select.SampleSelectButtonActivity
 import com.codehong.lib.sample.button.text.SampleTextButtonActivity
@@ -683,6 +684,16 @@ fun MainScreen(
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
                                                     HongWidgetType.BOTTOM_SHEET_SELECT.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
+                                        HongWidgetType.BOTTOM_SHEET_SWIPE -> {
+                                            Intent(activity, SampleBottomSheetSwipeActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.BOTTOM_SHEET_SWIPE.value
                                                 )
                                                 activity.startActivity(this)
                                             }

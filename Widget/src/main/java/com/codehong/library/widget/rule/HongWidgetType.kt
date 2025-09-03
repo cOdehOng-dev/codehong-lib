@@ -2,7 +2,7 @@ package com.codehong.library.widget.rule
 
 enum class HongWidgetType(
     val value: String,
-    val allowPlayground: Boolean = false,
+    val allowPlayground: Boolean = false
 ) {
     TEXT("Text", true),
     TEXT_CHECK("TextCheck", true),
@@ -39,6 +39,7 @@ enum class HongWidgetType(
     LABEL_CHECKBOX("LabelCheckbox", true),
     PICKER("Picker", false),
     BOTTOM_SHEET_SELECT("BottomSheetSelect", false),
+    BOTTOM_SHEET_SWIPE("BottomSheetSwipe", false),
     GRAPH_LINE("GraphLine", true),
     GRAPH_BAR("GraphBar", true),
     ICON("Icon", true),
