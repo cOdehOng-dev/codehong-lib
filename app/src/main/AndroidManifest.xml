@@ -110,6 +110,7 @@
         <activity android:name=".graph.SampleGraphBarActivity"/>
 
         <activity android:name=".icon.SampleIconActivity"/>
+        <activity android:name=".draganddrop.SampleDragAndDropActivity"/>
     </application>
 
 </manifest>

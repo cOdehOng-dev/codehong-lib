@@ -729,6 +729,10 @@ fun MainScreen(
                                             }
                                         }
 
+                                        HongWidgetType.DRAG_AND_DROP -> {
+
+                                        }
+
                                         else -> {
                                             Intent(activity, OptionPickerActivity::class.java).apply {
                                                 activity.startActivity(this)
