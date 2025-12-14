@@ -1,7 +1,6 @@
 package com.codehong.lib.sample.calendar
 
 import android.util.Log
-import com.codehong.lib.sample.SampleConst.koreanHolidayList
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.library.widget.calendar.HongCalendarBuilder
@@ -12,6 +11,7 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.util.HongDateUtil
 
 class CalendarPlayground(
     playgroundActivity: PlaygroundActivity
@@ -100,7 +100,7 @@ class CalendarPlayground(
             )
             .spacingHorizontal(16)
             .bottomSpacingWeek(20)
-            .holidayList(koreanHolidayList)
+            .holidayList(HongDateUtil.KOREAN_HOLIDAY_LIST)
             .dayOfWeekBottomLineColorHex("#eeeeee")
             .onSelected { startDate, endDate ->
                 if (startDate == null || endDate == null) {
@@ -121,7 +121,6 @@ class CalendarPlayground(
         commonPreviewOption(
             height = previewOption.height,
             margin = previewOption.margin,
-            padding = previewOption.padding,
             useWidth = false,
             usePadding = false,
             selectHeight = {

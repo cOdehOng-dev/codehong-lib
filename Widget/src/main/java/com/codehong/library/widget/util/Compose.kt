@@ -1,9 +1,6 @@
 package com.codehong.library.widget.util
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -44,9 +41,6 @@ fun dpToPx(dp: Int) = with(LocalDensity.current) { dp.dp.toPx() }
 
 @Composable
 fun pxToDp(px: Float) = with(LocalDensity.current) { px.toDp() }
-
-@Composable
-fun getStatusHeight(): Dp = WindowInsets.systemBars.asPaddingValues().calculateTopPadding()
 
 fun getAlphaColor(colorHexCode: String, alpha: Int): String {
     val prefix = when (alpha) {

@@ -1,11 +1,9 @@
 package com.codehong.library.widget.textfield
 
 import com.codehong.library.widget.HongWidgetCommonOption
-import com.codehong.library.widget.R
-import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.image.HongImageOption
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
@@ -14,24 +12,12 @@ import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.rule.typo.fontType
-import com.codehong.library.widget.rule.typo.size
-import com.codehong.library.widget.text.HongTextBuilder
 
 data class HongTextFieldOption(
     override val type: HongWidgetType = HongWidgetType.TEXT_FILED
 ) : HongWidgetCommonOption {
 
     companion object {
-        val DEFAULT_PLACEHOLDER_TYPO = HongTypo.BODY_16
-        val DEFAULT_PLACEHOLDER_FONT = DEFAULT_PLACEHOLDER_TYPO.fontType().font
-
-        val DEFAULT_INPUT_TYPO = HongTypo.BODY_16_B
-        val DEFAULT_INPUT_FONT = DEFAULT_INPUT_TYPO.fontType().font
-        val DEFAULT_INPUT_SIZE = DEFAULT_INPUT_TYPO.size()
-        val DEFAULT_INPUT_COLOR = HongColor.BLACK_100.hex
-
-        const val DEFAULT_USE_HIDE_KEYBOARD = true
         const val DEFAULT_MAX_LINES = Int.MAX_VALUE
         const val DEFAULT_MIN_LINES = 1
 
@@ -40,34 +26,7 @@ data class HongTextFieldOption(
             HongKeyboardActionType.DONE
         )
 
-        const val DEFAULT_SINGLE_LINE = true
-
-        const val DEFAULT_USE_SHAPE_CIRCLE = false
-
         const val DEFAULT_DELAY_INPUT_CALLBACK = 0L
-
-        val DEFAULT_PLACEHOLDER = HongTextBuilder()
-            .width(HongLayoutParam.MATCH_PARENT.value)
-            .typography(DEFAULT_PLACEHOLDER_TYPO)
-            .color(HongColor.BLACK_30.hex)
-            .applyOption()
-
-        val DEFAULT_INPUT = HongTextBuilder()
-            .width(HongLayoutParam.MATCH_PARENT.value)
-            .typography(DEFAULT_INPUT_TYPO)
-            .color(DEFAULT_INPUT_COLOR)
-            .applyOption()
-
-        val DEFAULT_CLEAR_IMAGE = HongImageBuilder()
-            .width(20)
-            .height(20)
-            .margin(
-                HongSpacingInfo(
-                    left = 8f
-                )
-            )
-            .drawableResId(R.drawable.honglib_ic_20_close)
-            .applyOption()
     }
 
 
@@ -75,8 +34,8 @@ data class HongTextFieldOption(
 
     override var width: Int = HongLayoutParam.WRAP_CONTENT.value
     override var height: Int = HongLayoutParam.WRAP_CONTENT.value
-    override var margin: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
-    override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
+    override var margin: HongSpacingInfo = HongSpacingInfo()
+    override var padding: HongSpacingInfo = HongSpacingInfo()
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
 
 
@@ -86,18 +45,25 @@ data class HongTextFieldOption(
     override var shadow: HongShadowInfo = HongShadowInfo()
     override var border: HongBorderInfo = HongBorderInfo()
 
-    override var useShapeCircle: Boolean = DEFAULT_USE_SHAPE_CIRCLE
+    override var useShapeCircle: Boolean = false
 
-    var placeholderTextOption = DEFAULT_PLACEHOLDER
-    var inputTextOption = DEFAULT_INPUT
-    var clearImageOption: HongImageOption? = null
+    var placeholder: String? = null
+    var placeholderTypo: HongTypo = HongTypo.BODY_16
+    var placeholderColorHex: String = HongColor.BLACK_30.hex
+    var placeholderPadding = HongSpacingInfo()
 
     var input: String? = null
-    var placeholder: String? = null
+    var inputTypo: HongTypo = HongTypo.BODY_16_B
+    var inputColorHex: String = HongColor.BLACK_100.hex
+
+    var clearIconRes: Int? = null
+    var clearIconSize: Int = 20
+    var clearIconScaleType: HongScaleType = HongScaleType.CENTER_CROP
+    var clearIconMargin: HongSpacingInfo = HongSpacingInfo(left = 8f)
 
     var cursorColorHex: String = HongColor.MAIN_ORANGE_100.hex
-    var useHideKeyboard: Boolean = DEFAULT_USE_HIDE_KEYBOARD
-    var singleLine: Boolean = DEFAULT_SINGLE_LINE
+    var useHideKeyboard: Boolean = true
+    var singleLine: Boolean = true
     var maxLines: Int = DEFAULT_MAX_LINES
     var minLines: Int = DEFAULT_MIN_LINES
 
@@ -126,11 +92,17 @@ data class HongTextFieldOption(
         if (shadow != other.shadow) return false
         if (border != other.border) return false
         if (useShapeCircle != other.useShapeCircle) return false
-        if (placeholderTextOption != other.placeholderTextOption) return false
-        if (inputTextOption != other.inputTextOption) return false
-        if (clearImageOption != other.clearImageOption) return false
-        if (input != other.input) return false
         if (placeholder != other.placeholder) return false
+        if (placeholderTypo != other.placeholderTypo) return false
+        if (placeholderColorHex != other.placeholderColorHex) return false
+        if (placeholderPadding != other.placeholderPadding) return false
+        if (input != other.input) return false
+        if (inputTypo != other.inputTypo) return false
+        if (inputColorHex != other.inputColorHex) return false
+        if (clearIconRes != other.clearIconRes) return false
+        if (clearIconSize != other.clearIconSize) return false
+        if (clearIconScaleType != other.clearIconScaleType) return false
+        if (clearIconMargin != other.clearIconMargin) return false
         if (cursorColorHex != other.cursorColorHex) return false
         if (useHideKeyboard != other.useHideKeyboard) return false
         if (singleLine != other.singleLine) return false
@@ -156,11 +128,17 @@ data class HongTextFieldOption(
         result = 31 * result + shadow.hashCode()
         result = 31 * result + border.hashCode()
         result = 31 * result + useShapeCircle.hashCode()
-        result = 31 * result + placeholderTextOption.hashCode()
-        result = 31 * result + inputTextOption.hashCode()
-        result = 31 * result + (clearImageOption?.hashCode() ?: 0)
-        result = 31 * result + (input?.hashCode() ?: 0)
         result = 31 * result + (placeholder?.hashCode() ?: 0)
+        result = 31 * result + placeholderTypo.hashCode()
+        result = 31 * result + placeholderColorHex.hashCode()
+        result = 31 * result + placeholderPadding.hashCode()
+        result = 31 * result + (input?.hashCode() ?: 0)
+        result = 31 * result + inputTypo.hashCode()
+        result = 31 * result + inputColorHex.hashCode()
+        result = 31 * result + (clearIconRes ?: 0)
+        result = 31 * result + clearIconSize
+        result = 31 * result + clearIconScaleType.hashCode()
+        result = 31 * result + clearIconMargin.hashCode()
         result = 31 * result + cursorColorHex.hashCode()
         result = 31 * result + useHideKeyboard.hashCode()
         result = 31 * result + singleLine.hashCode()
@@ -186,11 +164,17 @@ data class HongTextFieldOption(
                 "shadow=$shadow, " +
                 "border=$border, " +
                 "useShapeCircle=$useShapeCircle, " +
-                "placeholderTextOption=$placeholderTextOption, " +
-                "inputTextOption=$inputTextOption, " +
-                "clearImageOption=$clearImageOption, " +
-                "input=$input, " +
                 "placeholder=$placeholder, " +
+                "placeholderTypo=$placeholderTypo, " +
+                "placeholderColorHex='$placeholderColorHex', " +
+                "placeholderPadding=$placeholderPadding, " +
+                "input=$input, " +
+                "inputTypo=$inputTypo, " +
+                "inputColorHex='$inputColorHex', " +
+                "clearIconRes=$clearIconRes, " +
+                "clearIconSize=$clearIconSize, " +
+                "clearIconScaleType=$clearIconScaleType, " +
+                "clearIconMargin=$clearIconMargin, " +
                 "cursorColorHex='$cursorColorHex', " +
                 "useHideKeyboard=$useHideKeyboard, " +
                 "singleLine=$singleLine, " +
@@ -201,4 +185,6 @@ data class HongTextFieldOption(
                 "onTextChanged=$onTextChanged" +
                 ")"
     }
+
+
 }

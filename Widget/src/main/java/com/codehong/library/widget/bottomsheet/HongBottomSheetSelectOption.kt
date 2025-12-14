@@ -11,7 +11,7 @@ import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 
 data class HongBottomSheetSelectOption(
-    override val type: HongWidgetType = HongWidgetType.BOTTOM_SHEET_SELECT,
+    override val type: HongWidgetType = HongWidgetType.BOTTOM_SHEET_SELECT
 ) : HongWidgetCommonOption {
 
     override var isValidComponent: Boolean = true

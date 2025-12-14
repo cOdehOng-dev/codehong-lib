@@ -125,7 +125,7 @@ class HongLabelPlayground(
             callback.invoke(inject)
         }
 
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.labelTypo,
             label = "label 폰트",
@@ -168,7 +168,7 @@ class HongLabelPlayground(
             callback.invoke(inject)
         }
 
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.labelTypo,
             label = "description 폰트",

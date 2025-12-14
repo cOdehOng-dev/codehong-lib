@@ -3,17 +3,12 @@ package com.codehong.lib.sample.label.input
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
-import com.codehong.lib.sample.textfield.HongTextFieldPlayground
 import com.codehong.library.widget.label.input.HongLabelInputBuilder
 import com.codehong.library.widget.label.input.HongLabelInputOption
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
-import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.textfield.HongTextFieldBuilder
-import com.codehong.library.widget.textfield.HongTextFieldOption
 
 class HongLabelInputPlayground(
     playgroundActivity: PlaygroundActivity
@@ -32,29 +27,6 @@ class HongLabelInputPlayground(
             )
             .label("레이블")
             .description("레이블 설명하는 테스트이에요.")
-            .textFieldOption(
-                HongTextFieldBuilder()
-                    .copy(HongLabelInputOption.DEFAULT_TEXT_FIELD)
-                    .margin(
-                        HongSpacingInfo(
-                            top = 10f
-                        )
-                    )
-                    .placeholderTextOption(
-                        HongTextBuilder()
-                            .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                            .applyOption()
-                    )
-                    .inputTextOption(
-                        HongTextBuilder()
-                            .copy(HongTextFieldOption.DEFAULT_INPUT)
-                            .width(HongLayoutParam.MATCH_PARENT.value)
-                            .typography(HongTypo.BODY_14)
-                            .color(HongColor.BLACK_100)
-                            .applyOption()
-                    )
-                    .applyOption()
-            )
             .applyOption()
     }
 
@@ -117,7 +89,7 @@ class HongLabelInputPlayground(
             callback.invoke(inject)
         }
 
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.labelTypo,
             label = "label 폰트",
@@ -160,7 +132,7 @@ class HongLabelInputPlayground(
             callback.invoke(inject)
         }
 
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.labelTypo,
             label = "description 폰트",
@@ -176,17 +148,79 @@ class HongLabelInputPlayground(
             activity,
             label = "TextField 옵션"
         )
-        HongTextFieldPlayground(activity)
-            .injectPreview(
-                injectOption = previewOption.textFieldOption,
-                includeCommonOption = true
-            ) {
-                this.previewOption = HongLabelInputBuilder()
-                    .copy(previewOption)
-                    .textFieldOption(it)
-                    .applyOption()
-                executePreview()
-            }
+
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity = activity,
+            label = "placeholder",
+            input = inject.placeholder,
+        ) {
+            inject = HongLabelInputBuilder()
+                .copy(inject)
+                .placeholder(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addViewSelectTypoOption(
+            activity,
+            label = "placeholder typo",
+            typo = inject.placeholderTypo,
+        ) {
+            inject = HongLabelInputBuilder()
+                .copy(inject)
+                .placeholderTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addColorOptionPreview(
+            activity = activity,
+            label = "placeholder ",
+            colorHex = inject.placeholderColorHex
+        ) {
+            inject = HongLabelInputBuilder()
+                .copy(inject)
+                .placeholderColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        /** input */
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity = activity,
+            label = "입력 값",
+            input = inject.input,
+        ) {
+            inject = HongLabelInputBuilder()
+                .copy(inject)
+                .input(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addViewSelectTypoOption(
+            activity,
+            typo = inject.inputTypo,
+            label = "입력 값 typo",
+        ) {
+            inject = HongLabelInputBuilder()
+                .copy(inject)
+                .inputTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addColorOptionPreview(
+            activity = activity,
+            label = "입력 값 ",
+            colorHex = inject.inputColorHex
+        ) {
+            inject = HongLabelInputBuilder()
+                .copy(inject)
+                .inputColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
     }
 
 }

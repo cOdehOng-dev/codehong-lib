@@ -88,7 +88,7 @@ class HongTextPlayground(
                     .copy(inject)
                     .text(text)
                     .applyOption()
-                callback.invoke(inject.also {Log.d("TAG", "test here result 222 = ${it.text}")})
+                callback.invoke(inject)
             }
         }
 
@@ -145,7 +145,7 @@ class HongTextPlayground(
 
         /** 텍스트 타이포그라피 */
         if (useTypo) {
-            PlaygroundManager.addSelectTypoOptionView(
+            PlaygroundManager.addViewSelectTypoOption(
                 activity,
                 typo = inject.typography ?: HongTypo.BODY_14,
                 label = "텍스트 typo 설정"
@@ -166,7 +166,7 @@ class HongTextPlayground(
              */
             val textAlignList = HongTextAlign.entries.map { it.alias }
             val initialTextAlign = inject.align.toHongTextAlignToAlias()
-            PlaygroundManager.addSelectOptionView(
+            PlaygroundManager.addViewSelectOption(
                 activity = activity,
                 initialText = initialTextAlign,
                 label = "$label 텍스트 정렬",
@@ -215,7 +215,7 @@ class HongTextPlayground(
              */
             val overflowList = HongTextOverflow.entries.map { it.alias }
             val initialOverflow = inject.overflow.toHongTextOverflowToAlias()
-            PlaygroundManager.addSelectOptionView(
+            PlaygroundManager.addViewSelectOption(
                 activity = activity,
                 initialText = initialOverflow,
                 label = "글 잘림 처리",
@@ -239,7 +239,7 @@ class HongTextPlayground(
             val lineBreakList = HongTextLineBreak.entries.map { it.alias }.toList()
             val initialLineBreak = inject.lineBreak.toHongTextLineBreakToAlias()
 
-            PlaygroundManager.addSelectOptionView(
+            PlaygroundManager.addViewSelectOption(
                 activity = activity,
                 initialText = initialLineBreak,
                 label = "줄바꿈 설정",

@@ -13,6 +13,7 @@ import com.codehong.library.widget.language.hongTextField
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
 
 class HongLabelInputView @JvmOverloads constructor(
@@ -71,12 +72,49 @@ class HongLabelInputView @JvmOverloads constructor(
         hongTextField {
             set(
                 HongTextFieldBuilder()
-                    .copy(option.textFieldOption)
+                    .width(HongLayoutParam.MATCH_PARENT.value)
+                    .height(48)
                     .margin(
                         HongSpacingInfo(
                             top = 10f
                         )
                     )
+                    .radius(
+                        HongRadiusInfo(
+                            topLeft = 10,
+                            topRight = 10,
+                            bottomLeft = 10,
+                            bottomRight = 10
+                        )
+                    )
+                    .padding(
+                        HongSpacingInfo(
+                            top = 11f,
+                            bottom = 11f,
+                            left = 10f,
+                            right = 10f
+                        )
+                    )
+                    .input(option.input)
+                    .inputTypo(option.inputTypo)
+                    .inputColor(option.inputColorHex)
+                    .placeholderPadding(
+                        HongSpacingInfo(
+                            top = 4f,
+                            bottom = 4f,
+                            left = 4f,
+                            right = 4f
+                        )
+                    )
+                    .placeholder(option.placeholder)
+                    .placeholderTypo(option.placeholderTypo)
+                    .placeholderColor(option.placeholderColorHex)
+                    .clearIconSize(option.clearIconSize)
+                    .clearIconRes(option.clearIconRes)
+                    .clearIconScaleType(option.clearIconScaleType)
+                    .clearIconMargin(option.clearIconMargin)
+                    .keyboardOption(option.keyboardOption)
+                    .onTextChanged(option.onTextChanged)
                     .applyOption()
             )
         }

@@ -21,7 +21,6 @@ enum class HongLayoutParam(val value: Int, val paramName: String) {
             }
         }
 
-        // TODO HONG 구조 변경
         fun HongLayoutParam.toHongLayoutParamValue(): Int {
             return when (this) {
                 MATCH_PARENT -> MATCH_PARENT.value

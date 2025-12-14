@@ -70,7 +70,6 @@ class SamplePickerComposeActivity : BaseActivity() {
                     .selectorColor(HongColor.GRAY_10.hex)
                     .onDismiss { showBottomSheet1 = false }
                     .onConfirm { selectedFirstOption, selectedSecondOption ->
-                        Log.d("TAG", "test here 111 selectedFirstOption = $selectedFirstOption, selectedSecondOption = $selectedSecondOption")
                         showBottomSheet1 = false
                     }
                     .applyOption(),
@@ -84,8 +83,7 @@ class SamplePickerComposeActivity : BaseActivity() {
                     .buttonText("선택")
                     .useDimClickClose(true)
                     .onDismiss { showBottomSheet2 = false }
-                    .onDirectSelect { selectedFirstOption, _ ->
-                        Log.d("TAG", "test here 222 = $selectedFirstOption")
+                    .onDirectSelect { _, _ ->
                     }
                     .applyOption(),
             )

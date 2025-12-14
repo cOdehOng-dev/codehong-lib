@@ -1,5 +1,6 @@
 package com.codehong.lib.sample.tab.segment
 
+import android.util.Log
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
@@ -44,6 +45,9 @@ class HongTabSegmentPlayground(
             )
             .backgroundColor(HongColor.GRAY_10)
             .tabTextList(listOf("추천", "계좌", "연락처"))
+            .onTabClick {
+                Log.d("TAG", "selected tab index: $it")
+            }
             .applyOption()
     }
     override val activity: PlaygroundActivity = playgroundActivity
@@ -101,7 +105,7 @@ class HongTabSegmentPlayground(
         }
 
         /** radius */
-        PlaygroundManager.addRadiusOptionPreview(
+        PlaygroundManager.addViewRadiusOption(
             activity = activity,
             radius = inject.radius,
         ) { selectRadius ->
@@ -196,7 +200,7 @@ class HongTabSegmentPlayground(
         }
 
         /** selectTypo */
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.selectTypo,
             label = "인디케이터 typo"
@@ -209,7 +213,7 @@ class HongTabSegmentPlayground(
         }
 
         /** unselectTypo */
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.unselectTypo,
             label = "기본 텍스트 typo"

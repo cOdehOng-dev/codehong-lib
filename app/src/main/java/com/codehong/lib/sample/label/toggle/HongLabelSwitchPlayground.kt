@@ -82,20 +82,6 @@ class HongLabelSwitchPlayground(
                 padding = inject.padding,
                 useWidth = false,
                 useHeight = false,
-                selectWidth = { selectWidth ->
-                    inject = HongLabelSwitchBuilder()
-                        .copy(inject)
-                        .width(selectWidth)
-                        .applyOption()
-                    callback.invoke(inject)
-                },
-                selectHeight = { selectHeight ->
-                    inject = HongLabelSwitchBuilder()
-                        .copy(inject)
-                        .height(selectHeight)
-                        .applyOption()
-                    callback.invoke(inject)
-                },
                 selectMargin = { selectMargin ->
                     inject = HongLabelSwitchBuilder()
                         .copy(inject)
@@ -143,7 +129,7 @@ class HongLabelSwitchPlayground(
             callback.invoke(inject)
         }
 
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.labelTypo,
             label = "label 폰트",
@@ -186,7 +172,7 @@ class HongLabelSwitchPlayground(
             callback.invoke(inject)
         }
 
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.labelTypo,
             label = "description 폰트",

@@ -30,15 +30,16 @@ import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongSpacing
 import com.codehong.library.widget.extensions.toColor
-import com.codehong.library.widget.icon.HongIcon
+import com.codehong.library.widget.icon.HongIconBuilder
+import com.codehong.library.widget.icon.HongIconCompose
 import com.codehong.library.widget.pretendardFontFamily
 import com.codehong.library.widget.rule.HongBorderInfo
-import com.codehong.library.widget.rule.HongIconType
 import com.codehong.library.widget.rule.HongInputState
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
+import com.codehong.library.widget.rule.icon.HongIconType
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.rule.typo.fontWeight
 import com.codehong.library.widget.rule.typo.size
@@ -235,16 +236,13 @@ fun HongTextFieldBorderSelect(
                             },
                         contentAlignment = Alignment.Center
                     ) {
-                        HongIcon(
-                            type = HongIconType.H20,
-                            resId = R.drawable.honglib_ic_20_arrow_down,
-                            iconColor = HongColor.GRAY_30,
+                        HongIconCompose(
+                            option = HongIconBuilder()
+                                .iconResId(R.drawable.honglib_ic_20_arrow_down)
+                                .iconType(HongIconType.H20)
+                                .iconColor(HongColor.GRAY_30)
+                                .applyOption()
                         )
-//                        Icon(
-//                            type = IconType.H20,
-//                            resId = R.drawable.honglib_ic_20_arrow_down,
-//                            color = SemanticColor.CONTENT_TERTIARY
-//                        )
                     }
                 }
             }

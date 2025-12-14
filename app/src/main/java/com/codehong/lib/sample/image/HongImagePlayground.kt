@@ -25,7 +25,7 @@ class HongImagePlayground(
                     left = 20f
                 )
             )
-            .imageUrl("https://images.unsplash.com/photo-1735832489994-96adfc4db2dd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+            .imageInfo("https://images.unsplash.com/photo-1735832489994-96adfc4db2dd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
             .radius(
                 HongRadiusInfo(
                     topLeft = 12,
@@ -82,12 +82,12 @@ class HongImagePlayground(
         PlaygroundManager.addLabelInputOptionPreview(
             activity = activity,
             label = "이미지 URL",
-            input = inject.imageUrl,
+            input = inject.imageInfo as? String,
         ) { inputText ->
             inject = HongImageBuilder()
                 .copy(inject)
-                .drawableResId(null)
-                .imageUrl(inputText)
+                .imageInfo(null)
+                .imageInfo(inputText)
                 .applyOption()
             callback.invoke(inject)
         }
@@ -96,12 +96,12 @@ class HongImagePlayground(
         PlaygroundManager.addLocalResourceOptionPreview(
             activity = activity,
             label = "로컬 이미지",
-            drawableResId = inject.drawableResId
+            drawableResId = inject.imageInfo as? Int
         ) { resId ->
             inject = HongImageBuilder()
                 .copy(inject)
-                .imageUrl(null)
-                .drawableResId(resId)
+                .imageInfo(null)
+                .imageInfo(resId)
                 .applyOption()
             callback.invoke(inject)
         }
@@ -145,7 +145,7 @@ class HongImagePlayground(
         }
 
         /** radius */
-        PlaygroundManager.addRadiusOptionPreview(
+        PlaygroundManager.addViewRadiusOption(
             activity = activity,
             radius = inject.radius,
         ) { selectRadius ->
@@ -189,7 +189,7 @@ class HongImagePlayground(
         val initial = scaleTypeList
             .firstOrNull { it == inject.scaleType }
             ?: HongScaleType.FIT_START
-        PlaygroundManager.addSelectOptionView(
+        PlaygroundManager.addViewSelectOption(
             activity = activity,
             initialText = initial.value,
             label = "scale type",
@@ -210,7 +210,7 @@ class HongImagePlayground(
         PlaygroundManager.addLocalResourceOptionPreview(
             activity = activity,
             label = "placeholder",
-            drawableResId = inject.drawableResId
+            drawableResId = inject.imageInfo as? Int
         ) { resId ->
             inject = HongImageBuilder()
                 .copy(inject)
@@ -223,7 +223,7 @@ class HongImagePlayground(
         PlaygroundManager.addLocalResourceOptionPreview(
             activity = activity,
             label = "error",
-            drawableResId = inject.drawableResId
+            drawableResId = inject.imageInfo as? Int
         ) { resId ->
             inject = HongImageBuilder()
                 .copy(inject)

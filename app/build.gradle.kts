@@ -16,6 +16,7 @@ dependencies {
 //    debugImplementation(project(":Widget"))
     implementation(project(":Widget"))
 //    implementation(codehonglibs.widget)
+//    implementation("com.codehong.library:widget:2.5.6")
 
     implementation(libs.androidx.multidex)
     implementation(libs.androidx.fragment.ktx)

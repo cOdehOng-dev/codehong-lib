@@ -39,7 +39,7 @@ class HongTextUnitPlayground(
             injectOption = previewOption,
             includeCommonOption = true
         ) {
-            previewOption = it.also { Log.e("TAG", "test here result = ${it.textOption.text}") }
+            previewOption = it
             executePreview()
         }
     }

@@ -2,7 +2,7 @@ package com.codehong.library.widget.rule
 
 enum class HongWidgetType(
     val value: String,
-    val allowPlayground: Boolean = false,
+    val allowPlayground: Boolean = false
 ) {
     TEXT("Text", true),
     TEXT_CHECK("TextCheck", true),
@@ -11,14 +11,13 @@ enum class HongWidgetType(
     TEXT_BADGE("TextBadge", true),
     TEXT_COUNT("TextCount", true),
     IMAGE("Image", true),
-    CLOSE_HEADER("CloseHeader", true),
+    HEADER_CLOSE("HeaderClose", true),
     TEXT_FILED("TextField", true),
-    UNDERLINE_TEXT_FIELD("UnderlineTextField", true),
-    TIMER_TEXT_FIELD("TimerTextField", true),
-    NUMBER_TEXT_FIELD("NumberTextField", true),
+    TEXT_FIELD_UNDERLINE("TextFieldUnderline", true),
+    TEXT_FIELD_TIMER("TextFieldTimer", true),
+    TEXT_FIELD_NUMBER("TextFieldNumber", true),
     TEXT_FIELD_BORDER("TextFieldBorder", true),
     TEXT_FIELD_BORDER_SELECT("TextFieldBorderSelect", true),
-    //    SEARCH_BAR("SearchBar", true),
     BUTTON_TEXT("ButtonText", true),
     BUTTON_SELECT("ButtonSelect", true),
     BUTTON_ICON("ButtonIcon", true),
@@ -40,8 +39,11 @@ enum class HongWidgetType(
     LABEL_CHECKBOX("LabelCheckbox", true),
     PICKER("Picker", false),
     BOTTOM_SHEET_SELECT("BottomSheetSelect", false),
-    GRAPH("Graph", true),
+    BOTTOM_SHEET_SWIPE("BottomSheetSwipe", false),
+    GRAPH_LINE("GraphLine", true),
     GRAPH_BAR("GraphBar", true),
+    ICON("Icon", true),
+    DRAG_AND_DROP("DragAndDrop", false),
     NO_VALUE("no_value");
 
     companion object {

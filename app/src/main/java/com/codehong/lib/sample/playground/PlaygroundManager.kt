@@ -2,9 +2,11 @@ package com.codehong.lib.sample.playground
 
 import android.content.Context
 import android.util.Log
+import android.view.View
 import com.codehong.lib.sample.R
 import com.codehong.lib.sample.playground.preview.HorizontalOptionView
 import com.codehong.lib.sample.playground.preview.QuarterInputOptionView
+import com.codehong.library.widget.Consts
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.extensions.toFigureFloat
 import com.codehong.library.widget.extensions.toFigureInt
@@ -12,7 +14,6 @@ import com.codehong.library.widget.extensions.toFigureString
 import com.codehong.library.widget.label.HongLabelBuilder
 import com.codehong.library.widget.label.HongLabelView
 import com.codehong.library.widget.label.input.HongLabelInputBuilder
-import com.codehong.library.widget.label.input.HongLabelInputOption
 import com.codehong.library.widget.label.input.HongLabelInputView
 import com.codehong.library.widget.label.select.HongLabelSelectInputBuilder
 import com.codehong.library.widget.label.select.HongLabelSelectInputView
@@ -30,25 +31,20 @@ import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.textfield.HongTextFieldBuilder
 import com.codehong.library.widget.toggleswitch.HongSwitchBuilder
-import com.codehong.library.widget.util.Const
 
 object PlaygroundManager {
 
     val widthHeightSizeList = listOf(
         HongLayoutParam.MATCH_PARENT.paramName,
         HongLayoutParam.WRAP_CONTENT.paramName,
-        Const.DIRECT_INPUT
+        Consts.DIRECT_INPUT
     )
 
     val hongColorList: List<HongColor> = HongColor.entries
-//    private val hongColorNameList: List<String> = hongColorList.map { it.colorName }
-//    private val hongColorHexList: List<String> = hongColorList.map { it.hex }
 
     val typographyList = HongTypo.entries
-    val typographyNameList = typographyList.map { it.styleName }
+    val typoNameList = typographyList.map { it.styleName }
 
     /**
      * 옵션 제목 뷰
@@ -66,7 +62,7 @@ object PlaygroundManager {
                 HongLabelBuilder()
                     .padding(
                         HongSpacingInfo(
-                            top = (if (useTopPadding) Const.PLAYGROUND_TOP_PADDING else 0).toFloat(),
+                            top = (if (useTopPadding) Consts.PLAYGROUND_TOP_PADDING else 0).toFloat(),
                         )
                     )
                     .label(label)
@@ -103,24 +99,24 @@ object PlaygroundManager {
             leftOptionView = useWidth.takeIf { it }?.let {
                 HongLabelSelectInputView(activity).apply {
                     val initialWidth =
-                        width.toHongLayoutValueToParam().ifEmpty { Const.DIRECT_INPUT }
+                        width.toHongLayoutValueToParam().ifEmpty { Consts.DIRECT_INPUT }
                     setSelectInputView(
                         HongLabelSelectInputBuilder()
                             .label("${label}width")
                             .description(description)
                             .buttonText(initialWidth)
                             .inputText(
-                                if (initialWidth == Const.DIRECT_INPUT) {
+                                if (initialWidth == Consts.DIRECT_INPUT) {
                                     width.toString()
                                 } else {
                                     initialWidth
                                 }
                             )
                             .selectList(widthHeightSizeList)
-                            .selectPosition(widthHeightSizeList.indexOf(initialWidth.ifEmpty { Const.DIRECT_INPUT }))
+                            .selectPosition(widthHeightSizeList.indexOf(initialWidth.ifEmpty { Consts.DIRECT_INPUT }))
                             .useDirectCallback(true)
                             .useOnlyNumber(true)
-                            .showInput(initialWidth == Const.DIRECT_INPUT)
+                            .showInput(initialWidth == Consts.DIRECT_INPUT)
                             .inputCallback { inputSize ->
                                 if (inputSize.isHongLayoutParam()) {
                                     return@inputCallback
@@ -149,24 +145,24 @@ object PlaygroundManager {
             rightOptionView = useHeight.takeIf { it }?.let {
                 HongLabelSelectInputView(activity).apply {
                     val initialHeight =
-                        height.toHongLayoutValueToParam().ifEmpty { Const.DIRECT_INPUT }
+                        height.toHongLayoutValueToParam().ifEmpty { Consts.DIRECT_INPUT }
                     setSelectInputView(
                         HongLabelSelectInputBuilder()
                             .label("${label}height")
                             .description(description)
                             .buttonText(initialHeight)
                             .inputText(
-                                if (initialHeight == Const.DIRECT_INPUT) {
+                                if (initialHeight == Consts.DIRECT_INPUT) {
                                     height.toString()
                                 } else {
                                     initialHeight
                                 }
                             )
                             .selectList(widthHeightSizeList)
-                            .selectPosition(widthHeightSizeList.indexOf(initialHeight.ifEmpty { Const.DIRECT_INPUT }))
+                            .selectPosition(widthHeightSizeList.indexOf(initialHeight.ifEmpty { Consts.DIRECT_INPUT }))
                             .useDirectCallback(true)
                             .useOnlyNumber(true)
-                            .showInput(initialHeight == Const.DIRECT_INPUT)
+                            .showInput(initialHeight == Consts.DIRECT_INPUT)
                             .inputCallback { inputSize ->
                                 if (inputSize.isHongLayoutParam()) {
                                     return@inputCallback
@@ -348,7 +344,7 @@ object PlaygroundManager {
     /**
      * radius
      */
-    fun addRadiusOptionPreview(
+    fun addViewRadiusOption(
         activity: PlaygroundActivity,
         radius: HongRadiusInfo,
         label: String = "",
@@ -362,10 +358,10 @@ object PlaygroundManager {
                 label = "${label}radius",
                 useTopPadding = useTopPadding,
                 description = description,
-                inputInit1 = Triple("topLeft", initRadius.topLeft.toFigureString(), true),
-                inputInit2 = Triple("topRight", initRadius.topRight.toFigureString(), true),
-                inputInit3 = Triple("bottomLeft", initRadius.bottomLeft.toFigureString(), true),
-                inputInit4 = Triple("bottomRight", initRadius.bottomRight.toFigureString(), true),
+                inputInit1 = Triple("topL", initRadius.topLeft.toFigureString(), true),
+                inputInit2 = Triple("topR", initRadius.topRight.toFigureString(), true),
+                inputInit3 = Triple("bottomL", initRadius.bottomLeft.toFigureString(), true),
+                inputInit4 = Triple("bottomR", initRadius.bottomRight.toFigureString(), true),
                 inputCallback1 = { topLeft ->
                     callback.invoke(
                         HongRadiusInfo(
@@ -433,20 +429,20 @@ object PlaygroundManager {
     ): HongLabelSelectInputView {
         return HongLabelSelectInputView(activity).apply {
             val colorOptionList = hongColorList.map { it.colorName }.toMutableList()
-            colorOptionList.add(0, Const.DIRECT_INPUT)
+            colorOptionList.add(0, Consts.DIRECT_INPUT)
             val initialColor = hongColorList.firstOrNull { it.hex == colorHex }
 
             setSelectInputView(
                 HongLabelSelectInputBuilder()
                     .padding(
                         HongSpacingInfo(
-                            top = if (useTopPadding) Const.PLAYGROUND_TOP_PADDING_FLOAT else 0f,
+                            top = if (useTopPadding) Consts.PLAYGROUND_TOP_PADDING_FLOAT else 0f,
                         )
                     )
                     .label("${label}color")
                     .description(description)
                     .placeholder("hexCode를 입력하세요. (ex: #ff000000)")
-                    .buttonText(if (!initialColor?.colorName.isNullOrEmpty()) initialColor?.colorName else Const.DIRECT_INPUT)
+                    .buttonText(if (!initialColor?.colorName.isNullOrEmpty()) initialColor?.colorName else Consts.DIRECT_INPUT)
                     .inputText(initialColor?.hex ?: (colorHex ?: ""))
                     .selectList(colorOptionList)
                     .selectPosition(if (initialColor != null) colorOptionList.indexOf(initialColor.colorName) else 0)
@@ -466,7 +462,7 @@ object PlaygroundManager {
                             hongColorList.firstOrNull { it.colorName == selectColor }
                                 ?: HongColor.BLACK_100
                         Log.e("TAG", "옵션 selectColor = $selectColor")
-                        if (selectColor == Const.DIRECT_INPUT) {
+                        if (selectColor == Consts.DIRECT_INPUT) {
                             showInput()
                             setInputText("")
                             callback.invoke("")
@@ -700,35 +696,22 @@ object PlaygroundManager {
                 .width(HongLayoutParam.MATCH_PARENT.value)
                 .padding(
                     HongSpacingInfo(
-                        top = (if (useTopPadding) Const.PLAYGROUND_TOP_PADDING else 0).toFloat(),
+                        top = (if (useTopPadding) Consts.PLAYGROUND_TOP_PADDING else 0).toFloat(),
                     )
                 )
                 .label(label)
+                .input(input)
                 .description(description)
-                .textFieldOption(
-                    HongTextFieldBuilder()
-                        .copy(HongLabelInputOption.DEFAULT_TEXT_FIELD)
-                        .height(48)
-                        .inputTextOption(
-                            HongTextBuilder()
-                                .width(HongLayoutParam.MATCH_PARENT.value)
-                                .typography(HongTypo.BODY_14)
-                                .color(HongColor.BLACK_100)
-                                .text(input)
-                                .applyOption()
-                        )
-                        .keyboardOption(
-                            Pair(
-                                if (useOnlyNumber) {
-                                    HongKeyboardType.NUMBER
-                                } else {
-                                    HongKeyboardType.TEXT
-                                }, HongKeyboardActionType.DONE
-                            )
-                        )
-                        .onTextChanged(callback)
-                        .applyOption()
+                .keyboardOption(
+                    Pair(
+                        if (useOnlyNumber) {
+                            HongKeyboardType.NUMBER
+                        } else {
+                            HongKeyboardType.TEXT
+                        }, HongKeyboardActionType.DONE
+                    )
                 )
+                .onTextChanged(callback)
                 .applyOption()
         )
     }
@@ -764,7 +747,7 @@ object PlaygroundManager {
             HongLabelSwitchBuilder()
                 .padding(
                     HongSpacingInfo(
-                        top = if (useTopPadding) Const.PLAYGROUND_TOP_PADDING_FLOAT else 0f
+                        top = if (useTopPadding) Consts.PLAYGROUND_TOP_PADDING_FLOAT else 0f
                     )
                 )
                 .label(label)
@@ -806,7 +789,7 @@ object PlaygroundManager {
         } else {
             drawableList.first()
         }
-        addSelectOptionView(
+        addViewSelectOption(
             activity = activity,
             initialText = initial,
             selectList = drawableList,
@@ -824,7 +807,7 @@ object PlaygroundManager {
         }
     }
 
-    fun addSelectOptionView(
+    fun addViewSelectOption(
         activity: PlaygroundActivity,
         initialText: String?,
         label: String,
@@ -865,7 +848,7 @@ object PlaygroundManager {
             HongLabelSelectInputBuilder()
                 .padding(
                     HongSpacingInfo(
-                        top = if (useTopPadding) Const.PLAYGROUND_TOP_PADDING_FLOAT else 0f
+                        top = if (useTopPadding) Consts.PLAYGROUND_TOP_PADDING_FLOAT else 0f
                     )
                 )
                 .label(label)
@@ -932,7 +915,7 @@ object PlaygroundManager {
             HongLabelSelectInputBuilder()
                 .padding(
                     HongSpacingInfo(
-                        top = if (useTopPadding) Const.PLAYGROUND_TOP_PADDING_FLOAT else 0f
+                        top = if (useTopPadding) Consts.PLAYGROUND_TOP_PADDING_FLOAT else 0f
                     )
                 )
                 .label(label)
@@ -950,29 +933,60 @@ object PlaygroundManager {
         )
     }
 
-    fun addSelectTypoOptionView(
+    fun addViewSelectTypoOption(
         activity: PlaygroundActivity,
         typo: HongTypo,
         label: String,
         description: String = "",
+        useTopPadding: Boolean = true,
         callback: (HongTypo) -> Unit
     ) {
         val initialTypography = typographyList.firstOrNull {
             it == typo
         } ?: HongTypo.BODY_14
-        addSelectOptionView(
+        addViewSelectOption(
             activity = activity,
             initialText = initialTypography.styleName,
-            selectList = typographyNameList,
+            selectList = typoNameList,
             selectedPosition = typographyList.indexOf(initialTypography),
             label = label,
             description = description,
             useDirectCallback = true,
-        ) { selectTypography, index ->
+            useTopPadding = useTopPadding
+        ) { selectTypography, _ ->
             val typography = typographyList.firstOrNull { it.styleName == selectTypography }
                     ?: HongTypo.BODY_16_B
             callback(typography)
         }
+    }
+
+    fun getSelectTypoOptionView(
+        activity: PlaygroundActivity,
+        typo: HongTypo,
+        label: String,
+        description: String = "",
+        useTopPadding: Boolean = true,
+        callback: (HongTypo) -> Unit
+    ): View {
+        val initialTypo = typographyList.firstOrNull {
+            it == typo
+        } ?: HongTypo.BODY_14
+
+        return selectOptionView(
+            activity = activity,
+            initialText = initialTypo.styleName,
+            label = label,
+            selectList = typoNameList,
+            selectedPosition = typographyList.indexOf(initialTypo),
+            description = description,
+            useDirectCallback = true,
+            useTopPadding = useTopPadding,
+            selectOptionCallback =  { selectTypography, _ ->
+                val typography = typographyList.firstOrNull { it.styleName == selectTypography }
+                    ?: HongTypo.BODY_16_B
+                callback(typography)
+            }
+        )
     }
 
 

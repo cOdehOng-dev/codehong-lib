@@ -11,11 +11,9 @@ import com.codehong.library.widget.label.HongLabelViewCompose
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
-import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.textfield.HongTextFieldBuilder
 import com.codehong.library.widget.textfield.HongTextFieldCompose
-import com.codehong.library.widget.textfield.HongTextFieldOption
 import com.codehong.library.widget.util.HongWidgetContainer
 
 @Composable
@@ -41,8 +39,53 @@ fun HongLabelInputCompose(
                     .descriptionTypo(option.descriptionTypo)
                     .applyOption()
             )
-            HongTextFieldCompose(option.textFieldOption)
-
+            HongTextFieldCompose(
+                HongTextFieldBuilder()
+                    .width(HongLayoutParam.MATCH_PARENT.value)
+                    .height(48)
+                    .margin(
+                        HongSpacingInfo(
+                            top = 10f
+                        )
+                    )
+                    .radius(
+                        HongRadiusInfo(
+                            topLeft = 10,
+                            topRight = 10,
+                            bottomLeft = 10,
+                            bottomRight = 10
+                        )
+                    )
+                    .padding(
+                        HongSpacingInfo(
+                            top = 11f,
+                            bottom = 11f,
+                            left = 10f,
+                            right = 10f
+                        )
+                    )
+                    .input(option.input)
+                    .inputTypo(option.inputTypo)
+                    .inputColor(option.inputColorHex)
+                    .placeholderPadding(
+                        HongSpacingInfo(
+                            top = 4f,
+                            bottom = 4f,
+                            left = 4f,
+                            right = 4f
+                        )
+                    )
+                    .placeholder(option.placeholder)
+                    .placeholderTypo(option.placeholderTypo)
+                    .placeholderColor(option.placeholderColorHex)
+                    .clearIconSize(option.clearIconSize)
+                    .clearIconRes(option.clearIconRes)
+                    .clearIconScaleType(option.clearIconScaleType)
+                    .clearIconMargin(option.clearIconMargin)
+                    .keyboardOption(option.keyboardOption)
+                    .onTextChanged(option.onTextChanged)
+                    .applyOption()
+            )
         }
     }
 }
@@ -62,29 +105,6 @@ fun PreviewHongLabelInputCompose() {
         )
         .label("레이블")
         .description("레이블 설명하는 테스트이에요.")
-        .textFieldOption(
-            HongTextFieldBuilder()
-                .copy(HongLabelInputOption.DEFAULT_TEXT_FIELD)
-                .margin(
-                    HongSpacingInfo(
-                        top = 10f
-                    )
-                )
-                .placeholderTextOption(
-                    HongTextBuilder()
-                        .copy(HongTextFieldOption.DEFAULT_PLACEHOLDER)
-                        .applyOption()
-                )
-                .inputTextOption(
-                    HongTextBuilder()
-                        .copy(HongTextFieldOption.DEFAULT_INPUT)
-                        .width(HongLayoutParam.MATCH_PARENT.value)
-                        .typography(HongTypo.BODY_14)
-                        .color(HongColor.BLACK_100)
-                        .applyOption()
-                )
-                .applyOption()
-        )
         .applyOption()
 
     HongLabelInputCompose(option)

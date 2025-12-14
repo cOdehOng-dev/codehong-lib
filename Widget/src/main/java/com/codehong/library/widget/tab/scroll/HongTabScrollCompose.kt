@@ -16,10 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.extensions.disableRippleClickable
 import com.codehong.library.widget.extensions.hongBackground
-import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongSpacing
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.rule.HongBorderInfo
+import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.text.HongTextBuilder
 import com.codehong.library.widget.text.HongTextCompose
@@ -43,8 +43,7 @@ fun HongTabScrollCompose(
         modifier = Modifier
             .horizontalScroll(scrollState)
             .hongSpacing(option.margin)
-            .hongWidth(option.width)
-            .hongHeight(option.height)
+            .hongWidth(HongLayoutParam.MATCH_PARENT.value)
             .hongSpacing(
                 HongSpacingInfo(
                     left = option.padding.left,
@@ -73,20 +72,6 @@ fun HongTabScrollCompose(
             ) {
                 Box(
                     modifier = Modifier
-//                        .hongWidth(
-//                            if (isSelected) {
-//                                option.selectTabTextOption.width
-//                            } else {
-//                                option.unselectTabTextOption.width
-//                            }
-//                        )
-//                        .hongHeight(
-//                            if (isSelected) {
-//                                option.selectTabTextOption.height
-//                            } else {
-//                                option.unselectTabTextOption.height
-//                            }
-//                        )
                         .hongBackground(
                             color = if (isSelected) {
                                 option.selectBackgroundColorHex

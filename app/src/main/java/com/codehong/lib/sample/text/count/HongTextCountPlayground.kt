@@ -63,5 +63,88 @@ class HongTextCountPlayground(
                 label
             )
         }
+
+        if (includeCommonOption) {
+            commonPreviewOption(
+                margin = inject.margin,
+                padding = inject.padding,
+                useWidth = false,
+                useHeight = false,
+                selectMargin = { selectMargin ->
+                    inject = HongTextCountBuilder()
+                        .copy(inject)
+                        .margin(selectMargin)
+                        .applyOption()
+                    callback.invoke(inject)
+                },
+                selectPadding = { selectPadding ->
+                    inject = HongTextCountBuilder()
+                        .copy(inject)
+                        .padding(selectPadding)
+                        .applyOption()
+                    callback.invoke(inject)
+                }
+            )
+        }
+
+        PlaygroundManager.addColorOptionPreview(
+            activity,
+            label = "카운트 텍스트 ",
+            colorHex = inject.countColorHex
+        ) {
+            inject = HongTextCountBuilder()
+                .copy(inject)
+                .countColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addViewSelectTypoOption(
+            activity,
+            typo = inject.countTypo,
+            label = "카운트 typo",
+        ) {
+            inject = HongTextCountBuilder()
+                .copy(inject)
+                .countTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addLabelInputOptionPreview(
+            activity,
+            input = inject.unitText,
+            label = "단위 텍스트",
+        ) {
+            inject = HongTextCountBuilder()
+                .copy(inject)
+                .unitText(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addColorOptionPreview(
+            activity,
+            label = "단위 텍스트 ",
+            colorHex = inject.unitColorHex
+        ) {
+            inject = HongTextCountBuilder()
+                .copy(inject)
+                .unitColor(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
+
+        PlaygroundManager.addViewSelectTypoOption(
+            activity,
+            typo = inject.unitTypo,
+            label = "단위 typo",
+        ) {
+            inject = HongTextCountBuilder()
+                .copy(inject)
+                .unitTypo(it)
+                .applyOption()
+            callback.invoke(inject)
+        }
     }
 }

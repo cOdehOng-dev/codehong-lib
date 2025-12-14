@@ -3,35 +3,28 @@ package com.codehong.lib.sample.closeheader
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
-import com.codehong.library.widget.header.HongCloseHeaderBuilder
-import com.codehong.library.widget.header.HongCloseHeaderOption
+import com.codehong.library.widget.header.HongHeaderCloseBuilder
+import com.codehong.library.widget.header.HongHeaderCloseOption
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
 
 class HongCloseHeaderPlayground(
     playgroundActivity: PlaygroundActivity
-) : BasePlayground<HongCloseHeaderOption> {
+) : BasePlayground<HongHeaderCloseOption> {
 
     companion object {
-        val DEFAULT_PREVIEW_OPTION = HongCloseHeaderBuilder()
-            .headerTitleTextOption(
-                HongTextBuilder()
-                    .text("헤더 제목")
-                    .typography(HongTypo.BODY_16_B)
-                    .color(HongColor.BLACK_100.hex)
-                    .applyOption()
-            )
-            .close {
-
-            }
+        val DEFAULT_PREVIEW_OPTION = HongHeaderCloseBuilder()
+            .title("헤더 제목")
+            .titleTypo(HongTypo.BODY_16_B)
+            .titleColor(HongColor.BLACK_100.hex)
+            .close {}
             .applyOption()
     }
 
     override val activity: PlaygroundActivity = playgroundActivity
-    override var previewOption: HongCloseHeaderOption = DEFAULT_PREVIEW_OPTION
-    override val widgetType: HongWidgetType = HongWidgetType.CLOSE_HEADER
+    override var previewOption: HongHeaderCloseOption = DEFAULT_PREVIEW_OPTION
+    override val widgetType: HongWidgetType = HongWidgetType.HEADER_CLOSE
 
     fun preview() {
         executePreview()
@@ -42,7 +35,7 @@ class HongCloseHeaderPlayground(
             label = "background",
             colorHex = previewOption.backgroundColorHex
         ) { colorHex ->
-            previewOption = HongCloseHeaderBuilder()
+            previewOption = HongHeaderCloseBuilder()
                 .copy(previewOption)
                 .backgroundColor(colorHex)
                 .applyOption()
@@ -52,17 +45,12 @@ class HongCloseHeaderPlayground(
         /** 헤더 제목 */
         PlaygroundManager.addLabelInputOptionPreview(
             activity = activity,
-            input = previewOption.headerTitleTextOption.text,
+            input = previewOption.title,
             label = "헤더 제목"
         ) { text ->
-            previewOption = HongCloseHeaderBuilder()
+            previewOption = HongHeaderCloseBuilder()
                 .copy(previewOption)
-                .headerTitleTextOption(
-                    HongTextBuilder()
-                        .copy(previewOption.headerTitleTextOption)
-                        .text(text)
-                        .applyOption()
-                )
+                .title(text)
                 .applyOption()
             executePreview()
         }
@@ -72,28 +60,22 @@ class HongCloseHeaderPlayground(
         PlaygroundManager.addColorOptionPreview(
             activity = activity,
             label = "text ",
-            colorHex = previewOption.headerTitleTextOption.colorHex
+            colorHex = previewOption.titleColorHex
         ) { selectHongColor ->
-            this.previewOption = HongCloseHeaderBuilder()
+            this.previewOption = HongHeaderCloseBuilder()
                 .copy(previewOption)
-                .headerTitleTextOption(
-                    HongTextBuilder()
-                        .copy(previewOption.headerTitleTextOption)
-                        .color(selectHongColor)
-                        .applyOption()
-                )
+                .titleColor(selectHongColor)
                 .applyOption()
             executePreview()
         }
 
         /** 텍스트 타이포그라피 */
-        val initialTypography = PlaygroundManager.typographyList.firstOrNull {
-            it == previewOption.headerTitleTextOption.typography
-        } ?: HongTypo.BODY_14_B
-        PlaygroundManager.addSelectOptionView(
+        val initialTypography = PlaygroundManager.typographyList
+            .firstOrNull { it == previewOption.titleTypo } ?: HongTypo.BODY_14_B
+        PlaygroundManager.addViewSelectOption(
             activity = activity,
             initialText = initialTypography.styleName,
-            selectList = PlaygroundManager.typographyNameList,
+            selectList = PlaygroundManager.typoNameList,
             selectedPosition = PlaygroundManager.typographyList.indexOf(initialTypography),
             label = "typo 설정",
             description = "헤더 제목의 타이포그라피를 설정해요.",
@@ -102,14 +84,9 @@ class HongCloseHeaderPlayground(
             val typography = PlaygroundManager.typographyList
                 .firstOrNull { it.styleName == selectTypography }
                 ?: HongTypo.BODY_16_B
-            previewOption = HongCloseHeaderBuilder()
+            previewOption = HongHeaderCloseBuilder()
                 .copy(previewOption)
-                .headerTitleTextOption(
-                    HongTextBuilder()
-                        .copy(previewOption.headerTitleTextOption)
-                        .typography(typography)
-                        .applyOption()
-                )
+                .titleTypo(typography)
                 .applyOption()
             executePreview()
         }

@@ -127,7 +127,7 @@ class HongTextButtonPlayground(
 
         if (useRadius) {
             /** radius */
-            PlaygroundManager.addRadiusOptionPreview(
+            PlaygroundManager.addViewRadiusOption(
                 activity = activity,
                 radius = inject.radius,
             ) { selectRadius ->
@@ -199,7 +199,7 @@ class HongTextButtonPlayground(
             callback.invoke(inject)
         }
 
-        PlaygroundManager.addSelectTypoOptionView(
+        PlaygroundManager.addViewSelectTypoOption(
             activity,
             typo = inject.textTypo,
             label = "버튼 텍스트 폰트",

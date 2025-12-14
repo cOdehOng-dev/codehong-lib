@@ -32,9 +32,8 @@ data class HongImageOption(
 
     override var useShapeCircle: Boolean = false
 
-    var drawableResId: Int? = null
 
-    var imageUrl: String? = null
+    var imageInfo: Any? = null
     var placeholder: Int? = null
     var error: Int? = null
     var onLoading: (() -> Unit)? = null
@@ -67,8 +66,7 @@ data class HongImageOption(
         if (border != other.border) return false
         if (shadow != other.shadow) return false
         if (useShapeCircle != other.useShapeCircle) return false
-        if (drawableResId != other.drawableResId) return false
-        if (imageUrl != other.imageUrl) return false
+        if (imageInfo != other.imageInfo) return false
         if (placeholder != other.placeholder) return false
         if (error != other.error) return false
         if (onLoading != other.onLoading) return false
@@ -95,8 +93,7 @@ data class HongImageOption(
         result = 31 * result + border.hashCode()
         result = 31 * result + shadow.hashCode()
         result = 31 * result + useShapeCircle.hashCode()
-        result = 31 * result + (drawableResId ?: 0)
-        result = 31 * result + (imageUrl?.hashCode() ?: 0)
+        result = 31 * result + (imageInfo?.hashCode() ?: 0)
         result = 31 * result + (placeholder ?: 0)
         result = 31 * result + (error ?: 0)
         result = 31 * result + (onLoading?.hashCode() ?: 0)
@@ -123,8 +120,7 @@ data class HongImageOption(
                 "border=$border, " +
                 "shadow=$shadow, " +
                 "useShapeCircle=$useShapeCircle, " +
-                "drawableResId=$drawableResId, " +
-                "imageUrl=$imageUrl, " +
+                "imageInfo=$imageInfo, " +
                 "placeholder=$placeholder, " +
                 "error=$error, " +
                 "onLoading=$onLoading, " +

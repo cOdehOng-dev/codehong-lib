@@ -1,0 +1,27 @@
+package com.codehong.library.widget.icon
+
+import androidx.compose.runtime.Composable
+import com.codehong.library.widget.image.HongImageBuilder
+import com.codehong.library.widget.image.HongImageCompose
+import com.codehong.library.widget.util.HongWidgetNoneClickContainer
+
+@Composable
+fun HongIconCompose(
+    option: HongIconOption
+) {
+    val containerOption = HongIconBuilder()
+        .padding(option.padding)
+        .margin(option.margin)
+        .applyOption()
+    HongWidgetNoneClickContainer(containerOption) {
+        HongImageCompose(
+            HongImageBuilder()
+                .width(option.iconType.size)
+                .height(option.iconType.size)
+                .imageInfo(option.iconResId)
+                .imageColor(option.iconColorHex)
+                .scaleType(option.iconScaleType)
+                .applyOption()
+        )
+    }
+}

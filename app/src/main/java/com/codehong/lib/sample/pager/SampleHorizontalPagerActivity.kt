@@ -155,7 +155,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
                                         HongImageBuilder()
                                             .width(HongLayoutParam.MATCH_PARENT.value)
                                             .height(150)
-                                            .imageUrl(imageUrl)
+                                            .imageInfo(imageUrl)
                                             .radius(
                                                 HongRadiusInfo(
                                                     all = 12
@@ -182,7 +182,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
                                         HongImageBuilder()
                                             .width(HongLayoutParam.MATCH_PARENT.value)
                                             .height(150)
-                                            .imageUrl(imageUrl)
+                                            .imageInfo(imageUrl)
                                             .radius(
                                                 HongRadiusInfo(
                                                     all = 12
@@ -208,7 +208,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
                                     HongImageBuilder()
                                         .width(HongLayoutParam.MATCH_PARENT.value)
                                         .height(150)
-                                        .imageUrl(imageUrl)
+                                        .imageInfo(imageUrl)
                                         .radius(
                                             HongRadiusInfo(
                                                 all = 12
@@ -235,7 +235,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
                                         HongImageBuilder()
                                             .width(HongLayoutParam.MATCH_PARENT.value)
                                             .height(250)
-                                            .imageUrl(imageUrl)
+                                            .imageInfo(imageUrl)
                                             .radius(
                                                 HongRadiusInfo(
                                                     all = 12
@@ -262,7 +262,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
                                         HongImageBuilder()
                                             .width(HongLayoutParam.MATCH_PARENT.value)
                                             .height(150)
-                                            .imageUrl(imageUrl)
+                                            .imageInfo(imageUrl)
                                             .radius(
                                                 HongRadiusInfo(
                                                     all = 12
@@ -289,7 +289,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
                                         HongImageBuilder()
                                             .width(HongLayoutParam.MATCH_PARENT.value)
                                             .height(150)
-                                            .imageUrl(imageUrl)
+                                            .imageInfo(imageUrl)
                                             .radius(
                                                 HongRadiusInfo(
                                                     all = 12
@@ -327,7 +327,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
                                 option = HongImageBuilder()
                                     .width(HongLayoutParam.MATCH_PARENT.value)
                                     .height(150)
-                                    .imageUrl(imageUrl)
+                                    .imageInfo(imageUrl)
                                     .radius(
                                         HongRadiusInfo(
                                             all = 12
@@ -351,7 +351,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
                                 option = HongImageBuilder()
                                     .width(HongLayoutParam.MATCH_PARENT.value)
                                     .height(150)
-                                    .imageUrl(imageUrl)
+                                    .imageInfo(imageUrl)
                                     .radius(
                                         HongRadiusInfo(
                                             all = 12
@@ -375,7 +375,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
                                 option = HongImageBuilder()
                                     .width(HongLayoutParam.MATCH_PARENT.value)
                                     .height(150)
-                                    .imageUrl(imageUrl)
+                                    .imageInfo(imageUrl)
                                     .radius(
                                         HongRadiusInfo(
                                             all = 12
@@ -399,7 +399,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
                                 option = HongImageBuilder()
                                     .width(HongLayoutParam.MATCH_PARENT.value)
                                     .height(250)
-                                    .imageUrl(imageUrl)
+                                    .imageInfo(imageUrl)
                                     .radius(
                                         HongRadiusInfo(
                                             all = 12
@@ -423,7 +423,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
                                 option = HongImageBuilder()
                                     .width(HongLayoutParam.MATCH_PARENT.value)
                                     .height(150)
-                                    .imageUrl(imageUrl)
+                                    .imageInfo(imageUrl)
                                     .radius(
                                         HongRadiusInfo(
                                             all = 12
@@ -447,7 +447,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
                                 option = HongImageBuilder()
                                     .width(HongLayoutParam.MATCH_PARENT.value)
                                     .height(150)
-                                    .imageUrl(imageUrl)
+                                    .imageInfo(imageUrl)
                                     .radius(
                                         HongRadiusInfo(
                                             all = 12

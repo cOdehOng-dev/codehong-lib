@@ -44,7 +44,7 @@ fun HongTextCheckCompose(
                             right = 8f
                         )
                     )
-                    .drawableResId(R.drawable.honglib_ic_check)
+                    .imageInfo(R.drawable.honglib_ic_check)
                     .imageColor(
                         if (isChecked) option.checkColor
                         else option.uncheckColor
@@ -62,7 +62,7 @@ fun HongTextCheckCompose(
                 HongImageBuilder()
                     .width(option.arrowSize)
                     .height(option.arrowSize)
-                    .drawableResId(R.drawable.honglib_ic_arrow_right)
+                    .imageInfo(R.drawable.honglib_ic_arrow_right)
                     .imageColor(option.textOption.colorHex)
                     .scaleType(HongScaleType.CENTER_INSIDE)
                     .applyOption()

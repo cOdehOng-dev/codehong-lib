@@ -2,7 +2,6 @@ package com.codehong.lib.sample.calendar
 
 import android.os.Bundle
 import com.codehong.lib.sample.SampleConst
-import com.codehong.lib.sample.SampleConst.koreanHolidayList
 import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.lib.sample.databinding.ActivitySampleCalendarBinding
 import com.codehong.library.widget.calendar.HongCalendarBuilder
@@ -14,6 +13,7 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.util.HongDateUtil
 import com.codehong.library.widget.util.HongToastUtil
 
 class SampleCalendarActivity : BaseActivity() {
@@ -129,7 +129,7 @@ class SampleCalendarActivity : BaseActivity() {
             .spacingHorizontal(16)
             .backgroundColor(HongColor.WHITE_100.hex)
             .bottomSpacingWeek(20)
-            .holidayList(koreanHolidayList)
+            .holidayList(HongDateUtil.KOREAN_HOLIDAY_LIST)
             .dayOfWeekBottomLineColorHex("#eeeeee")
             .onSelected { startDate, endDate ->
                 if (startDate == null || endDate == null) {

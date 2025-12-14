@@ -75,7 +75,7 @@ class HongTextUpDownView @JvmOverloads constructor(
                             color = option.borderColorHex
                         )
                     )
-                    .drawableResId(R.drawable.honglib_ic_minus)
+                    .imageInfo(R.drawable.honglib_ic_minus)
                     .onClick {
                         amount -= option.gap
                         option.onResult(amount)
@@ -116,7 +116,7 @@ class HongTextUpDownView @JvmOverloads constructor(
                             color = option.borderColorHex
                         )
                     )
-                    .drawableResId(R.drawable.honglib_ic_plus)
+                    .imageInfo(R.drawable.honglib_ic_plus)
                     .onClick {
                         amount += option.gap
                         option.onResult(amount)

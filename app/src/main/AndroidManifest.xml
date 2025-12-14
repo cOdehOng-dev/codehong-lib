@@ -56,9 +56,9 @@
             android:name=".layout.fadeanimheader.FadeAnimHeaderLayoutActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".textfield.SampleTextFieldActivity"/>
-        <activity android:name=".textfield.underline.SampleUnderlineTextFieldActivity"/>
-        <activity android:name=".textfield.number.SampleNumberTextFieldActivity"/>
-        <activity android:name=".textfield.timer.SampleTimerTextFieldActivity"/>
+        <activity android:name=".textfield.underline.SampleTextFieldUnderlineActivity"/>
+        <activity android:name=".textfield.number.SampleTextFieldNumberActivity"/>
+        <activity android:name=".textfield.timer.SampleTextFieldTimerActivity"/>
         <activity android:name=".button.text.SampleTextButtonActivity"/>
         <activity android:name=".button.select.SampleSelectButtonActivity"/>
         <activity android:name=".image.SampleImageActivity"/>
@@ -103,10 +103,14 @@
         <activity android:name=".textfield.border.SampleTextFieldBorderActivity"/>
 
         <activity android:name=".bottomsheet.SampleBottomSheetSelectActivity"/>
+        <activity android:name=".bottomsheet.SampleBottomSheetSwipeActivity"/>
         <activity android:name=".textfield.borderselect.SampleTextFieldBorderSelectActivity"/>
 
         <activity android:name=".graph.SampleGraphLineActivity"/>
         <activity android:name=".graph.SampleGraphBarActivity"/>
+
+        <activity android:name=".icon.SampleIconActivity"/>
+        <activity android:name=".draganddrop.SampleDragAndDropActivity"/>
     </application>
 
 </manifest>
