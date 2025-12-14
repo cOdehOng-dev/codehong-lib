@@ -258,7 +258,7 @@ fun HongTextFieldBorderCompose(
                                 HongImageBuilder()
                                     .width(20)
                                     .height(20)
-                                    .drawableResId(R.drawable.honglib_ic_20_circle_close_fill)
+                                    .imageInfo(R.drawable.honglib_ic_20_circle_close_fill)
                                     .applyOption()
                             )
                         }

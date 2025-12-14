@@ -151,7 +151,7 @@ fun HongNumberTextFieldCompose(
                             .width(option.clearIconSize)
                             .height(option.clearIconSize)
                             .margin(option.clearIconMargin)
-                            .drawableResId(option.clearIconRes)
+                            .imageInfo(option.clearIconRes)
                             .onClick {
                                 textFieldValue = TextFieldValue("")
                             }

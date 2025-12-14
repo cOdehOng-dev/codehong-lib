@@ -55,7 +55,7 @@ class HongImageView @JvmOverloads constructor(
             val transformation = option.radius.toRoundedCornersTransformation(context)
 
             val request = ImageRequest.Builder(context)
-                .data(option.imageUrl ?: option.drawableResId)
+                .data(option.imageInfo)
                 .target(this)
                 .crossfade(true)
                 .transformations(transformation)

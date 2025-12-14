@@ -18,7 +18,7 @@ fun HongIconCompose(
             HongImageBuilder()
                 .width(option.iconType.size)
                 .height(option.iconType.size)
-                .drawableResId(option.iconResId)
+                .imageInfo(option.iconResId)
                 .imageColor(option.iconColorHex)
                 .scaleType(option.iconScaleType)
                 .applyOption()

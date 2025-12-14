@@ -4,7 +4,9 @@ import androidx.annotation.DrawableRes
 
 data class FoodItem(
     val id: Int,
-    val name: String,
-    val price: Double,
+    val storeName: String,
+    val prdName: String,
+    val price: Int,
+    val discountPer: String,
     @DrawableRes val image: Int
 )

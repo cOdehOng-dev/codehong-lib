@@ -13,12 +13,8 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
     override val builder: HongImageBuilder = this
     override val option: HongImageOption = HongImageOption()
 
-    fun drawableResId(drawableResId: Int?) = apply {
-        option.drawableResId = drawableResId
-    }
-
-    fun imageUrl(imageUrl: String?) = apply {
-        option.imageUrl = imageUrl
+    fun imageInfo(imageInfo: Any?) = apply {
+        option.imageInfo = imageInfo
     }
 
     fun radius(radiusInfo: HongRadiusInfo) = apply {
@@ -89,8 +85,7 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
             .backgroundColor(inject.backgroundColorHex)
             .border(inject.border)
             .useShapeCircle(inject.useShapeCircle)
-            .drawableResId(inject.drawableResId)
-            .imageUrl(inject.imageUrl)
+            .imageInfo(inject.imageInfo)
             .placeholder(inject.placeholder)
             .error(inject.error)
             .onLoading(inject.onLoading)

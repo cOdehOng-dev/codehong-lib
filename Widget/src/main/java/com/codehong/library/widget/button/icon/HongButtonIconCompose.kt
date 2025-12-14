@@ -85,7 +85,7 @@ fun HongButtonIconCompose(
                     HongImageBuilder()
                         .width(iconSize)
                         .height(iconSize)
-                        .drawableResId(option.iconResId)
+                        .imageInfo(option.iconResId)
                         .imageColor(iconColorState)
                         .applyOption()
                 )

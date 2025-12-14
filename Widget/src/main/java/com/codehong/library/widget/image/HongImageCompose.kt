@@ -14,25 +14,14 @@ import com.codehong.library.widget.extensions.hongSpacing
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.rule.HongScaleType.Companion.toContentScale
-import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toRoundedCornersTransformation
 import com.codehong.library.widget.util.HongWidgetContainer
 
 @Composable
 fun HongImageCompose(
     option: HongImageOption,
 ) {
-    val hasUrl = !option.imageUrl.isNullOrEmpty()
-    if (option.drawableResId == null && !hasUrl) {
-        return
-    }
-
     HongWidgetContainer(option) {
         val context = LocalContext.current
-        val imageInfo = if (hasUrl) {
-            option.imageUrl
-        } else {
-            option.drawableResId
-        }
         AsyncImage(
             modifier = Modifier
                 .hongWidth(option.width)
@@ -46,7 +35,7 @@ fun HongImageCompose(
                 )
                 .hongSpacing(option.padding),
             model = ImageRequest.Builder(context)
-                .data(imageInfo)
+                .data(option.imageInfo)
                 .placeholder(
                     option.placeholder?.let {
                         ContextCompat.getDrawable(
@@ -63,7 +52,7 @@ fun HongImageCompose(
                         )
                     }
                 )
-                .transformations(option.radius.toRoundedCornersTransformation(context))
+//                .transformations(option.radius.toRoundedCornersTransformation(context))
                 .fallback(R.color.honglib_color_transparent)
                 .memoryCachePolicy(option.memoryCache)
                 .diskCachePolicy(option.diskCache)

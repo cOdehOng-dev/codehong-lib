@@ -70,7 +70,7 @@ fun HongHeaderCloseCompose(
                     .width(20)
                     .height(20)
                     .scaleType(HongScaleType.CENTER_CROP)
-                    .drawableResId(R.drawable.honglib_ic_close)
+                    .imageInfo(R.drawable.honglib_ic_close)
                     .imageColor(option.closeIconColorHex)
                     .useShapeCircle(true)
                     .applyOption()

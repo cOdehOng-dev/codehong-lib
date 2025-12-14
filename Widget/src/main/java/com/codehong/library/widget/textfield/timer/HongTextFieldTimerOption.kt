@@ -48,7 +48,7 @@ data class HongTextFieldTimerOption(
                     right = 5f
                 )
             )
-            .drawableResId(R.drawable.honglib_ic_close)
+            .imageInfo(R.drawable.honglib_ic_close)
             .applyOption()
 
         val DEFAULT_COUNT_DOWN_TEXT = HongTextBuilder()

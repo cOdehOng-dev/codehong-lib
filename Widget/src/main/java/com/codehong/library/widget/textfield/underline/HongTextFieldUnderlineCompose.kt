@@ -121,7 +121,7 @@ fun HongUnderlineTextFieldCompose(
                             .width(option.clearIconSize)
                             .height(option.clearIconSize)
                             .margin(option.clearIconMargin)
-                            .drawableResId(option.clearIconRes)
+                            .imageInfo(option.clearIconRes)
                             .onClick {
                                 inputText = ""
                             }

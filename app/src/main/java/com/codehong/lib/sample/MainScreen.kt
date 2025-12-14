@@ -32,6 +32,7 @@ import com.codehong.lib.sample.calendar.SampleCalendarComposeActivity
 import com.codehong.lib.sample.captureshare.SampleCaptureShareActivity
 import com.codehong.lib.sample.checkbox.SampleCheckboxActivity
 import com.codehong.lib.sample.closeheader.SampleCloseHeaderActivity
+import com.codehong.lib.sample.draganddrop.SampleDragAndDropActivity
 import com.codehong.lib.sample.dynamicisland.SampleDynamicIslandActivity
 import com.codehong.lib.sample.graph.SampleGraphBarActivity
 import com.codehong.lib.sample.graph.SampleGraphLineActivity
@@ -730,7 +731,13 @@ fun MainScreen(
                                         }
 
                                         HongWidgetType.DRAG_AND_DROP -> {
-
+                                            Intent(activity, SampleDragAndDropActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.DRAG_AND_DROP.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
                                         }
 
                                         else -> {

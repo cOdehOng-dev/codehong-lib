@@ -153,7 +153,7 @@ fun HongPickerCompose(
                             option = HongImageBuilder()
                                 .width(24)
                                 .height(24)
-                                .drawableResId(R.drawable.honglib_ic_close)
+                                .imageInfo(R.drawable.honglib_ic_close)
                                 .onClick { option.onDismiss() }
                                 .applyOption()
                         )

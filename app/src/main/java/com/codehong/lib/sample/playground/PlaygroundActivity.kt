@@ -301,7 +301,7 @@ class PlaygroundActivity : BaseActivity() {
                                     option = HongImageBuilder()
                                         .width(HongLayoutParam.MATCH_PARENT.value)
                                         .height(150)
-                                        .imageUrl(imageUrl)
+                                        .imageInfo(imageUrl)
                                         .radius(
                                             HongRadiusInfo(
                                                 all = 12

@@ -23,7 +23,7 @@ class SampleImageActivity : BaseSampleMixActivity() {
                 left = 20f
             )
         )
-        .drawableResId(R.drawable.honglib_ic_20_close)
+        .imageInfo(R.drawable.honglib_ic_20_close)
         .scaleType(HongScaleType.CENTER_CROP)
         .applyOption()
 
@@ -36,7 +36,7 @@ class SampleImageActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .drawableResId(R.drawable.honglib_ic_20_close)
+        .imageInfo(R.drawable.honglib_ic_20_close)
         .scaleType(HongScaleType.CENTER_CROP)
         .applyOption()
 
@@ -49,7 +49,7 @@ class SampleImageActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .drawableResId(R.drawable.honglib_ic_check)
+        .imageInfo(R.drawable.honglib_ic_check)
         .scaleType(HongScaleType.CENTER_CROP)
         .imageColor(HongColor.MAIN_ORANGE_100)
         .applyOption()
@@ -62,7 +62,7 @@ class SampleImageActivity : BaseSampleMixActivity() {
                 left = 20f
             )
         )
-        .drawableResId(R.drawable.honglib_ic_20_close)
+        .imageInfo(R.drawable.honglib_ic_20_close)
         .scaleType(HongScaleType.CENTER_CROP)
         .applyOption()
 
@@ -75,7 +75,7 @@ class SampleImageActivity : BaseSampleMixActivity() {
                 bottom = 20f
             )
         )
-        .imageUrl("https://images.unsplash.com/photo-1735832489994-96adfc4db2dd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+        .imageInfo("https://images.unsplash.com/photo-1735832489994-96adfc4db2dd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
         .radius(
             HongRadiusInfo(
                 topLeft = 12,
@@ -105,7 +105,7 @@ class SampleImageActivity : BaseSampleMixActivity() {
                 left = 20f
             )
         )
-        .imageUrl(
+        .imageInfo(
             "https://images.unsplash.com/photo-173583248" +
                     "b=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         )
