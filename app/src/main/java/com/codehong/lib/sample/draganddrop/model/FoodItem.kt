@@ -1,4 +1,4 @@
-package com.codehong.lib.sample.draganddrop
+package com.codehong.lib.sample.draganddrop.model
 
 import androidx.annotation.DrawableRes
 

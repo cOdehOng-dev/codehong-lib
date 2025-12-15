@@ -12,10 +12,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.R
+import com.codehong.lib.sample.draganddrop.model.FoodItem
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.image.HongImageCompose
 import com.codehong.library.widget.rule.HongLayoutParam
@@ -30,7 +30,6 @@ import java.text.DecimalFormat
 fun FoodItemContent(
     foodItem: FoodItem
 ) {
-    val context = LocalContext.current
     Box(
         modifier = Modifier
             .background(
