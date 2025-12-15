@@ -1,6 +1,7 @@
 package com.codehong.lib.sample.base
 
 import android.os.Bundle
+import android.util.Log
 import androidx.compose.runtime.Composable
 import com.codehong.lib.sample.SampleConst
 import com.codehong.lib.sample.databinding.ActivityBaseSampleComposeBinding
@@ -21,6 +22,7 @@ abstract class BaseSampleComposeActivity : BaseActivity() {
         widgetType = intent.getStringExtra(SampleConst.WIDGET_TYPE).toHongWidgetType()
 
         if (widgetType == HongWidgetType.NO_VALUE) {
+            Log.e("TAG", "Invalid widget type")
             finish()
             return
         }

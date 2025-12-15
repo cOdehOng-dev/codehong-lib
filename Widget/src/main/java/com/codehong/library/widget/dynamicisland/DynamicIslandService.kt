@@ -10,19 +10,27 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
 import android.view.WindowManager
-import android.view.animation.AnticipateInterpolator
-import android.view.animation.OvershootInterpolator
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
-import com.codehong.library.widget.databinding.HonglibViewDynamicIslandBinding
-import com.codehong.library.widget.extensions.dpToPx
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.ComposeView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.setViewTreeLifecycleOwner
+import androidx.lifecycle.setViewTreeViewModelStoreOwner
+import androidx.savedstate.SavedStateRegistry
+import androidx.savedstate.SavedStateRegistryController
+import androidx.savedstate.SavedStateRegistryOwner
+import androidx.savedstate.setViewTreeSavedStateRegistryOwner
+import com.codehong.library.widget.dynamicisland.DynamicIslandType.Companion.toStateMessage
+import com.codehong.library.widget.dynamicisland.DynamicIslandType.Companion.toType
 import java.lang.ref.WeakReference
 
-class DynamicIslandService : Service() {
+class DynamicIslandService :
+    Service(), SavedStateRegistryOwner, ViewModelStoreOwner {
 
     companion object {
         var isRunning = false
@@ -31,36 +39,41 @@ class DynamicIslandService : Service() {
             get() = _instance?.get()
     }
 
-    private lateinit var binding: HonglibViewDynamicIslandBinding
+    private val lifecycleRegistry by lazy { LifecycleRegistry(this) }
+    private val savedStateRegistryController by lazy { SavedStateRegistryController.create(this) }
+    override val viewModelStore by lazy { ViewModelStore() }
 
-    private var params: WindowManager.LayoutParams? = null
+    override val lifecycle get() = lifecycleRegistry
+    override val savedStateRegistry: SavedStateRegistry get() = savedStateRegistryController.savedStateRegistry
+
     private var windowManager: WindowManager? = null
-    private var dynamicIslandView: View? = null
+    private var params: WindowManager.LayoutParams? = null
+    private var composeView: ComposeView? = null
 
-    private var productStartTime = 0L
-    private var dispEndTime = 0L
-    private var link: String? = null
+    private var islandInfo by mutableStateOf<DynamicIslandInfo?>(null)
+    private var isExpanded by mutableStateOf(false)
+    private var timeTextSmall by mutableStateOf("")
+    private var timeTextLarge by mutableStateOf("")
 
-    private var isExpanded = false
+    private var type: DynamicIslandType = DynamicIslandType.LODGING
 
     private val handler = Handler(Looper.getMainLooper())
-
     private val checkRunnable = object : Runnable {
         override fun run() {
+            val info = islandInfo ?: return
             val now = System.currentTimeMillis()
-            if (now >= dispEndTime) {
-                remove()
+
+            if (now >= info.dispEndTime) {
                 if (isExpanded) {
-                    collapseExpandDynamicIsland {
-                        removeDynamicIsland()
-                    }
+                    isExpanded = false
+                    handler.postDelayed({ removeDynamicIsland() }, 400)
                 } else {
-                    collapseSmallDynamicIsland()
+                    removeDynamicIsland()
                 }
             } else {
-                val remaining = productStartTime - now
-                binding.tvSmallState.text = getStateMessage(remaining, true)
-                binding.tvExpandState.text = getStateMessage(remaining, false)
+                val remaining = info.startTime - now
+                timeTextSmall =  type.toStateMessage(remaining, true)
+                timeTextLarge = type.toStateMessage(remaining, false)
                 handler.postDelayed(this, 1000)
             }
         }
@@ -68,17 +81,38 @@ class DynamicIslandService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+        savedStateRegistryController.performRestore(null)
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
         isRunning = true
         _instance = WeakReference(this)
-        this.windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        binding = HonglibViewDynamicIslandBinding.inflate(LayoutInflater.from(this))
+        windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        setupComposeView()
+    }
 
-        this.isExpanded = false
-        binding.clExpandedContent.visibility = View.GONE
-        binding.llSmallContent.visibility = View.VISIBLE
+    private fun setupComposeView() {
+        composeView = ComposeView(this).apply {
+            setViewTreeLifecycleOwner(this@DynamicIslandService)
+            setViewTreeSavedStateRegistryOwner(this@DynamicIslandService)
+            setViewTreeViewModelStoreOwner(this@DynamicIslandService)
+
+            setContent {
+                DynamicIslandScreen(
+                    isExpanded = isExpanded,
+                    smallText = timeTextSmall,
+                    largeText = timeTextLarge,
+                    info = islandInfo,
+                    onExpand = { expandWindow() },
+                    onCollapse = { collapseWindow() },
+                    onLinkClick = { executeLandingLink() }
+                )
+            }
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+
         val info = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent?.getParcelableExtra(
                 DynamicIslandConst.DYNAMIC_ISLAND_INFO,
@@ -89,49 +123,25 @@ class DynamicIslandService : Service() {
             intent?.getParcelableExtra(DynamicIslandConst.DYNAMIC_ISLAND_INFO)
         } ?: return START_NOT_STICKY
 
-        this.productStartTime = info.startTime
-        this.dispEndTime = info.dispEndTime
-        this.link = info.link
+        reset(info)
 
-        if (dynamicIslandView == null) {
-            showDynamicIsland(info)
+        if (composeView?.parent == null) {
+            showDynamicIsland()
         }
-
-        handler.post(checkRunnable)
 
         return START_STICKY
     }
 
-    override fun onDestroy() {
-        isRunning = false
-        _instance = null
-        handler.removeCallbacks(checkRunnable)
-        remove()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            stopForeground(STOP_FOREGROUND_DETACH)
-        } else {
-            @Suppress("DEPRECATION")
-            stopForeground(true)
-        }
-        super.onDestroy()
-    }
-
-    override fun onBind(intent: Intent?): IBinder? = null
-
     fun reset(info: DynamicIslandInfo?) {
         if (info == null) return
-
-        this.productStartTime = info.startTime
-        this.dispEndTime = info.dispEndTime
-        this.link = info.link
-
-        setDynamicIslandContent(info)
+        this.islandInfo = info
+        this.type = info.type.toType()
 
         handler.removeCallbacks(checkRunnable)
         handler.post(checkRunnable)
     }
 
-    private fun showDynamicIsland(info: DynamicIslandInfo) {
+    private fun showDynamicIsland() {
         this.params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -141,51 +151,37 @@ class DynamicIslandService : Service() {
                     WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             PixelFormat.TRANSLUCENT
         ).apply {
-            this.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
-            this.y = 10
+            gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
+            y = 10
         }
-        dynamicIslandView = binding.root
-        windowManager?.addView(dynamicIslandView, params)
-
-        // 컨텐츠 세팅
-        setDynamicIslandContent(info)
-
-        with(binding.llSmallContent) {
-            setOnClickListener {
-                executeLandingLink()
-            }
-            setOnLongClickListener {
-                expandDynamicIsland()
-                true
-            }
-        }
-
-        binding.clExpandedContent.setOnClickListener {
-            collapseExpandDynamicIsland {
-                executeLandingLink()
-            }
-        }
-
-        binding.flRoot.setOnClickListener {
-            collapseExpandDynamicIsland()
-        }
+        windowManager?.addView(composeView, params)
     }
 
-    private fun setDynamicIslandContent(info: DynamicIslandInfo) {
-        binding.tvAppName.text = "HONG AIR"
-        binding.tvFrom.text = info.fromCity
-        binding.tvTo.text = info.toCity
+    // WindowManager Layout Params 업데이트 로직
+    private fun expandWindow() {
+        if (isExpanded) return
+        // 1. Window 크기를 먼저 키움 (터치 영역 확보)
+        params?.height = WindowManager.LayoutParams.MATCH_PARENT
+        windowManager?.updateViewLayout(composeView, params)
+        // 2. Compose 상태 변경 (애니메이션 시작)
+        isExpanded = true
+    }
 
-        val requestOptions = RequestOptions()
-            .transform(RoundedCorners(this.dpToPx(10f)))
-
-        Glide.with(this)
-            .load(info.thumbnailUrl)
-            .apply(requestOptions)
-            .into(binding.ivThumbnail)
+    private fun collapseWindow() {
+        if (!isExpanded) return
+        // 1. Compose 상태 변경 (애니메이션 시작)
+        isExpanded = false
+        // 2. 애니메이션이 끝날 즈음에 Window 크기 줄임 (Composable 내부의 SideEffect나 Timer로 처리 필요하지만, 여기서는 딜레이로 처리)
+        handler.postDelayed({
+            if (!isExpanded) { // 상태가 다시 바뀌지 않았다면
+                params?.height = WindowManager.LayoutParams.WRAP_CONTENT
+                windowManager?.updateViewLayout(composeView, params)
+            }
+        }, 400) // 애니메이션 시간과 맞춤
     }
 
     private fun executeLandingLink() {
+        val link = islandInfo?.link
         if (link.isNullOrEmpty()) return
 
         val uri = Uri.parse(link)
@@ -195,125 +191,32 @@ class DynamicIslandService : Service() {
         startActivity(launchIntent)
     }
 
-    // 확장 애니메이션: 위에서 아래로 양쪽으로 퍼지며 바운스 효과
-    private fun expandDynamicIsland() {
-        if (isExpanded) return
-        this.isExpanded = true
-
-        params?.height = WindowManager.LayoutParams.MATCH_PARENT
-        windowManager?.updateViewLayout(dynamicIslandView, params)
-        binding.llSmallContent.visibility = View.GONE
-        binding.clExpandedContent.visibility = View.VISIBLE
-
-        binding.clExpandedContent.apply {
-            scaleX = 0f
-            scaleY = 0f
-            pivotX = (width / 2).toFloat()
-            pivotY = 0f
-            alpha = 0f
-            visibility = View.VISIBLE
-        }
-
-        binding.clExpandedContent.animate()
-            .scaleX(1f)
-            .scaleY(1f)
-            .alpha(1f)
-            .setDuration(400)
-            .setInterpolator(OvershootInterpolator(1f))
-            .start()
-    }
-
-    private fun collapseExpandDynamicIsland(
-        onEnd: (() -> Unit)? = null
-    ) {
-        if (!isExpanded) return
-        this.isExpanded = false
-
-        params?.height = WindowManager.LayoutParams.WRAP_CONTENT
-        windowManager?.updateViewLayout(dynamicIslandView, params)
-        binding.clExpandedContent.apply {
-            pivotX = (width / 2).toFloat()
-            pivotY = 0f // 상단 중앙 기준
-        }
-
-        binding.clExpandedContent.animate()
-            .scaleX(0f)
-            .scaleY(0f)
-            .alpha(0f)
-            .setDuration(400)
-            .setInterpolator(AnticipateInterpolator())
-            .withEndAction {
-                binding.clExpandedContent.visibility = View.GONE
-                binding.llSmallContent.visibility = View.VISIBLE
-                binding.llSmallContent.animate()
-                    .alpha(1f)
-                    .setDuration(400)
-                    .setInterpolator(OvershootInterpolator(1f))
-                    .withEndAction {
-                        onEnd?.invoke()
-                    }
-                    .start()
-            }
-            .start()
-    }
-
-    private fun collapseSmallDynamicIsland() {
-        binding.llSmallContent.animate()
-            .scaleX(0f)
-            .scaleY(0f)
-            .alpha(0f)
-            .setDuration(300)
-            .withEndAction {
-                removeDynamicIsland()
-            }
-            .start()
-    }
-
-    private fun remove() {
-        dynamicIslandView?.let {
-            windowManager?.removeView(it)
-            dynamicIslandView = null
-        }
-    }
-
-    private fun getStateMessage(
-        diffMillis: Long,
-        isSmall: Boolean
-    ): String {
-        val diffMinutes = diffMillis / (60 * 1000)
-
-        val betweenOneMinOneHourMessage = if (isSmall) {
-            "탑승 전"
-        } else {
-            "${diffMinutes}분 뒤 탑승 예정"
-        }
-
-        val underOneMinMessage = if (isSmall) {
-            "탑승 준비"
-        } else {
-            "잠시 후 탑승 예정"
-        }
-
-        val startMessage = if (isSmall) {
-            "탑승 시작"
-        } else {
-            "지금 탑승 하세요!"
-        }
-
-        return when {
-            diffMinutes in 1..60 -> betweenOneMinOneHourMessage
-            diffMinutes < 1 && diffMillis > 0 -> underOneMinMessage
-            else -> startMessage
-        }
-    }
-
     private fun removeDynamicIsland() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            stopForeground(STOP_FOREGROUND_DETACH)
-        } else {
-            @Suppress("DEPRECATION")
-            stopForeground(true)
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                stopForeground(STOP_FOREGROUND_DETACH)
+            } else {
+                @Suppress("DEPRECATION")
+                stopForeground(true)
+            }
+            stopSelf()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-        stopSelf()
     }
+
+    override fun onDestroy() {
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        isRunning = false
+        _instance = null
+        handler.removeCallbacks(checkRunnable)
+        composeView?.let {
+            if (it.parent != null) windowManager?.removeView(it)
+        }
+        composeView = null
+        super.onDestroy()
+    }
+
+    override fun onBind(intent: Intent?): IBinder? = null
 }
+

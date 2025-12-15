@@ -503,6 +503,10 @@ fun MainScreen(
 
                                         HongWidgetType.DYNAMIC_ISLAND -> {
                                             Intent(activity, SampleDynamicIslandActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.DYNAMIC_ISLAND.value
+                                                )
                                                 activity.startActivity(this)
                                             }
                                         }

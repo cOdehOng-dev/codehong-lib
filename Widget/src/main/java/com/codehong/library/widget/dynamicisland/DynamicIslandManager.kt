@@ -1,6 +1,6 @@
 package com.codehong.library.widget.dynamicisland
 
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
@@ -14,53 +14,52 @@ object DynamicIslandManager {
         DynamicIslandService.instance?.reset(info)
     }
 
-    fun isGranted(activity: Activity?): Boolean {
-        if (activity == null) return false
+    fun isGranted(context: Context?): Boolean {
+        if (context == null) return false
 
-        return Settings.canDrawOverlays(activity)
+        return Settings.canDrawOverlays(context)
     }
 
-
     fun checkPermission(
-        activity: Activity?,
+        context: Context?,
         launcher: ActivityResultLauncher<Intent>,
         granted: () -> Unit
     ) {
-        if (activity == null) return
+        if (context == null) return
 
-        if (isGranted(activity)) {
+        if (isGranted(context)) {
             granted.invoke()
         } else {
             val intent = Intent(
                 Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:${activity.packageName}")
+                Uri.parse("package:${context.packageName}")
             )
             launcher.launch(intent)
         }
     }
 
     fun schedule(
-        activity: Activity?,
+        context: Context?,
         info: DynamicIslandInfo?
     ) {
-        if (activity == null || info == null) return
+        if (context == null || info == null) return
 
-        val serviceIntent = Intent(activity, DynamicIslandService::class.java).apply {
+        val serviceIntent = Intent(context, DynamicIslandService::class.java).apply {
             putExtra(DynamicIslandConst.DYNAMIC_ISLAND_INFO, info)
         }
-        activity.startService(serviceIntent)
+        context.startService(serviceIntent)
     }
 
     fun setPermission(
-        activity: Activity?,
+        context: Context?,
         isChecked: Boolean,
         launcher: ActivityResultLauncher<Intent>,
         start: () -> Unit
     ) {
-        if (activity == null) return
+        if (context == null) return
         if (isChecked) {
             checkPermission(
-                activity,
+                context,
                 launcher = launcher
             ) {
                 start.invoke()
@@ -68,7 +67,7 @@ object DynamicIslandManager {
         } else {
             val intent = Intent(
                 Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:${activity.packageName}")
+                Uri.parse("package:${context.packageName}")
             )
             launcher.launch(intent)
         }

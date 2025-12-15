@@ -6,6 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class DynamicIslandInfo(
+    val type: Int = DynamicIslandType.AIR.type,
     val appName: String? = null,
     val fromCity: String? = null,
     val toCity: String? = null,
@@ -16,28 +17,11 @@ data class DynamicIslandInfo(
 ) : Parcelable {
     val startTime get() = HongDateUtil.parseDateTimeString(startDate, "yyyyMMddHHmmss")
     val endTime get() = HongDateUtil.parseDateTimeString(endDate, "yyyyMMddHHmmss")
-
     val dispStartTime
         get() = startTime - 1000 * 60 * 120
 
     val dispEndTime
         get() = startTime + 1000 * 60 * 10
-
-    override fun toString(): String {
-        return "DynamicIslandInfo( " +
-                "appName=$appName, " +
-                "fromCity=$fromCity, " +
-                "toCity=$toCity, " +
-                "thumbnailUrl=$thumbnailUrl, " +
-                "startDate=$startDate, " +
-                "endDate=$endDate, " +
-                "link=$link, " +
-                "startTime=$startTime, " +
-                "endTime=$endTime, " +
-                "dispStartTime=$dispStartTime, " +
-                "dispEndTime=$dispEndTime" +
-                ")"
-    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -66,4 +50,18 @@ data class DynamicIslandInfo(
         result = 31 * result + (link?.hashCode() ?: 0)
         return result
     }
+
+    override fun toString(): String {
+        return "DynamicIslandInfo(" +
+                "appName=$appName, " +
+                "fromCity=$fromCity, " +
+                "toCity=$toCity, " +
+                "thumbnailUrl=$thumbnailUrl, " +
+                "startDate=$startDate, " +
+                "endDate=$endDate, " +
+                "link=$link" +
+                ")"
+    }
+
+
 }

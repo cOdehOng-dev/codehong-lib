@@ -17,6 +17,7 @@
 |------|------|------|
 | Calendar | 커스텀 달력 위젯 | [README](Widget/src/main/java/com/codehong/library/widget/calendar/README.md) |
 | HorizontalPager | 자동 스크롤, 무한 스크롤, 페이지 미리보기 등을 지원하는 수평 페이저 위젯 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/pager/README.md) |
+| Dynamic Island | iOS의 Dynamic Island를 모티프로 한 안드로이드 오버레이 알림 위젯. 항공편/숙박 예약 정보를 시각적으로 표시 | [README](Widget/src/main/java/com/codehong/library/widget/dynamicisland/README.md) |
 
 ## 🛠 설치
 
