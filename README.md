@@ -13,10 +13,10 @@
 
 ## 📦 위젯 리스트
 
-### 달력
 | 위젯 | 설명 | 문서 |
 |------|------|------|
 | Calendar | 커스텀 달력 위젯 | [README](Widget/src/main/java/com/codehong/library/widget/calendar/README.md) |
+| HorizontalPager | 자동 스크롤, 무한 스크롤, 페이지 미리보기 등을 지원하는 수평 페이저 위젯 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/pager/README.md) |
 
 ## 🛠 설치
 
