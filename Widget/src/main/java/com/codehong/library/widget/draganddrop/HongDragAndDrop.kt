@@ -20,17 +20,17 @@ import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.IntSize
 
-internal val LocalDragTargetInfo = compositionLocalOf { DragTargetInfo() }
+internal val LocalDragTargetInfo = compositionLocalOf { HongDragTargetInfo() }
 
 /**
  * @link https://canopas.com/android-drag-and-drop-ui-element-in-jetpack-compose-14922073b3f1
  */
 @Composable
-fun LongPressDraggable(
+fun HongLongPressDraggable(
     modifier: Modifier = Modifier,
     content: @Composable BoxScope.() -> Unit
 ) {
-    val state = remember { DragTargetInfo() }
+    val state = remember { HongDragTargetInfo() }
 
     CompositionLocalProvider(
         LocalDragTargetInfo provides state
@@ -68,7 +68,7 @@ fun LongPressDraggable(
 
 @Suppress("NonSkippableComposable")
 @Composable
-fun <T> DragTarget(
+fun <T> HongDragTarget(
     modifier: Modifier = Modifier,
     dataToDrop: T,
     content: @Composable (() -> Unit)
@@ -109,7 +109,7 @@ fun <T> DragTarget(
 }
 
 @Composable
-fun <T> DropTarget(
+fun <T> HongDragTarget(
     modifier: Modifier = Modifier,
     content: @Composable() (BoxScope.(isInBound: Boolean, data: T?) -> Unit)
 ) {

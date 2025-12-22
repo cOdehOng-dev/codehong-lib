@@ -22,7 +22,7 @@ import com.codehong.library.widget.extensions.hongSpacing
 @Composable
 fun HongGridDragAndDropCompose(
     option: HongGridDragAndDropOption,
-    subContent: @Composable () -> Unit = {},
+    subContent: @Composable (String) -> Unit = {},
     content: @Composable (Any) -> Unit
 ) {
     var isEditMode by remember { mutableStateOf(false) }
@@ -34,29 +34,33 @@ fun HongGridDragAndDropCompose(
             option.onBackClick()
         }
     }
-    LongPressDraggable {
+    HongLongPressDraggable {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .hongBackground(
-                    color = option.backgroundColorHex
-                )
+                .hongSpacing(option.margin)
+                .hongBackground(color = option.backgroundColorHex)
                 .hongSpacing(option.padding),
         ) {
             LazyVerticalGrid(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
-                columns = GridCells.Fixed(3),
-                contentPadding = PaddingValues(10.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                columns = GridCells.Fixed(option.gridColumns),
+                contentPadding = PaddingValues(
+                    top = option.gridContentPadding.top.dp,
+                    bottom = option.gridContentPadding.bottom.dp,
+                    start = option.gridContentPadding.left.dp,
+                    end = option.gridContentPadding.right.dp
+                ),
+                horizontalArrangement = Arrangement.spacedBy(option.gridHorizontalSpacing.dp),
+                verticalArrangement = Arrangement.spacedBy(option.gridVerticalSpacing.dp)
             ) {
                 items(
                     items = option.itemList
-                ) { food ->
-                    DragAndDropItem(
-                        item = food,
+                ) { item ->
+                    HongDragAndDropItem(
+                        item = item,
                         isShaking = isEditMode,
                         onLongClick = {
                             isEditMode = true
@@ -67,11 +71,11 @@ fun HongGridDragAndDropCompose(
                             }
                         }
                     ) {
-                        content(food)
+                        content(item)
                     }
                 }
             }
-            subContent()
+            subContent(option.inboundColorHex)
         }
     }
 

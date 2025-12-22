@@ -60,6 +60,5 @@ class HongButtonIconBuilder : HongWidgetCommonBuilder<HongButtonIconOption, Hong
             .iconColor(inject.iconColorHex)
             .state(inject.state)
             .iconResId(inject.iconResId)
-
     }
 }

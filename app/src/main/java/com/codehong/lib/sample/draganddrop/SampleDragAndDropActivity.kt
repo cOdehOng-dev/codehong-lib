@@ -7,7 +7,7 @@ class SampleDragAndDropActivity : BaseSampleComposeActivity() {
 
     @Composable
     override fun InitCompose() {
-        DragAndDropScreen {
+        SampleHongDragAndDropScreen {
             finish()
         }
     }

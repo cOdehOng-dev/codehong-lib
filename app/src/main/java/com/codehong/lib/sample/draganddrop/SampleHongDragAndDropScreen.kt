@@ -13,11 +13,12 @@ import com.codehong.lib.sample.R
 import com.codehong.lib.sample.draganddrop.model.BreadItem
 import com.codehong.library.widget.draganddrop.HongGridDragAndDropBuilder
 import com.codehong.library.widget.draganddrop.HongGridDragAndDropCompose
+import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 
 
 @Composable
-fun DragAndDropScreen(
+fun SampleHongDragAndDropScreen(
     onFinish: () -> Unit
 ) {
     val breadList = listOf(
@@ -41,18 +42,21 @@ fun DragAndDropScreen(
         BreadItem(18, "디저트 랩", "블루베리 머핀", 3500, "12", R.drawable.img_bread_6)
     )
 
-    // test
     HongGridDragAndDropCompose(
         option = HongGridDragAndDropBuilder()
             .itemList(breadList)
             .backgroundColor(HongColor.WHITE_100)
+            .gridColumns(3)
+            .gridVerticalSpacing(8)
+            .gridHorizontalSpacing(8)
+            .gridContentPadding(HongSpacingInfo(left = 10f, top = 10f, right = 10f, bottom = 10f))
             .onBackClick { onFinish() }
             .onItemClick {
                 Log.i("TAG", "test here onItemClick")
             }
             .applyOption(),
-        subContent = {
-            CartContent()
+        subContent = { inboundColorHex ->
+            CartContent(inboundColorHex)
         }
     ) { bread ->
         Card(
@@ -68,54 +72,4 @@ fun DragAndDropScreen(
             BreadItemContent(breadItem = bread as BreadItem)
         }
     }
-
-//    LongPressDraggable {
-//        Column(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .background(color = Color.White)
-//        ) {
-//            LazyVerticalGrid(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .weight(1f),
-//                columns = GridCells.Fixed(3),
-//                contentPadding = PaddingValues(10.dp),
-//                horizontalArrangement = Arrangement.spacedBy(8.dp),
-//                verticalArrangement = Arrangement.spacedBy(8.dp)
-//            ) {
-//                items(
-//                    items = breadList
-//                ) { food ->
-//                    DragAndDropItem(
-//                        item = food,
-//                        isShaking = isEditMode,
-//                        onLongClick = {
-//                            isEditMode = true
-//                        },
-//                        onClick = {
-//                            if (!isEditMode) {
-//                                // 상세 페이지 이동 로직 등...
-//                            }
-//                        }
-//                    ) {
-//                        Card(
-//                            modifier = Modifier
-//                                .background(
-//                                    color = Color.Transparent,
-//                                    shape = RoundedCornerShape(0.dp)
-//                                ),
-//                            elevation = CardDefaults
-//                                .cardElevation(10.dp),
-//                            shape = RoundedCornerShape(0.dp),
-//                        ) {
-//                            BreadItemContent(breadItem = food)
-//                        }
-//                    }
-//                }
-//            }
-//            CartContent()
-//        }
-//
-//    }
 }

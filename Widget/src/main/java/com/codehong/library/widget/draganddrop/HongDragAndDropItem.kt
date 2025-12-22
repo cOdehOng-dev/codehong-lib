@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun DragAndDropItem(
+fun HongDragAndDropItem(
     modifier: Modifier = Modifier,
     item: Any,
     isShaking: Boolean,
@@ -47,7 +47,7 @@ fun DragAndDropItem(
             ),
     ) {
         if (isShaking) {
-            DragTarget(
+            HongDragTarget(
                 dataToDrop = item
             ) {
                 content()
