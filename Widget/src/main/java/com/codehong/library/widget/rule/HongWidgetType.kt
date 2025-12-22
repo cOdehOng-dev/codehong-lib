@@ -43,7 +43,7 @@ enum class HongWidgetType(
     GRAPH_LINE("GraphLine", true),
     GRAPH_BAR("GraphBar", true),
     ICON("Icon", true),
-    DRAG_AND_DROP("DragAndDrop", false),
+    GRID_DRAG_AND_DROP("GridDragAndDrop", false),
     NO_VALUE("no_value");
 
     companion object {

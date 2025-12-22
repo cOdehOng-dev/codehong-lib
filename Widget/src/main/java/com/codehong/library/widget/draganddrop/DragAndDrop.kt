@@ -31,6 +31,7 @@ fun LongPressDraggable(
     content: @Composable BoxScope.() -> Unit
 ) {
     val state = remember { DragTargetInfo() }
+
     CompositionLocalProvider(
         LocalDragTargetInfo provides state
     ) {
@@ -39,10 +40,11 @@ fun LongPressDraggable(
                 .fillMaxSize()
         ) {
             content()
+
             if (state.isDragging) {
-                var targetSize by remember {
-                    mutableStateOf(IntSize.Zero)
-                }
+
+                var targetSize by remember { mutableStateOf(IntSize.Zero) }
+
                 Box(
                     modifier = Modifier
                         .graphicsLayer {
@@ -115,17 +117,21 @@ fun <T> DropTarget(
     val dragInfo = LocalDragTargetInfo.current
     val dragPosition = dragInfo.dragPosition
     val dragOffset = dragInfo.dragOffset
-    var isCurrentDropTarget by remember {
-        mutableStateOf(false)
-    }
+    var isCurrentDropTarget by remember { mutableStateOf(false) }
 
-    Box(modifier = modifier.onGloballyPositioned {
-        it.boundsInWindow().let { rect ->
-            isCurrentDropTarget = rect.contains(dragPosition + dragOffset)
+    Box(
+        modifier = modifier
+            .onGloballyPositioned {
+                it.boundsInWindow().let { rect ->
+                    isCurrentDropTarget = rect.contains(dragPosition + dragOffset)
+                }
+            }
+    ) {
+        val data = if (isCurrentDropTarget && !dragInfo.isDragging) {
+            dragInfo.dataToDrop as T?
+        } else {
+            null
         }
-    }) {
-        val data =
-            if (isCurrentDropTarget && !dragInfo.isDragging) dragInfo.dataToDrop as T? else null
         content(isCurrentDropTarget, data)
     }
 }

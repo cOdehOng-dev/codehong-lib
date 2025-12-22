@@ -16,7 +16,7 @@ import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.codehong.lib.sample.draganddrop.model.FoodItem
+import com.codehong.lib.sample.draganddrop.model.BreadItem
 import com.codehong.library.widget.button.text.HongButtonTextBuilder
 import com.codehong.library.widget.button.text.HongButtonTextCompose
 import com.codehong.library.widget.draganddrop.DropTarget
@@ -32,12 +32,12 @@ import java.text.DecimalFormat
 
 @Composable
 fun CartContent() {
-    val foodItems = remember { mutableStateListOf<FoodItem>() }
+    val breadList = remember { mutableStateListOf<BreadItem>() }
 
-    DropTarget<FoodItem>(
+    DropTarget<BreadItem>(
         modifier = Modifier
             .fillMaxWidth()
-    ) { isInBound, foodItem ->
+    ) { isInBound, breadItem ->
         // isInBound 값으로 배경색 변경
         val bgColor = if (isInBound) {
             HongColor.MAIN_ORANGE_25.toColor()
@@ -45,9 +45,9 @@ fun CartContent() {
             Color.White
         }
 
-        foodItem?.let {
+        breadItem?.let {
             if (isInBound) {
-                foodItems.add(foodItem)
+                breadList.add(breadItem)
             }
         }
 
@@ -65,7 +65,7 @@ fun CartContent() {
             Text(
                 modifier = Modifier
                     .weight(1f),
-                text = "${DecimalFormat("#,###").format(foodItems.sumOf { it.price }.toLong())}원",
+                text = "${DecimalFormat("#,###").format(breadList.sumOf { it.price }.toLong())}원",
                 style = TextStyle(
                     color = Color.Black,
                     fontFamily = pretendardFontFamily,
@@ -80,7 +80,7 @@ fun CartContent() {
                     .width(200)
                     .height(50)
                     .backgroundColor(
-                        if (foodItems.isNotEmpty()) HongColor.MAIN_ORANGE_100 else HongColor.GRAY_30
+                        if (breadList.isNotEmpty()) HongColor.MAIN_ORANGE_100 else HongColor.GRAY_30
                     )
                     .padding(
                         HongSpacingInfo(
@@ -96,9 +96,9 @@ fun CartContent() {
                             bottomRight = 10
                         )
                     )
-                    .text("${foodItems.size}개 빵 바로 주문하기")
+                    .text("${breadList.size}개 빵 바로 주문하기")
                     .textTypo(HongTypo.BODY_15_B)
-                    .textColor(if (foodItems.isNotEmpty()) HongColor.BLACK_100 else HongColor.GRAY_60)
+                    .textColor(if (breadList.isNotEmpty()) HongColor.BLACK_100 else HongColor.GRAY_60)
                     .onClick {}
                     .applyOption()
             )

@@ -7,28 +7,21 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun DragAndDropItemCard(
+fun DragAndDropItem(
     modifier: Modifier = Modifier,
     item: Any,
     isShaking: Boolean,
-    cardRadius: Dp = 0.dp,
     onLongClick: () -> Unit,
-    onClick: () -> Unit ,
+    onClick: () -> Unit,
     content: @Composable (() -> Unit)
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "shake_animation")
@@ -44,21 +37,14 @@ fun DragAndDropItemCard(
 
     val currentRotation = if (isShaking) rotation else 0f
 
-    Card(
+    Box(
         modifier = Modifier
             .then(modifier)
-            .background(
-                color = Color.Transparent,
-                shape = RoundedCornerShape(cardRadius)
-            )
             .graphicsLayer { rotationZ = currentRotation }
             .combinedClickable(
                 onLongClick = onLongClick,
                 onClick = onClick
             ),
-        elevation = CardDefaults
-            .cardElevation(10.dp),
-        shape = RoundedCornerShape(cardRadius),
     ) {
         if (isShaking) {
             DragTarget(
@@ -70,4 +56,5 @@ fun DragAndDropItemCard(
             content()
         }
     }
+
 }

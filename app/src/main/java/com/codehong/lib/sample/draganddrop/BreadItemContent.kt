@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.R
-import com.codehong.lib.sample.draganddrop.model.FoodItem
+import com.codehong.lib.sample.draganddrop.model.BreadItem
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.image.HongImageCompose
 import com.codehong.library.widget.rule.HongLayoutParam
@@ -27,8 +27,8 @@ import com.codehong.library.widget.text.HongTextCompose
 import java.text.DecimalFormat
 
 @Composable
-fun FoodItemContent(
-    foodItem: FoodItem
+fun BreadItemContent(
+    breadItem: BreadItem
 ) {
     Box(
         modifier = Modifier
@@ -47,7 +47,7 @@ fun FoodItemContent(
                     .height(120)
                     .backgroundColor("0A000000")
                     .scaleType(HongScaleType.CENTER_INSIDE)
-                    .imageInfo(foodItem.image)
+                    .imageInfo(breadItem.image)
                     .applyOption()
             )
 
@@ -60,7 +60,7 @@ fun FoodItemContent(
                 HongTextCompose(
                     option = HongTextBuilder()
                         .width(HongLayoutParam.WRAP_CONTENT.value)
-                        .text(foodItem.storeName)
+                        .text(breadItem.storeName)
                         .typography(HongTypo.CONTENTS_12_B)
                         .color(HongColor.BLACK_100)
                         .applyOption()
@@ -71,7 +71,7 @@ fun FoodItemContent(
                 HongTextCompose(
                     option = HongTextBuilder()
                         .width(HongLayoutParam.WRAP_CONTENT.value)
-                        .text(foodItem.prdName)
+                        .text(breadItem.prdName)
                         .typography(HongTypo.BODY_13)
                         .color(HongColor.BLACK_100)
                         .applyOption()
@@ -80,11 +80,11 @@ fun FoodItemContent(
                 Spacer(modifier = Modifier.height(2.dp))
 
                 Row {
-                    if (foodItem.discountPer.isNotEmpty()) {
+                    if (breadItem.discountPer.isNotEmpty()) {
                         HongTextCompose(
                             option = HongTextBuilder()
                                 .width(HongLayoutParam.WRAP_CONTENT.value)
-                                .text("${foodItem.discountPer}%")
+                                .text("${breadItem.discountPer}%")
                                 .typography(HongTypo.BODY_15_B)
                                 .color(HongColor.RED_100)
                                 .applyOption()
@@ -94,7 +94,7 @@ fun FoodItemContent(
                     HongTextCompose(
                         option = HongTextBuilder()
                             .width(HongLayoutParam.WRAP_CONTENT.value)
-                            .text("${DecimalFormat("#,###").format(foodItem.price.toLong())}원")
+                            .text("${DecimalFormat("#,###").format(breadItem.price.toLong())}원")
                             .typography(HongTypo.BODY_15_B)
                             .color(HongColor.BLACK_100)
                             .applyOption()

@@ -734,11 +734,11 @@ fun MainScreen(
                                             }
                                         }
 
-                                        HongWidgetType.DRAG_AND_DROP -> {
+                                        HongWidgetType.GRID_DRAG_AND_DROP -> {
                                             Intent(activity, SampleDragAndDropActivity::class.java).apply {
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
-                                                    HongWidgetType.DRAG_AND_DROP.value
+                                                    HongWidgetType.GRID_DRAG_AND_DROP.value
                                                 )
                                                 activity.startActivity(this)
                                             }
