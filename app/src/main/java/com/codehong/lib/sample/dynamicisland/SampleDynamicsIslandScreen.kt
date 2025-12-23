@@ -25,8 +25,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.dynamicisland.DynamicIslandInfo
-import com.codehong.library.widget.dynamicisland.DynamicIslandManager
-import com.codehong.library.widget.dynamicisland.DynamicIslandType
+import com.codehong.library.widget.dynamicisland.HongDynamicIslandManager
+import com.codehong.library.widget.dynamicisland.HongDynamicIslandType
 import com.codehong.library.widget.pretendardFontFamily
 import com.codehong.library.widget.util.HongToastUtil
 import com.codehong.library.widget.util.dpToSp
@@ -38,12 +38,12 @@ import java.util.TimeZone
 @Composable
 fun SampleDynamicsIslandScreen() {
     val context = LocalContext.current
-    var isOnPush by remember { mutableStateOf(DynamicIslandManager.isGranted(context)) }
+    var isOnPush by remember { mutableStateOf(HongDynamicIslandManager.isGranted(context)) }
 
     val requestOverlayPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { _ ->
-        if (DynamicIslandManager.isGranted(context)) {
+        if (HongDynamicIslandManager.isGranted(context)) {
             startDynamicIsland(context)
             isOnPush = true
         } else {
@@ -77,7 +77,7 @@ fun SampleDynamicsIslandScreen() {
                 checked = isOnPush,
                 onCheckedChange = { isChecked ->
                     isOnPush = isChecked
-                    DynamicIslandManager.setPermission(
+                    HongDynamicIslandManager.setPermission(
                         context,
                         isChecked = isChecked,
                         launcher = requestOverlayPermissionLauncher
@@ -111,16 +111,16 @@ private fun startDynamicIsland(
     val endFutureTime = Date(System.currentTimeMillis() + 1000 * 60 * 120) // 2시간 후
     val end = dateFormat.format(endFutureTime)
     val ticketInfo = DynamicIslandInfo(
-        type = DynamicIslandType.AIR.type,
+        type = HongDynamicIslandType.AIR.type,
         thumbnailUrl = "https://images.unsplash.com/photo-1664190426315-b3abf1cf07ad?q=80&w=2187&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         fromCity = "FROM   SEOUL/INCHEON",
         toCity = "TO         TOKYO",
         startDate = start,
         endDate = end
     )
-    if (DynamicIslandManager.isRunning()) {
-        DynamicIslandManager.reset(ticketInfo)
+    if (HongDynamicIslandManager.isRunning()) {
+        HongDynamicIslandManager.reset(ticketInfo)
     } else {
-        DynamicIslandManager.schedule(context, ticketInfo)
+        HongDynamicIslandManager.schedule(context, ticketInfo)
     }
 }

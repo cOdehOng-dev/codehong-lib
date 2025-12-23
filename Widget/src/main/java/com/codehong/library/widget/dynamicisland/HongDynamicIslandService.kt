@@ -25,17 +25,17 @@ import androidx.savedstate.SavedStateRegistry
 import androidx.savedstate.SavedStateRegistryController
 import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
-import com.codehong.library.widget.dynamicisland.DynamicIslandType.Companion.toStateMessage
-import com.codehong.library.widget.dynamicisland.DynamicIslandType.Companion.toType
+import com.codehong.library.widget.dynamicisland.HongDynamicIslandType.Companion.toStateMessage
+import com.codehong.library.widget.dynamicisland.HongDynamicIslandType.Companion.toType
 import java.lang.ref.WeakReference
 
-class DynamicIslandService :
+class HongDynamicIslandService :
     Service(), SavedStateRegistryOwner, ViewModelStoreOwner {
 
     companion object {
         var isRunning = false
-        private var _instance: WeakReference<DynamicIslandService>? = null
-        val instance: DynamicIslandService?
+        private var _instance: WeakReference<HongDynamicIslandService>? = null
+        val instance: HongDynamicIslandService?
             get() = _instance?.get()
     }
 
@@ -55,7 +55,7 @@ class DynamicIslandService :
     private var timeTextSmall by mutableStateOf("")
     private var timeTextLarge by mutableStateOf("")
 
-    private var type: DynamicIslandType = DynamicIslandType.LODGING
+    private var type: HongDynamicIslandType = HongDynamicIslandType.LODGING
 
     private val handler = Handler(Looper.getMainLooper())
     private val checkRunnable = object : Runnable {
@@ -91,12 +91,12 @@ class DynamicIslandService :
 
     private fun setupComposeView() {
         composeView = ComposeView(this).apply {
-            setViewTreeLifecycleOwner(this@DynamicIslandService)
-            setViewTreeSavedStateRegistryOwner(this@DynamicIslandService)
-            setViewTreeViewModelStoreOwner(this@DynamicIslandService)
+            setViewTreeLifecycleOwner(this@HongDynamicIslandService)
+            setViewTreeSavedStateRegistryOwner(this@HongDynamicIslandService)
+            setViewTreeViewModelStoreOwner(this@HongDynamicIslandService)
 
             setContent {
-                DynamicIslandScreen(
+                HongDynamicIslandScreen(
                     isExpanded = isExpanded,
                     smallText = timeTextSmall,
                     largeText = timeTextLarge,
@@ -115,12 +115,12 @@ class DynamicIslandService :
 
         val info = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent?.getParcelableExtra(
-                DynamicIslandConst.DYNAMIC_ISLAND_INFO,
+                HongDynamicIslandConst.DYNAMIC_ISLAND_INFO,
                 DynamicIslandInfo::class.java
             )
         } else {
             @Suppress("DEPRECATION")
-            intent?.getParcelableExtra(DynamicIslandConst.DYNAMIC_ISLAND_INFO)
+            intent?.getParcelableExtra(HongDynamicIslandConst.DYNAMIC_ISLAND_INFO)
         } ?: return START_NOT_STICKY
 
         reset(info)

@@ -6,12 +6,12 @@ import android.net.Uri
 import android.provider.Settings
 import androidx.activity.result.ActivityResultLauncher
 
-object DynamicIslandManager {
+object HongDynamicIslandManager {
 
-    fun isRunning() = DynamicIslandService.isRunning
+    fun isRunning() = HongDynamicIslandService.isRunning
 
     fun reset(info: DynamicIslandInfo?) {
-        DynamicIslandService.instance?.reset(info)
+        HongDynamicIslandService.instance?.reset(info)
     }
 
     fun isGranted(context: Context?): Boolean {
@@ -44,8 +44,8 @@ object DynamicIslandManager {
     ) {
         if (context == null || info == null) return
 
-        val serviceIntent = Intent(context, DynamicIslandService::class.java).apply {
-            putExtra(DynamicIslandConst.DYNAMIC_ISLAND_INFO, info)
+        val serviceIntent = Intent(context, HongDynamicIslandService::class.java).apply {
+            putExtra(HongDynamicIslandConst.DYNAMIC_ISLAND_INFO, info)
         }
         context.startService(serviceIntent)
     }

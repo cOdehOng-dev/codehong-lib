@@ -89,7 +89,7 @@ import com.codehong.library.widget.text.label.HongTextCompose
 import com.codehong.library.widget.text.label.HongTextOption
 import com.codehong.library.widget.text.badge.HongTextBadgeCompose
 import com.codehong.library.widget.text.badge.HongTextBadgeOption
-import com.codehong.library.widget.text.check.HongCheckTextOption
+import com.codehong.library.widget.text.check.HongTextCheckOption
 import com.codehong.library.widget.text.check.HongTextCheckCompose
 import com.codehong.library.widget.text.count.HongTextCountCompose
 import com.codehong.library.widget.text.count.HongTextCountOption
@@ -279,7 +279,7 @@ class PlaygroundActivity : BaseActivity() {
             PreviewUI(isBorderOn) {
                 when (componentType) {
                     HongWidgetType.TEXT -> HongTextCompose(previewOption as HongTextOption)
-                    HongWidgetType.TEXT_CHECK -> HongTextCheckCompose(previewOption as HongCheckTextOption)
+                    HongWidgetType.TEXT_CHECK -> HongTextCheckCompose(previewOption as HongTextCheckOption)
                     HongWidgetType.TEXT_UNIT -> HongTextUnitCompose(previewOption as HongTextUnitOption)
                     HongWidgetType.TEXT_UP_DOWN -> HongTextUpDownCompose(previewOption as HongTextUpDownOption)
                     HongWidgetType.TEXT_COUNT -> HongTextCountCompose(previewOption as HongTextCountOption)

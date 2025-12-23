@@ -6,10 +6,10 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.text.label.HongTextBuilder
 import com.codehong.library.widget.text.label.HongTextOption
 
-class HongCheckTextBuilder : HongWidgetCommonBuilder<HongCheckTextOption, HongCheckTextBuilder> {
+class HongTextCheckBuilder : HongWidgetCommonBuilder<HongTextCheckOption, HongTextCheckBuilder> {
 
-    override val builder: HongCheckTextBuilder = this
-    override val option: HongCheckTextOption = HongCheckTextOption()
+    override val builder: HongTextCheckBuilder = this
+    override val option: HongTextCheckOption = HongTextCheckOption()
 
     override fun padding(padding: HongSpacingInfo) = apply {
         option.padding = HongSpacingInfo()
@@ -59,9 +59,9 @@ class HongCheckTextBuilder : HongWidgetCommonBuilder<HongCheckTextOption, HongCh
         option.arrowSize = size
     }
 
-    fun copy(inject: HongCheckTextOption?): HongCheckTextBuilder {
-        if (inject == null) return HongCheckTextBuilder()
-        return HongCheckTextBuilder()
+    fun copy(inject: HongTextCheckOption?): HongTextCheckBuilder {
+        if (inject == null) return HongTextCheckBuilder()
+        return HongTextCheckBuilder()
             .width(inject.width)
             .height(inject.height)
             .margin(inject.margin)

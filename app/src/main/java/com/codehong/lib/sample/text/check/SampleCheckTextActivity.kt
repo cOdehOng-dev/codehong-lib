@@ -8,14 +8,14 @@ import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.label.HongTextBuilder
-import com.codehong.library.widget.text.check.HongCheckTextBuilder
+import com.codehong.library.widget.text.check.HongTextCheckBuilder
 import com.codehong.library.widget.text.check.HongTextCheckCompose
-import com.codehong.library.widget.text.check.HongCheckTextOption
-import com.codehong.library.widget.text.check.HongCheckTextView
+import com.codehong.library.widget.text.check.HongTextCheckOption
+import com.codehong.library.widget.text.check.HongTextCheckView
 
 class SampleCheckTextActivity : BaseSampleMixActivity() {
 
-    private val option1 = HongCheckTextBuilder()
+    private val option1 = HongTextCheckBuilder()
         .margin(
             HongSpacingInfo(
                 left = 20f,
@@ -27,7 +27,7 @@ class SampleCheckTextActivity : BaseSampleMixActivity() {
         .text("기본 CheckTextView 예시")
         .applyOption()
 
-    private val option2 = HongCheckTextBuilder()
+    private val option2 = HongTextCheckBuilder()
         .margin(
             HongSpacingInfo(
                 left = 20f
@@ -38,7 +38,7 @@ class SampleCheckTextActivity : BaseSampleMixActivity() {
         .text("휴대폰/카드 본인확인 서비스")
         .textOption(
             HongTextBuilder()
-                .copy(HongCheckTextOption.DEFAULT_TEXT_OPTION)
+                .copy(HongTextCheckOption.DEFAULT_TEXT_OPTION)
                 .typography(HongTypo.BODY_15)
                 .color(HongColor.GRAY_70)
                 .applyOption()
@@ -60,7 +60,7 @@ class SampleCheckTextActivity : BaseSampleMixActivity() {
     override fun optionViewList(): List<View> {
         return mutableListOf<View>().apply {
             optionList.forEach {
-                add(HongCheckTextView(this@SampleCheckTextActivity).set(it))
+                add(HongTextCheckView(this@SampleCheckTextActivity).set(it))
             }
         }
     }

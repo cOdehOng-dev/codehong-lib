@@ -1,5 +1,5 @@
 package com.codehong.library.widget.dynamicisland
 
-object DynamicIslandConst {
+object HongDynamicIslandConst {
     const val DYNAMIC_ISLAND_INFO = "dynamic_island_info"
 }

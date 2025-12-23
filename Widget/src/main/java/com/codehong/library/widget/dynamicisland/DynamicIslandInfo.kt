@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class DynamicIslandInfo(
-    val type: Int = DynamicIslandType.AIR.type,
+    val type: Int = HongDynamicIslandType.AIR.type,
     val appName: String? = null,
     val fromCity: String? = null,
     val toCity: String? = null,

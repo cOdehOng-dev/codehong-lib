@@ -15,19 +15,19 @@ iOS의 Dynamic Island를 모티프로 한 안드로이드 오버레이 알림 �
 
 ### 핵심 컴포넌트
 
-1. **DynamicIslandService**: 오버레이 윈도우를 관리하는 메인 서비스
-2. **DynamicIslandManager**: 권한 체크 및 서비스 스케줄링 관리
-3. **DynamicIslandScreen**: Jetpack Compose로 구현된 UI 컴포넌트
-4. **DynamicIslandInfo**: 알림 정보를 담는 데이터 클래스
-5. **DynamicIslandType**: 알림 타입(항공편/숙박) 정의
-6. **DynamicIslandConst**: 상수 정의
+1. **HongHongDynamicIslandService**: 오버레이 윈도우를 관리하는 메인 서비스
+2. **HongHongDynamicIslandManager**: 권한 체크 및 서비스 스케줄링 관리
+3. **HongHongDynamicIslandScreen**: Jetpack Compose로 구현된 UI 컴포넌트
+4. **HongHongDynamicIslandInfo**: 알림 정보를 담는 데이터 클래스
+5. **HongHongDynamicIslandType**: 알림 타입(항공편/숙박) 정의
+6. **HongHongDynamicIslandConst**: 상수 정의
 
 ### 동작 원리
 
 ```
-1. DynamicIslandManager.schedule() 호출
+1. HongDynamicIslandManager.schedule() 호출
    ↓
-2. DynamicIslandService 시작
+2. HongDynamicIslandService 시작
    ↓
 3. WindowManager를 통해 오버레이 뷰 표시
    ↓
@@ -48,7 +48,7 @@ val launcher = rememberLauncherForActivityResult(
 ) { /* 권한 결과 처리 */ }
 
 // 권한 확인 및 요청
-DynamicIslandManager.checkPermission(
+HongDynamicIslandManager.checkPermission(
     context = context,
     launcher = launcher,
     granted = {
@@ -60,8 +60,8 @@ DynamicIslandManager.checkPermission(
 ### 2. 알림 스케줄링
 
 ```kotlin
-val info = DynamicIslandInfo(
-    type = DynamicIslandType.AIR.type,
+val info = HongDynamicIslandInfo(
+    type = HongDynamicIslandType.AIR.type,
     appName = "항공사 앱",
     fromCity = "서울/인천",
     toCity = "뉴욕",
@@ -71,7 +71,7 @@ val info = DynamicIslandInfo(
     link = "myapp://flight/12345"
 )
 
-DynamicIslandManager.schedule(
+HongDynamicIslandManager.schedule(
     context = context,
     info = info
 )
@@ -82,18 +82,18 @@ DynamicIslandManager.schedule(
 실행 중인 알림 정보를 업데이트할 수 있습니다.
 
 ```kotlin
-DynamicIslandManager.reset(updatedInfo)
+HongDynamicIslandManager.reset(updatedInfo)
 ```
 
 ### 4. 실행 상태 확인
 
 ```kotlin
-val isRunning = DynamicIslandManager.isRunning()
+val isRunning = HongDynamicIslandManager.isRunning()
 ```
 
 ## API 레퍼런스
 
-### DynamicIslandInfo
+### HongDynamicIslandInfo
 
 알림에 표시할 정보를 담는 데이터 클래스입니다.
 
@@ -112,10 +112,10 @@ val isRunning = DynamicIslandManager.isRunning()
 - `dispStartTime`: 시작 시간 2시간 전부터 표시
 - `dispEndTime`: 시작 시간 10분 후까지 표시
 
-### DynamicIslandType
+### HongDynamicIslandType
 
 ```kotlin
-enum class DynamicIslandType(val type: Int) {
+enum class HongDynamicIslandType(val type: Int) {
     LODGING(1),  // 숙박
     AIR(2),      // 항공편
     ETC(3)       // 기타
@@ -123,10 +123,10 @@ enum class DynamicIslandType(val type: Int) {
 ```
 
 **확장 함수:**
-- `Int.toType()`: Int 값을 DynamicIslandType으로 변환
-- `DynamicIslandType.toStateMessage(diffMillis: Long, isSmall: Boolean)`: 남은 시간에 따른 상태 메시지 생성
+- `Int.toType()`: Int 값을 HongDynamicIslandType으로 변환
+- `HongDynamicIslandType.toStateMessage(diffMillis: Long, isSmall: Boolean)`: 남은 시간에 따른 상태 메시지 생성
 
-### DynamicIslandManager
+### HongDynamicIslandManager
 
 | 메서드 | 설명 |
 |--------|------|
@@ -196,7 +196,7 @@ enum class DynamicIslandType(val type: Int) {
 - **권한**: `SYSTEM_ALERT_WINDOW` (오버레이 표시)
 - **매니페스트 등록**:
   ```xml
-  <service android:name="com.codehong.library.widget.dynamicisland.DynamicIslandService" />
+  <service android:name="com.codehong.library.widget.HongDynamicIsland.HongHongDynamicIslandService" />
   ```
 
 ## 주의사항
@@ -209,14 +209,14 @@ enum class DynamicIslandType(val type: Int) {
 
 ## 예제
 
-전체 예제는 샘플 앱의 `SampleDynamicIslandActivity`를 참고하세요.
+전체 예제는 샘플 앱의 `SampleHongDynamicIslandActivity`를 참고하세요.
 
 ```kotlin
 class MainActivity : ComponentActivity() {
     private val overlayPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        if (DynamicIslandManager.isGranted(this)) {
+        if (HongDynamicIslandManager.isGranted(this)) {
             scheduleNotification()
         }
     }
@@ -231,7 +231,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun requestPermissionAndSchedule() {
-        DynamicIslandManager.checkPermission(
+        HongDynamicIslandManager.checkPermission(
             context = this,
             launcher = overlayPermissionLauncher,
             granted = { scheduleNotification() }
@@ -239,15 +239,15 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun scheduleNotification() {
-        val info = DynamicIslandInfo(
-            type = DynamicIslandType.AIR.type,
+        val info = HongDynamicIslandInfo(
+            type = HongDynamicIslandType.AIR.type,
             fromCity = "서울/인천",
             toCity = "제주",
             startDate = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
                 .format(Date(System.currentTimeMillis() + 3600000)), // 1시간 후
             link = "myapp://detail"
         )
-        DynamicIslandManager.schedule(this, info)
+        HongDynamicIslandManager.schedule(this, info)
     }
 }
 ```

@@ -12,7 +12,7 @@
 
     <application>
         <service
-            android:name=".dynamicisland.DynamicIslandService"
+            android:name=".dynamicisland.HongDynamicIslandService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="dataSync" />

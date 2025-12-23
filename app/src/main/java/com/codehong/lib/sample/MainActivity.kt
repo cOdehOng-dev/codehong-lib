@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.codehong.library.widget.dynamicisland.DynamicIslandInfo
-import com.codehong.library.widget.dynamicisland.DynamicIslandManager
+import com.codehong.library.widget.dynamicisland.HongDynamicIslandManager
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun checkDynamicIsland() {
-        if (DynamicIslandManager.isGranted(this)) {
+        if (HongDynamicIslandManager.isGranted(this)) {
             startDynamicIsland()
         }
     }
@@ -40,10 +40,10 @@ class MainActivity : ComponentActivity() {
             startDate = start,
             endDate = end
         )
-        if (DynamicIslandManager.isRunning()) {
-            DynamicIslandManager.reset(ticketInfo)
+        if (HongDynamicIslandManager.isRunning()) {
+            HongDynamicIslandManager.reset(ticketInfo)
         } else {
-            DynamicIslandManager.schedule(this, ticketInfo)
+            HongDynamicIslandManager.schedule(this, ticketInfo)
         }
     }
 }

@@ -12,7 +12,7 @@ import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.label.HongTextBuilder
 import com.codehong.library.widget.text.label.HongTextOption
 
-data class HongCheckTextOption(
+data class HongTextCheckOption(
     override val type: HongWidgetType = HongWidgetType.TEXT_CHECK,
 ) : HongWidgetCommonOption {
 
@@ -56,7 +56,7 @@ data class HongCheckTextOption(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as HongCheckTextOption
+        other as HongTextCheckOption
 
         if (type != other.type) return false
         if (isValidComponent != other.isValidComponent) return false

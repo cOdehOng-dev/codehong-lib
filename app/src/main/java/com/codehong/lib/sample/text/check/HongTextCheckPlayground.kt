@@ -10,21 +10,21 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.label.HongTextBuilder
-import com.codehong.library.widget.text.check.HongCheckTextBuilder
-import com.codehong.library.widget.text.check.HongCheckTextOption
+import com.codehong.library.widget.text.check.HongTextCheckBuilder
+import com.codehong.library.widget.text.check.HongTextCheckOption
 
 class HongTextCheckPlayground(
     playgroundActivity: PlaygroundActivity
-) : BasePlayground<HongCheckTextOption> {
+) : BasePlayground<HongTextCheckOption> {
 
     companion object {
-        private val DEFAULT_PREVIEW_OPTION = HongCheckTextBuilder()
+        private val DEFAULT_PREVIEW_OPTION = HongTextCheckBuilder()
             .checkSize(30)
             .arrowSize(20)
             .text("휴대폰/카드 본인확인 서비스")
             .textOption(
                 HongTextBuilder()
-                    .copy(HongCheckTextOption.DEFAULT_TEXT_OPTION)
+                    .copy(HongTextCheckOption.DEFAULT_TEXT_OPTION)
                     .typography(HongTypo.BODY_15)
                     .color(HongColor.GRAY_70)
                     .applyOption()
@@ -33,7 +33,7 @@ class HongTextCheckPlayground(
             .applyOption()
     }
     override val activity: PlaygroundActivity = playgroundActivity
-    override var previewOption: HongCheckTextOption = DEFAULT_PREVIEW_OPTION
+    override var previewOption: HongTextCheckOption = DEFAULT_PREVIEW_OPTION
     override val widgetType: HongWidgetType = HongWidgetType.TEXT_CHECK
 
     fun preview() {
@@ -49,10 +49,10 @@ class HongTextCheckPlayground(
     }
 
     fun injectPreview(
-        injectOption: HongCheckTextOption,
+        injectOption: HongTextCheckOption,
         includeCommonOption: Boolean = false,
         label: String = "",
-        callback: (HongCheckTextOption) -> Unit
+        callback: (HongTextCheckOption) -> Unit
     ) {
         var inject = injectOption
 
@@ -70,21 +70,21 @@ class HongTextCheckPlayground(
                 margin = inject.margin,
                 usePadding = false,
                 selectWidth = { selectWidth ->
-                    inject = HongCheckTextBuilder()
+                    inject = HongTextCheckBuilder()
                         .copy(inject)
                         .width(selectWidth)
                         .applyOption()
                     callback.invoke(inject)
                 },
                 selectHeight = { selectHeight ->
-                    inject = HongCheckTextBuilder()
+                    inject = HongTextCheckBuilder()
                         .copy(inject)
                         .height(selectHeight)
                         .applyOption()
                     callback.invoke(inject)
                 },
                 selectMargin = { selectMargin ->
-                    inject = HongCheckTextBuilder()
+                    inject = HongTextCheckBuilder()
                         .copy(inject)
                         .margin(selectMargin)
                         .applyOption()
@@ -101,7 +101,7 @@ class HongTextCheckPlayground(
             input = inject.checkSize.toFigureString(),
             useOnlyNumber = true,
         ) {
-            inject = HongCheckTextBuilder()
+            inject = HongTextCheckBuilder()
                 .copy(inject)
                 .checkSize(it.toFigureInt())
                 .applyOption()
@@ -116,7 +116,7 @@ class HongTextCheckPlayground(
             input = inject.arrowSize.toFigureString(),
             useOnlyNumber = true,
         ) {
-            inject = HongCheckTextBuilder()
+            inject = HongTextCheckBuilder()
                 .copy(inject)
                 .checkSize(it.toFigureInt())
                 .applyOption()
@@ -137,7 +137,7 @@ class HongTextCheckPlayground(
                 useMaxLine = false,
                 useOverflow = false,
             ) {
-                inject = HongCheckTextBuilder()
+                inject = HongTextCheckBuilder()
                     .copy(inject)
                     .text(it.text)
                     .textOption(it)
@@ -152,7 +152,7 @@ class HongTextCheckPlayground(
             label = "체크된 아이콘 ",
             description = "체크 아이콘의 색상을 설정해요."
         ) {
-            inject = HongCheckTextBuilder()
+            inject = HongTextCheckBuilder()
                 .copy(inject)
                 .checkColor(it)
                 .applyOption()
@@ -166,7 +166,7 @@ class HongTextCheckPlayground(
             label = "체크 해제 아이콘 ",
             description = "체크 해제 아이콘의 색상을 설정해요."
         ) {
-            inject = HongCheckTextBuilder()
+            inject = HongTextCheckBuilder()
                 .copy(inject)
                 .uncheckColor(it)
                 .applyOption()

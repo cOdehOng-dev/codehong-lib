@@ -48,7 +48,7 @@ import com.codehong.library.widget.pretendardFontFamily
 import com.codehong.library.widget.util.dpToSp
 
 @Composable
-fun DynamicIslandScreen(
+fun HongDynamicIslandScreen(
     isExpanded: Boolean,
     smallText: String,
     largeText: String,

@@ -15,13 +15,13 @@ import com.codehong.library.widget.extensions.setLayout
 import com.codehong.library.widget.language.hongText
 import com.codehong.library.widget.language.image
 
-class HongCheckTextView @JvmOverloads constructor(
+class HongTextCheckView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    var option = HongCheckTextOption()
+    var option = HongTextCheckOption()
         private set
 
     private var checkMark = AppCompatImageView(context)
@@ -34,8 +34,8 @@ class HongCheckTextView @JvmOverloads constructor(
     }
 
     fun set(
-        option: HongCheckTextOption
-    ): HongCheckTextView {
+        option: HongTextCheckOption
+    ): HongTextCheckView {
         this.option = option
         this.isChecked = option.checkState
 

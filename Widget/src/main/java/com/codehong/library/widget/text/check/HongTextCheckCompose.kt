@@ -24,7 +24,7 @@ import com.codehong.library.widget.util.HongWidgetContainer
 
 @Composable
 fun HongTextCheckCompose(
-    option: HongCheckTextOption
+    option: HongTextCheckOption
 ) {
     HongWidgetContainer(option) {
         Row(
@@ -74,7 +74,7 @@ fun HongTextCheckCompose(
 @Composable
 @Preview(showBackground = true)
 fun PreviewHongCheckTextCompose() {
-    val option = HongCheckTextBuilder()
+    val option = HongTextCheckBuilder()
         .margin(
             HongSpacingInfo(
                 left = 20f
@@ -85,7 +85,7 @@ fun PreviewHongCheckTextCompose() {
         .text("휴대폰/카드 본인확인 서비스")
         .textOption(
             HongTextBuilder()
-                .copy(HongCheckTextOption.DEFAULT_TEXT_OPTION)
+                .copy(HongTextCheckOption.DEFAULT_TEXT_OPTION)
                 .typography(HongTypo.BODY_15)
                 .color(HongColor.GRAY_70)
                 .applyOption()

@@ -1,13 +1,13 @@
 package com.codehong.library.widget.dynamicisland
 
-enum class DynamicIslandType(val type: Int) {
+enum class HongDynamicIslandType(val type: Int) {
     LODGING(1),
     AIR(2),
     ETC(3)
     ;
 
     companion object {
-        fun Int.toType(): DynamicIslandType {
+        fun Int.toType(): HongDynamicIslandType {
             return when (this) {
                 LODGING.type -> LODGING
                 AIR.type -> AIR
@@ -15,7 +15,7 @@ enum class DynamicIslandType(val type: Int) {
                 else -> ETC
             }
         }
-        fun DynamicIslandType.toStateMessage(
+        fun HongDynamicIslandType.toStateMessage(
             diffMillis: Long,
             isSmall: Boolean
         ): String {
