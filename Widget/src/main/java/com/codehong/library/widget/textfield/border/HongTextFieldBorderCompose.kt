@@ -43,8 +43,8 @@ import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.rule.typo.fontWeight
 import com.codehong.library.widget.rule.typo.size
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.text.HongTextCompose
+import com.codehong.library.widget.text.label.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextCompose
 import com.codehong.library.widget.util.HongWidgetContainer
 import com.codehong.library.widget.util.dpToSp
 

@@ -1,4 +1,4 @@
-package com.codehong.library.widget.text
+package com.codehong.library.widget.text.label
 
 import android.content.Context
 import android.graphics.Paint

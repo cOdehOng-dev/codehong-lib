@@ -32,7 +32,7 @@
             android:layout_gravity="center"/>
     </FrameLayout>
 
-    <com.codehong.library.widget.captureshare.CaptureShareView
+    <com.codehong.library.widget.captureshare.HongCaptureShareView
         android:id="@+id/v_capture_share"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

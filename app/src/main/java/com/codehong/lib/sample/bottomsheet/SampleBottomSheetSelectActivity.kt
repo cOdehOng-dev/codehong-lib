@@ -17,8 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.base.BaseSampleComposeActivity
-import com.codehong.library.widget.bottomsheet.HongBottomSheetSelectBuilder
-import com.codehong.library.widget.bottomsheet.HongBottomSheetSelectCompose
+import com.codehong.library.widget.bottomsheet.select.HongBottomSheetSelectBuilder
+import com.codehong.library.widget.bottomsheet.select.HongBottomSheetSelectCompose
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.rule.color.HongColor
 

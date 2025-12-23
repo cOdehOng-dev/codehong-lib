@@ -1,4 +1,4 @@
-package com.codehong.library.widget.text
+package com.codehong.library.widget.text.label
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.HongTextAlign

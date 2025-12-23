@@ -36,9 +36,8 @@ import coil.request.ImageRequest
 import kotlinx.coroutines.delay
 
 @Composable
-fun CaptureShareCompose(
+fun HongCaptureShareCompose(
     imageUri: Uri,
-    shareLink: String?,
     onShareClicked: () -> Unit,
     onDismiss: () -> Unit
 ) {

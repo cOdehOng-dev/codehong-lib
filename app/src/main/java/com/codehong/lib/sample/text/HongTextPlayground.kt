@@ -16,8 +16,8 @@ import com.codehong.library.widget.rule.HongTextOverflow.Companion.toHongTextOve
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.text.HongTextOption
+import com.codehong.library.widget.text.label.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextOption
 
 class HongTextPlayground(
     playgroundActivity: PlaygroundActivity

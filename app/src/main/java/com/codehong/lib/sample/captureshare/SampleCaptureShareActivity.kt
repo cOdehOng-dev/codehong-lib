@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.lib.sample.databinding.ActivityCaptureShareBinding
-import com.codehong.library.widget.captureshare.CaptureShareManager
+import com.codehong.library.widget.captureshare.HongCaptureShareManager
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.util.PermissionManager
 
@@ -38,7 +38,7 @@ class SampleCaptureShareActivity : BaseActivity() {
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { _ ->
             if (!PermissionManager.checkPhotoAccessIsLimited(this)) {
-                CaptureShareManager.showSettingDialog(this)
+                HongCaptureShareManager.showSettingDialog(this)
             }
         }
 }

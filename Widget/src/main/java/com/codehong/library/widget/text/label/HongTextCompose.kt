@@ -1,4 +1,4 @@
-package com.codehong.library.widget.text
+package com.codehong.library.widget.text.label
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding

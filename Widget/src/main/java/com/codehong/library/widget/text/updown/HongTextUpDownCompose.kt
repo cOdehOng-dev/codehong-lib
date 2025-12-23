@@ -20,7 +20,7 @@ import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongSpacingInfo
-import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextBuilder
 import com.codehong.library.widget.text.unit.HongTextUnitBuilder
 import com.codehong.library.widget.text.unit.HongTextUnitCompose
 import com.codehong.library.widget.util.HongWidgetContainer

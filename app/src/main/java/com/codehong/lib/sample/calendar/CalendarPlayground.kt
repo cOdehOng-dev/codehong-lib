@@ -10,7 +10,7 @@ import com.codehong.library.widget.calendar.model.HongCalendarSelectBackgroundCo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongFont
-import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextBuilder
 import com.codehong.library.widget.util.HongDateUtil
 
 class CalendarPlayground(

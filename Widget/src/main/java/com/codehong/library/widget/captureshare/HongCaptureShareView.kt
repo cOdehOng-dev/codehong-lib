@@ -21,12 +21,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.codehong.library.widget.databinding.HonglibViewCaptureShareBinding
-import com.codehong.library.widget.util.PermissionManager
 import com.codehong.library.widget.extensions.isAppForeground
+import com.codehong.library.widget.util.PermissionManager
 import java.io.File
 import java.io.FileOutputStream
 
-class CaptureShareView @JvmOverloads constructor(
+class HongCaptureShareView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -116,7 +116,7 @@ class CaptureShareView @JvmOverloads constructor(
                 )
                 val isAccessAllGranted = PermissionManager.checkPhotoAccessIsLimited(activity)
                 if (isAccessAllGranted && isSystemGranted) {
-                    CaptureShareManager.observeScreenshot(activity) { bitmap ->
+                    HongCaptureShareManager.observeScreenshot(activity) { bitmap ->
                         val cachePath = File(context.cacheDir, "images").apply { mkdirs() }
                         val file = File(cachePath, "shared_image.png")
                         FileOutputStream(file).use { stream ->
@@ -138,12 +138,12 @@ class CaptureShareView @JvmOverloads constructor(
                     }
                 } else {
                     if (!isAccessAllGranted && !isSystemGranted) {
-                        CaptureShareManager.showPermissionDialog(
+                        HongCaptureShareManager.showPermissionDialog(
                             activity,
                             launcher
                         )
                     } else {
-                        CaptureShareManager.showSettingDialog(activity)
+                        HongCaptureShareManager.showSettingDialog(activity)
                     }
                 }
             }

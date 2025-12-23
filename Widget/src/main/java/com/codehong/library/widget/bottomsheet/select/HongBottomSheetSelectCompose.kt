@@ -1,4 +1,4 @@
-package com.codehong.library.widget.bottomsheet
+package com.codehong.library.widget.bottomsheet.select
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -33,8 +33,8 @@ import com.codehong.library.widget.rule.button.HongButtonIconType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toRoundedCornerShape
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.text.HongTextCompose
+import com.codehong.library.widget.text.label.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextCompose
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -8,7 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.rule.HongSpacingInfo
-import com.codehong.library.widget.text.HongTextCompose
+import com.codehong.library.widget.text.label.HongTextCompose
 import com.codehong.library.widget.util.HongWidgetContainer
 
 @Composable

@@ -10,7 +10,7 @@ import com.codehong.library.widget.label.HongLabelView
 import com.codehong.library.widget.label.input.HongLabelInputView
 import com.codehong.library.widget.label.select.HongLabelSelectInputView
 import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchView
-import com.codehong.library.widget.text.HongTextView
+import com.codehong.library.widget.text.label.HongTextView
 import com.codehong.library.widget.text.unit.HongTextUnitView
 import com.codehong.library.widget.textfield.HongTextFieldView
 import com.codehong.library.widget.toggleswitch.HongSwitchView

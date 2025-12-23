@@ -26,7 +26,7 @@ import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toCornerRadii
-import com.codehong.library.widget.text.HongTextOption
+import com.codehong.library.widget.text.label.HongTextOption
 
 fun View?.setLayout(
     width: Int = HongLayoutParam.WRAP_CONTENT.value,

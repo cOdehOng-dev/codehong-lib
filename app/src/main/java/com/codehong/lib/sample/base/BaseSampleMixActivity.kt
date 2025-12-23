@@ -17,7 +17,7 @@ import com.codehong.library.widget.rule.HongWidgetType.Companion.toHongWidgetTyp
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextBuilder
 
 abstract class BaseSampleMixActivity : BaseActivity() {
 

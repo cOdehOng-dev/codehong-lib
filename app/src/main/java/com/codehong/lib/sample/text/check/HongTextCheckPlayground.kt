@@ -9,7 +9,7 @@ import com.codehong.library.widget.extensions.toFigureString
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextBuilder
 import com.codehong.library.widget.text.check.HongCheckTextBuilder
 import com.codehong.library.widget.text.check.HongCheckTextOption
 

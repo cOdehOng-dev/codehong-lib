@@ -3,8 +3,8 @@ package com.codehong.library.widget.text.check
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.text.HongTextOption
+import com.codehong.library.widget.text.label.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextOption
 
 class HongCheckTextBuilder : HongWidgetCommonBuilder<HongCheckTextOption, HongCheckTextBuilder> {
 

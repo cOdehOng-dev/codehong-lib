@@ -8,7 +8,7 @@ import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
 import com.codehong.library.widget.language.hongText
-import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextBuilder
 
 class HongTextBadgeView @JvmOverloads constructor(
     context: Context,

@@ -12,7 +12,7 @@ import com.codehong.library.widget.calendar.model.InitialSelectedInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongFont
-import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextBuilder
 import com.codehong.library.widget.util.HongDateUtil
 import com.codehong.library.widget.util.HongToastUtil
 

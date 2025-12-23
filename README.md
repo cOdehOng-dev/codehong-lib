@@ -27,6 +27,10 @@
 | HongButtonIcon | 아이콘 버튼 위젯. 버튼 상태에 따라 자동 색상 변경, 다양한 크기 옵션 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/button/icon/README.md) |
 | HongButtonText | 텍스트 버튼 위젯. 다양한 스타일 커스터마이징과 ENABLED/DISABLED 상태 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/button/text/README.md) |
 | HongSelectButton | 이중 선택 버튼 위젯. 취소/확인 등 양자택일 UI 제공 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/button/select/README.md) |
+| HongBottomSheetSwipe | 드래그 제스처로 높이를 조절할 수 있는 스와이프 바텀시트. 배경 콘텐츠 스케일/오프셋 애니메이션 지원 (Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/bottomsheet/swipe/README.md) |
+| HongBottomSheetSelect | 여러 옵션 중 하나를 선택할 수 있는 바텀시트. 제목/부제목이 있는 선택 항목 리스트와 선택된 항목 강조 표시 지원 (Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/bottomsheet/select/README.md) |
+| HongText | 빌더 패턴 기반의 커스텀 텍스트 위젯. 타이포그래피 시스템, Span 텍스트, 숫자 포맷팅, 줄바꿈 제어 등 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/label/README.md) |
+| HongTextBadge | 텍스트 배지 위젯. 상태, 카테고리, 태그 등을 표시하는 단일 줄 배지. 배경색, 테두리, 모서리 둥글기 커스터마이징 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/badge/README.md) |
 
 ## 🛠 설치
 

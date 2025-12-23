@@ -4,7 +4,7 @@ import com.codehong.library.widget.calendar.model.HongCalendarDayOfWeekLangType
 import com.codehong.library.widget.calendar.model.HongCalendarSelectBackgroundColorHex
 import com.codehong.library.widget.calendar.model.InitialSelectedInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
-import com.codehong.library.widget.text.HongTextOption
+import com.codehong.library.widget.text.label.HongTextOption
 import org.threeten.bp.LocalDate
 
 class HongCalendarBuilder {

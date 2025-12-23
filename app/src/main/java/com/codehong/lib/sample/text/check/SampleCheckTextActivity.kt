@@ -7,7 +7,7 @@ import com.codehong.lib.sample.base.BaseSampleMixActivity
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextBuilder
 import com.codehong.library.widget.text.check.HongCheckTextBuilder
 import com.codehong.library.widget.text.check.HongTextCheckCompose
 import com.codehong.library.widget.text.check.HongCheckTextOption

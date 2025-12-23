@@ -18,7 +18,7 @@ import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
-object CaptureShareManager {
+object HongCaptureShareManager {
     private const val DATA_STORE = "DATA_STORE"
     private const val KEY_ONE_MONTH_LATER = "one_month_later"
 

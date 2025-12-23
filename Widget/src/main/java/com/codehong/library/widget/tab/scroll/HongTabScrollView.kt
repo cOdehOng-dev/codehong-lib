@@ -15,7 +15,7 @@ import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
-import com.codehong.library.widget.text.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextBuilder
 
 class HongTabScrollView @JvmOverloads constructor(
     context: Context,

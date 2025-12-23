@@ -85,8 +85,8 @@ import com.codehong.library.widget.tab.scroll.HongTabScrollCompose
 import com.codehong.library.widget.tab.scroll.HongTabScrollOption
 import com.codehong.library.widget.tab.segment.HongTabSegmentCompose
 import com.codehong.library.widget.tab.segment.HongTabSegmentOption
-import com.codehong.library.widget.text.HongTextCompose
-import com.codehong.library.widget.text.HongTextOption
+import com.codehong.library.widget.text.label.HongTextCompose
+import com.codehong.library.widget.text.label.HongTextOption
 import com.codehong.library.widget.text.badge.HongTextBadgeCompose
 import com.codehong.library.widget.text.badge.HongTextBadgeOption
 import com.codehong.library.widget.text.check.HongCheckTextOption

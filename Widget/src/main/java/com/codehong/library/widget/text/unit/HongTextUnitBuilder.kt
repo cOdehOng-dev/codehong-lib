@@ -2,8 +2,8 @@ package com.codehong.library.widget.text.unit
 
 import android.util.Log
 import com.codehong.library.widget.HongWidgetCommonBuilder
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.text.HongTextOption
+import com.codehong.library.widget.text.label.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextOption
 
 class HongTextUnitBuilder : HongWidgetCommonBuilder<HongTextUnitOption, HongTextUnitBuilder> {
 

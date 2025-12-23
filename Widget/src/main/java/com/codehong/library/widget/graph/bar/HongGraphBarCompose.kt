@@ -22,8 +22,8 @@ import com.codehong.library.widget.graph.HongGraphBuilder
 import com.codehong.library.widget.graph.HongGraphOption
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongTextAlign
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.text.HongTextCompose
+import com.codehong.library.widget.text.label.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextCompose
 import com.codehong.library.widget.util.HongWidgetContainer
 
 @Composable

@@ -1,4 +1,4 @@
-package com.codehong.library.widget.text
+package com.codehong.library.widget.text.label
 
 import androidx.compose.ui.text.font.FontWeight
 import com.codehong.library.widget.HongWidgetCommonOption

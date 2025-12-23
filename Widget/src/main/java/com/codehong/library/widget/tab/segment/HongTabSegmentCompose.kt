@@ -24,8 +24,8 @@ import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.text.HongTextBuilder
-import com.codehong.library.widget.text.HongTextCompose
+import com.codehong.library.widget.text.label.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextCompose
 
 @SuppressLint("UseOfNonLambdaOffsetOverload")
 @Composable
