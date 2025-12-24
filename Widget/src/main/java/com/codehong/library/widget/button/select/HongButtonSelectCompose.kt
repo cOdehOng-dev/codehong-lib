@@ -19,8 +19,8 @@ import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.util.HongWidgetContainer
 
 @Composable
-fun HongSelectButtonCompose(
-    option: HongSelectButtonOption
+fun HongButtonSelectCompose(
+    option: HongButtonSelectOption
 ) {
     HongWidgetContainer(option) {
         Row(
@@ -109,8 +109,8 @@ fun HongSelectButtonCompose(
 @Preview(showBackground = true)
 @Composable
 fun PreviewHongSelectButtonCompose() {
-    HongSelectButtonCompose(
-        HongSelectButtonBuilder()
+    HongButtonSelectCompose(
+        HongButtonSelectBuilder()
             .margin(
                 HongSpacingInfo(
                     top = 20f,

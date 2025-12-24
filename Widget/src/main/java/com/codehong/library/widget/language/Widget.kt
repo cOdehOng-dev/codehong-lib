@@ -2,7 +2,7 @@ package com.codehong.library.widget.language
 
 import android.content.Context
 import android.view.ViewGroup
-import com.codehong.library.widget.button.select.HongSelectButtonView
+import com.codehong.library.widget.button.select.HongButtonSelectView
 import com.codehong.library.widget.button.text.HongButtonTextView
 import com.codehong.library.widget.checkbox.HongCheckboxView
 import com.codehong.library.widget.image.HongImageView
@@ -109,14 +109,14 @@ fun ViewGroup.hongTextButton(
 }
 
 fun Context.hongSelectButton(
-    block: HongSelectButtonView.() -> Unit
-) = HongSelectButtonView(this).run {
+    block: HongButtonSelectView.() -> Unit
+) = HongButtonSelectView(this).run {
     block.invoke(this)
     this
 }
 fun ViewGroup.hongSelectButton(
-    block: HongSelectButtonView.() -> Unit
-) = HongSelectButtonView(this.context).run {
+    block: HongButtonSelectView.() -> Unit
+) = HongButtonSelectView(this.context).run {
     block.invoke(this)
     this@hongSelectButton.addView(this)
     this

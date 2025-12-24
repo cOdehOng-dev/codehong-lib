@@ -15,7 +15,7 @@ import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
-class HongSelectButtonView @JvmOverloads constructor(
+class HongButtonSelectView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -25,12 +25,12 @@ class HongSelectButtonView @JvmOverloads constructor(
         orientation = HORIZONTAL
     }
 
-    var option = HongSelectButtonOption()
+    var option = HongButtonSelectOption()
         private set
 
     fun set(
-        option: HongSelectButtonOption
-    ): HongSelectButtonView {
+        option: HongButtonSelectOption
+    ): HongButtonSelectView {
         removeAllViews()
 
         this.option = option

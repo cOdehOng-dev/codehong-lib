@@ -5,12 +5,12 @@ import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
 
-class HongSelectButtonBuilder : HongWidgetCommonBuilder<HongSelectButtonOption, HongSelectButtonBuilder> {
+class HongButtonSelectBuilder : HongWidgetCommonBuilder<HongButtonSelectOption, HongButtonSelectBuilder> {
 
-    override val builder: HongSelectButtonBuilder = this
-    override val option: HongSelectButtonOption = HongSelectButtonOption()
+    override val builder: HongButtonSelectBuilder = this
+    override val option: HongButtonSelectOption = HongButtonSelectOption()
 
-    override fun width(width: Int?): HongSelectButtonBuilder = apply {
+    override fun width(width: Int?): HongButtonSelectBuilder = apply {
         this.option.width = HongLayoutParam.MATCH_PARENT.value
     }
 
@@ -73,10 +73,10 @@ class HongSelectButtonBuilder : HongWidgetCommonBuilder<HongSelectButtonOption, 
         this.option.positiveClick = click
     }
 
-    fun copy(inject: HongSelectButtonOption?): HongSelectButtonBuilder {
-        if (inject == null) return HongSelectButtonBuilder()
+    fun copy(inject: HongButtonSelectOption?): HongButtonSelectBuilder {
+        if (inject == null) return HongButtonSelectBuilder()
 
-        return HongSelectButtonBuilder()
+        return HongButtonSelectBuilder()
             .width(inject.width)
             .height(inject.height)
             .margin(inject.margin)

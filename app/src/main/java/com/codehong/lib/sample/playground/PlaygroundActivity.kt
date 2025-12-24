@@ -44,8 +44,8 @@ import com.codehong.lib.sample.textfield.timer.HongTextFieldTimerPlayground
 import com.codehong.lib.sample.textfield.underline.HongTextFieldUnderlinePlayground
 import com.codehong.lib.sample.toggleswitch.HongSwitchPlayground
 import com.codehong.library.widget.HongWidgetCommonOption
-import com.codehong.library.widget.button.select.HongSelectButtonCompose
-import com.codehong.library.widget.button.select.HongSelectButtonOption
+import com.codehong.library.widget.button.select.HongButtonSelectCompose
+import com.codehong.library.widget.button.select.HongButtonSelectOption
 import com.codehong.library.widget.button.text.HongButtonTextCompose
 import com.codehong.library.widget.button.text.HongButtonTextOption
 import com.codehong.library.widget.calendar.HongCalendarCompose
@@ -290,7 +290,7 @@ class PlaygroundActivity : BaseActivity() {
                     HongWidgetType.TEXT_FIELD_TIMER -> HongTimerTextFieldCompose(previewOption as HongTextFieldTimerOption)
                     HongWidgetType.TEXT_FIELD_NUMBER -> HongNumberTextFieldCompose(previewOption as HongTextFieldNumberOption)
                     HongWidgetType.BUTTON_TEXT -> HongButtonTextCompose(previewOption as HongButtonTextOption)
-                    HongWidgetType.BUTTON_SELECT -> HongSelectButtonCompose(previewOption as HongSelectButtonOption)
+                    HongWidgetType.BUTTON_SELECT -> HongButtonSelectCompose(previewOption as HongButtonSelectOption)
                     HongWidgetType.CALENDAR -> HongCalendarCompose(previewOption as HongCalendarOption)
                     HongWidgetType.HORIZONTAL_PAGER -> HongHorizontalPagerCompose(previewOption as HongHorizontalPagerOption) { item ->
                         (item as? String)

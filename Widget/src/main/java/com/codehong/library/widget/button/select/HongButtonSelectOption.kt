@@ -10,7 +10,7 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 
-data class HongSelectButtonOption(
+data class HongButtonSelectOption(
     override val type: HongWidgetType = HongWidgetType.BUTTON_SELECT
 ) : HongWidgetCommonOption {
 
@@ -44,7 +44,7 @@ data class HongSelectButtonOption(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as HongSelectButtonOption
+        other as HongButtonSelectOption
 
         if (type != other.type) return false
         if (isValidComponent != other.isValidComponent) return false

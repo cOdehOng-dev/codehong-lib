@@ -12,7 +12,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import com.codehong.library.widget.R
-import com.codehong.library.widget.button.select.HongSelectButtonBuilder
+import com.codehong.library.widget.button.select.HongButtonSelectBuilder
 import com.codehong.library.widget.button.text.HongButtonTextBuilder
 import com.codehong.library.widget.databinding.HonglibOptionPickerDialogBinding
 import com.codehong.library.widget.extensions.dpToPx
@@ -120,7 +120,7 @@ class OptionPickerDialog constructor(
             if (!useDirectCallback) {
                 hongSelectButton {
                     set(
-                        HongSelectButtonBuilder()
+                        HongButtonSelectBuilder()
                             .margin(
                                 HongSpacingInfo(
                                     left = 20f,

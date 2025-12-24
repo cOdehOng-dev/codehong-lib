@@ -32,6 +32,7 @@
 | HongText             | 빌더 패턴 기반의 커스텀 텍스트 위젯. 타이포그래피 시스템, Span 텍스트, 숫자 포맷팅, 줄바꿈 제어 등 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/label/README.md) |
 | HongTextBadge        | 텍스트 배지 위젯. 상태, 카테고리, 태그 등을 표시하는 단일 줄 배지. 배경색, 테두리, 모서리 둥글기 커스터마이징 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/badge/README.md) |
 | HongCheckText        | 체크 가능한 텍스트 위젯. 체크마크, 텍스트, 화살표로 구성된 인터랙티브 선택 UI (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/check/README.md) |
+| HongTextCount        | 숫자 입력 및 증감 버튼을 제공하는 카운터 위젯. ➖/➕ 버튼으로 값 조절, Long/Double 타입 지원, 최소값/최대값 범위 제한 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/count/README.md) |
 
 ## 🛠 설치
 

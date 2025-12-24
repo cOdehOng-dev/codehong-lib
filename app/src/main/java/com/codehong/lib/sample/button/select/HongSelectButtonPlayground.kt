@@ -4,18 +4,18 @@ import android.util.Log
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
-import com.codehong.library.widget.button.select.HongSelectButtonBuilder
-import com.codehong.library.widget.button.select.HongSelectButtonOption
+import com.codehong.library.widget.button.select.HongButtonSelectBuilder
+import com.codehong.library.widget.button.select.HongButtonSelectOption
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.typo.HongTypo
 
 class HongSelectButtonPlayground(
     playgroundActivity: PlaygroundActivity
-) : BasePlayground<HongSelectButtonOption> {
+) : BasePlayground<HongButtonSelectOption> {
 
     companion object {
-        private val DEFAULT_PREVIEW_OPTION = HongSelectButtonBuilder()
+        private val DEFAULT_PREVIEW_OPTION = HongButtonSelectBuilder()
             .margin(
                 HongSpacingInfo(
                     left = 20f,
@@ -32,7 +32,7 @@ class HongSelectButtonPlayground(
     }
 
     override val activity: PlaygroundActivity = playgroundActivity
-    override var previewOption: HongSelectButtonOption = DEFAULT_PREVIEW_OPTION
+    override var previewOption: HongButtonSelectOption = DEFAULT_PREVIEW_OPTION
     override val widgetType: HongWidgetType = HongWidgetType.BUTTON_SELECT
 
     fun preview() {
@@ -48,10 +48,10 @@ class HongSelectButtonPlayground(
     }
 
     fun injectPreview(
-        injectOption: HongSelectButtonOption,
+        injectOption: HongButtonSelectOption,
         includeCommonOption: Boolean = false,
         label: String? = null,
-        callback: (HongSelectButtonOption) -> Unit
+        callback: (HongButtonSelectOption) -> Unit
     ) {
         var inject = injectOption
         if (!label.isNullOrEmpty()) {
@@ -68,21 +68,21 @@ class HongSelectButtonPlayground(
                 margin = inject.margin,
                 useWidth = false,
                 selectHeight = { selectHeight ->
-                    inject = HongSelectButtonBuilder()
+                    inject = HongButtonSelectBuilder()
                         .copy(inject)
                         .height(selectHeight)
                         .applyOption()
                     callback.invoke(inject)
                 },
                 selectMargin = { selectMargin ->
-                    inject = HongSelectButtonBuilder()
+                    inject = HongButtonSelectBuilder()
                         .copy(inject)
                         .margin(selectMargin)
                         .applyOption()
                     callback.invoke(inject)
                 },
                 selectPadding = { selectPadding ->
-                    inject = HongSelectButtonBuilder()
+                    inject = HongButtonSelectBuilder()
                         .copy(inject)
                         .padding(selectPadding)
                         .applyOption()
@@ -102,7 +102,7 @@ class HongSelectButtonPlayground(
             input = inject.negativeText,
             label = "버튼 텍스트",
         ) {
-            inject = HongSelectButtonBuilder()
+            inject = HongButtonSelectBuilder()
                 .copy(inject)
                 .negativeText(it)
                 .applyOption()
@@ -114,7 +114,7 @@ class HongSelectButtonPlayground(
             typo = inject.negativeTextTypo,
             label = "버튼 텍스트 폰트",
         ) {
-            inject = HongSelectButtonBuilder()
+            inject = HongButtonSelectBuilder()
                 .copy(inject)
                 .negativeTextTypo(it)
                 .applyOption()
@@ -126,7 +126,7 @@ class HongSelectButtonPlayground(
             label = "버튼 텍스트 ",
             colorHex = inject.negativeTextColorHex
         ) {
-            inject = HongSelectButtonBuilder()
+            inject = HongButtonSelectBuilder()
                 .copy(inject)
                 .negativeTextColor(it)
                 .applyOption()
@@ -144,7 +144,7 @@ class HongSelectButtonPlayground(
             input = inject.positiveText,
             label = "버튼 텍스트",
         ) {
-            inject = HongSelectButtonBuilder()
+            inject = HongButtonSelectBuilder()
                 .copy(inject)
                 .positiveText(it)
                 .applyOption()
@@ -156,7 +156,7 @@ class HongSelectButtonPlayground(
             typo = inject.positiveTextTypo,
             label = "버튼 텍스트 폰트",
         ) {
-            inject = HongSelectButtonBuilder()
+            inject = HongButtonSelectBuilder()
                 .copy(inject)
                 .positiveTextTypo(it)
                 .applyOption()
@@ -168,7 +168,7 @@ class HongSelectButtonPlayground(
             label = "버튼 텍스트 ",
             colorHex = inject.positiveTextColorHex
         ) {
-            inject = HongSelectButtonBuilder()
+            inject = HongButtonSelectBuilder()
                 .copy(inject)
                 .positiveTextColor(it)
                 .applyOption()
