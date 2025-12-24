@@ -33,6 +33,10 @@
 | HongTextBadge        | 텍스트 배지 위젯. 상태, 카테고리, 태그 등을 표시하는 단일 줄 배지. 배경색, 테두리, 모서리 둥글기 커스터마이징 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/badge/README.md) |
 | HongCheckText        | 체크 가능한 텍스트 위젯. 체크마크, 텍스트, 화살표로 구성된 인터랙티브 선택 UI (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/check/README.md) |
 | HongTextCount        | 숫자 입력 및 증감 버튼을 제공하는 카운터 위젯. ➖/➕ 버튼으로 값 조절, Long/Double 타입 지원, 최소값/최대값 범위 제한 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/count/README.md) |
+| HongTextUnit         | 숫자와 단위를 함께 표시하는 텍스트 위젯. 천 단위 콤마 자동 추가, 단위 표시 ON/OFF 제어, 독립적인 스타일 설정 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/unit/README.md) |
+| HongTextUpDown       | 마이너스/플러스 버튼으로 숫자를 증감시키는 위젯. 원형 버튼, 증감 단위 설정, 천 단위 콤마 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/updown/README.md) |
+| HongTabFlow          | FlowRow 레이아웃을 사용하는 다중 행 탭 선택 위젯. 자동 줄바꿈, 한 줄당 최대 탭 개수 설정, 선택/미선택 시각적 구분 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/tab/flow/README.md) |
+| HongTabScroll        | 수평 스크롤이 가능한 탭 선택 위젯. 선택된 탭이 자동으로 중앙으로 이동하며, 선택/미선택 상태에 따라 자동 스타일 변경 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/tab/scroll/README.md) |
 
 ## 🛠 설치
 
