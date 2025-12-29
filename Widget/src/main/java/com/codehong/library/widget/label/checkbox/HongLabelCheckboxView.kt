@@ -8,7 +8,7 @@ import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
-import com.codehong.library.widget.label.HongLabelBuilder
+import com.codehong.library.widget.label.def.HongLabelBuilder
 import com.codehong.library.widget.language.frameLayout
 import com.codehong.library.widget.language.hongCheckbox
 import com.codehong.library.widget.language.hongLabel

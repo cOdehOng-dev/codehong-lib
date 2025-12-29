@@ -3,8 +3,8 @@ package com.codehong.lib.sample.label
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
-import com.codehong.library.widget.label.HongLabelBuilder
-import com.codehong.library.widget.label.HongLabelOption
+import com.codehong.library.widget.label.def.HongLabelBuilder
+import com.codehong.library.widget.label.def.HongLabelOption
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.typo.HongTypo

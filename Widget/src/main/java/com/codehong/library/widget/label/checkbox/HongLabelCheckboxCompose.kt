@@ -14,8 +14,8 @@ import com.codehong.library.widget.checkbox.HongCheckBoxCompose
 import com.codehong.library.widget.checkbox.HongCheckboxBuilder
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
-import com.codehong.library.widget.label.HongLabelBuilder
-import com.codehong.library.widget.label.HongLabelViewCompose
+import com.codehong.library.widget.label.def.HongLabelBuilder
+import com.codehong.library.widget.label.def.HongLabelViewCompose
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongPosition
 import com.codehong.library.widget.rule.HongSpacingInfo

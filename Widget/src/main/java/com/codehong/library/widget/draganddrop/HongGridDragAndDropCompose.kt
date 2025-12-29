@@ -78,5 +78,4 @@ fun HongGridDragAndDropCompose(
             subContent(option.inboundColorHex)
         }
     }
-
 }

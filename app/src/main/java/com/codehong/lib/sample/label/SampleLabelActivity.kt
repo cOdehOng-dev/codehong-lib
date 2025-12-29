@@ -3,9 +3,9 @@ package com.codehong.lib.sample.label
 import android.view.View
 import androidx.compose.runtime.Composable
 import com.codehong.lib.sample.base.BaseSampleMixActivity
-import com.codehong.library.widget.label.HongLabelBuilder
-import com.codehong.library.widget.label.HongLabelView
-import com.codehong.library.widget.label.HongLabelViewCompose
+import com.codehong.library.widget.label.def.HongLabelBuilder
+import com.codehong.library.widget.label.def.HongLabelView
+import com.codehong.library.widget.label.def.HongLabelViewCompose
 import com.codehong.library.widget.rule.HongSpacingInfo
 
 class SampleLabelActivity : BaseSampleMixActivity() {

@@ -1,4 +1,4 @@
-package com.codehong.library.widget.label
+package com.codehong.library.widget.label.def
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable

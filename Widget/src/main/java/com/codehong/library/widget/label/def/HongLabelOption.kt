@@ -1,4 +1,4 @@
-package com.codehong.library.widget.label
+package com.codehong.library.widget.label.def
 
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.rule.HongBorderInfo

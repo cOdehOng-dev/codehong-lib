@@ -6,7 +6,7 @@ import com.codehong.library.widget.button.select.HongButtonSelectView
 import com.codehong.library.widget.button.text.HongButtonTextView
 import com.codehong.library.widget.checkbox.HongCheckboxView
 import com.codehong.library.widget.image.HongImageView
-import com.codehong.library.widget.label.HongLabelView
+import com.codehong.library.widget.label.def.HongLabelView
 import com.codehong.library.widget.label.input.HongLabelInputView
 import com.codehong.library.widget.label.select.HongLabelSelectInputView
 import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchView

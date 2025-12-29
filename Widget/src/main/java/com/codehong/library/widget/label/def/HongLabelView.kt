@@ -1,4 +1,4 @@
-package com.codehong.library.widget.label
+package com.codehong.library.widget.label.def
 
 import android.content.Context
 import android.util.AttributeSet
