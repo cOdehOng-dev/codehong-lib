@@ -1,4 +1,4 @@
-package com.codehong.library.widget.layout
+package com.codehong.library.widget.layout.slide
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope

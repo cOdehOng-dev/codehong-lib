@@ -43,6 +43,7 @@ import com.codehong.lib.sample.label.checkbox.SampleLabelCheckboxActivity
 import com.codehong.lib.sample.label.input.SampleLabelInputActivity
 import com.codehong.lib.sample.label.select.SampleLabelSelectInputActivity
 import com.codehong.lib.sample.label.toggle.SampleLabelSwitchActivity
+import com.codehong.lib.sample.layout.fade.SampleFadeAnimHeaderLayoutActivity
 import com.codehong.lib.sample.pager.SampleHorizontalPagerActivity
 import com.codehong.lib.sample.picker.OptionPickerActivity
 import com.codehong.lib.sample.picker.SamplePickerComposeActivity
@@ -373,78 +374,6 @@ fun MainScreen(
                                             }
                                         }
 
-                                        HongWidgetType.CALENDAR -> {
-                                            OptionPickerDialog(
-                                                activity,
-                                                "샘플 선택",
-                                                listOf(
-                                                    "초기 날짜 미선택(XML)",
-                                                    "초기 날짜 선택(XML)",
-                                                    "초기 날짜 미선택(Compose)",
-                                                    "초기 날짜 선택(Compose)"
-                                                ),
-                                                0
-                                            ) { selectType, _ ->
-                                                Handler(Looper.getMainLooper()).postDelayed({
-                                                    when (selectType) {
-                                                        "초기 날짜 미선택(XML)" -> {
-                                                            Intent(
-                                                                activity,
-                                                                SampleCalendarActivity::class.java
-                                                            ).apply {
-                                                                putExtra(
-                                                                    SampleConst.INITIAL_DATE,
-                                                                    false
-                                                                )
-                                                                activity.startActivity(this)
-                                                            }
-                                                        }
-                                                        "초기 날짜 선택(XML)" -> {
-                                                            Intent(
-                                                                activity,
-                                                                SampleCalendarActivity::class.java
-                                                            ).apply {
-                                                                putExtra(
-                                                                    SampleConst.INITIAL_DATE,
-                                                                    true
-                                                                )
-                                                                activity.startActivity(this)
-                                                            }
-                                                        }
-
-                                                        "초기 날짜 미선택(Compose)" -> {
-                                                            Intent(activity, SampleCalendarComposeActivity::class.java).apply {
-                                                                putExtra(
-                                                                    SampleConst.INITIAL_DATE,
-                                                                    false
-                                                                )
-                                                                putExtra(
-                                                                    SampleConst.WIDGET_TYPE,
-                                                                    HongWidgetType.CALENDAR.value
-                                                                )
-                                                                activity.startActivity(this)
-                                                            }
-                                                        }
-
-                                                        "초기 날짜 선택(Compose)" -> {
-                                                            Intent(activity, SampleCalendarComposeActivity::class.java).apply {
-                                                                putExtra(
-                                                                    SampleConst.INITIAL_DATE,
-                                                                    true
-                                                                )
-                                                                putExtra(
-                                                                    SampleConst.WIDGET_TYPE,
-                                                                    HongWidgetType.CALENDAR.value
-                                                                )
-                                                                activity.startActivity(this)
-                                                            }
-                                                        }
-                                                        else -> {}
-                                                    }
-                                                }, 200)
-                                            }.show()
-                                        }
-
                                         HongWidgetType.HORIZONTAL_PAGER -> {
                                             Intent(activity, SampleHorizontalPagerActivity::class.java).apply {
                                                 putExtra(
@@ -739,6 +668,88 @@ fun MainScreen(
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
                                                     HongWidgetType.GRID_DRAG_AND_DROP.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
+                                        HongWidgetType.CALENDAR -> {
+                                            OptionPickerDialog(
+                                                activity,
+                                                "샘플 선택",
+                                                listOf(
+                                                    "초기 날짜 미선택(XML)",
+                                                    "초기 날짜 선택(XML)",
+                                                    "초기 날짜 미선택(Compose)",
+                                                    "초기 날짜 선택(Compose)"
+                                                ),
+                                                0
+                                            ) { selectType, _ ->
+                                                Handler(Looper.getMainLooper()).postDelayed({
+                                                    when (selectType) {
+                                                        "초기 날짜 미선택(XML)" -> {
+                                                            Intent(
+                                                                activity,
+                                                                SampleCalendarActivity::class.java
+                                                            ).apply {
+                                                                putExtra(
+                                                                    SampleConst.INITIAL_DATE,
+                                                                    false
+                                                                )
+                                                                activity.startActivity(this)
+                                                            }
+                                                        }
+                                                        "초기 날짜 선택(XML)" -> {
+                                                            Intent(
+                                                                activity,
+                                                                SampleCalendarActivity::class.java
+                                                            ).apply {
+                                                                putExtra(
+                                                                    SampleConst.INITIAL_DATE,
+                                                                    true
+                                                                )
+                                                                activity.startActivity(this)
+                                                            }
+                                                        }
+
+                                                        "초기 날짜 미선택(Compose)" -> {
+                                                            Intent(activity, SampleCalendarComposeActivity::class.java).apply {
+                                                                putExtra(
+                                                                    SampleConst.INITIAL_DATE,
+                                                                    false
+                                                                )
+                                                                putExtra(
+                                                                    SampleConst.WIDGET_TYPE,
+                                                                    HongWidgetType.CALENDAR.value
+                                                                )
+                                                                activity.startActivity(this)
+                                                            }
+                                                        }
+
+                                                        "초기 날짜 선택(Compose)" -> {
+                                                            Intent(activity, SampleCalendarComposeActivity::class.java).apply {
+                                                                putExtra(
+                                                                    SampleConst.INITIAL_DATE,
+                                                                    true
+                                                                )
+                                                                putExtra(
+                                                                    SampleConst.WIDGET_TYPE,
+                                                                    HongWidgetType.CALENDAR.value
+                                                                )
+                                                                activity.startActivity(this)
+                                                            }
+                                                        }
+                                                        else -> {}
+                                                    }
+                                                }, 200)
+                                            }.show()
+                                        }
+
+                                        HongWidgetType.SCROLL_FADE_ANIM_LAYOUT -> {
+                                            Intent(activity, SampleFadeAnimHeaderLayoutActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.SCROLL_FADE_ANIM_LAYOUT.value
                                                 )
                                                 activity.startActivity(this)
                                             }

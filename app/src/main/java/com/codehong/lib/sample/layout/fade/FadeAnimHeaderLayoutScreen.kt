@@ -1,4 +1,4 @@
-package com.codehong.lib.sample.layout.fadeanimheader
+package com.codehong.lib.sample.layout.fade
 
 
 import androidx.compose.foundation.background
@@ -12,6 +12,13 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.codehong.library.widget.R
+import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongTextAlign
+import com.codehong.library.widget.rule.HongTextOverflow
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.typo.HongTypo
+import com.codehong.library.widget.text.label.HongTextBuilder
+import com.codehong.library.widget.text.label.HongTextCompose
 
 @Composable
 fun FadeAnimHeaderLayoutHeader(
@@ -22,7 +29,10 @@ fun FadeAnimHeaderLayoutHeader(
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp)
-            .background(colorResource(id = R.color.honglib_color_ffffff).copy(alpha = headerAlpha))
+            .background(
+                colorResource(id = R.color.honglib_color_ffffff)
+                    .copy(alpha = headerAlpha)
+            )
     ) {
         val startGuideline = createGuidelineFromStart(4.dp)
         val endGuideline = createGuidelineFromEnd(4.dp)
@@ -43,26 +53,18 @@ fun FadeAnimHeaderLayoutHeader(
                 .background(colorResource(id = if (isTransparent) R.color.honglib_color_ffffff else R.color.honglib_color_000000))
         )
 
-//        HongText(
-//            modifier = Modifier
-//                .constrainAs(tvTitle) {
-//                    start.linkTo(ivBack.end, 4.dp)
-//                    end.linkTo(ivShare.start, 4.dp)
-//                    top.linkTo(topGuideline)
-//                    bottom.linkTo(bottomGuideline)
-//                    width = Dimension.fillToConstraints
-//                }
-//                .alpha(if (isTransparent) 0f else 1f),
-//            text = "헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더헤더",
-//            size = 16,
-//            fontWeight = FontWeight.W700,
-//            color = HongComposeColor(
-//                resId = R.color.honglib_color_29292d
-//            ),
-//            maxLines = 1,
-//            overflow = TextOverflow.Ellipsis,
-//            isEmptyOrNullHideView = false
-//        )
+        HongTextCompose(
+            option = HongTextBuilder()
+                .width(HongLayoutParam.MATCH_PARENT.value)
+                .height(HongLayoutParam.WRAP_CONTENT.value)
+                .textAlign(HongTextAlign.CENTER)
+                .maxLines(1)
+                .overflow(HongTextOverflow.ELLIPSIS)
+                .typography(HongTypo.TITLE_26_B)
+                .color(HongColor.BLACK_100)
+                .text("헤더 타이틀")
+                .applyOption()
+        )
 
         Spacer(
             modifier = Modifier

@@ -5,7 +5,7 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.textfield.HongTextFieldBuilder
+import com.codehong.library.widget.textfield.def.HongTextFieldBuilder
 
 class HongLabelSelectInputBuilder : HongWidgetCommonBuilder<HongLabelSelectInputOption, HongLabelSelectInputBuilder> {
 

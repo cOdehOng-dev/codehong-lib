@@ -220,30 +220,26 @@ fun HongTextFieldBorderSelect(
                     }
                 }
 
-                Row(
+                Box(
                     modifier = Modifier
-                        .padding(top = 28.dp),
+                        .padding(top = 28.dp)
+                        .width(60.dp)
+                        .height(52.dp)
+                        .clickable(
+                            interactionSource = interactionSource,
+                            indication = null
+                        ) {
+                            option.onSelectionClick()
+                        },
+                    contentAlignment = Alignment.Center
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .width(60.dp)
-                            .height(52.dp)
-                            .clickable(
-                                interactionSource = remember { MutableInteractionSource() },
-                                indication = null
-                            ) {
-                                option.onSelectionClick()
-                            },
-                        contentAlignment = Alignment.Center
-                    ) {
-                        HongIconCompose(
-                            option = HongIconBuilder()
-                                .iconResId(R.drawable.honglib_ic_20_arrow_down)
-                                .iconType(HongIconType.H20)
-                                .iconColor(HongColor.GRAY_30)
-                                .applyOption()
-                        )
-                    }
+                    HongIconCompose(
+                        option = HongIconBuilder()
+                            .iconResId(R.drawable.honglib_ic_20_arrow_down)
+                            .iconType(HongIconType.H20)
+                            .iconColor(HongColor.GRAY_30)
+                            .applyOption()
+                    )
                 }
             }
 

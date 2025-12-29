@@ -7,7 +7,7 @@ import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.label.HongTextOption
-import com.codehong.library.widget.textfield.HongTextFieldOption
+import com.codehong.library.widget.textfield.def.HongTextFieldOption
 
 class HongTextFieldTimerBuilder :
     HongWidgetCommonBuilder<HongTextFieldTimerOption, HongTextFieldTimerBuilder> {

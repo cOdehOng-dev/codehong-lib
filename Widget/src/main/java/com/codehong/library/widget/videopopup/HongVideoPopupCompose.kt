@@ -33,15 +33,15 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.R
+import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.player.HongVideoPlayerCompose
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.util.dpToSp
-import com.codehong.library.widget.extensions.hongBackground
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun HongComposeVideoPopupView(
+fun HongVideoPopupCompose(
     option: HongVideoPopupOption,
     onShow: () -> Unit = {},
     onHide: (isClickClose: Boolean) -> Unit = { _ -> },

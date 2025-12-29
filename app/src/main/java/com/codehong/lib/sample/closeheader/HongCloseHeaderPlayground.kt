@@ -3,8 +3,8 @@ package com.codehong.lib.sample.closeheader
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
-import com.codehong.library.widget.header.HongHeaderCloseBuilder
-import com.codehong.library.widget.header.HongHeaderCloseOption
+import com.codehong.library.widget.header.close.HongHeaderCloseBuilder
+import com.codehong.library.widget.header.close.HongHeaderCloseOption
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo

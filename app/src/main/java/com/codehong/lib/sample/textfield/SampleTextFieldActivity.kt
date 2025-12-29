@@ -10,9 +10,9 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.textfield.HongTextFieldBuilder
-import com.codehong.library.widget.textfield.HongTextFieldCompose
-import com.codehong.library.widget.textfield.HongTextFieldView
+import com.codehong.library.widget.textfield.def.HongTextFieldBuilder
+import com.codehong.library.widget.textfield.def.HongTextFieldCompose
+import com.codehong.library.widget.textfield.def.HongTextFieldView
 
 class SampleTextFieldActivity : BaseSampleMixActivity() {
 

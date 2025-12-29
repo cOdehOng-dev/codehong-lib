@@ -9,10 +9,12 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.util.HongToastUtil
 import com.codehong.library.widget.util.applyStatusBarColor
-import com.codehong.library.widget.videopopup.HongComposeVideoPopupView
 import com.codehong.library.widget.videopopup.HongVideoPopupBuilder
+import com.codehong.library.widget.videopopup.HongVideoPopupCompose
 import com.codehong.library.widget.videopopup.HongVideoPopupManager
 
+
+// TODO 구조 변경
 class SampleVideoPopupComposeActivity : BaseActivity() {
 
     private lateinit var binding: ActivitySampleVideoPopupComposeBinding
@@ -61,7 +63,7 @@ class SampleVideoPopupComposeActivity : BaseActivity() {
             .landingLink("https://github.com/cOdehOng-dev")
             .applyOption()
         binding.vCompose.setContent {
-            HongComposeVideoPopupView(
+            HongVideoPopupCompose(
                 option = option,
                 onShow = {
                     applyStatusBarColor(R.color.honglib_color_29292d_60)

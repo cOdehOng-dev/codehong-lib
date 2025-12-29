@@ -34,7 +34,6 @@ class HongButtonTextBuilder : HongWidgetCommonBuilder<HongButtonTextOption, Hong
         option.state = state
     }
 
-
     fun text(text: String?) = apply {
         option.text = text ?: ""
     }
@@ -50,8 +49,6 @@ class HongButtonTextBuilder : HongWidgetCommonBuilder<HongButtonTextOption, Hong
     fun textColor(colorHex: String) = apply {
         option.textColorHex = colorHex
     }
-
-
 
 
     fun copy(inject: HongButtonTextOption?): HongButtonTextBuilder {

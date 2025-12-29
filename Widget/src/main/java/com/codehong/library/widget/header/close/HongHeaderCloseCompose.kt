@@ -1,4 +1,4 @@
-package com.codehong.library.widget.header
+package com.codehong.library.widget.header.close
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row

@@ -30,8 +30,8 @@ import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongSpacing
 import com.codehong.library.widget.extensions.hongWidth
-import com.codehong.library.widget.header.HongHeaderCloseBuilder
-import com.codehong.library.widget.header.HongHeaderCloseCompose
+import com.codehong.library.widget.header.close.HongHeaderCloseBuilder
+import com.codehong.library.widget.header.close.HongHeaderCloseCompose
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor

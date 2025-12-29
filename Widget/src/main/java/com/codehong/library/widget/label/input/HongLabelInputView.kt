@@ -14,7 +14,7 @@ import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.textfield.HongTextFieldBuilder
+import com.codehong.library.widget.textfield.def.HongTextFieldBuilder
 
 class HongLabelInputView @JvmOverloads constructor(
     context: Context,

@@ -9,11 +9,12 @@ import com.codehong.library.widget.util.HongWidgetNoneClickContainer
 fun HongIconCompose(
     option: HongIconOption
 ) {
-    val containerOption = HongIconBuilder()
-        .padding(option.padding)
-        .margin(option.margin)
-        .applyOption()
-    HongWidgetNoneClickContainer(containerOption) {
+    HongWidgetNoneClickContainer(
+        HongIconBuilder()
+            .padding(option.padding)
+            .margin(option.margin)
+            .applyOption()
+    ) {
         HongImageCompose(
             HongImageBuilder()
                 .width(option.iconType.size)

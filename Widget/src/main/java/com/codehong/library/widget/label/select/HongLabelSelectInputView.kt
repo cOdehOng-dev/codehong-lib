@@ -20,7 +20,7 @@ import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.textfield.HongTextFieldView
+import com.codehong.library.widget.textfield.def.HongTextFieldView
 import com.codehong.library.widget.util.picker.OptionPickerDialog
 
 class HongLabelSelectInputView @JvmOverloads constructor(

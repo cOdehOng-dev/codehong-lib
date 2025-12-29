@@ -1,4 +1,4 @@
-package com.codehong.library.widget.header
+package com.codehong.library.widget.header.close
 
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.rule.HongBorderInfo

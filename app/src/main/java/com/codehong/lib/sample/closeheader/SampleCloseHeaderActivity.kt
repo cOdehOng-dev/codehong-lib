@@ -3,9 +3,9 @@ package com.codehong.lib.sample.closeheader
 import android.view.View
 import androidx.compose.runtime.Composable
 import com.codehong.lib.sample.base.BaseSampleMixActivity
-import com.codehong.library.widget.header.HongHeaderCloseBuilder
-import com.codehong.library.widget.header.HongHeaderCloseCompose
-import com.codehong.library.widget.header.HongHeaderCloseView
+import com.codehong.library.widget.header.close.HongHeaderCloseBuilder
+import com.codehong.library.widget.header.close.HongHeaderCloseCompose
+import com.codehong.library.widget.header.close.HongHeaderCloseView
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
 
