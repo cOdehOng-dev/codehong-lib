@@ -15,7 +15,7 @@ import com.codehong.library.widget.checkbox.HongCheckboxBuilder
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.label.def.HongLabelBuilder
-import com.codehong.library.widget.label.def.HongLabelViewCompose
+import com.codehong.library.widget.label.def.HongLabelCompose
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongPosition
 import com.codehong.library.widget.rule.HongSpacingInfo
@@ -40,7 +40,7 @@ fun HongLabelCheckboxCompose(
                         .size(HongLabelCheckboxOption.DEFAULT_BETWEEN_SPACER.dp)
                 )
             }
-            HongLabelViewCompose(
+            HongLabelCompose(
                 HongLabelBuilder()
                     .width(HongLayoutParam.WRAP_CONTENT.value)
                     .backgroundColor(HongColor.TRANSPARENT)

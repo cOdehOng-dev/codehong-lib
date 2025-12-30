@@ -43,7 +43,7 @@ import com.codehong.lib.sample.label.checkbox.SampleLabelCheckboxActivity
 import com.codehong.lib.sample.label.input.SampleLabelInputActivity
 import com.codehong.lib.sample.label.select.SampleLabelSelectInputActivity
 import com.codehong.lib.sample.label.toggle.SampleLabelSwitchActivity
-import com.codehong.lib.sample.layout.fade.SampleFadeAnimHeaderLayoutActivity
+import com.codehong.lib.sample.layout.fade.SampleScrollFadeLayoutActivity
 import com.codehong.lib.sample.pager.SampleHorizontalPagerActivity
 import com.codehong.lib.sample.picker.OptionPickerActivity
 import com.codehong.lib.sample.picker.SamplePickerComposeActivity
@@ -81,8 +81,8 @@ import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.label.HongTextBuilder
-import com.codehong.library.widget.text.label.HongTextCompose
+import com.codehong.library.widget.text.def.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextCompose
 import com.codehong.library.widget.util.picker.OptionPickerDialog
 
 @Composable
@@ -746,7 +746,7 @@ fun MainScreen(
                                         }
 
                                         HongWidgetType.SCROLL_FADE_ANIM_LAYOUT -> {
-                                            Intent(activity, SampleFadeAnimHeaderLayoutActivity::class.java).apply {
+                                            Intent(activity, SampleScrollFadeLayoutActivity::class.java).apply {
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
                                                     HongWidgetType.SCROLL_FADE_ANIM_LAYOUT.value

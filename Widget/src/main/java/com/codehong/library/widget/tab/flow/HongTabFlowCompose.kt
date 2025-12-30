@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongSpacing
 import com.codehong.library.widget.rule.HongSpacingInfo
-import com.codehong.library.widget.text.label.HongTextBuilder
-import com.codehong.library.widget.text.label.HongTextCompose
+import com.codehong.library.widget.text.def.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextCompose
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

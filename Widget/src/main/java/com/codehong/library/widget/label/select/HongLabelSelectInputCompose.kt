@@ -18,7 +18,7 @@ import com.codehong.library.widget.button.text.HongButtonTextCompose
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.label.def.HongLabelBuilder
-import com.codehong.library.widget.label.def.HongLabelViewCompose
+import com.codehong.library.widget.label.def.HongLabelCompose
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongLayoutParam.Companion.toHongLayoutValueToParam
@@ -48,7 +48,7 @@ fun HongLabelSelectInputCompose(
             var currentPosition by rememberSaveable(option.selectPosition) { mutableIntStateOf(option.selectPosition) }
             var initial by rememberSaveable(option.buttonText) { mutableStateOf(option.buttonText) }
 
-            HongLabelViewCompose(
+            HongLabelCompose(
                 HongLabelBuilder()
                     .width(HongLayoutParam.MATCH_PARENT.value)
                     .backgroundColor(HongColor.TRANSPARENT)

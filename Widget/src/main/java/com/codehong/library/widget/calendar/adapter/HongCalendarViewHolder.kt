@@ -15,9 +15,9 @@ import com.codehong.library.widget.databinding.HonglibItemCalendarBinding
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.typo.HongFont
-import com.codehong.library.widget.text.label.HongTextBuilder
-import com.codehong.library.widget.text.label.HongTextOption
-import com.codehong.library.widget.text.label.HongTextView
+import com.codehong.library.widget.text.def.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextOption
+import com.codehong.library.widget.text.def.HongTextView
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongMargin
 import com.codehong.library.widget.extensions.toParseColor

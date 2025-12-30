@@ -11,8 +11,8 @@ import com.codehong.library.widget.rule.HongTextAlign
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.label.HongTextBuilder
-import com.codehong.library.widget.text.label.HongTextCompose
+import com.codehong.library.widget.text.def.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextCompose
 import com.codehong.library.widget.util.HongWidgetContainer
 import com.codehong.library.widget.util.HongWidgetNoneClickContainer
 

@@ -34,7 +34,7 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.parseColor
 import com.codehong.library.widget.rule.typo.fontType
 import com.codehong.library.widget.rule.typo.size
-import com.codehong.library.widget.text.label.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextBuilder
 
 class HongTextFieldUnderlineView @JvmOverloads constructor(
     context: Context,

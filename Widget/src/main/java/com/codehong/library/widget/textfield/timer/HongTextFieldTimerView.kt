@@ -36,7 +36,7 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.parseColor
 import com.codehong.library.widget.rule.typo.fontType
 import com.codehong.library.widget.rule.typo.size
-import com.codehong.library.widget.text.label.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextBuilder
 import com.codehong.library.widget.util.CountdownTimerHelper
 
 class HongTextFieldTimerView @JvmOverloads constructor(

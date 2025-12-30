@@ -9,12 +9,12 @@ import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
-import com.codehong.library.widget.text.label.HongTextBuilder
-import com.codehong.library.widget.text.label.HongTextCompose
+import com.codehong.library.widget.text.def.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextCompose
 import com.codehong.library.widget.util.HongWidgetContainer
 
 @Composable
-fun HongLabelViewCompose(
+fun HongLabelCompose(
     option: HongLabelOption
 ) {
     if (option.label.isNullOrEmpty()) return
@@ -70,6 +70,6 @@ fun PreviewHongLabelViewCompose2() {
         .description("width가 MATCH_PARENT인 경우, textAlign이 적용되지 않습니다.")
         .applyOption()
 
-    HongLabelViewCompose(option)
+    HongLabelCompose(option)
 
 }

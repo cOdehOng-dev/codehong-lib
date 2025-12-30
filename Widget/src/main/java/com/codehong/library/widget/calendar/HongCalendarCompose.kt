@@ -33,9 +33,9 @@ import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongFont
-import com.codehong.library.widget.text.label.HongTextBuilder
-import com.codehong.library.widget.text.label.HongTextCompose
-import com.codehong.library.widget.text.label.HongTextOption
+import com.codehong.library.widget.text.def.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextCompose
+import com.codehong.library.widget.text.def.HongTextOption
 import com.codehong.library.widget.util.HongDateUtil
 import com.codehong.library.widget.util.HongWidgetContainer
 import org.threeten.bp.DayOfWeek

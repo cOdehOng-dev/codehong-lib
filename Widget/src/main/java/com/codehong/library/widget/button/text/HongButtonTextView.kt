@@ -13,7 +13,7 @@ import com.codehong.library.widget.rule.HongState
 import com.codehong.library.widget.rule.HongTextAlign
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.label.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextBuilder
 
 class HongButtonTextView @JvmOverloads constructor(
     context: Context,

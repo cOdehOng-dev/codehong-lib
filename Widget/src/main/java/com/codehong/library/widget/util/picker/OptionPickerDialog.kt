@@ -27,7 +27,7 @@ import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
-import com.codehong.library.widget.text.label.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextBuilder
 
 class OptionPickerDialog constructor(
     private val context: Context,

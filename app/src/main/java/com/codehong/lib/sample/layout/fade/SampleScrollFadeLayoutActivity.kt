@@ -14,12 +14,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.codehong.library.widget.R
 import com.codehong.library.widget.layout.fade.HongScrollFadeLayoutBuilder
 import com.codehong.library.widget.layout.fade.HongScrollFadeLayoutCompose
 import com.codehong.library.widget.layout.fade.HongScrollFadeLayoutOption
 import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.typo.HongTypo
 
-class SampleFadeAnimHeaderLayoutActivity : AppCompatActivity() {
+class SampleScrollFadeLayoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,13 +29,19 @@ class SampleFadeAnimHeaderLayoutActivity : AppCompatActivity() {
             HongScrollFadeLayoutCompose(
                 option = HongScrollFadeLayoutBuilder()
                     .backgroundColor(HongColor.BLUE_10.hex)
-                    .mainContentHeightDp(HongScrollFadeLayoutOption.MAIN_CONTENT_HEIGHT)
-                    .headerContent { isTransparent, headerAlpha ->
-                        FadeAnimHeaderLayoutHeader(
-                            isTransparent = isTransparent,
-                            headerAlpha = headerAlpha
-                        )
+                    .mainContentHeightDp(HongScrollFadeLayoutOption.DEFAULT_MAIN_CONTENT_HEIGHT)
+                    .headerBackgroundColor(HongColor.WHITE_100)
+                    .leftIconInfo(R.drawable.honglib_ic_arrow_left)
+                    .leftIconColor(HongColor.WHITE_100 to HongColor.BLACK_100)
+                    .leftIconClick {
+                        finish()
                     }
+                    .titleText("헤더헤더헤더")
+                    .titleTypo(HongTypo.TITLE_26_B)
+                    .titleColor(HongColor.WHITE_100 to HongColor.BLACK_100)
+                    .rightIconInfo(R.drawable.honglib_ic_menu)
+                    .rightIconColor(HongColor.WHITE_100 to HongColor.BLACK_100)
+                    .useTitleOverFlow(true)
                     .mainContent {
                         Text(
                             text = "Item #0",

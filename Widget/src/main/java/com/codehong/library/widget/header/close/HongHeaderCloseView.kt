@@ -14,8 +14,8 @@ import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongTextAlign
 import com.codehong.library.widget.rule.HongTextOverflow
-import com.codehong.library.widget.text.label.HongTextBuilder
-import com.codehong.library.widget.text.label.HongTextView
+import com.codehong.library.widget.text.def.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextView
 
 class HongHeaderCloseView @JvmOverloads constructor(
     context: Context,

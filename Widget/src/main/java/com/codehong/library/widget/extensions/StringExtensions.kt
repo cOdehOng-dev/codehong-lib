@@ -13,7 +13,7 @@ import com.codehong.library.widget.rule.HongTextLineBreak
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.rule.typo.HongFontManager
-import com.codehong.library.widget.text.label.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextBuilder
 import com.codehong.library.widget.util.TextSpan
 
 fun String?.toColor(): Color {

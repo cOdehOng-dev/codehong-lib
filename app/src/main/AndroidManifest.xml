@@ -53,7 +53,7 @@
         <activity android:name=".picker.OptionPickerActivity"/>
 
         <activity
-            android:name=".layout.fade.SampleFadeAnimHeaderLayoutActivity"
+            android:name=".layout.fade.SampleScrollFadeLayoutActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".textfield.SampleTextFieldActivity"/>
         <activity android:name=".textfield.underline.SampleTextFieldUnderlineActivity"/>

@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.typo.HongTypo
 
 class HongScrollFadeLayoutBuilder :
     HongWidgetCommonBuilder<HongScrollFadeLayoutOption, HongScrollFadeLayoutBuilder> {
@@ -37,9 +39,6 @@ class HongScrollFadeLayoutBuilder :
         option.mainContentHeightDp = heightDp
     }
 
-    fun headerContent(headerContent: @Composable (Boolean, Float) -> Unit) = apply {
-        option.headerContent = headerContent
-    }
 
     fun mainContent(mainContent: @Composable () -> Unit) = apply {
         option.mainContent = mainContent
@@ -53,14 +52,89 @@ class HongScrollFadeLayoutBuilder :
         option.bottomContent = bottomContent
     }
 
+    fun leftIconInfo(info: Any?) = apply {
+        option.leftIconInfo = info
+    }
+
+    fun leftIconColor(color: Pair<HongColor, HongColor>?) = apply {
+        val injectColor = color ?: Pair(HongColor.WHITE_100, HongColor.BLACK_100)
+        leftIconColorHex(injectColor.first.hex to injectColor.second.hex)
+    }
+
+    fun leftIconColorHex(color: Pair<String, String>) = apply {
+        option.leftIconColorHex = color
+    }
+
+    fun leftIconClick(onClick: () -> Unit) = apply {
+        option.leftIconClick = onClick
+    }
+
+    fun rightIconInfo(info: Any?) = apply {
+        option.rightIconInfo = info
+    }
+
+    fun rightIconColor(color: Pair<HongColor, HongColor>?) = apply {
+        val injectColor = color ?: Pair(HongColor.WHITE_100, HongColor.BLACK_100)
+        rightIconColorHex(injectColor.first.hex to injectColor.second.hex)
+    }
+
+    fun rightIconColorHex(color: Pair<String, String>) = apply {
+        option.rightIconColorHex = color
+    }
+
+    fun rightIconClick(onClick: () -> Unit) = apply {
+        option.rightIconClick = onClick
+    }
+
+    fun titleText(title: String) = apply {
+        option.titleText = title
+    }
+
+    fun titleTypo(typo: HongTypo) = apply {
+        option.titleTypo = typo
+    }
+
+    fun useTitleOverFlow(use: Boolean) = apply {
+        option.useTitleOverFlow = use
+    }
+
+    fun titleColor(color: Pair<HongColor, HongColor>?) = apply {
+        val injectColor = color ?: Pair(HongColor.WHITE_100, HongColor.BLACK_100)
+        titleColorHex(injectColor.first.hex to injectColor.second.hex)
+    }
+
+    fun titleColorHex(color: Pair<String, String>) = apply {
+        option.titleColorHex = color
+    }
+
+    fun headerBackgroundColor(color: HongColor?) = apply {
+        val injectColor = color?.hex ?: HongScrollFadeLayoutOption.DEFAULT_HEADER_BACKGROUND_COLOR
+        headerBackgroundColorHex(injectColor)
+    }
+    fun headerBackgroundColorHex(color: String) = apply {
+        option.headerBackgroundColorHex = color
+    }
+
+
     fun copy(inject: HongScrollFadeLayoutOption?): HongScrollFadeLayoutBuilder {
         if (inject == null) return HongScrollFadeLayoutBuilder()
+
         return HongScrollFadeLayoutBuilder()
             .backgroundColor(inject.backgroundColorHex)
             .mainContentHeightDp(inject.mainContentHeightDp)
-            .headerContent(inject.headerContent)
             .mainContent(inject.mainContent)
             .subContentList(inject.subContentList)
             .bottomContent(inject.bottomContent)
+            .leftIconInfo(inject.leftIconInfo)
+            .leftIconColorHex(inject.leftIconColorHex)
+            .leftIconClick(inject.leftIconClick)
+            .rightIconInfo(inject.rightIconInfo)
+            .rightIconColorHex(inject.rightIconColorHex)
+            .rightIconClick(inject.rightIconClick)
+            .titleText(inject.titleText)
+            .titleTypo(inject.titleTypo)
+            .useTitleOverFlow(inject.useTitleOverFlow)
+            .titleColorHex(inject.titleColorHex)
+            .headerBackgroundColorHex(inject.headerBackgroundColorHex)
     }
 }

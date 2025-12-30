@@ -35,8 +35,8 @@ import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType.Companio
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.typo.fontWeight
 import com.codehong.library.widget.rule.typo.size
-import com.codehong.library.widget.text.label.HongTextBuilder
-import com.codehong.library.widget.text.label.HongTextCompose
+import com.codehong.library.widget.text.def.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextCompose
 import com.codehong.library.widget.util.HongWidgetContainer
 import com.codehong.library.widget.util.checkPasswordType
 import com.codehong.library.widget.util.dpToSp

@@ -64,7 +64,7 @@ import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.image.HongImageCompose
 import com.codehong.library.widget.image.HongImageOption
 import com.codehong.library.widget.label.def.HongLabelOption
-import com.codehong.library.widget.label.def.HongLabelViewCompose
+import com.codehong.library.widget.label.def.HongLabelCompose
 import com.codehong.library.widget.label.checkbox.HongLabelCheckboxCompose
 import com.codehong.library.widget.label.checkbox.HongLabelCheckboxOption
 import com.codehong.library.widget.label.input.HongLabelInputCompose
@@ -85,8 +85,8 @@ import com.codehong.library.widget.tab.scroll.HongTabScrollCompose
 import com.codehong.library.widget.tab.scroll.HongTabScrollOption
 import com.codehong.library.widget.tab.segment.HongTabSegmentCompose
 import com.codehong.library.widget.tab.segment.HongTabSegmentOption
-import com.codehong.library.widget.text.label.HongTextCompose
-import com.codehong.library.widget.text.label.HongTextOption
+import com.codehong.library.widget.text.def.HongTextCompose
+import com.codehong.library.widget.text.def.HongTextOption
 import com.codehong.library.widget.text.badge.HongTextBadgeCompose
 import com.codehong.library.widget.text.badge.HongTextBadgeOption
 import com.codehong.library.widget.text.check.HongTextCheckOption
@@ -315,7 +315,7 @@ class PlaygroundActivity : BaseActivity() {
                     HongWidgetType.TEXT_BADGE -> HongTextBadgeCompose(previewOption as HongTextBadgeOption)
                     HongWidgetType.CHECKBOX -> HongCheckBoxCompose(previewOption as HongCheckboxOption)
                     HongWidgetType.SWITCH -> HongSwitchCompose(previewOption as HongSwitchOption)
-                    HongWidgetType.LABEL -> HongLabelViewCompose(previewOption as HongLabelOption)
+                    HongWidgetType.LABEL -> HongLabelCompose(previewOption as HongLabelOption)
                     HongWidgetType.LABEL_INPUT -> HongLabelInputCompose(previewOption as HongLabelInputOption)
                     HongWidgetType.LABEL_SWITCH -> HongLabelSwitchCompose(previewOption as HongLabelSwitchOption)
                     HongWidgetType.LABEL_CHECKBOX -> HongLabelCheckboxCompose(previewOption as HongLabelCheckboxOption)

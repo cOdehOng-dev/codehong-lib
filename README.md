@@ -29,7 +29,7 @@
 | HongSelectButton      | 이중 선택 버튼 위젯. 취소/확인 등 양자택일 UI 제공 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/button/select) |
 | HongBottomSheetSwipe  | 드래그 제스처로 높이를 조절할 수 있는 스와이프 바텀시트. 배경 콘텐츠 스케일/오프셋 애니메이션 지원 (Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/bottomsheet/swipe) |
 | HongBottomSheetSelect | 여러 옵션 중 하나를 선택할 수 있는 바텀시트. 제목/부제목이 있는 선택 항목 리스트와 선택된 항목 강조 표시 지원 (Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/bottomsheet/select) |
-| HongText              | 빌더 패턴 기반의 커스텀 텍스트 위젯. 타이포그래피 시스템, Span 텍스트, 숫자 포맷팅, 줄바꿈 제어 등 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/label) |
+| HongText              | 빌더 패턴 기반의 커스텀 텍스트 위젯. 타이포그래피 시스템, Span 텍스트, 숫자 포맷팅, 줄바꿈 제어 등 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/def) |
 | HongTextBadge         | 텍스트 배지 위젯. 상태, 카테고리, 태그 등을 표시하는 단일 줄 배지. 배경색, 테두리, 모서리 둥글기 커스터마이징 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/badge) |
 | HongCheckText         | 체크 가능한 텍스트 위젯. 체크마크, 텍스트, 화살표로 구성된 인터랙티브 선택 UI (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/check) |
 | HongTextCount         | 숫자 입력 및 증감 버튼을 제공하는 카운터 위젯. ➖/➕ 버튼으로 값 조절, Long/Double 타입 지원, 최소값/최대값 범위 제한 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/text/count) |
@@ -50,6 +50,8 @@
 | HongTextFieldNumber   | 숫자 전용 텍스트 입력 필드 위젯. 자동 천 단위 콤마 포맷팅, 숫자 키패드, 지우기 버튼 등 제공 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/textfield/number) |
 | HongTextFieldBorder   | 테두리가 있는 텍스트 입력 필드 위젯. 라벨, 플레이스홀더, 도움말, 필수 표시, 지우기 버튼, 접미사 등 완전한 폼 입력 UI 제공 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/textfield/border) |
 | HongTextFieldBorderSelect | 라벨, 설명, 선택 버튼, 텍스트 입력 필드를 결합한 복합 선택 입력 위젯. 피커 다이얼로그, 직접 입력 모드, 숫자 전용 입력 지원 (Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/textfield/select) |
+| HongTextFieldTimer        | 카운트다운 타이머가 내장된 텍스트 입력 필드 위젯. 제한 시간 내 입력을 받아야 하는 UI(인증번호 입력 등)에 최적화. 타이머 종료 시 자동 콜백 및 언더라인 색상 변경 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/textfield/timer) |
+| HongTextFieldUnderline    | 언더라인이 있는 텍스트 입력 필드 위젯. 포커스 상태에 따라 언더라인 색상이 자동으로 변경되어 시각적 피드백을 제공하는 심플한 텍스트 입력 컴포넌트 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/textfield/underline) |
 
 ## 🛠 설치
 

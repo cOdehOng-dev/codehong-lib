@@ -4,8 +4,8 @@ import android.view.View
 import androidx.compose.runtime.Composable
 import com.codehong.lib.sample.base.BaseSampleMixActivity
 import com.codehong.library.widget.label.def.HongLabelBuilder
+import com.codehong.library.widget.label.def.HongLabelCompose
 import com.codehong.library.widget.label.def.HongLabelView
-import com.codehong.library.widget.label.def.HongLabelViewCompose
 import com.codehong.library.widget.rule.HongSpacingInfo
 
 class SampleLabelActivity : BaseSampleMixActivity() {
@@ -48,7 +48,7 @@ class SampleLabelActivity : BaseSampleMixActivity() {
     @Composable
     override fun InitCompose() {
         optionList.forEach {
-            HongLabelViewCompose(it)
+            HongLabelCompose(it)
         }
     }
 }

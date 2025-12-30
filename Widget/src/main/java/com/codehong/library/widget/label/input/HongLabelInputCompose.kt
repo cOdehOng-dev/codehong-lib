@@ -7,7 +7,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.label.def.HongLabelBuilder
-import com.codehong.library.widget.label.def.HongLabelViewCompose
+import com.codehong.library.widget.label.def.HongLabelCompose
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
@@ -27,7 +27,7 @@ fun HongLabelInputCompose(
                 .hongWidth(option.width)
                 .hongHeight(option.height)
         ) {
-            HongLabelViewCompose(
+            HongLabelCompose(
                 HongLabelBuilder()
                     .width(HongLayoutParam.MATCH_PARENT.value)
                     .backgroundColor(HongColor.TRANSPARENT)
