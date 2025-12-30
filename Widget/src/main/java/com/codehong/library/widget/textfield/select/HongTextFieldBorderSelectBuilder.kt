@@ -6,7 +6,8 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 
-class HongTextFieldBorderSelectBuilder : HongWidgetCommonBuilder<HongTextFieldBorderSelectOption, HongTextFieldBorderSelectBuilder> {
+class HongTextFieldBorderSelectBuilder :
+    HongWidgetCommonBuilder<HongTextFieldBorderSelectOption, HongTextFieldBorderSelectBuilder> {
 
     override val builder: HongTextFieldBorderSelectBuilder = this
     override val option: HongTextFieldBorderSelectOption = HongTextFieldBorderSelectOption()

@@ -52,6 +52,8 @@
 | HongTextFieldBorderSelect | 라벨, 설명, 선택 버튼, 텍스트 입력 필드를 결합한 복합 선택 입력 위젯. 피커 다이얼로그, 직접 입력 모드, 숫자 전용 입력 지원 (Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/textfield/select) |
 | HongTextFieldTimer        | 카운트다운 타이머가 내장된 텍스트 입력 필드 위젯. 제한 시간 내 입력을 받아야 하는 UI(인증번호 입력 등)에 최적화. 타이머 종료 시 자동 콜백 및 언더라인 색상 변경 지원 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/textfield/timer) |
 | HongTextFieldUnderline    | 언더라인이 있는 텍스트 입력 필드 위젯. 포커스 상태에 따라 언더라인 색상이 자동으로 변경되어 시각적 피드백을 제공하는 심플한 텍스트 입력 컴포넌트 (View/Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/textfield/underline) |
+| HongScrollFadeLayout      | 스크롤 시 헤더가 페이드 인/아웃되는 레이아웃 위젯. 메인 콘텐츠가 사라질 때 헤더의 배경색과 아이콘/텍스트 색상이 부드럽게 전환 (Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/layout/fade) |
+| HongPicker                | 바텀시트 스타일의 스크롤 피커 위젯. 단일/이중 선택 지원, 스냅 스크롤링, 직접 선택 또는 확인 버튼 모드 제공 (Compose 지원) | [README](Widget/src/main/java/com/codehong/library/widget/picker) |
 
 ## 🛠 설치
 
