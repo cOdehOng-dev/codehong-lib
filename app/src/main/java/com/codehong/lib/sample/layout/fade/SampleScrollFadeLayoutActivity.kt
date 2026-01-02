@@ -15,8 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.codehong.library.widget.R
+import com.codehong.library.widget.layout.fade.HongScrollFadeLayout
 import com.codehong.library.widget.layout.fade.HongScrollFadeLayoutBuilder
-import com.codehong.library.widget.layout.fade.HongScrollFadeLayoutCompose
 import com.codehong.library.widget.layout.fade.HongScrollFadeLayoutOption
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
@@ -26,7 +26,7 @@ class SampleScrollFadeLayoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            HongScrollFadeLayoutCompose(
+            HongScrollFadeLayout(
                 option = HongScrollFadeLayoutBuilder()
                     .backgroundColor(HongColor.BLUE_10.hex)
                     .mainContentHeightDp(HongScrollFadeLayoutOption.DEFAULT_MAIN_CONTENT_HEIGHT)

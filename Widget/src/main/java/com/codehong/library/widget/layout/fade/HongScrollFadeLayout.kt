@@ -43,7 +43,7 @@ import com.codehong.library.widget.util.dpToPx
 import kotlin.math.abs
 
 @Composable
-fun HongScrollFadeLayoutCompose(
+fun HongScrollFadeLayout(
     option: HongScrollFadeLayoutOption,
 ) {
     val injectOption by remember { mutableStateOf(option) }

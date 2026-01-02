@@ -21,7 +21,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -49,30 +48,19 @@ import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.def.HongTextBuilder
 import com.codehong.library.widget.text.def.HongTextCompose
-import kotlinx.coroutines.delay
 import kotlin.math.abs
 
 @Composable
-fun HongPickerCompose(
+fun HongPicker(
     visible: Boolean,
-    option: HongPickerOption,
+    injectOption: HongPickerOption,
 ) {
+    val option by remember { mutableStateOf(injectOption) }
 
-    val isTwoOptionList = !option.secondOptionList.isNullOrEmpty()
+    val hasDoubleOption = !injectOption.secondOptionList.isNullOrEmpty()
 
     var selectedFirstOption by remember { mutableStateOf(Pair(option.initialFirstOption, option.firstOptionList[option.initialFirstOption])) }
     var selectedSecondOption by remember { mutableStateOf(Pair(option.initialSecondOption, option.secondOptionList?.get(option.initialSecondOption))) }
-
-    var showContent by remember { mutableStateOf(false) }
-
-    LaunchedEffect(visible) {
-        if (visible) {
-            delay(100)
-            showContent = true
-        } else {
-            showContent = false
-        }
-    }
 
     Box(
         modifier = Modifier
@@ -148,7 +136,7 @@ fun HongPickerCompose(
                         )
                     }
 
-                    if (option.onDirectSelect == null) {
+                    if (option.onDirectSelect == null || option.buttonText.isEmpty()) {
                         HongImageCompose(
                             option = HongImageBuilder()
                                 .width(24)
@@ -183,7 +171,7 @@ fun HongPickerCompose(
                         option.onDirectSelect?.invoke(selectedFirstOption, selectedSecondOption)
                     }
 
-                    if (isTwoOptionList) {
+                    if (hasDoubleOption) {
                         Picker(
                             modifier = Modifier
                                 .hongSpacing(
@@ -200,38 +188,40 @@ fun HongPickerCompose(
                     }
                 }
 
-                HongButtonTextCompose(
-                    HongButtonTextBuilder()
-                        .width(HongLayoutParam.MATCH_PARENT.value)
-                        .height(48)
-                        .margin(
-                            HongSpacingInfo(
-                                top = 10f,
-                                left = 20f,
-                                right = 20f,
-                                bottom = 10f
-                            )
-                        )
-                        .text(option.buttonText)
-                        .textTypo(HongTypo.BODY_15_B)
-                        .textColor(HongColor.WHITE_100)
-                        .backgroundColor(HongColor.MAIN_ORANGE_100.hex)
-                        .radius(
-                            HongRadiusInfo(
-                                all = 12
-                            )
-                        )
-                        .onClick {
-                            if (option.onDirectSelect == null) {
-                                option.onConfirm?.invoke(
-                                    selectedFirstOption,
-                                    selectedSecondOption
+                if (option.buttonText.isNotEmpty()) {
+                    HongButtonTextCompose(
+                        HongButtonTextBuilder()
+                            .width(HongLayoutParam.MATCH_PARENT.value)
+                            .height(48)
+                            .margin(
+                                HongSpacingInfo(
+                                    top = 10f,
+                                    left = 20f,
+                                    right = 20f,
+                                    bottom = 10f
                                 )
+                            )
+                            .text(option.buttonText)
+                            .textTypo(HongTypo.BODY_15_B)
+                            .textColor(HongColor.WHITE_100)
+                            .backgroundColor(HongColor.MAIN_ORANGE_100.hex)
+                            .radius(
+                                HongRadiusInfo(
+                                    all = 12
+                                )
+                            )
+                            .onClick {
+                                if (option.onDirectSelect == null) {
+                                    option.onConfirm?.invoke(
+                                        selectedFirstOption,
+                                        selectedSecondOption
+                                    )
+                                }
+                                option.onDismiss()
                             }
-                            option.onDismiss()
-                        }
-                        .applyOption()
-                )
+                            .applyOption()
+                    )
+                }
             }
         }
     }

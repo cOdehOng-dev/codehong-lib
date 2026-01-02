@@ -60,11 +60,15 @@ class HongPickerBuilder : HongWidgetCommonBuilder<HongPickerOption, HongPickerBu
         option.onDismiss = onDismiss
     }
 
-    fun onConfirm(onConfirm: ((selectedFirstOption: Pair<Int, String>, selectedSecondOption: Pair<Int, String?>) -> Unit)?) = apply {
+    fun onConfirm(
+        onConfirm: ((selectedFirstOption: Pair<Int, String>, selectedSecondOption: Pair<Int, String?>) -> Unit)?
+    ) = apply {
         option.onConfirm = onConfirm
     }
 
-    fun onDirectSelect(onDirectSelect: ((selectedFirstOption: Pair<Int, String>, selectedSecondOption: Pair<Int, String?>) -> Unit)?) = apply {
+    fun onDirectSelect(
+        onDirectSelect: ((selectedFirstOption: Pair<Int, String>, selectedSecondOption: Pair<Int, String?>) -> Unit)?
+    ) = apply {
         option.onDirectSelect = onDirectSelect
     }
 

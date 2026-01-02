@@ -31,16 +31,11 @@ import com.codehong.library.widget.util.aspectRatio
 @OptIn(UnstableApi::class)
 @Composable
 fun HongVideoPlayerCompose(
-    option: HongVideoPlayerOption,
-    onPlayVideo: () -> Unit = {},
-    onRenderingFinish: () -> Unit = {},
-    onReady: () -> Unit = {},
-    onBuffering: () -> Unit = {},
-    onEnd: () -> Unit = {},
-    onError: () -> Unit = {},
-    onPlayerReference: (() -> Unit) -> Unit = {}
+    option: HongVideoPlayerOption
 ) {
     if (option.videoUrl.isNullOrEmpty()) return
+
+    val remOption by remember { mutableStateOf(option) }
 
     val context = LocalContext.current
     var videoPlayer by remember { mutableStateOf<ExoPlayer?>(null) }
@@ -61,28 +56,28 @@ fun HongVideoPlayerCompose(
 
     playbackStateListener = object : Player.Listener {
         override fun onRenderedFirstFrame() {
-            onRenderingFinish()
+            remOption.onRenderingFinish()
         }
 
         override fun onPlaybackStateChanged(playbackState: Int) {
-            onPlayVideo()
+            remOption.onPlayVideo()
             when (playbackState) {
                 Player.STATE_IDLE -> {
                     clearPlayer()
-                    onError()
+                    remOption.onError()
                 }
 
                 Player.STATE_ENDED -> {
                     clearPlayer()
-                    onEnd()
+                    remOption.onEnd()
                 }
 
                 Player.STATE_READY -> {
-                    onReady()
+                    remOption.onReady()
                 }
 
                 Player.STATE_BUFFERING -> {
-                    onBuffering()
+                    remOption.onBuffering()
                 }
             }
         }
@@ -90,11 +85,11 @@ fun HongVideoPlayerCompose(
 
     // 외부에서 clearPlayer 호출할 수 있게 참조 전달
     LaunchedEffect(Unit) {
-        onPlayerReference.invoke { clearPlayer() }
+        remOption.onPlayerReference.invoke { clearPlayer() }
     }
 
-    DisposableEffect(option.videoUrl) {
-        if (option.videoUrl.isNullOrEmpty()) {
+    DisposableEffect(remOption.videoUrl) {
+        if (remOption.videoUrl.isNullOrEmpty()) {
             return@DisposableEffect onDispose { videoPlayer = null }
         }
 
@@ -112,7 +107,7 @@ fun HongVideoPlayerCompose(
         }
 
 
-        Utils.buildMediaSource(context, option.videoUrl ?: "")?.let { mediaSource ->
+        Utils.buildMediaSource(context, remOption.videoUrl ?: "")?.let { mediaSource ->
             videoPlayer?.setMediaSource(mediaSource)
             videoPlayer?.prepare()
         }
@@ -132,31 +127,31 @@ fun HongVideoPlayerCompose(
     Box(
         modifier = Modifier
             .padding(
-                start = option.margin.left.dp,
-                top = option.margin.top.dp,
-                end = option.margin.right.dp,
-                bottom = option.margin.bottom.dp
+                start = remOption.margin.left.dp,
+                top = remOption.margin.top.dp,
+                end = remOption.margin.right.dp,
+                bottom = remOption.margin.bottom.dp
             )
     ) {
         AndroidView(
             modifier = Modifier
-                .hongWidth(option.width)
-                .hongHeight(option.height)
-                .aspectRatio(option.ratio.aspectRatio())
+                .hongWidth(remOption.width)
+                .hongHeight(remOption.height)
+                .aspectRatio(remOption.ratio.aspectRatio())
                 .hongBackground(
-                    color = option.backgroundColorHex,
-                    radius = option.radius,
-                    useShapeCircle = option.useShapeCircle,
-                    shadow = option.shadow,
-                    border = option.border
+                    color = remOption.backgroundColorHex,
+                    radius = remOption.radius,
+                    useShapeCircle = remOption.useShapeCircle,
+                    shadow = remOption.shadow,
+                    border = remOption.border
                 )
                 .padding(
-                    start = option.padding.left.dp,
-                    top = option.padding.top.dp,
-                    end = option.padding.right.dp,
-                    bottom = option.padding.bottom.dp
+                    start = remOption.padding.left.dp,
+                    top = remOption.padding.top.dp,
+                    end = remOption.padding.right.dp,
+                    bottom = remOption.padding.bottom.dp
                 )
-                .clip(option.radius.toRoundedCornerShape()),
+                .clip(remOption.radius.toRoundedCornerShape()),
             factory = { videoSurfaceView!! }
         )
     }

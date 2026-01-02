@@ -11,11 +11,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.doOnLayout
 import com.codehong.library.widget.R
 import com.codehong.library.widget.databinding.HonglibViewVideoPopupBinding
-import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
+import com.codehong.library.widget.player.HongVideoPlayerBuilder
+import com.codehong.library.widget.rule.color.HongColor
 
 class HongVideoPopupView @JvmOverloads constructor(
     context: Context,
@@ -49,6 +50,21 @@ class HongVideoPopupView @JvmOverloads constructor(
     ): HongVideoPopupView {
         this.option = option
 
+        val videoPlayerOption = HongVideoPlayerBuilder()
+            .copy(option.videoPlayerOption)
+            .onReady {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    showView(onShow)
+                }, 50)
+            }
+            .onEnd {
+                dismiss(true, onHide)
+            }
+            .onError {
+                dismiss(true, onHide)
+            }
+            .applyOption()
+
         binding.vDim.setOnClickListener {
             if (!option.blockTouchOutside) {
                 dismiss(
@@ -71,24 +87,12 @@ class HongVideoPopupView @JvmOverloads constructor(
 
             hongBackground(
                 backgroundColor = HongColor.WHITE_100.hex,
-                radius = option.videoPlayerOption.radius
+                radius = videoPlayerOption.radius
             )
             hongPadding(option.padding)
 
             set(
-                option = option.videoPlayerOption,
-                onReady = {
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        showView(onShow)
-                    }, 50)
-                },
-                onEnd = {
-                    dismiss(true, onHide)
-
-                },
-                onError = {
-                    dismiss(true, onHide)
-                }
+                option = videoPlayerOption
             )
         }
 

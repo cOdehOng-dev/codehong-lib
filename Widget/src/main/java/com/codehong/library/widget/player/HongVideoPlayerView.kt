@@ -11,13 +11,13 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import com.codehong.library.widget.databinding.HonglibViewVideoPlayerBinding
-import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toMaterialShapeDrawable
-import com.codehong.library.widget.util.Utils
-import com.codehong.library.widget.util.applyRatio
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
+import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toMaterialShapeDrawable
+import com.codehong.library.widget.util.Utils
+import com.codehong.library.widget.util.applyRatio
 
 class HongVideoPlayerView @JvmOverloads constructor(
     context: Context,
@@ -39,10 +39,7 @@ class HongVideoPlayerView @JvmOverloads constructor(
         private set
 
     fun set(
-        option: HongVideoPlayerOption,
-        onReady: () -> Unit = {},
-        onEnd: () -> Unit = {},
-        onError: () -> Unit = {}
+        option: HongVideoPlayerOption
     ): HongVideoPlayerView {
         this.option = option
 
@@ -75,16 +72,16 @@ class HongVideoPlayerView @JvmOverloads constructor(
                 when (playbackState) {
                     Player.STATE_IDLE -> {
                         clearPlayer()
-                        onError()
+                        option.onError()
                     }
 
                     Player.STATE_ENDED -> {
                         clearPlayer()
-                        onEnd()
+                        option.onEnd()
                     }
 
                     Player.STATE_READY -> {
-                        onReady()
+                        option.onReady()
                     }
 
                     Player.STATE_BUFFERING -> {}

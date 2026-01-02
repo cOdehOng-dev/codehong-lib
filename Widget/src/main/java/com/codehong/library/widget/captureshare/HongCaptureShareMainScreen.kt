@@ -31,7 +31,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 @Composable
-fun CaptureShareMainScreen(
+fun HongCaptureShareMainScreen(
     activity: Activity,
     shareLink: String?
 ) {

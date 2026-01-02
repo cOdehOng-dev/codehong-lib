@@ -52,6 +52,14 @@ data class HongVideoPlayerOption(
     var videoUrl: String? = null
     var ratio: String? = null
 
+    var onPlayVideo: () -> Unit = {}
+    var onRenderingFinish: () -> Unit = {}
+    var onReady: () -> Unit = {}
+    var onBuffering: () -> Unit = {}
+    var onEnd: () -> Unit = {}
+    var onError: () -> Unit = {}
+    var onPlayerReference: (() -> Unit) -> Unit = {}
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -72,6 +80,13 @@ data class HongVideoPlayerOption(
         if (useShapeCircle != other.useShapeCircle) return false
         if (videoUrl != other.videoUrl) return false
         if (ratio != other.ratio) return false
+        if (onPlayVideo != other.onPlayVideo) return false
+        if (onRenderingFinish != other.onRenderingFinish) return false
+        if (onReady != other.onReady) return false
+        if (onBuffering != other.onBuffering) return false
+        if (onEnd != other.onEnd) return false
+        if (onError != other.onError) return false
+        if (onPlayerReference != other.onPlayerReference) return false
 
         return true
     }
@@ -91,6 +106,13 @@ data class HongVideoPlayerOption(
         result = 31 * result + useShapeCircle.hashCode()
         result = 31 * result + (videoUrl?.hashCode() ?: 0)
         result = 31 * result + (ratio?.hashCode() ?: 0)
+        result = 31 * result + onPlayVideo.hashCode()
+        result = 31 * result + onRenderingFinish.hashCode()
+        result = 31 * result + onReady.hashCode()
+        result = 31 * result + onBuffering.hashCode()
+        result = 31 * result + onEnd.hashCode()
+        result = 31 * result + onError.hashCode()
+        result = 31 * result + onPlayerReference.hashCode()
         return result
     }
 
@@ -109,7 +131,14 @@ data class HongVideoPlayerOption(
                 "backgroundColorHex='$backgroundColorHex', " +
                 "useShapeCircle=$useShapeCircle, " +
                 "videoUrl=$videoUrl, " +
-                "ratio=$ratio" +
+                "ratio=$ratio, " +
+                "onPlayVideo=$onPlayVideo, " +
+                "onRenderingFinish=$onRenderingFinish, " +
+                "onReady=$onReady, " +
+                "onBuffering=$onBuffering, " +
+                "onEnd=$onEnd, " +
+                "onError=$onError, " +
+                "onPlayerReference=$onPlayerReference" +
                 ")"
     }
 }

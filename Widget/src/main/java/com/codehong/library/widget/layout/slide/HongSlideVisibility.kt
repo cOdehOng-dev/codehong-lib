@@ -12,7 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 
 @Composable
-fun HongSlideVisibleLayout(
+fun HongSlideVisibility(
     modifier: Modifier = Modifier,
     isVisible: Boolean,
     duration: Int = 300,

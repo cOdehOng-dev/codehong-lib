@@ -1,12 +1,19 @@
 package com.codehong.lib.sample.videopopup
 
-import android.os.Bundle
-import com.codehong.lib.sample.base.BaseActivity
-import com.codehong.lib.sample.databinding.ActivitySampleVideoPopupComposeBinding
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import com.codehong.lib.sample.base.BaseSampleComposeActivity
 import com.codehong.library.widget.R
+import com.codehong.library.widget.button.text.HongButtonTextBuilder
+import com.codehong.library.widget.button.text.HongButtonTextCompose
 import com.codehong.library.widget.player.HongVideoPlayerBuilder
-import com.codehong.library.widget.rule.HongWidgetType
+import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.util.HongToastUtil
 import com.codehong.library.widget.util.applyStatusBarColor
 import com.codehong.library.widget.videopopup.HongVideoPopupBuilder
@@ -14,40 +21,16 @@ import com.codehong.library.widget.videopopup.HongVideoPopupCompose
 import com.codehong.library.widget.videopopup.HongVideoPopupManager
 
 
-// TODO 구조 변경
-class SampleVideoPopupComposeActivity : BaseActivity() {
-
-    private lateinit var binding: ActivitySampleVideoPopupComposeBinding
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivitySampleVideoPopupComposeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.vHeader.init(HongWidgetType.VIDEO_POPUP.value) {
-            finish()
-        }
-
-        binding.btnRemove.setOnClickListener {
-            HongVideoPopupManager.resetLastSeenTimestamp(this)
-        }
-        setup()
-    }
+class SampleVideoPopupComposeActivity : BaseSampleComposeActivity() {
 
     override fun handleOnBackPressed() {
-//        if (videoPopupView?.isShow() == true) {
-//            videoPopupView?.dismiss(true) {
-//                applyStatusBarColor(com.codehong.library.widget.R.color.honglib_color_ffffff)
-//            }
-//            return
-//        }
         applyStatusBarColor(R.color.honglib_color_ffffff)
         super.handleOnBackPressed()
     }
 
-    private fun setup() {
+
+    @Composable
+    override fun InitCompose() {
         val option = HongVideoPopupBuilder()
             .videoPlayerOption(
                 HongVideoPlayerBuilder()
@@ -61,23 +44,57 @@ class SampleVideoPopupComposeActivity : BaseActivity() {
                     .applyOption()
             )
             .landingLink("https://github.com/cOdehOng-dev")
-            .applyOption()
-        binding.vCompose.setContent {
-            HongVideoPopupCompose(
-                option = option,
-                onShow = {
-                    applyStatusBarColor(R.color.honglib_color_29292d_60)
-                },
-                onHide = { isClickClose ->
-                    hidePopup(isClickClose)
-                },
-                clickLanding = { link ->
-                    if (!link.isNullOrEmpty()) {
-                        HongToastUtil.showToast(this, "링크 이동")
-                    }
+            .onShow {
+                applyStatusBarColor(R.color.honglib_color_29292d_60)
+            }
+            .onHide { isClickClose ->
+                hidePopup(isClickClose)
+            }
+            .clickLanding { link ->
+                if (!link.isNullOrEmpty()) {
+                    HongToastUtil.showToast(this, "링크 이동")
                 }
+
+            }
+            .applyOption()
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            val remoteButtonOption = HongButtonTextBuilder()
+                .width(150)
+                .height(50)
+                .margin(
+                    HongSpacingInfo(
+                        top = 10f,
+                        left = 20f,
+                        right = 20f,
+                        bottom = 10f
+                    )
+                )
+                .text("데이터 초기화")
+                .textTypo(HongTypo.BODY_15_B)
+                .textColor(HongColor.WHITE_100)
+                .backgroundColor(HongColor.GRAY_50.hex)
+                .radius(
+                    HongRadiusInfo(
+                        all = 8
+                    )
+                )
+                .onClick {
+                    HongVideoPopupManager.resetLastSeenTimestamp(this@SampleVideoPopupComposeActivity)
+                }
+                .applyOption()
+            HongButtonTextCompose(
+                option = remoteButtonOption,
             )
         }
+
+        HongVideoPopupCompose(
+            option = option
+        )
     }
 
     private fun hidePopup(isClickClose: Boolean) {

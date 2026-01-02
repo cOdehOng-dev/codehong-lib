@@ -1,32 +1,12 @@
 package com.codehong.library.widget.player
 
-import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
-class HongVideoPlayerBuilder {
+class HongVideoPlayerBuilder : HongWidgetCommonBuilder<HongVideoPlayerOption, HongVideoPlayerBuilder> {
 
-    val option = HongVideoPlayerOption()
-
-    fun height(height: Int?) = apply {
-        height?.let { option.height = it }
-    }
-
-    fun margin(margin: HongSpacingInfo) = apply {
-        option.margin = margin
-    }
-
-    fun padding(padding: HongSpacingInfo) = apply {
-        option.padding = padding
-    }
-
-    fun onClick(onClick:( (HongVideoPlayerOption) -> Unit)?) = apply {
-        option.click = {
-            if (it is HongVideoPlayerOption) {
-                onClick?.invoke(it)
-            }
-        }
-    }
-
+    override val builder: HongVideoPlayerBuilder = this
+    override val option: HongVideoPlayerOption = HongVideoPlayerOption()
 
     fun radius(radius: HongRadiusInfo) = apply {
         option.radius = radius
@@ -40,9 +20,34 @@ class HongVideoPlayerBuilder {
         option.ratio = ratio
     }
 
-    fun applyOption(): HongVideoPlayerOption {
-        return option
+    fun onPlayVideo(onPlayVideo: () -> Unit) = apply {
+        option.onPlayVideo = onPlayVideo
     }
+
+    fun onRenderingFinish(onRenderingFinish: () -> Unit) = apply {
+        option.onRenderingFinish = onRenderingFinish
+    }
+
+    fun onReady(onReady: () -> Unit) = apply {
+        option.onReady = onReady
+    }
+
+    fun onBuffering(onBuffering: () -> Unit) = apply {
+        option.onBuffering = onBuffering
+    }
+
+    fun onEnd(onEnd: () -> Unit) = apply {
+        option.onEnd = onEnd
+    }
+
+    fun onError(onError: () -> Unit) = apply {
+        option.onError = onError
+    }
+
+    fun onPlayerReference(onPlayerReference: (() -> Unit) -> Unit) = apply {
+        option.onPlayerReference = onPlayerReference
+    }
+
 
     fun copy(inject: HongVideoPlayerOption): HongVideoPlayerBuilder {
         return HongVideoPlayerBuilder()
@@ -53,5 +58,12 @@ class HongVideoPlayerBuilder {
             .radius(inject.radius)
             .setVideoUrl(inject.videoUrl)
             .ratio(inject.ratio)
+            .onPlayVideo(inject.onPlayVideo)
+            .onRenderingFinish(inject.onRenderingFinish)
+            .onReady(inject.onReady)
+            .onBuffering(inject.onBuffering)
+            .onEnd(inject.onEnd)
+            .onError(inject.onError)
+            .onPlayerReference(inject.onPlayerReference)
     }
 }

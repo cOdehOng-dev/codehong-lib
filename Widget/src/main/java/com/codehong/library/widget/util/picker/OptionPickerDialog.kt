@@ -29,7 +29,7 @@ import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.def.HongTextBuilder
 
-class OptionPickerDialog constructor(
+class OptionPickerDialog(
     private val context: Context,
     private val title: String,
     private val optionList: List<String>,

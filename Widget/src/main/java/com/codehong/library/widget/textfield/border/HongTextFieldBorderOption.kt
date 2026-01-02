@@ -44,8 +44,6 @@ data class HongTextFieldBorderOption(
     // background
     var inputBackgroundColorHex: String = HongColor.WHITE_100.hex
 
-
-
     var label: String = ""
     var labelColoHex: String = HongColor.BLACK_100.hex
     var labelTypo: HongTypo = HongTypo.CONTENTS_12

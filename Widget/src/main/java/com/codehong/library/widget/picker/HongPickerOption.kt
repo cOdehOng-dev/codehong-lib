@@ -34,7 +34,7 @@ data class HongPickerOption(
     var titleColorHex: String = HongColor.BLACK_100.hex
     var title: String = ""
 
-    var buttonText: String = "선택"
+    var buttonText: String = ""
 
     var initialFirstOption: Int = 0
     var firstOptionList: List<String> = emptyList()
@@ -44,7 +44,6 @@ data class HongPickerOption(
     var secondOptionList: List<String>? = null
 
     var useDimClickCLose: Boolean = false
-
 
     var selectorColorHex: String = HongColor.GRAY_10.hex
 

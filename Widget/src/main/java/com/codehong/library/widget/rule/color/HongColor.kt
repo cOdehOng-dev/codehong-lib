@@ -134,10 +134,7 @@ enum class HongColor(val colorName: String, @ColorRes val colorResId: Int, val h
     PURPLE_10("purple_10", R.color.honglib_color_8e43e7_10, "#1A8E43E7"),
     PURPLE_05("purple_05", R.color.honglib_color_8e43e7_05, "#0D8E43E7"),
 
-
     LINE("line", R.color.honglib_color_eaeaea, "#ffeaeaea"),
-
-
     ;
 
 

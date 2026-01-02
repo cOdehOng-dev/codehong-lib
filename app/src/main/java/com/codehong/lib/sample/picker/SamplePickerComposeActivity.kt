@@ -18,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.library.widget.extensions.hongBackground
+import com.codehong.library.widget.picker.HongPicker
 import com.codehong.library.widget.picker.HongPickerBuilder
-import com.codehong.library.widget.picker.HongPickerCompose
 import com.codehong.library.widget.rule.color.HongColor
 
 class SamplePickerComposeActivity : BaseActivity() {
@@ -29,6 +29,7 @@ class SamplePickerComposeActivity : BaseActivity() {
         setContent {
             var showBottomSheet1 by remember { mutableStateOf(false) }
             var showBottomSheet2 by remember { mutableStateOf(false) }
+            var showBottomSheet3 by remember { mutableStateOf(false) }
 
             Box(
                 modifier = Modifier
@@ -53,15 +54,15 @@ class SamplePickerComposeActivity : BaseActivity() {
                     Button(
                         modifier = Modifier
                             .padding(top = 15.dp),
-                        onClick = { showBottomSheet2 = true }) {
+                        onClick = { showBottomSheet3 = true }) {
                         Text("열기2")
                     }
                 }
             }
 
-            HongPickerCompose(
+            HongPicker(
                 visible = showBottomSheet1,
-                option = HongPickerBuilder()
+                injectOption = HongPickerBuilder()
                     .title("성별 · 출생년도")
                     .firstOptionList(listOf("남성", "여성", "기타"))
                     .secondOptionList((1980..2010).map { "${it}년" })
@@ -75,9 +76,9 @@ class SamplePickerComposeActivity : BaseActivity() {
                     .applyOption(),
             )
 
-            HongPickerCompose(
+            HongPicker(
                 visible = showBottomSheet2,
-                option = HongPickerBuilder()
+                injectOption = HongPickerBuilder()
                     .title("성별 · 출생년도")
                     .firstOptionList((1980..2010).map { "${it}년" })
                     .buttonText("선택")
@@ -88,17 +89,16 @@ class SamplePickerComposeActivity : BaseActivity() {
                     .applyOption(),
             )
 
-            HongPickerCompose(
-                visible = showBottomSheet2,
-                option = HongPickerBuilder()
+            HongPicker(
+                visible = showBottomSheet3,
+                injectOption = HongPickerBuilder()
                     .title("성별 · 출생년도")
                     .titleColor(HongColor.MAIN_ORANGE_100)
                     .firstOptionList((1980..2010).map { "${it}년" })
-                    .buttonText("선택")
                     .useDimClickClose(true)
-                    .onDismiss { showBottomSheet2 = false }
+                    .onDismiss { showBottomSheet3 = false }
                     .onDirectSelect { selectedFirstOption, _ ->
-                        Log.d("TAG", "test here 222 = $selectedFirstOption")
+                        Log.d("TAG", "select = $selectedFirstOption")
                     }
                     .applyOption(),
             )

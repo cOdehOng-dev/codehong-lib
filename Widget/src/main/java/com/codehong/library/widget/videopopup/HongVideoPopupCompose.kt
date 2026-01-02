@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -28,31 +26,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.hongBackground
+import com.codehong.library.widget.player.HongVideoPlayerBuilder
 import com.codehong.library.widget.player.HongVideoPlayerCompose
+import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
-import com.codehong.library.widget.util.dpToSp
+import com.codehong.library.widget.text.def.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextCompose
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
 fun HongVideoPopupCompose(
-    option: HongVideoPopupOption,
-    onShow: () -> Unit = {},
-    onHide: (isClickClose: Boolean) -> Unit = { _ -> },
-    showPopup: (Boolean) -> Unit = {},
-    clickLanding: ((String?) -> Unit)? = null,
+    option: HongVideoPopupOption
 ) {
     if (option.videoPlayerOption.videoUrl.isNullOrEmpty()) return
 
+    val remOption by remember { mutableStateOf(option) }
+
     var isVisible by remember { mutableStateOf(false) } // 광고 노출 여부
-    var isAnimating by remember { mutableStateOf(false) } // 슬라이드 아웃 중 여부
-    var isClickNoShow by remember { mutableStateOf(false) } // 일주일 또는 닫기 버튼 클릭 여부
     var videoClearRef by remember { mutableStateOf<(() -> Unit)?>(null) }
     var isShow by remember { mutableStateOf(false) }
 
@@ -74,31 +69,52 @@ fun HongVideoPopupCompose(
     }
 
     fun dismiss(isClickClose: Boolean) {
-        isClickNoShow = isClickClose
-        isAnimating = true
         isVisible = false
         scope.launch {
             delay(300)
             clear()
             isShow = false
-            isAnimating = false
-            onHide(isClickClose)
+            remOption.onHide(isClickClose)
         }
     }
 
     LaunchedEffect(isShow) {
-        showPopup.invoke(isShow)
+        remOption.showPopup(isShow)
     }
+
+    val videoPlayerOption = HongVideoPlayerBuilder()
+        .copy(remOption.videoPlayerOption)
+        .onEnd {
+            // 영상 끝날 때 닫기
+            dismiss(true)
+        }
+        .onError {
+            // 영상 오류 시 닫기
+            dismiss(true)
+        }
+        .onReady {
+            // 영상 준비 완료 시
+            scope.launch {
+                delay(50)
+                isShow = true
+                isVisible = true
+                remOption.onShow()
+            }
+        }
+        .onPlayerReference { clearFunc ->
+            videoClearRef = clearFunc
+        }
+        .applyOption()
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = alpha * 0.5f)) // dim 처리
-            .clickable(enabled = !option.blockTouchOutside) {
+            .background(Color.Black.copy(alpha = alpha * 0.5f))
+            .clickable(enabled = !remOption.blockTouchOutside) {
                 dismiss(true)
             }
     ) {
-        val landingLink = option.landingLink
+        val landingLink = remOption.landingLink
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -106,36 +122,13 @@ fun HongVideoPopupCompose(
                 .fillMaxWidth()
                 .hongBackground(
                     color = HongColor.WHITE_100.hex,
-                    radius = option.videoPlayerOption.radius,
+                    radius = videoPlayerOption.radius,
                 )
-//                .clip(RoundedCornerShape(topStart = topRadius.dp, topEnd = topRadius.dp))
-//                .background(Color.White)
-                .clickable { if (!landingLink.isNullOrEmpty()) clickLanding?.invoke(landingLink) }
+                .clickable { if (!landingLink.isNullOrEmpty()) remOption.clickLanding?.invoke(landingLink) }
         ) {
             HongVideoPlayerCompose(
-                option = option.videoPlayerOption,
-                onEnd = {
-                    // 영상 끝날 때 닫기
-                    dismiss(true)
-                },
-                onError = {
-                    // 영상 오류 시 닫기
-                    dismiss(true)
-                },
-                onReady = {
-                    // 영상 준비 완료 시
-                    scope.launch {
-                        delay(50)
-                        isShow = true
-                        isVisible = true
-                        onShow()
-                    }
-                },
-                onPlayerReference = { clearFunc ->
-                    videoClearRef = clearFunc
-                }
+                option = videoPlayerOption
             )
-
 
             Row(
                 modifier = Modifier
@@ -144,37 +137,51 @@ fun HongVideoPopupCompose(
                     .background(color = colorResource(R.color.honglib_color_default)),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(
+                ButtonContent(
                     modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight()
-                        .clickable { dismiss(false) },
-                    contentAlignment = Alignment.Center
+                        .weight(1f),
+                    buttonText = "오늘은 그만 보기",
                 ) {
-                    Text(
-                        text = "오늘은 그만 보기",
-                        color = Color.White,
-                        fontSize = dpToSp(16),
-                        fontFamily = FontFamily(Font(R.font.pretendard_400)),
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
+                    dismiss(false)
                 }
-                Box(
+
+                ButtonContent(
                     modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight()
-                        .clickable { dismiss(true) },
-                    contentAlignment = Alignment.Center
+                        .weight(1f),
+                    buttonText = "닫기",
                 ) {
-                    Text(
-                        text = "닫기",
-                        color = Color.White,
-                        fontSize = dpToSp(16),
-                        fontFamily = FontFamily(Font(R.font.pretendard_400)),
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
+                    dismiss(true)
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun ButtonContent(
+    modifier: Modifier,
+    buttonText: String,
+    onClick: (Boolean) -> Unit,
+) {
+    Box(
+        modifier = Modifier
+            .then(modifier)
+            .fillMaxHeight()
+            .clickable { onClick(false) },
+        contentAlignment = Alignment.Center
+    ) {
+        HongTextCompose(
+            option = HongTextBuilder()
+                .margin(
+                    HongSpacingInfo(
+                        top = 8f,
+                        bottom = 8f
+                    )
+                )
+                .text(buttonText)
+                .size(16)
+                .color(HongColor.WHITE_100)
+                .applyOption()
+        )
     }
 }

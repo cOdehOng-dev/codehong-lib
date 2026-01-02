@@ -59,12 +59,104 @@ data class HongScrollFadeLayoutOption(
     var useTitleOverFlow: Boolean = false
     var titleColorHex: Pair<String, String> = DEFAULT_COLOR
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
 
+        other as HongScrollFadeLayoutOption
 
+        if (type != other.type) return false
+        if (isValidComponent != other.isValidComponent) return false
+        if (width != other.width) return false
+        if (height != other.height) return false
+        if (margin != other.margin) return false
+        if (padding != other.padding) return false
+        if (click != other.click) return false
+        if (radius != other.radius) return false
+        if (border != other.border) return false
+        if (useShapeCircle != other.useShapeCircle) return false
+        if (shadow != other.shadow) return false
+        if (backgroundColorHex != other.backgroundColorHex) return false
+        if (mainContentHeightDp != other.mainContentHeightDp) return false
+        if (mainContent != other.mainContent) return false
+        if (subContentList != other.subContentList) return false
+        if (bottomContent != other.bottomContent) return false
+        if (leftIconInfo != other.leftIconInfo) return false
+        if (leftIconColorHex != other.leftIconColorHex) return false
+        if (leftIconClick != other.leftIconClick) return false
+        if (rightIconInfo != other.rightIconInfo) return false
+        if (rightIconColorHex != other.rightIconColorHex) return false
+        if (rightIconClick != other.rightIconClick) return false
+        if (headerBackgroundColorHex != other.headerBackgroundColorHex) return false
+        if (titleText != other.titleText) return false
+        if (titleTypo != other.titleTypo) return false
+        if (useTitleOverFlow != other.useTitleOverFlow) return false
+        if (titleColorHex != other.titleColorHex) return false
 
+        return true
+    }
 
+    override fun hashCode(): Int {
+        var result = type.hashCode()
+        result = 31 * result + isValidComponent.hashCode()
+        result = 31 * result + width
+        result = 31 * result + height
+        result = 31 * result + margin.hashCode()
+        result = 31 * result + padding.hashCode()
+        result = 31 * result + (click?.hashCode() ?: 0)
+        result = 31 * result + radius.hashCode()
+        result = 31 * result + border.hashCode()
+        result = 31 * result + useShapeCircle.hashCode()
+        result = 31 * result + shadow.hashCode()
+        result = 31 * result + backgroundColorHex.hashCode()
+        result = 31 * result + mainContentHeightDp
+        result = 31 * result + mainContent.hashCode()
+        result = 31 * result + subContentList.hashCode()
+        result = 31 * result + bottomContent.hashCode()
+        result = 31 * result + (leftIconInfo?.hashCode() ?: 0)
+        result = 31 * result + leftIconColorHex.hashCode()
+        result = 31 * result + leftIconClick.hashCode()
+        result = 31 * result + (rightIconInfo?.hashCode() ?: 0)
+        result = 31 * result + rightIconColorHex.hashCode()
+        result = 31 * result + rightIconClick.hashCode()
+        result = 31 * result + headerBackgroundColorHex.hashCode()
+        result = 31 * result + titleText.hashCode()
+        result = 31 * result + titleTypo.hashCode()
+        result = 31 * result + useTitleOverFlow.hashCode()
+        result = 31 * result + titleColorHex.hashCode()
+        return result
+    }
 
-
-
+    override fun toString(): String {
+        return "HongScrollFadeLayoutOption(" +
+                "type=$type, " +
+                "isValidComponent=$isValidComponent, " +
+                "width=$width, " +
+                "height=$height, " +
+                "margin=$margin, " +
+                "padding=$padding, " +
+                "click=$click, " +
+                "radius=$radius, " +
+                "border=$border, " +
+                "useShapeCircle=$useShapeCircle, " +
+                "shadow=$shadow, " +
+                "backgroundColorHex='$backgroundColorHex', " +
+                "mainContentHeightDp=$mainContentHeightDp, " +
+                "mainContent=$mainContent, " +
+                "subContentList=$subContentList, " +
+                "bottomContent=$bottomContent, " +
+                "leftIconInfo=$leftIconInfo, " +
+                "leftIconColorHex=$leftIconColorHex, " +
+                "leftIconClick=$leftIconClick, " +
+                "rightIconInfo=$rightIconInfo, " +
+                "rightIconColorHex=$rightIconColorHex, " +
+                "rightIconClick=$rightIconClick, " +
+                "headerBackgroundColorHex='$headerBackgroundColorHex', " +
+                "titleText='$titleText', " +
+                "titleTypo=$titleTypo, " +
+                "useTitleOverFlow=$useTitleOverFlow, " +
+                "titleColorHex=$titleColorHex" +
+                ")"
+    }
 
 }

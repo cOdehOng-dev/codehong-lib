@@ -6,6 +6,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,12 +33,13 @@ import com.codehong.library.widget.text.def.HongTextCompose
 fun HongHeaderCloseCompose(
     option: HongHeaderCloseOption
 ) {
+    val remOption by remember { mutableStateOf(option) }
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .hongWidth(HongLayoutParam.MATCH_PARENT.value)
             .hongHeight(52)
-            .hongBackground(option.backgroundColorHex),
+            .hongBackground(remOption.backgroundColorHex),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Spacer(modifier = Modifier.size(40.dp))
@@ -52,9 +56,9 @@ fun HongHeaderCloseCompose(
                     .textAlign(HongTextAlign.CENTER)
                     .maxLines(1)
                     .overflow(HongTextOverflow.ELLIPSIS)
-                    .typography(option.titleTypo)
-                    .color(option.titleColorHex)
-                    .text(option.title)
+                    .typography(remOption.titleTypo)
+                    .color(remOption.titleColorHex)
+                    .text(remOption.title)
                     .applyOption()
             )
         }
@@ -62,7 +66,7 @@ fun HongHeaderCloseCompose(
         Box(
             modifier = Modifier
                 .size(40.dp)
-                .disableRippleClickable { option.onCloseClick() },
+                .disableRippleClickable { remOption.onCloseClick() },
             contentAlignment = Alignment.Center
         ) {
             HongImageCompose(
@@ -71,7 +75,7 @@ fun HongHeaderCloseCompose(
                     .height(20)
                     .scaleType(HongScaleType.CENTER_CROP)
                     .imageInfo(R.drawable.honglib_ic_close)
-                    .imageColor(option.closeIconColorHex)
+                    .imageColor(remOption.closeIconColorHex)
                     .useShapeCircle(true)
                     .applyOption()
             )

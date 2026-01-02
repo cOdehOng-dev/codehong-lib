@@ -7,6 +7,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -26,28 +27,29 @@ import com.codehong.library.widget.util.HongWidgetContainer
 fun HongCheckBoxCompose(
     option: HongCheckboxOption
 ) {
-    var isChecked by rememberSaveable(option.checkState) { mutableStateOf(option.checkState) }
-    val isEnabled by rememberSaveable(option.enableState.isEnabled()) { mutableStateOf(option.enableState.isEnabled()) }
+    val remOption by remember { mutableStateOf(option) }
+    var isChecked by rememberSaveable(option.checkState) { mutableStateOf(remOption.checkState) }
+    val isEnabled by rememberSaveable(remOption.enableState.isEnabled()) { mutableStateOf(remOption.enableState.isEnabled()) }
 
 
     // 상태별 배경색
     val backgroundColor = when {
         !isEnabled -> HongColor.GRAY_20.hex
-        isChecked -> option.checkedColorHex
+        isChecked -> remOption.checkedColorHex
         else -> HongColor.TRANSPARENT.hex
     }
 
     // 상태별 테두리색
     val borderColor = when {
         !isEnabled -> HongColor.GRAY_20.hex
-        isChecked -> option.checkedColorHex
-        else -> option.border.color
+        isChecked -> remOption.checkedColorHex
+        else -> remOption.border.color
     }
 
     val injectOption = HongCheckboxBuilder()
         .copy(option)
-        .width(option.size)
-        .height(option.size)
+        .width(remOption.size)
+        .height(remOption.size)
         .backgroundColor(backgroundColor)
         .onClick {
             if (isEnabled) {
@@ -57,7 +59,7 @@ fun HongCheckBoxCompose(
         }
         .border(
             HongBorderInfo(
-                width = option.border.width,
+                width = remOption.border.width,
                 color = borderColor
             )
         )
@@ -68,15 +70,15 @@ fun HongCheckBoxCompose(
             Icon(
                 imageVector = Icons.Default.Check,
                 contentDescription = "체크됨",
-                tint = option.checkmarkColorHex.toColor(),
-                modifier = Modifier.size(injectOption.size.dp * 0.9f)
+                tint = remOption.checkmarkColorHex.toColor(),
+                modifier = Modifier.size(remOption.size.dp * 0.9f)
             )
         } else if (!isEnabled) {
             Icon(
                 imageVector = Icons.Default.Check,
                 contentDescription = "비활성화 상태",
                 tint = HongColor.GRAY_40.toColor(),
-                modifier = Modifier.size(injectOption.size.dp * 0.9f)
+                modifier = Modifier.size(remOption.size.dp * 0.9f)
             )
         }
     }
