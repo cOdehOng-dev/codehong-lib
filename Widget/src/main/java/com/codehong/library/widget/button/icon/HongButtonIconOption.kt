@@ -15,6 +15,14 @@ data class HongButtonIconOption(
     override val type: HongWidgetType = HongWidgetType.BUTTON_ICON
 ) : HongWidgetCommonOption {
 
+    companion object {
+        val DEFAULT_BORDER = HongBorderInfo(
+            width = 1,
+            color = HongColor.GRAY_40.hex
+        )
+        val DEFAULT_BUTTON_TYPE = HongButtonIconType.SIZE_28
+    }
+
     override var isValidComponent: Boolean = true
     override var width: Int = HongLayoutParam.WRAP_CONTENT.value
     override var height: Int = HongLayoutParam.WRAP_CONTENT.value
@@ -24,15 +32,12 @@ data class HongButtonIconOption(
 
 
     override var backgroundColorHex: String = HongColor.WHITE_100.hex
-    override var border: HongBorderInfo = HongBorderInfo(
-        width = 1,
-        color = HongColor.GRAY_40.hex
-    )
+    override var border: HongBorderInfo = DEFAULT_BORDER
     override var radius: HongRadiusInfo = HongRadiusInfo()
-    override var useShapeCircle: Boolean = true
+    override var useShapeCircle: Boolean = false
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
 
-    var buttonType: HongButtonIconType = HongButtonIconType.SIZE_28
+    var buttonType: HongButtonIconType = DEFAULT_BUTTON_TYPE
     var iconColorHex: String = HongColor.BLACK_100.hex
     var state: HongClickState = HongClickState.ENABLE
     var iconResId: Int = 0
@@ -103,6 +108,4 @@ data class HongButtonIconOption(
                 "iconResId=$iconResId" +
                 ")"
     }
-
-
 }

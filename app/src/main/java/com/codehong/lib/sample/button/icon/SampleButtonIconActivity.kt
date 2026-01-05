@@ -24,6 +24,7 @@ class SampleButtonIconActivity : BaseSampleMixActivity() {
         .buttonType(HongButtonIconType.SIZE_56)
         .iconResId(R.drawable.ic_close)
         .state(HongClickState.ENABLE)
+        .useShapeCircle(true)
         .onClick {
             Log.d("TAG", "click 11")
         }
@@ -31,9 +32,10 @@ class SampleButtonIconActivity : BaseSampleMixActivity() {
 
     private val option2 = HongButtonIconBuilder()
         .buttonType(HongButtonIconType.SIZE_32)
-        .backgroundColor(HongColor.BLACK_100)
+        .backgroundColor(HongColor.MAIN_ORANGE_100)
         .iconResId(R.drawable.ic_close)
         .state(HongClickState.ENABLE)
+        .useShapeCircle(true)
         .onClick {
             Log.d("TAG", "click 22")
         }
@@ -43,6 +45,7 @@ class SampleButtonIconActivity : BaseSampleMixActivity() {
         .buttonType(HongButtonIconType.SIZE_32)
         .iconResId(R.drawable.ic_close)
         .state(HongClickState.DISABLE)
+        .useShapeCircle(true)
         .onClick {
             Log.d("TAG", "click 33")
         }

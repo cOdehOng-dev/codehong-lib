@@ -85,7 +85,7 @@ data class HongButtonTextOption(
     }
 
     override fun toString(): String {
-        return "HongTextButtonOption2(" +
+        return "HongTextButtonOption(" +
                 "type=$type, " +
                 "isValidComponent=$isValidComponent, " +
                 "width=$width, " +
@@ -104,6 +104,4 @@ data class HongButtonTextOption(
                 "state=$state" +
                 ")"
     }
-
-
 }

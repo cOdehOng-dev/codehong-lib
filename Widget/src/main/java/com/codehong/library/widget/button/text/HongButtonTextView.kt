@@ -91,8 +91,6 @@ class HongButtonTextView @JvmOverloads constructor(
             }
         }
 
-
-
         return this
     }
 }
