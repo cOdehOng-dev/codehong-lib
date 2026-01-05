@@ -6,6 +6,7 @@ import com.codehong.lib.sample.base.BaseSampleMixActivity
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongTextLineBreak
+import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.def.HongTextBuilder
 import com.codehong.library.widget.text.def.HongTextCompose
@@ -36,6 +37,7 @@ class SampleTextActivity : BaseSampleMixActivity() {
         .text("14342")
         .typography(HongTypo.BODY_16_B)
         .lineBreak(HongTextLineBreak.DEFAULT)
+        .color(HongColor.MAIN_ORANGE_100.hex)
         .margin(HongSpacingInfo(10f, 10f, 10f, 10f))
         .useNumberDecimal(true)
         .applyOption()
@@ -65,8 +67,6 @@ class SampleTextActivity : BaseSampleMixActivity() {
         option4,
         option5
     )
-
-
 
     override fun optionViewList(): List<View> {
         return mutableListOf<View>().apply {

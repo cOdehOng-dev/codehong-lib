@@ -28,7 +28,7 @@ import com.codehong.library.widget.language.textField
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
-import com.codehong.library.widget.rule.color.HongColor.Companion.parseColor
+import com.codehong.library.widget.rule.color.HongColor.Companion.toParseColor
 import com.codehong.library.widget.rule.typo.fontType
 import com.codehong.library.widget.rule.typo.size
 import com.codehong.library.widget.text.def.HongTextBuilder
@@ -99,7 +99,7 @@ class HongTextFieldView @JvmOverloads constructor(
             layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT).apply {
                 weight = 1f
             }
-            setBackgroundColor(HongColor.TRANSPARENT.parseColor())
+            setBackgroundColor(HongColor.TRANSPARENT.toParseColor())
 
             setOnKeyListener { v, keyCode, event ->
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {

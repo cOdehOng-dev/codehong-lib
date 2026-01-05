@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.extensions.lineBreakSyllable
-import com.codehong.library.widget.extensions.parseComposeColor
+import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.pretendardFontFamily
 import com.codehong.library.widget.rule.HongTextLineBreak
 import com.codehong.library.widget.rule.typo.lineHeight
@@ -101,7 +101,7 @@ fun HongTextCompose(
                         color = (
                                 builder.option.colorHex
                                     ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
-                                ).parseComposeColor(),
+                                ).toColor(),
                         fontWeight = builder.option.fontWeight,
                         fontSize = dpToSp(
                             dp = (builder.option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size()).dp
@@ -155,7 +155,7 @@ fun HongTextCompose(
                     color = (
                             option.colorHex
                                 ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
-                            ).parseComposeColor(),
+                            ).toColor(),
                     platformStyle = PlatformTextStyle(includeFontPadding = false)
                 )
             )
@@ -189,7 +189,7 @@ fun HongTextCompose(
                 color = (
                         option.colorHex
                             ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
-                        ).parseComposeColor(),
+                        ).toColor(),
                 platformStyle = PlatformTextStyle(includeFontPadding = false)
             )
         )

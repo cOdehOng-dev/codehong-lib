@@ -12,7 +12,7 @@ import com.codehong.library.widget.language.hongLabel
 import com.codehong.library.widget.language.horizontalLinearLayout
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.color.HongColor
-import com.codehong.library.widget.rule.color.HongColor.Companion.parseColor
+import com.codehong.library.widget.rule.color.HongColor.Companion.toParseColor
 
 class HorizontalOptionView @JvmOverloads constructor(
     context: Context,
@@ -35,7 +35,7 @@ class HorizontalOptionView @JvmOverloads constructor(
     ): HorizontalOptionView {
         removeAllViews()
 
-        setBackgroundColor(HongColor.WHITE_100.parseColor())
+        setBackgroundColor(HongColor.WHITE_100.toParseColor())
 
         setPadding(
             paddingLeft,

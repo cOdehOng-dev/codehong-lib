@@ -17,7 +17,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.rule.color.HongColor
-import com.codehong.library.widget.rule.color.HongColor.Companion.parseColor
+import com.codehong.library.widget.rule.color.HongColor.Companion.toParseColor
 import kotlin.math.abs
 import kotlin.math.min
 
@@ -47,8 +47,8 @@ class PickerItem @JvmOverloads constructor(
     private var mWrapSelectorRawPickerPreferred: Boolean
 
     private val textPaint = Paint()
-    private val selectedTextColor = HongColor.BLACK_100.parseColor()
-    private val unSelectedTextColor = HongColor.BLACK_100.parseColor()
+    private val selectedTextColor = HongColor.BLACK_100.toParseColor()
+    private val unSelectedTextColor = HongColor.BLACK_100.toParseColor()
 
     private val overScroller = OverScroller(context, DecelerateInterpolator(2.5f))
     private var velocityTracker: VelocityTracker? = null

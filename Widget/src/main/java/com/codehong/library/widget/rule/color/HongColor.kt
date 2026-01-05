@@ -5,7 +5,11 @@ import androidx.compose.ui.graphics.Color
 import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.toColor
 
-enum class HongColor(val colorName: String, @ColorRes val colorResId: Int, val hex: String) {
+enum class HongColor(
+    val colorName: String,
+    @ColorRes val colorResId: Int,
+    val hex: String
+) {
     TRANSPARENT("transparent", R.color.honglib_color_transparent, "#00000000"),
 
     MAIN_ORANGE_100("main_orange_100", R.color.honglib_color_ff8224, "#FFFF8224"),
@@ -152,7 +156,7 @@ enum class HongColor(val colorName: String, @ColorRes val colorResId: Int, val h
             return this?.hex.toColor()
         }
 
-        fun HongColor?.parseColor(): Int {
+        fun HongColor?.toParseColor(): Int {
             val hex = this?.hex
             return try {
                 android.graphics.Color.parseColor(

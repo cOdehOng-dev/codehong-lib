@@ -43,7 +43,7 @@ class HongButtonTextBuilder : HongWidgetCommonBuilder<HongButtonTextOption, Hong
     }
 
     fun textColor(color: HongColor) = apply {
-        option.textColorHex = color.hex
+        textColor(color.hex)
     }
 
     fun textColor(colorHex: String) = apply {

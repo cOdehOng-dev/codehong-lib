@@ -2,6 +2,8 @@ package com.codehong.library.widget.bottomsheet.select
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.HongBorderInfo
+import com.codehong.library.widget.rule.HongLayoutParam
+import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
@@ -12,8 +14,20 @@ class HongBottomSheetSelectBuilder : HongWidgetCommonBuilder<HongBottomSheetSele
     override val option: HongBottomSheetSelectOption = HongBottomSheetSelectOption()
 
 
-    fun topRadius(radius: Int) = apply {
-        option.topRadius = radius
+    override fun width(width: Int?) = apply {
+        option.width = HongLayoutParam.MATCH_PARENT.value
+    }
+
+    override fun margin(margin: HongSpacingInfo) = apply {
+        option.margin = HongSpacingInfo()
+    }
+
+    override fun padding(padding: HongSpacingInfo) = apply {
+        option.padding = HongSpacingInfo()
+    }
+
+    fun topRadius(radius: Int?) = apply {
+        option.topRadius = radius ?: HongBottomSheetSelectOption.DEFAULT_TOP_RADIUS
     }
 
     fun dimColor(color: String) = apply {
@@ -103,6 +117,9 @@ class HongBottomSheetSelectBuilder : HongWidgetCommonBuilder<HongBottomSheetSele
         if (inject == null) return HongBottomSheetSelectBuilder()
 
         return HongBottomSheetSelectBuilder()
+            .width(inject.width)
+            .margin(inject.margin)
+            .padding(inject.padding)
             .topRadius(inject.topRadius)
             .dimColor(inject.dimColorHex)
             .dragHandleColor(inject.dragHandleColorHex)

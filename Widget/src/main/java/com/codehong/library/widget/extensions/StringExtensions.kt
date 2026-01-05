@@ -15,11 +15,12 @@ import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.rule.typo.HongFontManager
 import com.codehong.library.widget.text.def.HongTextBuilder
 import com.codehong.library.widget.util.TextSpan
+import timber.log.Timber
 
 fun String?.toColor(): Color {
     try {
         if (this.isNullOrEmpty()) {
-            Log.e("TAG","컬러 hex 문자열이 비어있거나 null입니다")
+            Timber.e("TAG","컬러 hex 문자열이 비어있거나 null입니다")
             return HongColor.TRANSPARENT.hex.toColor()
         }
 
@@ -41,9 +42,7 @@ fun String?.toColor(): Color {
                 Color(r, g, b, a)
             }
 
-            else -> {
-                HongColor.TRANSPARENT.hex.toColor()
-            }
+            else -> HongColor.TRANSPARENT.hex.toColor()
         }
     } catch (e: Exception) {
         return HongColor.TRANSPARENT.hex.toColor()
@@ -52,12 +51,13 @@ fun String?.toColor(): Color {
 
 fun String?.toParseColor(): Int {
     if (this.isNullOrEmpty()) {
-        Log.d("TAG", "컬러 hex 문자열이 비어있거나 null입니다")
-        return android.graphics.Color.parseColor(HongColor.TRANSPARENT.hex)
+        Timber.d("TAG", "컬러 hex 문자열이 비어있거나 null입니다")
+        return HongColor.TRANSPARENT.hex.parseColor()
     }
 
     return android.graphics.Color.parseColor(this)
 }
+
 
 fun String?.toFigureInt(): Int {
     return if (this.isNullOrEmpty()) {
@@ -80,38 +80,6 @@ fun String?.toFigureLong(): Long {
         0L
     } else {
         this.toLong()
-    }
-}
-
-fun String?.parseComposeColor(): Color {
-    return try {
-        Color(
-            android.graphics.Color.parseColor(
-                if (this.isNullOrEmpty()
-                    || this.equals("null", true)
-                    || this.equals("none", true)
-                    || this.equals("blank", true)
-                    || this.equals("empty", true)
-                ) {
-                    "#00000000"
-                } else if (this.startsWith("#")) {
-                    when (this.length) {
-                        7 -> this.replace("#", "#ff")
-                        9 -> this
-                        else -> "#00000000"
-                    }
-                } else {
-                    when (this.length) {
-                        6 -> "#ff$this"
-                        8 -> "#$this"
-                        else -> "#00000000"
-                    }
-                }
-            )
-        )
-    } catch (e: Exception) {
-        Log.e("ERROR", e.toString())
-        Color.Transparent
     }
 }
 

@@ -45,9 +45,9 @@ fun HongBottomSheetSelectCompose(
 ) {
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
-    var selectedOption by remember(option.initialSelection) { mutableStateOf(option.initialSelection) }
 
-
+    val remOption by remember { mutableStateOf(option) }
+    var selectedOption by remember { mutableStateOf(remOption.initialSelection) }
 
     @Composable
     fun Content() {
@@ -73,9 +73,9 @@ fun HongBottomSheetSelectCompose(
                 ) {
                     HongTextCompose(
                         HongTextBuilder()
-                            .text(option.title)
-                            .typography(option.titleTypo)
-                            .color(option.titleColorHex)
+                            .text(remOption.title)
+                            .typography(remOption.titleTypo)
+                            .color(remOption.titleColorHex)
                             .applyOption()
                     )
                 }
@@ -93,7 +93,7 @@ fun HongBottomSheetSelectCompose(
                             .onClick {
                                 scope.launch {
                                     bottomSheetState.hide()
-                                    option.onChangeVisibleState(false)
+                                    remOption.onChangeVisibleState(false)
                                 }
                             }
                             .applyOption()
@@ -101,17 +101,17 @@ fun HongBottomSheetSelectCompose(
                 }
             }
 
-            option.selectionList.forEachIndexed { _, item ->
+            remOption.selectionList.forEachIndexed { _, item ->
                 SelectionItem(
                     option = option,
                     selection = item,
                     isSelected = item.first == selectedOption.first,
                     onSelect = {
-                        option.selectSelectionCallback(item)
+                        remOption.selectSelectionCallback(item)
                         selectedOption = item
                         scope.launch {
                             bottomSheetState.hide()
-                            option.onChangeVisibleState(false)
+                            remOption.onChangeVisibleState(false)
                         }
                     }
                 )
@@ -128,11 +128,11 @@ fun HongBottomSheetSelectCompose(
             .fillMaxWidth(),
         onDismissRequest = {
             scope.launch {
-                option.onChangeVisibleState(false)
+                remOption.onChangeVisibleState(false)
             }
         },
         sheetState = bottomSheetState,
-        scrimColor = option.dimColorHex.toColor(),
+        scrimColor = remOption.dimColorHex.toColor(),
         dragHandle = {
             Box(
                 modifier = Modifier
@@ -148,7 +148,7 @@ fun HongBottomSheetSelectCompose(
                         .width(40.dp)
                         .height(6.dp)
                         .hongBackground(
-                            color = option.dragHandleColorHex,
+                            color = remOption.dragHandleColorHex,
                             radius = HongRadiusInfo(
                                 topLeft = 3,
                                 topRight = 3,
@@ -160,8 +160,8 @@ fun HongBottomSheetSelectCompose(
             }
         },
         shape = HongRadiusInfo(
-            topLeft = option.topRadius,
-            topRight = option.topRadius,
+            topLeft = remOption.topRadius,
+            topRight = remOption.topRadius,
             bottomLeft = 0,
             bottomRight = 0
         ).toRoundedCornerShape()
