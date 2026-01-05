@@ -76,7 +76,7 @@ class SampleBottomSheetSelectActivity : BaseSampleComposeActivity() {
 
             HongBottomSheetSelectCompose(
                 showBottomSheet = show2,
-                HongBottomSheetSelectBuilder()
+                option = HongBottomSheetSelectBuilder()
                     .title("신체 컨디션")
                     .selectionList(
                         listOf(
