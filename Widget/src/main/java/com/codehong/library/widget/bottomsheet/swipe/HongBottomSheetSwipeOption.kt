@@ -16,6 +16,12 @@ data class HongBottomSheetSwipeOption(
     override val type: HongWidgetType = HongWidgetType.BOTTOM_SHEET_SWIPE
 ) : HongWidgetCommonOption {
 
+    companion object {
+        const val DEFAULT_BOTTOM_SHEET_MAX_HEIGHT = 280f
+        const val DEFAULT_BOTTOM_SHEET_MIN_HEIGHT = 50f
+        const val DEFAULT_BOTTOM_SHEET_TOP_RADIUS = 20
+    }
+
     override var isValidComponent: Boolean = true
     override var width: Int = HongLayoutParam.MATCH_PARENT.value
     override var height: Int = HongLayoutParam.MATCH_PARENT.value
@@ -30,19 +36,19 @@ data class HongBottomSheetSwipeOption(
 
     override var backgroundColorHex: String = HongColor.MAIN_ORANGE_100.hex
 
-    var bottomSheetMaxHeight: Float = 280f
-    var bottomSheetMinHeight: Float = 50f
+    var bottomSheetMaxHeight: Float = DEFAULT_BOTTOM_SHEET_MAX_HEIGHT
+    var bottomSheetMinHeight: Float = DEFAULT_BOTTOM_SHEET_MIN_HEIGHT
 
     var bottomSheetBackgroundColorHex: String = HongColor.WHITE_100.hex
-    var bottomSheetTopRadius = 20
+    var bottomSheetTopRadius = DEFAULT_BOTTOM_SHEET_TOP_RADIUS
 
     var closeIconColorHex: String = HongColor.BLACK_100.hex
-
 
     var onCloseClick: () -> Unit = {}
 
     var content: @Composable BoxScope.() -> Unit = {}
     var bottomSheetContent: @Composable ColumnScope.() -> Unit = {}
+
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -122,6 +128,4 @@ data class HongBottomSheetSwipeOption(
                 "bottomSheetContent=$bottomSheetContent" +
                 ")"
     }
-
-
 }

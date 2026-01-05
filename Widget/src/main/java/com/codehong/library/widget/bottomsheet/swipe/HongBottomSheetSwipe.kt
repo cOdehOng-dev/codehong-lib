@@ -1,6 +1,5 @@
 package com.codehong.library.widget.bottomsheet.swipe
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
@@ -14,17 +13,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongHeight
@@ -39,27 +40,21 @@ import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import kotlin.math.max
 import kotlin.math.min
 
+private val LocalOption = compositionLocalOf { HongBottomSheetSwipeOption() }
+private val LocalContentScale = compositionLocalOf { 1f }
+private val LocalContentOffsetY = compositionLocalOf { 0f }
+
 @Composable
 fun HongBottomSheetSwipe(
     option: HongBottomSheetSwipeOption
 ) {
-    val density = LocalDensity.current
+    val remOption by remember { mutableStateOf(option) }
 
-    val bottomSheetMinHeight = option.bottomSheetMinHeight
-    val bottomsheetMaxHeight = option.bottomSheetMaxHeight
+    val bottomSheetMinHeight by rememberSaveable { mutableFloatStateOf(remOption.bottomSheetMinHeight) }
+    val bottomsheetMaxHeight by rememberSaveable { mutableFloatStateOf(remOption.bottomSheetMaxHeight) }
 
-    var bottomSheetHeight by remember(bottomSheetMinHeight) { mutableFloatStateOf(bottomSheetMinHeight) }
-    var isDragging by remember { mutableStateOf(false) }
-    var isMaxBottomSheetHeight by remember { mutableStateOf(false) }
-
-
-    LaunchedEffect(bottomSheetHeight) {
-        isMaxBottomSheetHeight = if (bottomSheetHeight >= bottomsheetMaxHeight) {
-            true
-        } else {
-            false
-        }
-    }
+    var bottomSheetHeight by rememberSaveable { mutableFloatStateOf(bottomSheetMinHeight) }
+    var isDragging by rememberSaveable { mutableStateOf(false) }
 
     val animatedHeight by animateFloatAsState(
         targetValue = bottomSheetHeight,
@@ -79,98 +74,129 @@ fun HongBottomSheetSwipe(
         label = "offsetY"
     )
 
-
-    @SuppressLint("UseOfNonLambdaOffsetOverload")
-    @Composable
-    fun Content() {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 50.dp)
-                .offset(y = with(density) { contentOffsetY.dp })
-                .scale(contentScale),
-        ) {
-            option.content.invoke(this)
-        }
-    }
-
-    Scaffold(
-        contentWindowInsets = WindowInsets.systemBars
+    CompositionLocalProvider(
+        LocalOption provides remOption,
+        LocalContentScale provides contentScale,
+        LocalContentOffsetY provides contentOffsetY,
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .hongBackground(
-                    color = option.backgroundColorHex
-                )
-                .padding(it)
+        Scaffold(
+            contentWindowInsets = WindowInsets.systemBars
         ) {
-            HongHeaderCloseCompose(
-                HongHeaderCloseBuilder()
-                    .closeIconColor(option.closeIconColorHex)
-                    .close { option.onCloseClick.invoke() }
-                    .applyOption()
-            )
-
-            Content()
-
-            // 바텀시트
             Box(
                 modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .hongWidth(HongLayoutParam.MATCH_PARENT.value)
-                    .hongHeight(with(density) { animatedHeight }.toInt())
+                    .fillMaxSize()
                     .hongBackground(
-                        color = option.bottomSheetBackgroundColorHex,
-                        radius = HongRadiusInfo(
-                            topLeft = option.bottomSheetTopRadius,
-                            topRight = option.bottomSheetTopRadius
-                        )
+                        color = remOption.backgroundColorHex
                     )
-                    .pointerInput(Unit) {
-                        detectDragGestures(
-                            onDragStart = {
-                                isDragging = true
-                            },
-                            onDragEnd = {
-                                isDragging = false
-                            }
-                        ) { _, dragAmount ->
-                            val newHeight = bottomSheetHeight - dragAmount.y
-                            bottomSheetHeight = max(bottomSheetMinHeight, min(bottomsheetMaxHeight, newHeight))
+                    .padding(it)
+            ) {
+                HongHeaderCloseCompose(
+                    HongHeaderCloseBuilder()
+                        .closeIconColor(remOption.closeIconColorHex)
+                        .close { remOption.onCloseClick() }
+                        .applyOption()
+                )
+
+                MainContent()
+
+                BottomSheetContent(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .hongWidth(HongLayoutParam.MATCH_PARENT.value)
+                        .hongHeight(animatedHeight.toInt())
+                        .hongBackground(
+                            color = option.bottomSheetBackgroundColorHex,
+                            radius = HongRadiusInfo(
+                                topLeft = option.bottomSheetTopRadius,
+                                topRight = option.bottomSheetTopRadius
+                            )
+                        ),
+                    onDragAmount = { dragAmount ->
+                        val newHeight = bottomSheetHeight - dragAmount.y
+                        bottomSheetHeight = max(bottomSheetMinHeight, min(bottomsheetMaxHeight, newHeight))
+                    },
+                    onDragging = { isDrag ->
+                        isDragging = isDrag
+                    },
+                    onContentClick = {
+                        bottomSheetHeight = if (bottomSheetHeight <= (bottomSheetMinHeight + 20f)) {
+                            bottomsheetMaxHeight
+                        } else {
+                            bottomSheetMinHeight
                         }
                     }
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .hongSpacing(
-                                HongSpacingInfo(
-                                    top = 10f,
-                                    bottom = 4f
-                                )
-                            )
-                            .hongWidth(40)
-                            .hongHeight(6)
-                            .hongBackground(
-                                color = HongColor.GRAY_30,
-                                radius = HongRadiusInfo(3)
-                            )
-                            .clickable {
-                                bottomSheetHeight = if (bottomSheetHeight <= (bottomSheetMinHeight + 20f)) {
-                                    bottomsheetMaxHeight
-                                } else {
-                                    bottomSheetMinHeight
-                                }
-                            }
-                    )
-                    option.bottomSheetContent.invoke(this)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun MainContent() {
+    val option = LocalOption.current
+    val contentScale = LocalContentScale.current
+    val contentOffsetY = LocalContentOffsetY.current
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 50.dp)
+            .offset(y = contentOffsetY.dp)
+            .scale(contentScale),
+    ) {
+        option.content(this)
+    }
+}
+
+@Composable
+private fun BottomSheetContent(
+    modifier: Modifier = Modifier,
+    onDragAmount: (Offset) -> Unit,
+    onDragging: (Boolean) -> Unit,
+    onContentClick: () -> Unit
+) {
+    val option = LocalOption.current
+
+    Box(
+        modifier = Modifier
+            .then(modifier)
+            .pointerInput(Unit) {
+                detectDragGestures(
+                    onDragStart = {
+                        onDragging(true)
+                    },
+                    onDragEnd = {
+                        onDragging(false)
+                    }
+                ) { _, dragAmount ->
+                    onDragAmount(dragAmount)
                 }
             }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Box(
+                modifier = Modifier
+                    .hongSpacing(
+                        HongSpacingInfo(
+                            top = 10f,
+                            bottom = 4f
+                        )
+                    )
+                    .hongWidth(40)
+                    .hongHeight(6)
+                    .hongBackground(
+                        color = HongColor.GRAY_30,
+                        radius = HongRadiusInfo(3)
+                    )
+                    .clickable {
+                        onContentClick()
+                    }
+            )
+            option.bottomSheetContent(this)
         }
     }
 }
