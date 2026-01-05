@@ -44,7 +44,7 @@ private val LocalSelectedOption = compositionLocalOf { Pair("", "") }
 @Suppress("NonSkippableComposable")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HongBottomSheetSelectCompose(
+fun HongBottomSheetSelect(
     showBottomSheet: Boolean,
     option: HongBottomSheetSelectOption
 ) {

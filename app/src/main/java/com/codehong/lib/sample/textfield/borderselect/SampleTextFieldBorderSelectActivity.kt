@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.base.BaseSampleComposeActivity
 import com.codehong.library.widget.Consts
 import com.codehong.library.widget.bottomsheet.select.HongBottomSheetSelectBuilder
-import com.codehong.library.widget.bottomsheet.select.HongBottomSheetSelectCompose
+import com.codehong.library.widget.bottomsheet.select.HongBottomSheetSelect
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.rule.HongInputState
 import com.codehong.library.widget.rule.color.HongColor
@@ -66,7 +66,7 @@ class SampleTextFieldBorderSelectActivity : BaseSampleComposeActivity() {
                     .applyOption(),
             )
 
-            HongBottomSheetSelectCompose(
+            HongBottomSheetSelect(
                 showBottomSheet = showBottomSheet,
                 option = HongBottomSheetSelectBuilder()
                     .title("선호 러닝")
