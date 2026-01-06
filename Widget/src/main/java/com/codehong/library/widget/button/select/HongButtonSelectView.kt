@@ -84,7 +84,7 @@ class HongButtonSelectView @JvmOverloads constructor(
                         .textTypo(option.negativeTextTypo)
                         .textColor(option.negativeTextColorHex)
                         .onClick {
-                            option.negativeClick?.invoke()
+                            option.onClickNegative?.invoke()
                         }
                         .applyOption()
                 )
@@ -121,7 +121,7 @@ class HongButtonSelectView @JvmOverloads constructor(
                         .textColor(option.positiveTextColorHex)
                         .backgroundColor(option.positiveBackgroundColorHex)
                         .onClick {
-                            option.positiveClick?.invoke()
+                            option.onClickPositive?.invoke()
                         }
                         .applyOption()
                 )

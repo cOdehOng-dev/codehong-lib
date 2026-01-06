@@ -5,6 +5,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,11 +25,13 @@ import com.codehong.library.widget.util.HongWidgetContainer
 fun HongButtonSelectCompose(
     option: HongButtonSelectOption
 ) {
+    val remOption by remember { mutableStateOf(option) }
+
     HongWidgetContainer(option) {
         Row(
             modifier = Modifier
-                .hongWidth(option.width)
-                .hongHeight(option.height)
+                .hongWidth(remOption.width)
+                .hongHeight(remOption.height)
         ) {
             Box(
                 modifier = Modifier
@@ -53,14 +58,14 @@ fun HongButtonSelectCompose(
                         .border(
                             HongBorderInfo(
                                 width = 1,
-                                color = option.negativeBorderColorHex
+                                color = remOption.negativeBorderColorHex
                             )
                         )
-                        .text(option.negativeText)
-                        .textTypo(option.negativeTextTypo)
-                        .textColor(option.negativeTextColorHex)
+                        .text(remOption.negativeText)
+                        .textTypo(remOption.negativeTextTypo)
+                        .textColor(remOption.negativeTextColorHex)
                         .onClick {
-                            option.negativeClick?.invoke()
+                            remOption.onClickNegative?.invoke()
                         }
                         .applyOption()
                 )
@@ -91,12 +96,12 @@ fun HongButtonSelectCompose(
                                 bottomRight = 10
                             )
                         )
-                        .text(option.positiveText)
-                        .textTypo(option.positiveTextTypo)
-                        .textColor(option.positiveTextColorHex)
-                        .backgroundColor(option.positiveBackgroundColorHex)
+                        .text(remOption.positiveText)
+                        .textTypo(remOption.positiveTextTypo)
+                        .textColor(remOption.positiveTextColorHex)
+                        .backgroundColor(remOption.positiveBackgroundColorHex)
                         .onClick {
-                            option.positiveClick?.invoke()
+                            remOption.onClickPositive?.invoke()
                         }
                         .applyOption()
                 )

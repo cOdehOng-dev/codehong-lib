@@ -14,6 +14,11 @@ data class HongButtonSelectOption(
     override val type: HongWidgetType = HongWidgetType.BUTTON_SELECT
 ) : HongWidgetCommonOption {
 
+    companion object {
+        const val DEFAULT_NEGATIVE_TEXT = "취소"
+        const val DEFAULT_POSITIVE_TEXT = "확인"
+    }
+
     override var isValidComponent: Boolean = true
     override var width: Int = HongLayoutParam.MATCH_PARENT.value
     override var height: Int = HongLayoutParam.WRAP_CONTENT.value
@@ -37,8 +42,8 @@ data class HongButtonSelectOption(
     var positiveTextColorHex: String = HongColor.WHITE_100.hex
     var positiveBackgroundColorHex: String = HongColor.MAIN_ORANGE_100.hex
 
-    var positiveClick: (() -> Unit)? = null
-    var negativeClick: (() -> Unit)? = null
+    var onClickPositive: (() -> Unit)? = null
+    var onClickNegative: (() -> Unit)? = null
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -66,8 +71,8 @@ data class HongButtonSelectOption(
         if (positiveTextTypo != other.positiveTextTypo) return false
         if (positiveTextColorHex != other.positiveTextColorHex) return false
         if (positiveBackgroundColorHex != other.positiveBackgroundColorHex) return false
-        if (positiveClick != other.positiveClick) return false
-        if (negativeClick != other.negativeClick) return false
+        if (onClickPositive != other.onClickPositive) return false
+        if (onClickNegative != other.onClickNegative) return false
 
         return true
     }
@@ -93,13 +98,13 @@ data class HongButtonSelectOption(
         result = 31 * result + positiveTextTypo.hashCode()
         result = 31 * result + positiveTextColorHex.hashCode()
         result = 31 * result + positiveBackgroundColorHex.hashCode()
-        result = 31 * result + (positiveClick?.hashCode() ?: 0)
-        result = 31 * result + (negativeClick?.hashCode() ?: 0)
+        result = 31 * result + (onClickPositive?.hashCode() ?: 0)
+        result = 31 * result + (onClickNegative?.hashCode() ?: 0)
         return result
     }
 
     override fun toString(): String {
-        return "HongSelectButtonOption(" +
+        return "HongButtonSelectOption(" +
                 "type=$type, " +
                 "isValidComponent=$isValidComponent, " +
                 "width=$width, " +
@@ -120,9 +125,10 @@ data class HongButtonSelectOption(
                 "positiveTextTypo=$positiveTextTypo, " +
                 "positiveTextColorHex='$positiveTextColorHex', " +
                 "positiveBackgroundColorHex='$positiveBackgroundColorHex', " +
-                "positiveClick=$positiveClick, " +
-                "negativeClick=$negativeClick" +
+                "onClickPositive=$onClickPositive, " +
+                "onClickNegative=$onClickNegative" +
                 ")"
     }
+
 
 }

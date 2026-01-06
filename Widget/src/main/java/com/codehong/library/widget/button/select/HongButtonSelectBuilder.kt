@@ -15,7 +15,7 @@ class HongButtonSelectBuilder : HongWidgetCommonBuilder<HongButtonSelectOption, 
     }
 
     fun negativeText(text: String?) = apply {
-        option.negativeText = text ?: ""
+        option.negativeText = text ?: HongButtonSelectOption.DEFAULT_NEGATIVE_TEXT
     }
 
     fun negativeTextTypo(typo: HongTypo) = apply {
@@ -23,7 +23,7 @@ class HongButtonSelectBuilder : HongWidgetCommonBuilder<HongButtonSelectOption, 
     }
 
     fun negativeTextColor(color: HongColor) = apply {
-        option.negativeTextColorHex = color.hex
+        negativeTextColor(color.hex)
     }
 
     fun negativeTextColor(colorHex: String) = apply {
@@ -40,7 +40,7 @@ class HongButtonSelectBuilder : HongWidgetCommonBuilder<HongButtonSelectOption, 
 
 
     fun positiveText(text: String?) = apply {
-        option.positiveText = text ?: ""
+        option.positiveText = text ?: HongButtonSelectOption.DEFAULT_POSITIVE_TEXT
     }
 
     fun positiveTextTypo(typo: HongTypo) = apply {
@@ -48,7 +48,7 @@ class HongButtonSelectBuilder : HongWidgetCommonBuilder<HongButtonSelectOption, 
     }
 
     fun positiveTextColor(color: HongColor) = apply {
-        option.positiveTextColorHex = color.hex
+        positiveTextColor(color.hex)
     }
 
     fun positiveTextColor(colorHex: String) = apply {
@@ -63,14 +63,12 @@ class HongButtonSelectBuilder : HongWidgetCommonBuilder<HongButtonSelectOption, 
         option.positiveBackgroundColorHex = colorHex
     }
 
-    
-
     fun onNegativeClick(click: (() -> Unit)?) = apply {
-        this.option.negativeClick = click
+        option.onClickNegative = click
     }
 
     fun onPositiveClick(click: (() -> Unit)?) = apply {
-        this.option.positiveClick = click
+        option.onClickPositive = click
     }
 
     fun copy(inject: HongButtonSelectOption?): HongButtonSelectBuilder {
@@ -91,7 +89,7 @@ class HongButtonSelectBuilder : HongWidgetCommonBuilder<HongButtonSelectOption, 
             .positiveTextTypo(inject.positiveTextTypo)
             .positiveTextColor(inject.positiveTextColorHex)
             .positiveBackgroundColor(inject.positiveBackgroundColorHex)
-            .onNegativeClick(inject.negativeClick)
-            .onPositiveClick(inject.positiveClick)
+            .onNegativeClick(inject.onClickNegative)
+            .onPositiveClick(inject.onClickPositive)
     }
 }
