@@ -44,6 +44,7 @@ import com.codehong.lib.sample.label.input.SampleLabelInputActivity
 import com.codehong.lib.sample.label.select.SampleLabelSelectInputActivity
 import com.codehong.lib.sample.label.toggle.SampleLabelSwitchActivity
 import com.codehong.lib.sample.layout.fade.SampleScrollFadeLayoutActivity
+import com.codehong.lib.sample.liquidglass.SampleLiquidGlassActivity
 import com.codehong.lib.sample.pager.SampleHorizontalPagerActivity
 import com.codehong.lib.sample.picker.OptionPickerActivity
 import com.codehong.lib.sample.picker.SamplePickerComposeActivity
@@ -754,6 +755,17 @@ fun MainScreen(
                                                 activity.startActivity(this)
                                             }
                                         }
+
+                                        HongWidgetType.LIQUID_GLASS -> {
+                                            Intent(activity, SampleLiquidGlassActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.LIQUID_GLASS.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
 
                                         else -> {
                                             Intent(activity, OptionPickerActivity::class.java).apply {

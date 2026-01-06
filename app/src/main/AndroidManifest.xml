@@ -111,6 +111,7 @@
 
         <activity android:name=".icon.SampleIconActivity"/>
         <activity android:name=".draganddrop.SampleDragAndDropActivity"/>
+        <activity android:name=".liquidglass.SampleLiquidGlassActivity"/>
     </application>
 
 </manifest>
