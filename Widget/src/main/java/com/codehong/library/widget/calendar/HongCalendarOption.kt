@@ -2,7 +2,7 @@ package com.codehong.library.widget.calendar
 
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.calendar.model.HongCalendarDayOfWeekLangType
-import com.codehong.library.widget.calendar.model.InitialSelectedInfo
+import com.codehong.library.widget.calendar.model.HongCalendarInitialSelectedInfo
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -140,7 +140,7 @@ data class HongCalendarOption(
 
     var maxYears = DEFAULT_MAX_YEARS // 최대 년도 범위
 
-    var initialSelectedInfo: InitialSelectedInfo? = null // 초기 달력 정보
+    var initialSelectedInfo: HongCalendarInitialSelectedInfo? = null // 초기 달력 정보
 
     var dayOfWeekLangType = HongCalendarDayOfWeekLangType.KOR // 요일 언어 타입
 

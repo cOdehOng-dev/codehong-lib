@@ -3,7 +3,7 @@ package com.codehong.library.widget.calendar.model
 import com.codehong.library.widget.util.HongDateUtil
 import org.threeten.bp.LocalDate
 
-data class InitialSelectedInfo(
+data class HongCalendarInitialSelectedInfo(
     val startDate: String,
     val endDate: String,
     val datePattern: String = "yyyyMMdd"
@@ -18,4 +18,3 @@ data class InitialSelectedInfo(
         datePattern = datePattern
     )
 }
-

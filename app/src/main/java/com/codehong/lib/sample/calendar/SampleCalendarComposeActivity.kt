@@ -8,7 +8,7 @@ import com.codehong.library.widget.calendar.HongCalendarBuilder
 import com.codehong.library.widget.calendar.HongCalendarCompose
 import com.codehong.library.widget.calendar.HongCalendarOption
 import com.codehong.library.widget.calendar.model.HongCalendarDayOfWeekLangType
-import com.codehong.library.widget.calendar.model.InitialSelectedInfo
+import com.codehong.library.widget.calendar.model.HongCalendarInitialSelectedInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.text.def.HongTextBuilder
@@ -30,7 +30,7 @@ class SampleCalendarComposeActivity : BaseSampleComposeActivity() {
                 .backgroundColor(HongColor.WHITE_100.hex)
                 .initialSelectedInfo(
                     if (isInitialDate) {
-                        InitialSelectedInfo(
+                        HongCalendarInitialSelectedInfo(
                             startDate = "20250710",
                             endDate = "20250720"
                         )

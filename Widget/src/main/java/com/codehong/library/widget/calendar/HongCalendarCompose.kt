@@ -30,7 +30,7 @@ import com.codehong.library.widget.HongDivider
 import com.codehong.library.widget.calendar.model.HongCalendarDayOfWeekLangType
 import com.codehong.library.widget.calendar.model.HongCalendarSelectDate
 import com.codehong.library.widget.calendar.model.HongCalendarSelectedType
-import com.codehong.library.widget.calendar.model.InitialSelectedInfo
+import com.codehong.library.widget.calendar.model.HongCalendarInitialSelectedInfo
 import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
@@ -444,7 +444,7 @@ fun PreviewHongCalendarCompose() {
     val option = HongCalendarBuilder()
         .backgroundColor(HongColor.WHITE_100.hex)
         .initialSelectedInfo(
-            InitialSelectedInfo(
+            HongCalendarInitialSelectedInfo(
                 startDate = "20250710",
                 endDate = "20250720"
             )

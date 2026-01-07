@@ -8,7 +8,7 @@ import com.codehong.library.widget.calendar.HongCalendarBuilder
 import com.codehong.library.widget.calendar.HongCalendarOption
 import com.codehong.library.widget.calendar.HongCalendarView
 import com.codehong.library.widget.calendar.model.HongCalendarDayOfWeekLangType
-import com.codehong.library.widget.calendar.model.InitialSelectedInfo
+import com.codehong.library.widget.calendar.model.HongCalendarInitialSelectedInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongFont
@@ -39,7 +39,7 @@ class SampleCalendarActivity : BaseActivity() {
         val option = HongCalendarBuilder()
             .initialSelectedInfo(
                 if (isInitialDate) {
-                    InitialSelectedInfo(
+                    HongCalendarInitialSelectedInfo(
                         startDate = "20250710",
                         endDate = "20250720"
                     )

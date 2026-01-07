@@ -2,7 +2,7 @@ package com.codehong.library.widget.calendar
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.calendar.model.HongCalendarDayOfWeekLangType
-import com.codehong.library.widget.calendar.model.InitialSelectedInfo
+import com.codehong.library.widget.calendar.model.HongCalendarInitialSelectedInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.text.def.HongTextOption
@@ -110,7 +110,7 @@ class HongCalendarBuilder : HongWidgetCommonBuilder<HongCalendarOption, HongCale
         this.option.maxYears = maxYears
     }
 
-    fun initialSelectedInfo(initialDate: InitialSelectedInfo?) = apply {
+    fun initialSelectedInfo(initialDate: HongCalendarInitialSelectedInfo?) = apply {
         this.option.initialSelectedInfo = initialDate
     }
 
