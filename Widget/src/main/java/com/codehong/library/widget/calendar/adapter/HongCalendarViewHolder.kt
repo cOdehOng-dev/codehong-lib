@@ -12,21 +12,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codehong.library.widget.calendar.HongCalendarOption
 import com.codehong.library.widget.calendar.model.HongCalendarSelectedType
 import com.codehong.library.widget.databinding.HonglibItemCalendarBinding
+import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.widget.extensions.hongMargin
+import com.codehong.library.widget.extensions.toParseColor
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.text.def.HongTextBuilder
 import com.codehong.library.widget.text.def.HongTextOption
 import com.codehong.library.widget.text.def.HongTextView
-import com.codehong.library.widget.extensions.dpToPx
-import com.codehong.library.widget.extensions.hongMargin
-import com.codehong.library.widget.extensions.toParseColor
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.DateTimeFormatter
 
-class HongCalendarViewHolder constructor(
+class HongCalendarViewHolder(
     private val binding: HonglibItemCalendarBinding,
     private val option: HongCalendarOption,
 ) : RecyclerView.ViewHolder(binding.root) {
@@ -109,7 +109,7 @@ class HongCalendarViewHolder constructor(
                                 if (endDate != null && startDate != endDate) {
                                     selectStartOrBackground(
                                         selectedType = HongCalendarSelectedType.START,
-                                        selectedBackgroundColorHex = option.selectBackgroundColorHex.rangeDaysColorHex
+                                        selectedBackgroundColorHex = option.rangeDaysTextOption.backgroundColorHex
                                     )
                                 } else {
                                     null
@@ -117,7 +117,7 @@ class HongCalendarViewHolder constructor(
                             } else if (isEnd) {
                                 selectStartOrBackground(
                                     selectedType = HongCalendarSelectedType.END,
-                                    selectedBackgroundColorHex = option.selectBackgroundColorHex.rangeDaysColorHex
+                                    selectedBackgroundColorHex = option.rangeDaysTextOption.backgroundColorHex
                                 )
                             } else {
                                 null
@@ -130,9 +130,9 @@ class HongCalendarViewHolder constructor(
                             addView(
                                 FrameLayout(binding.root.context).apply {
                                     background = when {
-                                        isStart -> circleDrawable(option.selectBackgroundColorHex.startDayColorHex)
-                                        isEnd -> circleDrawable(option.selectBackgroundColorHex.endDayColorHex)
-                                        isSelectedRange -> rectangleDrawable(option.selectBackgroundColorHex.rangeDaysColorHex)
+                                        isStart -> circleDrawable(option.startDayTextOption.backgroundColorHex)
+                                        isEnd -> circleDrawable(option.endDayTextOption.backgroundColorHex)
+                                        isSelectedRange -> rectangleDrawable(option.rangeDaysTextOption.backgroundColorHex)
                                         else -> null
                                     }
                                     val dayOfMonthStr = day.dayOfMonth.toString()

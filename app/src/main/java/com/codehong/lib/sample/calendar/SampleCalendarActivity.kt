@@ -5,9 +5,9 @@ import com.codehong.lib.sample.SampleConst
 import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.lib.sample.databinding.ActivitySampleCalendarBinding
 import com.codehong.library.widget.calendar.HongCalendarBuilder
+import com.codehong.library.widget.calendar.HongCalendarOption
 import com.codehong.library.widget.calendar.HongCalendarView
 import com.codehong.library.widget.calendar.model.HongCalendarDayOfWeekLangType
-import com.codehong.library.widget.calendar.model.HongCalendarSelectBackgroundColorHex
 import com.codehong.library.widget.calendar.model.InitialSelectedInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
@@ -63,17 +63,11 @@ class SampleCalendarActivity : BaseActivity() {
                     .applyOption()
             )
             .yearMonthPattern("yyyy.MM")
-            .selectBackgroundColorHex(
-                HongCalendarSelectBackgroundColorHex(
-                    startDayColorHex = HongColor.MAIN_ORANGE_100.hex,
-                    endDayColorHex = HongColor.MAIN_ORANGE_100.hex,
-                    rangeDaysColorHex = HongColor.MAIN_ORANGE_15.hex
-                )
-            )
             .startDayTextOption(
                 HongTextBuilder()
                     .size(17)
                     .color(HongColor.WHITE_100.hex)
+                    .backgroundColor(HongCalendarOption.DEFAULT_SELECT_START_DAY_BACKGROUND_COLOR)
                     .fontType(HongFont.PRETENDARD_700)
                     .applyOption()
             )
@@ -81,6 +75,7 @@ class SampleCalendarActivity : BaseActivity() {
                 HongTextBuilder()
                     .size(17)
                     .color(HongColor.WHITE_100.hex)
+                    .backgroundColor(HongCalendarOption.DEFAULT_SELECT_END_DAY_BACKGROUND_COLOR)
                     .fontType(HongFont.PRETENDARD_700)
                     .applyOption()
             )
@@ -88,6 +83,7 @@ class SampleCalendarActivity : BaseActivity() {
                 HongTextBuilder()
                     .size(17)
                     .color(HongColor.MAIN_ORANGE_100.hex)
+                    .backgroundColor(HongCalendarOption.DEFAULT_SELECT_RANGE_DAYS_BACKGROUND_COLOR)
                     .fontType(HongFont.PRETENDARD_700)
                     .applyOption()
             )

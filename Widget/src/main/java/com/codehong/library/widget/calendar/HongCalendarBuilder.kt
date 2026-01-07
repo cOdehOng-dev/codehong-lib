@@ -1,39 +1,44 @@
 package com.codehong.library.widget.calendar
 
+import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.calendar.model.HongCalendarDayOfWeekLangType
-import com.codehong.library.widget.calendar.model.HongCalendarSelectBackgroundColorHex
 import com.codehong.library.widget.calendar.model.InitialSelectedInfo
+import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.text.def.HongTextOption
 import org.threeten.bp.LocalDate
 
-class HongCalendarBuilder {
+class HongCalendarBuilder : HongWidgetCommonBuilder<HongCalendarOption, HongCalendarBuilder> {
 
-    val option = HongCalendarOption()
+    override val builder: HongCalendarBuilder = this
+    override val option: HongCalendarOption = HongCalendarOption()
 
-//    fun width(width: Int?) = apply {
-//        width?.let { this.option.width = it }
-//    }
-
-    fun height(height: Int?) = apply {
-        height?.let { this.option.height = it }
+    override fun width(width: Int?) = apply {
+        option.width = HongLayoutParam.MATCH_PARENT.value
     }
 
-    fun margin(margin: HongSpacingInfo) = apply {
-        this.option.margin = margin
+    override fun onClick(onClick: ((HongCalendarOption) -> Unit)?) = apply {
+        option.click = null
     }
 
-    fun spacingHorizontal(spacingHorizontal: Int) = apply {
-        this.option.padding = HongSpacingInfo(
-            left = spacingHorizontal.toFloat(),
+    override fun padding(padding: HongSpacingInfo) = apply {
+        option.padding = HongSpacingInfo(
+            left = padding.left,
             top = 0f,
-            right = spacingHorizontal.toFloat(),
+            right = padding.right,
             bottom = 0f
         )
     }
 
-    fun backgroundColor(colorHex: String) = apply {
-        this.option.backgroundColorHex = colorHex
+    fun spacingHorizontal(spacingHorizontal: Int) = apply {
+        padding(
+            HongSpacingInfo(
+                left = spacingHorizontal.toFloat(),
+                top = 0f,
+                right = spacingHorizontal.toFloat(),
+                bottom = 0f
+            )
+        )
     }
 
     fun dayOfWeekTextOption(dayOfWeekTextOption: HongTextOption) = apply {
@@ -50,10 +55,6 @@ class HongCalendarBuilder {
 
     fun yearMonthPattern(pattern: String) = apply {
         this.option.yearMonthPattern = pattern
-    }
-
-    fun selectBackgroundColorHex(selectBackgroundColorHex: HongCalendarSelectBackgroundColorHex) = apply {
-        this.option.selectBackgroundColorHex = selectBackgroundColorHex
     }
 
 
@@ -121,20 +122,17 @@ class HongCalendarBuilder {
         this.option.onSelected = onSelected
     }
 
-    fun applyOption() = option
-
     fun copy(injectOption: HongCalendarOption): HongCalendarBuilder {
         return HongCalendarBuilder()
-//            .width(injectOption.width)
+            .width(injectOption.width)
             .height(injectOption.height)
             .margin(injectOption.margin)
-            .spacingHorizontal(injectOption.spacingHorizontal)
+            .padding(injectOption.padding)
             .backgroundColor(injectOption.backgroundColorHex)
             .dayOfWeekTextOption(injectOption.dayOfWeekTextOption)
             .dayOfWeekBottomLineColorHex(injectOption.dayOfWeekBottomLineColorHex)
             .yearMonthTextOption(injectOption.yearMonthTextOption)
             .yearMonthPattern(injectOption.yearMonthPattern)
-            .selectBackgroundColorHex(injectOption.selectBackgroundColorHex)
             .startDayTextOption(injectOption.startDayTextOption)
             .endDayTextOption(injectOption.endDayTextOption)
             .rangeDaysTextOption(injectOption.rangeDaysTextOption)

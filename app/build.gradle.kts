@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.haze)
 
 
     debugImplementation(libs.androidx.compose.tooling)

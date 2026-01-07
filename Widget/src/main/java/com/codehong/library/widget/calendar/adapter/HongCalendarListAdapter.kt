@@ -9,7 +9,7 @@ import com.codehong.library.widget.calendar.HongCalendarOption
 import com.codehong.library.widget.databinding.HonglibItemCalendarBinding
 import org.threeten.bp.LocalDate
 
-class HongCalendarListAdapter constructor(
+class HongCalendarListAdapter(
     private val option: HongCalendarOption,
     private val today: LocalDate,
 ) : ListAdapter<LocalDate, HongCalendarViewHolder>(

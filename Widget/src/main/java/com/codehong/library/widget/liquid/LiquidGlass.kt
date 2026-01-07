@@ -158,41 +158,6 @@ fun Modifier.iosLiquidGlass(
         .border(width = 1.dp, brush = glassBorderBrush, shape = shape)
 }
 
-// ==========================================
-// 2. 배경 애니메이션
-// ==========================================
-@Composable
-fun AnimatedColorfulBackground() {
-    val infiniteTransition = rememberInfiniteTransition(label = "background")
-    val offset1 by infiniteTransition.animateFloat(
-        initialValue = -100f, targetValue = 100f,
-        animationSpec = infiniteRepeatable(tween(3000, easing = LinearEasing), RepeatMode.Reverse), label = "blob1"
-    )
-    val offset2 by infiniteTransition.animateFloat(
-        initialValue = 50f, targetValue = -150f,
-        animationSpec = infiniteRepeatable(tween(4500, easing = LinearEasing), RepeatMode.Reverse), label = "blob2"
-    )
-    val scale by infiniteTransition.animateFloat(
-        initialValue = 1f, targetValue = 1.3f,
-        animationSpec = infiniteRepeatable(tween(3500, easing = LinearEasing), RepeatMode.Reverse), label = "scale"
-    )
-    val rotation by infiniteTransition.animateFloat(
-        initialValue = 0f, targetValue = 360f,
-        animationSpec = infiniteRepeatable(tween(10000, easing = LinearEasing), RepeatMode.Restart), label = "rotation"
-    )
-    Box(modifier = Modifier.fillMaxSize()) {
-        FloatingBlob(Brush.sweepGradient(listOf(Color(0xFFFF00CC), Color(0xFF3300FF), Color(0xFFFF00CC))), Alignment.TopStart, (-80 + offset1).dp, (-50).dp, scale, rotation)
-        FloatingBlob(Brush.radialGradient(listOf(Color(0xFF00FFFF), Color(0xFF0000FF))), Alignment.CenterEnd, 120.dp, (-100 + offset2).dp, scale * 0.8f, -rotation)
-        FloatingBlob(Brush.linearGradient(listOf(Color(0xFFCCFF00), Color(0xFF00FF00))), Alignment.BottomStart, (-50 + offset2).dp, 150.dp, scale * 1.1f, rotation * 0.5f)
-    }
-}
-
-@Composable
-fun FloatingBlob(brush: Brush, alignment: Alignment, offsetX: Dp, offsetY: Dp, scale: Float = 1f, rotation: Float) {
-    Box(modifier = Modifier.fillMaxWidth().height(450.dp).offset(x = offsetX, y = offsetY)
-        .graphicsLayer { scaleX = scale; scaleY = scale; rotationZ = rotation }
-        .background(brush, CircleShape))
-}
 
 // ==========================================
 // 3. 헤더
@@ -234,7 +199,6 @@ fun GlassHeader(hazeState: HazeState, isDarkTheme: Boolean) {
 // ==========================================
 // 4. 탭바 (색상 반전 및 가시성 개선)
 // ==========================================
-
 @Composable
 fun GlassSlidingTabBar(hazeState: HazeState, isDarkTheme: Boolean) {
     val tabs = listOf(
@@ -281,7 +245,6 @@ fun GlassSlidingTabBar(hazeState: HazeState, isDarkTheme: Boolean) {
         Color.Black.copy(alpha = 0.1f)
     }
 
-    // [드래그 시 배경색 투명도(Alpha) 조정]
     val dragAlpha = if (isDarkTheme) 0.01f else 0.06f
 
     val animatedBaseColor by animateColorAsState(
@@ -359,7 +322,12 @@ fun GlassSlidingTabBar(hazeState: HazeState, isDarkTheme: Boolean) {
                     val tabWidthDp = with(density) { tabWidthPx.toDp() }
                     val widthExtension = 12.dp
                     val indicatorWidth = tabWidthDp + widthExtension
-                    val indicatorHeight = tabBarHeight - (verticalPadding * 2)
+
+                    // [수정] 높이 증가량을 8.dp -> 18.dp로 대폭 늘림
+                    val stretchHeight = 18.dp * bulgeIntensity
+
+                    val indicatorHeight = (tabBarHeight - (verticalPadding * 2)) + stretchHeight
+
                     val stretchWidth = 16.dp * bulgeIntensity
                     val currentOffsetDp = with(density) { indicatorOffset.value.toDp() }
                     val targetX = currentOffsetDp + (tabWidthDp - indicatorWidth) / 2 - (stretchWidth / 2)
@@ -403,7 +371,7 @@ fun GlassSlidingTabBar(hazeState: HazeState, isDarkTheme: Boolean) {
                             .height(indicatorHeight)
                             .graphicsLayer {
                                 scaleX = 1f + (0.05f * bulgeIntensity)
-                                scaleY = 1f - (0.05f * bulgeIntensity)
+                                scaleY = 1f // 높이가 물리적으로 변하므로 스케일 변형 없음
                             }
                             .clip(indicatorShape)
                             .hazeChild(
@@ -451,7 +419,7 @@ fun GlassSlidingTabBar(hazeState: HazeState, isDarkTheme: Boolean) {
                             label = "IconScale"
                         )
 
-                        // [핵심 수정] 드래그 중이더라도 선택되지 않은 탭은 흐린 색상 유지
+                        // 선택 상태에 따른 색상 (드래그 영향 X)
                         val contentColor = if (isDarkTheme) {
                             if (isSelected) Color.White else Color.White.copy(0.5f)
                         } else {
@@ -494,6 +462,9 @@ fun GlassSlidingTabBar(hazeState: HazeState, isDarkTheme: Boolean) {
     }
 }
 
+
+
+
 // ==========================================
 // 5. 최종 화면: 밝기 조절 토글
 // ==========================================
@@ -508,7 +479,10 @@ fun LiquidGlassScreen() {
         label = "BgColor"
     )
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -568,7 +542,9 @@ fun LiquidGlassScreen() {
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(
                     text = "Swipe the tab bar below",
-                    color = if(isDarkTheme) Color.White.copy(alpha = 0.5f) else Color.Black.copy(0.5f),
+                    color = if (isDarkTheme) Color.White.copy(alpha = 0.5f) else Color.Black.copy(
+                        0.5f
+                    ),
                     fontSize = 16.sp
                 )
             }
@@ -576,4 +552,71 @@ fun LiquidGlassScreen() {
             GlassSlidingTabBar(hazeState, isDarkTheme)
         }
     }
+}
+
+// ==========================================
+// 2. 배경 애니메이션
+// ==========================================
+@Composable
+private fun AnimatedColorfulBackground() {
+    val infiniteTransition = rememberInfiniteTransition(label = "background")
+    val offset1 by infiniteTransition.animateFloat(
+        initialValue = -100f,
+        targetValue = 100f,
+        animationSpec = infiniteRepeatable(tween(3000, easing = LinearEasing), RepeatMode.Reverse),
+        label = "blob1"
+    )
+    val offset2 by infiniteTransition.animateFloat(
+        initialValue = 50f,
+        targetValue = -150f,
+        animationSpec = infiniteRepeatable(tween(4500, easing = LinearEasing), RepeatMode.Reverse),
+        label = "blob2"
+    )
+    val scale by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 1.3f,
+        animationSpec = infiniteRepeatable(tween(3500, easing = LinearEasing), RepeatMode.Reverse),
+        label = "scale"
+    )
+    val rotation by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(tween(10000, easing = LinearEasing), RepeatMode.Restart),
+        label = "rotation"
+    )
+    Box(modifier = Modifier.fillMaxSize()) {
+        FloatingBlob(
+            Brush.sweepGradient(
+                listOf(
+                    Color(0xFFFF00CC),
+                    Color(0xFF3300FF),
+                    Color(0xFFFF00CC)
+                )
+            ), (-80 + offset1).dp, (-50).dp, scale, rotation
+        )
+        FloatingBlob(
+            Brush.radialGradient(listOf(Color(0xFF00FFFF), Color(0xFF0000FF))),
+            120.dp,
+            (-100 + offset2).dp,
+            scale * 0.8f,
+            -rotation
+        )
+        FloatingBlob(
+            Brush.linearGradient(listOf(Color(0xFFCCFF00), Color(0xFF00FF00))),
+            (-50 + offset2).dp,
+            150.dp,
+            scale * 1.1f,
+            rotation * 0.5f
+        )
+    }
+}
+
+@Composable
+fun FloatingBlob(brush: Brush, offsetX: Dp, offsetY: Dp, scale: Float = 1f, rotation: Float) {
+    Box(modifier = Modifier
+        .fillMaxWidth()
+        .height(450.dp)
+        .offset(x = offsetX, y = offsetY)
+        .graphicsLayer { scaleX = scale; scaleY = scale; rotationZ = rotation }
+        .background(brush, CircleShape))
 }

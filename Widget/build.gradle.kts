@@ -54,7 +54,7 @@ dependencies {
     implementation(libs.androidx.media3.datasource)
 
     implementation(libs.timber)
-    implementation("dev.chrisbanes.haze:haze:1.3.0")
+    implementation(libs.haze)
 
     debugImplementation(libs.androidx.compose.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
