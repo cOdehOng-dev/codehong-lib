@@ -8,6 +8,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
@@ -26,6 +28,8 @@ import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toCornerRadii
+import com.codehong.library.widget.rule.typo.HongFont
+import com.codehong.library.widget.rule.typo.HongFontManager
 import com.codehong.library.widget.text.def.HongTextOption
 
 fun View?.setLayout(
@@ -271,5 +275,46 @@ fun AppCompatEditText.checkFont(
             context,
             inputFontId
         )
+    }
+}
+
+fun TextView?.setTextSize(dp: Int?, defDp: Int) {
+    if (this == null) return
+
+    if (dp == null) {
+        setTextSize(defDp)
+        return
+    }
+
+    setTextSize(dp)
+}
+
+fun TextView?.setTextSize(size: Int?) {
+    this ?: return
+    size ?: return
+
+    this.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size.toFloat())
+}
+
+fun TextView?.setTextFont(fontType: HongFont?, defFont: HongFont) {
+    if (this == null) return
+
+    if (fontType == null) {
+        typeface = HongFontManager.getFont(context, defFont)
+        return
+    }
+
+    typeface = HongFontManager.getFont(context, fontType)
+}
+
+fun View?.applyRatio(ratio: String?) {
+    if (this == null || ratio.isNullOrEmpty()) return
+
+    try {
+        val params = this.layoutParams as ConstraintLayout.LayoutParams
+        params.dimensionRatio = ratio
+        this.layoutParams = params
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
 }

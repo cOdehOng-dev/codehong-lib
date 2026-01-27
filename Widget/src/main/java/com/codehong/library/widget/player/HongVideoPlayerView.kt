@@ -11,13 +11,13 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import com.codehong.library.widget.databinding.HonglibViewVideoPlayerBinding
+import com.codehong.library.widget.extensions.applyRatio
 import com.codehong.library.widget.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
 import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toMaterialShapeDrawable
 import com.codehong.library.widget.util.Utils
-import com.codehong.library.widget.util.applyRatio
 
 class HongVideoPlayerView @JvmOverloads constructor(
     context: Context,
@@ -34,35 +34,27 @@ class HongVideoPlayerView @JvmOverloads constructor(
     var isShowPlayer = false
         private set
 
-
     var option = HongVideoPlayerOption()
         private set
 
-    fun set(
-        option: HongVideoPlayerOption
-    ): HongVideoPlayerView {
+    fun set(option: HongVideoPlayerOption): HongVideoPlayerView {
         this.option = option
 
-        with(binding.clPlayerContainer) {
-            setLayout(
-                option.width,
-                option.height
-            )?.apply {
-                this.leftMargin = context.dpToPx(option.margin.left)
-                this.topMargin = context.dpToPx(option.margin.top)
-                this.rightMargin = context.dpToPx(option.margin.right)
-                this.bottomMargin = context.dpToPx(option.margin.bottom)
+        binding.clPlayerContainer.apply {
+            setLayout(option.width, option.height)?.apply {
+                leftMargin = context.dpToPx(option.margin.left)
+                topMargin = context.dpToPx(option.margin.top)
+                rightMargin = context.dpToPx(option.margin.right)
+                bottomMargin = context.dpToPx(option.margin.bottom)
             }
-
             hongBackground(
                 backgroundColor = option.backgroundColorHex,
                 radius = option.radius
             )
-
             hongPadding(option.padding)
         }
 
-        this.playerListener = object : Player.Listener {
+        playerListener = object : Player.Listener {
             override fun onRenderedFirstFrame() {
                 super.onRenderedFirstFrame()
                 binding.clPlayerContainer.animate().alpha(1f).setDuration(50).start()
@@ -74,42 +66,33 @@ class HongVideoPlayerView @JvmOverloads constructor(
                         clearPlayer()
                         option.onError()
                     }
-
                     Player.STATE_ENDED -> {
                         clearPlayer()
                         option.onEnd()
                     }
-
-                    Player.STATE_READY -> {
-                        option.onReady()
-                    }
-
-                    Player.STATE_BUFFERING -> {}
-                    else -> {}
+                    Player.STATE_READY -> option.onReady()
+                    Player.STATE_BUFFERING -> Unit
                 }
             }
         }
 
-        with(binding.vPlayer) {
-            this.background = option.radius.toMaterialShapeDrawable(context)
-            this.clipToOutline = true
+        binding.vPlayer.apply {
+            background = option.radius.toMaterialShapeDrawable(context)
+            clipToOutline = true
         }
         return this
     }
 
     @OptIn(UnstableApi::class)
     fun play() {
+        if (option.videoUrl.isNullOrEmpty()) return
+
         try {
-            if (option.videoUrl.isNullOrEmpty()) {
-                return
-            }
             binding.clPlayerContainer.alpha = 0f
 
             videoPlayer = ExoPlayer.Builder(context).build().apply {
                 volume = 0f
-                playerListener?.let {
-                    addListener(it)
-                }
+                playerListener?.let { addListener(it) }
             }
 
             videoSurfaceView = binding.vPlayer.apply {
@@ -125,8 +108,7 @@ class HongVideoPlayerView @JvmOverloads constructor(
                 videoPlayer?.playWhenReady = true
             }
 
-            this.isShowPlayer = true
-
+            isShowPlayer = true
         } catch (e: Exception) {
             e.printStackTrace()
             clearPlayer()
@@ -134,18 +116,17 @@ class HongVideoPlayerView @JvmOverloads constructor(
     }
 
     fun clearPlayer() {
-        videoPlayer?.playWhenReady = false
+        videoPlayer?.run {
+            playWhenReady = false
+            pause()
+            stop()
+            clearMediaItems()
+            playerListener?.let { removeListener(it) }
+            release()
+        }
         videoSurfaceView?.onPause()
-        videoPlayer?.pause()
-        videoPlayer?.stop()
-        videoPlayer?.clearMediaItems()
-        playerListener?.let { videoPlayer?.removeListener(it) }
-        videoPlayer?.release()
-
-        this.videoPlayer = null
-        this.videoSurfaceView = null
-
-        this.isShowPlayer = false
+        videoPlayer = null
+        videoSurfaceView = null
+        isShowPlayer = false
     }
-
 }

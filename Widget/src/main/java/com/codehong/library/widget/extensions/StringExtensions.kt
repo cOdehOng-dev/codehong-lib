@@ -159,3 +159,13 @@ fun SpannableString.setTextSpan(
 
     return result
 }
+
+fun String?.aspectRatio(): Float {
+    if (this.isNullOrEmpty()) return 0f
+    val parts = this.split(":")
+    return if (parts.size == 2) {
+        parts[0].toFloat() / parts[1].toFloat()
+    } else {
+        1f / 1f
+    }
+}

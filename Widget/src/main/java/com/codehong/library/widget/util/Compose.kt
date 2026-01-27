@@ -3,6 +3,9 @@ package com.codehong.library.widget.util
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
@@ -156,24 +159,26 @@ fun HongWidgetContainer(
     option: HongWidgetCommonOption,
     childCompose: @Composable () -> Unit,
 ) {
-    if (option.click == null) {
-        HongWidgetNoneClickContainer(option, childCompose)
+    val remOption by remember { mutableStateOf(option) }
+
+    if (remOption.click == null) {
+        HongWidgetNoneClickContainer(remOption, childCompose)
         return
     }
     Box(
         modifier = Modifier
-            .hongSpacing(option.margin)
-            .hongWidth(option.width)
-            .hongHeight(option.height)
+            .hongSpacing(remOption.margin)
+            .hongWidth(remOption.width)
+            .hongHeight(remOption.height)
             .hongBackground(
-                color = option.backgroundColorHex,
-                border = option.border,
-                shadow = option.shadow,
-                radius = option.radius,
-                useShapeCircle = option.useShapeCircle,
+                color = remOption.backgroundColorHex,
+                border = remOption.border,
+                shadow = remOption.shadow,
+                radius = remOption.radius,
+                useShapeCircle = remOption.useShapeCircle,
             )
-            .hongSpacing(option.padding)
-            .disableRippleClickable { option.click?.invoke(option) },
+            .hongSpacing(remOption.padding)
+            .disableRippleClickable { remOption.click?.invoke(remOption) },
         contentAlignment = Alignment.Center
     ) {
         childCompose()

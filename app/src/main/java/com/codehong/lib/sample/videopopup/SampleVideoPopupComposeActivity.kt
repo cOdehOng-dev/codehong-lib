@@ -9,13 +9,13 @@ import com.codehong.lib.sample.base.BaseSampleComposeActivity
 import com.codehong.library.widget.R
 import com.codehong.library.widget.button.text.HongButtonTextBuilder
 import com.codehong.library.widget.button.text.HongButtonTextCompose
+import com.codehong.library.widget.extensions.applyStatusBarColor
 import com.codehong.library.widget.player.HongVideoPlayerBuilder
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.util.HongToastUtil
-import com.codehong.library.widget.util.applyStatusBarColor
 import com.codehong.library.widget.videopopup.HongVideoPopupBuilder
 import com.codehong.library.widget.videopopup.HongVideoPopupCompose
 import com.codehong.library.widget.videopopup.HongVideoPopupManager

@@ -12,17 +12,7 @@ class HongVideoPopupBuilder : HongWidgetCommonBuilder<HongVideoPopupOption, Hong
 
     fun videoPlayerOption(videoPlayerOption: HongVideoPlayerOption?) = apply {
         option.videoPlayerOption = videoPlayerOption ?: HongVideoPlayerBuilder()
-            .radius(
-                HongRadiusInfo(
-                    all = HongVideoPlayerOption.DEFAULT_ALL_RADIUS,
-                    top = HongVideoPlayerOption.DEFAULT_TOP_RADIUS,
-                    bottom = HongVideoPlayerOption.DEFAULT_BOTTOM_RADIUS,
-                    topLeft = HongVideoPlayerOption.DEFAULT_TOP_LEFT_RADIUS,
-                    topRight = HongVideoPlayerOption.DEFAULT_TOP_RIGHT_RADIUS,
-                    bottomLeft = HongVideoPlayerOption.DEFAULT_BOTTOM_LEFT_RADIUS,
-                    bottomRight = HongVideoPlayerOption.DEFAULT_BOTTOM_RIGHT_RADIUS
-                )
-            )
+            .radius(HongRadiusInfo())
             .applyOption()
     }
 

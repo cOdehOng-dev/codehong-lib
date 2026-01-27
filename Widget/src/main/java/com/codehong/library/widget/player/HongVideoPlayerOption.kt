@@ -1,7 +1,6 @@
 package com.codehong.library.widget.player
 
 import com.codehong.library.widget.HongWidgetCommonOption
-
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -14,44 +13,20 @@ data class HongVideoPlayerOption(
     override val type: HongWidgetType = HongWidgetType.VIDEO_PLAYER
 ) : HongWidgetCommonOption {
 
-    companion object {
-        const val DEFAULT_ALL_RADIUS = 0
-        const val DEFAULT_TOP_RADIUS = 0
-        const val DEFAULT_BOTTOM_RADIUS = 0
-        const val DEFAULT_TOP_LEFT_RADIUS = 0
-        const val DEFAULT_TOP_RIGHT_RADIUS = 0
-        const val DEFAULT_BOTTOM_LEFT_RADIUS = 0
-        const val DEFAULT_BOTTOM_RIGHT_RADIUS = 0
-    }
-
     override var isValidComponent: Boolean = true
-
     override var width: Int = HongLayoutParam.MATCH_PARENT.value
     override var height: Int = HongLayoutParam.WRAP_CONTENT.value
-    override var margin: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
-    override var padding: HongSpacingInfo = HongSpacingInfo(0f, 0f, 0f, 0f)
+    override var margin: HongSpacingInfo = HongSpacingInfo()
+    override var padding: HongSpacingInfo = HongSpacingInfo()
     override var click: ((HongWidgetCommonOption) -> Unit)? = null
-
-    override var radius: HongRadiusInfo = HongRadiusInfo(
-        all = DEFAULT_ALL_RADIUS,
-        top = DEFAULT_TOP_RADIUS,
-        bottom = DEFAULT_BOTTOM_RADIUS,
-        topLeft = DEFAULT_TOP_LEFT_RADIUS,
-        topRight = DEFAULT_TOP_RIGHT_RADIUS,
-        bottomLeft = DEFAULT_BOTTOM_LEFT_RADIUS,
-        bottomRight = DEFAULT_BOTTOM_RIGHT_RADIUS
-    )
-
+    override var radius: HongRadiusInfo = HongRadiusInfo()
     override var border: HongBorderInfo = HongBorderInfo()
-
     override var shadow: HongShadowInfo = HongShadowInfo()
-
     override var backgroundColorHex: String = HongColor.TRANSPARENT.hex
     override var useShapeCircle: Boolean = false
 
     var videoUrl: String? = null
     var ratio: String? = null
-
     var onPlayVideo: () -> Unit = {}
     var onRenderingFinish: () -> Unit = {}
     var onReady: () -> Unit = {}
@@ -62,83 +37,53 @@ data class HongVideoPlayerOption(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as HongVideoPlayerOption
-
-        if (type != other.type) return false
-        if (isValidComponent != other.isValidComponent) return false
-        if (width != other.width) return false
-        if (height != other.height) return false
-        if (margin != other.margin) return false
-        if (padding != other.padding) return false
-        if (click != other.click) return false
-        if (radius != other.radius) return false
-        if (border != other.border) return false
-        if (shadow != other.shadow) return false
-        if (backgroundColorHex != other.backgroundColorHex) return false
-        if (useShapeCircle != other.useShapeCircle) return false
-        if (videoUrl != other.videoUrl) return false
-        if (ratio != other.ratio) return false
-        if (onPlayVideo != other.onPlayVideo) return false
-        if (onRenderingFinish != other.onRenderingFinish) return false
-        if (onReady != other.onReady) return false
-        if (onBuffering != other.onBuffering) return false
-        if (onEnd != other.onEnd) return false
-        if (onError != other.onError) return false
-        if (onPlayerReference != other.onPlayerReference) return false
-
-        return true
+        if (other !is HongVideoPlayerOption) return false
+        return type == other.type &&
+            isValidComponent == other.isValidComponent &&
+            width == other.width &&
+            height == other.height &&
+            margin == other.margin &&
+            padding == other.padding &&
+            click == other.click &&
+            radius == other.radius &&
+            border == other.border &&
+            shadow == other.shadow &&
+            backgroundColorHex == other.backgroundColorHex &&
+            useShapeCircle == other.useShapeCircle &&
+            videoUrl == other.videoUrl &&
+            ratio == other.ratio &&
+            onPlayVideo == other.onPlayVideo &&
+            onRenderingFinish == other.onRenderingFinish &&
+            onReady == other.onReady &&
+            onBuffering == other.onBuffering &&
+            onEnd == other.onEnd &&
+            onError == other.onError &&
+            onPlayerReference == other.onPlayerReference
     }
 
-    override fun hashCode(): Int {
-        var result = type.hashCode()
-        result = 31 * result + isValidComponent.hashCode()
-        result = 31 * result + width
-        result = 31 * result + height
-        result = 31 * result + margin.hashCode()
-        result = 31 * result + padding.hashCode()
-        result = 31 * result + (click?.hashCode() ?: 0)
-        result = 31 * result + radius.hashCode()
-        result = 31 * result + border.hashCode()
-        result = 31 * result + shadow.hashCode()
-        result = 31 * result + backgroundColorHex.hashCode()
-        result = 31 * result + useShapeCircle.hashCode()
-        result = 31 * result + (videoUrl?.hashCode() ?: 0)
-        result = 31 * result + (ratio?.hashCode() ?: 0)
-        result = 31 * result + onPlayVideo.hashCode()
-        result = 31 * result + onRenderingFinish.hashCode()
-        result = 31 * result + onReady.hashCode()
-        result = 31 * result + onBuffering.hashCode()
-        result = 31 * result + onEnd.hashCode()
-        result = 31 * result + onError.hashCode()
-        result = 31 * result + onPlayerReference.hashCode()
-        return result
-    }
+    override fun hashCode(): Int = listOf(
+        type, isValidComponent, width, height, margin, padding, click,
+        radius, border, shadow, backgroundColorHex, useShapeCircle,
+        videoUrl, ratio, onPlayVideo, onRenderingFinish, onReady,
+        onBuffering, onEnd, onError, onPlayerReference
+    ).fold(0) { acc, value -> 31 * acc + (value?.hashCode() ?: 0) }
 
-    override fun toString(): String {
-        return "HongVideoPlayerOption(" +
-                "type=$type, " +
-                "isValidComponent=$isValidComponent, " +
-                "width=$width, " +
-                "height=$height, " +
-                "margin=$margin, " +
-                "padding=$padding, " +
-                "click=$click, " +
-                "radius=$radius, " +
-                "border=$border, " +
-                "shadow=$shadow, " +
-                "backgroundColorHex='$backgroundColorHex', " +
-                "useShapeCircle=$useShapeCircle, " +
-                "videoUrl=$videoUrl, " +
-                "ratio=$ratio, " +
-                "onPlayVideo=$onPlayVideo, " +
-                "onRenderingFinish=$onRenderingFinish, " +
-                "onReady=$onReady, " +
-                "onBuffering=$onBuffering, " +
-                "onEnd=$onEnd, " +
-                "onError=$onError, " +
-                "onPlayerReference=$onPlayerReference" +
-                ")"
+    override fun toString(): String = buildString {
+        append("HongVideoPlayerOption(")
+        append("type=$type, ")
+        append("isValidComponent=$isValidComponent, ")
+        append("width=$width, ")
+        append("height=$height, ")
+        append("margin=$margin, ")
+        append("padding=$padding, ")
+        append("click=$click, ")
+        append("radius=$radius, ")
+        append("border=$border, ")
+        append("shadow=$shadow, ")
+        append("backgroundColorHex='$backgroundColorHex', ")
+        append("useShapeCircle=$useShapeCircle, ")
+        append("videoUrl=$videoUrl, ")
+        append("ratio=$ratio")
+        append(")")
     }
 }

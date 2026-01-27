@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import com.codehong.library.widget.extensions.safeLaunch
 
 object PermissionManager {
 
