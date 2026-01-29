@@ -5,9 +5,17 @@ val githubProperties = Properties().apply {
 }
 
 pluginManagement {
-    includeBuild("build-logic")
+    includeBuild("codehong-submodule-build-logic/build-logic")
+
     repositories {
-        google()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
     }
@@ -17,6 +25,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://repository.map.naver.com/archive/maven")
+
         maven {
             url = uri(githubProperties.getProperty("url"))
             credentials {
@@ -24,21 +34,18 @@ dependencyResolutionManagement {
                 password = githubProperties.getProperty("token")
             }
         }
-        maven("https://repository.map.naver.com/archive/maven")
     }
     versionCatalogs {
-//        create("libs") {
-//            from(files("gradle/libs.versions.toml"))
-//        }
+        create("libs") {
+            from(files("codehong-submodule-build-logic/gradle/libs.versions.toml"))
+        }
         create("codehonglibs") {
             from(files("gradle/codehonglibs.versions.toml"))
         }
     }
 }
 
-
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-rootProject.name = "code-hong-lib"
+rootProject.name = "codehong-lib"
 include(":app")
 include(":Widget")
+
