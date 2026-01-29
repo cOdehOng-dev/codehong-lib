@@ -48,4 +48,5 @@ dependencyResolutionManagement {
 rootProject.name = "codehong-lib"
 include(":app")
 include(":Widget")
+include(":network")
 

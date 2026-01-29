@@ -15,6 +15,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":network"))
     implementation(project(":Widget"))
 
     implementation(libs.androidx.core.ktx)

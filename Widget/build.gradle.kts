@@ -12,13 +12,13 @@ dependencies {
     implementation(libs.material)
     api(libs.timber)
 
-    api(libs.gson)
-    api(libs.bundles.retrofit)
-
-    api(platform(libs.okhttp.bom))
-    api(libs.okhttp)
-    api(libs.okhttp.logging.interceptor)
-    api(libs.okhttp.urlconnection)
+//    api(libs.gson)
+//    api(libs.bundles.retrofit)
+//
+//    api(platform(libs.okhttp.bom))
+//    api(libs.okhttp)
+//    api(libs.okhttp.logging.interceptor)
+//    api(libs.okhttp.urlconnection)
 
     api(libs.androidx.media3.exoplayer)
     api(libs.androidx.media3.ui)
