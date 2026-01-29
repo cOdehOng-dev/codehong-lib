@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
@@ -33,88 +34,10 @@ fun HongTextCompose(
         return
     }
 
-    var textDecoration: TextDecoration? = null
-    if (option.isEnableCancelLine || option.isEnableUnderLine) {
-        val decoList = mutableListOf<TextDecoration>()
-        if (option.isEnableUnderLine) {
-            decoList.add(TextDecoration.Underline)
-        }
-        if (option.isEnableCancelLine) {
-            decoList.add(TextDecoration.LineThrough)
-        }
-        textDecoration = TextDecoration.combine(decoList)
-    }
-
     val isLineBreakSyllable = option.lineBreak == HongTextLineBreak.SYLLABLE
-
-    var fullText = if (option.useNumberDecimal) {
-        val clean = (option.text ?: "").replace(",", "").trim()
-        when {
-            clean.toLongOrNull() != null -> DecimalFormat("#,###").format(clean.toLong())
-            clean.toDoubleOrNull() != null -> DecimalFormat("#,##0.##").format(clean.toDouble())
-            else -> option.text ?: ""
-        }
-    } else {
-        option.text ?: ""
-    }
-
-
-
-    if (isLineBreakSyllable) {
-        fullText = fullText.lineBreakSyllable() ?: ""
-    }
-
-    val text = buildAnnotatedString {
-        this.append(fullText)
-
-        if (option.spanTextBuilderList.isNullOrEmpty()) {
-            return@buildAnnotatedString
-        }
-
-        option.spanTextBuilderList?.forEach { builder ->
-            builder.injectOption(option)
-
-            val target = if (isLineBreakSyllable) {
-                builder.option.text?.lineBreakSyllable()
-            } else {
-                builder.option.text
-            }
-
-            target?.toRegex()?.findAll(fullText)?.forEach { matchResult ->
-                val startIndex = matchResult.range.first
-                val endIndex = matchResult.range.last + 1
-
-                var spanTextDecoration: TextDecoration? = null
-                if (builder.option.isEnableCancelLine || builder.option.isEnableUnderLine) {
-                    val decoList = mutableListOf<TextDecoration>()
-                    if (builder.option.isEnableCancelLine) {
-                        decoList.add(TextDecoration.LineThrough)
-                    }
-                    if (builder.option.isEnableUnderLine) {
-                        decoList.add(TextDecoration.Underline)
-                    }
-                    spanTextDecoration = TextDecoration.combine(decoList)
-                }
-
-                this.addStyle(
-                    style = SpanStyle(
-                        color = (
-                                builder.option.colorHex
-                                    ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
-                                ).toColor(),
-                        fontWeight = builder.option.fontWeight,
-                        fontSize = dpToSp(
-                            dp = (builder.option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size()).dp
-                        ),
-                        fontFamily = pretendardFontFamily,
-                        textDecoration = spanTextDecoration,
-                    ),
-                    start = startIndex,
-                    end = endIndex
-                )
-            }
-        }
-    }
+    val fullText = option.formatText(isLineBreakSyllable)
+    val annotatedText = buildStyledText(fullText, option, isLineBreakSyllable)
+    val textDecoration = createTextDecoration(option.isEnableUnderLine, option.isEnableCancelLine)
 
     if (option.hasMargin()) {
         Box(
@@ -128,70 +51,145 @@ fun HongTextCompose(
                 .hongWidth(option.width)
                 .hongHeight(option.height)
         ) {
-            Text(
-                modifier = Modifier
-                    .padding(
-                        start = option.padding.left.dp,
-                        top = option.padding.top.dp,
-                        end = option.padding.right.dp,
-                        bottom = option.padding.bottom.dp
-                    )
-                    .hongWidth(option.width)
-                    .hongHeight(option.height),
-                text = text,
-                fontFamily = pretendardFontFamily,
-                fontWeight = option.fontWeight,
-                fontSize = dpToSp(dp = (option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size())),
-                lineHeight = dpToSp(
-                    dp = option.lineHeight ?: HongTextOption.DEFAULT_TYPOGRAPHY.lineHeight()
-                ),
-                letterSpacing = (-0.05).sp,
-                textAlign = option.align.value,
-                maxLines = option.maxLines,
-                overflow = option.overflow.value,
+            HongStyledText(
+                option = option,
+                text = annotatedText,
                 textDecoration = textDecoration,
-                onTextLayout = onTextLayout ?: {},
-                style = TextStyle(
-                    color = (
-                            option.colorHex
-                                ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
-                            ).toColor(),
-                    platformStyle = PlatformTextStyle(includeFontPadding = false)
-                )
+                onTextLayout = onTextLayout
             )
         }
     } else {
-        Text(
-            modifier = Modifier
-                .padding(
-                    start = option.padding.left.dp,
-                    top = option.padding.top.dp,
-                    end = option.padding.right.dp,
-                    bottom = option.padding.bottom.dp
-                )
-                .hongWidth(option.width)
-                .hongHeight(option.height),
-            text = text,
-
-            fontFamily = pretendardFontFamily,
-            fontWeight = option.fontWeight,
-            fontSize = dpToSp(dp = (option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size())),
-            lineHeight = dpToSp(
-                dp = option.lineHeight ?: HongTextOption.DEFAULT_TYPOGRAPHY.lineHeight()
-            ),
-            letterSpacing = (-0.05).sp,
-            textAlign = option.align.value,
-            maxLines = option.maxLines,
-            overflow = option.overflow.value,
+        HongStyledText(
+            option = option,
+            text = annotatedText,
             textDecoration = textDecoration,
-            onTextLayout = onTextLayout ?: {},
-            style = TextStyle(
-                color = (
-                        option.colorHex
-                            ?: HongTextOption.DEFAULT_LABEL_COLOR.hex
-                        ).toColor(),
-                platformStyle = PlatformTextStyle(includeFontPadding = false)
+            onTextLayout = onTextLayout
+        )
+    }
+}
+
+@Composable
+private fun HongStyledText(
+    option: HongTextOption,
+    text: AnnotatedString,
+    textDecoration: TextDecoration?,
+    onTextLayout: ((TextLayoutResult) -> Unit)?
+) {
+    Text(
+        modifier = Modifier
+            .padding(
+                start = option.padding.left.dp,
+                top = option.padding.top.dp,
+                end = option.padding.right.dp,
+                bottom = option.padding.bottom.dp
             )
+            .hongWidth(option.width)
+            .hongHeight(option.height),
+        text = text,
+        fontFamily = pretendardFontFamily,
+        fontWeight = option.fontWeight,
+        fontSize = dpToSp(dp = (option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size())),
+        lineHeight = dpToSp(
+            dp = option.lineHeight ?: HongTextOption.DEFAULT_TYPOGRAPHY.lineHeight()
+        ),
+        letterSpacing = (-0.05).sp,
+        textAlign = option.align.value,
+        maxLines = option.maxLines,
+        overflow = option.overflow.value,
+        textDecoration = textDecoration,
+        onTextLayout = onTextLayout ?: {},
+        style = TextStyle(
+            color = (option.colorHex ?: HongTextOption.DEFAULT_LABEL_COLOR.hex).toColor(),
+            platformStyle = PlatformTextStyle(includeFontPadding = false)
+        )
+    )
+}
+
+private fun HongTextOption.formatText(isLineBreakSyllable: Boolean): String {
+    val formattedText = if (useNumberDecimal) {
+        val clean = (text ?: "").replace(",", "").trim()
+        when {
+            clean.toLongOrNull() != null -> DecimalFormat("#,###").format(clean.toLong())
+            clean.toDoubleOrNull() != null -> DecimalFormat("#,##0.##").format(clean.toDouble())
+            else -> text ?: ""
+        }
+    } else {
+        text ?: ""
+    }
+
+    return if (isLineBreakSyllable) {
+        formattedText.lineBreakSyllable() ?: ""
+    } else {
+        formattedText
+    }
+}
+
+private fun createTextDecoration(
+    isEnableUnderLine: Boolean,
+    isEnableCancelLine: Boolean
+): TextDecoration? {
+    if (!isEnableUnderLine && !isEnableCancelLine) {
+        return null
+    }
+
+    val decorations = buildList {
+        if (isEnableUnderLine) add(TextDecoration.Underline)
+        if (isEnableCancelLine) add(TextDecoration.LineThrough)
+    }
+
+    return TextDecoration.combine(decorations)
+}
+
+@Composable
+private fun buildStyledText(
+    fullText: String,
+    option: HongTextOption,
+    isLineBreakSyllable: Boolean
+): AnnotatedString {
+    return buildAnnotatedString {
+        append(fullText)
+
+        if (option.spanTextBuilderList.isNullOrEmpty()) {
+            return@buildAnnotatedString
+        }
+
+        option.spanTextBuilderList?.forEach { builder ->
+            builder.injectOption(option)
+            applySpanStyle(fullText, builder, isLineBreakSyllable)
+        }
+    }
+}
+
+@Composable
+private fun AnnotatedString.Builder.applySpanStyle(
+    fullText: String,
+    builder: HongTextBuilder,
+    isLineBreakSyllable: Boolean
+) {
+    val target = if (isLineBreakSyllable) {
+        builder.option.text?.lineBreakSyllable()
+    } else {
+        builder.option.text
+    } ?: return
+
+    val spanDecoration = createTextDecoration(
+        builder.option.isEnableUnderLine,
+        builder.option.isEnableCancelLine
+    )
+
+    target.toRegex().findAll(fullText).forEach { matchResult ->
+        addStyle(
+            style = SpanStyle(
+                color = (builder.option.colorHex ?: HongTextOption.DEFAULT_LABEL_COLOR.hex).toColor(),
+                fontWeight = builder.option.fontWeight,
+                fontSize = dpToSp(
+                    dp = (builder.option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size()).dp
+                ),
+                fontFamily = pretendardFontFamily,
+                textDecoration = spanDecoration
+            ),
+            start = matchResult.range.first,
+            end = matchResult.range.last + 1
         )
     }
 }

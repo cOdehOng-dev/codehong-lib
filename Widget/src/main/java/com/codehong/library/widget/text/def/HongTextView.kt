@@ -38,128 +38,123 @@ class HongTextView @JvmOverloads constructor(
             textView.lineBreakType = value
         }
 
-    fun set(
-        option: HongTextOption
-    ): HongTextView {
-        if (this.childCount > 0) {
-            this.removeAllViews()
-        }
-
-        this.setLayout(
-            option.width,
-            option.height
-        )?.apply {
-            this.leftMargin = context.dpToPx(option.margin.left)
-            this.topMargin = context.dpToPx(option.margin.top)
-            this.rightMargin = context.dpToPx(option.margin.right)
-            this.bottomMargin = context.dpToPx(option.margin.bottom)
-        }
-
-        textView.setLayout(
-            option.width,
-            option.height
-        )
-        this.addView(textView)
-        textView.setPadding(
-            context.dpToPx(option.padding.left),
-            context.dpToPx(option.padding.top),
-            context.dpToPx(option.padding.right),
-            context.dpToPx(option.padding.bottom)
-        )
+    fun set(option: HongTextOption): HongTextView {
+        prepareView()
+        setupLayout(option)
 
         if (!option.isValidComponent) {
             this.visibility = View.GONE
             return this
         }
 
+        applyTextStyle(option)
+        applyTextContent(option)
 
-        setColor(
-            (option.colorHex ?: HongTextOption.DEFAULT_LABEL_COLOR.hex).parseColor()
+        return this
+    }
+
+    private fun prepareView() {
+        if (childCount > 0) {
+            removeAllViews()
+        }
+    }
+
+    private fun setupLayout(option: HongTextOption) {
+        setLayout(option.width, option.height)?.apply {
+            leftMargin = context.dpToPx(option.margin.left)
+            topMargin = context.dpToPx(option.margin.top)
+            rightMargin = context.dpToPx(option.margin.right)
+            bottomMargin = context.dpToPx(option.margin.bottom)
+        }
+
+        textView.setLayout(option.width, option.height)
+        addView(textView)
+
+        textView.setPadding(
+            context.dpToPx(option.padding.left),
+            context.dpToPx(option.padding.top),
+            context.dpToPx(option.padding.right),
+            context.dpToPx(option.padding.bottom)
         )
+    }
+
+    private fun applyTextStyle(option: HongTextOption) {
+        setColor((option.colorHex ?: HongTextOption.DEFAULT_LABEL_COLOR.hex).parseColor())
         setTypography(
             option.size ?: HongTextOption.DEFAULT_TYPOGRAPHY.size(),
             option.fontType ?: HongTextOption.DEFAULT_TYPOGRAPHY.fontType(),
             option.lineHeight ?: HongTextOption.DEFAULT_TYPOGRAPHY.lineHeight()
         )
+
         textView.maxLines = option.maxLines
         textView.textAlignment = option.align.view
-
-        this.gravity = option.align.gravity
+        gravity = option.align.gravity
         textView.gravity = option.align.gravity
 
-        if (option.isEnableCancelLine) {
-            textView.paintFlags = textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        updatePaintFlag(Paint.STRIKE_THRU_TEXT_FLAG, option.isEnableCancelLine)
+        updatePaintFlag(Paint.UNDERLINE_TEXT_FLAG, option.isEnableUnderLine)
+
+        lineBreakType = option.lineBreak
+        option.overflow.truncateAt?.let { textView.ellipsize = it }
+    }
+
+    private fun updatePaintFlag(flag: Int, enable: Boolean) {
+        textView.paintFlags = if (enable) {
+            textView.paintFlags or flag
         } else {
-            textView.paintFlags = textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            textView.paintFlags and flag.inv()
         }
+    }
 
-        if (option.isEnableUnderLine) {
-            textView.paintFlags = textView.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-        } else {
-            textView.paintFlags = textView.paintFlags and Paint.UNDERLINE_TEXT_FLAG.inv()
-        }
-
-        this.lineBreakType = (option.lineBreak)
-
-        option.overflow.truncateAt?.let {
-            textView.ellipsize = it
-        }
-
-        val resultText = if (option.useNumberDecimal) {
-            option.text?.let {
-                val clean = it.replace(",", "").trim()
-                when {
-                    clean.toLongOrNull() != null -> DecimalFormat("#,###").format(clean.toLong())
-                    clean.toDoubleOrNull() != null -> DecimalFormat("#,##0.##").format(clean.toDouble())
-                    else -> it
-                }
-            }
-        } else {
-            option.text
-        }
+    private fun applyTextContent(option: HongTextOption) {
+        val resultText = formatNumberIfNeeded(option)
         textView.text = resultText
 
-        option.spanTextBuilderList?.let {
-            val spannableText = SpannableString(
-                if (lineBreakType == HongTextLineBreak.SYLLABLE) {
-                    resultText.lineBreakSyllable()
-                } else {
-                    resultText
-                }
-            )
-
-            it.forEach { spanOption ->
-                spanOption.injectOption(option)
-                spannableText.setTextSpan(
-                    context,
-                    spanOption,
-                    lineBreakType
-                )
-            }
-
-            textView.text = spannableText
+        option.spanTextBuilderList?.let { builders ->
+            textView.text = createSpannableText(resultText, builders, option)
         }
-        return this
+    }
+
+    private fun formatNumberIfNeeded(option: HongTextOption): String? {
+        if (!option.useNumberDecimal) {
+            return option.text
+        }
+
+        return option.text?.let { text ->
+            val clean = text.replace(",", "").trim()
+            when {
+                clean.toLongOrNull() != null -> DecimalFormat("#,###").format(clean.toLong())
+                clean.toDoubleOrNull() != null -> DecimalFormat("#,##0.##").format(clean.toDouble())
+                else -> text
+            }
+        }
+    }
+
+    private fun createSpannableText(
+        text: String?,
+        builders: List<HongTextBuilder>,
+        option: HongTextOption
+    ): SpannableString {
+        val processedText = if (lineBreakType == HongTextLineBreak.SYLLABLE) {
+            text.lineBreakSyllable()
+        } else {
+            text
+        }
+
+        return SpannableString(processedText).apply {
+            builders.forEach { builder ->
+                builder.injectOption(option)
+                setTextSpan(context, builder, lineBreakType)
+            }
+        }
     }
 
     fun setColor(@ColorInt colorInt: Int) {
-        setColor(
-            textView,
-            colorInt
-        )
-    }
-    private fun setColor(
-        textView: HongCustomText,
-        @ColorInt colorInt: Int
-    ) {
         textView.setTextColor(colorInt)
     }
 
-    fun setTypography(
-        typography: HongTypo = HongTextOption.DEFAULT_TYPOGRAPHY
-    ) {
+    fun setTypography(typography: HongTypo = HongTextOption.DEFAULT_TYPOGRAPHY) {
         setTypography(
-            this.textView,
             typography.size(),
             typography.fontType(),
             typography.lineHeight()
@@ -171,24 +166,10 @@ class HongTextView @JvmOverloads constructor(
         fontType: HongFont = HongTextOption.DEFAULT_TYPOGRAPHY.fontType(),
         lineHeight: Int = HongTextOption.DEFAULT_TYPOGRAPHY.lineHeight()
     ) {
-        setTypography(
-            this.textView,
-            size,
-            fontType,
-            lineHeight
-        )
-    }
-    private fun setTypography(
-        textView: HongCustomText,
-        size: Int = HongTextOption.DEFAULT_TYPOGRAPHY.size(),
-        fontType: HongFont = HongTextOption.DEFAULT_TYPOGRAPHY.fontType(),
-        lineHeight: Int = HongTextOption.DEFAULT_TYPOGRAPHY.lineHeight()
-    ) {
         textView.setTextSize(size, HongTextOption.DEFAULT_TYPOGRAPHY.size())
         textView.setTextFont(fontType, HongTextOption.DEFAULT_TYPOGRAPHY.fontType())
 
         val fontLineHeight = textView.paint.getFontMetrics(textView.paint.fontMetrics)
-
         val figmaLineHeight = context.dpToFloatPx(lineHeight)
 
         textView.setLineSpacing(0f, figmaLineHeight / fontLineHeight)
