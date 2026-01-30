@@ -46,6 +46,7 @@ enum class HongWidgetType(
     GRID_DRAG_AND_DROP("GridDragAndDrop", false),
     SCROLL_FADE_ANIM_LAYOUT("ScrollFadeAnimLayout", false),
     LIQUID_GLASS("LiquidGlass", false),
+    PROGRESS("Progress", false),
     NO_VALUE("no_value");
 
     companion object {

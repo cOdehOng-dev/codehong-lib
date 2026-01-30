@@ -50,6 +50,7 @@ import com.codehong.lib.sample.picker.OptionPickerActivity
 import com.codehong.lib.sample.picker.SamplePickerComposeActivity
 import com.codehong.lib.sample.player.SampleVideoPlayerActivity
 import com.codehong.lib.sample.playground.PlaygroundActivity
+import com.codehong.lib.sample.progress.SampleProgressActivity
 import com.codehong.lib.sample.tab.flow.SampleTabFlowActivity
 import com.codehong.lib.sample.tab.scroll.SampleTabScrollActivity
 import com.codehong.lib.sample.tab.segment.SampleTabSegmentActivity
@@ -761,6 +762,17 @@ fun MainScreen(
                                                 putExtra(
                                                     SampleConst.WIDGET_TYPE,
                                                     HongWidgetType.LIQUID_GLASS.value
+                                                )
+                                                activity.startActivity(this)
+                                            }
+                                        }
+
+
+                                        HongWidgetType.PROGRESS -> {
+                                            Intent(activity, SampleProgressActivity::class.java).apply {
+                                                putExtra(
+                                                    SampleConst.WIDGET_TYPE,
+                                                    HongWidgetType.PROGRESS.value
                                                 )
                                                 activity.startActivity(this)
                                             }
