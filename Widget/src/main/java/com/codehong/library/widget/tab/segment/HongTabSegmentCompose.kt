@@ -1,7 +1,6 @@
 package com.codehong.library.widget.tab.segment
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
@@ -24,6 +23,7 @@ import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.def.HongTextBuilder
 import com.codehong.library.widget.text.def.HongTextCompose
 
@@ -38,8 +38,9 @@ fun HongTabSegmentCompose(
 
     var selectedIndex by remember { mutableIntStateOf(option.initialSelectIndex) }
     val indicatorOffset by animateDpAsState(
-        targetValue = (selectedIndex * 100).dp,
-        animationSpec = tween(durationMillis = 300)
+        targetValue = (selectedIndex * option.tabWidth).dp,
+        animationSpec = tween(durationMillis = 300),
+        label = "indicatorOffset"
     )
 
     Box(
@@ -53,48 +54,27 @@ fun HongTabSegmentCompose(
                 .hongSpacing(option.margin)
                 .hongBackground(
                     color = option.backgroundColorHex,
-                    radius = option.radius,
+                    radius = option.radius
                 )
                 .hongSpacing(option.padding)
         ) {
-            // 인디케이터
-            Box(
-                modifier = Modifier
-                    .offset(x = indicatorOffset)
-                    .hongBackground(
-                        color = option.indicatorColorHex,
-                        radius = option.radius
-                    )
-                    .hongWidth(option.tabWidth)
-                    .hongHeight(option.tabHeight)
+            HongTabSegmentIndicator(
+                indicatorOffset = indicatorOffset,
+                option = option
             )
 
             Row {
                 option.tabTextList.forEachIndexed { index, text ->
-                    Box(
-                        modifier = Modifier
-                            .hongWidth(option.tabWidth)
-                            .hongHeight(option.tabHeight)
-                            .disableRippleClickable {
-                                selectedIndex = index
-                                option.tabClick?.invoke(index)
-                            },
-                        contentAlignment = Alignment.Center
-                    ) {
-                        HongTextCompose(
-                            option = HongTextBuilder()
-                                .text(text)
-                                .color(
-                                    if (selectedIndex == index) option.selectTextColorHex
-                                    else option.unselectTabColorHex
-                                )
-                                .typography(
-                                    if (selectedIndex == index) option.selectTypo
-                                    else option.unselectTypo
-                                )
-                                .applyOption()
-                        )
-                    }
+                    HongTabSegmentItem(
+                        option = option,
+                        index = index,
+                        text = text,
+                        isSelected = selectedIndex == index,
+                        onTabClick = { clickedIndex ->
+                            selectedIndex = clickedIndex
+                            option.tabClick?.invoke(clickedIndex)
+                        }
+                    )
                 }
             }
         }
@@ -102,41 +82,91 @@ fun HongTabSegmentCompose(
 }
 
 @Composable
+private fun HongTabSegmentIndicator(
+    indicatorOffset: androidx.compose.ui.unit.Dp,
+    option: HongTabSegmentOption
+) {
+    Box(
+        modifier = Modifier
+            .offset(x = indicatorOffset)
+            .hongBackground(
+                color = option.indicatorColorHex,
+                radius = option.radius
+            )
+            .hongWidth(option.tabWidth)
+            .hongHeight(option.tabHeight)
+    )
+}
+
+@Composable
+private fun HongTabSegmentItem(
+    option: HongTabSegmentOption,
+    index: Int,
+    text: String,
+    isSelected: Boolean,
+    onTabClick: (Int) -> Unit
+) {
+    val textColor = if (isSelected) {
+        option.selectTabTextColorHex
+    } else {
+        option.unselectTabColorHex
+    }
+
+    val textTypo = if (isSelected) {
+        option.selectTypo
+    } else {
+        option.unselectTypo
+    }
+
+    Box(
+        modifier = Modifier
+            .hongWidth(option.tabWidth)
+            .hongHeight(option.tabHeight)
+            .disableRippleClickable { onTabClick(index) },
+        contentAlignment = Alignment.Center
+    ) {
+        HongTextCompose(
+            option = HongTextBuilder()
+                .text(text)
+                .color(textColor)
+                .typography(textTypo)
+                .applyOption()
+        )
+    }
+}
+
 @Preview(showBackground = true)
-fun PreviewHongTabSegmentCompose() {
+@Composable
+private fun PreviewHongTabSegmentCompose() {
     val option = HongTabSegmentBuilder()
-        .margin(
-            HongSpacingInfo(
-                left = 16f,
-                top = 16f,
-                right = 16f,
-                bottom = 16f
-            )
-        )
-        .padding(
-            HongSpacingInfo(
-                left = 4f,
-                top = 4f,
-                right = 4f,
-                bottom = 4f
-            )
-        )
-        .radius(
-            HongRadiusInfo(
-                topLeft = 24,
-                topRight = 24,
-                bottomLeft = 24,
-                bottomRight = 24
-            )
-        )
+        .margin(HongSpacingInfo(left = 16f, top = 16f, right = 16f, bottom = 16f))
+        .padding(HongSpacingInfo(left = 4f, top = 4f, right = 4f, bottom = 4f))
+        .radius(HongRadiusInfo(all = 24))
         .backgroundColor(HongColor.GRAY_10)
         .tabTextList(listOf("추천", "계좌", "연락처"))
-        .onTabClick {
-            Log.d("TAG", "selected tab index: $it")
-        }
         .applyOption()
 
-    HongTabSegmentCompose(
-        option
-    )
+    HongTabSegmentCompose(option)
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun PreviewHongTabSegmentComposeCustomStyle() {
+    val option = HongTabSegmentBuilder()
+        .margin(HongSpacingInfo(left = 16f, top = 16f, right = 16f, bottom = 16f))
+        .padding(HongSpacingInfo(left = 4f, top = 4f, right = 4f, bottom = 4f))
+        .radius(HongRadiusInfo(all = 12))
+        .backgroundColor(HongColor.GRAY_20)
+        .indicatorColor(HongColor.MAIN_ORANGE_100)
+        .selectTabTextColor(HongColor.WHITE_100)
+        .unselectTabTextColor(HongColor.GRAY_50)
+        .selectTypo(HongTypo.BODY_14_B)
+        .unselectTypo(HongTypo.BODY_14)
+        .tabWidth(80)
+        .tabHeight(36)
+        .tabTextList(listOf("전체", "진행중", "완료"))
+        .initialSelectIndex(1)
+        .applyOption()
+
+    HongTabSegmentCompose(option)
 }

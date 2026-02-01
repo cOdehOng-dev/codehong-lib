@@ -19,30 +19,36 @@ class HongTextBadgeView @JvmOverloads constructor(
     var option = HongTextBadgeOption()
         private set
 
-    fun set(
-        option: HongTextBadgeOption
-    ): HongTextBadgeView {
+    fun set(option: HongTextBadgeOption): HongTextBadgeView {
         this.option = option
+        applyLayout()
+        applyBackground()
+        applyText()
+        return this
+    }
 
-        setLayout(
-            option.width,
-            option.height
-        )?.apply {
-            this.leftMargin = context.dpToPx(option.margin.left)
-            this.topMargin = context.dpToPx(option.margin.top)
-            this.rightMargin = context.dpToPx(option.margin.right)
-            this.bottomMargin = context.dpToPx(option.margin.bottom)
+    private fun applyLayout() {
+        setLayout(option.width, option.height)?.apply {
+            leftMargin = context.dpToPx(option.margin.left)
+            topMargin = context.dpToPx(option.margin.top)
+            rightMargin = context.dpToPx(option.margin.right)
+            bottomMargin = context.dpToPx(option.margin.bottom)
         }
         hongPadding(option.padding)
+    }
+
+    private fun applyBackground() {
         hongBackground(
             backgroundColor = option.backgroundColorHex,
             border = option.border,
             radius = option.radius
         )
+    }
 
+    private fun applyText() {
         hongText {
             set(
-                HongTextBuilder()
+                option = HongTextBuilder()
                     .width(option.width)
                     .height(option.height)
                     .text(option.text)
@@ -52,7 +58,5 @@ class HongTextBadgeView @JvmOverloads constructor(
                     .applyOption()
             )
         }
-        return this
     }
-
 }

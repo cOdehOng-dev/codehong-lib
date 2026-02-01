@@ -29,11 +29,11 @@ class HongTabSegmentBuilder : HongWidgetCommonBuilder<HongTabSegmentOption, Hong
         option.indicatorColorHex = color
     }
 
-    fun selectTextColor(color: HongColor) = apply {
-        option.selectTextColorHex = color.hex
+    fun selectTabTextColor(color: HongColor) = apply {
+        option.selectTabTextColorHex = color.hex
     }
-    fun selectTextColor(color: String) = apply {
-        option.selectTextColorHex = color
+    fun selectTabTextColor(color: String) = apply {
+        option.selectTabTextColorHex = color
     }
 
     fun unselectTabTextColor(color: HongColor) = apply {
@@ -73,7 +73,7 @@ class HongTabSegmentBuilder : HongWidgetCommonBuilder<HongTabSegmentOption, Hong
             .tabTextList(inject.tabTextList)
             .initialSelectIndex(inject.initialSelectIndex)
             .indicatorColor(inject.indicatorColorHex)
-            .selectTextColor(inject.selectTextColorHex)
+            .selectTabTextColor(inject.selectTabTextColorHex)
             .unselectTabTextColor(inject.unselectTabColorHex)
             .tabWidth(inject.tabWidth)
             .tabHeight(inject.tabHeight)

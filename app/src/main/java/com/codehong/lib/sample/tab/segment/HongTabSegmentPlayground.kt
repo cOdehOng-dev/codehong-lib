@@ -176,11 +176,11 @@ class HongTabSegmentPlayground(
         PlaygroundManager.addColorOptionPreview(
             activity = activity,
             label = "인디케이터 텍스트 ",
-            colorHex = inject.selectTextColorHex
+            colorHex = inject.selectTabTextColorHex
         ) { selectColor ->
             inject = HongTabSegmentBuilder()
                 .copy(inject)
-                .selectTextColor(selectColor)
+                .selectTabTextColor(selectColor)
                 .applyOption()
             callback.invoke(inject)
         }

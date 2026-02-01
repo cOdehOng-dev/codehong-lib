@@ -47,7 +47,7 @@ data class HongTabSegmentOption(
     var initialSelectIndex: Int = 0
     var indicatorColorHex: String = HongColor.WHITE_100.hex
 
-    var selectTextColorHex: String = HongColor.BLACK_100.hex
+    var selectTabTextColorHex: String = HongColor.BLACK_100.hex
     var unselectTabColorHex: String = HongColor.GRAY_50.hex
 
     var selectTypo: HongTypo = HongTypo.BODY_15_B
@@ -80,7 +80,7 @@ data class HongTabSegmentOption(
         if (tabTextList != other.tabTextList) return false
         if (initialSelectIndex != other.initialSelectIndex) return false
         if (indicatorColorHex != other.indicatorColorHex) return false
-        if (selectTextColorHex != other.selectTextColorHex) return false
+        if (selectTabTextColorHex != other.selectTabTextColorHex) return false
         if (unselectTabColorHex != other.unselectTabColorHex) return false
         if (selectTypo != other.selectTypo) return false
         if (unselectTypo != other.unselectTypo) return false
@@ -107,7 +107,7 @@ data class HongTabSegmentOption(
         result = 31 * result + tabTextList.hashCode()
         result = 31 * result + initialSelectIndex
         result = 31 * result + indicatorColorHex.hashCode()
-        result = 31 * result + selectTextColorHex.hashCode()
+        result = 31 * result + selectTabTextColorHex.hashCode()
         result = 31 * result + unselectTabColorHex.hashCode()
         result = 31 * result + selectTypo.hashCode()
         result = 31 * result + unselectTypo.hashCode()
@@ -134,7 +134,7 @@ data class HongTabSegmentOption(
                 "tabTextList=$tabTextList, " +
                 "initialSelectIndex=$initialSelectIndex, " +
                 "indicatorColorHex='$indicatorColorHex', " +
-                "selectTextColorHex='$selectTextColorHex', " +
+                "selectTabTextColorHex='$selectTabTextColorHex', " +
                 "unselectTabColorHex='$unselectTabColorHex', " +
                 "selectTypo=$selectTypo, " +
                 "unselectTypo=$unselectTypo, " +

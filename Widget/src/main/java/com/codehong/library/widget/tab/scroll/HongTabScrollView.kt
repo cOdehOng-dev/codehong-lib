@@ -32,20 +32,14 @@ class HongTabScrollView @JvmOverloads constructor(
         private set
 
     private var selectedIndex: Int = 0
-    private var tabList: List<Any> = emptyList()
-    private var tabTitleList: List<String> = emptyList()
 
     init {
         isHorizontalScrollBarEnabled = false
         addView(container, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT))
     }
 
-    fun set(
-        option: HongTabScrollOption,
-    ): HongTabScrollView {
+    fun set(option: HongTabScrollOption): HongTabScrollView {
         this.option = option
-        this.tabList = option.tabList
-        this.tabTitleList = option.tabTextList
         this.selectedIndex = option.initialSelectIndex
 
         drawTabs()
@@ -57,110 +51,117 @@ class HongTabScrollView @JvmOverloads constructor(
     private fun drawTabs() {
         container.removeAllViews()
 
-        with(container) {
-            removeAllViews()
-            setLayout(
-                option.width,
-                option.height
-            )?.apply {
-                this.leftMargin = context.dpToPx(option.margin.left)
-                this.topMargin = context.dpToPx(option.margin.top)
-                this.rightMargin = context.dpToPx(option.margin.right)
-                this.bottomMargin = context.dpToPx(option.margin.bottom)
-            }
-            hongPadding(option.padding)
+        container.setLayout(option.width, option.height)?.apply {
+            leftMargin = context.dpToPx(option.margin.left)
+            topMargin = context.dpToPx(option.margin.top)
+            rightMargin = context.dpToPx(option.margin.right)
+            bottomMargin = context.dpToPx(option.margin.bottom)
         }
+        container.hongPadding(option.padding)
 
-        tabList.forEachIndexed { index, item ->
-            val tabView = createTabView(index)
-            container.addView(tabView)
+        option.tabList.forEachIndexed { index, _ ->
+            container.addView(createTabView(index))
         }
     }
 
     private fun createTabView(index: Int): View {
         val isSelected = selectedIndex == index
-        val tabTitle = tabTitleList.getOrNull(index) ?: ""
+        val isFirst = index == 0
+        val isLast = index == option.tabList.size - 1
+        val tabTitle = option.tabTextList.getOrElse(index) { "" }
 
-        val itemBinding =
-            HonglibItemScrollTabBinding.inflate(LayoutInflater.from(context), this, false)
+        val itemBinding = HonglibItemScrollTabBinding.inflate(
+            LayoutInflater.from(context),
+            this,
+            false
+        )
 
-        with(itemBinding.flContainer) {
-            hongBackground(
-                backgroundColor = if (isSelected) {
-                    option.selectBackgroundColorHex
-                } else {
-                    option.unselectBackgroundColorHex
-                },
-                border = HongBorderInfo(
-                    color = if (isSelected) {
-                        option.selectBorderColorHex
-                    } else {
-                        option.unselectBorderColorHex
-                    },
-                    width = option.unselectBorderWidth,
-                ),
-                radius = option.radius,
-            )
-            hongMargin(
-                HongSpacingInfo(
-                    left = if (index == 0) {
-                        0f
-                    } else {
-                        (option.tabBetweenPadding / 2).toFloat()
-                    },
-                    right = if (index == option.tabList.size - 1) {
-                        0f
-                    } else {
-                        (option.tabBetweenPadding / 2).toFloat()
-                    }
-                )
-            )
-            hongPadding(
-                padding = HongSpacingInfo(
-                    left = option.tabTextHorizontalPadding.toFloat(),
-                    top = option.tabTextVerticalPadding.toFloat(),
-                    right = option.tabTextHorizontalPadding.toFloat(),
-                    bottom = option.tabTextVerticalPadding.toFloat()
-                )
-            )
+        setupTabContainer(itemBinding, index, isSelected, isFirst, isLast)
+        setupTabText(itemBinding, tabTitle, isSelected)
 
-            setOnClickListener {
-                if (selectedIndex != index) {
-                    selectedIndex = index
-                    drawTabs()
-                    if (!isSelected) {
-                        scrollToSelectedTab(animated = true)
-                    }
-                    option.tabClick?.invoke(index, tabList[index])
-                }
-            }
+        return itemBinding.root
+    }
+
+    private fun setupTabContainer(
+        binding: HonglibItemScrollTabBinding,
+        index: Int,
+        isSelected: Boolean,
+        isFirst: Boolean,
+        isLast: Boolean
+    ) {
+        val backgroundColor = if (isSelected) {
+            option.selectBackgroundColorHex
+        } else {
+            option.unselectBackgroundColorHex
         }
 
+        val borderInfo = HongBorderInfo(
+            color = if (isSelected) option.selectBorderColorHex else option.unselectBorderColorHex,
+            width = if (isSelected) option.selectBorderWidth else option.unselectBorderWidth
+        )
 
-        itemBinding.vDummyTab.set(
+        val marginInfo = HongSpacingInfo(
+            left = if (isFirst) 0f else (option.tabBetweenPadding / 2).toFloat(),
+            right = if (isLast) 0f else (option.tabBetweenPadding / 2).toFloat()
+        )
+
+        val paddingInfo = HongSpacingInfo(
+            left = option.tabTextHorizontalPadding.toFloat(),
+            top = option.tabTextVerticalPadding.toFloat(),
+            right = option.tabTextHorizontalPadding.toFloat(),
+            bottom = option.tabTextVerticalPadding.toFloat()
+        )
+
+        with(binding.flContainer) {
+            hongBackground(
+                backgroundColor = backgroundColor,
+                border = borderInfo,
+                radius = option.radius
+            )
+            hongMargin(marginInfo)
+            hongPadding(paddingInfo)
+            setOnClickListener { onTabClicked(index) }
+        }
+    }
+
+    private fun setupTabText(
+        binding: HonglibItemScrollTabBinding,
+        tabTitle: String,
+        isSelected: Boolean
+    ) {
+        binding.vDummyTab.set(
             option = HongTextBuilder()
                 .text(tabTitle)
                 .typography(option.selectTabTextTypo)
                 .applyOption()
         )
 
-        itemBinding.vTab.set(
-            option = if (isSelected) {
-                HongTextBuilder()
-                    .text(tabTitle)
-                    .typography(option.selectTabTextTypo)
-                    .color(option.selectTabTextColorHex)
-                    .applyOption()
-            } else {
-                HongTextBuilder()
-                    .text(tabTitle)
-                    .typography(option.unselectTabTextTypo)
-                    .color(option.unselectTabTextColorHex)
-                    .applyOption()
-            }
-        )
+        val textOption = if (isSelected) {
+            HongTextBuilder()
+                .text(tabTitle)
+                .typography(option.selectTabTextTypo)
+                .color(option.selectTabTextColorHex)
+                .applyOption()
+        } else {
+            HongTextBuilder()
+                .text(tabTitle)
+                .typography(option.unselectTabTextTypo)
+                .color(option.unselectTabTextColorHex)
+                .applyOption()
+        }
 
-        return itemBinding.root
+        binding.vTab.set(option = textOption)
+    }
+
+    private fun onTabClicked(index: Int) {
+        if (selectedIndex == index) return
+
+        selectedIndex = index
+        drawTabs()
+        scrollToSelectedTab(animated = true)
+        option.tabList.getOrNull(index)?.let { item ->
+            option.tabClick?.invoke(index, item)
+        }
     }
 
     private fun scrollToSelectedTab(animated: Boolean) {
@@ -173,6 +174,10 @@ class HongTabScrollView @JvmOverloads constructor(
             } else {
                 scrollTo(scrollX, 0)
             }
-        }, 100)
+        }, SCROLL_DELAY_MS)
+    }
+
+    companion object {
+        private const val SCROLL_DELAY_MS = 100L
     }
 }

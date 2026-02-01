@@ -18,6 +18,7 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
 import com.codehong.library.widget.rule.typo.HongTypo
 import com.codehong.library.widget.text.def.HongTextBuilder
+import dagger.hilt.android.AndroidEntryPoint
 
 abstract class BaseSampleMixActivity : BaseActivity() {
 

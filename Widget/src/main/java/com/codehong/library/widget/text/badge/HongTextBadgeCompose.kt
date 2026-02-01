@@ -12,12 +12,10 @@ import com.codehong.library.widget.text.def.HongTextCompose
 import com.codehong.library.widget.util.HongWidgetContainer
 
 @Composable
-fun HongTextBadgeCompose(
-    option: HongTextBadgeOption
-) {
+fun HongTextBadgeCompose(option: HongTextBadgeOption) {
     HongWidgetContainer(option) {
         HongTextCompose(
-            HongTextBuilder()
+            option = HongTextBuilder()
                 .width(option.width)
                 .height(option.height)
                 .text(option.text)
@@ -29,33 +27,17 @@ fun HongTextBadgeCompose(
     }
 }
 
-@Composable
 @Preview(showBackground = true)
-fun PreviewHongTextBadgeCompose() {
+@Composable
+private fun PreviewHongTextBadgeCompose() {
     val option = HongTextBadgeBuilder()
-        .padding(
-            HongSpacingInfo(
-                top = 1.5f,
-                bottom = 1.5f,
-                left = 4f,
-                right = 4f
-            )
-        )
+        .padding(HongSpacingInfo(top = 1.5f, bottom = 1.5f, left = 4f, right = 4f))
         .text("모두 파랑파랑파랑해")
         .textColor(HongColor.PURPLE_100.hex)
         .textTypo(HongTypo.CONTENTS_12_B)
         .backgroundColor(HongColor.WHITE_100.hex)
-        .border(
-            HongBorderInfo(
-                color = "#dfb4fc",
-                width = 1
-            )
-        )
-        .radius(
-            HongRadiusInfo(
-                all = 6
-            )
-        )
+        .border(HongBorderInfo(color = "#dfb4fc", width = 1))
+        .radius(HongRadiusInfo(all = 6))
         .applyOption()
     HongTextBadgeCompose(option)
 }
