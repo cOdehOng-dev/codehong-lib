@@ -429,7 +429,7 @@ class PickerItem @JvmOverloads constructor(
         mPreviousScrollerY = 0
         var deltaY = mInitialFirstItemOffset - mCurrentFirstItemOffset
 
-        if (Math.abs(deltaY) > mItemHeight / 2) {
+        if (abs(deltaY) > mItemHeight / 2) {
             deltaY += if (deltaY > 0) {
                 -mItemHeight
             } else {
