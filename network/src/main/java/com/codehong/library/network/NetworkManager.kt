@@ -1,12 +1,16 @@
 package com.codehong.library.network
+
 import android.content.Context
 import com.codehong.library.network.debug.TimberConfig
 import com.codehong.library.network.debug.TimberUtil
 import com.google.gson.Gson
 import com.hongji.library.util.network.NetworkConfig
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
@@ -58,11 +62,12 @@ object NetworkManager {
         convertType: ConvertType = ConvertType.JSON,
         converters: List<Converter.Factory>? = null,
         gson: Gson? = null,
+        json: Json? = null,
         connectTimeout: Long? = null,
         readTimeout: Long? = null,
         writeTimeout: Long? = null,
     ): T {
-        val converter = getConverter(convertType, gson)
+        val converter = getConverter(convertType, gson, json)
 
         val builder =  getRetrofitBuilder(
             connectTimeout = connectTimeout,
@@ -83,12 +88,15 @@ object NetworkManager {
 
     fun getConverter(
         convertType: ConvertType,
-        gson: Gson? = null
+        gson: Gson? = null,
+        json: Json? = null
     ): Converter.Factory {
+        val jsonConfig = json ?: Json
         return when (convertType) {
             ConvertType.JSON -> GsonConverterFactory.create(gson ?: Gson())
             ConvertType.SCALARS -> ScalarsConverterFactory.create()
             ConvertType.XML -> SimpleXmlConverterFactory.create()
+            ConvertType.KOTLIN_SERIALIZATION_JSON -> jsonConfig.asConverterFactory("application/json".toMediaType())
         }
     }
 }
