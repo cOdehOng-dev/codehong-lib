@@ -18,10 +18,11 @@ import com.codehong.lib.sample.button.select.HongButtonSelectPlayground
 import com.codehong.lib.sample.button.text.HongButtonTextPlayground
 import com.codehong.lib.sample.calendar.CalendarPlayground
 import com.codehong.lib.sample.checkbox.HongCheckboxPlayground
-import com.codehong.lib.sample.header.close.HongHeaderClosePlayground
 import com.codehong.lib.sample.databinding.ActivityPlaygroundBinding
 import com.codehong.lib.sample.graph.HongGraphBarPlayground
 import com.codehong.lib.sample.graph.HongGraphLinePlayground
+import com.codehong.lib.sample.header.close.HongHeaderClosePlayground
+import com.codehong.lib.sample.header.icon.HongHeaderIconPlayground
 import com.codehong.lib.sample.icon.HongIconPlayground
 import com.codehong.lib.sample.image.HongImagePlayground
 import com.codehong.lib.sample.label.HongLabelPlayground
@@ -61,6 +62,8 @@ import com.codehong.library.widget.graph.bar.HongGraphBarCompose
 import com.codehong.library.widget.graph.line.HongGraphLineCompose
 import com.codehong.library.widget.header.close.HongHeaderCloseCompose
 import com.codehong.library.widget.header.close.HongHeaderCloseOption
+import com.codehong.library.widget.header.icon.HongHeaderIcon
+import com.codehong.library.widget.header.icon.HongHeaderIconOption
 import com.codehong.library.widget.icon.HongIconCompose
 import com.codehong.library.widget.icon.HongIconOption
 import com.codehong.library.widget.image.HongImageBuilder
@@ -216,6 +219,7 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.TEXT_UP_DOWN -> HongTextUpDownPlayground(this).preview()
             HongWidgetType.IMAGE -> HongImagePlayground(this).preview()
             HongWidgetType.HEADER_CLOSE -> HongHeaderClosePlayground(this).preview()
+            HongWidgetType.HEADER_ICON -> HongHeaderIconPlayground(this).preview()
             HongWidgetType.TEXT_FILED -> HongTextFieldPlayground(this).preview()
             HongWidgetType.TEXT_FIELD_UNDERLINE -> HongTextFieldUnderlinePlayground(this).preview()
             HongWidgetType.TEXT_FIELD_TIMER -> HongTextFieldTimerPlayground(this).preview()
@@ -289,6 +293,7 @@ class PlaygroundActivity : BaseActivity() {
                     HongWidgetType.TEXT_COUNT -> HongTextCountCompose(previewOption as HongTextCountOption)
                     HongWidgetType.IMAGE -> HongImageCompose(previewOption as HongImageOption)
                     HongWidgetType.HEADER_CLOSE -> HongHeaderCloseCompose(previewOption as HongHeaderCloseOption)
+                    HongWidgetType.HEADER_ICON -> HongHeaderIcon(previewOption as HongHeaderIconOption)
                     HongWidgetType.TEXT_FILED -> HongTextFieldCompose(previewOption as HongTextFieldOption)
                     HongWidgetType.TEXT_FIELD_UNDERLINE -> HongUnderlineTextFieldCompose(previewOption as HongTextFieldUnderlineOption)
                     HongWidgetType.TEXT_FIELD_TIMER -> HongTimerTextFieldCompose(previewOption as HongTextFieldTimerOption)
@@ -299,7 +304,6 @@ class PlaygroundActivity : BaseActivity() {
                     HongWidgetType.CALENDAR -> HongCalendarCompose(previewOption as HongCalendarOption)
                     HongWidgetType.HORIZONTAL_PAGER -> HongHorizontalPagerCompose(previewOption as HongHorizontalPagerOption) { item ->
                         (item as? String)
-                            ?.toString()
                             ?.takeIf { it.isNotEmpty() }
                             ?.let { imageUrl ->
                                 HongImageCompose(
