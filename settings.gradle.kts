@@ -1,5 +1,11 @@
 import java.util.Properties
 
+include(":architecture")
+
+
+include(":util")
+
+
 val githubProperties = Properties().apply {
     load(file("github.properties").inputStream())
 }

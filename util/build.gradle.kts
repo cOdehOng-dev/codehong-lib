@@ -5,17 +5,15 @@ plugins {
 }
 
 android {
-    namespace = "com.codehong.library.widget"
+    namespace = "com.codehong.library.util"
 }
 
 dependencies {
     implementation(libs.material)
-    api(libs.timber)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 
-    api(libs.androidx.media3.exoplayer)
-    api(libs.androidx.media3.ui)
-    api(libs.androidx.media3.exoplayer.hls)
-    api(libs.androidx.media3.datasource)
+    api(libs.timber)
     api(libs.threetenapb)
     api(libs.haze)
 }
