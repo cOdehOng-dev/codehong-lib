@@ -1,9 +1,10 @@
-package com.codehong.library.widget.header.close
+package com.codehong.library.widget.header.icon
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,8 +28,8 @@ import com.codehong.library.widget.text.def.HongTextBuilder
 import com.codehong.library.widget.text.def.HongTextCompose
 
 @Composable
-fun HongHeaderCloseCompose(
-    option: HongHeaderCloseOption
+fun HongHeaderIcon(
+    option: HongHeaderIconOption
 ) {
     Row(
         modifier = Modifier
@@ -38,7 +39,27 @@ fun HongHeaderCloseCompose(
             .hongBackground(option.backgroundColorHex),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Spacer(modifier = Modifier.size(40.dp))
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .padding(start = 8.dp)
+                .disableRippleClickable { option.onBackClick() },
+            contentAlignment = Alignment.Center
+        ) {
+            option.backIconRes?.let { iconRes ->
+                HongImageCompose(
+                    option = HongImageBuilder()
+                        .width(34)
+                        .height(34)
+                        .scaleType(HongScaleType.CENTER_CROP)
+                        .imageInfo(iconRes)
+                        .imageColor(option.backIconColorHex)
+                        .applyOption()
+                )
+            }
+        }
+
+//        Spacer(modifier = Modifier.size(56.dp))
 
         Box(
             modifier = Modifier
@@ -59,34 +80,19 @@ fun HongHeaderCloseCompose(
             )
         }
 
-        Box(
-            modifier = Modifier
-                .size(40.dp)
-                .disableRippleClickable { option.onCloseClick() },
-            contentAlignment = Alignment.Center
-        ) {
-            HongImageCompose(
-                option = HongImageBuilder()
-                    .width(20)
-                    .height(20)
-                    .scaleType(HongScaleType.CENTER_CROP)
-                    .imageInfo(R.drawable.honglib_ic_close)
-                    .imageColor(option.closeIconColorHex)
-                    .useShapeCircle(true)
-                    .applyOption()
-            )
-        }
+        Spacer(modifier = Modifier.size(40.dp))
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewHongCloseHeaderCompose() {
-    val option = HongHeaderCloseBuilder()
+fun PreviewHongHeaderIcon() {
+    val option = HongHeaderIconBuilder()
         .title("헤더 제목")
-        .titleTypo(HongTypo.BODY_16_B)
+        .titleTypo(HongTypo.BODY_18)
         .titleColor(HongColor.BLACK_100.hex)
-        .close {}
+        .backIcon(R.drawable.honglib_ic_arrow_left)
+        .onBack {}
         .applyOption()
-    HongHeaderCloseCompose(option)
+    HongHeaderIcon(option)
 }

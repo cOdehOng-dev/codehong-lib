@@ -28,8 +28,7 @@ fun HongCheckBoxCompose(
 ) {
     var isChecked by rememberSaveable(option.checkState) { mutableStateOf(option.checkState) }
     val isEnabled by rememberSaveable(option.enableState.isEnabled()) { mutableStateOf(option.enableState.isEnabled()) }
-
-
+    
     // 상태별 배경색
     val backgroundColor = when {
         !isEnabled -> HongColor.GRAY_20.hex

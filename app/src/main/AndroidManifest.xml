@@ -67,7 +67,8 @@
         <activity android:name=".calendar.SampleCalendarActivity"/>
         <activity android:name=".calendar.SampleCalendarComposeActivity"/>
 
-        <activity android:name=".closeheader.SampleCloseHeaderActivity"/>
+        <activity android:name=".header.close.SampleHeaderCloseActivity"/>
+        <activity android:name=".header.icon.SampleHeaderIconActivity"/>
         <activity android:name=".pager.SampleHorizontalPagerActivity"/>
         <activity android:name=".text.badge.SampleTextBadgeActivity"/>
         <activity android:name=".tab.scroll.SampleTabScrollActivity"/>

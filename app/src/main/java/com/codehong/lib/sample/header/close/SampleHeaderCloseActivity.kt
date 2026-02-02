@@ -1,4 +1,4 @@
-package com.codehong.lib.sample.closeheader
+package com.codehong.lib.sample.header.close
 
 import android.view.View
 import androidx.compose.runtime.Composable
@@ -9,7 +9,7 @@ import com.codehong.library.widget.header.close.HongHeaderCloseView
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
 
-class SampleCloseHeaderActivity : BaseSampleMixActivity() {
+class SampleHeaderCloseActivity : BaseSampleMixActivity() {
 
     private val option1 = HongHeaderCloseBuilder()
         .title("헤더 제목")
@@ -34,7 +34,7 @@ class SampleCloseHeaderActivity : BaseSampleMixActivity() {
     override fun optionViewList(): List<View> {
         return mutableListOf<View>().apply {
             optionList.forEach { option ->
-                add(HongHeaderCloseView(this@SampleCloseHeaderActivity).set(option))
+                add(HongHeaderCloseView(this@SampleHeaderCloseActivity).set(option))
             }
         }
     }

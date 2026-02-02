@@ -18,7 +18,7 @@ import com.codehong.lib.sample.button.select.HongButtonSelectPlayground
 import com.codehong.lib.sample.button.text.HongButtonTextPlayground
 import com.codehong.lib.sample.calendar.CalendarPlayground
 import com.codehong.lib.sample.checkbox.HongCheckboxPlayground
-import com.codehong.lib.sample.closeheader.HongCloseHeaderPlayground
+import com.codehong.lib.sample.header.close.HongHeaderClosePlayground
 import com.codehong.lib.sample.databinding.ActivityPlaygroundBinding
 import com.codehong.lib.sample.graph.HongGraphBarPlayground
 import com.codehong.lib.sample.graph.HongGraphLinePlayground
@@ -215,7 +215,7 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.TEXT_UNIT -> HongTextUnitPlayground(this).preview()
             HongWidgetType.TEXT_UP_DOWN -> HongTextUpDownPlayground(this).preview()
             HongWidgetType.IMAGE -> HongImagePlayground(this).preview()
-            HongWidgetType.HEADER_CLOSE -> HongCloseHeaderPlayground(this).preview()
+            HongWidgetType.HEADER_CLOSE -> HongHeaderClosePlayground(this).preview()
             HongWidgetType.TEXT_FILED -> HongTextFieldPlayground(this).preview()
             HongWidgetType.TEXT_FIELD_UNDERLINE -> HongTextFieldUnderlinePlayground(this).preview()
             HongWidgetType.TEXT_FIELD_TIMER -> HongTextFieldTimerPlayground(this).preview()

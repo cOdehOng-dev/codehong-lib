@@ -12,6 +12,7 @@ enum class HongWidgetType(
     TEXT_COUNT("TextCount", true),
     IMAGE("Image", true),
     HEADER_CLOSE("HeaderClose", true),
+    HEADER_ICON("HeaderIcon", true),
     TEXT_FILED("TextField", true),
     TEXT_FIELD_UNDERLINE("TextFieldUnderline", true),
     TEXT_FIELD_TIMER("TextFieldTimer", true),

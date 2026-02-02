@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.HongDivider
 import com.codehong.library.widget.calendar.model.HongCalendarDayOfWeekLangType
+import com.codehong.library.widget.calendar.model.HongCalendarDaySelectionState
 import com.codehong.library.widget.calendar.model.HongCalendarInitialSelectedInfo
 import com.codehong.library.widget.calendar.model.HongCalendarSelectDate
 import com.codehong.library.widget.calendar.model.HongCalendarSelectedType
@@ -44,7 +45,6 @@ import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.DateTimeFormatter
-
 
 private val LocalOption = compositionLocalOf { HongCalendarOption() }
 private val LocalSelectDate = compositionLocalOf { HongCalendarSelectDate() }
@@ -69,54 +69,24 @@ fun HongCalendarCompose(
     ) {
         HongWidgetContainer(option) {
             Column {
-                // 요일 헤더
                 DayOfWeekHeaderContent()
 
-                // 달력 본문
                 LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     itemsIndexed(months) { i, month ->
-                        Column(
-                            modifier = Modifier
-                                .padding(
-                                    top = if (i == 0) {
-                                        option.bottomSpacingDayOfWeek.dp
-                                    } else {
-                                        0.dp
-                                    },
-                                    bottom = option.bottomSpacingMonth.dp
-                                )
-                        ) {
-                            // 년, 월 표기
-                            // ex) 2025.07
-                            YearMonthContent(
-                                month.format(
-                                    DateTimeFormatter.ofPattern(
-                                        option.yearMonthPattern
-                                    )
-                                )
-                            )
-
-                            DateContent(
-                                month,
-                                onSelectStartDate = {
-                                    startDate = it
-                                    option.onSelected?.invoke(
-                                        startDate,
-                                        endDate
-                                    )
-                                },
-                                onSelectEndDate = {
-                                    endDate = it
-                                    option.onSelected?.invoke(
-                                        startDate,
-                                        endDate
-                                    )
-                                }
-                            )
-                        }
+                        MonthContent(
+                            month = month,
+                            isFirstMonth = i == 0,
+                            onSelectStartDate = { date ->
+                                startDate = date
+                                option.onSelected?.invoke(startDate, endDate)
+                            },
+                            onSelectEndDate = { date ->
+                                endDate = date
+                                option.onSelected?.invoke(startDate, endDate)
+                            }
+                        )
                     }
                 }
             }
@@ -136,15 +106,14 @@ private fun DayOfWeekHeaderContent() {
     ) {
         option.dayOfWeekLangType.dayOfWeekList.forEach { day ->
             Box(
-                modifier = Modifier
-                    .weight(1f),
+                modifier = Modifier.weight(1f),
                 contentAlignment = Alignment.Center
             ) {
                 HongTextCompose(
                     option = HongTextBuilder()
                         .copy(option.dayOfWeekTextOption)
                         .text(day)
-                        .applyOption(),
+                        .applyOption()
                 )
             }
         }
@@ -155,26 +124,41 @@ private fun DayOfWeekHeaderContent() {
     )
 }
 
-/**
- * 년, 월 표기
- * ex) 2025.07
- */
 @Composable
-private fun YearMonthContent(
-    month: String
+private fun MonthContent(
+    month: LocalDate,
+    isFirstMonth: Boolean,
+    onSelectStartDate: (LocalDate?) -> Unit,
+    onSelectEndDate: (LocalDate?) -> Unit
 ) {
+    val option = LocalOption.current
+
+    Column(
+        modifier = Modifier.padding(
+            top = if (isFirstMonth) option.bottomSpacingDayOfWeek.dp else 0.dp,
+            bottom = option.bottomSpacingMonth.dp
+        )
+    ) {
+        YearMonthContent(
+            month.format(DateTimeFormatter.ofPattern(option.yearMonthPattern))
+        )
+
+        DateContent(
+            month = month,
+            onSelectStartDate = onSelectStartDate,
+            onSelectEndDate = onSelectEndDate
+        )
+    }
+}
+
+@Composable
+private fun YearMonthContent(month: String) {
     val option = LocalOption.current
     HongTextCompose(
         option = HongTextBuilder()
             .copy(option.yearMonthTextOption)
             .width(HongLayoutParam.MATCH_PARENT.value)
-            .padding(
-                HongSpacingInfo(
-                    left = 11f,
-                    right = 11f,
-                    bottom = 8f
-                )
-            )
+            .padding(HongSpacingInfo(left = 11f, right = 11f, bottom = 8f))
             .text(month)
             .applyOption()
     )
@@ -186,164 +170,237 @@ private fun DateContent(
     onSelectStartDate: (LocalDate?) -> Unit,
     onSelectEndDate: (LocalDate?) -> Unit
 ) {
+    val option = LocalOption.current
+    val paddedDays = generateMonthDays(month)
+
+    paddedDays.chunked(7).forEach { week ->
+        WeekRow(
+            week = week,
+            onSelectStartDate = onSelectStartDate,
+            onSelectEndDate = onSelectEndDate
+        )
+    }
+}
+
+private fun generateMonthDays(month: LocalDate): List<LocalDate?> {
+    val daysInMonth = YearMonth.from(month).lengthOfMonth()
+    val firstDayOfWeek = month.withDayOfMonth(1).dayOfWeek.value % 7
+    val days = List(firstDayOfWeek) { null } + (1..daysInMonth).map { month.withDayOfMonth(it) }
+    val totalCells = ((days.size + 6) / 7) * 7
+    return days + List(totalCells - days.size) { null }
+}
+
+@Composable
+private fun WeekRow(
+    week: List<LocalDate?>,
+    onSelectStartDate: (LocalDate?) -> Unit,
+    onSelectEndDate: (LocalDate?) -> Unit
+) {
+    val option = LocalOption.current
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = option.bottomSpacingWeek.dp)
+    ) {
+        week.forEach { day ->
+            Box(
+                modifier = Modifier.weight(1f),
+                contentAlignment = Alignment.Center
+            ) {
+                day?.let {
+                    DayCell(
+                        day = it,
+                        onSelectStartDate = onSelectStartDate,
+                        onSelectEndDate = onSelectEndDate
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun DayCell(
+    day: LocalDate,
+    onSelectStartDate: (LocalDate?) -> Unit,
+    onSelectEndDate: (LocalDate?) -> Unit
+) {
     val today = LocalDate.now()
     val option = LocalOption.current
     val selectDate = LocalSelectDate.current
     val startDate = selectDate.startDate
     val endDate = selectDate.endDate
 
-    val daysInMonth = YearMonth.from(month).lengthOfMonth()
-    val firstDayOfWeek = month.withDayOfMonth(1).dayOfWeek.value % 7 // 요일 시작 위치
-    val days = List(firstDayOfWeek) { null } + (1..daysInMonth).map {
-        month.withDayOfMonth(it)
+    val isPast = day.isBefore(today)
+    val isToday = day == today
+    val isStart = day == startDate
+    val isEnd = day == endDate
+    val isHoliday = checkIsHoliday(day, option.holidayList)
+
+    val selectionState = determineSelectionState(
+        day = day,
+        isPast = isPast,
+        isStart = isStart,
+        isEnd = isEnd,
+        startDate = startDate,
+        endDate = endDate
+    )
+
+    if (isStart && endDate != null && startDate != endDate) {
+        SelectStartOrEndBackground(
+            selectedType = HongCalendarSelectedType.START,
+            selectedBackgroundColorHex = option.rangeDaysTextOption.backgroundColorHex
+        )
+    } else if (isEnd) {
+        SelectStartOrEndBackground(
+            selectedType = HongCalendarSelectedType.END,
+            selectedBackgroundColorHex = option.rangeDaysTextOption.backgroundColorHex
+        )
     }
-    val totalCells = ((days.size + 6) / 7) * 7 // 7의 배수로 행 맞추기
-    val paddedDays = days + List(totalCells - days.size) { null }
 
-    paddedDays.chunked(7).forEach { week ->
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    bottom = option.bottomSpacingWeek.dp,
-                )
-        ) {
-            week.forEach { day ->
-                Box(
-                    modifier = Modifier.weight(1f),
-                    contentAlignment = Alignment.Center
-                ) {
-                    day?.let { day ->
-                        val isPast = day.isBefore(today)
-                        val isToday = day == today
-                        val isStart = day == startDate
-                        val isEnd = day == endDate
-                        val isSelectedRange = startDate != null && endDate != null && day in startDate..endDate
-                        val holidayList = option.holidayList
-                        val isHoliday = if (holidayList != null) {
-                            day in holidayList || day.dayOfWeek == DayOfWeek.SUNDAY
-                        } else {
-                            day.dayOfWeek == DayOfWeek.SUNDAY
-                        }
+    val dateModifier = getDateModifier(selectionState, option)
 
-                        if (isStart) {
-                            if (endDate != null && startDate != endDate) {
-                                SelectStartOrEndBackground(
-                                    selectedType = HongCalendarSelectedType.START,
-                                    selectedBackgroundColorHex = option.rangeDaysTextOption.backgroundColorHex
-                                )
-                            }
-                        } else if (isEnd) {
-                            SelectStartOrEndBackground(
-                                selectedType = HongCalendarSelectedType.END,
-                                selectedBackgroundColorHex = option.rangeDaysTextOption.backgroundColorHex
-                            )
-                        }
-
-                        val dateModifier = when {
-                            isStart -> {
-                                Modifier
-                                    .clip(CircleShape)
-                                    .background(
-                                        color = option.startDayTextOption.backgroundColorHex.toColor()
-                                    )
-                            }
-
-                            isEnd -> {
-                                Modifier
-                                    .clip(CircleShape)
-                                    .background(
-                                        color = option.endDayTextOption.backgroundColorHex.toColor()
-                                    )
-                            }
-
-                            isSelectedRange -> {
-                                Modifier
-                                    .background(
-                                        color = option.rangeDaysTextOption.backgroundColorHex.toColor()
-                                    )
-                            }
-
-                            else -> Modifier
-                        }
-
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(48.dp)
-                                .clickable(enabled = !isPast) {
-                                    when {
-                                        startDate == null || endDate != null -> {
-                                            onSelectStartDate(day)
-                                            onSelectEndDate(null)
-                                        }
-                                        day < startDate -> {
-                                            onSelectStartDate(day)
-                                        }
-                                        else -> {
-                                            onSelectEndDate(day)
-                                        }
-                                    }
-                                }
-                                .then(dateModifier),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            val dayOfMonthStr = day.dayOfMonth.toString()
-                            when {
-                                isPast -> {
-                                    DayOfMonthView(
-                                        dayOfMonth = dayOfMonthStr,
-                                        dayTextOption = if (isHoliday) {
-                                            HongTextBuilder()
-                                                .copy(option.holidaysTextOption)
-                                                .color("#75ff322e")
-                                                .applyOption()
-                                        } else {
-                                            option.pastDaysTextOption
-                                        }
-                                    )
-                                }
-
-                                isStart -> {
-                                    DayOfMonthView(
-                                        dayOfMonth = dayOfMonthStr,
-                                        dayTextOption = option.startDayTextOption,
-                                        todayTextOption = option.selectTodayTextOption,
-                                        isToday = isToday
-                                    )
-                                }
-
-                                isEnd -> {
-                                    DayOfMonthView(
-                                        dayOfMonth = dayOfMonthStr,
-                                        dayTextOption = option.endDayTextOption
-                                    )
-                                }
-
-                                isSelectedRange -> {
-                                    DayOfMonthView(
-                                        dayOfMonth = dayOfMonthStr,
-                                        dayTextOption = option.rangeDaysTextOption
-                                    )
-                                }
-
-                                else -> {
-                                    DayOfMonthView(
-                                        dayOfMonth = dayOfMonthStr,
-                                        dayTextOption = if (isHoliday) {
-                                            option.holidaysTextOption
-                                        } else {
-                                            option.defaultDayTextOption
-                                        },
-                                        todayTextOption = option.unselectTodayTextOption,
-                                        isToday = isToday
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+            .clickable(enabled = !isPast) {
+                handleDateClick(day, startDate, endDate, onSelectStartDate, onSelectEndDate)
             }
+            .then(dateModifier),
+        contentAlignment = Alignment.Center
+    ) {
+        DayContent(
+            day = day,
+            selectionState = selectionState,
+            isToday = isToday,
+            isHoliday = isHoliday,
+            option = option
+        )
+    }
+}
+
+private fun checkIsHoliday(day: LocalDate, holidayList: List<LocalDate>?): Boolean {
+    return if (holidayList != null) {
+        day in holidayList || day.dayOfWeek == DayOfWeek.SUNDAY
+    } else {
+        day.dayOfWeek == DayOfWeek.SUNDAY
+    }
+}
+
+private fun determineSelectionState(
+    day: LocalDate,
+    isPast: Boolean,
+    isStart: Boolean,
+    isEnd: Boolean,
+    startDate: LocalDate?,
+    endDate: LocalDate?
+): HongCalendarDaySelectionState {
+    return when {
+        isPast -> HongCalendarDaySelectionState.Past
+        isStart -> HongCalendarDaySelectionState.Start
+        isEnd -> HongCalendarDaySelectionState.End
+        startDate != null && endDate != null && day in startDate..endDate -> HongCalendarDaySelectionState.InRange
+        else -> HongCalendarDaySelectionState.Default
+    }
+}
+
+@Composable
+private fun getDateModifier(
+    selectionState: HongCalendarDaySelectionState,
+    option: HongCalendarOption
+): Modifier {
+    return when (selectionState) {
+        is HongCalendarDaySelectionState.Start -> {
+            Modifier
+                .clip(CircleShape)
+                .background(color = option.startDayTextOption.backgroundColorHex.toColor())
+        }
+        is HongCalendarDaySelectionState.End -> {
+            Modifier
+                .clip(CircleShape)
+                .background(color = option.endDayTextOption.backgroundColorHex.toColor())
+        }
+        is HongCalendarDaySelectionState.InRange -> {
+            Modifier.background(color = option.rangeDaysTextOption.backgroundColorHex.toColor())
+        }
+        else -> Modifier
+    }
+}
+
+private fun handleDateClick(
+    day: LocalDate,
+    startDate: LocalDate?,
+    endDate: LocalDate?,
+    onSelectStartDate: (LocalDate?) -> Unit,
+    onSelectEndDate: (LocalDate?) -> Unit
+) {
+    when {
+        startDate == null || endDate != null -> {
+            onSelectStartDate(day)
+            onSelectEndDate(null)
+        }
+        day < startDate -> {
+            onSelectStartDate(day)
+        }
+        else -> {
+            onSelectEndDate(day)
+        }
+    }
+}
+
+@Composable
+private fun DayContent(
+    day: LocalDate,
+    selectionState: HongCalendarDaySelectionState,
+    isToday: Boolean,
+    isHoliday: Boolean,
+    option: HongCalendarOption
+) {
+    val dayOfMonthStr = day.dayOfMonth.toString()
+
+    when (selectionState) {
+        is HongCalendarDaySelectionState.Past -> {
+            DayOfMonthView(
+                dayOfMonth = dayOfMonthStr,
+                dayTextOption = if (isHoliday) {
+                    HongTextBuilder()
+                        .copy(option.holidaysTextOption)
+                        .color("#75ff322e")
+                        .applyOption()
+                } else {
+                    option.pastDaysTextOption
+                }
+            )
+        }
+        is HongCalendarDaySelectionState.Start -> {
+            DayOfMonthView(
+                dayOfMonth = dayOfMonthStr,
+                dayTextOption = option.startDayTextOption,
+                todayTextOption = option.selectTodayTextOption,
+                isToday = isToday
+            )
+        }
+        is HongCalendarDaySelectionState.End -> {
+            DayOfMonthView(
+                dayOfMonth = dayOfMonthStr,
+                dayTextOption = option.endDayTextOption
+            )
+        }
+        is HongCalendarDaySelectionState.InRange -> {
+            DayOfMonthView(
+                dayOfMonth = dayOfMonthStr,
+                dayTextOption = option.rangeDaysTextOption
+            )
+        }
+        is HongCalendarDaySelectionState.Default -> {
+            DayOfMonthView(
+                dayOfMonth = dayOfMonthStr,
+                dayTextOption = if (isHoliday) option.holidaysTextOption else option.defaultDayTextOption,
+                todayTextOption = option.unselectTodayTextOption,
+                isToday = isToday
+            )
         }
     }
 }
@@ -374,7 +431,6 @@ private fun SelectStartOrEndBackground(
                 )
             }
         }
-
         HongCalendarSelectedType.END -> {
             Row(
                 modifier = Modifier
@@ -395,7 +451,6 @@ private fun SelectStartOrEndBackground(
                 )
             }
         }
-
         else -> {
             Spacer(
                 modifier = Modifier
@@ -436,98 +491,139 @@ private fun DayOfMonthView(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewHongCalendarCompose() {
-    val option = HongCalendarBuilder()
-        .backgroundColor(HongColor.WHITE_100.hex)
-        .initialSelectedInfo(
-            HongCalendarInitialSelectedInfo(
-                startDate = "20250710",
-                endDate = "20250720"
-            )
-        )
-        .dayOfWeekTextOption(
-            HongTextBuilder()
-                .size(13)
-                .color("#666666")
-                .fontType(HongFont.PRETENDARD_400)
-                .applyOption()
-        )
-        .dayOfWeekLangType(HongCalendarDayOfWeekLangType.KOR)
-        .yearMonthTextOption(
-            HongTextBuilder()
-                .size(19)
-                .color(HongColor.BLACK_100.hex)
-                .fontType(HongFont.PRETENDARD_700)
-                .applyOption()
-        )
-        .yearMonthPattern("yyyy.MM")
-        .startDayTextOption(
-            HongTextBuilder()
-                .size(17)
-                .color(HongColor.WHITE_100.hex)
-                .backgroundColor(HongCalendarOption.DEFAULT_SELECT_START_DAY_BACKGROUND_COLOR)
-                .fontType(HongFont.PRETENDARD_700)
-                .applyOption()
-        )
-        .endDayTextOption(
-            HongTextBuilder()
-                .size(17)
-                .color(HongColor.WHITE_100.hex)
-                .backgroundColor(HongCalendarOption.DEFAULT_SELECT_END_DAY_BACKGROUND_COLOR)
-                .fontType(HongFont.PRETENDARD_700)
-                .applyOption()
-        )
-        .rangeDaysTextOption(
-            HongTextBuilder()
-                .size(17)
-                .color(HongColor.MAIN_ORANGE_100.hex)
-                .backgroundColor(HongCalendarOption.DEFAULT_SELECT_RANGE_DAYS_BACKGROUND_COLOR)
-                .fontType(HongFont.PRETENDARD_700)
-                .applyOption()
-        )
-        .holidaysTextOption(
-            HongTextBuilder()
-                .size(17)
-                .color("#ff322e")
-                .fontType(HongFont.PRETENDARD_700)
-                .applyOption()
-        )
-        .pastDaysTextOption(
-            HongTextBuilder()
-                .size(17)
-                .color("#cccccc")
-                .fontType(HongFont.PRETENDARD_700)
-                .applyOption()
-        )
-        .selectTodayTextOption(
-            HongTextBuilder()
-                .size(8)
-                .color(HongColor.WHITE_100.hex)
-                .fontType(HongFont.PRETENDARD_700)
-                .applyOption()
-        )
-        .unselectTodayTextOption(
-            HongTextBuilder()
-                .size(8)
-                .color("#545457")
-                .fontType(HongFont.PRETENDARD_700)
-                .applyOption()
-        )
-        .defaultDayTextOption(
-            HongTextBuilder()
-                .size(17)
-                .color(HongColor.BLACK_100.hex)
-                .fontType(HongFont.PRETENDARD_700)
-                .applyOption()
-        )
-        .spacingHorizontal(16)
-        .bottomSpacingWeek(20)
-        .holidayList(HongDateUtil.KOREAN_HOLIDAY_LIST)
-        .dayOfWeekBottomLineColorHex("#eeeeee")
-        .onSelected { _, _ -> }
-        .applyOption()
+// region Preview
 
-    HongCalendarCompose(option)
+@Preview(showBackground = true, name = "Default Calendar")
+@Composable
+private fun PreviewHongCalendarDefault() {
+    HongCalendarCompose(
+        option = HongCalendarBuilder()
+            .backgroundColor(HongColor.WHITE_100.hex)
+            .applyOption()
+    )
 }
+
+@Preview(showBackground = true, name = "Calendar with Selected Range")
+@Composable
+private fun PreviewHongCalendarWithSelection() {
+    HongCalendarCompose(
+        option = HongCalendarBuilder()
+            .backgroundColor(HongColor.WHITE_100.hex)
+            .initialSelectedInfo(
+                HongCalendarInitialSelectedInfo(
+                    startDate = "20250710",
+                    endDate = "20250720"
+                )
+            )
+            .applyOption()
+    )
+}
+
+@Preview(showBackground = true, name = "Calendar with Korean Holidays")
+@Composable
+private fun PreviewHongCalendarWithHolidays() {
+    HongCalendarCompose(
+        option = HongCalendarBuilder()
+            .backgroundColor(HongColor.WHITE_100.hex)
+            .dayOfWeekLangType(HongCalendarDayOfWeekLangType.KOR)
+            .holidayList(HongDateUtil.KOREAN_HOLIDAY_LIST)
+            .applyOption()
+    )
+}
+
+@Preview(showBackground = true, name = "Calendar Full Customized")
+@Composable
+private fun PreviewHongCalendarFullCustomized() {
+    HongCalendarCompose(
+        option = HongCalendarBuilder()
+            .backgroundColor(HongColor.WHITE_100.hex)
+            .initialSelectedInfo(
+                HongCalendarInitialSelectedInfo(
+                    startDate = "20250710",
+                    endDate = "20250720"
+                )
+            )
+            .dayOfWeekTextOption(
+                HongTextBuilder()
+                    .size(13)
+                    .color("#666666")
+                    .fontType(HongFont.PRETENDARD_400)
+                    .applyOption()
+            )
+            .dayOfWeekLangType(HongCalendarDayOfWeekLangType.KOR)
+            .yearMonthTextOption(
+                HongTextBuilder()
+                    .size(19)
+                    .color(HongColor.BLACK_100.hex)
+                    .fontType(HongFont.PRETENDARD_700)
+                    .applyOption()
+            )
+            .yearMonthPattern("yyyy.MM")
+            .startDayTextOption(
+                HongTextBuilder()
+                    .size(17)
+                    .color(HongColor.WHITE_100.hex)
+                    .backgroundColor(HongCalendarOption.DEFAULT_SELECT_START_DAY_BACKGROUND_COLOR)
+                    .fontType(HongFont.PRETENDARD_700)
+                    .applyOption()
+            )
+            .endDayTextOption(
+                HongTextBuilder()
+                    .size(17)
+                    .color(HongColor.WHITE_100.hex)
+                    .backgroundColor(HongCalendarOption.DEFAULT_SELECT_END_DAY_BACKGROUND_COLOR)
+                    .fontType(HongFont.PRETENDARD_700)
+                    .applyOption()
+            )
+            .rangeDaysTextOption(
+                HongTextBuilder()
+                    .size(17)
+                    .color(HongColor.MAIN_ORANGE_100.hex)
+                    .backgroundColor(HongCalendarOption.DEFAULT_SELECT_RANGE_DAYS_BACKGROUND_COLOR)
+                    .fontType(HongFont.PRETENDARD_700)
+                    .applyOption()
+            )
+            .holidaysTextOption(
+                HongTextBuilder()
+                    .size(17)
+                    .color("#ff322e")
+                    .fontType(HongFont.PRETENDARD_700)
+                    .applyOption()
+            )
+            .pastDaysTextOption(
+                HongTextBuilder()
+                    .size(17)
+                    .color("#cccccc")
+                    .fontType(HongFont.PRETENDARD_700)
+                    .applyOption()
+            )
+            .selectTodayTextOption(
+                HongTextBuilder()
+                    .size(8)
+                    .color(HongColor.WHITE_100.hex)
+                    .fontType(HongFont.PRETENDARD_700)
+                    .applyOption()
+            )
+            .unselectTodayTextOption(
+                HongTextBuilder()
+                    .size(8)
+                    .color("#545457")
+                    .fontType(HongFont.PRETENDARD_700)
+                    .applyOption()
+            )
+            .defaultDayTextOption(
+                HongTextBuilder()
+                    .size(17)
+                    .color(HongColor.BLACK_100.hex)
+                    .fontType(HongFont.PRETENDARD_700)
+                    .applyOption()
+            )
+            .spacingHorizontal(16)
+            .bottomSpacingWeek(20)
+            .holidayList(HongDateUtil.KOREAN_HOLIDAY_LIST)
+            .dayOfWeekBottomLineColorHex("#eeeeee")
+            .applyOption()
+    )
+}
+
+// endregion

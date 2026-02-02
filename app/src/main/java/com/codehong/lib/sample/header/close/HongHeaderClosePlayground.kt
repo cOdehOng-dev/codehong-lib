@@ -1,4 +1,4 @@
-package com.codehong.lib.sample.closeheader
+package com.codehong.lib.sample.header.close
 
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
@@ -9,7 +9,7 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongTypo
 
-class HongCloseHeaderPlayground(
+class HongHeaderClosePlayground(
     playgroundActivity: PlaygroundActivity
 ) : BasePlayground<HongHeaderCloseOption> {
 

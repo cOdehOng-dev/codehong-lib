@@ -33,11 +33,12 @@ import com.codehong.lib.sample.calendar.SampleCalendarActivity
 import com.codehong.lib.sample.calendar.SampleCalendarComposeActivity
 import com.codehong.lib.sample.captureshare.SampleCaptureShareActivity
 import com.codehong.lib.sample.checkbox.SampleCheckboxActivity
-import com.codehong.lib.sample.closeheader.SampleCloseHeaderActivity
 import com.codehong.lib.sample.draganddrop.SampleDragAndDropActivity
 import com.codehong.lib.sample.dynamicisland.SampleDynamicIslandActivity
 import com.codehong.lib.sample.graph.SampleGraphBarActivity
 import com.codehong.lib.sample.graph.SampleGraphLineActivity
+import com.codehong.lib.sample.header.close.SampleHeaderCloseActivity
+import com.codehong.lib.sample.header.icon.SampleHeaderIconActivity
 import com.codehong.lib.sample.icon.SampleIconActivity
 import com.codehong.lib.sample.image.SampleImageActivity
 import com.codehong.lib.sample.label.SampleLabelActivity
@@ -174,12 +175,18 @@ private val widgetCategories = listOf(
         )
     ),
     WidgetCategory(
+        title = "Header",
+        widgets = listOf(
+            HongWidgetType.HEADER_CLOSE,
+            HongWidgetType.HEADER_ICON
+        )
+    ),
+    WidgetCategory(
         title = "Etc",
         widgets = listOf(
             HongWidgetType.ICON,
             HongWidgetType.CALENDAR,
             HongWidgetType.HORIZONTAL_PAGER,
-            HongWidgetType.HEADER_CLOSE,
             HongWidgetType.PICKER,
             HongWidgetType.CAPTURE_SHARE,
             HongWidgetType.DYNAMIC_ISLAND,
@@ -396,23 +403,23 @@ private fun handleSampleClick(
 ) {
     when (item.widgetType) {
         HongWidgetType.BOTTOM_SHEET_SELECT -> {
-            context.startSampleActivity(SampleBottomSheetSelectActivity::class.java, HongWidgetType.BOTTOM_SHEET_SELECT)
+            context.startSampleActivity(SampleBottomSheetSelectActivity::class.java, item.widgetType)
         }
 
         HongWidgetType.BOTTOM_SHEET_SWIPE -> {
-            context.startSampleActivity(SampleBottomSheetSwipeActivity::class.java, HongWidgetType.BOTTOM_SHEET_SWIPE)
+            context.startSampleActivity(SampleBottomSheetSwipeActivity::class.java, item.widgetType)
         }
 
         HongWidgetType.BUTTON_ICON -> {
-            context.startSampleActivity(SampleButtonIconActivity::class.java, HongWidgetType.BUTTON_ICON)
+            context.startSampleActivity(SampleButtonIconActivity::class.java, item.widgetType)
         }
 
         HongWidgetType.BUTTON_SELECT -> {
-            context.startSampleActivity(SampleSelectButtonActivity::class.java, HongWidgetType.BUTTON_SELECT)
+            context.startSampleActivity(SampleSelectButtonActivity::class.java, item.widgetType)
         }
 
         HongWidgetType.BUTTON_TEXT -> {
-            context.startSampleActivity(SampleTextButtonActivity::class.java, HongWidgetType.BUTTON_TEXT)
+            context.startSampleActivity(SampleTextButtonActivity::class.java, item.widgetType)
         }
 
         HongWidgetType.CALENDAR -> {
@@ -420,43 +427,43 @@ private fun handleSampleClick(
         }
 
         HongWidgetType.CAPTURE_SHARE -> {
-            context.startSampleActivity(SampleCaptureShareActivity::class.java)
+            context.startSampleActivity(SampleCaptureShareActivity::class.java, item.widgetType)
         }
 
         HongWidgetType.CHECKBOX -> {
-            context.startSampleActivity(SampleCheckboxActivity::class.java, HongWidgetType.CHECKBOX)
+            context.startSampleActivity(SampleCheckboxActivity::class.java, item.widgetType)
         }
 
         HongWidgetType.DYNAMIC_ISLAND -> {
-            context.startSampleActivity(SampleDynamicIslandActivity::class.java, HongWidgetType.DYNAMIC_ISLAND)
+            context.startSampleActivity(SampleDynamicIslandActivity::class.java, item.widgetType)
         }
 
         HongWidgetType.GRAPH_BAR -> {
-            context.startSampleActivity(SampleGraphBarActivity::class.java, HongWidgetType.GRAPH_BAR)
+            context.startSampleActivity(SampleGraphBarActivity::class.java, item.widgetType)
         }
 
         HongWidgetType.GRAPH_LINE -> {
-            context.startSampleActivity(SampleGraphLineActivity::class.java, HongWidgetType.GRAPH_LINE)
+            context.startSampleActivity(SampleGraphLineActivity::class.java, item.widgetType)
         }
 
         HongWidgetType.GRID_DRAG_AND_DROP -> {
-            context.startSampleActivity(SampleDragAndDropActivity::class.java, HongWidgetType.GRID_DRAG_AND_DROP)
+            context.startSampleActivity(SampleDragAndDropActivity::class.java, item.widgetType)
         }
 
-        HongWidgetType.HEADER_CLOSE -> {
-            context.startSampleActivity(SampleCloseHeaderActivity::class.java, HongWidgetType.HEADER_CLOSE)
-        }
+        HongWidgetType.HEADER_CLOSE -> context.startSampleActivity(SampleHeaderCloseActivity::class.java, item.widgetType)
+        HongWidgetType.HEADER_ICON -> context.startSampleActivity(SampleHeaderIconActivity::class.java, item.widgetType)
+
 
         HongWidgetType.HORIZONTAL_PAGER -> {
-            context.startSampleActivity(SampleHorizontalPagerActivity::class.java, HongWidgetType.HORIZONTAL_PAGER)
+            context.startSampleActivity(SampleHorizontalPagerActivity::class.java, item.widgetType)
         }
 
         HongWidgetType.ICON -> {
-            context.startSampleActivity(SampleIconActivity::class.java, HongWidgetType.ICON)
+            context.startSampleActivity(SampleIconActivity::class.java, item.widgetType)
         }
 
         HongWidgetType.IMAGE -> {
-            context.startSampleActivity(SampleImageActivity::class.java, HongWidgetType.IMAGE)
+            context.startSampleActivity(SampleImageActivity::class.java, item.widgetType)
         }
 
         HongWidgetType.LABEL -> {
