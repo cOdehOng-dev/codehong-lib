@@ -1,17 +1,16 @@
 package com.codehong.library.widget.button.icon
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.image.HongImageBuilder
@@ -19,6 +18,7 @@ import com.codehong.library.widget.image.HongImageCompose
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongClickState
 import com.codehong.library.widget.rule.HongClickState.Companion.isEnable
+import com.codehong.library.widget.rule.button.HongButtonIconType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.util.HongWidgetContainer
 
@@ -26,62 +26,19 @@ import com.codehong.library.widget.util.HongWidgetContainer
 fun HongButtonIconCompose(
     option: HongButtonIconOption
 ) {
-    val remOption by remember { mutableStateOf(option) }
+    val isDisabled = option.state == HongClickState.DISABLE
 
-    val iconColorState by rememberSaveable {
-        mutableStateOf(
-            if (remOption.state == HongClickState.DISABLE) {
-                HongColor.GRAY_20.hex
-            } else {
-                remOption.iconColorHex
-            }
-        )
-    }
+    val iconColor = if (isDisabled) HongColor.GRAY_20.hex else option.iconColorHex
+    val backgroundColor = if (isDisabled) HongColor.GRAY_10.hex else option.backgroundColorHex
+    val borderColor = if (isDisabled) HongColor.GRAY_05.hex else option.border.color
 
-    val backgroundColorState by rememberSaveable {
-        mutableStateOf(
-            if (remOption.state == HongClickState.DISABLE) {
-                HongColor.GRAY_10.hex
-            } else {
-                remOption.backgroundColorHex
-            }
-        )
-    }
-    val borderColorState by rememberSaveable {
-        mutableStateOf(
-            if (remOption.state == HongClickState.DISABLE) {
-                HongColor.GRAY_05.hex
-            } else {
-                remOption.border.color
-            }
-        )
-    }
-
-    val buttonSize by rememberSaveable {
-        mutableIntStateOf(if (remOption.buttonType.size > 40) remOption.buttonType.size else 40)
-    }
-    val iconSize by rememberSaveable {
-        mutableIntStateOf(
-            when (remOption.buttonType.size) {
-                56, 48 -> 24
-                40, 32 -> 16
-                else -> 12
-            }
-        )
-    }
-    val padding by rememberSaveable {
-        mutableIntStateOf(
-            when (remOption.buttonType.size) {
-                32 -> 4
-                28 -> 8
-                else -> 0
-            }
-        )
-    }
+    val buttonSize = option.buttonType.size.coerceAtLeast(40)
+    val iconSize = option.buttonType.getIconSize()
+    val contentPadding = option.buttonType.getContentPadding()
 
     HongWidgetContainer(
         HongButtonIconBuilder()
-            .copy(remOption)
+            .copy(option)
             .width(buttonSize)
             .height(buttonSize)
             .border(HongBorderInfo())
@@ -89,19 +46,19 @@ fun HongButtonIconCompose(
     ) {
         Box(
             modifier = Modifier
-                .padding(padding.dp)
+                .padding(contentPadding.dp)
                 .size(buttonSize.dp)
                 .hongBackground(
-                    color = backgroundColorState,
+                    color = backgroundColor,
                     border = HongBorderInfo(
                         width = 1,
-                        color = borderColorState
+                        color = borderColor
                     ),
-                    useShapeCircle = remOption.useShapeCircle
+                    useShapeCircle = option.useShapeCircle
                 )
                 .clickable {
-                    if (remOption.state.isEnable()) {
-                        remOption.click?.invoke(option)
+                    if (option.state.isEnable()) {
+                        option.click?.invoke(option)
                     }
                 },
             contentAlignment = Alignment.Center
@@ -110,8 +67,97 @@ fun HongButtonIconCompose(
                 HongImageBuilder()
                     .width(iconSize)
                     .height(iconSize)
-                    .imageInfo(remOption.iconResId)
-                    .imageColor(iconColorState)
+                    .imageInfo(option.iconResId)
+                    .imageColor(iconColor)
+                    .applyOption()
+            )
+        }
+    }
+}
+
+private fun HongButtonIconType.getIconSize(): Int {
+    return when (size) {
+        56, 48 -> 24
+        40, 32 -> 16
+        else -> 12
+    }
+}
+
+private fun HongButtonIconType.getContentPadding(): Int {
+    return when (size) {
+        32 -> 4
+        28 -> 8
+        else -> 0
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewHongButtonIconCompose() {
+    Column(
+        modifier = Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            HongButtonIconCompose(
+                HongButtonIconBuilder()
+                    .buttonType(HongButtonIconType.SIZE_56)
+                    .useShapeCircle(true)
+                    .applyOption()
+            )
+            HongButtonIconCompose(
+                HongButtonIconBuilder()
+                    .buttonType(HongButtonIconType.SIZE_48)
+                    .useShapeCircle(true)
+                    .applyOption()
+            )
+            HongButtonIconCompose(
+                HongButtonIconBuilder()
+                    .buttonType(HongButtonIconType.SIZE_40)
+                    .useShapeCircle(true)
+                    .applyOption()
+            )
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            HongButtonIconCompose(
+                HongButtonIconBuilder()
+                    .buttonType(HongButtonIconType.SIZE_32)
+                    .useShapeCircle(true)
+                    .applyOption()
+            )
+            HongButtonIconCompose(
+                HongButtonIconBuilder()
+                    .buttonType(HongButtonIconType.SIZE_28)
+                    .useShapeCircle(true)
+                    .applyOption()
+            )
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            HongButtonIconCompose(
+                HongButtonIconBuilder()
+                    .buttonType(HongButtonIconType.SIZE_48)
+                    .useShapeCircle(true)
+                    .iconColor(HongColor.MAIN_ORANGE_100)
+                    .backgroundColor(HongColor.MAIN_ORANGE_10.hex)
+                    .border(HongBorderInfo(width = 1, color = HongColor.MAIN_ORANGE_40.hex))
+                    .applyOption()
+            )
+            HongButtonIconCompose(
+                HongButtonIconBuilder()
+                    .buttonType(HongButtonIconType.SIZE_48)
+                    .useShapeCircle(true)
+                    .state(HongClickState.DISABLE)
                     .applyOption()
             )
         }

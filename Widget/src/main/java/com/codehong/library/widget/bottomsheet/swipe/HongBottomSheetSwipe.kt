@@ -18,7 +18,6 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -48,10 +47,8 @@ private val LocalContentOffsetY = compositionLocalOf { 0f }
 fun HongBottomSheetSwipe(
     option: HongBottomSheetSwipeOption
 ) {
-    val remOption by remember { mutableStateOf(option) }
-
-    val bottomSheetMinHeight by rememberSaveable { mutableFloatStateOf(remOption.bottomSheetMinHeight) }
-    val bottomsheetMaxHeight by rememberSaveable { mutableFloatStateOf(remOption.bottomSheetMaxHeight) }
+    val bottomSheetMinHeight by rememberSaveable { mutableFloatStateOf(option.bottomSheetMinHeight) }
+    val bottomsheetMaxHeight by rememberSaveable { mutableFloatStateOf(option.bottomSheetMaxHeight) }
 
     var bottomSheetHeight by rememberSaveable { mutableFloatStateOf(bottomSheetMinHeight) }
     var isDragging by rememberSaveable { mutableStateOf(false) }
@@ -75,7 +72,7 @@ fun HongBottomSheetSwipe(
     )
 
     CompositionLocalProvider(
-        LocalOption provides remOption,
+        LocalOption provides option,
         LocalContentScale provides contentScale,
         LocalContentOffsetY provides contentOffsetY,
     ) {
@@ -86,14 +83,14 @@ fun HongBottomSheetSwipe(
                 modifier = Modifier
                     .fillMaxSize()
                     .hongBackground(
-                        color = remOption.backgroundColorHex
+                        color = option.backgroundColorHex
                     )
                     .padding(it)
             ) {
                 HongHeaderCloseCompose(
                     HongHeaderCloseBuilder()
-                        .closeIconColor(remOption.closeIconColorHex)
-                        .close { remOption.onCloseClick() }
+                        .closeIconColor(option.closeIconColorHex)
+                        .close { option.onCloseClick() }
                         .applyOption()
                 )
 

@@ -6,6 +6,7 @@ import android.view.View
 import com.codehong.lib.sample.R
 import com.codehong.lib.sample.playground.preview.HorizontalOptionView
 import com.codehong.lib.sample.playground.preview.QuarterInputOptionView
+import com.codehong.library.network.debug.TimberUtil
 import com.codehong.library.widget.Consts
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.extensions.toFigureFloat
@@ -799,7 +800,7 @@ object PlaygroundManager {
         ) { selectDrawable, index ->
             val drawable =
                 drawableList.firstOrNull { it == selectDrawable }
-            Log.e("TAG", "옵션 drawable = $drawable, index = $index")
+            TimberUtil.i("test here 옵션 drawable = $drawable, index = $index")
             selectResId.invoke(
                 if (drawable.isNullOrEmpty()) null
                 else getDrawableResIdByNameFromLibrary(drawable)
@@ -1020,7 +1021,8 @@ object PlaygroundManager {
         }
     }
 
-    fun getDrawableResIdByNameFromLibrary(name: String): Int? {
+    fun getDrawableResIdByNameFromLibrary(name: String?): Int? {
+        if (name.isNullOrEmpty()) return null
         return try {
             val drawableClass = Class.forName("com.codehong.library.widget.R\$drawable")
             val field = drawableClass.getDeclaredField(name)

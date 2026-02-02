@@ -51,15 +51,14 @@ fun HongBottomSheetSelect(
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
 
-    val remOption by remember { mutableStateOf(option) }
-    var selectedOption by remember { mutableStateOf(remOption.initialSelection) }
+    var selectedOption by remember { mutableStateOf(option.initialSelection) }
 
     if (!showBottomSheet) {
         return
     }
 
     CompositionLocalProvider(
-        LocalOption provides remOption,
+        LocalOption provides option,
         LocalSelectedOption provides selectedOption
     ) {
         ModalBottomSheet(
@@ -67,11 +66,11 @@ fun HongBottomSheetSelect(
                 .fillMaxWidth(),
             onDismissRequest = {
                 scope.launch {
-                    remOption.onChangeVisibleState(false)
+                    option.onChangeVisibleState(false)
                 }
             },
             sheetState = bottomSheetState,
-            scrimColor = remOption.dimColorHex.toColor(),
+            scrimColor = option.dimColorHex.toColor(),
             dragHandle = {
                 Box(
                     modifier = Modifier
@@ -87,7 +86,7 @@ fun HongBottomSheetSelect(
                             .width(40.dp)
                             .height(6.dp)
                             .hongBackground(
-                                color = remOption.dragHandleColorHex,
+                                color = option.dragHandleColorHex,
                                 radius = HongRadiusInfo(
                                     topLeft = 3,
                                     topRight = 3,
@@ -99,8 +98,8 @@ fun HongBottomSheetSelect(
                 }
             },
             shape = HongRadiusInfo(
-                topLeft = remOption.topRadius,
-                topRight = remOption.topRadius,
+                topLeft = option.topRadius,
+                topRight = option.topRadius,
                 bottomLeft = 0,
                 bottomRight = 0
             ).toRoundedCornerShape()

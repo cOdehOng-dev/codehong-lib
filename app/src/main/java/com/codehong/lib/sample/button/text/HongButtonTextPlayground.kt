@@ -12,7 +12,7 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 
-class HongTextButtonPlayground(
+class HongButtonTextPlayground(
     playgroundActivity: PlaygroundActivity
 ) : BasePlayground<HongButtonTextOption> {
 

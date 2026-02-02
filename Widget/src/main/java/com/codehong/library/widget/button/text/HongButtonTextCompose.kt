@@ -2,9 +2,6 @@ package com.codehong.library.widget.button.text
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
@@ -23,9 +20,7 @@ import com.codehong.library.widget.util.HongWidgetNoneClickContainer
 fun HongButtonTextCompose(
     option: HongButtonTextOption
 ) {
-    val remOption by remember { mutableStateOf(option) }
-
-    if (remOption.state == HongState.DISABLED) {
+    if (option.state == HongState.DISABLED) {
         HongWidgetNoneClickContainer(
             HongButtonTextBuilder()
                 .copy(option)
@@ -36,7 +31,7 @@ fun HongButtonTextCompose(
             HongTextCompose(
                 option = HongTextBuilder()
                     .width(HongLayoutParam.MATCH_PARENT.value)
-                    .text(remOption.text)
+                    .text(option.text)
                     .typography(HongTypo.BODY_15_B)
                     .color(HongColor.WHITE_60.hex)
                     .textAlign(HongTextAlign.CENTER)
@@ -48,9 +43,9 @@ fun HongButtonTextCompose(
             HongTextCompose(
                 option = HongTextBuilder()
                     .width(HongLayoutParam.MATCH_PARENT.value)
-                    .text(remOption.text)
-                    .typography(remOption.textTypo)
-                    .color(remOption.textColorHex)
+                    .text(option.text)
+                    .typography(option.textTypo)
+                    .color(option.textColorHex)
                     .textAlign(HongTextAlign.CENTER)
                     .applyOption()
             )

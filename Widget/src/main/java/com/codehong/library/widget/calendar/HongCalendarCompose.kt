@@ -18,7 +18,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -28,9 +27,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.HongDivider
 import com.codehong.library.widget.calendar.model.HongCalendarDayOfWeekLangType
+import com.codehong.library.widget.calendar.model.HongCalendarInitialSelectedInfo
 import com.codehong.library.widget.calendar.model.HongCalendarSelectDate
 import com.codehong.library.widget.calendar.model.HongCalendarSelectedType
-import com.codehong.library.widget.calendar.model.HongCalendarInitialSelectedInfo
 import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
@@ -54,19 +53,18 @@ private val LocalSelectDate = compositionLocalOf { HongCalendarSelectDate() }
 fun HongCalendarCompose(
     option: HongCalendarOption
 ) {
-    val remOption by remember { mutableStateOf(option) }
     val today = LocalDate.now()
-    val maxYearLater = today.plusYears(remOption.maxYears.toLong())
+    val maxYearLater = today.plusYears(option.maxYears.toLong())
     val months = rememberSaveable {
         (0..12).map { today.plusMonths(it.toLong()).withDayOfMonth(1) }
             .filter { it <= maxYearLater }
     }
 
-    var startDate by rememberSaveable { mutableStateOf(remOption.initialSelectedInfo?.getStartLocalDate()) }
-    var endDate by rememberSaveable { mutableStateOf(remOption.initialSelectedInfo?.getEndLocalDate()) }
+    var startDate by rememberSaveable { mutableStateOf(option.initialSelectedInfo?.getStartLocalDate()) }
+    var endDate by rememberSaveable { mutableStateOf(option.initialSelectedInfo?.getEndLocalDate()) }
 
     CompositionLocalProvider(
-        LocalOption provides remOption,
+        LocalOption provides option,
         LocalSelectDate provides HongCalendarSelectDate(startDate, endDate)
     ) {
         HongWidgetContainer(option) {
@@ -84,11 +82,11 @@ fun HongCalendarCompose(
                             modifier = Modifier
                                 .padding(
                                     top = if (i == 0) {
-                                        remOption.bottomSpacingDayOfWeek.dp
+                                        option.bottomSpacingDayOfWeek.dp
                                     } else {
                                         0.dp
                                     },
-                                    bottom = remOption.bottomSpacingMonth.dp
+                                    bottom = option.bottomSpacingMonth.dp
                                 )
                         ) {
                             // 년, 월 표기
@@ -96,7 +94,7 @@ fun HongCalendarCompose(
                             YearMonthContent(
                                 month.format(
                                     DateTimeFormatter.ofPattern(
-                                        remOption.yearMonthPattern
+                                        option.yearMonthPattern
                                     )
                                 )
                             )

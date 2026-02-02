@@ -10,7 +10,7 @@ import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.typo.HongTypo
 
-class HongSelectButtonPlayground(
+class HongButtonSelectPlayground(
     playgroundActivity: PlaygroundActivity
 ) : BasePlayground<HongButtonSelectOption> {
 

@@ -13,8 +13,9 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.codehong.lib.sample.SampleConst
 import com.codehong.lib.sample.base.BaseActivity
-import com.codehong.lib.sample.button.select.HongSelectButtonPlayground
-import com.codehong.lib.sample.button.text.HongTextButtonPlayground
+import com.codehong.lib.sample.button.icon.HongButtonIconPlayground
+import com.codehong.lib.sample.button.select.HongButtonSelectPlayground
+import com.codehong.lib.sample.button.text.HongButtonTextPlayground
 import com.codehong.lib.sample.calendar.CalendarPlayground
 import com.codehong.lib.sample.checkbox.HongCheckboxPlayground
 import com.codehong.lib.sample.closeheader.HongCloseHeaderPlayground
@@ -44,6 +45,8 @@ import com.codehong.lib.sample.textfield.timer.HongTextFieldTimerPlayground
 import com.codehong.lib.sample.textfield.underline.HongTextFieldUnderlinePlayground
 import com.codehong.lib.sample.toggleswitch.HongSwitchPlayground
 import com.codehong.library.widget.HongWidgetCommonOption
+import com.codehong.library.widget.button.icon.HongButtonIconCompose
+import com.codehong.library.widget.button.icon.HongButtonIconOption
 import com.codehong.library.widget.button.select.HongButtonSelectCompose
 import com.codehong.library.widget.button.select.HongButtonSelectOption
 import com.codehong.library.widget.button.text.HongButtonTextCompose
@@ -63,10 +66,10 @@ import com.codehong.library.widget.icon.HongIconOption
 import com.codehong.library.widget.image.HongImageBuilder
 import com.codehong.library.widget.image.HongImageCompose
 import com.codehong.library.widget.image.HongImageOption
-import com.codehong.library.widget.label.def.HongLabelOption
-import com.codehong.library.widget.label.def.HongLabelCompose
 import com.codehong.library.widget.label.checkbox.HongLabelCheckboxCompose
 import com.codehong.library.widget.label.checkbox.HongLabelCheckboxOption
+import com.codehong.library.widget.label.def.HongLabelCompose
+import com.codehong.library.widget.label.def.HongLabelOption
 import com.codehong.library.widget.label.input.HongLabelInputCompose
 import com.codehong.library.widget.label.input.HongLabelInputOption
 import com.codehong.library.widget.label.toggleswitch.HongLabelSwitchCompose
@@ -85,14 +88,14 @@ import com.codehong.library.widget.tab.scroll.HongTabScrollCompose
 import com.codehong.library.widget.tab.scroll.HongTabScrollOption
 import com.codehong.library.widget.tab.segment.HongTabSegmentCompose
 import com.codehong.library.widget.tab.segment.HongTabSegmentOption
-import com.codehong.library.widget.text.def.HongTextCompose
-import com.codehong.library.widget.text.def.HongTextOption
 import com.codehong.library.widget.text.badge.HongTextBadgeCompose
 import com.codehong.library.widget.text.badge.HongTextBadgeOption
-import com.codehong.library.widget.text.check.HongTextCheckOption
 import com.codehong.library.widget.text.check.HongTextCheckCompose
+import com.codehong.library.widget.text.check.HongTextCheckOption
 import com.codehong.library.widget.text.count.HongTextCountCompose
 import com.codehong.library.widget.text.count.HongTextCountOption
+import com.codehong.library.widget.text.def.HongTextCompose
+import com.codehong.library.widget.text.def.HongTextOption
 import com.codehong.library.widget.text.unit.HongTextUnitCompose
 import com.codehong.library.widget.text.unit.HongTextUnitOption
 import com.codehong.library.widget.text.updown.HongTextUpDownCompose
@@ -218,8 +221,9 @@ class PlaygroundActivity : BaseActivity() {
             HongWidgetType.TEXT_FIELD_TIMER -> HongTextFieldTimerPlayground(this).preview()
             HongWidgetType.TEXT_FIELD_NUMBER -> HongTextFieldNumberPlayground(this).preview()
             HongWidgetType.CALENDAR -> CalendarPlayground(this).preview()
-            HongWidgetType.BUTTON_TEXT -> HongTextButtonPlayground(this).preview()
-            HongWidgetType.BUTTON_SELECT -> HongSelectButtonPlayground(this).preview()
+            HongWidgetType.BUTTON_TEXT -> HongButtonTextPlayground(this).preview()
+            HongWidgetType.BUTTON_SELECT -> HongButtonSelectPlayground(this).preview()
+            HongWidgetType.BUTTON_ICON -> HongButtonIconPlayground(this).preview()
             HongWidgetType.HORIZONTAL_PAGER -> HongHorizontalPagerPlayground(this).preview()
             HongWidgetType.TEXT_BADGE -> HongTextBadgePlayground(this).preview()
             HongWidgetType.CHECKBOX -> HongCheckboxPlayground(this).preview()
@@ -291,6 +295,7 @@ class PlaygroundActivity : BaseActivity() {
                     HongWidgetType.TEXT_FIELD_NUMBER -> HongNumberTextFieldCompose(previewOption as HongTextFieldNumberOption)
                     HongWidgetType.BUTTON_TEXT -> HongButtonTextCompose(previewOption as HongButtonTextOption)
                     HongWidgetType.BUTTON_SELECT -> HongButtonSelectCompose(previewOption as HongButtonSelectOption)
+                    HongWidgetType.BUTTON_ICON -> HongButtonIconCompose(previewOption as HongButtonIconOption)
                     HongWidgetType.CALENDAR -> HongCalendarCompose(previewOption as HongCalendarOption)
                     HongWidgetType.HORIZONTAL_PAGER -> HongHorizontalPagerCompose(previewOption as HongHorizontalPagerOption) { item ->
                         (item as? String)

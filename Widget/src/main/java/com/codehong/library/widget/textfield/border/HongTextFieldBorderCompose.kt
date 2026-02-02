@@ -52,46 +52,44 @@ import com.codehong.library.widget.util.dpToSp
 fun HongTextFieldBorderCompose(
     option: HongTextFieldBorderOption,
 ) {
-    val remOption by remember { mutableStateOf(option) }
-
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
     val focusManager = LocalFocusManager.current
 
-    var input by remember(remOption.initialInput) { mutableStateOf(remOption.initialInput) }
+    var input by remember(option.initialInput) { mutableStateOf(option.initialInput) }
 
-    val isEnabled = remOption.state == HongInputState.ENABLE
+    val isEnabled = option.state == HongInputState.ENABLE
 
     val borderColor = when {
         !isEnabled -> HongColor.GRAY_10.hex
-        isFocused && isEnabled -> remOption.focusedBorderColorHex
-        else -> remOption.enableBorderColorHex
+        isFocused && isEnabled -> option.focusedBorderColorHex
+        else -> option.enableBorderColorHex
     }
 
     val backgroundColor = when {
-        isEnabled -> remOption.inputBackgroundColorHex
+        isEnabled -> option.inputBackgroundColorHex
         else -> HongColor.GRAY_10.hex
     }
 
     val labelTextColor = when {
-        isEnabled -> remOption.labelColoHex
+        isEnabled -> option.labelColoHex
         else -> HongColor.GRAY_30.hex
     }
 
     val inputTextColor = when {
-        isEnabled -> remOption.inputTextColorHex
+        isEnabled -> option.inputTextColorHex
         else -> HongColor.GRAY_30.hex
     }
 
     val placeholderTextColor = when {
-        isEnabled -> remOption.placeholderColorHex
+        isEnabled -> option.placeholderColorHex
         else -> HongColor.GRAY_30.hex
     }
 
     val paddingMarginOption = HongTextFieldBorderBuilder()
         .width(HongLayoutParam.MATCH_PARENT.value)
-        .padding(remOption.padding)
-        .margin(remOption.margin)
+        .padding(option.padding)
+        .margin(option.margin)
         .applyOption()
 
     HongWidgetContainer(paddingMarginOption) {
@@ -101,7 +99,7 @@ fun HongTextFieldBorderCompose(
                     .fillMaxWidth()
                     .hongBackground(
                         color = backgroundColor,
-                        radius = remOption.inputRadius,
+                        radius = option.inputRadius,
                         border = HongBorderInfo(
                             width = 1,
                             color = borderColor
@@ -123,17 +121,17 @@ fun HongTextFieldBorderCompose(
                     ) {
                         HongTextCompose(
                             HongTextBuilder()
-                                .text(remOption.label)
-                                .typography(remOption.labelTypo)
+                                .text(option.label)
+                                .typography(option.labelTypo)
                                 .color(labelTextColor)
                                 .applyOption()
                         )
 
-                        if (remOption.isRequired && isEnabled) {
+                        if (option.isRequired && isEnabled) {
                             HongTextCompose(
                                 HongTextBuilder()
                                     .text(" *")
-                                    .typography(remOption.labelTypo)
+                                    .typography(option.labelTypo)
                                     .color(HongColor.MAIN_ORANGE_100)
                                     .applyOption()
                             )
@@ -151,7 +149,7 @@ fun HongTextFieldBorderCompose(
                                 .fillMaxWidth(),
                             contentAlignment = Alignment.CenterStart
                         ) {
-                            if (input.isEmpty() && remOption.placeholder.isNotEmpty()) {
+                            if (input.isEmpty() && option.placeholder.isNotEmpty()) {
                                 HongTextCompose(
                                     HongTextBuilder()
                                         .width(HongLayoutParam.MATCH_PARENT.value)
@@ -161,8 +159,8 @@ fun HongTextFieldBorderCompose(
                                                 bottom = 18f
                                             )
                                         )
-                                        .text(remOption.placeholder)
-                                        .typography(remOption.placeholderTypo)
+                                        .text(option.placeholder)
+                                        .typography(option.placeholderTypo)
                                         .color(placeholderTextColor)
                                         .applyOption()
                                 )
@@ -181,7 +179,7 @@ fun HongTextFieldBorderCompose(
                                 onValueChange = {
                                     if (isEnabled) {
                                         input = it
-                                        remOption.onChangeInput(it)
+                                        option.onChangeInput(it)
                                     }
                                 },
                                 enabled = isEnabled,
@@ -195,7 +193,7 @@ fun HongTextFieldBorderCompose(
                                 ),
                                 keyboardOptions = KeyboardOptions(
                                     imeAction = ImeAction.Done,
-                                    keyboardType = if (remOption.useNumberKeypad) {
+                                    keyboardType = if (option.useNumberKeypad) {
                                         KeyboardType.Number
                                     } else {
                                         KeyboardType.Text
@@ -218,11 +216,11 @@ fun HongTextFieldBorderCompose(
                     modifier = Modifier
                         .padding(top = 28.dp)
                 ) {
-                    if (remOption.suffix.isNotEmpty()) {
+                    if (option.suffix.isNotEmpty()) {
                         Box(
                             modifier = Modifier
                                 .padding(
-                                    end = if (input.isNotEmpty() && isEnabled && remOption.useClearButton) 0.dp else 20.dp
+                                    end = if (input.isNotEmpty() && isEnabled && option.useClearButton) 0.dp else 20.dp
                                 )
                                 .width(40.dp)
                                 .height(52.dp),
@@ -230,8 +228,8 @@ fun HongTextFieldBorderCompose(
                         ) {
                             HongTextCompose(
                                 HongTextBuilder()
-                                    .text(remOption.suffix)
-                                    .typography(remOption.suffixTypo)
+                                    .text(option.suffix)
+                                    .typography(option.suffixTypo)
                                     .color(inputTextColor)
                                     .applyOption()
                             )
@@ -241,7 +239,7 @@ fun HongTextFieldBorderCompose(
 
                     if (input.isNotEmpty()
                         && isEnabled
-                        && remOption.useClearButton
+                        && option.useClearButton
                     ) {
                         Box(
                             modifier = Modifier
@@ -252,7 +250,7 @@ fun HongTextFieldBorderCompose(
                                     indication = null
                                 ) {
                                     input = ""
-                                    remOption.onChangeInput("")
+                                    option.onChangeInput("")
                                 },
                             contentAlignment = Alignment.Center
                         ) {
@@ -269,7 +267,7 @@ fun HongTextFieldBorderCompose(
                 }
             }
 
-            if (remOption.helperText.isNotEmpty()) {
+            if (option.helperText.isNotEmpty()) {
                 HongTextCompose(
                     HongTextBuilder()
                         .padding(

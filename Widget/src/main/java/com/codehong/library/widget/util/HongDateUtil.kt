@@ -12,7 +12,7 @@ import java.util.TimeZone
 
 object HongDateUtil {
     const val MINUTES_IN_A_DAY = 1440L
-    private val KOREA_ZONE_ID = ZoneId.of("Asia/Seoul")
+    val KOREA_ZONE_ID = ZoneId.of("Asia/Seoul")
 
     val KOREAN_HOLIDAY_LIST = listOf(
         // 2025년 공휴일

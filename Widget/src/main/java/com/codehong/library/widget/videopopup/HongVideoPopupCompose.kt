@@ -45,8 +45,6 @@ fun HongVideoPopupCompose(
 ) {
     if (option.videoPlayerOption.videoUrl.isNullOrEmpty()) return
 
-    val remOption by remember { mutableStateOf(option) }
-
     var isVisible by remember { mutableStateOf(false) } // 광고 노출 여부
     var videoClearRef by remember { mutableStateOf<(() -> Unit)?>(null) }
     var isShow by remember { mutableStateOf(false) }
@@ -74,16 +72,16 @@ fun HongVideoPopupCompose(
             delay(300)
             clear()
             isShow = false
-            remOption.onHide(isClickClose)
+            option.onHide(isClickClose)
         }
     }
 
     LaunchedEffect(isShow) {
-        remOption.showPopup(isShow)
+        option.showPopup(isShow)
     }
 
     val videoPlayerOption = HongVideoPlayerBuilder()
-        .copy(remOption.videoPlayerOption)
+        .copy(option.videoPlayerOption)
         .onEnd {
             // 영상 끝날 때 닫기
             dismiss(true)
@@ -98,7 +96,7 @@ fun HongVideoPopupCompose(
                 delay(50)
                 isShow = true
                 isVisible = true
-                remOption.onShow()
+                option.onShow()
             }
         }
         .onPlayerReference { clearFunc ->
@@ -110,11 +108,11 @@ fun HongVideoPopupCompose(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black.copy(alpha = alpha * 0.5f))
-            .clickable(enabled = !remOption.blockTouchOutside) {
+            .clickable(enabled = !option.blockTouchOutside) {
                 dismiss(true)
             }
     ) {
-        val landingLink = remOption.landingLink
+        val landingLink = option.landingLink
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -124,7 +122,7 @@ fun HongVideoPopupCompose(
                     color = HongColor.WHITE_100.hex,
                     radius = videoPlayerOption.radius,
                 )
-                .clickable { if (!landingLink.isNullOrEmpty()) remOption.clickLanding?.invoke(landingLink) }
+                .clickable { if (!landingLink.isNullOrEmpty()) option.clickLanding?.invoke(landingLink) }
         ) {
             HongVideoPlayerCompose(
                 option = videoPlayerOption
