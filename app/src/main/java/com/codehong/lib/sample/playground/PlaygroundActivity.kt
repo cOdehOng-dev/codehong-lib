@@ -286,22 +286,6 @@ class PlaygroundActivity : BaseActivity() {
         binding.vComposePreview.setContent {
             PreviewUI(isBorderOn) {
                 when (componentType) {
-                    HongWidgetType.TEXT -> HongTextCompose(previewOption as HongTextOption)
-                    HongWidgetType.TEXT_CHECK -> HongTextCheckCompose(previewOption as HongTextCheckOption)
-                    HongWidgetType.TEXT_UNIT -> HongTextUnitCompose(previewOption as HongTextUnitOption)
-                    HongWidgetType.TEXT_UP_DOWN -> HongTextUpDownCompose(previewOption as HongTextUpDownOption)
-                    HongWidgetType.TEXT_COUNT -> HongTextCountCompose(previewOption as HongTextCountOption)
-                    HongWidgetType.IMAGE -> HongImageCompose(previewOption as HongImageOption)
-                    HongWidgetType.HEADER_CLOSE -> HongHeaderCloseCompose(previewOption as HongHeaderCloseOption)
-                    HongWidgetType.HEADER_ICON -> HongHeaderIcon(previewOption as HongHeaderIconOption)
-                    HongWidgetType.TEXT_FILED -> HongTextFieldCompose(previewOption as HongTextFieldOption)
-                    HongWidgetType.TEXT_FIELD_UNDERLINE -> HongUnderlineTextFieldCompose(previewOption as HongTextFieldUnderlineOption)
-                    HongWidgetType.TEXT_FIELD_TIMER -> HongTimerTextFieldCompose(previewOption as HongTextFieldTimerOption)
-                    HongWidgetType.TEXT_FIELD_NUMBER -> HongNumberTextFieldCompose(previewOption as HongTextFieldNumberOption)
-                    HongWidgetType.BUTTON_TEXT -> HongButtonTextCompose(previewOption as HongButtonTextOption)
-                    HongWidgetType.BUTTON_SELECT -> HongButtonSelectCompose(previewOption as HongButtonSelectOption)
-                    HongWidgetType.BUTTON_ICON -> HongButtonIconCompose(previewOption as HongButtonIconOption)
-                    HongWidgetType.CALENDAR -> HongCalendarCompose(previewOption as HongCalendarOption)
                     HongWidgetType.HORIZONTAL_PAGER -> HongHorizontalPagerCompose(previewOption as HongHorizontalPagerOption) { item ->
                         (item as? String)
                             ?.takeIf { it.isNotEmpty() }
@@ -321,6 +305,22 @@ class PlaygroundActivity : BaseActivity() {
                                 )
                             }
                     }
+                    HongWidgetType.TEXT -> HongTextCompose(previewOption as HongTextOption)
+                    HongWidgetType.TEXT_CHECK -> HongTextCheckCompose(previewOption as HongTextCheckOption)
+                    HongWidgetType.TEXT_UNIT -> HongTextUnitCompose(previewOption as HongTextUnitOption)
+                    HongWidgetType.TEXT_UP_DOWN -> HongTextUpDownCompose(previewOption as HongTextUpDownOption)
+                    HongWidgetType.TEXT_COUNT -> HongTextCountCompose(previewOption as HongTextCountOption)
+                    HongWidgetType.IMAGE -> HongImageCompose(previewOption as HongImageOption)
+                    HongWidgetType.HEADER_CLOSE -> HongHeaderCloseCompose(previewOption as HongHeaderCloseOption)
+                    HongWidgetType.HEADER_ICON -> HongHeaderIcon(previewOption as HongHeaderIconOption)
+                    HongWidgetType.TEXT_FILED -> HongTextFieldCompose(previewOption as HongTextFieldOption)
+                    HongWidgetType.TEXT_FIELD_UNDERLINE -> HongUnderlineTextFieldCompose(previewOption as HongTextFieldUnderlineOption)
+                    HongWidgetType.TEXT_FIELD_TIMER -> HongTimerTextFieldCompose(previewOption as HongTextFieldTimerOption)
+                    HongWidgetType.TEXT_FIELD_NUMBER -> HongNumberTextFieldCompose(previewOption as HongTextFieldNumberOption)
+                    HongWidgetType.BUTTON_TEXT -> HongButtonTextCompose(previewOption as HongButtonTextOption)
+                    HongWidgetType.BUTTON_SELECT -> HongButtonSelectCompose(previewOption as HongButtonSelectOption)
+                    HongWidgetType.BUTTON_ICON -> HongButtonIconCompose(previewOption as HongButtonIconOption)
+                    HongWidgetType.CALENDAR -> HongCalendarCompose(previewOption as HongCalendarOption)
                     HongWidgetType.TEXT_BADGE -> HongTextBadgeCompose(previewOption as HongTextBadgeOption)
                     HongWidgetType.CHECKBOX -> HongCheckBoxCompose(previewOption as HongCheckboxOption)
                     HongWidgetType.SWITCH -> HongSwitchCompose(previewOption as HongSwitchOption)
