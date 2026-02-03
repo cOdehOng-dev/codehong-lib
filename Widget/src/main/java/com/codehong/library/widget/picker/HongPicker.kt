@@ -1,5 +1,6 @@
 package com.codehong.library.widget.picker
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
@@ -227,6 +228,7 @@ fun HongPicker(
     }
 }
 
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 private fun Picker(
     modifier: Modifier = Modifier,

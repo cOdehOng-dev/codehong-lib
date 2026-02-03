@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.hongBackground
@@ -205,4 +206,57 @@ private fun HeaderContent(
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun HongScrollFadeLayoutPreview() {
+    val option = HongScrollFadeLayoutBuilder()
+        .backgroundColor(HongColor.GRAY_10.hex)
+        .mainContentHeightDp(300)
+        .titleText("Preview Title")
+        .titleColor(Pair(HongColor.WHITE_100, HongColor.BLACK_100))
+        .headerBackgroundColor(HongColor.WHITE_100)
+        .leftIconInfo(R.drawable.honglib_ic_arrow_left)
+        .leftIconColor(Pair(HongColor.WHITE_100, HongColor.BLACK_100))
+        .rightIconInfo(R.drawable.honglib_ic_menu)
+        .rightIconColor(Pair(HongColor.WHITE_100, HongColor.BLACK_100))
+        .mainContent {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(300.dp)
+                    .background(HongColor.BLUE_10.hex.toColor()),
+                contentAlignment = Alignment.Center
+            ) {
+                HongTextCompose(
+                    option = HongTextBuilder()
+                        .text("Main Content Area")
+                        .color(HongColor.WHITE_100.hex)
+                        .applyOption()
+                )
+            }
+        }
+        .subContentList { lazyListScope ->
+            lazyListScope.items(20) { index ->
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .background(HongColor.WHITE_100.hex.toColor()),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    HongTextCompose(
+                        option = HongTextBuilder()
+                            .text("Item ${index + 1}")
+                            .color(HongColor.BLACK_100.hex)
+                            .applyOption()
+                    )
+                }
+            }
+        }
+        .applyOption()
+
+    HongScrollFadeLayout(option = option)
 }
