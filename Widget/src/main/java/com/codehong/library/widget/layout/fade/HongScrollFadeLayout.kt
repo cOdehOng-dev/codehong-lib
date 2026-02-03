@@ -18,7 +18,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -47,12 +46,10 @@ import kotlin.math.abs
 fun HongScrollFadeLayout(
     option: HongScrollFadeLayoutOption,
 ) {
-    val injectOption by remember { mutableStateOf(option) }
-
     val scrollState = rememberLazyListState()
     var mainContentOffset by remember { mutableIntStateOf(0) }
     var previousOffset by remember { mutableIntStateOf(0) }
-    val itemHeight = dpToPx(dp = injectOption.mainContentHeightDp) / 2
+    val itemHeight = dpToPx(dp = option.mainContentHeightDp) / 2
 
     var targetAlpha by remember { mutableFloatStateOf(0f) }
 
@@ -68,7 +65,7 @@ fun HongScrollFadeLayout(
                 modifier = Modifier
                     .fillMaxSize()
                     .hongBackground(
-                        color = injectOption.backgroundColorHex,
+                        color = option.backgroundColorHex,
                     )
                     .padding(it)
             ) {
@@ -80,27 +77,27 @@ fun HongScrollFadeLayout(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(injectOption.mainContentHeightDp.dp)
+                                .height(option.mainContentHeightDp.dp)
                                 .background(HongColor.TRANSPARENT.hex.toColor())
                                 .onGloballyPositioned { layoutCoordinates ->
                                     mainContentOffset = layoutCoordinates.positionInParent().y.toInt()
                                 },
                             contentAlignment = Alignment.Center
                         ) {
-                            injectOption.mainContent()
+                            option.mainContent()
                         }
                     }
-                    injectOption.subContentList(this)
+                    option.subContentList(this)
                 }
 
                 HeaderContent(
-                    option = injectOption,
+                    option = option,
                     isTransparent = targetAlpha == 0f,
                     headerAlpha = animatedAlpha
                 )
             }
         },
-        bottomBar = injectOption.bottomContent
+        bottomBar = option.bottomContent
     )
 
     // 첫 번째 아이템이 반 이상 사라졌는지 + 완전히 사라졌는지 + 스크롤 방향 체크

@@ -54,11 +54,9 @@ import kotlin.math.abs
 @Composable
 fun HongPicker(
     visible: Boolean,
-    injectOption: HongPickerOption,
+    option: HongPickerOption,
 ) {
-    val option by remember { mutableStateOf(injectOption) }
-
-    val hasDoubleOption = !injectOption.secondOptionList.isNullOrEmpty()
+    val hasDoubleOption = !option.secondOptionList.isNullOrEmpty()
 
     var selectedFirstOption by remember { mutableStateOf(Pair(option.initialFirstOption, option.firstOptionList[option.initialFirstOption])) }
     var selectedSecondOption by remember { mutableStateOf(Pair(option.initialSecondOption, option.secondOptionList?.get(option.initialSecondOption))) }
@@ -167,6 +165,7 @@ fun HongPicker(
                     Picker(
                         modifier = Modifier.weight(1f),
                         optionList = option.firstOptionList,
+                        initialIndex = selectedFirstOption.first
                     ) { index, item ->
                         selectedFirstOption = Pair(index, item)
                         option.onDirectSelect?.invoke(selectedFirstOption, selectedSecondOption)
@@ -182,6 +181,7 @@ fun HongPicker(
                                 )
                                 .weight(1f),
                             optionList = option.secondOptionList!!,
+                            initialIndex = selectedSecondOption.first
                         ) { index, item ->
                             selectedSecondOption = Pair(index, item)
                             option.onDirectSelect?.invoke(selectedFirstOption, selectedSecondOption)
@@ -233,9 +233,10 @@ fun HongPicker(
 private fun Picker(
     modifier: Modifier = Modifier,
     optionList: List<String>,
+    initialIndex: Int = 0,
     onSelected: (Int, String) -> Unit
 ) {
-    val listState = rememberLazyListState()
+    val listState = rememberLazyListState(initialFirstVisibleItemIndex = initialIndex)
     val flingBehavior = rememberSnapFlingBehavior(lazyListState = listState)
 
     BoxWithConstraints(
