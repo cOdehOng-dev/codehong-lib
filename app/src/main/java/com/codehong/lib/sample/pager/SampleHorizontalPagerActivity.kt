@@ -10,17 +10,18 @@ import androidx.compose.ui.Modifier
 import com.codehong.lib.sample.SampleComposeDespContainer
 import com.codehong.lib.sample.SampleConst.testImageUrlList
 import com.codehong.lib.sample.base.BaseSampleMixActivity
-import com.codehong.library.widget.image.HongImageCompose
+import com.codehong.library.network.debug.TimberUtil
+import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.image.HongImageBuilder
+import com.codehong.library.widget.image.HongImageCompose
 import com.codehong.library.widget.image.HongImageView
-import com.codehong.library.widget.pager.HongHorizontalPagerCompose
 import com.codehong.library.widget.pager.HongHorizontalPagerBuilder
+import com.codehong.library.widget.pager.HongHorizontalPagerCompose
 import com.codehong.library.widget.pager.HongHorizontalPagerView
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
-import com.codehong.library.widget.extensions.toColor
 
 class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
 
@@ -36,11 +37,11 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
         .pageInfoList(testImageUrlList)
         .pageSpacing(10)
         .currentIndex {
-            Log.d("TAG", "기본 현재 인데스: $it")
+            TimberUtil.d("기본 현재 인데스: $it")
         }
         .applyOption()
 
-    private val autoNandInifiniteNoption = HongHorizontalPagerBuilder()
+    private val autoNandInfiniteNoOption = HongHorizontalPagerBuilder()
         .width(HongLayoutParam.MATCH_PARENT.value)
         .verticalPadding(
             topPadding = 20f,
@@ -173,7 +174,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
             Pair(
                 "오토스크롤 X, 무한스크롤 X",
                 HongHorizontalPagerView(this)
-                    .set(autoNandInifiniteNoption) { binding, data ->
+                    .set(autoNandInfiniteNoOption) { binding, data ->
                         (data as? String)
                             ?.takeIf { it.isNotEmpty() }
                             ?.let { imageUrl ->
@@ -341,7 +342,7 @@ class SampleHorizontalPagerActivity : BaseSampleMixActivity() {
             }
             SampleComposeDespContainer(desp = "오토스크롤 X, 무한스크롤 X") {
                 HongHorizontalPagerCompose(
-                    option = autoNandInifiniteNoption,
+                    option = autoNandInfiniteNoOption,
                 ) { item ->
                     (item as? String)
                         ?.toString()

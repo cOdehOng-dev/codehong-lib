@@ -1,6 +1,7 @@
 package com.codehong.library.widget.image
 
 import coil.request.CachePolicy
+import coil.size.Size
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongScaleType
@@ -72,6 +73,14 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
         option.imageColor = colorHex
     }
 
+    fun size(size: Size?) = apply {
+        option.size = size
+    }
+
+    fun crossFade(crossFade: Boolean) = apply {
+        option.crossFade = crossFade
+    }
+
     fun copy(inject: HongImageOption?): HongImageBuilder {
         if (inject == null) return HongImageBuilder()
         return HongImageBuilder()
@@ -95,5 +104,7 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
             .memoryCache(inject.memoryCache)
             .diskCache(inject.diskCache)
             .imageColor(inject.imageColor)
+            .size(inject.size)
+            .crossFade(inject.crossFade)
     }
 }
