@@ -34,8 +34,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.codehong.lib.sample.base.BaseSampleComposeActivity
+import com.codehong.library.widget.R
 import com.codehong.library.widget.liquid.tabbar.HongLiquidGlassTabBar
 import com.codehong.library.widget.liquidglass.FloatingBlob
+import com.codehong.library.widget.liquidglass.HongLiquidGlassTabItem
 import com.codehong.library.widget.liquidglass.tabbar.HongLiquidGlassTabBarBuilder
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.haze
@@ -124,6 +126,26 @@ class SampleLiquidGlassTabBarActivity : BaseSampleComposeActivity() {
                 HongLiquidGlassTabBar(
                     HongLiquidGlassTabBarBuilder()
                         .isDarkTheme(isDarkTheme)
+                        .tabList(
+                            listOf(
+                                HongLiquidGlassTabItem(
+                                    R.drawable.honglib_ic_home,
+                                    "Home"
+                                ),
+                                HongLiquidGlassTabItem(
+                                    R.drawable.honglib_ic_search,
+                                    "Search"
+                                ),
+                                HongLiquidGlassTabItem(
+                                    R.drawable.honglib_ic_favorite,
+                                    "Favorite"
+                                ),
+                                HongLiquidGlassTabItem(
+                                    R.drawable.honglib_ic_persion,
+                                    "Profile"
+                                )
+                            )
+                        )
                         .applyOption()
                 )
             }
