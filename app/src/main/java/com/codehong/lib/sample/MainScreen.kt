@@ -48,6 +48,7 @@ import com.codehong.lib.sample.label.select.SampleLabelSelectInputActivity
 import com.codehong.lib.sample.label.toggle.SampleLabelSwitchActivity
 import com.codehong.lib.sample.layout.fade.SampleScrollFadeLayoutActivity
 import com.codehong.lib.sample.liquidglass.SampleLiquidGlassActivity
+import com.codehong.lib.sample.liquidglass.tabbar.SampleLiquidGlassTabBarActivity
 import com.codehong.lib.sample.pager.SampleHorizontalPagerActivity
 import com.codehong.lib.sample.picker.OptionPickerActivity
 import com.codehong.lib.sample.picker.SamplePickerComposeActivity
@@ -489,6 +490,7 @@ private fun handleSampleClick(
         HongWidgetType.LIQUID_GLASS -> {
             context.startSampleActivity(SampleLiquidGlassActivity::class.java, HongWidgetType.LIQUID_GLASS)
         }
+        HongWidgetType.LIQUID_GLASS_TAB_BAR -> context.startSampleActivity(SampleLiquidGlassTabBarActivity::class.java, item.widgetType)
 
         HongWidgetType.PICKER -> {
             (context as? ComponentActivity)?.let { showPickerDialog(it) }

@@ -46,7 +46,9 @@ fun HongImageCompose(option: HongImageOption) {
         val colorFilter = option.imageColor?.let { ColorFilter.tint(it.toColor()) }
 
         if (isPreview) {
-            val previewRes = option.placeholder ?: option.error
+            val previewRes = (option.imageInfo as? Int)
+                ?: option.placeholder
+                ?: option.error
             if (previewRes != null) {
                 Image(
                     modifier = imageModifier,

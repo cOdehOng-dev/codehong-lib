@@ -3,7 +3,7 @@ package com.codehong.lib.sample.liquidglass
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import com.codehong.lib.sample.base.BaseActivity
-import com.codehong.library.widget.liquid.LiquidGlassScreen
+import com.codehong.library.widget.liquidglass.LiquidGlassScreen
 
 class SampleLiquidGlassActivity : BaseActivity() {
 

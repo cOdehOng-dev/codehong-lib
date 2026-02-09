@@ -48,6 +48,7 @@ enum class HongWidgetType(
     SCROLL_FADE_ANIM_LAYOUT("ScrollFadeAnimLayout", false),
     LIQUID_GLASS("LiquidGlass", false),
     PROGRESS("Progress", false),
+    LIQUID_GLASS_TAB_BAR("LiquidGlassTabBar", false),
     NO_VALUE("no_value");
 
     companion object {

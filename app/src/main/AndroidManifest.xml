@@ -113,6 +113,7 @@
         <activity android:name=".icon.SampleIconActivity"/>
         <activity android:name=".draganddrop.SampleDragAndDropActivity"/>
         <activity android:name=".liquidglass.SampleLiquidGlassActivity"/>
+        <activity android:name=".liquidglass.tabbar.SampleLiquidGlassTabBarActivity"/>
         <activity android:name=".progress.SampleProgressActivity"/>
     </application>
 

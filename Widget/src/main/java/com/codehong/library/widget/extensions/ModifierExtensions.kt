@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
@@ -35,6 +38,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.rule.HongBorderInfo
@@ -45,6 +49,10 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toRoundCornerShape
 import com.codehong.library.widget.rule.radius.HongRadiusInfo.Companion.toRoundedCornerShape
+import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.HazeStyle
+import dev.chrisbanes.haze.HazeTint
+import dev.chrisbanes.haze.hazeChild
 
 /**
  * 클릭 ripple 이벤트 삭제
@@ -299,3 +307,79 @@ fun Modifier.shimmerEffect() = composed {
     }
 }
 
+
+@Composable
+fun Modifier.liquidGlass(
+    hazeState: HazeState,
+    shape: RoundedCornerShape,
+    isDarkTheme: Boolean,
+    blurRadius: Dp = 30.dp
+): Modifier {
+    // 1. 틴트 설정
+    val tintColor = if (isDarkTheme) {
+        Color.White.copy(alpha = 0.1f)
+    } else {
+        // [수정] Light Mode: 흰색 틴트를 조금 더 강하게
+        Color.White.copy(alpha = 0.6f)
+    }
+
+    // 2. [핵심 수정] 배경색 설정
+    val glassBackgroundColor = if (isDarkTheme) {
+        Color.Black.copy(alpha = 0.3f)
+    } else {
+        // [수정] Light Mode:
+        // 1. Alpha를 0.45f -> 0.85f로 대폭 올려서 불투명하게 만듦 (하얀색 위에서도 잘 보임)
+        // 2. 순수 화이트 대신 아주 연한 회색(F5F5F5)을 베이스로 사용하여 하얀 배경과 대비를 줌
+        Color(0xFFF5F5F7).copy(alpha = 0.8f)
+    }
+
+    // 3. 유리 테두리 (하이라이트)
+    val glassBorderBrush = if (isDarkTheme) {
+        Brush.verticalGradient(
+            colors = listOf(Color.White.copy(alpha = 0.4f), Color.White.copy(alpha = 0.05f))
+        )
+    } else {
+        // [수정] Light Mode 테두리를 더 선명하게 하여 경계 강조
+        Brush.verticalGradient(
+            colors = listOf(
+                Color.White.copy(alpha = 0.9f),
+                Color(0xFFE5E5EA).copy(alpha = 0.6f) // 아래쪽도 회색톤으로 잡아줌
+            )
+        )
+    }
+
+    // 4. 그림자 설정
+    val shadowColor = if (isDarkTheme) {
+        Color.Black.copy(alpha = 1.0f)
+    } else {
+        // Light Mode 그림자를 조금 더 진하게 (0.25f -> 0.3f)
+        Color.Black.copy(alpha = 0.3f)
+    }
+
+    val shadowElevation = if (isDarkTheme) 24.dp else 16.dp
+
+    return this
+        // Layer 1: 그림자 (위쪽 포함 사방으로 퍼짐)
+        .shadow(
+            elevation = shadowElevation,
+            shape = shape,
+            spotColor = shadowColor,
+            ambientColor = shadowColor,
+            clip = false
+        )
+        // Layer 2: 형태 클리핑
+        .clip(shape)
+
+        // Layer 3: 블러 (Haze) + 배경색
+        .hazeChild(
+            state = hazeState,
+            style = HazeStyle(
+                backgroundColor = glassBackgroundColor, // 수정된 진한 배경색 적용
+                tint = HazeTint(tintColor),
+                blurRadius = blurRadius,
+                noiseFactor = 0.02f
+            )
+        )
+        // Layer 4: 유리 하이라이트
+        .border(width = 1.dp, brush = glassBorderBrush, shape = shape)
+}
