@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.codehong.lib.sample.base.BaseActivity
+import com.codehong.library.network.debug.TimberUtil
 import com.codehong.library.widget.R
 import com.codehong.library.widget.liquid.tabbar.HongLiquidGlassTabBar
 import com.codehong.library.widget.liquidglass.FloatingBlob
@@ -151,6 +152,12 @@ class SampleLiquidGlassTabBarActivity : BaseActivity() {
                                 )
                             )
                             .outerRadius(40)
+                            .tabBarHeight(80)
+                            .tabVerticalPadding(12)
+                            .innerSideGap(16)
+                            .onSelectedTab { i, item ->
+                                TimberUtil.d("Selected tab index: $i, title: $item")
+                            }
                             .applyOption()
                     )
                 }

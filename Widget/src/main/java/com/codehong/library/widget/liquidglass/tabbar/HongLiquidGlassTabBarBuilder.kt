@@ -2,6 +2,7 @@ package com.codehong.library.widget.liquidglass.tabbar
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
 import com.codehong.library.widget.liquidglass.HongLiquidGlassTabItem
+import com.codehong.library.widget.rule.typo.HongTypo
 
 class HongLiquidGlassTabBarBuilder : HongWidgetCommonBuilder<HongLiquidGlassTabBarOption, HongLiquidGlassTabBarBuilder> {
 
@@ -26,8 +27,32 @@ class HongLiquidGlassTabBarBuilder : HongWidgetCommonBuilder<HongLiquidGlassTabB
         option.outerRadius = outerRadius
     }
 
+    fun tabBarHeight(tabBarHeight: Int) = apply {
+        option.tabBarHeight = tabBarHeight
+    }
 
-    fun onSelectedTab(onSelectedTab: (HongLiquidGlassTabItem) -> Unit) = apply {
+    fun tabVerticalPadding(verticalPadding: Int) = apply {
+        option.verticalPadding = verticalPadding
+    }
+
+    fun innerSideGap(innerSideGap: Int) = apply {
+        if (innerSideGap > 16) {
+            option.innerSideGap = 16
+            return this
+        }
+        option.innerSideGap = innerSideGap
+    }
+
+    fun tabSelectTypo(tabSelectTypo: HongTypo) = apply {
+        option.tabSelectTypo = tabSelectTypo
+    }
+
+    fun tabDefTypo(tabDefTypo: HongTypo) = apply {
+        option.tabDefTypo = tabDefTypo
+    }
+
+
+    fun onSelectedTab(onSelectedTab: (Int, HongLiquidGlassTabItem) -> Unit) = apply {
         option.onSelectedTab = onSelectedTab
     }
 

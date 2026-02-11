@@ -9,6 +9,7 @@ import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
+import com.codehong.library.widget.rule.typo.HongTypo
 
 data class HongLiquidGlassTabBarOption(
     override val type: HongWidgetType = HongWidgetType.LIQUID_GLASS_TAB_BAR,
@@ -32,10 +33,21 @@ data class HongLiquidGlassTabBarOption(
 
     var isDarkTheme: Boolean = false
 
-    var onSelectedTab: (HongLiquidGlassTabItem) -> Unit = {}
+    var onSelectedTab: (Int, HongLiquidGlassTabItem) -> Unit = {_, _ ->}
 
 
     var outerRadius: Int = 40
+
+    var verticalPadding: Int = 12
+
+    var innerSideGap: Int = 16
+
+    var tabBarHeight: Int = 80
+
+
+    var tabSelectTypo: HongTypo = HongTypo.CONTENTS_12_B
+    var tabDefTypo: HongTypo = HongTypo.CONTENTS_12
+
 
 
 }

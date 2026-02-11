@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,7 +22,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -43,15 +41,20 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.liquidGlass
+import com.codehong.library.widget.extensions.toHexCode
 import com.codehong.library.widget.image.def.HongImageBuilder
 import com.codehong.library.widget.image.def.HongImageCompose
 import com.codehong.library.widget.liquidglass.tabbar.HongLiquidGlassTabBarOption
 import com.codehong.library.widget.rule.HongScaleType
+import com.codehong.library.widget.rule.HongSpacingInfo
+import com.codehong.library.widget.rule.HongTextAlign
+import com.codehong.library.widget.rule.color.HongColor
+import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
+import com.codehong.library.widget.text.def.HongTextBuilder
+import com.codehong.library.widget.text.def.HongTextCompose
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeStyle
 import dev.chrisbanes.haze.HazeTint
@@ -94,9 +97,9 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
 
     // [인디케이터 베이스 색상 설정]
     val targetBaseColor = if (option.isDarkTheme) {
-        Color.White.copy(alpha = 0.05f)
+        HongColor.WHITE_100.toColor().copy(alpha = 0.05f)
     } else {
-        Color.Black.copy(alpha = 0.1f)
+        HongColor.BLACK_100.toColor().copy(alpha = 0.06f)
     }
 
     val dragAlpha = if (option.isDarkTheme) 0.01f else 0.06f
@@ -107,11 +110,8 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
         label = "IndicatorColor"
     )
 
-    val tabBarHeight = 80.dp
     val tabBarShape = RoundedCornerShape(option.outerRadius.dp)
-    val verticalPadding = 12.dp
-    val indicatorShape = RoundedCornerShape(option.outerRadius.dp - verticalPadding)
-    val innerSideGap = 16.dp
+    val indicatorShape = RoundedCornerShape(option.outerRadius.dp - option.verticalPadding.dp)
 
     Box(
         modifier = Modifier
@@ -126,13 +126,13 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                 .scale(tabBarScale)
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
-                .height(tabBarHeight)
+                .hongHeight(option.tabBarHeight)
                 .liquidGlass(hazeState, tabBarShape, option.isDarkTheme, blurRadius = 40.dp)
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = innerSideGap)
+                    .padding(horizontal = option.innerSideGap.dp)
                     .onGloballyPositioned { coordinates ->
                         if (tabWidthPx == 0f) {
                             tabWidthPx = coordinates.size.width.toFloat() / option.tabList.size
@@ -143,6 +143,7 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                             onTap = { offset ->
                                 val index = (offset.x / tabWidthPx).toInt().coerceIn(0, option.tabList.lastIndex)
                                 selectedIndex = index
+                                option.onSelectedTab(selectedIndex, option.tabList[selectedIndex])
                                 scope.launch { indicatorOffset.animateTo(index * tabWidthPx, spring(0.7f, 400f)) }
                             },
                             onPress = { tryAwaitRelease() }
@@ -179,7 +180,7 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                     // [수정] 높이 증가량을 8.dp -> 18.dp로 대폭 늘림
                     val stretchHeight = 18.dp * bulgeIntensity
 
-                    val indicatorHeight = (tabBarHeight - (verticalPadding * 2)) + stretchHeight
+                    val indicatorHeight = (option.tabBarHeight.dp - (option.verticalPadding.dp * 2)) + stretchHeight
 
                     val stretchWidth = 16.dp * bulgeIntensity
                     val currentOffsetDp = with(density) { indicatorOffset.value.toDp() }
@@ -189,9 +190,9 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                     val refractionRimBrush = Brush.radialGradient(
                         colors = listOf(
                             Color.Transparent,
-                            Color.White.copy(alpha = 0.05f * lensEffectAlpha),
-                            Color.White.copy(alpha = 0.2f * lensEffectAlpha),
-                            Color.White.copy(alpha = 0.6f * lensEffectAlpha)
+                            HongColor.WHITE_100.toColor().copy(alpha = 0.05f * lensEffectAlpha),
+                            HongColor.WHITE_100.toColor().copy(alpha = 0.2f * lensEffectAlpha),
+                            HongColor.WHITE_100.toColor().copy(alpha = 0.6f * lensEffectAlpha)
                         ),
                         radius = with(density) { (indicatorWidth.toPx() + stretchWidth.toPx()) * 0.7f }
                     )
@@ -199,11 +200,11 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                     // 2. [Lens Highlight]
                     val lensHighlight = Brush.linearGradient(
                         colors = listOf(
-                            Color.White.copy(alpha = 0.5f * lensEffectAlpha),
-                            Color.White.copy(alpha = 0.1f * lensEffectAlpha),
+                            HongColor.WHITE_100.toColor().copy(alpha = 0.5f * lensEffectAlpha),
+                            HongColor.WHITE_100.toColor().copy(alpha = 0.1f * lensEffectAlpha),
                             Color.Transparent,
                             Color.Transparent,
-                            Color.White.copy(alpha = 0.3f * lensEffectAlpha)
+                            HongColor.WHITE_100.toColor().copy(alpha = 0.3f * lensEffectAlpha)
                         ),
                         start = Offset.Zero, end = Offset.Infinite
                     )
@@ -211,8 +212,8 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                     // 3. [Border]
                     val borderBrush = Brush.verticalGradient(
                         colors = listOf(
-                            Color.White.copy(alpha = 0.7f * lensEffectAlpha),
-                            Color.White.copy(alpha = 0.2f * lensEffectAlpha)
+                            HongColor.WHITE_100.toColor().copy(alpha = 0.7f * lensEffectAlpha),
+                            HongColor.WHITE_100.toColor().copy(alpha = 0.2f * lensEffectAlpha)
                         )
                     )
 
@@ -230,10 +231,10 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                             .hazeChild(
                                 state = hazeState,
                                 style = HazeStyle(
-                                    tint = HazeTint(Color.White.copy(alpha = 0.2f)),
+                                    tint = HazeTint(HongColor.WHITE_100.toColor().copy(alpha = 0.2f)),
                                     blurRadius = 15.dp,
                                     noiseFactor = 0.05f,
-                                    backgroundColor = if (option.isDarkTheme) Color.Black else Color.White
+                                    backgroundColor = if (option.isDarkTheme) HongColor.BLACK_100.toColor() else HongColor.WHITE_100.toColor()
                                 )
                             )
                             .background(animatedBaseColor) // 기본 투명도
@@ -274,9 +275,9 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
 
                         // 선택 상태에 따른 색상 (드래그 영향 X)
                         val contentColor = if (option.isDarkTheme) {
-                            if (isSelected) Color.White else Color.White.copy(0.5f)
+                            if (isSelected) HongColor.WHITE_100.toColor() else HongColor.WHITE_100.toColor().copy(0.5f)
                         } else {
-                            if (isSelected) Color.Black else Color.Black.copy(0.5f)
+                            if (isSelected) HongColor.BLACK_100.toColor() else HongColor.BLACK_100.toColor().copy(0.5f)
                         }
 
                         val animatedContentColor by animateColorAsState(
@@ -293,12 +294,6 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                             verticalArrangement = Arrangement.Center,
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-//                            Icon(
-//                                imageVector = tab.icon as ImageVector,
-//                                contentDescription = tab.label,
-//                                tint = animatedContentColor,
-//                                modifier = Modifier.size(24.dp)
-//                            )
                             HongImageCompose(
                                 option = HongImageBuilder()
                                     .width(24)
@@ -308,13 +303,14 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                                     .imageColor(animatedContentColor)
                                     .applyOption()
                             )
-                            Spacer(modifier = Modifier.height(4.dp))
-                            Text(
-                                text = tab.label,
-                                color = animatedContentColor,
-                                fontSize = 11.sp,
-                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                                textAlign = TextAlign.Center
+                            HongTextCompose(
+                                option = HongTextBuilder()
+                                    .margin(HongSpacingInfo(top = 4f))
+                                    .text(tab.label)
+                                    .typography(if (isSelected) option.tabSelectTypo else option.tabDefTypo)
+                                    .color(animatedContentColor.toHexCode())
+                                    .textAlign(HongTextAlign.CENTER)
+                                    .applyOption()
                             )
                         }
                     }
