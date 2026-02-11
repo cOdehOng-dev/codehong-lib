@@ -29,8 +29,8 @@ import com.codehong.library.widget.button.text.HongButtonTextBuilder
 import com.codehong.library.widget.button.text.HongButtonTextCompose
 import com.codehong.library.widget.draganddrop.HongDragTarget
 import com.codehong.library.widget.extensions.toColor
-import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.image.HongImageCompose
+import com.codehong.library.widget.image.def.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageCompose
 import com.codehong.library.widget.pretendardFontFamily
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongScaleType

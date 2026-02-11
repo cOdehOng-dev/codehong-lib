@@ -4,9 +4,9 @@ import android.view.View
 import androidx.compose.runtime.Composable
 import com.codehong.lib.sample.base.BaseSampleMixActivity
 import com.codehong.library.widget.R
-import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.image.HongImageCompose
-import com.codehong.library.widget.image.HongImageView
+import com.codehong.library.widget.image.def.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageCompose
+import com.codehong.library.widget.image.def.HongImageView
 import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongShadowInfo
 import com.codehong.library.widget.rule.HongSpacingInfo

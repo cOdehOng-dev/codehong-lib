@@ -2,8 +2,8 @@ package com.codehong.library.widget.textfield.timer
 
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.R
-import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.image.HongImageOption
+import com.codehong.library.widget.image.def.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageOption
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo

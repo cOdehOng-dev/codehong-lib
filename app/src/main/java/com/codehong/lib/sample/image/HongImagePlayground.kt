@@ -3,8 +3,8 @@ package com.codehong.lib.sample.image
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
-import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.image.HongImageOption
+import com.codehong.library.widget.image.def.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageOption
 import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongScaleType.Companion.toHongScaleType
 import com.codehong.library.widget.rule.HongShadowInfo

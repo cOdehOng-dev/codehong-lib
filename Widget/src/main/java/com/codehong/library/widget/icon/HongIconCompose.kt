@@ -1,8 +1,8 @@
 package com.codehong.library.widget.icon
 
 import androidx.compose.runtime.Composable
-import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.image.HongImageCompose
+import com.codehong.library.widget.image.def.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageCompose
 import com.codehong.library.widget.util.HongWidgetNoneClickContainer
 
 @Composable

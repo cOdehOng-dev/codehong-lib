@@ -1,8 +1,10 @@
-package com.codehong.library.widget.image
+package com.codehong.library.widget.image.def
 
+import androidx.compose.ui.graphics.Color
 import coil.request.CachePolicy
 import coil.size.Size
 import com.codehong.library.widget.HongWidgetCommonBuilder
+import com.codehong.library.widget.extensions.toHexCode
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongShadowInfo
@@ -67,7 +69,10 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
     }
 
     fun imageColor(color: HongColor) = apply {
-        option.imageColor = color.hex
+        imageColor(color.hex)
+    }
+    fun imageColor(color: Color) = apply {
+        imageColor(color.toHexCode())
     }
     fun imageColor(colorHex: String?) = apply {
         option.imageColor = colorHex

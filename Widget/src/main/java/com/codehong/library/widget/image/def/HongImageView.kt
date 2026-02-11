@@ -1,4 +1,4 @@
-package com.codehong.library.widget.image
+package com.codehong.library.widget.image.def
 
 import android.content.Context
 import android.graphics.PorterDuff

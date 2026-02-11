@@ -17,7 +17,18 @@ class HongLiquidGlassTabBarBuilder : HongWidgetCommonBuilder<HongLiquidGlassTabB
         option.isDarkTheme = isDarkTheme
     }
 
+
+    fun outerRadius(outerRadius: Int) = apply {
+        if (outerRadius > 40) {
+            option.outerRadius = 40
+            return this
+        }
+        option.outerRadius = outerRadius
+    }
+
+
     fun onSelectedTab(onSelectedTab: (HongLiquidGlassTabItem) -> Unit) = apply {
         option.onSelectedTab = onSelectedTab
     }
+
 }

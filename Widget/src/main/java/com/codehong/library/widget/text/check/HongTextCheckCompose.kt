@@ -12,8 +12,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
-import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.image.HongImageCompose
+import com.codehong.library.widget.image.def.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageCompose
 import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor

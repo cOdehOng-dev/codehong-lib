@@ -8,8 +8,8 @@ import android.widget.LinearLayout
 import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.setLayout
-import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.image.HongImageView
+import com.codehong.library.widget.image.def.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageView
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongTextAlign

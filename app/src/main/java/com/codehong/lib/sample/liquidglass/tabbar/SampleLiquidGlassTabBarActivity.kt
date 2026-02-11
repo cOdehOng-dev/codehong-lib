@@ -1,5 +1,7 @@
 package com.codehong.lib.sample.liquidglass.tabbar
 
+import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -33,7 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.codehong.lib.sample.base.BaseSampleComposeActivity
+import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.library.widget.R
 import com.codehong.library.widget.liquid.tabbar.HongLiquidGlassTabBar
 import com.codehong.library.widget.liquidglass.FloatingBlob
@@ -42,112 +44,116 @@ import com.codehong.library.widget.liquidglass.tabbar.HongLiquidGlassTabBarBuild
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.haze
 
-class SampleLiquidGlassTabBarActivity : BaseSampleComposeActivity() {
+class SampleLiquidGlassTabBarActivity : BaseActivity() {
 
-    @Composable
-    override fun InitCompose() {
-        val hazeState = remember { HazeState() }
-        var isDarkTheme by remember { mutableStateOf(true) }
 
-        val backgroundColor by animateColorAsState(
-            targetValue = if (isDarkTheme) Color(0xFF050510) else Color(0xFFFFFFFF),
-            animationSpec = tween(1000),
-            label = "BgColor"
-        )
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            val hazeState = remember { HazeState() }
+            var isDarkTheme by remember { mutableStateOf(true) }
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
+            val backgroundColor by animateColorAsState(
+                targetValue = if (isDarkTheme) Color(0xFF050510) else Color(0xFFFFFFFF),
+                animationSpec = tween(1000),
+                label = "BgColor"
+            )
+
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(backgroundColor)
             ) {
-                AnimatedColorfulBackground()
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .haze(state = hazeState)
-                )
-            }
-
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .statusBarsPadding()
-                    .navigationBarsPadding(),
-                verticalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .background(backgroundColor)
                 ) {
-                    Text(
-                        text = if (isDarkTheme) "Dark Mode Glass" else "Light Mode Glass",
-                        color = if (isDarkTheme) Color.White else Color.Black,
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            "Light",
-                            color = if (isDarkTheme) Color.White.copy(0.5f) else Color.Black,
-                            modifier = Modifier.padding(end = 8.dp)
-                        )
-                        Switch(
-                            checked = isDarkTheme,
-                            onCheckedChange = { isDarkTheme = it },
-                            colors = SwitchDefaults.colors(
-                                checkedThumbColor = Color.White,
-                                checkedTrackColor = Color(0xFF3300FF),
-                                uncheckedThumbColor = Color.Gray,
-                                uncheckedTrackColor = Color.White
-                            )
-                        )
-                        Text(
-                            "Dark",
-                            color = if (isDarkTheme) Color.White else Color.Black.copy(0.5f),
-                            modifier = Modifier.padding(start = 8.dp)
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(24.dp))
-                    Text(
-                        text = "Swipe the tab bar below",
-                        color = if (isDarkTheme) Color.White.copy(alpha = 0.5f) else Color.Black.copy(
-                            0.5f
-                        ),
-                        fontSize = 16.sp
+                    AnimatedColorfulBackground()
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .haze(state = hazeState)
                     )
                 }
 
-                HongLiquidGlassTabBar(
-                    HongLiquidGlassTabBarBuilder()
-                        .isDarkTheme(isDarkTheme)
-                        .tabList(
-                            listOf(
-                                HongLiquidGlassTabItem(
-                                    R.drawable.honglib_ic_home,
-                                    "Home"
-                                ),
-                                HongLiquidGlassTabItem(
-                                    R.drawable.honglib_ic_search,
-                                    "Search"
-                                ),
-                                HongLiquidGlassTabItem(
-                                    R.drawable.honglib_ic_favorite,
-                                    "Favorite"
-                                ),
-                                HongLiquidGlassTabItem(
-                                    R.drawable.honglib_ic_persion,
-                                    "Profile"
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .statusBarsPadding()
+                        .navigationBarsPadding(),
+                    verticalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = if (isDarkTheme) "Dark Mode Glass" else "Light Mode Glass",
+                            color = if (isDarkTheme) Color.White else Color.Black,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                "Light",
+                                color = if (isDarkTheme) Color.White.copy(0.5f) else Color.Black,
+                                modifier = Modifier.padding(end = 8.dp)
+                            )
+                            Switch(
+                                checked = isDarkTheme,
+                                onCheckedChange = { isDarkTheme = it },
+                                colors = SwitchDefaults.colors(
+                                    checkedThumbColor = Color.White,
+                                    checkedTrackColor = Color(0xFF3300FF),
+                                    uncheckedThumbColor = Color.Gray,
+                                    uncheckedTrackColor = Color.White
                                 )
                             )
+                            Text(
+                                "Dark",
+                                color = if (isDarkTheme) Color.White else Color.Black.copy(0.5f),
+                                modifier = Modifier.padding(start = 8.dp)
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(24.dp))
+                        Text(
+                            text = "Swipe the tab bar below",
+                            color = if (isDarkTheme) Color.White.copy(alpha = 0.5f) else Color.Black.copy(
+                                0.5f
+                            ),
+                            fontSize = 16.sp
                         )
-                        .applyOption()
-                )
+                    }
+
+                    HongLiquidGlassTabBar(
+                        HongLiquidGlassTabBarBuilder()
+                            .isDarkTheme(isDarkTheme)
+                            .tabList(
+                                listOf(
+                                    HongLiquidGlassTabItem(
+                                        R.drawable.honglib_ic_home,
+                                        "Home"
+                                    ),
+                                    HongLiquidGlassTabItem(
+                                        R.drawable.honglib_ic_search,
+                                        "Search"
+                                    ),
+                                    HongLiquidGlassTabItem(
+                                        R.drawable.honglib_ic_favorite,
+                                        "Favorite"
+                                    ),
+                                    HongLiquidGlassTabItem(
+                                        R.drawable.honglib_ic_persion,
+                                        "Profile"
+                                    )
+                                )
+                            )
+                            .outerRadius(40)
+                            .applyOption()
+                    )
+                }
             }
         }
     }

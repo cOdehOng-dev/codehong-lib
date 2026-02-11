@@ -11,6 +11,7 @@ enum class HongWidgetType(
     TEXT_BADGE("TextBadge", true),
     TEXT_COUNT("TextCount", true),
     IMAGE("Image", true),
+    IMAGE_BLUR("ImageBlur", false),
     HEADER_CLOSE("HeaderClose", true),
     HEADER_ICON("HeaderIcon", true),
     TEXT_FILED("TextField", true),
@@ -46,8 +47,8 @@ enum class HongWidgetType(
     ICON("Icon", true),
     GRID_DRAG_AND_DROP("GridDragAndDrop", false),
     SCROLL_FADE_ANIM_LAYOUT("ScrollFadeAnimLayout", false),
-    LIQUID_GLASS("LiquidGlass", false),
     PROGRESS("Progress", false),
+    LIQUID_GLASS_HEADER("LiquidGlassHeader", false),
     LIQUID_GLASS_TAB_BAR("LiquidGlassTabBar", false),
     NO_VALUE("no_value");
 

@@ -1,7 +1,7 @@
 package com.codehong.library.widget.textfield.timer
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
-import com.codehong.library.widget.image.HongImageOption
+import com.codehong.library.widget.image.def.HongImageOption
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.keyboard.HongKeyboardActionType
 import com.codehong.library.widget.rule.keyboard.HongKeyboardType

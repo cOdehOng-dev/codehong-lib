@@ -12,9 +12,9 @@ import com.codehong.lib.sample.SampleConst.testImageUrlList
 import com.codehong.lib.sample.base.BaseSampleMixActivity
 import com.codehong.library.network.debug.TimberUtil
 import com.codehong.library.widget.extensions.toColor
-import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.image.HongImageCompose
-import com.codehong.library.widget.image.HongImageView
+import com.codehong.library.widget.image.def.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageCompose
+import com.codehong.library.widget.image.def.HongImageView
 import com.codehong.library.widget.pager.HongHorizontalPagerBuilder
 import com.codehong.library.widget.pager.HongHorizontalPagerCompose
 import com.codehong.library.widget.pager.HongHorizontalPagerView

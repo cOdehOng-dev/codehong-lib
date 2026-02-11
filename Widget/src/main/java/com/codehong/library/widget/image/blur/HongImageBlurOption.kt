@@ -1,7 +1,5 @@
-package com.codehong.library.widget.image
+package com.codehong.library.widget.image.blur
 
-import coil.request.CachePolicy
-import coil.size.Size
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
@@ -12,10 +10,9 @@ import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 
-data class HongImageOption(
-    override val type: HongWidgetType = HongWidgetType.IMAGE
+data class HongImageBlurOption(
+    override val type: HongWidgetType = HongWidgetType.IMAGE_BLUR
 ) : HongWidgetCommonOption {
-
     override var isValidComponent: Boolean = true
 
     override var width: Int = HongLayoutParam.WRAP_CONTENT.value
@@ -33,39 +30,24 @@ data class HongImageOption(
 
     override var useShapeCircle: Boolean = false
 
-
     var imageInfo: Any? = null
-    var placeholder: Int? = null
-    var error: Int? = null
-    var onLoading: (() -> Unit)? = null
-    var onSuccess: (() -> Unit)? = null
-    var onError: (() -> Unit)? = null
 
-    var scaleType: HongScaleType = HongScaleType.FIT_START
+    var scaleType: HongScaleType = HongScaleType.CENTER_CROP
 
-    var memoryCache = CachePolicy.ENABLED
-    var diskCache = CachePolicy.ENABLED
-
-    var imageColor: String? = null
-
-    var size: Size? = null
-
-    var crossFade: Boolean = false
+    var blur: Int = 30
 
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as HongImageOption
+        other as HongImageBlurOption
 
         if (isValidComponent != other.isValidComponent) return false
         if (width != other.width) return false
         if (height != other.height) return false
         if (useShapeCircle != other.useShapeCircle) return false
-        if (placeholder != other.placeholder) return false
-        if (error != other.error) return false
-        if (crossFade != other.crossFade) return false
+        if (blur != other.blur) return false
         if (type != other.type) return false
         if (margin != other.margin) return false
         if (padding != other.padding) return false
@@ -75,14 +57,7 @@ data class HongImageOption(
         if (border != other.border) return false
         if (shadow != other.shadow) return false
         if (imageInfo != other.imageInfo) return false
-        if (onLoading != other.onLoading) return false
-        if (onSuccess != other.onSuccess) return false
-        if (onError != other.onError) return false
         if (scaleType != other.scaleType) return false
-        if (memoryCache != other.memoryCache) return false
-        if (diskCache != other.diskCache) return false
-        if (imageColor != other.imageColor) return false
-        if (size != other.size) return false
 
         return true
     }
@@ -92,9 +67,7 @@ data class HongImageOption(
         result = 31 * result + width
         result = 31 * result + height
         result = 31 * result + useShapeCircle.hashCode()
-        result = 31 * result + (placeholder ?: 0)
-        result = 31 * result + (error ?: 0)
-        result = 31 * result + crossFade.hashCode()
+        result = 31 * result + blur
         result = 31 * result + type.hashCode()
         result = 31 * result + margin.hashCode()
         result = 31 * result + padding.hashCode()
@@ -104,19 +77,12 @@ data class HongImageOption(
         result = 31 * result + border.hashCode()
         result = 31 * result + shadow.hashCode()
         result = 31 * result + (imageInfo?.hashCode() ?: 0)
-        result = 31 * result + (onLoading?.hashCode() ?: 0)
-        result = 31 * result + (onSuccess?.hashCode() ?: 0)
-        result = 31 * result + (onError?.hashCode() ?: 0)
         result = 31 * result + scaleType.hashCode()
-        result = 31 * result + memoryCache.hashCode()
-        result = 31 * result + diskCache.hashCode()
-        result = 31 * result + (imageColor?.hashCode() ?: 0)
-        result = 31 * result + (size?.hashCode() ?: 0)
         return result
     }
 
     override fun toString(): String {
-        return "HongImageOption(" +
+        return "HongImageBlurOption(" +
                 "type=$type, " +
                 "isValidComponent=$isValidComponent, " +
                 "width=$width, " +
@@ -130,17 +96,8 @@ data class HongImageOption(
                 "shadow=$shadow, " +
                 "useShapeCircle=$useShapeCircle, " +
                 "imageInfo=$imageInfo, " +
-                "placeholder=$placeholder, " +
-                "error=$error, " +
-                "onLoading=$onLoading, " +
-                "onSuccess=$onSuccess, " +
-                "onError=$onError, " +
                 "scaleType=$scaleType, " +
-                "memoryCache=$memoryCache, " +
-                "diskCache=$diskCache, " +
-                "imageColor=$imageColor, " +
-                "size=$size, " +
-                "crossFade=$crossFade" +
+                "blur=$blur" +
                 ")"
     }
 }

@@ -6,7 +6,7 @@ import com.codehong.lib.sample.playground.PlaygroundManager
 import com.codehong.lib.sample.text.HongTextPlayground
 import com.codehong.library.widget.extensions.toFigureInt
 import com.codehong.library.widget.extensions.toFigureString
-import com.codehong.library.widget.image.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageBuilder
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType

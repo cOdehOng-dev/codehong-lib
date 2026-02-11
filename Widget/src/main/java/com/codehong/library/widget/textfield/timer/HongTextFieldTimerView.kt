@@ -23,8 +23,8 @@ import com.codehong.library.widget.extensions.setLayout
 import com.codehong.library.widget.extensions.setUseHideKeyboard
 import com.codehong.library.widget.extensions.toKeyboardOptions
 import com.codehong.library.widget.extensions.toParseColor
-import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.image.HongImageView
+import com.codehong.library.widget.image.def.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageView
 import com.codehong.library.widget.language.hongImage
 import com.codehong.library.widget.language.hongText
 import com.codehong.library.widget.language.horizontalLinearLayout

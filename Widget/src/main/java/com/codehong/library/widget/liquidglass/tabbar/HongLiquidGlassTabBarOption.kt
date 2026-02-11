@@ -32,7 +32,10 @@ data class HongLiquidGlassTabBarOption(
 
     var isDarkTheme: Boolean = false
 
-    var onSelectedTab: (HongLiquidGlassTabItem) -> Unit = { }
+    var onSelectedTab: (HongLiquidGlassTabItem) -> Unit = {}
+
+
+    var outerRadius: Int = 40
 
 
 }

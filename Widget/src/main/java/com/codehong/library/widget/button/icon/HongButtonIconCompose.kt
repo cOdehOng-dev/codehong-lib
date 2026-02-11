@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codehong.library.widget.extensions.hongBackground
-import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.image.HongImageCompose
+import com.codehong.library.widget.image.def.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageCompose
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongClickState
 import com.codehong.library.widget.rule.HongClickState.Companion.isEnable

@@ -11,7 +11,7 @@ import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
 import com.codehong.library.widget.extensions.toFigureStringCoverZero
-import com.codehong.library.widget.image.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageBuilder
 import com.codehong.library.widget.language.frameLayout
 import com.codehong.library.widget.language.hongImage
 import com.codehong.library.widget.language.hongTextUnit

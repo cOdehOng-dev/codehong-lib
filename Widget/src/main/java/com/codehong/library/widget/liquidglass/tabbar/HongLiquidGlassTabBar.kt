@@ -21,16 +21,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -48,7 +40,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
@@ -57,8 +48,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.codehong.library.widget.extensions.liquidGlass
-import com.codehong.library.widget.liquidglass.HongLiquidGlassTabItem
+import com.codehong.library.widget.image.def.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageCompose
 import com.codehong.library.widget.liquidglass.tabbar.HongLiquidGlassTabBarOption
+import com.codehong.library.widget.rule.HongScaleType
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeStyle
 import dev.chrisbanes.haze.HazeTint
@@ -68,14 +61,6 @@ import kotlin.math.roundToInt
 
 @Composable
 fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
-    val tabs = listOf(
-        HongLiquidGlassTabItem(Icons.Default.Home, "Home"),
-        HongLiquidGlassTabItem(Icons.Default.Search, "Search"),
-        HongLiquidGlassTabItem(Icons.Filled.Favorite, "Likes"),
-        HongLiquidGlassTabItem(Icons.Filled.Notifications, "Noti"),
-        HongLiquidGlassTabItem(Icons.Default.Settings, "Setting")
-    )
-
     val hazeState = remember { HazeState() }
 
     var selectedIndex by remember { mutableIntStateOf(0) }
@@ -123,10 +108,9 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
     )
 
     val tabBarHeight = 80.dp
-    val outerRadius = 40.dp
-    val tabBarShape = RoundedCornerShape(outerRadius)
+    val tabBarShape = RoundedCornerShape(option.outerRadius.dp)
     val verticalPadding = 12.dp
-    val indicatorShape = RoundedCornerShape(outerRadius - verticalPadding)
+    val indicatorShape = RoundedCornerShape(option.outerRadius.dp - verticalPadding)
     val innerSideGap = 16.dp
 
     Box(
@@ -151,13 +135,13 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                     .padding(horizontal = innerSideGap)
                     .onGloballyPositioned { coordinates ->
                         if (tabWidthPx == 0f) {
-                            tabWidthPx = coordinates.size.width.toFloat() / tabs.size
+                            tabWidthPx = coordinates.size.width.toFloat() / option.tabList.size
                         }
                     }
                     .pointerInput(Unit) {
                         detectTapGestures(
                             onTap = { offset ->
-                                val index = (offset.x / tabWidthPx).toInt().coerceIn(0, tabs.lastIndex)
+                                val index = (offset.x / tabWidthPx).toInt().coerceIn(0, option.tabList.lastIndex)
                                 selectedIndex = index
                                 scope.launch { indicatorOffset.animateTo(index * tabWidthPx, spring(0.7f, 400f)) }
                             },
@@ -171,14 +155,14 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                             onDragCancel = { isDragging = false },
                             onDragEnd = {
                                 isDragging = false
-                                val targetIndex = (indicatorOffset.value / tabWidthPx).roundToInt().coerceIn(0, tabs.lastIndex)
+                                val targetIndex = (indicatorOffset.value / tabWidthPx).roundToInt().coerceIn(0, option.tabList.lastIndex)
                                 selectedIndex = targetIndex
                                 scope.launch { indicatorOffset.animateTo(targetIndex * tabWidthPx, spring(0.8f, 300f)) }
                             },
                             onHorizontalDrag = { change, dragAmount ->
                                 change.consume()
                                 scope.launch {
-                                    val maxOffset = tabWidthPx * (tabs.size - 1)
+                                    val maxOffset = tabWidthPx * (option.tabList.size - 1)
                                     val newOffset = (indicatorOffset.value + dragAmount).coerceIn(0f, maxOffset)
                                     indicatorOffset.snapTo(newOffset)
                                 }
@@ -264,7 +248,7 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                     modifier = Modifier.fillMaxSize(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    tabs.forEachIndexed { index, tab ->
+                    option.tabList.forEachIndexed { index, tab ->
                         val currentTabPosition = index * tabWidthPx
                         val distance = kotlin.math.abs(indicatorOffset.value - currentTabPosition)
                         val focusRange = tabWidthPx * 0.8f
@@ -309,11 +293,20 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                             verticalArrangement = Arrangement.Center,
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Icon(
-                                imageVector = tab.icon as ImageVector,
-                                contentDescription = tab.label,
-                                tint = animatedContentColor,
-                                modifier = Modifier.size(24.dp)
+//                            Icon(
+//                                imageVector = tab.icon as ImageVector,
+//                                contentDescription = tab.label,
+//                                tint = animatedContentColor,
+//                                modifier = Modifier.size(24.dp)
+//                            )
+                            HongImageCompose(
+                                option = HongImageBuilder()
+                                    .width(24)
+                                    .height(24)
+                                    .scaleType(HongScaleType.CENTER_CROP)
+                                    .imageInfo(tab.icon)
+                                    .imageColor(animatedContentColor)
+                                    .applyOption()
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(

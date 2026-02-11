@@ -1,4 +1,4 @@
-package com.codehong.library.widget.image
+package com.codehong.library.widget.image.def
 
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable

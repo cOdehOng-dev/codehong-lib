@@ -3,7 +3,7 @@ package com.codehong.lib.sample.textfield.timer
 import android.view.View
 import androidx.compose.runtime.Composable
 import com.codehong.lib.sample.base.BaseSampleMixActivity
-import com.codehong.library.widget.image.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageBuilder
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor

@@ -62,6 +62,7 @@
         <activity android:name=".button.text.SampleTextButtonActivity"/>
         <activity android:name=".button.select.SampleSelectButtonActivity"/>
         <activity android:name=".image.SampleImageActivity"/>
+        <activity android:name=".image.SampleImageBlurActivity"/>
         <activity android:name=".layout.slide.SampleSlideLayoutActivity"/>
 
         <activity android:name=".calendar.SampleCalendarActivity"/>

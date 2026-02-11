@@ -66,9 +66,9 @@ import com.codehong.library.widget.header.icon.HongHeaderIcon
 import com.codehong.library.widget.header.icon.HongHeaderIconOption
 import com.codehong.library.widget.icon.HongIconCompose
 import com.codehong.library.widget.icon.HongIconOption
-import com.codehong.library.widget.image.HongImageBuilder
-import com.codehong.library.widget.image.HongImageCompose
-import com.codehong.library.widget.image.HongImageOption
+import com.codehong.library.widget.image.def.HongImageBuilder
+import com.codehong.library.widget.image.def.HongImageCompose
+import com.codehong.library.widget.image.def.HongImageOption
 import com.codehong.library.widget.label.checkbox.HongLabelCheckboxCompose
 import com.codehong.library.widget.label.checkbox.HongLabelCheckboxOption
 import com.codehong.library.widget.label.def.HongLabelCompose

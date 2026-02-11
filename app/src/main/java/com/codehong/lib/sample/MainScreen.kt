@@ -10,9 +10,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -41,6 +44,7 @@ import com.codehong.lib.sample.header.close.SampleHeaderCloseActivity
 import com.codehong.lib.sample.header.icon.SampleHeaderIconActivity
 import com.codehong.lib.sample.icon.SampleIconActivity
 import com.codehong.lib.sample.image.SampleImageActivity
+import com.codehong.lib.sample.image.SampleImageBlurActivity
 import com.codehong.lib.sample.label.SampleLabelActivity
 import com.codehong.lib.sample.label.checkbox.SampleLabelCheckboxActivity
 import com.codehong.lib.sample.label.input.SampleLabelInputActivity
@@ -161,9 +165,15 @@ private val widgetCategories = listOf(
         )
     ),
     WidgetCategory(
-        title = "Media",
+        title = "Image",
         widgets = listOf(
             HongWidgetType.IMAGE,
+            HongWidgetType.IMAGE_BLUR
+        )
+    ),
+    WidgetCategory(
+        title = "Video",
+        widgets = listOf(
             HongWidgetType.VIDEO_POPUP,
             HongWidgetType.VIDEO_PLAYER
         )
@@ -193,7 +203,8 @@ private val widgetCategories = listOf(
             HongWidgetType.DYNAMIC_ISLAND,
             HongWidgetType.GRID_DRAG_AND_DROP,
             HongWidgetType.SCROLL_FADE_ANIM_LAYOUT,
-            HongWidgetType.LIQUID_GLASS,
+            HongWidgetType.LIQUID_GLASS_HEADER,
+            HongWidgetType.LIQUID_GLASS_TAB_BAR,
             HongWidgetType.PROGRESS
         )
     )
@@ -209,6 +220,10 @@ fun MainScreen() {
     )
 
     Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .statusBarsPadding()
+            .navigationBarsPadding(),
         topBar = {
             Box(
                 modifier = Modifier
@@ -463,9 +478,8 @@ private fun handleSampleClick(
             context.startSampleActivity(SampleIconActivity::class.java, item.widgetType)
         }
 
-        HongWidgetType.IMAGE -> {
-            context.startSampleActivity(SampleImageActivity::class.java, item.widgetType)
-        }
+        HongWidgetType.IMAGE -> context.startSampleActivity(SampleImageActivity::class.java, item.widgetType)
+        HongWidgetType.IMAGE_BLUR -> context.startSampleActivity(SampleImageBlurActivity::class.java, item.widgetType)
 
         HongWidgetType.LABEL -> {
             context.startSampleActivity(SampleLabelActivity::class.java, HongWidgetType.LABEL)
@@ -487,8 +501,8 @@ private fun handleSampleClick(
             context.startSampleActivity(SampleLabelSwitchActivity::class.java, HongWidgetType.LABEL_SWITCH)
         }
 
-        HongWidgetType.LIQUID_GLASS -> {
-            context.startSampleActivity(SampleLiquidGlassActivity::class.java, HongWidgetType.LIQUID_GLASS)
+        HongWidgetType.LIQUID_GLASS_HEADER -> {
+            context.startSampleActivity(SampleLiquidGlassActivity::class.java, HongWidgetType.LIQUID_GLASS_HEADER)
         }
         HongWidgetType.LIQUID_GLASS_TAB_BAR -> context.startSampleActivity(SampleLiquidGlassTabBarActivity::class.java, item.widgetType)
 
