@@ -3,11 +3,6 @@ package com.codehong.lib.sample.liquidglass.tabbar
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,21 +11,21 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -39,11 +34,8 @@ import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.library.network.debug.TimberUtil
 import com.codehong.library.widget.R
 import com.codehong.library.widget.liquid.tabbar.HongLiquidGlassTabBar
-import com.codehong.library.widget.liquidglass.FloatingBlob
-import com.codehong.library.widget.liquidglass.HongLiquidGlassTabItem
+import com.codehong.library.widget.liquidglass.tabbar.HongLiquidGlassTabItem
 import com.codehong.library.widget.liquidglass.tabbar.HongLiquidGlassTabBarBuilder
-import dev.chrisbanes.haze.HazeState
-import dev.chrisbanes.haze.haze
 
 class SampleLiquidGlassTabBarActivity : BaseActivity() {
 
@@ -51,7 +43,6 @@ class SampleLiquidGlassTabBarActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val hazeState = remember { HazeState() }
             var isDarkTheme by remember { mutableStateOf(true) }
 
             val backgroundColor by animateColorAsState(
@@ -63,18 +54,38 @@ class SampleLiquidGlassTabBarActivity : BaseActivity() {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .statusBarsPadding()
+                    .navigationBarsPadding()
             ) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .background(backgroundColor)
                 ) {
-                    AnimatedColorfulBackground()
-                    Box(
+
+                    LazyColumn(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .haze(state = hazeState)
-                    )
+                            .fillMaxWidth()
+                    ) {
+                        items(49) { index ->
+                            val backgroundColor = Color.hsv((index * 30) % 360f, 0.8f, 0.9f)
+
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(100.dp)
+                                    .background(backgroundColor),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = "Item #$index",
+                                    color = Color.White,
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                        }
+                    }
                 }
 
                 Column(
@@ -162,60 +173,6 @@ class SampleLiquidGlassTabBarActivity : BaseActivity() {
                     )
                 }
             }
-        }
-    }
-
-    @Composable
-    private fun AnimatedColorfulBackground() {
-        val infiniteTransition = rememberInfiniteTransition(label = "background")
-        val offset1 by infiniteTransition.animateFloat(
-            initialValue = -100f,
-            targetValue = 100f,
-            animationSpec = infiniteRepeatable(tween(3000, easing = LinearEasing), RepeatMode.Reverse),
-            label = "blob1"
-        )
-        val offset2 by infiniteTransition.animateFloat(
-            initialValue = 50f,
-            targetValue = -150f,
-            animationSpec = infiniteRepeatable(tween(4500, easing = LinearEasing), RepeatMode.Reverse),
-            label = "blob2"
-        )
-        val scale by infiniteTransition.animateFloat(
-            initialValue = 1f,
-            targetValue = 1.3f,
-            animationSpec = infiniteRepeatable(tween(3500, easing = LinearEasing), RepeatMode.Reverse),
-            label = "scale"
-        )
-        val rotation by infiniteTransition.animateFloat(
-            initialValue = 0f,
-            targetValue = 360f,
-            animationSpec = infiniteRepeatable(tween(10000, easing = LinearEasing), RepeatMode.Restart),
-            label = "rotation"
-        )
-        Box(modifier = Modifier.fillMaxSize()) {
-            FloatingBlob(
-                Brush.sweepGradient(
-                    listOf(
-                        Color(0xFFFF00CC),
-                        Color(0xFF3300FF),
-                        Color(0xFFFF00CC)
-                    )
-                ), (-80 + offset1).dp, (-50).dp, scale, rotation
-            )
-            FloatingBlob(
-                Brush.radialGradient(listOf(Color(0xFF00FFFF), Color(0xFF0000FF))),
-                120.dp,
-                (-100 + offset2).dp,
-                scale * 0.8f,
-                -rotation
-            )
-            FloatingBlob(
-                Brush.linearGradient(listOf(Color(0xFFCCFF00), Color(0xFF00FF00))),
-                (-50 + offset2).dp,
-                150.dp,
-                scale * 1.1f,
-                rotation * 0.5f
-            )
         }
     }
 }

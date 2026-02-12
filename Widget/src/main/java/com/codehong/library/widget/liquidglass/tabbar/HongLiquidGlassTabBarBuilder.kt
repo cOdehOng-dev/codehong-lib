@@ -1,7 +1,7 @@
 package com.codehong.library.widget.liquidglass.tabbar
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
-import com.codehong.library.widget.liquidglass.HongLiquidGlassTabItem
+import com.codehong.library.widget.liquidglass.tabbar.HongLiquidGlassTabItem
 import com.codehong.library.widget.rule.typo.HongTypo
 
 class HongLiquidGlassTabBarBuilder : HongWidgetCommonBuilder<HongLiquidGlassTabBarOption, HongLiquidGlassTabBarBuilder> {

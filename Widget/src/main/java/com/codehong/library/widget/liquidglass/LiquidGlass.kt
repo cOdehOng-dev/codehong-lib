@@ -70,7 +70,7 @@ fun GlassHeader(hazeState: HazeState, isDarkTheme: Boolean) {
             .fillMaxWidth()
             .padding(top = 16.dp, start = 16.dp, end = 16.dp)
             .height(80.dp)
-            .liquidGlass(hazeState, shape, isDarkTheme, blurRadius = 30.dp)
+            .liquidGlass(shape, isDarkTheme)
             .padding(horizontal = 24.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween

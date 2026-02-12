@@ -1,7 +1,7 @@
 package com.codehong.library.widget.liquidglass.tabbar
 
 import com.codehong.library.widget.HongWidgetCommonOption
-import com.codehong.library.widget.liquidglass.HongLiquidGlassTabItem
+import com.codehong.library.widget.liquidglass.tabbar.HongLiquidGlassTabItem
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongLayoutParam
 import com.codehong.library.widget.rule.HongShadowInfo
