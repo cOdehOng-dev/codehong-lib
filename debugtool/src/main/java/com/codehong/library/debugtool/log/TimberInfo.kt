@@ -1,4 +1,4 @@
-package com.codehong.library.network.debug
+package com.codehong.library.debugtool.log
 
 class TimberConfig {
     internal var packageName: String = ""

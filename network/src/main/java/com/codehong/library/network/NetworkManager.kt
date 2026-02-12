@@ -1,10 +1,9 @@
 package com.codehong.library.network
 
 import android.content.Context
-import com.codehong.library.network.debug.TimberConfig
-import com.codehong.library.network.debug.TimberUtil
+import com.codehong.library.debugtool.log.TimberConfig
+import com.codehong.library.debugtool.log.TimberUtil
 import com.google.gson.Gson
-import com.hongji.library.util.network.NetworkConfig
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Converter

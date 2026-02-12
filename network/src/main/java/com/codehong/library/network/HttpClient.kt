@@ -1,16 +1,14 @@
 package com.codehong.library.network
 
-import com.codehong.library.network.debug.TimberUtil
+import com.codehong.library.debugtool.log.TimberUtil
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import com.google.gson.JsonParser
 import com.google.gson.JsonSyntaxException
-import com.hongji.library.util.network.NetworkConst
 import okhttp3.ConnectionPool
 import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import timber.log.Timber
 import java.net.CookieHandler
 import java.util.concurrent.TimeUnit
 
@@ -83,15 +81,15 @@ object HttpClient {
                     val gson = GsonBuilder().setPrettyPrinting().create()
                     val jsonElement: JsonElement = JsonParser().parse(rMessage)
                     val prettyJson: String = gson.toJson(jsonElement)
-                    Timber.tag(NetworkManager.NETWORK_LIB_TAG).d(prettyJson)
+                    TimberUtil.d(prettyJson)
                 } catch (e: JsonSyntaxException) {
                     e.printStackTrace()
-                    Timber.tag(NetworkManager.NETWORK_LIB_TAG).d(rMessage)
+                    TimberUtil.d(rMessage)
                 }
             }
 
             else -> {
-                Timber.tag(NetworkManager.NETWORK_LIB_TAG).d(toOneLineString(message))
+                TimberUtil.d(toOneLineString(message))
             }
         }
     }

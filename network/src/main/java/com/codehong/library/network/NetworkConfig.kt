@@ -1,4 +1,4 @@
-package com.hongji.library.util.network
+package com.codehong.library.network
 
 class NetworkConfig {
 

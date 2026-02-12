@@ -1,10 +1,12 @@
 [versions]
 widget = "0.0.3.24-20250618.163944-SNAPSHOT"
+debugtool = "0.0.1-20260212.102504-SNAPSHOT"
 
 [plugins]
 
 [libraries]
 widget = { group = "com.codehong.library", name = "widget", version.ref = "widget" }
+debugtool = { group = "com.codehong.library", name = "debugtool", version.ref = "debugtool" }
 
 [bundles]
 

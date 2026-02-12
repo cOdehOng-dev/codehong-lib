@@ -169,3 +169,20 @@ fun String?.aspectRatio(): Float {
         1f / 1f
     }
 }
+
+fun String?.splitAtFirstDigit(): Pair<String, String> {
+    if (this.isNullOrEmpty()) return Pair("", "")
+    // 1. 처음으로 숫자가 나오는 인덱스를 찾습니다.
+    val index = this.indexOfFirst { it.isDigit() }
+
+    // 2. 숫자가 하나도 없다면, 전체를 첫 번째 요소로 반환합니다.
+    if (index == -1) {
+        return this.trim() to ""
+    }
+
+    // 3. 인덱스를 기준으로 자르고, 앞뒤 공백을 제거(trim)하여 반환합니다.
+    val firstPart = this.substring(0, index).trim()
+    val secondPart = this.substring(index).trim()
+
+    return firstPart to secondPart
+}

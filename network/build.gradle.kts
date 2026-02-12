@@ -9,7 +9,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.timber)
+    implementation(codehonglibs.debugtool)
 
     api(libs.kotlinx.serialization)
 }

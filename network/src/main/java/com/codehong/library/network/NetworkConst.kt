@@ -1,4 +1,4 @@
-package com.hongji.library.util.network
+package com.codehong.library.network
 
 object NetworkConst {
     const val CONNECT_TIMEOUT: Long = 30 * 3
