@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import com.codehong.lib.sample.SampleComposeDespContainer
 import com.codehong.lib.sample.SampleConst.testImageUrlList
 import com.codehong.lib.sample.base.BaseSampleMixActivity
-import com.codehong.library.network.debug.TimberUtil
+import com.codehong.library.debugtool.log.TimberUtil
 import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.image.def.HongImageBuilder
 import com.codehong.library.widget.image.def.HongImageCompose

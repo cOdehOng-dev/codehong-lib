@@ -159,6 +159,7 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                                 val targetIndex = (indicatorOffset.value / tabWidthPx).roundToInt()
                                     .coerceIn(0, option.tabList.lastIndex)
                                 selectedIndex = targetIndex
+                                option.onSelectedTab(targetIndex, option.tabList[targetIndex])
                                 scope.launch {
                                     indicatorOffset.animateTo(
                                         targetIndex * tabWidthPx,

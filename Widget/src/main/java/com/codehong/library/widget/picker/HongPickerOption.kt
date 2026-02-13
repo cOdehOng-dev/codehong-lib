@@ -47,12 +47,14 @@ data class HongPickerOption(
 
     var selectorColorHex: String = HongColor.GRAY_10.hex
 
+    var buttonColorHex: String = HongColor.MAIN_ORANGE_100.hex
+
+    var buttonTextColorHex: String = HongColor.WHITE_100.hex
     var onDismiss: () -> Unit = {}
 
     var onConfirm: ((selectedFirstOption: Pair<Int, String>, selectedSecondOption: Pair<Int, String?>) -> Unit)? = null
 
     var onDirectSelect: ((selectedFirstOption: Pair<Int, String>, selectedSecondOption: Pair<Int, String?>) -> Unit)? = null
-
 
 
     override fun equals(other: Any?): Boolean {
@@ -61,27 +63,29 @@ data class HongPickerOption(
 
         other as HongPickerOption
 
-        if (type != other.type) return false
         if (isValidComponent != other.isValidComponent) return false
         if (width != other.width) return false
         if (height != other.height) return false
+        if (useShapeCircle != other.useShapeCircle) return false
+        if (initialFirstOption != other.initialFirstOption) return false
+        if (initialSecondOption != other.initialSecondOption) return false
+        if (useDimClickCLose != other.useDimClickCLose) return false
+        if (type != other.type) return false
         if (margin != other.margin) return false
         if (padding != other.padding) return false
         if (click != other.click) return false
         if (shadow != other.shadow) return false
         if (border != other.border) return false
-        if (useShapeCircle != other.useShapeCircle) return false
         if (backgroundColorHex != other.backgroundColorHex) return false
         if (radius != other.radius) return false
         if (titleColorHex != other.titleColorHex) return false
         if (title != other.title) return false
         if (buttonText != other.buttonText) return false
-        if (initialFirstOption != other.initialFirstOption) return false
         if (firstOptionList != other.firstOptionList) return false
-        if (initialSecondOption != other.initialSecondOption) return false
         if (secondOptionList != other.secondOptionList) return false
-        if (useDimClickCLose != other.useDimClickCLose) return false
         if (selectorColorHex != other.selectorColorHex) return false
+        if (buttonColorHex != other.buttonColorHex) return false
+        if (buttonTextColorHex != other.buttonTextColorHex) return false
         if (onDismiss != other.onDismiss) return false
         if (onConfirm != other.onConfirm) return false
         if (onDirectSelect != other.onDirectSelect) return false
@@ -90,27 +94,29 @@ data class HongPickerOption(
     }
 
     override fun hashCode(): Int {
-        var result = type.hashCode()
-        result = 31 * result + isValidComponent.hashCode()
+        var result = isValidComponent.hashCode()
         result = 31 * result + width
         result = 31 * result + height
+        result = 31 * result + useShapeCircle.hashCode()
+        result = 31 * result + initialFirstOption
+        result = 31 * result + initialSecondOption
+        result = 31 * result + useDimClickCLose.hashCode()
+        result = 31 * result + type.hashCode()
         result = 31 * result + margin.hashCode()
         result = 31 * result + padding.hashCode()
         result = 31 * result + (click?.hashCode() ?: 0)
         result = 31 * result + shadow.hashCode()
         result = 31 * result + border.hashCode()
-        result = 31 * result + useShapeCircle.hashCode()
         result = 31 * result + backgroundColorHex.hashCode()
         result = 31 * result + radius.hashCode()
         result = 31 * result + titleColorHex.hashCode()
         result = 31 * result + title.hashCode()
         result = 31 * result + buttonText.hashCode()
-        result = 31 * result + initialFirstOption
         result = 31 * result + firstOptionList.hashCode()
-        result = 31 * result + initialSecondOption
         result = 31 * result + (secondOptionList?.hashCode() ?: 0)
-        result = 31 * result + useDimClickCLose.hashCode()
         result = 31 * result + selectorColorHex.hashCode()
+        result = 31 * result + buttonColorHex.hashCode()
+        result = 31 * result + buttonTextColorHex.hashCode()
         result = 31 * result + onDismiss.hashCode()
         result = 31 * result + (onConfirm?.hashCode() ?: 0)
         result = 31 * result + (onDirectSelect?.hashCode() ?: 0)
@@ -140,6 +146,8 @@ data class HongPickerOption(
                 "secondOptionList=$secondOptionList, " +
                 "useDimClickCLose=$useDimClickCLose, " +
                 "selectorColorHex='$selectorColorHex', " +
+                "buttonColorHex='$buttonColorHex', " +
+                "buttonTextColorHex='$buttonTextColorHex', " +
                 "onDismiss=$onDismiss, " +
                 "onConfirm=$onConfirm, " +
                 "onDirectSelect=$onDirectSelect" +

@@ -6,7 +6,7 @@ import android.view.View
 import com.codehong.lib.sample.R
 import com.codehong.lib.sample.playground.preview.HorizontalOptionView
 import com.codehong.lib.sample.playground.preview.QuarterInputOptionView
-import com.codehong.library.network.debug.TimberUtil
+import com.codehong.library.debugtool.log.TimberUtil
 import com.codehong.library.widget.Consts
 import com.codehong.library.widget.HongWidgetCommonOption
 import com.codehong.library.widget.extensions.toFigureFloat

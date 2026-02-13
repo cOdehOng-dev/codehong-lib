@@ -9,18 +9,17 @@ import android.text.style.UnderlineSpan
 import android.util.Log
 import androidx.compose.ui.graphics.Color
 import androidx.core.text.set
+import com.codehong.library.debugtool.log.TimberUtil
 import com.codehong.library.widget.rule.HongTextLineBreak
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.typo.HongFont
 import com.codehong.library.widget.rule.typo.HongFontManager
 import com.codehong.library.widget.text.def.HongTextBuilder
 import com.codehong.library.widget.util.TextSpan
-import timber.log.Timber
-
 fun String?.toColor(): Color {
     try {
         if (this.isNullOrEmpty()) {
-            Timber.e("TAG","컬러 hex 문자열이 비어있거나 null입니다")
+            TimberUtil.e("컬러 hex 문자열이 비어있거나 null입니다")
             return HongColor.TRANSPARENT.hex.toColor()
         }
 
@@ -51,7 +50,7 @@ fun String?.toColor(): Color {
 
 fun String?.toParseColor(): Int {
     if (this.isNullOrEmpty()) {
-        Timber.d("TAG", "컬러 hex 문자열이 비어있거나 null입니다")
+        TimberUtil.d("컬러 hex 문자열이 비어있거나 null입니다")
         return HongColor.TRANSPARENT.hex.parseColor()
     }
 
@@ -185,4 +184,65 @@ fun String?.splitAtFirstDigit(): Pair<String, String> {
     val secondPart = this.substring(index).trim()
 
     return firstPart to secondPart
+}
+
+/**
+ * 문자열을 콤마(,)로 구분하되 괄호 안의 콤마는 무시하며,
+ * "메인 텍스트" to "괄호 안 텍스트" 형태의 Pair 리스트로 반환합니다.
+ */
+fun String?.splitAndParseWithParentheses(): List<Pair<String, String>> {
+    if (this.isNullOrEmpty()) return emptyList()
+
+    val result = mutableListOf<Pair<String, String>>()
+    val buffer = StringBuilder()
+    var depth = 0
+
+    // 내부 함수: 버퍼에 쌓인 문자열을 분석해서 결과에 추가
+    fun addBufferToResult() {
+        if (buffer.isBlank()) return // 공백만 있는 경우 무시
+
+        val rawItem = buffer.toString().trim()
+        val firstParenIndex = rawItem.indexOf('(')
+        val lastParenIndex = rawItem.lastIndexOf(')')
+
+        if (firstParenIndex != -1 && lastParenIndex > firstParenIndex) {
+            // 괄호가 있는 경우: "Banana (Yellow)" -> "Banana" to "Yellow"
+            val outerText = rawItem.take(firstParenIndex).trim()
+            val innerText = rawItem.substring(firstParenIndex + 1, lastParenIndex).trim()
+            result.add(outerText to innerText)
+        } else {
+            // 괄호가 없는 경우: "Apple" -> "Apple" to ""
+            result.add(rawItem to "")
+        }
+        buffer.clear()
+    }
+
+    // 문자열 순회
+    for (char in this) {
+        when (char) {
+            '(' -> {
+                depth++
+                buffer.append(char)
+            }
+            ')' -> {
+                if (depth > 0) depth--
+                buffer.append(char)
+            }
+            ',' -> {
+                if (depth == 0) {
+                    // 괄호 밖의 콤마일 때만 아이템 분리
+                    addBufferToResult()
+                } else {
+                    // 괄호 안의 콤마는 문자로 취급
+                    buffer.append(char)
+                }
+            }
+            else -> buffer.append(char)
+        }
+    }
+
+    // 마지막 남은 버퍼 처리
+    addBufferToResult()
+
+    return result
 }

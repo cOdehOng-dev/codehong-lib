@@ -46,6 +46,21 @@ class HongPickerBuilder : HongWidgetCommonBuilder<HongPickerOption, HongPickerBu
         option.selectorColorHex = selectorColorHex
     }
 
+    fun buttonColor(buttonColor: HongColor) = apply {
+        option.buttonColorHex = buttonColor.hex
+    }
+    fun buttonColor(buttonColorHex: String) = apply {
+        option.buttonColorHex = buttonColorHex
+    }
+
+    fun buttonTextColor(buttonTextColor: HongColor) = apply {
+        option.buttonTextColorHex = buttonTextColor.hex
+    }
+
+    fun buttonTextColor(buttonTextColorHex: String) = apply {
+        option.buttonTextColorHex = buttonTextColorHex
+    }
+
     fun radius(
         topLeft: Int,
         topRight: Int,
@@ -91,6 +106,8 @@ class HongPickerBuilder : HongWidgetCommonBuilder<HongPickerOption, HongPickerBu
             .onDismiss(inject.onDismiss)
             .onConfirm(inject.onConfirm)
             .onDirectSelect(inject.onDirectSelect)
+            .buttonColor(inject.buttonColorHex)
+            .buttonTextColor(inject.buttonTextColorHex)
     }
 
 }

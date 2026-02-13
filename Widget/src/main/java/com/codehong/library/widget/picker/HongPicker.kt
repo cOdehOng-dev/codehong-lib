@@ -17,6 +17,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -64,6 +66,8 @@ fun HongPicker(
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .statusBarsPadding()
+            .navigationBarsPadding()
     ) {
         if (visible) {
             Box(
@@ -204,8 +208,8 @@ fun HongPicker(
                             )
                             .text(option.buttonText)
                             .textTypo(HongTypo.BODY_15_B)
-                            .textColor(HongColor.WHITE_100)
-                            .backgroundColor(HongColor.MAIN_ORANGE_100.hex)
+                            .textColor(option.buttonTextColorHex)
+                            .backgroundColor(option.buttonColorHex)
                             .radius(
                                 HongRadiusInfo(
                                     all = 12

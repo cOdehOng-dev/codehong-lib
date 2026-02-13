@@ -17,6 +17,7 @@ android {
 dependencies {
     implementation(project(":network"))
     implementation(project(":Widget"))
+    implementation(project(":debugtool"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

@@ -1,12 +1,13 @@
 package com.codehong.lib.sample.picker
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
@@ -17,7 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.base.BaseActivity
-import com.codehong.library.network.debug.TimberUtil
+import com.codehong.library.debugtool.log.TimberUtil
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.picker.HongPicker
 import com.codehong.library.widget.picker.HongPickerBuilder
@@ -37,6 +38,8 @@ class SamplePickerComposeActivity : BaseActivity() {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .statusBarsPadding()
+                    .navigationBarsPadding()
                     .hongBackground(
                         color = HongColor.WHITE_100.hex
                     ),
@@ -76,7 +79,6 @@ class SamplePickerComposeActivity : BaseActivity() {
                     .selectorColor(HongColor.GRAY_10.hex)
                     .onDismiss { showBottomSheet1 = false }
                     .onConfirm { selectedFirstOption, selectedSecondOption ->
-                        TimberUtil.d("test here select = $selectedFirstOption")
                         firstOptionSelectedIndex = selectedFirstOption.first
                         showBottomSheet1 = false
                     }
@@ -105,7 +107,6 @@ class SamplePickerComposeActivity : BaseActivity() {
                     .useDimClickClose(true)
                     .onDismiss { showBottomSheet3 = false }
                     .onDirectSelect { selectedFirstOption, _ ->
-                        Log.d("TAG", "select = $selectedFirstOption")
                     }
                     .applyOption(),
             )

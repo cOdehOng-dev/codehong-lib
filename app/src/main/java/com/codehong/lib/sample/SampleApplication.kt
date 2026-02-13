@@ -1,8 +1,8 @@
 package com.codehong.lib.sample
 
 import android.app.Application
-import com.codehong.library.network.debug.TimberConfig
-import com.codehong.library.network.debug.TimberUtil
+import com.codehong.library.debugtool.log.TimberConfig
+import com.codehong.library.debugtool.log.TimberUtil
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.hilt.android.HiltAndroidApp
 

@@ -11,7 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.codehong.lib.sample.SampleConst
-import com.codehong.library.network.debug.TimberUtil
+import com.codehong.library.debugtool.log.TimberUtil
 import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.header.icon.HongHeaderIcon
