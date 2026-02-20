@@ -18,6 +18,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -53,11 +54,9 @@ private val LocalSelectDate = compositionLocalOf { HongCalendarSelectDate() }
 fun HongCalendarCompose(
     option: HongCalendarOption
 ) {
-    val today = LocalDate.now()
-    val maxYearLater = today.plusYears(option.maxYears.toLong())
-    val months = rememberSaveable {
-        (0..12).map { today.plusMonths(it.toLong()).withDayOfMonth(1) }
-            .filter { it <= maxYearLater }
+    val today = remember { LocalDate.now() }
+    val months = remember {
+        (0..option.maxYears * 12).map { today.plusMonths(it.toLong()).withDayOfMonth(1) }
     }
 
     var startDate by rememberSaveable { mutableStateOf(option.initialSelectedInfo?.getStartLocalDate()) }
@@ -71,19 +70,15 @@ fun HongCalendarCompose(
             Column {
                 DayOfWeekHeaderContent()
 
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize()
-                ) {
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
                     itemsIndexed(months) { i, month ->
                         MonthContent(
                             month = month,
+                            today = today,
                             isFirstMonth = i == 0,
-                            onSelectStartDate = { date ->
-                                startDate = date
-                                option.onSelected?.invoke(startDate, endDate)
-                            },
-                            onSelectEndDate = { date ->
-                                endDate = date
+                            onDateSelected = { newStart, newEnd ->
+                                startDate = newStart
+                                endDate = newEnd
                                 option.onSelected?.invoke(startDate, endDate)
                             }
                         )
@@ -127,9 +122,9 @@ private fun DayOfWeekHeaderContent() {
 @Composable
 private fun MonthContent(
     month: LocalDate,
+    today: LocalDate,
     isFirstMonth: Boolean,
-    onSelectStartDate: (LocalDate?) -> Unit,
-    onSelectEndDate: (LocalDate?) -> Unit
+    onDateSelected: (LocalDate?, LocalDate?) -> Unit
 ) {
     val option = LocalOption.current
 
@@ -139,15 +134,8 @@ private fun MonthContent(
             bottom = option.bottomSpacingMonth.dp
         )
     ) {
-        YearMonthContent(
-            month.format(DateTimeFormatter.ofPattern(option.yearMonthPattern))
-        )
-
-        DateContent(
-            month = month,
-            onSelectStartDate = onSelectStartDate,
-            onSelectEndDate = onSelectEndDate
-        )
+        YearMonthContent(month.format(DateTimeFormatter.ofPattern(option.yearMonthPattern)))
+        DateContent(month = month, today = today, onDateSelected = onDateSelected)
     }
 }
 
@@ -167,18 +155,13 @@ private fun YearMonthContent(month: String) {
 @Composable
 private fun DateContent(
     month: LocalDate,
-    onSelectStartDate: (LocalDate?) -> Unit,
-    onSelectEndDate: (LocalDate?) -> Unit
+    today: LocalDate,
+    onDateSelected: (LocalDate?, LocalDate?) -> Unit
 ) {
-    val option = LocalOption.current
     val paddedDays = generateMonthDays(month)
 
     paddedDays.chunked(7).forEach { week ->
-        WeekRow(
-            week = week,
-            onSelectStartDate = onSelectStartDate,
-            onSelectEndDate = onSelectEndDate
-        )
+        WeekRow(week = week, today = today, onDateSelected = onDateSelected)
     }
 }
 
@@ -193,8 +176,8 @@ private fun generateMonthDays(month: LocalDate): List<LocalDate?> {
 @Composable
 private fun WeekRow(
     week: List<LocalDate?>,
-    onSelectStartDate: (LocalDate?) -> Unit,
-    onSelectEndDate: (LocalDate?) -> Unit
+    today: LocalDate,
+    onDateSelected: (LocalDate?, LocalDate?) -> Unit
 ) {
     val option = LocalOption.current
 
@@ -209,11 +192,7 @@ private fun WeekRow(
                 contentAlignment = Alignment.Center
             ) {
                 day?.let {
-                    DayCell(
-                        day = it,
-                        onSelectStartDate = onSelectStartDate,
-                        onSelectEndDate = onSelectEndDate
-                    )
+                    DayCell(day = it, today = today, onDateSelected = onDateSelected)
                 }
             }
         }
@@ -223,10 +202,9 @@ private fun WeekRow(
 @Composable
 private fun DayCell(
     day: LocalDate,
-    onSelectStartDate: (LocalDate?) -> Unit,
-    onSelectEndDate: (LocalDate?) -> Unit
+    today: LocalDate,
+    onDateSelected: (LocalDate?, LocalDate?) -> Unit
 ) {
-    val today = LocalDate.now()
     val option = LocalOption.current
     val selectDate = LocalSelectDate.current
     val startDate = selectDate.startDate
@@ -259,16 +237,14 @@ private fun DayCell(
         )
     }
 
-    val dateModifier = getDateModifier(selectionState, option)
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp)
             .clickable(enabled = !isPast) {
-                handleDateClick(day, startDate, endDate, onSelectStartDate, onSelectEndDate)
+                handleDateClick(day, startDate, endDate, onDateSelected)
             }
-            .then(dateModifier),
+            .then(getDateModifier(selectionState, option)),
         contentAlignment = Alignment.Center
     ) {
         DayContent(
@@ -282,11 +258,7 @@ private fun DayCell(
 }
 
 private fun checkIsHoliday(day: LocalDate, holidayList: List<LocalDate>?): Boolean {
-    return if (holidayList != null) {
-        day in holidayList || day.dayOfWeek == DayOfWeek.SUNDAY
-    } else {
-        day.dayOfWeek == DayOfWeek.SUNDAY
-    }
+    return day.dayOfWeek == DayOfWeek.SUNDAY || holidayList?.contains(day) == true
 }
 
 private fun determineSelectionState(
@@ -306,25 +278,19 @@ private fun determineSelectionState(
     }
 }
 
-@Composable
 private fun getDateModifier(
     selectionState: HongCalendarDaySelectionState,
     option: HongCalendarOption
 ): Modifier {
     return when (selectionState) {
-        is HongCalendarDaySelectionState.Start -> {
-            Modifier
-                .clip(CircleShape)
-                .background(color = option.startDayTextOption.backgroundColorHex.toColor())
-        }
-        is HongCalendarDaySelectionState.End -> {
-            Modifier
-                .clip(CircleShape)
-                .background(color = option.endDayTextOption.backgroundColorHex.toColor())
-        }
-        is HongCalendarDaySelectionState.InRange -> {
-            Modifier.background(color = option.rangeDaysTextOption.backgroundColorHex.toColor())
-        }
+        is HongCalendarDaySelectionState.Start -> Modifier
+            .clip(CircleShape)
+            .background(option.startDayTextOption.backgroundColorHex.toColor())
+        is HongCalendarDaySelectionState.End -> Modifier
+            .clip(CircleShape)
+            .background(option.endDayTextOption.backgroundColorHex.toColor())
+        is HongCalendarDaySelectionState.InRange -> Modifier
+            .background(option.rangeDaysTextOption.backgroundColorHex.toColor())
         else -> Modifier
     }
 }
@@ -333,20 +299,12 @@ private fun handleDateClick(
     day: LocalDate,
     startDate: LocalDate?,
     endDate: LocalDate?,
-    onSelectStartDate: (LocalDate?) -> Unit,
-    onSelectEndDate: (LocalDate?) -> Unit
+    onDateSelected: (LocalDate?, LocalDate?) -> Unit
 ) {
     when {
-        startDate == null || endDate != null -> {
-            onSelectStartDate(day)
-            onSelectEndDate(null)
-        }
-        day < startDate -> {
-            onSelectStartDate(day)
-        }
-        else -> {
-            onSelectEndDate(day)
-        }
+        startDate == null || endDate != null -> onDateSelected(day, null)
+        day < startDate -> onDateSelected(day, endDate)
+        else -> onDateSelected(startDate, day)
     }
 }
 
@@ -367,7 +325,7 @@ private fun DayContent(
                 dayTextOption = if (isHoliday) {
                     HongTextBuilder()
                         .copy(option.holidaysTextOption)
-                        .color("#75ff322e")
+                        .color(option.holidaysTextOption.colorHex.toPastColorHex())
                         .applyOption()
                 } else {
                     option.pastDaysTextOption
@@ -405,60 +363,40 @@ private fun DayContent(
     }
 }
 
+/** 지난 날짜 공휴일 색상: 공휴일 색상에 알파 0x75(~46%)를 적용해 흐리게 표시 */
+private fun String?.toPastColorHex(): String {
+    val hex = this?.trimStart('#') ?: return "#75ff322e"
+    return when (hex.length) {
+        6 -> "#75$hex"
+        8 -> "#75${hex.drop(2)}"
+        else -> "#75ff322e"
+    }
+}
+
 @Composable
 private fun SelectStartOrEndBackground(
     selectedType: HongCalendarSelectedType,
     selectedBackgroundColorHex: String
 ) {
-    when (selectedType) {
-        HongCalendarSelectedType.START -> {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp)
-            ) {
-                Spacer(
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(48.dp)
-                        .background(HongColor.TRANSPARENT.hex.toColor())
-                )
-                Spacer(
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(48.dp)
-                        .background(selectedBackgroundColorHex.toColor())
-                )
-            }
-        }
-        HongCalendarSelectedType.END -> {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp)
-            ) {
-                Spacer(
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(48.dp)
-                        .background(selectedBackgroundColorHex.toColor())
-                )
-                Spacer(
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(48.dp)
-                        .background(HongColor.TRANSPARENT.hex.toColor())
-                )
-            }
-        }
-        else -> {
-            Spacer(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp)
-                    .background(selectedBackgroundColorHex.toColor())
-            )
-        }
+    val (leftColorHex, rightColorHex) = when (selectedType) {
+        HongCalendarSelectedType.START -> HongColor.TRANSPARENT.hex to selectedBackgroundColorHex
+        HongCalendarSelectedType.END -> selectedBackgroundColorHex to HongColor.TRANSPARENT.hex
+        else -> return
+    }
+
+    Row(modifier = Modifier.fillMaxWidth().height(48.dp)) {
+        Spacer(
+            modifier = Modifier
+                .weight(1f)
+                .height(48.dp)
+                .background(leftColorHex.toColor())
+        )
+        Spacer(
+            modifier = Modifier
+                .weight(1f)
+                .height(48.dp)
+                .background(rightColorHex.toColor())
+        )
     }
 }
 
@@ -471,9 +409,7 @@ private fun DayOfMonthView(
         .applyOption(),
     isToday: Boolean = false
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
         HongTextCompose(
             option = HongTextBuilder()
                 .copy(dayTextOption)
