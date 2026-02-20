@@ -132,4 +132,49 @@ object HongDateUtil {
             return Pair(false, "")
         }
     }
+
+    fun Pair<String?, String?>.formatPerformancePeriod(): String {
+        val (startDate, endDate) = this
+        if (startDate.isNullOrEmpty()) return ""
+
+        val formattedStart = startDate.formatDateForDisplay()
+        val formattedEnd = endDate.formatDateForDisplay()
+
+        return if (formattedEnd.isNotEmpty()) {
+            "$formattedStart ~ $formattedEnd"
+        } else {
+            formattedStart
+        }
+    }
+
+
+    fun Pair<String, String>.formatDateDisplay(): String {
+        val (startDate, endDate) = this
+        val formattedStart = startDate.formatToMMdd()
+        val formattedEnd = endDate.formatToMMdd()
+        return "$formattedStart ~ $formattedEnd"
+    }
+
+    fun String?.formatToMMdd(): String {
+        if (this == null) return "20260506"
+        if (this.length != 8) return this
+        val month = this.substring(4, 6)
+        val day = this.substring(6, 8)
+        return "$month.$day"
+    }
+
+
+    fun String?.formatDateForDisplay(): String {
+        if (this.isNullOrEmpty()) return ""
+
+        // KOPIS API는 "2026.03.21" 형식으로 반환
+        if (this.contains(".")) return this
+
+        // yyyyMMdd 형식인 경우 변환
+        if (this.length == 8) {
+            return "${this.substring(0, 4)}.${this.substring(4, 6)}.${this.substring(6, 8)}"
+        }
+
+        return this
+    }
 }

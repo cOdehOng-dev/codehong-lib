@@ -2,6 +2,7 @@ package com.codehong.library.widget.extensions
 
 import android.graphics.BlurMaskFilter
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
@@ -9,6 +10,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,6 +39,8 @@ import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -312,7 +316,7 @@ fun Modifier.liquidGlass(
     val glassBackgroundColor = if (isDarkTheme) {
         HongColor.BLACK_50.toColor()
     } else {
-        HongColor.WHITE_80.toColor()
+        HongColor.WHITE_90.toColor()
     }
 
     val glassBorderBrush = if (isDarkTheme) {
@@ -350,4 +354,42 @@ fun Modifier.liquidGlass(
         .clip(shape)
         .background(glassBackgroundColor)
         .border(width = 1.dp, brush = glassBorderBrush, shape = shape)
+}
+
+fun Modifier.clickPress(
+    scaleDown: Float = 0.90f,
+    alphaDown: Float = 0.7f,
+    onClick: () -> Unit
+): Modifier = composed {
+    var isPressed by remember { mutableStateOf(false) }
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) scaleDown else 1f,
+        label = "pressScale2"
+    )
+    val alpha by animateFloatAsState(
+        targetValue = if (isPressed) alphaDown else 1f,
+        label = "pressAlpha2"
+    )
+
+    this
+        .graphicsLayer {
+            scaleX = scale
+            scaleY = scale
+            this.alpha = alpha
+        }
+        .pointerInput(onClick) {
+            detectTapGestures(
+                onPress = {
+                    isPressed = true
+                    try {
+                        awaitRelease()
+                    } finally {
+                        isPressed = false
+                    }
+                },
+                onTap = {
+                    onClick()
+                }
+            )
+        }
 }

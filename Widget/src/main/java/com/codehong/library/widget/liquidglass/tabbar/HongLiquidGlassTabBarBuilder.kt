@@ -1,7 +1,6 @@
 package com.codehong.library.widget.liquidglass.tabbar
 
 import com.codehong.library.widget.HongWidgetCommonBuilder
-import com.codehong.library.widget.liquidglass.tabbar.HongLiquidGlassTabItem
 import com.codehong.library.widget.rule.typo.HongTypo
 
 class HongLiquidGlassTabBarBuilder : HongWidgetCommonBuilder<HongLiquidGlassTabBarOption, HongLiquidGlassTabBarBuilder> {
@@ -54,6 +53,26 @@ class HongLiquidGlassTabBarBuilder : HongWidgetCommonBuilder<HongLiquidGlassTabB
 
     fun onSelectedTab(onSelectedTab: (Int, HongLiquidGlassTabItem) -> Unit) = apply {
         option.onSelectedTab = onSelectedTab
+    }
+
+    fun copy(inject: HongLiquidGlassTabBarOption?): HongLiquidGlassTabBarBuilder {
+        if (inject == null) return HongLiquidGlassTabBarBuilder()
+        return HongLiquidGlassTabBarBuilder()
+            .width(inject.width)
+            .height(inject.height)
+            .margin(inject.margin)
+            .padding(inject.padding)
+            .onClick(inject.click)
+            .backgroundColor(inject.backgroundColorHex)
+            .outerRadius(inject.outerRadius)
+            .tabBarHeight(inject.tabBarHeight)
+            .tabVerticalPadding(inject.verticalPadding)
+            .innerSideGap(inject.innerSideGap)
+            .isDarkTheme(inject.isDarkTheme)
+            .tabList(inject.tabList)
+            .tabDefTypo(inject.tabDefTypo)
+            .tabSelectTypo(inject.tabSelectTypo)
+            .onSelectedTab(inject.onSelectedTab)
     }
 
 }
