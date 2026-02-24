@@ -9,7 +9,7 @@ import com.codehong.lib.sample.base.BaseSampleComposeActivity
 import com.codehong.library.widget.R
 import com.codehong.library.widget.button.text.HongButtonTextBuilder
 import com.codehong.library.widget.button.text.HongButtonTextCompose
-import com.codehong.library.widget.extensions.applyStatusBarColor
+import com.codehong.library.util.extensions.applyStatusBarColor
 import com.codehong.library.widget.player.HongVideoPlayerBuilder
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.color.HongColor

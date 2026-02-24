@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.checkFont
-import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.util.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.parseColor

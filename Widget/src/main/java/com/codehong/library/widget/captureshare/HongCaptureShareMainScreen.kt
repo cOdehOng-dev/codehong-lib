@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.core.content.FileProvider
-import com.codehong.library.widget.extensions.isAppForeground
+import com.codehong.library.util.extensions.isAppForeground
 import com.codehong.library.widget.util.PermissionManager
 import java.io.File
 import java.io.FileOutputStream

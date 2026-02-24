@@ -3,7 +3,7 @@ package com.codehong.lib.sample.videopopup
 import android.os.Bundle
 import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.lib.sample.databinding.ActivitySampleVideoPopupBinding
-import com.codehong.library.widget.extensions.applyStatusBarColor
+import com.codehong.library.util.extensions.applyStatusBarColor
 import com.codehong.library.widget.player.HongVideoPlayerBuilder
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.radius.HongRadiusInfo

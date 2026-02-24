@@ -9,9 +9,9 @@ import com.codehong.lib.sample.playground.preview.QuarterInputOptionView
 import com.codehong.library.debugtool.log.TimberUtil
 import com.codehong.library.widget.Consts
 import com.codehong.library.widget.HongWidgetCommonOption
-import com.codehong.library.widget.extensions.toFigureFloat
-import com.codehong.library.widget.extensions.toFigureInt
-import com.codehong.library.widget.extensions.toFigureString
+import com.codehong.library.util.extensions.toFigureFloat
+import com.codehong.library.util.extensions.toFigureInt
+import com.codehong.library.util.extensions.toFigureString
 import com.codehong.library.widget.label.def.HongLabelBuilder
 import com.codehong.library.widget.label.def.HongLabelView
 import com.codehong.library.widget.label.input.HongLabelInputBuilder

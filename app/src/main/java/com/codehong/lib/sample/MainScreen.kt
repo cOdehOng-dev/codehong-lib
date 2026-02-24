@@ -59,6 +59,7 @@ import com.codehong.lib.sample.picker.SamplePickerComposeActivity
 import com.codehong.lib.sample.player.SampleVideoPlayerActivity
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.progress.SampleProgressActivity
+import com.codehong.lib.sample.swipe.SampleSwipeContainerActivity
 import com.codehong.lib.sample.tab.flow.SampleTabFlowActivity
 import com.codehong.lib.sample.tab.scroll.SampleTabScrollActivity
 import com.codehong.lib.sample.tab.segment.SampleTabSegmentActivity
@@ -205,7 +206,8 @@ private val widgetCategories = listOf(
             HongWidgetType.SCROLL_FADE_ANIM_LAYOUT,
             HongWidgetType.LIQUID_GLASS_HEADER,
             HongWidgetType.LIQUID_GLASS_TAB_BAR,
-            HongWidgetType.PROGRESS
+            HongWidgetType.PROGRESS,
+            HongWidgetType.SWIPE_CONTAINER
         )
     )
 )
@@ -510,9 +512,8 @@ private fun handleSampleClick(
             (context as? ComponentActivity)?.let { showPickerDialog(it) }
         }
 
-        HongWidgetType.PROGRESS -> {
-            context.startSampleActivity(SampleProgressActivity::class.java, HongWidgetType.PROGRESS)
-        }
+        HongWidgetType.PROGRESS -> context.startSampleActivity(SampleProgressActivity::class.java, item.widgetType)
+        HongWidgetType.SWIPE_CONTAINER -> context.startSampleActivity(SampleSwipeContainerActivity::class.java, item.widgetType)
 
         HongWidgetType.SCROLL_FADE_ANIM_LAYOUT -> {
             context.startSampleActivity(SampleScrollFadeLayoutActivity::class.java, HongWidgetType.SCROLL_FADE_ANIM_LAYOUT)

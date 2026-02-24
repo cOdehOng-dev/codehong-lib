@@ -21,7 +21,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.codehong.library.widget.databinding.HonglibViewCaptureShareBinding
-import com.codehong.library.widget.extensions.isAppForeground
+import com.codehong.library.util.extensions.isAppForeground
 import com.codehong.library.widget.util.PermissionManager
 import java.io.File
 import java.io.FileOutputStream

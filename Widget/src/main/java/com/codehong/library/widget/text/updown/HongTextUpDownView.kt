@@ -6,11 +6,11 @@ import android.view.Gravity
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import com.codehong.library.widget.R
-import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.util.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout
-import com.codehong.library.widget.extensions.toFigureStringCoverZero
+import com.codehong.library.util.extensions.toFigureStringCoverZero
 import com.codehong.library.widget.image.def.HongImageBuilder
 import com.codehong.library.widget.language.frameLayout
 import com.codehong.library.widget.language.hongImage

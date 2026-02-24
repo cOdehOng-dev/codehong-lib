@@ -10,7 +10,8 @@ android {
 
 dependencies {
     implementation(libs.material)
-    implementation(codehonglibs.debugtool                                                                             )
+    implementation(codehonglibs.debugtool)
+    implementation(codehonglibs.util)
 
     api(libs.androidx.media3.exoplayer)
     api(libs.androidx.media3.ui)

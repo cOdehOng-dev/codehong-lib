@@ -12,7 +12,7 @@ import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import com.codehong.library.widget.databinding.HonglibViewVideoPlayerBinding
 import com.codehong.library.widget.extensions.applyRatio
-import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.util.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout

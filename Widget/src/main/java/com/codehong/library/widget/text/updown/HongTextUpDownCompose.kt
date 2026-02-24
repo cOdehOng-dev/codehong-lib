@@ -13,7 +13,7 @@ import com.codehong.library.widget.MarginLeftOrRight
 import com.codehong.library.widget.R
 import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongWidth
-import com.codehong.library.widget.extensions.toFigureStringCoverZero
+import com.codehong.library.util.extensions.toFigureStringCoverZero
 import com.codehong.library.widget.image.def.HongImageBuilder
 import com.codehong.library.widget.image.def.HongImageCompose
 import com.codehong.library.widget.rule.HongBorderInfo

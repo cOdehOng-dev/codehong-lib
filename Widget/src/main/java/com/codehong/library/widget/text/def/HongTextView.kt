@@ -8,8 +8,8 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatTextView
-import com.codehong.library.widget.extensions.dpToFloatPx
-import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.util.extensions.dpToFloatPx
+import com.codehong.library.util.extensions.dpToPx
 import com.codehong.library.widget.extensions.lineBreakSyllable
 import com.codehong.library.widget.extensions.parseColor
 import com.codehong.library.widget.extensions.setLayout

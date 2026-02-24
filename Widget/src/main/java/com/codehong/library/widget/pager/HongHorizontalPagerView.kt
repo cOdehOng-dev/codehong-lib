@@ -12,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.codehong.library.widget.databinding.HonglibHorizontalPagerViewBinding
 import com.codehong.library.widget.databinding.HonglibItemHorizontalPagerBinding
 import com.codehong.library.widget.pager.adapter.HongHorizontalPagerAdapter
-import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.util.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout

@@ -1,4 +1,4 @@
-package com.codehong.library.widget.extensions
+package com.codehong.library.util.extensions
 
 fun Int?.toFigureString(): String {
     if (this == null) return ""

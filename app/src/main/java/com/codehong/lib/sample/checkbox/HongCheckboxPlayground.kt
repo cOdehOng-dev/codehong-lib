@@ -5,8 +5,8 @@ import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
 import com.codehong.library.widget.checkbox.HongCheckboxBuilder
 import com.codehong.library.widget.checkbox.HongCheckboxOption
-import com.codehong.library.widget.extensions.toFigureInt
-import com.codehong.library.widget.extensions.toFigureString
+import com.codehong.library.util.extensions.toFigureInt
+import com.codehong.library.util.extensions.toFigureString
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongState

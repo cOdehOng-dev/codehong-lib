@@ -3,8 +3,8 @@ package com.codehong.lib.sample.toggleswitch
 import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
-import com.codehong.library.widget.extensions.toFigureInt
-import com.codehong.library.widget.extensions.toFigureString
+import com.codehong.library.util.extensions.toFigureInt
+import com.codehong.library.util.extensions.toFigureString
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.toggleswitch.HongSwitchBuilder

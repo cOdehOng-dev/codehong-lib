@@ -1,11 +1,10 @@
-package com.codehong.library.widget.extensions
+package com.codehong.library.util.extensions
 
 import android.app.Activity
 import android.os.Build
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
-import com.codehong.library.widget.R
 
 fun Activity?.applyActivityOpenAnim(openAnim: Int) {
     if (this == null) return
@@ -14,10 +13,10 @@ fun Activity?.applyActivityOpenAnim(openAnim: Int) {
         overrideActivityTransition(
             Activity.OVERRIDE_TRANSITION_OPEN,
             openAnim,
-            R.anim.honglib_none
+            0
         )
     } else {
-        overridePendingTransition(openAnim, R.anim.honglib_none)
+        overridePendingTransition(openAnim, 0)
     }
 }
 
@@ -40,11 +39,11 @@ fun Activity?.applyActivityCloseAnim(closeAnim: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
         overrideActivityTransition(
             Activity.OVERRIDE_TRANSITION_CLOSE,
-            R.anim.honglib_none,
+            0,
             closeAnim
         )
     } else {
-        overridePendingTransition(R.anim.honglib_none, closeAnim)
+        overridePendingTransition(0, closeAnim)
     }
 }
 

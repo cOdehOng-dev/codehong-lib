@@ -1,4 +1,4 @@
-package com.codehong.library.widget.extensions
+package com.codehong.library.util.extensions
 
 import android.app.ActivityManager
 import android.content.Context

@@ -4,7 +4,7 @@ import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
 import com.codehong.lib.sample.playground.preview.HorizontalOptionView
-import com.codehong.library.widget.extensions.toFigureInt
+import com.codehong.library.util.extensions.toFigureInt
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongWidgetType
 import com.codehong.library.widget.tab.flow.HongTabFlowBuilder

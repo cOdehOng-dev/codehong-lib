@@ -1,4 +1,4 @@
-package com.codehong.library.widget.liquid.tabbar
+package com.codehong.library.widget.liquidglass.tabbar
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Animatable
@@ -46,7 +46,6 @@ import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.liquidGlass
 import com.codehong.library.widget.image.def.HongImageBuilder
 import com.codehong.library.widget.image.def.HongImageCompose
-import com.codehong.library.widget.liquidglass.tabbar.HongLiquidGlassTabBarOption
 import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongSpacingInfo
 import com.codehong.library.widget.rule.HongTextAlign
@@ -55,6 +54,7 @@ import com.codehong.library.widget.rule.color.HongColor.Companion.toColor
 import com.codehong.library.widget.text.def.HongTextBuilder
 import com.codehong.library.widget.text.def.HongTextCompose
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 import kotlin.math.roundToInt
 
 @Composable
@@ -252,7 +252,7 @@ fun HongLiquidGlassTabBar(option: HongLiquidGlassTabBarOption) {
                 ) {
                     option.tabList.forEachIndexed { index, tab ->
                         val currentTabPosition = index * tabWidthPx
-                        val distance = kotlin.math.abs(indicatorOffset.value - currentTabPosition)
+                        val distance = abs(indicatorOffset.value - currentTabPosition)
                         val focusRange = tabWidthPx * 0.8f
 
                         // 렌즈 확대 효과

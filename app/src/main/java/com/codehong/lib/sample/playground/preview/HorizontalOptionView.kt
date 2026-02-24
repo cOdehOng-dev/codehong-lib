@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 import com.codehong.library.widget.Consts
-import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.util.extensions.dpToPx
 import com.codehong.library.widget.label.def.HongLabelBuilder
 import com.codehong.library.widget.language.frameLayout
 import com.codehong.library.widget.language.hongLabel

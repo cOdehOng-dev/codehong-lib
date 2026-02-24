@@ -5,10 +5,10 @@ import com.codehong.lib.sample.playground.BasePlayground
 import com.codehong.lib.sample.playground.PlaygroundActivity
 import com.codehong.lib.sample.playground.PlaygroundManager
 import com.codehong.lib.sample.playground.preview.HorizontalOptionView
-import com.codehong.library.widget.extensions.toFigureFloat
-import com.codehong.library.widget.extensions.toFigureInt
-import com.codehong.library.widget.extensions.toFigureLong
-import com.codehong.library.widget.extensions.toFigureString
+import com.codehong.library.util.extensions.toFigureFloat
+import com.codehong.library.util.extensions.toFigureInt
+import com.codehong.library.util.extensions.toFigureLong
+import com.codehong.library.util.extensions.toFigureString
 import com.codehong.library.widget.pager.HongHorizontalPagerBuilder
 import com.codehong.library.widget.pager.HongHorizontalPagerOption
 import com.codehong.library.widget.rule.HongLayoutParam

@@ -3,7 +3,7 @@ package com.codehong.library.widget.label.input
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
-import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.util.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.setLayout

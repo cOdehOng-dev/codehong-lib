@@ -15,7 +15,7 @@ import android.widget.OverScroller
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.codehong.library.widget.R
-import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.util.extensions.dpToPx
 import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.color.HongColor.Companion.toParseColor
 import kotlin.math.abs

@@ -50,6 +50,7 @@ enum class HongWidgetType(
     PROGRESS("Progress", false),
     LIQUID_GLASS_HEADER("LiquidGlassHeader", false),
     LIQUID_GLASS_TAB_BAR("LiquidGlassTabBar", false),
+    SWIPE_CONTAINER("SwipeContainer", false),
     NO_VALUE("no_value");
 
     companion object {

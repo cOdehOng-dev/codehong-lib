@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import com.codehong.lib.sample.R
-import com.codehong.library.widget.extensions.applyActivityCloseAnim
-import com.codehong.library.widget.extensions.applyActivityOpenAnim
+import com.codehong.library.util.extensions.applyActivityCloseAnim
+import com.codehong.library.util.extensions.applyActivityOpenAnim
 
 abstract class BaseActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

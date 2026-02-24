@@ -7,7 +7,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import coil.imageLoader
 import coil.request.ImageRequest
-import com.codehong.library.widget.extensions.dpToPx
+import com.codehong.library.util.extensions.dpToPx
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.extensions.hongPadding
 import com.codehong.library.widget.extensions.parseColor

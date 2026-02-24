@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.sp
 import com.codehong.lib.sample.base.BaseActivity
 import com.codehong.library.debugtool.log.TimberUtil
 import com.codehong.library.widget.R
-import com.codehong.library.widget.liquid.tabbar.HongLiquidGlassTabBar
+import com.codehong.library.widget.liquidglass.tabbar.HongLiquidGlassTabBar
 import com.codehong.library.widget.liquidglass.tabbar.HongLiquidGlassTabBarBuilder
 import com.codehong.library.widget.liquidglass.tabbar.HongLiquidGlassTabItem
 

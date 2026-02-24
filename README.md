@@ -58,6 +58,7 @@
 | HongScrollFadeLayout      | 스크롤 시 헤더가 페이드 인/아웃되는 레이아웃 위젯. 메인 콘텐츠가 사라질 때 헤더의 배경색과 아이콘/텍스트 색상이 부드럽게 전환 (Compose 지원)                                | [README](Widget/src/main/java/com/codehong/library/widget/layout/fade)         |
 | HongPicker                | 바텀시트 스타일의 스크롤 피커 위젯. 단일/이중 선택 지원, 스냅 스크롤링, 직접 선택 또는 확인 버튼 모드 제공 (Compose 지원)                                         | [README](Widget/src/main/java/com/codehong/library/widget/picker)              |
 | HongLiquidGlassTabBar     | iOS 26 Liquid Glass 스타일의 탭 바 위젯. 유리 질감 배경, 젤리 인디케이터, 렌즈 확대 효과, Light/Dark 테마 지원 (Compose 지원)                          | [README](Widget/src/main/java/com/codehong/library/widget/liquidglass/tabbar)  |
+| HongSwipeContainer        | 좌측 스와이프 시 액션 버튼이 나타나는 스와이프 컨테이너 위젯. 삭제 등 아이템 단방향 액션 UI에 최적화, 스프링 애니메이션 및 풀스와이프 지원 (Compose 지원)                      | [README](Widget/src/main/java/com/codehong/library/widget/swipe)               |
 
 ## 🛠 설치
 

@@ -6,7 +6,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.dp
 import coil.transform.RoundedCornersTransformation
 import coil.transform.Transformation
-import com.codehong.library.widget.extensions.dpToFloatPx
+import com.codehong.library.util.extensions.dpToFloatPx
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 
