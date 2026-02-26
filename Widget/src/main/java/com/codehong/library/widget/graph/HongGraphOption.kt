@@ -73,7 +73,6 @@ data class HongGraphOption(
         if (dividerWidth != other.dividerWidth) return false
         if (labelColorHex != other.labelColorHex) return false
         if (labelTypo != other.labelTypo) return false
-
         return true
     }
 
@@ -129,6 +128,4 @@ data class HongGraphOption(
                 "labelTypo=$labelTypo" +
                 ")"
     }
-
-
 }

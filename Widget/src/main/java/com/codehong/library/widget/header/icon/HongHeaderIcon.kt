@@ -43,23 +43,21 @@ fun HongHeaderIcon(
             modifier = Modifier
                 .size(40.dp)
                 .padding(start = 8.dp)
-                .disableRippleClickable { option.onBackClick() },
+                .disableRippleClickable { option.onClickBack() },
             contentAlignment = Alignment.Center
         ) {
-            option.backIconRes?.let { iconRes ->
+            option.iconRes?.let { iconRes ->
                 HongImageCompose(
                     option = HongImageBuilder()
                         .width(34)
                         .height(34)
                         .scaleType(HongScaleType.CENTER_CROP)
                         .imageInfo(iconRes)
-                        .imageColor(option.backIconColorHex)
+                        .imageColor(option.iconColorHex)
                         .applyOption()
                 )
             }
         }
-
-//        Spacer(modifier = Modifier.size(56.dp))
 
         Box(
             modifier = Modifier
@@ -91,8 +89,8 @@ fun PreviewHongHeaderIcon() {
         .title("헤더 제목")
         .titleTypo(HongTypo.BODY_18)
         .titleColor(HongColor.BLACK_100.hex)
-        .backIcon(R.drawable.honglib_ic_arrow_left)
-        .onBack {}
+        .icon(R.drawable.honglib_ic_arrow_left)
+        .onClickBack {}
         .applyOption()
     HongHeaderIcon(option)
 }

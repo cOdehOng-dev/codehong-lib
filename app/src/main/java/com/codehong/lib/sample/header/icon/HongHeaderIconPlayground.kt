@@ -19,8 +19,8 @@ class HongHeaderIconPlayground(
             .title("헤더 제목")
             .titleTypo(HongTypo.BODY_16_B)
             .titleColor(HongColor.BLACK_100.hex)
-            .backIcon(R.drawable.honglib_ic_arrow_left)
-            .onBack {}
+            .icon(R.drawable.honglib_ic_arrow_left)
+            .onClickBack {}
             .applyOption()
     }
 
@@ -96,11 +96,11 @@ class HongHeaderIconPlayground(
         PlaygroundManager.addColorOptionPreview(
             activity = activity,
             label = "back icon",
-            colorHex = previewOption.backIconColorHex
+            colorHex = previewOption.iconColorHex
         ) { selectHongColor ->
             this.previewOption = HongHeaderIconBuilder()
                 .copy(previewOption)
-                .backIconColor(selectHongColor)
+                .iconColor(selectHongColor)
                 .applyOption()
             executePreview()
         }

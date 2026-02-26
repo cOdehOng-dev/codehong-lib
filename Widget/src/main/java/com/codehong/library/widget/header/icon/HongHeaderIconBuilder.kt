@@ -26,20 +26,20 @@ class HongHeaderIconBuilder : HongWidgetCommonBuilder<HongHeaderIconOption, Hong
         option.titleColorHex = colorHex
     }
 
-    fun backIcon(@DrawableRes iconRes: Int) = apply {
-        option.backIconRes = iconRes
+    fun icon(@DrawableRes iconRes: Int?) = apply {
+        option.iconRes = iconRes
     }
 
-    fun backIconColor(color: HongColor) = apply {
-        option.backIconColorHex = color.hex
+    fun iconColor(color: HongColor) = apply {
+        option.iconColorHex = color.hex
     }
 
-    fun backIconColor(colorHex: String) = apply {
-        option.backIconColorHex = colorHex
+    fun iconColor(colorHex: String) = apply {
+        option.iconColorHex = colorHex
     }
 
-    fun onBack(onBack: () -> Unit) = apply {
-        option.onBackClick = onBack
+    fun onClickBack(onBack: () -> Unit) = apply {
+        option.onClickBack = onBack
     }
 
     fun copy(inject: HongHeaderIconOption): HongHeaderIconBuilder {
@@ -52,11 +52,9 @@ class HongHeaderIconBuilder : HongWidgetCommonBuilder<HongHeaderIconOption, Hong
             .title(inject.title)
             .titleColor(inject.titleColorHex)
             .titleTypo(inject.titleTypo)
-            .apply {
-                inject.backIconRes?.let { backIcon(it) }
-            }
-            .backIconColor(inject.backIconColorHex)
-            .onBack(inject.onBackClick)
+            .icon(inject.iconRes)
+            .iconColor(inject.iconColorHex)
+            .onClickBack(inject.onClickBack)
             .backgroundColor(inject.backgroundColorHex)
     }
 }

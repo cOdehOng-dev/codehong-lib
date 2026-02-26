@@ -32,9 +32,9 @@ data class HongHeaderIconOption(
     var titleTypo: HongTypo = HongTypo.BODY_18
     var titleColorHex: String = HongColor.BLACK_100.hex
 
-    var backIconRes: Int? = null
-    var backIconColorHex: String = HongColor.BLACK_100.hex
-    var onBackClick: () -> Unit = {}
+    var iconRes: Int? = null
+    var iconColorHex: String = HongColor.BLACK_100.hex
+    var onClickBack: () -> Unit = {}
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -57,9 +57,9 @@ data class HongHeaderIconOption(
         if (title != other.title) return false
         if (titleTypo != other.titleTypo) return false
         if (titleColorHex != other.titleColorHex) return false
-        if (backIconRes != other.backIconRes) return false
-        if (backIconColorHex != other.backIconColorHex) return false
-        if (onBackClick != other.onBackClick) return false
+        if (iconRes != other.iconRes) return false
+        if (iconColorHex != other.iconColorHex) return false
+        if (onClickBack != other.onClickBack) return false
 
         return true
     }
@@ -80,9 +80,9 @@ data class HongHeaderIconOption(
         result = 31 * result + (title?.hashCode() ?: 0)
         result = 31 * result + titleTypo.hashCode()
         result = 31 * result + titleColorHex.hashCode()
-        result = 31 * result + (backIconRes?.hashCode() ?: 0)
-        result = 31 * result + backIconColorHex.hashCode()
-        result = 31 * result + onBackClick.hashCode()
+        result = 31 * result + (iconRes?.hashCode() ?: 0)
+        result = 31 * result + iconColorHex.hashCode()
+        result = 31 * result + onClickBack.hashCode()
         return result
     }
 
@@ -103,9 +103,9 @@ data class HongHeaderIconOption(
                 "title=$title, " +
                 "titleTypo=$titleTypo, " +
                 "titleColorHex='$titleColorHex', " +
-                "backIconRes=$backIconRes, " +
-                "backIconColorHex='$backIconColorHex', " +
-                "onBackClick=$onBackClick" +
+                "iconRes=$iconRes, " +
+                "iconColorHex='$iconColorHex', " +
+                "onClickBack=$onClickBack" +
                 ")"
     }
 }

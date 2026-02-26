@@ -82,6 +82,5 @@ class HongGraphBuilder : HongWidgetCommonBuilder<HongGraphOption, HongGraphBuild
             .dividerWidth(inject.dividerWidth)
             .labelColor(inject.labelColorHex)
             .labelTypo(inject.labelTypo)
-
     }
 }

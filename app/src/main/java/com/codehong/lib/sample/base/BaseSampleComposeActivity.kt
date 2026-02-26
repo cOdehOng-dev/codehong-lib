@@ -48,8 +48,8 @@ abstract class BaseSampleComposeActivity : BaseActivity() {
                             .title(widgetType?.value)
                             .titleTypo(HongTypo.BODY_18)
                             .titleColor(HongColor.BLACK_100.hex)
-                            .backIcon(R.drawable.honglib_ic_arrow_left)
-                            .onBack {
+                            .icon(R.drawable.honglib_ic_arrow_left)
+                            .onClickBack {
                                 finish()
                             }
                             .applyOption()

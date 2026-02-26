@@ -14,8 +14,8 @@ class SampleHeaderIconActivity : BaseSampleComposeActivity() {
         .title("헤더 제목")
         .titleTypo(HongTypo.BODY_16_B)
         .titleColor(HongColor.BLACK_100.hex)
-        .backIcon(R.drawable.honglib_ic_arrow_left)
-        .onBack { finish() }
+        .icon(R.drawable.honglib_ic_arrow_left)
+        .onClickBack { finish() }
         .applyOption()
 
     private val option2 = HongHeaderIconBuilder()
@@ -23,9 +23,9 @@ class SampleHeaderIconActivity : BaseSampleComposeActivity() {
         .titleColor(HongColor.WHITE_100)
         .titleTypo(HongTypo.BODY_16_B)
         .title("헤더 제목")
-        .backIcon(R.drawable.honglib_ic_arrow_left)
-        .backIconColor(HongColor.WHITE_100)
-        .onBack { finish() }
+        .icon(R.drawable.honglib_ic_arrow_left)
+        .iconColor(HongColor.WHITE_100)
+        .onClickBack { finish() }
         .applyOption()
     private val optionList = listOf(
         option1,

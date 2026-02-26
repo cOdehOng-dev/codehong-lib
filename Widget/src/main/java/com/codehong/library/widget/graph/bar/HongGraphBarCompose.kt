@@ -15,8 +15,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.unit.dp
+import com.codehong.library.widget.Consts.GRAPH_CANVAS_HORIZONTAL_PADDING_DP
+import com.codehong.library.widget.extensions.drawGridLines
 import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.graph.HongGraphBuilder
 import com.codehong.library.widget.graph.HongGraphOption
@@ -38,10 +39,7 @@ fun HongGraphBarCompose(
         .applyOption()
 
     HongWidgetContainer(containerOption) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -51,34 +49,20 @@ fun HongGraphBarCompose(
                 val maxDistance = option.graphPointList.maxOfOrNull { it.point } ?: 1.0
 
                 Canvas(modifier = Modifier.fillMaxSize()) {
-                    val width = size.width
-                    val height = size.height
-                    val paddingPx = 24.dp.toPx()
-                    val innerWidth = width - paddingPx * 2
-                    val gridLines = 4
-                    val pathEffect = PathEffect.dashPathEffect(floatArrayOf(15f, 10f), 0f)
+                    val paddingPx = GRAPH_CANVAS_HORIZONTAL_PADDING_DP.dp.toPx()
+                    val innerWidth = size.width - paddingPx * 2
 
-                    for (i in 1..gridLines) {
-                        val y = height - (height / gridLines) * i
-                        drawLine(
-                            color = option.dotLineColorHex.toColor(),
-                            start = Offset(0f, y),
-                            end = Offset(width, y),
-                            strokeWidth = option.dotLineWidth.dp.toPx(),
-                            pathEffect = pathEffect
-                        )
-                    }
+                    drawGridLines(option.dotLineColorHex, option.dotLineWidth)
 
                     val barWidth = innerWidth / (pointListSize * 1.5f)
                     option.graphPointList.forEachIndexed { index, dataPoint ->
                         val sectionWidth = innerWidth / pointListSize
                         val xStart = paddingPx + sectionWidth * index
                         val x = xStart + (sectionWidth - barWidth) / 2
-                        val barHeight = (dataPoint.point / maxDistance).toFloat() * height
-                        val y = height - barHeight
+                        val barHeight = (dataPoint.point / maxDistance).toFloat() * size.height
                         drawRect(
                             color = option.graphColorHex.toColor(),
-                            topLeft = Offset(x, y),
+                            topLeft = Offset(x, size.height - barHeight),
                             size = Size(barWidth, barHeight)
                         )
                     }
@@ -86,8 +70,7 @@ fun HongGraphBarCompose(
             }
 
             HorizontalDivider(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 thickness = option.dividerWidth.dp,
                 color = option.dividerColorHex.toColor()
             )
@@ -96,13 +79,12 @@ fun HongGraphBarCompose(
                 modifier = Modifier
                     .padding(top = 9.dp)
                     .fillMaxWidth()
-                    .padding(horizontal = 24.dp),
+                    .padding(horizontal = GRAPH_CANVAS_HORIZONTAL_PADDING_DP.dp),
                 horizontalArrangement = Arrangement.Start
             ) {
                 option.graphPointList.forEach { point ->
                     Box(
-                        modifier = Modifier
-                            .weight(1f),
+                        modifier = Modifier.weight(1f),
                         contentAlignment = Alignment.Center
                     ) {
                         HongTextCompose(

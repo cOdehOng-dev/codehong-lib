@@ -12,12 +12,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
+import com.codehong.library.widget.Consts.GRAPH_CANVAS_HORIZONTAL_PADDING_DP
+import com.codehong.library.widget.extensions.drawGridLines
 import com.codehong.library.widget.extensions.toColor
 import com.codehong.library.widget.graph.HongGraphBuilder
 import com.codehong.library.widget.graph.HongGraphOption
@@ -39,10 +40,7 @@ fun HongGraphLineCompose(
         .applyOption()
 
     HongWidgetContainer(containerOption) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -52,37 +50,18 @@ fun HongGraphLineCompose(
                 val maxDistance = option.graphPointList.maxOfOrNull { it.point } ?: 1.0
 
                 Canvas(modifier = Modifier.fillMaxSize()) {
-                    val width = size.width
-                    val height = size.height
-                    val paddingPx = 24.dp.toPx()
-                    val innerWidth = width - paddingPx * 2
-                    val gridLines = 4
-                    val pathEffect = PathEffect.dashPathEffect(floatArrayOf(15f, 10f), 0f)
+                    val paddingPx = GRAPH_CANVAS_HORIZONTAL_PADDING_DP.dp.toPx()
+                    val innerWidth = size.width - paddingPx * 2
 
-                    for (i in 1..gridLines) {
-                        val y = height - (height / gridLines) * i
-                        drawLine(
-                            color = option.dotLineColorHex.toColor(),
-                            start = Offset(0f, y),
-                            end = Offset(width, y),
-                            strokeWidth = option.dotLineWidth.dp.toPx(),
-                            pathEffect = pathEffect
-                        )
-                    }
+                    drawGridLines(option.dotLineColorHex, option.dotLineWidth)
 
                     val path = Path()
                     option.graphPointList.forEachIndexed { index, dataPoint ->
                         val x = paddingPx + (innerWidth / (totalPoints - 1)) * index
-                        val y = height - (dataPoint.point / maxDistance).toFloat() * height
-
-                        if (index == 0) {
-                            path.moveTo(x, y)
-                        } else {
-                            path.lineTo(x, y)
-                        }
+                        val y = size.height - (dataPoint.point / maxDistance).toFloat() * size.height
+                        if (index == 0) path.moveTo(x, y) else path.lineTo(x, y)
                     }
 
-                    // 그래프 선
                     drawPath(
                         path = path,
                         color = option.graphColorHex.toColor(),
@@ -96,8 +75,7 @@ fun HongGraphLineCompose(
             }
 
             HorizontalDivider(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 thickness = option.dividerWidth.dp,
                 color = option.dividerColorHex.toColor()
             )
@@ -106,7 +84,7 @@ fun HongGraphLineCompose(
                 modifier = Modifier
                     .padding(top = 9.dp)
                     .fillMaxWidth()
-                    .padding(horizontal = 24.dp),
+                    .padding(horizontal = GRAPH_CANVAS_HORIZONTAL_PADDING_DP.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 option.graphPointList.forEach { point ->
@@ -122,6 +100,4 @@ fun HongGraphLineCompose(
             }
         }
     }
-
-
 }

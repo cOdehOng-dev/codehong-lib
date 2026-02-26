@@ -3,14 +3,13 @@ package com.codehong.library.architecture.mvi
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -32,8 +31,15 @@ abstract class BaseViewModel<Event : ViewEvent, UiState : ViewState, Effect : Vi
     val event: SharedFlow<Event> = _event.asSharedFlow()
 
     // 4. Effect: 한 번만 소비되는 이벤트 (Toast, Navigation 등)
-    private val _effect: Channel<Effect> = Channel()
-    val effect = _effect.receiveAsFlow()
+    //  - replay = 0        : 새 구독자에게 이전 이벤트 재전달 없음 (Channel과 동일 의미론)
+    //  - extraBufferCapacity = Int.MAX_VALUE : UI가 수집하지 않을 때도 emit이 suspend되지 않음
+    //  - DROP_OLDEST       : 버퍼가 실제로 꽉 찬 극단적 상황의 안전 장치
+    private val _effect = MutableSharedFlow<Effect>(
+        replay = 0,
+        extraBufferCapacity = Int.MAX_VALUE,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+    )
+    val effect: SharedFlow<Effect> = _effect.asSharedFlow()
 
     init {
         subscribeToEvents()
@@ -77,11 +83,9 @@ abstract class BaseViewModel<Event : ViewEvent, UiState : ViewState, Effect : Vi
 
     /**
      * 부수 효과 발생 (Fire-and-forget)
+     * tryEmit: 버퍼가 여유 있으면 즉시 성공 (Non-blocking) — 코루틴 launch 불필요
      */
     protected fun setEffect(builder: () -> Effect) {
-        val effectValue = builder()
-        viewModelScope.launch {
-            _effect.send(effectValue)
-        }
+        _effect.tryEmit(builder())
     }
 }
