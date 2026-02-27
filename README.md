@@ -11,7 +11,7 @@
 - 간편한 커스터마이징
 - 가벼운 의존성
 
-## 📦 위젯 리스트
+## 🎨 Widget
 
 | 위젯                        | 설명                                                                                                                   | 문서                                                                             |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
@@ -60,6 +60,73 @@
 | HongPicker                | 바텀시트 스타일의 스크롤 피커 위젯. 단일/이중 선택 지원, 스냅 스크롤링, 직접 선택 또는 확인 버튼 모드 제공 (Compose 지원)                                         | [README](Widget/src/main/java/com/codehong/library/widget/picker)              |
 | HongLiquidGlassTabBar     | iOS 26 Liquid Glass 스타일의 탭 바 위젯. 유리 질감 배경, 젤리 인디케이터, 렌즈 확대 효과, Light/Dark 테마 지원 (Compose 지원)                          | [README](Widget/src/main/java/com/codehong/library/widget/liquidglass/tabbar)  |
 | HongSwipeContainer        | 좌측 스와이프 시 액션 버튼이 나타나는 스와이프 컨테이너 위젯. 삭제 등 아이템 단방향 액션 UI에 최적화, 스프링 애니메이션 및 풀스와이프 지원 (Compose 지원)                      | [README](Widget/src/main/java/com/codehong/library/widget/swipe)               |
+
+## 🏗 Architecture
+
+MVI(Model-View-Intent) 아키텍처 패턴 구현 라이브러리. StateFlow 기반 상태 관리와 SharedFlow 기반 이벤트/사이드이펙트 처리 제공.
+
+| 클래스 | 설명 |
+|--------|------|
+| `BaseViewModel` | MVI 핵심 ViewModel. `setState()`, `setEvent()`, `setEffect()` 제공 |
+| `ContractInterface` | `ViewEvent`, `ViewState`, `ViewSideEffect` 인터페이스 정의 |
+
+```gradle
+implementation("com.codehong.library:architecture:${LASTEST_VERSION}")
+```
+
+---
+
+## 🐛 DebugTool
+
+Timber 기반 커스텀 로깅 유틸리티. 패키지별 로깅 제어, 스택 트레이스 자동 추출, 긴 메시지 자동 분할 지원.
+
+| 클래스 | 설명 |
+|--------|------|
+| `TimberUtil` | 싱글톤 로거. `v/d/i/w/e()` 및 강제 출력 `forceV~forceE()` 제공 |
+| `TimberInfo` | `TimberConfig` 빌더. 패키지명, 태그, 활성화 여부 설정 |
+
+```gradle
+implementation("com.codehong.library:debugtool:${LASTEST_VERSION}")
+```
+
+---
+
+## 🌐 Network
+
+Retrofit 기반 HTTP 네트워크 통신 라이브러리. Gson, XML, Scalars, Kotlin Serialization 등 다양한 직렬화 포맷 및 HTTP 로깅 지원.
+
+| 클래스 | 설명 |
+|--------|------|
+| `NetworkManager` | 싱글톤 Retrofit 매니저. `getApiService<T>()` 로 API 서비스 생성 |
+| `HttpClient` | OkHttpClient 빌더. 타임아웃, 연결 풀, 로깅 인터셉터 설정 |
+| `NetworkConfig` | HTTP 로깅 활성화, JSON 포매터 옵션 등 설정 클래스 |
+| `CallStatus` | 네트워크 응답 상태 sealed class. `Loading/Success/Error/Empty` 등 제공 |
+| `ConvertType` | 직렬화 포맷 enum. `JSON`, `XML`, `SCALARS`, `KOTLIN_SERIALIZATION_JSON` |
+
+```gradle
+implementation("com.codehong.library:network:${LASTEST_VERSION}")
+```
+
+---
+
+## 🔧 Util
+
+날짜 처리, 데이터 변환, 단위 변환, 확장 함수 등 안드로이드 개발 편의 함수 모음.
+
+| 클래스/파일 | 설명 |
+|------------|------|
+| `DateUtil` | 서울 타임존 기준 날짜 조회/포맷. 이번달/지난달 첫날·마지막날, 한 달 뒤 날짜 등 제공 |
+| `Mapper` | `EntityMapper`, `DtoMapper`, `DomainMapper` 인터페이스 정의 |
+| `ActivityExtensions` | Activity 전환 애니메이션, SafeLaunch, 상태바 색상 설정 확장 함수 |
+| `ContextExtensions` | `dpToPx()`, `pxToDp()`, `isAppForeground()` 등 Context 확장 함수 |
+| `StringExtensions` | 숫자 변환, URL 검증, Aspect Ratio 계산, 괄호 포함 콤마 분할 등 String 확장 함수 |
+| `Int/Float/LongExtensions` | null-safe 숫자 → 문자열 변환 확장 함수 |
+
+```gradle
+implementation("com.codehong.library:util:${LASTEST_VERSION}")
+```
+
+---
 
 ## 🛠 설치
 
