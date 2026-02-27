@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.SampleType.Companion.toType
+import com.codehong.lib.sample.bottomsheet.SampleBottomSheetBankActivity
 import com.codehong.lib.sample.bottomsheet.SampleBottomSheetSelectActivity
 import com.codehong.lib.sample.bottomsheet.SampleBottomSheetSwipeActivity
 import com.codehong.lib.sample.button.icon.SampleButtonIconActivity
@@ -162,7 +163,8 @@ private val widgetCategories = listOf(
         title = "Bottom Sheet",
         widgets = listOf(
             HongWidgetType.BOTTOM_SHEET_SELECT,
-            HongWidgetType.BOTTOM_SHEET_SWIPE
+            HongWidgetType.BOTTOM_SHEET_SWIPE,
+            HongWidgetType.BOTTOM_SHEET_BANK
         )
     ),
     WidgetCategory(
@@ -420,13 +422,9 @@ private fun handleSampleClick(
     sampleTypeList: List<String>
 ) {
     when (item.widgetType) {
-        HongWidgetType.BOTTOM_SHEET_SELECT -> {
-            context.startSampleActivity(SampleBottomSheetSelectActivity::class.java, item.widgetType)
-        }
-
-        HongWidgetType.BOTTOM_SHEET_SWIPE -> {
-            context.startSampleActivity(SampleBottomSheetSwipeActivity::class.java, item.widgetType)
-        }
+        HongWidgetType.BOTTOM_SHEET_SELECT -> context.startSampleActivity(SampleBottomSheetSelectActivity::class.java, item.widgetType)
+        HongWidgetType.BOTTOM_SHEET_SWIPE -> context.startSampleActivity(SampleBottomSheetSwipeActivity::class.java, item.widgetType)
+        HongWidgetType.BOTTOM_SHEET_BANK -> context.startSampleActivity(SampleBottomSheetBankActivity::class.java, item.widgetType)
 
         HongWidgetType.BUTTON_ICON -> {
             context.startSampleActivity(SampleButtonIconActivity::class.java, item.widgetType)
@@ -551,13 +549,8 @@ private fun handleSampleClick(
             context.startSampleActivity(SampleTextCountActivity::class.java, HongWidgetType.TEXT_COUNT)
         }
 
-        HongWidgetType.TEXT_FIELD_BORDER -> {
-            context.startSampleActivity(SampleTextFieldBorderActivity::class.java, HongWidgetType.TEXT_FIELD_BORDER)
-        }
-
-        HongWidgetType.TEXT_FIELD_BORDER_SELECT -> {
-            context.startSampleActivity(SampleTextFieldBorderSelectActivity::class.java, HongWidgetType.TEXT_FIELD_BORDER_SELECT)
-        }
+        HongWidgetType.TEXT_FIELD_BORDER -> context.startSampleActivity(SampleTextFieldBorderActivity::class.java, item.widgetType)
+        HongWidgetType.TEXT_FIELD_BORDER_SELECT -> context.startSampleActivity(SampleTextFieldBorderSelectActivity::class.java, item.widgetType)
 
         HongWidgetType.TEXT_FIELD_NUMBER -> {
             context.startSampleActivity(SampleTextFieldNumberActivity::class.java, HongWidgetType.TEXT_FIELD_NUMBER)

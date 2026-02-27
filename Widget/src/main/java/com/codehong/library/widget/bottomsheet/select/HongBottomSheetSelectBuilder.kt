@@ -15,15 +15,15 @@ class HongBottomSheetSelectBuilder : HongWidgetCommonBuilder<HongBottomSheetSele
 
 
     override fun width(width: Int?) = apply {
-        option.width = HongLayoutParam.MATCH_PARENT.value
+        option.width = width ?: HongLayoutParam.MATCH_PARENT.value
     }
 
     override fun margin(margin: HongSpacingInfo) = apply {
-        option.margin = HongSpacingInfo()
+        option.margin = margin
     }
 
     override fun padding(padding: HongSpacingInfo) = apply {
-        option.padding = HongSpacingInfo()
+        option.padding = padding
     }
 
     fun topRadius(radius: Int?) = apply {

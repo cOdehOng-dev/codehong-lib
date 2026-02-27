@@ -102,19 +102,23 @@
         <activity android:name=".text.count.SampleTextCountActivity"/>
 
         <activity android:name=".tab.flow.SampleTabFlowActivity"/>
+
         <activity android:name=".textfield.border.SampleTextFieldBorderActivity"/>
+        <activity android:name=".textfield.borderselect.SampleTextFieldBorderSelectActivity"/>
 
         <activity android:name=".bottomsheet.SampleBottomSheetSelectActivity"/>
         <activity android:name=".bottomsheet.SampleBottomSheetSwipeActivity"/>
-        <activity android:name=".textfield.borderselect.SampleTextFieldBorderSelectActivity"/>
+        <activity android:name=".bottomsheet.SampleBottomSheetBankActivity"/>
 
         <activity android:name=".graph.SampleGraphLineActivity"/>
         <activity android:name=".graph.SampleGraphBarActivity"/>
 
         <activity android:name=".icon.SampleIconActivity"/>
         <activity android:name=".draganddrop.SampleDragAndDropActivity"/>
+
         <activity android:name=".liquidglass.SampleLiquidGlassActivity"/>
         <activity android:name=".liquidglass.tabbar.SampleLiquidGlassTabBarActivity"/>
+
         <activity android:name=".progress.SampleProgressActivity"/>
         <activity android:name=".swipe.SampleSwipeContainerActivity"/>
     </application>

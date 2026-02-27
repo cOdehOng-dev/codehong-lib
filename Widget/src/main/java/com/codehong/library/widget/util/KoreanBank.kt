@@ -1,0 +1,28 @@
+package com.codehong.library.widget.util
+
+enum class KoreanBank(val id: String, val bankName: String, val logoUrl: String) {
+    KAKAO_BANK("090", "카카오뱅크", "https://logo.bankconv.com/kakaobank.com"),
+    KB("004", "KB국민은행", "https://logo.bankconv.com/kbstar.com"),
+    SHINHAN("088", "신한은행", "https://logo.bankconv.com/shinhan.com"),
+    WOORI("020", "우리은행", "https://logo.bankconv.com/wooribank.com"),
+    HANA("081", "하나은행", "https://logo.bankconv.com/hanabank.com"),
+    NH("011", "NH농협은행", "https://logo.bankconv.com/nonghyup.com"),
+    IBK("003", "IBK기업은행", "https://logo.bankconv.com/ibk.co.kr"),
+    KDB("002", "KDB산업은행", "https://logo.bankconv.com/kdb.co.kr"),
+    SUHYUP("007", "수협은행", "https://logo.bankconv.com/suhyup-bank.com"),
+    JEONBUK("037", "전북은행", "https://logo.bankconv.com/jbbank.co.kr"),
+    GWANGJU("034", "광주은행", "https://logo.bankconv.com/kjbank.com"),
+    JEJU("035", "제주은행", "https://logo.bankconv.com/jejubank.com"),
+    GYEONGNAM("039", "경남은행", "https://logo.bankconv.com/knbank.co.kr"),
+    BUSAN("032", "부산은행", "https://logo.bankconv.com/busanbank.co.kr"),
+    DAEGU("031", "대구은행", "https://logo.bankconv.com/dgb.co.kr"),
+    TOSS_BANK("092", "토스뱅크", "https://logo.bankconv.com/tossbank.com"),
+    K_BANK("089", "케이뱅크", "https://logo.bankconv.com/kbanknow.com"),
+    SC("023", "SC제일은행", "https://logo.bankconv.com/standardchartered.co.kr"),
+    CITI("027", "한국씨티은행", "https://logo.bankconv.com/citibank.co.kr"),
+    POST("071", "우체국은행", "https://logo.bankconv.com/epostbank.go.kr"),
+    KFCC("045", "새마을금고", "https://logo.bankconv.com/kfcc.co.kr"),
+    CU("048", "신협", "https://logo.bankconv.com/cu.co.kr"),
+    KAKAO_PAY("kakao_pay", "카카오페이", "https://logo.bankconv.com/kakaopay.com"),
+    NAVER_FINANCIAL("naver_financial", "네이버파이낸셜", "https://logo.bankconv.com/naverfincorp.com"),
+}

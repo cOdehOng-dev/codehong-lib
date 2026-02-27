@@ -18,6 +18,7 @@ import com.codehong.library.widget.extensions.hongHeight
 import com.codehong.library.widget.extensions.hongSpacing
 import com.codehong.library.widget.extensions.hongWidth
 import com.codehong.library.widget.extensions.toColor
+import com.codehong.library.widget.image.WhiteBackgroundTransformation
 import com.codehong.library.widget.rule.HongBorderInfo
 import com.codehong.library.widget.rule.HongScaleType
 import com.codehong.library.widget.rule.HongScaleType.Companion.toContentScale
@@ -59,8 +60,15 @@ fun HongImageCompose(option: HongImageOption) {
                 )
             }
         } else {
-            val imageRequest = ImageRequest.Builder(context)
-                .data(option.imageInfo)
+            val builder = if (option.removeImageBg) {
+                ImageRequest.Builder(context)
+                    .data(option.imageInfo)
+                    .transformations(WhiteBackgroundTransformation(230))
+            } else {
+                ImageRequest.Builder(context)
+                    .data(option.imageInfo)
+            }
+            val imageRequest = builder
                 .placeholder(option.placeholder?.let { ContextCompat.getDrawable(context, it) })
                 .error(option.error?.let { ContextCompat.getDrawable(context, it) })
                 .fallback(R.color.honglib_color_transparent)

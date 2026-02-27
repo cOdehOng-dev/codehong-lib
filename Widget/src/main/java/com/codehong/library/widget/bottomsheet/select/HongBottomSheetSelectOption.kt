@@ -10,7 +10,7 @@ import com.codehong.library.widget.rule.color.HongColor
 import com.codehong.library.widget.rule.radius.HongRadiusInfo
 import com.codehong.library.widget.rule.typo.HongTypo
 
-data class HongBottomSheetSelectOption(
+class HongBottomSheetSelectOption(
     override val type: HongWidgetType = HongWidgetType.BOTTOM_SHEET_SELECT
 ) : HongWidgetCommonOption {
 

@@ -50,6 +50,8 @@ data class HongImageOption(
 
     var size: Size? = null
 
+    var removeImageBg: Boolean = false
+
     var crossFade: Boolean = false
 
     override fun equals(other: Any?): Boolean {

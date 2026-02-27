@@ -42,6 +42,7 @@ enum class HongWidgetType(
     PICKER("Picker", false),
     BOTTOM_SHEET_SELECT("BottomSheetSelect", false),
     BOTTOM_SHEET_SWIPE("BottomSheetSwipe", false),
+    BOTTOM_SHEET_BANK("BottomSheetBank", false),
     GRAPH_LINE("GraphLine", true),
     GRAPH_BAR("GraphBar", true),
     ICON("Icon", true),

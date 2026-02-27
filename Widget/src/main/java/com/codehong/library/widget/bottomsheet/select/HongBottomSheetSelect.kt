@@ -12,8 +12,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,100 +36,85 @@ import com.codehong.library.widget.text.def.HongTextBuilder
 import com.codehong.library.widget.text.def.HongTextCompose
 import kotlinx.coroutines.launch
 
-private val LocalOption = compositionLocalOf { HongBottomSheetSelectOption() }
-private val LocalSelectedOption = compositionLocalOf { Pair("", "") }
-
-@Suppress("NonSkippableComposable")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HongBottomSheetSelect(
     showBottomSheet: Boolean,
     option: HongBottomSheetSelectOption
 ) {
+    if (!showBottomSheet) return
+
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
 
     var selectedOption by remember { mutableStateOf(option.initialSelection) }
 
-    if (!showBottomSheet) {
-        return
-    }
-
-    CompositionLocalProvider(
-        LocalOption provides option,
-        LocalSelectedOption provides selectedOption
+    ModalBottomSheet(
+        modifier = Modifier.fillMaxWidth(),
+        onDismissRequest = {
+            scope.launch { option.onChangeVisibleState(false) }
+        },
+        sheetState = bottomSheetState,
+        scrimColor = option.dimColorHex.toColor(),
+        dragHandle = {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .hongBackground(color = HongColor.WHITE_100.hex),
+                contentAlignment = Alignment.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                        .width(40.dp)
+                        .height(6.dp)
+                        .hongBackground(
+                            color = option.dragHandleColorHex,
+                            radius = HongRadiusInfo(all = 3)
+                        )
+                )
+            }
+        },
+        shape = HongRadiusInfo(
+            topLeft = option.topRadius,
+            topRight = option.topRadius,
+            bottomLeft = 0,
+            bottomRight = 0
+        ).toRoundedCornerShape()
     ) {
-        ModalBottomSheet(
-            modifier = Modifier
-                .fillMaxWidth(),
-            onDismissRequest = {
+        Content(
+            option = option,
+            selectedOption = selectedOption,
+            onItemSelected = { item ->
+                selectedOption = item
                 scope.launch {
+                    bottomSheetState.hide()
                     option.onChangeVisibleState(false)
                 }
             },
-            sheetState = bottomSheetState,
-            scrimColor = option.dimColorHex.toColor(),
-            dragHandle = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .hongBackground(
-                            color = HongColor.WHITE_100.hex
-                        ),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .padding(top = 10.dp)
-                            .width(40.dp)
-                            .height(6.dp)
-                            .hongBackground(
-                                color = option.dragHandleColorHex,
-                                radius = HongRadiusInfo(
-                                    topLeft = 3,
-                                    topRight = 3,
-                                    bottomLeft = 3,
-                                    bottomRight = 3
-                                )
-                            )
-                    )
-                }
-            },
-            shape = HongRadiusInfo(
-                topLeft = option.topRadius,
-                topRight = option.topRadius,
-                bottomLeft = 0,
-                bottomRight = 0
-            ).toRoundedCornerShape()
-        ) {
-            Content { item ->
-                selectedOption = item
-
+            onClose = {
                 scope.launch {
                     bottomSheetState.hide()
                     option.onChangeVisibleState(false)
                 }
             }
-        }
+        )
     }
 }
 
 @Composable
 private fun Content(
-    onContentClick: (Pair<String, String>) -> Unit
+    option: HongBottomSheetSelectOption,
+    selectedOption: Pair<String, String>,
+    onItemSelected: (Pair<String, String>) -> Unit,
+    onClose: () -> Unit
 ) {
-    val option = LocalOption.current
-    val selectedOption = LocalSelectedOption.current
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .hongBackground(
-                color = HongColor.WHITE_100,
-            )
+            .hongBackground(color = HongColor.WHITE_100)
             .padding(bottom = 20.dp)
     ) {
-        // 헤더 영역
         Row(
             modifier = Modifier
                 .padding(top = 29.dp, start = 20.dp, bottom = 30.dp, end = 13.dp)
@@ -139,10 +122,7 @@ private fun Content(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-            ) {
+            Box(modifier = Modifier.weight(1f)) {
                 HongTextCompose(
                     HongTextBuilder()
                         .text(option.title)
@@ -157,35 +137,32 @@ private fun Content(
                     .iconResId(R.drawable.honglib_ic_close)
                     .buttonType(HongButtonIconType.SIZE_40)
                     .border(HongBorderInfo())
-                    .onClick {
-                        onContentClick(selectedOption)
-                    }
+                    .onClick { onClose() }
                     .applyOption()
             )
         }
 
-        option.selectionList.forEachIndexed { _, item ->
+        option.selectionList.forEach { item ->
             SelectionItem(
+                option = option,
                 selection = item,
+                isSelected = item.first == selectedOption.first,
                 onSelect = {
                     option.selectSelectionCallback(item)
-                    onContentClick(item)
+                    onItemSelected(item)
                 }
             )
         }
     }
 }
 
-
 @Composable
 private fun SelectionItem(
+    option: HongBottomSheetSelectOption,
     selection: Pair<String, String>,
+    isSelected: Boolean,
     onSelect: () -> Unit
 ) {
-    val option = LocalOption.current
-    val selectedOption = LocalSelectedOption.current
-    val isSelected = selection.first == selectedOption.first
-
     Box(
         modifier = Modifier
             .padding(bottom = 15.dp, start = 20.dp, end = 20.dp)
@@ -201,10 +178,7 @@ private fun SelectionItem(
             .padding(horizontal = 20.dp, vertical = 15.dp)
             .disableRippleClickable { onSelect() }
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
             HongTextCompose(
                 HongTextBuilder()
                     .text(selection.first)
@@ -214,15 +188,10 @@ private fun SelectionItem(
                     .applyOption()
             )
 
-
             if (selection.second.isNotEmpty()) {
                 HongTextCompose(
                     HongTextBuilder()
-                        .padding(
-                            HongSpacingInfo(
-                                top = 4f
-                            )
-                        )
+                        .padding(HongSpacingInfo(top = 4f))
                         .text(selection.second)
                         .typography(option.selectionSubtitleTypo)
                         .color(option.selectionSubtitleColorHex)

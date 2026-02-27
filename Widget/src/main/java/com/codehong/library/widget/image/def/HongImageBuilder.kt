@@ -86,6 +86,10 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
         option.crossFade = crossFade
     }
 
+    fun removeImageBg(removeImageBg: Boolean) = apply {
+        option.removeImageBg = removeImageBg
+    }
+
     fun copy(inject: HongImageOption?): HongImageBuilder {
         if (inject == null) return HongImageBuilder()
         return HongImageBuilder()
@@ -111,5 +115,6 @@ class HongImageBuilder : HongWidgetCommonBuilder<HongImageOption, HongImageBuild
             .imageColor(inject.imageColor)
             .size(inject.size)
             .crossFade(inject.crossFade)
+            .removeImageBg(inject.removeImageBg)
     }
 }
