@@ -34,7 +34,7 @@ data class HongHeaderIconOption(
 
     var iconRes: Int? = null
     var iconColorHex: String = HongColor.BLACK_100.hex
-    var onClickBack: () -> Unit = {}
+    var onClickIcon: () -> Unit = {}
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -59,7 +59,7 @@ data class HongHeaderIconOption(
         if (titleColorHex != other.titleColorHex) return false
         if (iconRes != other.iconRes) return false
         if (iconColorHex != other.iconColorHex) return false
-        if (onClickBack != other.onClickBack) return false
+        if (onClickIcon != other.onClickIcon) return false
 
         return true
     }
@@ -82,7 +82,7 @@ data class HongHeaderIconOption(
         result = 31 * result + titleColorHex.hashCode()
         result = 31 * result + (iconRes?.hashCode() ?: 0)
         result = 31 * result + iconColorHex.hashCode()
-        result = 31 * result + onClickBack.hashCode()
+        result = 31 * result + onClickIcon.hashCode()
         return result
     }
 
@@ -105,7 +105,7 @@ data class HongHeaderIconOption(
                 "titleColorHex='$titleColorHex', " +
                 "iconRes=$iconRes, " +
                 "iconColorHex='$iconColorHex', " +
-                "onClickBack=$onClickBack" +
+                "onClickBack=$onClickIcon" +
                 ")"
     }
 }

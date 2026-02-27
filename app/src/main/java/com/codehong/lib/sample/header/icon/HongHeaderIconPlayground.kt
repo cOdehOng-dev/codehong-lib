@@ -20,7 +20,7 @@ class HongHeaderIconPlayground(
             .titleTypo(HongTypo.BODY_16_B)
             .titleColor(HongColor.BLACK_100.hex)
             .icon(R.drawable.honglib_ic_arrow_left)
-            .onClickBack {}
+            .onClickIcon {}
             .applyOption()
     }
 

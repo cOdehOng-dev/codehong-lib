@@ -43,7 +43,7 @@ fun HongHeaderIcon(
             modifier = Modifier
                 .size(40.dp)
                 .padding(start = 8.dp)
-                .disableRippleClickable { option.onClickBack() },
+                .disableRippleClickable { option.onClickIcon() },
             contentAlignment = Alignment.Center
         ) {
             option.iconRes?.let { iconRes ->
@@ -90,7 +90,7 @@ fun PreviewHongHeaderIcon() {
         .titleTypo(HongTypo.BODY_18)
         .titleColor(HongColor.BLACK_100.hex)
         .icon(R.drawable.honglib_ic_arrow_left)
-        .onClickBack {}
+        .onClickIcon {}
         .applyOption()
     HongHeaderIcon(option)
 }

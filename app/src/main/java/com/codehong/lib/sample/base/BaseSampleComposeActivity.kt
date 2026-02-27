@@ -49,7 +49,7 @@ abstract class BaseSampleComposeActivity : BaseActivity() {
                             .titleTypo(HongTypo.BODY_18)
                             .titleColor(HongColor.BLACK_100.hex)
                             .icon(R.drawable.honglib_ic_arrow_left)
-                            .onClickBack {
+                            .onClickIcon {
                                 finish()
                             }
                             .applyOption()

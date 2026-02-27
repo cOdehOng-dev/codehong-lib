@@ -38,8 +38,8 @@ class HongHeaderIconBuilder : HongWidgetCommonBuilder<HongHeaderIconOption, Hong
         option.iconColorHex = colorHex
     }
 
-    fun onClickBack(onBack: () -> Unit) = apply {
-        option.onClickBack = onBack
+    fun onClickIcon(onClickIcon: () -> Unit) = apply {
+        option.onClickIcon = onClickIcon
     }
 
     fun copy(inject: HongHeaderIconOption): HongHeaderIconBuilder {
@@ -54,7 +54,7 @@ class HongHeaderIconBuilder : HongWidgetCommonBuilder<HongHeaderIconOption, Hong
             .titleTypo(inject.titleTypo)
             .icon(inject.iconRes)
             .iconColor(inject.iconColorHex)
-            .onClickBack(inject.onClickBack)
+            .onClickIcon(inject.onClickIcon)
             .backgroundColor(inject.backgroundColorHex)
     }
 }
