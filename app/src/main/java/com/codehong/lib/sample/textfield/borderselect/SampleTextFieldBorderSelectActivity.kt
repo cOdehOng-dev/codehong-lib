@@ -1,6 +1,5 @@
 package com.codehong.lib.sample.textfield.borderselect
 
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,9 +11,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.codehong.lib.sample.base.BaseSampleComposeActivity
+import com.codehong.library.debugtool.log.TimberUtil
 import com.codehong.library.widget.Consts
-import com.codehong.library.widget.bottomsheet.select.HongBottomSheetSelectBuilder
 import com.codehong.library.widget.bottomsheet.select.HongBottomSheetSelect
+import com.codehong.library.widget.bottomsheet.select.HongBottomSheetSelectBuilder
 import com.codehong.library.widget.extensions.hongBackground
 import com.codehong.library.widget.rule.HongInputState
 import com.codehong.library.widget.rule.color.HongColor
@@ -75,7 +75,7 @@ class SampleTextFieldBorderSelectActivity : BaseSampleComposeActivity() {
                         Pair("실외 러닝", "")
                     )
                     .selectSelectionCallback {
-                        Log.d("TAG", "선택된 옵션: $it")
+                        TimberUtil.d( "선택된 옵션: $it")
                         runningType = if (it.first == Consts.DIRECT_INPUT) {
                             useDirectInput = true
                             ""
